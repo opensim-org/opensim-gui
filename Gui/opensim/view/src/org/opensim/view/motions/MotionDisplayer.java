@@ -72,7 +72,6 @@ import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.utils.TheApp;
 import org.opensim.view.MuscleColoringFunction;
-import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ExperimentalDataItemType;
 import org.opensim.view.experimentaldata.ExperimentalDataObject;
@@ -82,10 +81,7 @@ import org.opensim.view.experimentaldata.MotionObjectBodyPoint;
 import org.opensim.view.experimentaldata.MotionObjectPointForce;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
-import vtk.vtkActor;
-import vtk.vtkAppendPolyData;
-import vtk.vtkLineSource;
-import vtk.vtkPolyDataMapper;
+
 
 /**
  * 
@@ -134,10 +130,6 @@ public class MotionDisplayer {
 
     Hashtable<Integer, ObjectTypesInMotionFiles> mapIndicesToObjectTypes=new Hashtable<Integer, ObjectTypesInMotionFiles>(40);
     Hashtable<Integer, Object> mapIndicesToObjects=new Hashtable<Integer, Object>(40);
-    private OpenSimvtkGlyphCloud  groundForcesRep = null;
-    OpenSimvtkGlyphCloud  bodyForcesRep = null;
-    OpenSimvtkGlyphCloud  generalizedForcesRep = null;
-    private OpenSimvtkGlyphCloud  markersRep = null;
     private final Storage simmMotionData; // Storage used to provide data
     private Storage motionAsStates=null; // In case we're playing back states this is complete State on std. layout for internal use only
     private Model model;
@@ -154,8 +146,6 @@ public class MotionDisplayer {
     private Hashtable<Integer, Body> mapIndicesToBodies = new Hashtable<Integer, Body>(10);
     // For generalized forces, this is the map from column index to DOF reference.
     private Hashtable<Integer, TransformAxis> mapIndicesToDofs = new Hashtable<Integer, TransformAxis>(10);
-    
-    protected Hashtable<ExperimentalDataObject, vtkActor> objectTrails = new Hashtable<ExperimentalDataObject, vtkActor>();
 
     private ArrayList<MotionDisplayer> associatedMotions = new  ArrayList<MotionDisplayer>();
     private ArrayStr colNames; // Will cache in labels and construct map to states for quick setting
@@ -188,20 +178,6 @@ public class MotionDisplayer {
         if (forceComponent.equals("y")) {vectorGlobal[0]=0.0; vectorGlobal[2]=0.0; return;};
         if (forceComponent.equals("z")) {vectorGlobal[0]=0.0; vectorGlobal[1]=0.0; return;};
         
-    }
-
-    /**
-     * @return the groundForcesRep
-     */
-    public OpenSimvtkGlyphCloud getGroundForcesRep() {
-        return groundForcesRep;
-    }
-
-    /**
-     * @return the markersRep
-     */
-    public OpenSimvtkGlyphCloud getMarkersRep() {
-        return markersRep;
     }
 
     /**
@@ -367,9 +343,6 @@ public class MotionDisplayer {
     }
     
     
-    // A local copy of motionObjects so that different motions have different motion objects
-    //Hashtable<String, vtkActor> motionObjectInstances =new Hashtable<String, vtkActor>(10);
-    
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
         String defaultMarkerRadiusString = "10"; // new default per issue #643
@@ -494,18 +467,10 @@ public class MotionDisplayer {
     }
 
     private void bindForceVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
-        if (ViewDB.isVtkGraphicsAvailable()){
-            int glyphIndex=groundForcesRep.addLocation(nextObject);
-            nextObject.setGlyphInfo(glyphIndex, groundForcesRep);
-        }
         nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
     }
 
     private void bindMarkerToVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
-        if (ViewDB.isVtkGraphicsAvailable()){
-            int glyphIndex=markersRep.addLocation(nextObject);
-            nextObject.setGlyphInfo(glyphIndex, markersRep);
-        }
         nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
     }
 
@@ -616,56 +581,6 @@ public class MotionDisplayer {
          // 
          String bName = bdy.getName();
          if (columnName.startsWith(bName+"_")){
-            if (columnName.startsWith(bName+"_marker_")){
-               if (columnName.equals(bName+"_marker_px")){
-                  mapIndicesToObjectTypes.put(columnIndex,   ObjectTypesInMotionFiles.Segment_marker_p1);
-                  mapIndicesToObjectTypes.put(columnIndex+1, ObjectTypesInMotionFiles.Segment_marker_p2);
-                  mapIndicesToObjectTypes.put(columnIndex+2, ObjectTypesInMotionFiles.Segment_marker_p3);
-                  int index= markersRep.addLocation(0., 0., 0.);
-                  mapIndicesToObjects.put(columnIndex, new Integer(index));
-                  mapIndicesToObjects.put(columnIndex+1, new Integer(index));
-                  mapIndicesToObjects.put(columnIndex+2, new Integer(index));
-                  return 3;
-               }
-               else {
-                  mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.UNKNOWN);
-                  return 0;  // Something else
-               }
-               
-            }
-            int numColumnsIncludingTime = simmMotionData.getColumnLabels().getSize();
-            if (columnName.startsWith(bName) && columnName.contains("force")){
-               if (columnName.startsWith(bName) && columnName.endsWith("_vx")){
-                  // Make sure we're not going outside # columns due to assumption about column ordering'
-                  if ((columnIndex+5) > numColumnsIncludingTime){
-                      OpenSimLogger.logMessage("Unexpected column headers for forces at column  "+columnIndex+" will be ignored", OpenSimLogger.INFO);
-                      continue;
-                  }
-                  mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.Segment_force_p1);
-                  mapIndicesToObjectTypes.put(columnIndex+1, ObjectTypesInMotionFiles.Segment_force_p2);
-                  mapIndicesToObjectTypes.put(columnIndex+2, ObjectTypesInMotionFiles.Segment_force_p3);
-                  mapIndicesToObjectTypes.put(columnIndex+3, ObjectTypesInMotionFiles.Segment_force_p4);
-                  mapIndicesToObjectTypes.put(columnIndex+4, ObjectTypesInMotionFiles.Segment_force_p5);
-                  mapIndicesToObjectTypes.put(columnIndex+5, ObjectTypesInMotionFiles.Segment_force_p6);
-                  int index = 0;
-                  if (bName.equalsIgnoreCase("ground"))
-                     index = groundForcesRep.addLocation(0., 0., 0.);
-                  else
-                     index = bodyForcesRep.addLocation(0., 0., 0.);
-                  mapIndicesToObjects.put(columnIndex, new Integer(index));
-                  mapIndicesToObjects.put(columnIndex+1, new Integer(index));
-                  mapIndicesToObjects.put(columnIndex+2, new Integer(index));
-                  mapIndicesToObjects.put(columnIndex+3, new Integer(index));
-                  mapIndicesToObjects.put(columnIndex+4, new Integer(index));
-                  mapIndicesToObjects.put(columnIndex+5, new Integer(index));
-                  mapIndicesToBodies.put(columnIndex, bdy);
-                  return 6;
-               }
-               else{
-                  mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.UNKNOWN);
-                  return 0;  // Something else, maybe a velocity component
-               }
-            }
             mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.Segment);
             mapIndicesToObjects.put(columnIndex, bdy);
             return 1;
@@ -729,87 +644,6 @@ public class MotionDisplayer {
           boolean markersModified=false;
           boolean forcesModified=false;
           mot.updateDecorations(interpolatedStates);
-          if (ViewDB.isVtkGraphicsAvailable()){
-             for(ExperimentalDataObject nextObject:objects){
-                  if (!nextObject.isDisplayed()) continue;
-                  // The following blocks need to be moved inside updateDecorations
-                  if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
-
-                      int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
-                      /*
-                      markersRep.setLocation(nextObject.getGlyphIndex(), 
-                              states.getitem(startIndex)/mot.getUnitConversion(), 
-                              states.getitem(startIndex+1)/mot.getUnitConversion(), 
-                              states.getitem(startIndex+2)/mot.getUnitConversion());
-                      markersModified = true;*/
-
-                  }
-                  else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                      String pointId = ((MotionObjectPointForce)nextObject).getPointIdentifier();
-                      String forceId = ((MotionObjectPointForce)nextObject).getForceIdentifier();
-                      String bodyId = ((MotionObjectPointForce)nextObject).getPointExpressedInBody();  
-                      Body b = model.getBodySet().get(bodyId);
-                      int startPointIndex = simmMotionData.getColumnIndicesForIdentifier(pointId).getitem(0)-1;
-                      double[] locationLocal = new double[]{states.getitem(startPointIndex), 
-                              states.getitem(startPointIndex+1), 
-                              states.getitem(startPointIndex+2)};
-                      double[] locationGlobal = new double[3]; 
-                      // Transform to ground from body frame
-                      dContext.transformPosition(b, locationLocal, locationGlobal);
-                      groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
-                              locationGlobal[0], locationGlobal[1], locationGlobal[2]);
-                      int startForceIndex = simmMotionData.getColumnIndicesForIdentifier(forceId).getitem(0)-1;
-                      double[] forceLocal = new double[]{states.getitem(startForceIndex), 
-                              states.getitem(startForceIndex+1), 
-                              states.getitem(startForceIndex+2)};
-                      maskForceComponent(forceLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
-                      double[] forceGlobal = new double[3]; 
-                      dContext.transform(b, forceLocal, model.get_ground(), forceGlobal);
-                      groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
-                              forceGlobal[0], 
-                              forceGlobal[1], 
-                              forceGlobal[2]);
-                      forcesModified=true;
-                } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
-                      int startIndex = nextObject.getStartIndexInFileNotIncludingTime();
-                      MotionObjectBodyPoint bodyPointObject = (MotionObjectBodyPoint)nextObject;
-                      double[] bodyPoint =bodyPointObject.getPoint();
-                      PhysicalFrame b = model.getBodySet().get(bodyPointObject.getPointExpressedInBody());
-                      double[] bodyPointGlobal = new double[3]; 
-                      // Transform to ground from body frame
-                      dContext.transformPosition(b, bodyPoint, bodyPointGlobal);
-                      groundForcesRep.setLocation(nextObject.getGlyphIndex(), 
-                              bodyPointGlobal[0], bodyPointGlobal[1], bodyPointGlobal[2]);
-                      double[] vectorGlobal = new double[]{states.getitem(startIndex), 
-                              states.getitem(startIndex+1), 
-                              states.getitem(startIndex+2)}; 
-
-                      if (b==model.get_ground())
-                           maskForceComponent(vectorGlobal, ((MotionObjectPointForce)nextObject).getForceComponent());
-                      else{
-                          double[] vectorLocal = new double[]{
-                                  states.getitem(startIndex), 
-                                  states.getitem(startIndex+1), 
-                                  states.getitem(startIndex+2)
-                          };
-                          maskForceComponent(vectorLocal, ((MotionObjectPointForce)nextObject).getForceComponent());
-                          // Transform to ground from body frame
-                          dContext.transform(b, vectorLocal, model.get_ground(), vectorGlobal);
-                      }
-
-                      groundForcesRep.setNormalAtLocation(nextObject.getGlyphIndex(), 
-                              vectorGlobal[0], vectorGlobal[1], vectorGlobal[2]);
-                      forcesModified=true;
-                }
-
-                if (forcesModified) groundForcesRep.setModified();
-                if (markersModified) markersRep.setModified();
-            }
-          }
-          // Create one frame and send to Visualizer this would have:
-          // updated positions for markers, 
-         // updated transforms for forces         
-          //groundForcesRep.hide(0);
           return;
       }
      // Here handling a motion file with potentially extra columns for Forces, Markers
@@ -873,74 +707,7 @@ public class MotionDisplayer {
         this.renderMuscleActivations = renderMuscleActivations;
     }
     
-    public void toggleTrail(ExperimentalDataObject aExperimentalDataObject)
-    {
-
-    }
-
-    // This method precreates the Trails for motion objects regardless.
-    // user uses commands to add or remove them from the scene.
-    private vtkActor createTrail(ExperimentalDataObject object) {
-        AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
-        ArrayDouble xCoord = new ArrayDouble();
-        ArrayDouble yCoord = new ArrayDouble();
-        ArrayDouble zCoord = new ArrayDouble();
-        double scale = 1.0;
-        if (object.getObjectType()==ExperimentalDataItemType.MarkerData){
-            int startIndex = object.getStartIndexInFileNotIncludingTime();
-            mot.getDataColumn(startIndex, xCoord);
-            mot.getDataColumn(startIndex+1, yCoord);
-            mot.getDataColumn(startIndex+2, zCoord);
-            scale = mot.getUnitConversion();
-        } 
-        else if (object.getObjectType()==ExperimentalDataItemType.PointForceData){
-            int startIndex = object.getStartIndexInFileNotIncludingTime();
-            mot.getDataColumn(startIndex+2, xCoord);
-            mot.getDataColumn(startIndex+3, yCoord);
-            mot.getDataColumn(startIndex+4, zCoord);           
-        }
-        else 
-            return null;
-        vtkAppendPolyData traceLinePolyData = new vtkAppendPolyData();
-        int numPoints = xCoord.getSize();
-        for(int i=0;i<numPoints-1;i++){
-            vtkLineSource nextLine = new vtkLineSource();
-            double vals[] = new double[]{xCoord.getitem(i), yCoord.getitem(i), zCoord.getitem(i)};
-            double valsp1[] = new double[]{xCoord.getitem(i+1), yCoord.getitem(i+1), zCoord.getitem(i+1)};
-            nextLine.SetPoint1(xCoord.getitem(i)/scale, yCoord.getitem(i)/scale, zCoord.getitem(i)/scale);
-            nextLine.SetPoint2(xCoord.getitem(i+1)/scale, yCoord.getitem(i+1)/scale, zCoord.getitem(i+1)/scale);
-            if (Double.isNaN(xCoord.getitem(i))||Double.isNaN(xCoord.getitem(i+1)))
-                continue;   // Gap in data
-            /*System.out.println("Line ("+nextLine.GetPoint1()[0]+", "+
-                    nextLine.GetPoint1()[1]+", "+nextLine.GetPoint1()[2]+")- to "+nextLine.GetPoint2()[0]+
-                    nextLine.GetPoint2()[1]+", "+nextLine.GetPoint2()[2]);*/
-            traceLinePolyData.AddInput(nextLine.GetOutput());
-        }
-        vtkPolyDataMapper traceLineMapper = new vtkPolyDataMapper();
-        traceLineMapper.SetInput(traceLinePolyData.GetOutput());
-        vtkActor traceLineActor = new vtkActor();
-        traceLineActor.SetMapper(traceLineMapper);
-        objectTrails.put(object, traceLineActor);
-        return traceLineActor;
-
-    }
-    public Vector<vtkActor> getActors()
-    {
-        Vector<vtkActor> dActors = new Vector<vtkActor>(4);
-        if (groundForcesRep != null)
-           dActors.add(groundForcesRep.getVtkActor());
-        if (bodyForcesRep != null)
-           dActors.add(bodyForcesRep.getVtkActor());
-        if (generalizedForcesRep != null)
-           dActors.add(generalizedForcesRep.getVtkActor());
-        if (markersRep != null)
-           dActors.add(markersRep.getVtkActor());
-        Collection<vtkActor> trails = objectTrails.values();
-        for(vtkActor nextActor:trails)
-            dActors.add(nextActor);
-        return dActors;
-    }
-    
+   
     public void updateMotionObjects(){
         if (simmMotionData instanceof AnnotatedMotion){
             // Add place hoders for markers

@@ -32,7 +32,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
@@ -42,7 +41,6 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.UUID;
 import java.util.Vector;
-import java.util.prefs.Preferences;
 import javax.swing.SwingUtilities;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
@@ -67,7 +65,6 @@ import org.opensim.threejs.JSONMessageHandler;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.utils.ErrorDialog;
-import org.opensim.utils.Prefs;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
 import vtk.AxesActor;
@@ -81,6 +78,7 @@ import vtk.vtkProp3D;
 import vtk.vtkProp3DCollection;
 import vtk.vtkTextActor;
 import vtk.vtkTextProperty;
+
 
 /**
  *

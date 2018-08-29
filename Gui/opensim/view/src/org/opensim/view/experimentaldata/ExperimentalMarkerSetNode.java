@@ -46,7 +46,6 @@ import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.nodes.*;
 import org.opensim.view.pub.ViewDB;
