@@ -375,6 +375,7 @@ public class MotionDisplayer {
     
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
+         // The following value should stay the same as the value in Installer.java
         String defaultMarkerRadiusString = "10"; // new default per issue #643
         String currentSize =TheApp.getCurrentVersionPreferences().get("Visualizer: Experimental Marker Radius (mm)", 
                 defaultMarkerRadiusString);
