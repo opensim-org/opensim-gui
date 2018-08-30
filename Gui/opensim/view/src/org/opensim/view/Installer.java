@@ -29,6 +29,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
@@ -36,6 +38,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.openide.modules.ModuleInstall;
+import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.openide.windows.WindowManager;
 import org.opensim.modeling.OpenSimObject;
@@ -77,7 +80,6 @@ public class Installer extends ModuleInstall {
 
     public void restored() {
         super.restored();
-        System.setProperty ("netbeans.buildnumber", "4.0.Beta"); // Should get that from JNI but sometimes doesn't work'
         try {
              // Put your startup code here.
             UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
@@ -147,19 +149,24 @@ public class Installer extends ModuleInstall {
      * built nito the application */
     private void restorePrefs()
     {
-         String currentVersionStr = NbBundle.getMessage(TheApp.class, "CTL_BuildDate");
-         String savedVersionStr = TheApp.getCurrentVersionPreferences().get("Internal.BuildDate", null);
          boolean updateResources = false;
-         if (!currentVersionStr.equalsIgnoreCase(savedVersionStr)){
-             updateResources = true;
-             // First launch, copy resources to User selected folder and save that as OpenSimUserDir
+         String relaunch_check_filepath = TheApp.getUserDir()+"first_launch.text";
+         boolean firstLaunch = !new File(relaunch_check_filepath).exists();
+         if (firstLaunch){
+            updateResources = true;
             SwingUtilities.invokeLater( new Runnable(){
                 public void run() {
                  String userDir = TheApp.installResources();
                  TheApp.getCurrentVersionPreferences().put("Internal.OpenSimResourcesDir", userDir);
                }
             });
-            TheApp.getCurrentVersionPreferences().put("Internal.BuildDate", currentVersionStr);
+            try {
+                 // First launch, copy resources to User selected folder and save that as OpenSimUserDir
+                 new File(relaunch_check_filepath).createNewFile();
+             } catch (IOException ex) {
+                 // need to report 
+                 Exceptions.printStackTrace(ex);
+             }        
          }
          
          String defaultGeometryPath = TheApp.getDefaultGeometrySearchPath();
@@ -167,7 +174,7 @@ public class Installer extends ModuleInstall {
          if (saved.isEmpty()||saved.equalsIgnoreCase("")){
              saved = defaultGeometryPath;
          }
-         else if (!saved.contains(defaultGeometryPath) && updateResources)
+         else if (!saved.contains(defaultGeometryPath))
              saved = saved.concat(File.pathSeparator+defaultGeometryPath);
          TheApp.getCurrentVersionPreferences().put("Paths: Geometry Search Path", saved);
          // Push changes to API side

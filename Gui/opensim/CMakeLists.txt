@@ -16,6 +16,48 @@ endif()
 
 find_package(Ant REQUIRED)
 
+# http://xit0.org/2013/04/cmake-use-git-branch-and-commit-details-in-project/
+# Get the latest abbreviated commit hash of the working branch
+set(VERSION_SUFFIX "")
+find_package(Git)
+if(Git_FOUND)
+    # This command provides the annotated tag for the current commit, if it
+    # exists, and returns an error if a tag does not exist.
+    execute_process(
+      COMMAND git describe --exact-match
+      WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+      RESULT_VARIABLE GIT_DESCRIBE_EXACT_MATCH_RETVAL
+      OUTPUT_VARIABLE GIT_TAG
+      OUTPUT_STRIP_TRAILING_WHITESPACE
+      OUTPUT_QUIET
+      ERROR_QUIET
+    )
+    if(${GIT_DESCRIBE_EXACT_MATCH_RETVAL} EQUAL 0)
+        # A tag exists.
+        # set(VERSION_SUFFIX "${GIT_TAG}")
+        # Do not add anything to the version.
+    else()
+        execute_process(
+            COMMAND git log -1 --format=%h
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            OUTPUT_VARIABLE GIT_COMMIT_HASH
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            )
+        # prepend date so that build ids can meaningfully be sorted
+        execute_process(
+            COMMAND git show -s --format=%cd --date=short HEAD
+            WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+            OUTPUT_VARIABLE GIT_COMMIT_DATE
+            OUTPUT_STRIP_TRAILING_WHITESPACE
+            )
+        set(VERSION_SUFFIX "-${GIT_COMMIT_DATE}-${GIT_COMMIT_HASH}")
+    endif()
+endif()
+set(OPENSIMGUI_BUILD_VERSION "${PROJECT_VERSION}${VERSION_SUFFIX}" CACHE STRING
+    "<date>-<commit>, or <tag> if this commit is tagged." FORCE)
+# inform user of created build version.
+message(STATUS "Build VERSION: ${OPENSIMGUI_BUILD_VERSION}")
+
 add_custom_target(CopyOpenSimCore ALL
                   COMMAND ${Ant_EXECUTABLE} copy-java-bindings -DapiJava.dir="${OpenSim_JAVA_FILES_DIR}"
                   ${ANT_ARGS}
@@ -35,7 +77,7 @@ if (WIN32)
     set(MSVC_REDIST_EXE "${MSVC_REDIST_DIR}/vcredist_x64.exe")
 
     add_custom_target(PrepareInstaller ALL
-                  COMMAND ${Ant_EXECUTABLE} copy-installer-files -Dapi.dir="${OpenSim_ROOT_DIR}" -Dmsvc.redist.exe="${MSVC_REDIST_EXE}"
+                  COMMAND ${Ant_EXECUTABLE} copy-installer-files -Dapi.dir="${OpenSim_ROOT_DIR}" -Dmsvc.redist.exe="${MSVC_REDIST_EXE}" -Dapp.version="${OPENSIMGUI_BUILD_VERSION}"
                   ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
@@ -94,6 +136,7 @@ if (APPLE)
                   COMMAND ${Ant_EXECUTABLE} build-mac-installer
                   -Dapi.dir="${OpenSim_ROOT_DIR}"
                   -Dmodels.dir="${MODELS_INSTALL_DIR}"
+                  -Dapp.version="${OPENSIMGUI_BUILD_VERSION}"
                   ${ANT_ARGS}
                   DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
                   WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
