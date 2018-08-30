@@ -44,7 +44,7 @@ public class Installer extends ModuleInstall {
      * built into the application */
     private void restorePrefs()
     {
-         String defaultScriptsPath = NbBundle.getMessage(JConsole.class,"CTL_ScriptsPath");
+         String defaultScriptsPath = TheApp.getResourcesDir()+"/Code/GUI/";
          String saved=TheApp.getCurrentVersionPreferences().get("Paths: Scripts Path", defaultScriptsPath);
          TheApp.getCurrentVersionPreferences().put("Paths: Scripts Path", saved);
 

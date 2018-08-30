@@ -26,8 +26,13 @@
  */
 package org.opensim.console;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
 import org.openide.cookies.OpenCookie;
 import org.openide.filesystems.FileObject;
 import org.openide.filesystems.FileUtil;
@@ -36,6 +41,7 @@ import org.openide.util.HelpCtx;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
+import org.opensim.utils.TheApp;
 
 public final class ScriptsRunBrowseAction extends CallableSystemAction {
 
@@ -65,7 +71,7 @@ public final class ScriptsRunBrowseAction extends CallableSystemAction {
     public HelpCtx getHelpCtx() {
          return HelpCtx.DEFAULT_HELP;
     }
-/*
+
     public JMenuItem getMenuPresenter() {
         JMenu scriptsMenu = new JMenu("Open");
         FileFilter fileFilter = new FileFilter() {
@@ -74,7 +80,7 @@ public final class ScriptsRunBrowseAction extends CallableSystemAction {
                 return (!file.isDirectory() && file.getName().endsWith(".py"));
             }
         };
-        final String ScriptsRootDirectory = TheApp.getCurrentVersionPreferences().get("Paths: Scripts Path", "Scripts");
+        final String ScriptsRootDirectory = TheApp.getCurrentVersionPreferences().get("Paths: Scripts Path", TheApp.getResourcesDir()+"/Code/GUI/");
         File rootHelpDirectory = new File(ScriptsRootDirectory);
         final String fullPath = rootHelpDirectory.getAbsolutePath();
         File[] files = rootHelpDirectory.listFiles(fileFilter);
@@ -109,7 +115,7 @@ public final class ScriptsRunBrowseAction extends CallableSystemAction {
         scriptsMenu.add(browseItem);
         return scriptsMenu;
     }
-*/
+
     /**
      * execute passed in scriptFilename in Scripting shell and echo contents
      * @param scriptFilename 
