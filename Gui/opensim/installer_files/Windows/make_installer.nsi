@@ -124,5 +124,6 @@ Section "Uninstall"
   RMDir /r "$INSTDIR"
 
   DeleteRegKey /ifempty HKCU "Software\OpenSim@VERSION@"
-
+  Delete "$SMPROGRAMS\OpenSim\OpenSim @VERSION@.lnk"
+  Delete "$SMPROGRAMS\OpenSim\Uninstall OpenSim @VERSION@.lnk"
 SectionEnd
