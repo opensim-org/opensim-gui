@@ -28,7 +28,7 @@ import os
 
 # Obtain Directory containing baseline results
 #resultsFolderCMC = getInstallDir() + "/Models/gait10dof18musc/CMC/ResultsCMC"
-resultsFolderCMC = utils.FileUtils.getInstance().browseForFolder("Select the folder with baseline CMC Results");
+resultsFolderCMC = utils.FileUtils.getInstance().browseForFolder("Select the folder with baseline CMC Results",1);
 
 # Obtain the legend name
 #legendName = "Baseline"

@@ -26,14 +26,15 @@
 # BothLegs OpenSim model adds curves of fiber length for the model. Then, it loads and plots 
 # data from a storage file, which contains fiber lengths for the model Subject01_simbody
 # that is included with the OpenSim distribution
+import os.path
 
 # Load the model BothLegs.osim
-filepath = getInstallDir() + "/Models/Gait2392_simbody/gait2392_simbody.osim";
+filepath = os.path.join(getResourcesDir(), "Models", "Gait2392_simbody", "gait2392_simbody.osim");
 loadModel(filepath);
 
 # Create a plotter panel and set the title
 plotterPanel = createPlotterPanel("Plot Example")
-
+    
 # Add curves showing rectus femoris and vasti fiber lengths vs. right knee angle and set the legend
 crv1 = addAnalysisCurve(plotterPanel, "fiber-length", "rect_fem_r", "knee_angle_r")
 crv2 = addAnalysisCurve(plotterPanel, "fiber-length", "vas_int_r", "knee_angle_r")
@@ -41,13 +42,13 @@ crv1.setLegend("RF_BothLegs")
 crv2.setLegend("VASINT_BothLegs")
 
 # Load data from an external data source and plot
-src = addDataSource(plotterPanel, getScriptsDir()+"/GUI_Scripting/testData/Subject01_FiberLengths.sto")
+src = addDataSource(plotterPanel, os.path.join(getResourcesDir(), "Code", "GUI", "testData", "Subject01_FiberLengths.sto"));
 crv3 = addCurve(plotterPanel, src, "knee_angle_r", "rect_fem_r")
 crv4 = addCurve(plotterPanel, src, "knee_angle_r", "vas_int_r")
 crv3.setLegend("RF_Subject01")
 crv4.setLegend("VASINT_Subject01") 
 
-crv5 =  addAnalysisCurve(plotterPanel, "MomentArm.r_knee_angle", "rect_fem_r", "knee_angle_r")
+crv5 =  addAnalysisCurve(plotterPanel, "MomentArm.knee_angle_r", "rect_fem_r", "knee_angle_r")
 
 # Change the color of the first curve in the plot
 setCurveColor(plotterPanel, 0, 0.0, 1.0, 1.0)
@@ -64,4 +65,4 @@ plotterPanel.setYAxisLabel("Fiber Length (m)");
 # plotterPanel.setAxesLabels("Knee angle (deg)","Fiber length (mm)")
 
 # Export the data in the plotter window to a file
-exportData(plotterPanel, getScriptsDir()+"/GUI_Scripting/testData/cvs_export.sto")
+exportData(plotterPanel, os.path.join(getResourcesDir(), "Code", "GUI", "testData", "cvs_export.sto"));

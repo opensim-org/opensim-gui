@@ -30,7 +30,7 @@ import os
 
 # Obtain Directory containing device results
 #resultsFolderCMC = getInstallDir() + "/Models/gait10dof18musc/CMC/ResultsCMC"
-resultsFolderCMC = utils.FileUtils.getInstance().browseForFolder("Select the folder with device CMC Results");
+resultsFolderCMC = utils.FileUtils.getInstance().browseForFolder("Select the folder with device CMC Results",1);
 
 # Obtain the legend name
 #legendName = "Device"
