@@ -346,7 +346,7 @@ public final class gui {
      * Get the full name of the directory used as a root for the Scripts.
      * @return string that represents the path to the Scripts directory
      */
-    static public String getScriptsDir()
+    static public String getScriptsPath()
     {
         String relativePath= TheApp.getCurrentVersionPreferences().get("Paths: Scripts Path", "Scripts");
         if (relativePath.equals(null)) return null;

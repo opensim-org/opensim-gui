@@ -153,6 +153,8 @@ public class Installer extends ModuleInstall {
                 public void run() {
                  String userDir = TheApp.installResources();
                  TheApp.getCurrentVersionPreferences().put("Internal.OpenSimResourcesDir", userDir);
+                 String defaultScriptsPath = userDir+"/Code/GUI/";
+                 TheApp.getCurrentVersionPreferences().put("Paths: Scripts Path", defaultScriptsPath);
                }
             });
             try {
