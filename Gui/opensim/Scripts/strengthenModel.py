@@ -53,6 +53,9 @@ fullName = oldModel.getInputFileName()
 newName = fullName.replace('.osim', '_stronger.osim')
 myModel.print(newName)
 
+# Display model
+loadModel(newName)
+
 #Popup a dialog to show the file name used to save the model
 win = swing.JFrame("Confirm")
 dLabel = swing.JLabel("Wrote stronger model to file "+newName)
