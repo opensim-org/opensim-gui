@@ -100,7 +100,7 @@ for filename in os.listdir(trcDataFolder):
 		# Set name of input trc file and output motion in tool
 		ikTool.setMarkerDataFileName(os.path.join(trcDataFolder,filename))
 		outFileName = filename.replace('.trc', '_ik.mot')
-		ikTool.setOutputMotionFileName(os.path.join(trcDataFolder,resultsFolder,outFileName))
+		ikTool.setOutputMotionFileName(os.path.join(resultsFolder,outFileName))
 
 		# Use the trc file to get the start and end times
 		markerData = modeling.MarkerData(os.path.join(trcDataFolder,filename))
@@ -114,4 +114,4 @@ for filename in os.listdir(trcDataFolder):
 
 		# Save the setup file
 		trialSetupFileName = filename.replace('.trc', '_IK_Setup.xml')
-		ikTool.print(os.path.join(trcDataFolder,resultsFolder,trialSetupFileName))
+		ikTool.print(os.path.join(resultsFolder,trialSetupFileName))
