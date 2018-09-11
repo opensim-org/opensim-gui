@@ -41,7 +41,7 @@ print "Acquiring folders with marker data"
 
 # Get the path to a model
 resourceDir	= getResourcesDir()
-trcDataFolder	= os.path.join(resourceDir, "Models", 'Leg39')
+trcDataFolder	= os.path.join(resourceDir, 'Models', 'Leg39')
 
 # Prompts user to select directory if above does not exist
 if not os.path.exists(trcDataFolder):
@@ -49,7 +49,7 @@ if not os.path.exists(trcDataFolder):
 print trcDataFolder
 
 # Load the setup file
-print "Acquiring setup file"
+print "Acquiring setup file" 
 
 # Prompts user to select file if above does not exist
 setupFile	= os.path.join(trcDataFolder,"leg39_swing_short_IK_Setup.xml");
@@ -64,8 +64,9 @@ ikTool = modeling.InverseKinematicsTool(setupFile)
 # Select folder to store output results
 print "Acquiring folder to store the IK results output files"
 
-resultsFolder = "IK_Results";
-print resultsFolder
+resultsFolder = os.path.join(trcDataFolder, 'IK_Results');
+if not os.path.exists(resultsFolder):
+	os.mkdir(resultsFolder)
 
 # Set the results folder in the ikTool
 ikTool.setResultsDir(resultsFolder)
@@ -107,10 +108,10 @@ for filename in os.listdir(trcDataFolder):
 		ikTool.setEndTime(markerData.getLastFrameTime())
 		
 		# Run the tool
-		print "Runnning trial file "+ikTool.getMarkerDataFileName()+" Output:"+ikTool.getOutputMotionFileName()
+		print "Running trial file "+ikTool.getMarkerDataFileName()+" Output:"+ikTool.getOutputMotionFileName()
 		ikTool.run()
 		print "Finished processing trial "+filename
 
 		# Save the setup file
 		trialSetupFileName = filename.replace('.trc', '_IK_Setup.xml')
-		ikTool.print(os.path.join(trcDataFolder,resultsFolder,trialSetupFileName));
+		ikTool.print(os.path.join(trcDataFolder,resultsFolder,trialSetupFileName))
