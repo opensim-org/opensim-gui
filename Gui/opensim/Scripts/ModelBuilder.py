@@ -100,9 +100,9 @@ class ModelBuilder(object):
 # Here is an example of copying the GUI's current model, adding components to
 # the copied model using ModelBuilder, and loading the copied model in the GUI.
 #
-modelCopy = getCurrentModel().clone()
-newBody = ModelBuilder.addBody(modelCopy, 'ball')
-sphere = modeling.Sphere(0.15)
-ModelBuilder.attachGeometryWithOffset(newBody, sphere)
-ModelBuilder.connectBodyWithJoint(modelCopy, 'ball', 'handle', 'SliderJoint')
-loadModel(modelCopy)
+#    modelCopy = getCurrentModel().clone()
+#    newBody = ModelBuilder.addBody(modelCopy, 'ball')
+#    sphere = modeling.Sphere(0.15)
+#    ModelBuilder.attachGeometryWithOffset(newBody, sphere)
+#    ModelBuilder.connectBodyWithJoint(modelCopy, 'ball', 'handle', 'SliderJoint')
+#    loadModel(modelCopy)
