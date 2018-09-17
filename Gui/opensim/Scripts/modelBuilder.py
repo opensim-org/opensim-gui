@@ -12,20 +12,23 @@ class modelBuilder():
 	# jointType is one of: 
 	# 'PinJoint', 'FreeJoint', 'WeldJoint', 'PlanarJoint', 'SliderJoint', 'UniversalJoint'
 	def connectBodyWithJoint(model, bodyName, jointName, jointType):
-		c = model.getComponent(bodyName)
-		c = modeling.PhysicalFrame.safeDownCast(c)
-		p = model.getGround()
-		module = sys.modules['org.opensim.modeling']
-		JointClass = getattr(module, jointType)
-		# Instantiate the class (pass arguments to the constructor, if needed)
-		joint = JointClass(jointName, p, c)
-		model.addJoint(joint)
-		return model
-
+		if (model.hasComponent(bodyName)):
+			c = model.getComponent(bodyName)
+			c = modeling.PhysicalFrame.safeDownCast(c)
+			p = model.getGround()
+			module = sys.modules['org.opensim.modeling']
+			JointClass = getattr(module, jointType)
+			# Instantiate the class (pass arguments to the constructor, if needed)
+			joint = JointClass(jointName, p, c)
+			model.addJoint(joint)
+			return model
+		else:
+			print('Body '+ bodyName +' does not exist in model '+ model.getName() +'. Ignoring')
+			return model
 	@staticmethod
 	# create a Body with passed in name and add it to passed in model
 	# created Body has mass of 1 and inertia (1,1,1,0,0,0)
-	#
+	# if name exists, a modified name is used e.g. bodyName_0 and is printed to scripting shell
 	def addBody(model, bodyName):
 		body = modeling.Body(bodyName, 1.0, modeling.Vec3(1.0), modeling.Inertia(1, 1, 1, 0, 0, 0))
 		model.addBody(body)
@@ -53,15 +56,15 @@ class modelBuilder():
 		# Instantiate the class (pass arguments to the constructor, if needed)
 		muscle = MuscleClass()
 		muscle.setName(muscleName);
-		muscle.addNewPathPoint("muscle-pt1", model.getGround(), Vec3(0,0,0));
-		muscle.addNewPathPoint("muscle-pt2", model.getGround(), Vec3(0,1,0));
+		muscle.addNewPathPoint("muscle-pt1", model.getGround(), modeling.Vec3(0,0,0));
+		muscle.addNewPathPoint("muscle-pt2", model.getGround(), modeling.Vec3(0,1,0));
 		model.addForce(muscle)
 #
 # example usage
 # modelCopy = m.clone()
-# newBody = modelBuilder.addBody(modelCopy, 'bucket')
-# block = modeling.Brick(modeling.Vec3(0.1, 0.2, 0.3))
-# modelBuilder.attachGeometryWithOffset(newBody, block)
-# modelCopy = modelBuilder.connectBodyWithJoint(modelCopy, 'bucket', 'handle', 'PinJoint')
+# newBody = modelBuilder.addBody(modelCopy, 'ball')
+# sphere = modeling.Sphere(0.15)
+# modelBuilder.attachGeometryWithOffset(newBody, sphere)
+# modelCopy = modelBuilder.connectBodyWithJoint(modelCopy, 'ball', 'handle', 'PinJoint')
 # loadModel(modelCopy)
 
