@@ -118,8 +118,7 @@ for iMuscle in range(myModel.getMuscles().getSize()):
     # name, slow-twitch ratio, and muscle mass. Note that the muscle mass
     # is ignored unless we set useProvidedMass to True.
     wholeBodyProbe.addMuscle(thisMuscle.getName(),
-                             slowTwitchRatio,
-                             -1)
+                             slowTwitchRatio)
 
 # Save the new model to a file with the suffix "_probed".
 oldPathName = oldModel.getInputFileName()

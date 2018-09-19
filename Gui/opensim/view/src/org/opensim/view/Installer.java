@@ -29,9 +29,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-import java.util.prefs.Preferences;
 import javax.swing.JFrame;
 import javax.swing.JPopupMenu;
 import javax.swing.SwingUtilities;
@@ -39,15 +36,14 @@ import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import org.openide.modules.ModuleInstall;
 import org.openide.util.Exceptions;
-import org.openide.util.NbBundle;
 import org.openide.windows.WindowManager;
-import org.opensim.modeling.OpenSimObject;
 import org.opensim.utils.ApplicationState;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.actions.ApplicationExit;
 import org.opensim.view.editors.BodyNameEditor;
 import org.opensim.view.editors.FrameNameEditor;
+import static org.opensim.view.motions.MotionDisplayer.STRING_EXPMARKER_DEFAULT_RADIUS;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.view.motions.MotionsDBDescriptor;
 import org.opensim.view.nodes.EditorRegistry;
@@ -157,6 +153,8 @@ public class Installer extends ModuleInstall {
                 public void run() {
                  String userDir = TheApp.installResources();
                  TheApp.getCurrentVersionPreferences().put("Internal.OpenSimResourcesDir", userDir);
+                 String defaultScriptsPath = userDir+"/Code/GUI/";
+                 TheApp.getCurrentVersionPreferences().put("Paths: Scripts Path", defaultScriptsPath);
                }
             });
             try {
@@ -182,9 +180,9 @@ public class Installer extends ModuleInstall {
          String muscleRadius = "8";
          saved = TheApp.getCurrentVersionPreferences().get("Visualizer: Muscle Display Radius (mm)", muscleRadius);
          TheApp.getCurrentVersionPreferences().put("Visualizer: Muscle Display Radius (mm)", saved);
-
-         String experimentalMarkerDisplayScaleStr="5.0";
-         saved=TheApp.getCurrentVersionPreferences().get("Visualizer: Experimental Marker Radius (mm)", experimentalMarkerDisplayScaleStr);
+         // The following value should stay the same as the value in MotionDisplayer constructor
+         String experimentalMarkerDisplayRadiusStr=STRING_EXPMARKER_DEFAULT_RADIUS;
+         saved=TheApp.getCurrentVersionPreferences().get("Visualizer: Experimental Marker Radius (mm)", experimentalMarkerDisplayRadiusStr);
          TheApp.getCurrentVersionPreferences().put("Visualizer: Experimental Marker Radius (mm)", saved);
          
          String persistModels = "Off";        

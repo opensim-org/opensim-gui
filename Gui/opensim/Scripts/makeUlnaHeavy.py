@@ -28,9 +28,10 @@
 #
 # This example shows how to load a model and create a modified version of the model
 # The script increases the mass of the ulna. The modified model is then loaded in the GUI.
+import os.path
 
 # Get handle to the Arm26 model
-oldModel = modeling.Model(getInstallDir() + "/Models/Arm26/arm26.osim")
+oldModel = modeling.Model(os.path.join(getResourcesDir(), "Models", "Arm26", "Arm26.osim"))
 # Create a fresh copy
 myModel = modeling.Model(oldModel)
 

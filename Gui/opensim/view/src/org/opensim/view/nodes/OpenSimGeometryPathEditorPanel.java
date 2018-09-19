@@ -1448,10 +1448,11 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
                  break;
          }
          newPoint.setParentFrame(mp.getParentFrame());
-         openSimContext.realizeVelocity();
+         ViewDB.getInstance().removePathDisplay(currentPath);
          boolean result = openSimContext.replacePathPoint(currentPath, mp, newPoint);
          if (result == false) {
             // Reset the combo box state without triggering an event
+            updatePathDisplay(EditOperation.Recreate, -1);
             musclePointTypeComboBox.setEnabled(false);
             musclePointTypeComboBox.setSelectedIndex(oldType);
             musclePointTypeComboBox.setEnabled(true);
@@ -1472,6 +1473,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          // update the panels
          updateAttachmentPanel();
          updateCurrentPathPanel();
+         updatePathDisplay(EditOperation.Recreate, -1);
       }
    }
    public void AttachmentPointEntered(javax.swing.JTextField field, int attachmentNum, int coordNum) {

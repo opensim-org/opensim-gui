@@ -131,7 +131,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
         if (dataFileName!="" && dataFileName !=null && new File(dataFileName).exists() && 
                 new File(dataFileName).isFile()){
             try {
-                externalLoadsStorage = new Storage(dataFileName, true);
+                externalLoadsStorage = new Storage(dataFileName);
             } catch (IOException ex) {
                 ErrorDialog.displayExceptionDialog(ex);
             }

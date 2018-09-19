@@ -27,7 +27,7 @@ import org.opensim.utils as utils
 
 # Obtain Directory containing CMC results
 #resultsFolderCMC = getInstallDir() + "/Models/gait10dof18musc/CMC/ResultsCMC"
-resultsFolderCMC = utils.FileUtils.getInstance().browseForFolder("Select the folder with CMC Results");
+resultsFolderCMC = utils.FileUtils.getInstance().browseForFolder("Select the folder with CMC Results",1);
 
 ####################################
 # Plot kinematics errors
@@ -113,9 +113,3 @@ thresholdReserveForceGoodNeg =  modeling.Constant(-25)
 thresholdReserveForceGoodNeg.setName('GOOD')
 addFunctionCurve(reserveForcePlot, thresholdReserveForceGoodNeg)
 setCurveColor(reserveForcePlot, 5, 0.0, 1.0, 0.0)
-
-
-
-
-
-

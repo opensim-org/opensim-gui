@@ -71,7 +71,7 @@ public final class ToolsRunScriptAction extends CallableSystemAction {
                 return (!file.isDirectory() && file.getName().endsWith(".py"));
             }
         };
-        final String ScriptsRootDirectory = TheApp.getCurrentVersionPreferences().get("Paths: Scripts Path", "Scripts");
+        final String ScriptsRootDirectory = TheApp.getCurrentVersionPreferences().get("Paths: Scripts Path", "Code/GUI/");
         File rootHelpDirectory = new File(ScriptsRootDirectory);
         final String fullPath = rootHelpDirectory.getAbsolutePath();
         File[] files = rootHelpDirectory.listFiles(fileFilter);

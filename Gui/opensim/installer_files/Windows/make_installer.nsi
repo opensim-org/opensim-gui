@@ -124,5 +124,9 @@ Section "Uninstall"
   RMDir /r "$INSTDIR"
 
   DeleteRegKey /ifempty HKCU "Software\OpenSim@VERSION@"
-
+  ; delete start menu shortcuts
+  Delete "$SMPROGRAMS\OpenSim\OpenSim @VERSION@.lnk"
+  Delete "$SMPROGRAMS\OpenSim\Uninstall OpenSim @VERSION@.lnk"
+  ; Delete Desktop shortcut
+  Delete "$DESKTOP\OpenSim @VERSION@.lnk"
 SectionEnd

@@ -34,9 +34,10 @@
 # The model used is the simple Bouncing Block model included with
 # the OpenSim distribution. It modifies the properties of one of
 # the bushings in the model
+import os.path
 
 # Load the model and get handle 
-loadModel(getInstallDir()+"/Models/BouncingBlock/bouncing_block.osim")
+loadModel( os.path.join(getResourcesDir(), "Models", "BouncingBlock", "bouncing_block.osim"))
 currentModel = getCurrentModel()
 
 # Create a new copy

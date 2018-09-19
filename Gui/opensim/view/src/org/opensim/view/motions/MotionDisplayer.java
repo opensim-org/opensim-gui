@@ -345,7 +345,8 @@ public class MotionDisplayer {
     
     /** Creates a new instance of MotionDisplayer */
     public MotionDisplayer(Storage motionData, Model model) {
-        String defaultMarkerRadiusString = "10"; // new default per issue #643
+         // The following value should stay the same as the value in Installer.java
+        String defaultMarkerRadiusString = STRING_EXPMARKER_DEFAULT_RADIUS; // new default per issue #643
         String currentSize =TheApp.getCurrentVersionPreferences().get("Visualizer: Experimental Marker Radius (mm)", 
                 defaultMarkerRadiusString);
         TheApp.getCurrentVersionPreferences().put("Visualizer: Experimental Marker Radius (mm)", currentSize);
@@ -365,6 +366,7 @@ public class MotionDisplayer {
         if (model instanceof ModelForExperimentalData) return;
 
     }
+    public static final String STRING_EXPMARKER_DEFAULT_RADIUS = "10";
     public void setupMotionDisplay() { 
         if (simmMotionData == null)
            return;
@@ -652,8 +654,6 @@ public class MotionDisplayer {
           // FIX40 speed this up by using map or YIndex
           context.getCurrentStateRef().setTime(assocTime);
           model.setStateVariableValues(context.getCurrentStateRef(), states.getAsVector());
-          // Assemble to satify constraints. Fixes issue #617
-          model.assemble(context.getCurrentStateRef());
           context.realizeVelocity();
       } else {
          // Any other states including muscles

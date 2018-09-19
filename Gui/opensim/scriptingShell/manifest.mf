@@ -1,6 +1,5 @@
 Manifest-Version: 1.0
 OpenIDE-Module: org.opensim.console
-OpenIDE-Module-Install: org/opensim/console/Installer.class
 OpenIDE-Module-Layer: org/opensim/console/layer.xml
 OpenIDE-Module-Localizing-Bundle: org/opensim/console/Bundle.properties
 OpenIDE-Module-Requires: org.openide.windows.WindowManager

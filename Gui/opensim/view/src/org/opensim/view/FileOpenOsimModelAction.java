@@ -39,7 +39,6 @@ import org.opensim.modeling.Model;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.actions.MRUFilesOptions;
-import org.opensim.view.base.ExecOpenSimProcess;
 import org.opensim.view.pub.OpenSimDB;
 
 public class FileOpenOsimModelAction extends CallableSystemAction {
@@ -125,7 +124,11 @@ public class FileOpenOsimModelAction extends CallableSystemAction {
              OpenSimLogger.logMessage("Failed to construct model from file "+fileName+"\n", OpenSimLogger.ERROR);
             return retValue;
         }
-
+        if (aModel.getValidationLog().length()>0){
+            NotifyDescriptor.Message dlg =
+                          new NotifyDescriptor.Message("The following Warnings/Errors were encountered while loading the model:\n"+aModel.getValidationLog(), NotifyDescriptor.WARNING_MESSAGE);
+                  DialogDisplayer.getDefault().notify(dlg);
+        }
         return loadModel(aModel, loadInForground);
     }
 
