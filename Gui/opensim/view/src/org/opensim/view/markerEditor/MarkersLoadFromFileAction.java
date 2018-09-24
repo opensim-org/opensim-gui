@@ -76,13 +76,8 @@ public class MarkersLoadFromFileAction extends AbstractAction {
         if (fileName==null) return;
         // This block of code should stay in sync with 
         // TestEditMarkers.java in opensim-core
-        MarkerSet newMarkerSet;
-        try {
-            newMarkerSet = new MarkerSet(model, fileName);
-        } catch (IOException ex) {
-            ErrorDialog.displayExceptionDialog(ex);
-            return;
-        }
+        MarkerSet newMarkerSet = new MarkerSet(fileName);
+        model.addComponent(newMarkerSet);
         MarkerSet modelMarkerSet = model.getMarkerSet();
         OpenSimContext context = OpenSimDB.getInstance().getContext(model);
         ArrayStr existingNames = new ArrayStr();
