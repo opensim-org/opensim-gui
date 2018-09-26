@@ -92,7 +92,8 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
             el.delete();
             el=null;
         }
-        dLoads = new ExternalLoads(modelLocalCopy, externalLoadsFilename);
+        dLoads = new ExternalLoads(externalLoadsFilename, true);
+        modelLocalCopy.addModelComponent(dLoads);
         dLoads.setName("Ex2");
         modelLocalCopy.initSystem();
         fullExternalLoadsFilename = externalLoadsFilename;

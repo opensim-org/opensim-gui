@@ -419,7 +419,7 @@ public class ScaleToolModel extends Observable implements Observer {
       //unscaledModel.setInputFileName("");
       unscaledModel.setOriginalModelPathFromModel(originalModel); // important to keep track of the original path so bone loading works
       //unscaledModel.setup();
-      originalMarkerSet = new MarkerSet(unscaledModel.getMarkerSet());
+      originalMarkerSet = MarkerSet.safeDownCast(unscaledModel.getMarkerSet().clone());
 
       // Create scale tool
       scaleTool = new ScaleTool();
@@ -587,13 +587,8 @@ public class ScaleToolModel extends Observable implements Observer {
       boolean success = true;
       extraMarkerSet = null;
       if(extraMarkerSetFile.isValid()) {
-         try {
-            extraMarkerSet = new MarkerSet(unscaledModel, extraMarkerSetFile.fileName);
-         } catch (IOException ex) {
-            extraMarkerSet = null;
-            success = false;
-            ErrorDialog.displayExceptionDialog(ex);
-         }
+            extraMarkerSet = new MarkerSet(extraMarkerSetFile.fileName);
+            unscaledModel.updateMarkerSet(extraMarkerSet);
       }
       
       resetMarkers(); // reset markers in our unscaled model
