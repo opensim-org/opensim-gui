@@ -41,7 +41,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Vector;
-import java.util.prefs.Preferences;
 import java.util.regex.Pattern;
 import javax.swing.undo.AbstractUndoableEdit;
 import javax.swing.undo.CannotRedoException;
@@ -58,7 +57,6 @@ import org.opensim.modeling.OpenSimObject;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
-import vtk.vtkMatrix4x4;
 
 /**
  *
@@ -208,15 +206,8 @@ public class OpenSimDB extends Observable implements Externalizable{
     // Swap context objects as well
    
    public void replaceModel(Model oldModel, Model newModel, OpenSimContext newContext) {
-      vtkMatrix4x4 offset=null;
-      double opacity=1;
       OpenSimContext swap=null;
       if(oldModel!=null) {
-         SingleModelVisuals rep = ViewDB.getInstance().getModelVisuals(oldModel);
-         if(rep!=null) {
-            offset = ViewDB.getInstance().getModelVisualsTransform(rep); // TODO: do we need to make a copy??
-            opacity = rep.getOpacity();
-         }
          removeModel(oldModel);
       }
       if(newModel!=null) {

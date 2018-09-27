@@ -40,7 +40,6 @@ import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.State;
-import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.motions.MotionDisplayer;
 
 /**
@@ -54,9 +53,7 @@ public class ExperimentalDataObject extends AdhocModelComponent {
     private int startIndexInFileNotIncludingTime=-1;
     private boolean displayed=true;
     private boolean trailDisplayed=false;
-    private int glyphIndex=-1;
     private UUID dataObjectUUID;
-    private OpenSimvtkGlyphCloud myGlyph;
     private Model model=null;
     /** Creates a new instance of ExperimentalDataObject */
     public ExperimentalDataObject(ExperimentalDataItemType objectType, String baseName, int index) {
@@ -95,19 +92,6 @@ public class ExperimentalDataObject extends AdhocModelComponent {
 
     public void setTrailDisplayed(boolean trailDisplayed) {
         this.trailDisplayed = trailDisplayed;
-    }
-
-    public int getGlyphIndex() {
-        return glyphIndex;
-    }
-
-    public void setGlyphInfo(int glyphIndex, OpenSimvtkGlyphCloud glyphUsed) {
-        this.glyphIndex = glyphIndex;
-        myGlyph = glyphUsed;
-    }
-
-    public OpenSimvtkGlyphCloud getMyGlyph() {
-        return myGlyph;
     }
 
     /**

@@ -71,7 +71,6 @@ public class MusclePointFunctionEventListener implements FunctionEventListener {
                   context.setYFunction(mmp, newFunction);
                else if (Function.getCPtr(oldFunction) == Function.getCPtr(mmp.get_z_location()))
                   context.setZFunction(mmp, newFunction);
-               MuscleEditorTopComponent.findInstance().movingPointMoved(event.getModel(), Muscle.safeDownCast(GeometryPath.safeDownCast(mmp.getOwner()).getOwner()), mmp);
             }
          } else if (event instanceof FunctionModifiedEvent) {
             FunctionModifiedEvent fme = (FunctionModifiedEvent) event;
@@ -82,7 +81,6 @@ public class MusclePointFunctionEventListener implements FunctionEventListener {
                context.setYFunction(mmp, function);
             else if (Function.getCPtr(function) == Function.getCPtr(mmp.get_z_location()))
                context.setZFunction(mmp, function);
-            MuscleEditorTopComponent.findInstance().movingPointMoved(event.getModel(), Muscle.safeDownCast(GeometryPath.safeDownCast(mmp.getOwner()).getOwner()), mmp);
          }
       }
    }

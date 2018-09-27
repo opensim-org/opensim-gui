@@ -5,7 +5,6 @@
         <folder name="Edit">
             <file name="org-opensim-view-FrameToggleVisibilityAction.instance"/>
             <file name="org-opensim-view-FileOpenOsimModelAction.instance"/>
-            <file name="org-opensim-view-experimentaldata-AnnotateMotionObjectsAction.instance"/>
             <file name="org-opensim-view-experimentaldata-MotionReclassifyAction.instance"/>
             <file name="org-opensim-view-motions.FileLoadMotionAction.instance"/>
             <file name="org-opensim-view-motions.FileLoadMotionMenuAction.instance"/>
@@ -18,17 +17,11 @@
             <file name="org-opensim-view-ObjectDisplayOpacityAction.instance"/>
             <file name="org-opensim-view-ObjectDisplayShowOnlyAction.instance"/>
             <file name="org-opensim-view-ModelRenameAction.instance"/>
-            <file name="org-opensim-view-ViewEditAction.instance"/>
-            <file name="org-opensim-view-ViewReplicateAction.instance"/>
             <file name="org-opensim-view-SaveAction.instance"/>
             <file name="org-opensim-view-FileSaveModelAction.instance"/>
             <file name="org-opensim-view-actions-EditPreferencesAction.instance"/>
             <file name="org-opensim-view-actions-FileCloseAction.instance"/>
-            <file name="org-opensim-view-actions-ViewAddNewAction.instance"/>
             <file name="org-opensim-view-base-SelectCameraAction.instance"/>
-            <file name="org-opensim-view-base-ToggleAxesAction.instance">
-                <attr name="instanceClass" stringvalue="org.opensim.view.base.ToggleAxesAction"/>
-            </file>
             <file name="org-opensim-view-editors-ObjectPropertiesEditor.instance"/>
             <file name="org-opensim-view-excitationEditor-ExcitationEditorAction.instance"/>
             <file name="org-opensim-view-experimentaldata-ExperimentalObjectDisplayHideAction.instance"/>
@@ -743,8 +736,7 @@
     <folder name="Windows2">
         <folder name="Components">
             <file name="ExplorerTopComponent.settings" url="ExplorerTopComponentSettings.xml"/>
-            <file name="MuscleEditorTopComponent.settings" url="editors/MuscleEditorTopComponentSettings.xml"/>
-        </folder>
+       </folder>
         <folder name="Modes">
             <file name="osimExplorerMode.wsmode" url="osimExplorerMode.wsmode"/>
             <file name="osimMessagesMode.wsmode" url="osimMessagesMode.wsmode"/>
@@ -754,7 +746,6 @@
                 <file name="ExplorerTopComponent.wstcref" url="ExplorerTopComponentWstcref.xml"/>
             </folder>
             <folder name="osimEditorsMode">
-                <file name="MuscleEditorTopComponent.wstcref" url="editors/MuscleEditorTopComponentWstcref.xml"/>
                 <file name="properties.wstcref" url="propertiesWstcref_1.xml"/>
             </folder>
             <folder name="properties">

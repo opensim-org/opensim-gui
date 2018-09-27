@@ -107,9 +107,6 @@ public class Lab implements Serializable {
         displayStatusText("Setting up lab...");
         
         PluginsDB.getInstance().loadPlugins();
-        // Open vtk window early as trying to display prematurely crashes
-        if (ViewDB.getInstance().getCurrentModelWindow()==null)
-            ViewDB.getInstance().addViewWindow();
         OpenSimDB.getInstance().rebuild((OpenSimDBDescriptor) getObject(DB));
         String instructionsFileName =  (String)getObject(INSTRUCTIONS);
         if (instructionsFileName !=null){

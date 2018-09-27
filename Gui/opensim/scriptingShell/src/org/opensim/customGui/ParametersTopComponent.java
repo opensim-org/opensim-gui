@@ -179,8 +179,6 @@ public final class ParametersTopComponent extends TopComponent
 
     private void resetViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetViewButtonActionPerformed
 // TODO add your handling code here:
-        ViewDB.getCurrentModelWindow().applyCameraAttributes(cameraAttributes);
-        ViewDB.getCurrentModelWindow().getCanvas().Render();
     }//GEN-LAST:event_resetViewButtonActionPerformed
 
     private void runButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_runButtonActionPerformed
@@ -391,18 +389,6 @@ public final class ParametersTopComponent extends TopComponent
                     //outputChannels.add(resultPanel);
                     //knobsPanel.add(resultPanel);                    
                 }
-                else if (nextOutput instanceof LabOutputTextToWindow) {
-                    outputChannels.add(new LabOutputAnnotationAnchorWindow((LabOutputTextToWindow)nextOutput));
-                }
-                else if (nextOutput instanceof LabOutputTextToObject) {
-                    LabOutputAnnotationAnchorObject newChannel;
-                    try {
-                        newChannel = new LabOutputAnnotationAnchorObject((LabOutputTextToObject) nextOutput);
-                        outputChannels.add(newChannel);
-                    } catch (IOException ex) {
-                        ex.printStackTrace();
-            }
-        }
             }
         }
         outputPanel.validate();

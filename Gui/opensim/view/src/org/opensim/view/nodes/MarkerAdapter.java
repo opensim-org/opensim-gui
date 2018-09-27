@@ -37,11 +37,9 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Vec3;
-import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.ObjectsRenamedEvent;
 import org.opensim.view.SingleModelGuiElements;
-import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 

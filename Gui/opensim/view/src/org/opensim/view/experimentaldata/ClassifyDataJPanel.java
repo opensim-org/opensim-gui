@@ -35,14 +35,12 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.opensim.modeling.ArrayStr;
-import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.pub.ViewDB;
-import vtk.vtkTransform;
 
 /**
  *

@@ -260,14 +260,6 @@ public class AnnotatedMotion extends Storage {
         dataObject.setDisplayed(true);
     }
 
-    void toggleObjectTrail(ExperimentalDataObject obj) {
-        // We'll create a separate table to keep track ofr trails. '
-        MotionDisplayer displayer=MotionControlJPanel.getInstance().getMasterMotion().getDisplayer(this);
-        if (displayer ==null) return;
-        displayer.toggleTrail(obj);
-        obj.setTrailDisplayed(!obj.isTrailDisplayed());
-    }
-
     public final double[] getBoundingBox() {
         if (isBoundingBoxComputed())
             return boundingBox;

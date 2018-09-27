@@ -22,32 +22,22 @@
  * -------------------------------------------------------------------------- */
 package org.opensim.view.nodes;
 
-import java.awt.Color;
 import java.awt.Image;
 import java.net.URL;
 import java.util.List;
 import javax.swing.ImageIcon;
 import java.util.ResourceBundle;
 import javax.swing.Action;
-import javax.swing.undo.AbstractUndoableEdit;
-import javax.swing.undo.CannotRedoException;
-import javax.swing.undo.CannotUndoException;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
-import org.openide.nodes.PropertySupport;
-import org.openide.nodes.Sheet;
-import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
-import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.MarkersDisplayer;
 import org.opensim.view.markerEditor.MarkersSaveToFileAction;
 import org.opensim.view.markerEditor.MarkersLoadFromFileAction;
 import org.opensim.view.markerEditor.NewMarkerAction;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
-import org.opensim.view.pub.ViewDB;
 
 /**
  * Node class to wrap Model's collection of markers
@@ -167,7 +157,7 @@ public class MarkersNode extends OpenSimObjectSetNode {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
         markersDisplayer.setColor(color);
-        ViewDB.repaintAll();
+        
         refreshNode();
     }
     public void setColorUI(final Color color) {
@@ -204,7 +194,7 @@ public class MarkersNode extends OpenSimObjectSetNode {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
         markersDisplayer.setScaleFactor(newFactor);
-        ViewDB.repaintAll();
+        
         refreshNode();
     }
 
