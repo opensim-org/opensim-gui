@@ -39,7 +39,6 @@ import org.opensim.modeling.*;
 import org.opensim.utils.TheApp;
 import org.opensim.view.MuscleColorByActivationStorage;
 import org.opensim.view.MuscleColoringFunction;
-import org.opensim.view.SingleModelVisuals;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
@@ -141,17 +140,6 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    // In seconds
    public void setMinRenderTimeInterval(double interval) { minRenderTimeInterval = interval; }
 
-   public void setRenderMuscleActivations(boolean render) {
-        if (getModelForDisplayCompatibleStates()) {
-            if (ViewDB.isVtkGraphicsAvailable()) {
-                SingleModelVisuals vis = ViewDB.getInstance().getModelVisuals(getModelForDisplay());
-                if (vis != null) {
-                    vis.setApplyMuscleColors(render);
-                }
-            }
-        }
-    }
-
    public void startProgressUsingTime(double startTime, double endTime) {
       progressUsingTime = true;
       this.startTime = startTime;
@@ -182,7 +170,7 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
                   //ViewDB.getInstance().updateModelDisplay(getModelForDisplay());  // Faster? than the next few indented lines
                     ViewDB.getInstance().updateModelDisplayNoRepaint(getModelForDisplay(), true, true);
                     ////ViewDB.getInstance().renderAll(); // Render now (if want to do it later, use repaintAll()) -- may slow things down too much
-                    //ViewDB.getInstance().repaintAll();
+                    //
                   lastRenderTime = currentRealTime; 
                   //System.out.println("REPAINTED");
                }
@@ -244,9 +232,8 @@ public class JavaMotionDisplayerCallback extends AnalysisWrapperWithTimer {
    }
    
    public void cleanupMotionDisplayer() {
-      setRenderMuscleActivations(false);
       if(motionDisplayer!=null) motionDisplayer.cleanupDisplay();
-      //ViewDB.getInstance().repaintAll();
+      //
       if (getTimer()!=null)
           getTimer().cancel();
    }

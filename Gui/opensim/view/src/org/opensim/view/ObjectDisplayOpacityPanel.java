@@ -35,7 +35,6 @@ import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.opensim.view.nodes.OneComponentNode;
 import org.opensim.view.pub.ViewDB;
-import vtk.vtkProperty;
 
 /**
  *
@@ -55,13 +54,7 @@ public class ObjectDisplayOpacityPanel extends javax.swing.JPanel {
 
       savedOpacities = new Vector<Double>(objects.size());
       for(int i=0; i<objects.size(); i++) {
-         if (ViewDB.isVtkGraphicsAvailable()){
-            vtkProperty prop = new vtkProperty();
-            ViewDB.getInstance().getObjectProperties(objects.get(i).getOpenSimObject(), prop);
-            savedOpacities.add((Double)prop.GetOpacity());
-         }
-         else
-            savedOpacities.add(1.0);
+         savedOpacities.add(1.0);
       }
 
       if(objects.size()>0) {
@@ -72,10 +65,6 @@ public class ObjectDisplayOpacityPanel extends javax.swing.JPanel {
    }
 
    void restore() {
-       if (ViewDB.isVtkGraphicsAvailable()){
-            for(int i=0; i<objects.size(); i++)
-               ViewDB.getInstance().setObjectOpacity(objects.get(i).getOpenSimObject(), savedOpacities.get(i));
-       }
        for(int i=0; i<objects.size(); i++) {
            if (objects.get(i) instanceof ColorableInterface)
             ((ColorableInterface) objects.get(i)).setOpacity(savedOpacities.get(i));

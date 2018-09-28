@@ -29,7 +29,6 @@ package org.opensim.view;
 
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Model;
-import vtk.vtkCaptionActor2D;
 
 /**
  *
@@ -57,21 +56,5 @@ public abstract class SelectedUserObject implements Selectable {
     public Model getOwnerModel() {
         return model;
     }
-    
-    public void updateAnchor(vtkCaptionActor2D caption) {
-             double[] bounds=getBounds();
-             if (bounds == null){   // object currently invisible
-                 caption.SetVisibility(0);
-                 return;
-             }
-             else
-                 caption.SetVisibility(1);
-             caption.SetAttachmentPoint(new double[]{
-                 (bounds[0]+bounds[1])/2.0,
-                 (bounds[2]+bounds[3])/2.0,
-                 (bounds[4]+bounds[5])/2.0,
-             });        
-    }
-
 
 }

@@ -45,7 +45,6 @@ import org.openide.nodes.Sheet;
 import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.nodes.*;
 import org.opensim.view.pub.ViewDB;
@@ -158,7 +157,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
         motionDisplayer.setDefaultForceColor(color);
-        ViewDB.repaintAll();
+        
         refreshNode();
     }
     public void setColorUI(final Color color) {
@@ -196,7 +195,7 @@ public class ExperimentalForceSetNode extends OpenSimNode {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
         motionDisplayer.setExperimentalForceScaleFactor(newFactor);
-        ViewDB.repaintAll();
+        
         refreshNode();
     }
 

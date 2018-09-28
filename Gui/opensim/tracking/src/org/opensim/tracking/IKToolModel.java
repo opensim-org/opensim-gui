@@ -91,8 +91,6 @@ public class IKToolModel extends Observable implements Observer {
 
          // Animation callback will update the display during IK solve
          animationCallback = new JavaMotionDisplayerCallback(getOriginalModel(),null/* ikTool.getOutputStorage()*/, progressHandle, true);
-         //OpenSim20 animationCallback.setRenderMuscleActivations(false);
-         //OpenSim20 animationCallback.setModelForDisplaySetConfiguration(false);
          getOriginalModel().addAnalysis(animationCallback);
          animationCallback.setStepInterval(1);
          animationCallback.startProgressUsingTime(startTime, endTime);

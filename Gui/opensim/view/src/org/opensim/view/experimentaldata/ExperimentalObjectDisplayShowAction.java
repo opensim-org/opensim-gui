@@ -31,7 +31,6 @@ import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.pub.ViewDB;
-import vtk.vtkCaptionActor2D;
 
 public final class ExperimentalObjectDisplayShowAction extends CallableSystemAction {
     

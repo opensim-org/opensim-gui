@@ -3,6 +3,19 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Component.java</file>
+            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/BodyKinematics.java</file>
+            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/AnalysisWrapperWithTimer.java</file>
+            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/ArrayVec3.java</file>
+            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/DecorativeGeometry.java</file>
+            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/ArrayStr.java</file>
+            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/AbstractTool.java</file>
+            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/OpenSimObject.java</file>
+            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/OpenSimContext.java</file>
+            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/Storage.java</file>
+            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/opensimCommonJNI.java</file>
+            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/AbstractSocket.java</file>
+        </group>
     </open-files>
 </project-private>

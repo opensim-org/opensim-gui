@@ -33,7 +33,6 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.threejs.BodyVisualizationJson;
 import org.opensim.threejs.ModelVisualizationJson;
-import org.opensim.view.BodyDisplayer;
 //import org.opensim.view.FrameToggleVisibilityAction;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.pub.ViewDB;

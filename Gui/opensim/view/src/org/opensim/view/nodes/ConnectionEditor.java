@@ -74,7 +74,7 @@ public class ConnectionEditor {
         Boolean isFrame = connector.getConnecteeTypeName().equalsIgnoreCase("PhysicalFrame")||
                 connector.getConnecteeTypeName().equalsIgnoreCase("Frame");
         ViewDB.getInstance().updateComponentVisuals(model, comp, isFrame);  
-        ViewDB.repaintAll();
+
         if (node!= null) node.refreshNode();
         SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
         guiElem.setUnsavedChangesFlag(true);

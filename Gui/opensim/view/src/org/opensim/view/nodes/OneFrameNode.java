@@ -189,7 +189,7 @@ public class OneFrameNode extends OneModelComponentNode {
         Frame frame = Frame.safeDownCast(comp);
         ViewDB.getInstance().updateDecorations(model, frame);
         ViewDB.getInstance().updateModelDisplay(model);
-        ViewDB.repaintAll();
+        
     }
     
    @Override
