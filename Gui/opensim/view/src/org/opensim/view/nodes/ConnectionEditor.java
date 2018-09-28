@@ -53,33 +53,28 @@ import org.opensim.view.pub.ViewDB;
  */
 public class ConnectionEditor {
 
-    OpenSimObject obj; // Object being edited or selected in navigator window
+    Component comp; // Object being edited or selected in navigator window
     AbstractSocket connector; // Property being edited
     OpenSimContext context = null; // Context object needed to recreate the system as needed, cached for speed
-    Model model; // model to which obj belongs
-    OpenSimObjectNode node;
+    Model model; // model to which comp belongs
+    OneComponentNode node;
 
     Model clonedModel;
     State clonedState;
     
-    public ConnectionEditor(AbstractSocket conn, OpenSimObjectNode ownerNode) {
+    public ConnectionEditor(AbstractSocket conn, OneComponentNode ownerNode) {
         this.connector = conn;
         this.model = ownerNode.getModelForNode();
         this.context = OpenSimDB.getInstance().getContext(model);
-        this.obj = ownerNode.getOpenSimObject();
+        this.comp = ownerNode.comp;
         this.node = ownerNode;
     }
     
     public void handleConnectionChangeCommon() {
-        if (Component.safeDownCast(obj)!= null){
-            Component mc = Component.safeDownCast(obj);
-            Boolean isFrame = connector.getConnecteeTypeName().equalsIgnoreCase("PhysicalFrame")||
-                    connector.getConnecteeTypeName().equalsIgnoreCase("Frame");
-            ViewDB.getInstance().updateComponentVisuals(model, mc, isFrame);  
-            
-        }
-        else 
-            ViewDB.getInstance().updateModelDisplay(model);
+        Boolean isFrame = connector.getConnecteeTypeName().equalsIgnoreCase("PhysicalFrame")||
+                connector.getConnecteeTypeName().equalsIgnoreCase("Frame");
+        ViewDB.getInstance().updateComponentVisuals(model, comp, isFrame);  
+        ViewDB.repaintAll();
         if (node!= null) node.refreshNode();
         SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);
         guiElem.setUnsavedChangesFlag(true);
@@ -100,20 +95,14 @@ public class ConnectionEditor {
     }
 
     private void handleConnectionChange(final String oldValue, final String v, boolean supportUndo) {
-        context.cacheModelAndState();
-        connector.setConnecteeName(v);
+
         try {
-            context.restoreStateFromCachedModel();
+            context.setConnecteeName(comp, connector, v);
          } catch (IOException iae) {
-            try {
                  new JOptionPane(iae.getMessage(), 
 				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
-                
-                connector.setConnecteeName(oldValue);
-                context.restoreStateFromCachedModel();  
-            } catch (IOException ex) {
-                ErrorDialog.displayExceptionDialog(ex);
-        }
+                 return; // change failed, no harm done
+
         }
         handleConnectionChangeCommon();
         
