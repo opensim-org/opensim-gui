@@ -86,13 +86,21 @@ public class NavigatorByTypeModel {
     
     public NavigatorByTypeModel(Model model) {
         setOfBodies.setMemoryOwner(false);
+        setOfBodies.connectToModel(model);
         setOfJoints.setMemoryOwner(false);
+        setOfJoints.connectToModel(model);
         setOfMarkers.setMemoryOwner(false);
+        setOfMarkers.connectToModel(model);
         setOfConstraints.setMemoryOwner(false);
+        setOfConstraints.connectToModel(model);
         setOfContactGeometry.setMemoryOwner(false);
+        setOfContactGeometry.connectToModel(model);
         setOfForces.setMemoryOwner(false);
+        setOfForces.connectToModel(model);
         setOfControllers.setMemoryOwner(false);
+        setOfControllers.connectToModel(model);
         setOfProbes.setMemoryOwner(false);
+        setOfProbes.connectToModel(model);
         buildCollections(model);
         createMuscleGroups(model);
     }
