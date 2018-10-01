@@ -46,7 +46,6 @@ import org.openide.util.Exceptions;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.ExplorerTopComponent;
-import org.opensim.view.OpenSimvtkGlyphCloud;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.nodes.*;
 import org.opensim.view.pub.ViewDB;
@@ -157,7 +156,7 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }
         motionDisplayer.setDefaultExperimentalMarkerColor(color);
-        ViewDB.repaintAll();
+        
         refreshNode();
     }
     public void setColorUI(final Color color) {
@@ -196,7 +195,7 @@ public class ExperimentalMarkerSetNode extends OpenSimNode {
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
         motionDisplayer.setExperimentalMarkerRadius(newRadius);
-        ViewDB.repaintAll();
+        
         refreshNode();
     }
 

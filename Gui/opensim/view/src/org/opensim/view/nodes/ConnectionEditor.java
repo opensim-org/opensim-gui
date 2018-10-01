@@ -76,7 +76,7 @@ public class ConnectionEditor {
             Boolean isFrame = connector.getConnecteeTypeName().equalsIgnoreCase("PhysicalFrame")||
                     connector.getConnecteeTypeName().equalsIgnoreCase("Frame");
             ViewDB.getInstance().updateComponentVisuals(model, mc, isFrame);  
-            ViewDB.repaintAll();
+            
         }
         else 
             ViewDB.getInstance().updateModelDisplay(model);

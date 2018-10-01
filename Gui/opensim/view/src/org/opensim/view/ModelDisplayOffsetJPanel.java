@@ -35,7 +35,6 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.Vec3;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.pub.ViewDB;
-import vtk.vtkMatrix4x4;
 
 /**
  *
@@ -47,7 +46,6 @@ import vtk.vtkMatrix4x4;
 public class ModelDisplayOffsetJPanel extends javax.swing.JPanel 
                                       implements ChangeListener{
     
-    private SingleModelVisuals rep;
     private ModelVisualizationJson modelJson;
     
     private Model dModel;
@@ -56,7 +54,6 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
     /** Creates new form ModelDisplayOffsetJPanel */
     public ModelDisplayOffsetJPanel(Model abstractModel) {
         // send message to visulaizer to get offset
-        rep = ViewDB.getInstance().getModelVisuals(abstractModel);
         modelJson = ViewDB.getInstance().getModelVisualizationJson(abstractModel);
         this.dModel = abstractModel;
 
@@ -181,7 +178,7 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
         // pass offsetVec3 to ViewDB to apply it
         //ViewDB.getInstance().setModelVisualsTransform(rep, offset);
         ViewDB.getInstance().setModelOffset(modelJson, offsetVec3);
-        ViewDB.getInstance().repaintAll();
+        
     }
     /** Make up bounds for displacement. Initially it's 3 times the size of the bounding 
      * box of the scene so that the user can move everything out of intersection.
@@ -213,7 +210,7 @@ public class ModelDisplayOffsetJPanel extends javax.swing.JPanel
         for (int i=0; i<3;i++)
             modelJson.getTransformWRTScene().p().set(i, backupOffset.get(i));
         ViewDB.getInstance().setModelOffset(modelJson, backupOffset);
-        ViewDB.getInstance().repaintAll();
+        
     }
     
 }

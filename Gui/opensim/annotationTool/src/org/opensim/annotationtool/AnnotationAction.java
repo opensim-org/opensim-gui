@@ -58,13 +58,13 @@ public final class AnnotationAction extends CallableSystemAction {
         textActor.AddPosition(0., 0., 0.);
         vis.addUserObject(textActor);
         //ViewDB.getInstance().hideOthers(mdl, true);
-        ViewDB.getInstance().repaintAll();
+        
         // Create timer that will undo the change in 5000 msec.
         Timer restoreTimer = new Timer(5000, new ActionListener(){
             public void actionPerformed(ActionEvent e) {
                 vis.removeUserObject(textActor);
                 //ViewDB.getInstance().hideOthers(mdl, false);
-                ViewDB.getInstance().repaintAll();
+                
             }});
         restoreTimer.setRepeats(false);
         restoreTimer.start();

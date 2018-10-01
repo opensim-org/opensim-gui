@@ -105,7 +105,6 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
          getModel().addAnalysis(animationCallback);
          animationCallback.setStepInterval(1);
          animationCallback.setMinRenderTimeInterval(0.1); // to avoid rendering really frequently which can slow down our execution
-         animationCallback.setRenderMuscleActivations(true);
          animationCallback.startProgressUsingTime(ti,tf);
          animationCallback.setDisplayTimeProgress(true);
 

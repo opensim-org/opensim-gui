@@ -105,7 +105,6 @@ public class RRAToolModel extends TrackingToolModel {
          getModel().addAnalysis(animationCallback);
          animationCallback.setStepInterval(1);
          animationCallback.setMinRenderTimeInterval(0.1); // to avoid rendering really frequently which can slow down our execution
-         animationCallback.setRenderMuscleActivations(true);
          animationCallback.startProgressUsingTime(ti,tf);
 
          // Do this maneuver (there's gotta be a nicer way) to create the object so that C++ owns it and not Java (since 
