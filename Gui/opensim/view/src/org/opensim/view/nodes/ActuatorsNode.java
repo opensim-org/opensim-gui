@@ -39,6 +39,7 @@ import org.opensim.modeling.Actuator;
 import org.opensim.modeling.Force;
 import org.opensim.modeling.ForceSet;
 import org.opensim.modeling.Muscle;
+import org.opensim.modeling.OpenSimObjectSet;
 
 /**
  *
@@ -52,14 +53,14 @@ public class ActuatorsNode extends OpenSimObjectSetNode {
    /**
     * Creates a new instance of ActuatorsNode
     */
-   public ActuatorsNode(ForceSet as) {
+   public ActuatorsNode(OpenSimObjectSet as) {
       super(as);
       setDisplayName(NbBundle.getMessage(ActuatorsNode.class, "CTL_Actuators"));
       Children children = getChildren();
 
       // Add all of the Actuators that are not Muscles directly under the Actuators node.
       for (int forceNum=0; forceNum < as.getSize(); forceNum++ ) {
-         Force nextForce = as.get(forceNum);
+         Force nextForce = Force.safeDownCast(as.get(forceNum));
          Actuator act = Actuator.safeDownCast(nextForce);
          Muscle msl = Muscle.safeDownCast(nextForce);
          if (act != null && msl == null) {

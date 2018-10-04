@@ -35,7 +35,9 @@ import javax.swing.Action;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.ContactGeometry;
 import org.opensim.modeling.ContactGeometrySet;
+import org.opensim.modeling.OpenSimObjectSet;
 
 /**
  * 
@@ -50,13 +52,14 @@ public class ContactGeometriesNode extends OpenSimObjectSetNode {
    /**
      * Creates a new instance of ContactGeometriesNode
      */
-   public ContactGeometriesNode(ContactGeometrySet as) {
+   public ContactGeometriesNode(OpenSimObjectSet as) {
        super(as);
        setDisplayName(NbBundle.getMessage(ContactGeometriesNode.class, "CTL_ContactGeometries"));
        Children children = getChildren();
        for (int i=0; i<as.getSize(); i++) {
            //System.out.println(as.get(i).getType());
-           OneContactGeometryNode node = new OneContactGeometryNode(as.get(i));
+           ContactGeometry cg = ContactGeometry.safeDownCast(as.get(i));
+           OneContactGeometryNode node = new OneContactGeometryNode(cg);
            Node[] arrNodes = new Node[1];
            arrNodes[0] = node;
            children.add(arrNodes);

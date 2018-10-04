@@ -32,7 +32,6 @@ import java.beans.VetoableChangeSupport;
 import org.opensim.modeling.ArrayConstObjPtr;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Body;
-import org.opensim.modeling.BodySet;
 import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
@@ -52,8 +51,10 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ObjectGroup;
+import org.opensim.modeling.OpenSimObjectSet;
 import org.opensim.modeling.Probe;
 import org.opensim.modeling.ProbeSet;
+import org.opensim.modeling.SetBodies;
 
 /**
  *
@@ -72,14 +73,14 @@ public class NavigatorByTypeModel {
     public static final String PROP_SETOFFORCES = "PROP_SETOFFORCES";
     public static final String PROP_SETOFCONTROLLERS = "PROP_SETOFCONTROLLERS";
     
-    private final BodySet setOfBodies = new BodySet();
-    private final JointSet setOfJoints = new JointSet();
-    private final MarkerSet setOfMarkers = new MarkerSet();
-    private final ConstraintSet setOfConstraints = new ConstraintSet();
-    private final ContactGeometrySet setOfContactGeometry = new ContactGeometrySet();
-    private final ForceSet setOfForces = new ForceSet();
-    private final ControllerSet setOfControllers = new ControllerSet();
-    private final ProbeSet setOfProbes = new ProbeSet();
+    private final OpenSimObjectSet setOfBodies = new OpenSimObjectSet();
+    private final OpenSimObjectSet setOfJoints = new OpenSimObjectSet();
+    private final OpenSimObjectSet setOfMarkers = new OpenSimObjectSet();
+    private final OpenSimObjectSet setOfConstraints = new OpenSimObjectSet();
+    private final OpenSimObjectSet setOfContactGeometry = new OpenSimObjectSet();
+    private final OpenSimObjectSet setOfForces = new OpenSimObjectSet();
+    private final OpenSimObjectSet setOfControllers = new OpenSimObjectSet();
+    private final OpenSimObjectSet setOfProbes = new OpenSimObjectSet();
     private final transient PropertyChangeSupport propertyChangeSupport = new java.beans.PropertyChangeSupport(this);
     private final transient VetoableChangeSupport vetoableChangeSupport = new java.beans.VetoableChangeSupport(this);
     private Ground ground;
@@ -176,56 +177,56 @@ public class NavigatorByTypeModel {
     /**
      * @return the setOfBodies
      */
-    public BodySet getSetOfBodies() {
+    public OpenSimObjectSet getSetOfBodies() {
         return setOfBodies;
     }
 
     /**
      * @return the setOfJoints
      */
-    public JointSet getSetOfJoints() {
+    public OpenSimObjectSet getSetOfJoints() {
         return setOfJoints;
     }
 
     /**
      * @return the setOfMarkers
      */
-    public MarkerSet getSetOfMarkers() {
+    public OpenSimObjectSet getSetOfMarkers() {
         return setOfMarkers;
     }
 
     /**
      * @return the setOfConstraints
      */
-    public ConstraintSet getSetOfConstraints() {
+    public OpenSimObjectSet getSetOfConstraints() {
         return setOfConstraints;
     }
 
     /**
      * @return the setOfContactGeometry
      */
-    public ContactGeometrySet getSetOfContactGeometry() {
+    public OpenSimObjectSet getSetOfContactGeometry() {
         return setOfContactGeometry;
     }
 
     /**
      * @return the setOfForces
      */
-    public ForceSet getSetOfForces() {
+    public OpenSimObjectSet getSetOfForces() {
         return setOfForces;
     }
 
     /**
      * @return the setOfControllers
      */
-    public ControllerSet getSetOfControllers() {
+    public OpenSimObjectSet getSetOfControllers() {
         return setOfControllers;
     }
 
     /**
      * @return the setOfProbes
      */
-    public ProbeSet getSetOfProbes() {
+    public OpenSimObjectSet getSetOfProbes() {
         return setOfProbes;
     }
 

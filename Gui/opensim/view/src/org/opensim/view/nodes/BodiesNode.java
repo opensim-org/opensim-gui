@@ -32,8 +32,7 @@ import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Body;
-import org.opensim.modeling.BodySet;
-import org.opensim.view.FrameToggleVisibilityAction;
+import org.opensim.modeling.OpenSimObjectSet;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
 /**
@@ -43,33 +42,18 @@ public class BodiesNode extends OpenSimObjectSetNode {
     boolean topological=false;
     private static ResourceBundle bundle = NbBundle.getBundle(BodiesNode.class);
 
-    public BodiesNode(BodySet bodySet) {
+    public BodiesNode(OpenSimObjectSet bodySet) {
         super(bodySet);
         setDisplayName(NbBundle.getMessage(BodiesNode.class, "CTL_Bodies"));
         //Stack<OneBodyNode> stack = new Stack<OneBodyNode>();
-
+        Children children = getChildren();
         for (int bodyNum=0; bodyNum < bodySet.getSize(); bodyNum++ ){
 
-            Body body = bodySet.get(bodyNum);
-            Children children = getChildren();
-
-            if (topological){
-                /*while (stack.size() > i.getNumAncestors())
-                    stack.pop();
-
-                if (stack.size() > 0)
-                    children = stack.peek().getChildren();
-
-                stack.push(new BodyNode(body));
-
-                children.add(new Node[] { stack.peek() });*/
-            }
-            else {
-                OneBodyNode node = new OneBodyNode(body);
-                Node[] arrNodes = new Node[1];
-                arrNodes[0] = node;
-                children.add(arrNodes);
-            }
+            Body body = Body.safeDownCast(bodySet.get(bodyNum));
+            OneBodyNode node = new OneBodyNode(body);
+            Node[] arrNodes = new Node[1];
+            arrNodes[0] = node;
+            children.add(arrNodes);
         }
       addDisplayOption(displayOption.Isolatable);
       addDisplayOption(displayOption.Showable);

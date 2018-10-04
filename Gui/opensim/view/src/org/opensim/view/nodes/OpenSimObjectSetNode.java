@@ -62,40 +62,7 @@ public class OpenSimObjectSetNode extends OpenSimObjectNode {
      * Action to be invoked on double clicking.
      */
     public Action getPreferredAction() {
-       if (getValidDisplayOptions().size()==0)  // Nothing to show or hide.
            return null;
-
-         // Collect objects from children and obtain their visibility status
-         Children children = getChildren();
-         Node[] theNodes = children.getNodes();
-         int collectiveStatus = 3;  // unknown;
-         for(int i=0; i<theNodes.length; i++){
-            Node node = theNodes[i];
-            if (!(node instanceof OpenSimObjectNode))
-               continue;
-            // Cycle thru children and get their display status, 
-            int currentStatus=ViewDB.getInstance().getDisplayStatus(((OpenSimObjectNode) node).getOpenSimObject());
-            if (collectiveStatus==3){
-               collectiveStatus=currentStatus;
-            }
-            else {
-               if (currentStatus!=collectiveStatus)
-                  collectiveStatus=2;  // mixed;
-            }
-         }
-         if (collectiveStatus==3)   
-            return null;
-         if (collectiveStatus==2) collectiveStatus=0;  // Assume hidden if mixed
-         
-         try {
-            // 2 for mixed, some shown some hidden, pick show
-            return ((ObjectDisplaySelectAction) ObjectDisplaySelectAction.findObject(
-            (Class)Class.forName("org.opensim.view.actions.ObjectDisplaySelectAction"), true));
-         } catch (ClassNotFoundException ex) {
-            ex.printStackTrace();
-         }
-            
-         return null;
     }
           
     /**

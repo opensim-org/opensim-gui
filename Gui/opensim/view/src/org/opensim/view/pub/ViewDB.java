@@ -667,6 +667,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    }
 
    public void setSelectedObject(OpenSimObject obj) {
+      if (obj instanceof OpenSimObjectSet) // Sets are not selectable as a whole
+          return;
       if (findObjectInSelectedList(obj)!=-1)
           return;
       clearSelectedObjects();

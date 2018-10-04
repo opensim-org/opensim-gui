@@ -31,6 +31,7 @@ import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Constraint;
 import org.opensim.modeling.ConstraintSet;
+import org.opensim.modeling.OpenSimObjectSet;
 
 /**
  * Node class to wrap Model's collection of constraints
@@ -38,13 +39,13 @@ import org.opensim.modeling.ConstraintSet;
 public class ConstraintsNode extends OpenSimObjectSetNode {
     private static ResourceBundle bundle = NbBundle.getBundle(ConstraintsNode.class);
 
-    public ConstraintsNode(ConstraintSet constraintSet) {
+    public ConstraintsNode(OpenSimObjectSet constraintSet) {
         super(constraintSet);
         setDisplayName(NbBundle.getMessage(ConstraintsNode.class, "CTL_Constraints"));
 
         for (int index=0; index < constraintSet.getSize(); index++ ){
 
-            Constraint constraint = constraintSet.get(index);
+            Constraint constraint = Constraint.safeDownCast(constraintSet.get(index));
             Children children = getChildren();
 
             OneConstraintNode node = new OneConstraintNode(constraint);

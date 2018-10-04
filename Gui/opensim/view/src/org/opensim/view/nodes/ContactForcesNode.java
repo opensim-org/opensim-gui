@@ -37,6 +37,7 @@ import org.openide.util.NbBundle;
 import org.opensim.modeling.Force;
 import org.opensim.modeling.ForceSet;
 import org.opensim.modeling.Muscle;
+import org.opensim.modeling.OpenSimObjectSet;
 
 /**
  *
@@ -50,14 +51,14 @@ public class ContactForcesNode extends OpenSimObjectSetNode {
    /**
     * Creates a new instance of ContactForcesNode
     */
-   public ContactForcesNode(ForceSet as) {
+   public ContactForcesNode(OpenSimObjectSet as) {
       super(as);
       setDisplayName(NbBundle.getMessage(ContactForcesNode.class, "CTL_ContactForces"));
       Children children = getChildren();
 
          // Add all of the ContactForces directly under the ContactForces node.
          for (int forceNum=0; forceNum < as.getSize(); forceNum++ ) {
-            Force nextForce = as.get(forceNum);
+            Force nextForce = Force.safeDownCast(as.get(forceNum));
             Muscle msl = Muscle.safeDownCast(nextForce);
             if (msl !=null) continue;
             if (nextForce.getConcreteClassName().equalsIgnoreCase("ElasticFoundationForce") ||

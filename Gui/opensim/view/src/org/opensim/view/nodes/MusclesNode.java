@@ -39,6 +39,7 @@ import org.opensim.modeling.Muscle;
 import org.opensim.modeling.ForceSet;
 import org.opensim.modeling.ArrayObjPtr;
 import org.opensim.modeling.ObjectGroup;
+import org.opensim.modeling.OpenSimObjectSet;
 import org.opensim.view.nodes.OpenSimObjectNode.displayOption;
 
 /**
@@ -53,7 +54,7 @@ public class MusclesNode extends OpenSimObjectSetNode {
    /**
     * Creates a new instance of MusclesNode
     */
-   public MusclesNode(ForceSet as) {
+   public MusclesNode(OpenSimObjectSet as) {
       super(as);
       setDisplayName(NbBundle.getMessage(MusclesNode.class, "CTL_Muscles"));
       Children children = getChildren();
@@ -142,7 +143,7 @@ public class MusclesNode extends OpenSimObjectSetNode {
        return NbBundle.getMessage(MusclesNode.class, "CTL_Muscles");
    }
 
-   private int countMuscleGroups(ForceSet as) {
+   private int countMuscleGroups(OpenSimObjectSet as) {
       int count = 0;
       for (int i = 0; i < as.getNumGroups(); i++) {
          ObjectGroup grp = as.getGroup(i);
@@ -157,7 +158,7 @@ public class MusclesNode extends OpenSimObjectSetNode {
       return count;
    }
 
-   private int countMuscles(ForceSet as) {
+   private int countMuscles(OpenSimObjectSet as) {
       int count = 0;
       for (int i = 0; i < as.getSize(); i++) {
          Muscle muscle = Muscle.safeDownCast(as.get(i));
