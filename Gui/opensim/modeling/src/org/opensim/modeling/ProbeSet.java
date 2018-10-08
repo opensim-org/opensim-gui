@@ -61,11 +61,11 @@ public class ProbeSet extends ModelComponentSetProbes {
     this(opensimSimulationJNI.new_ProbeSet__SWIG_0(), true);
   }
 
-  public ProbeSet(String file, boolean updateFromXML) {
+  public ProbeSet(String file, boolean updateFromXML) throws java.io.IOException {
     this(opensimSimulationJNI.new_ProbeSet__SWIG_1(file, updateFromXML), true);
   }
 
-  public ProbeSet(String file) {
+  public ProbeSet(String file) throws java.io.IOException {
     this(opensimSimulationJNI.new_ProbeSet__SWIG_2(file), true);
   }
 

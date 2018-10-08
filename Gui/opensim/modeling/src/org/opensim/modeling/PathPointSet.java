@@ -61,11 +61,11 @@ public class PathPointSet extends SetOfPathPoints {
     this(opensimSimulationJNI.new_PathPointSet__SWIG_0(), true);
   }
 
-  public PathPointSet(String file, boolean updateFromXML) {
+  public PathPointSet(String file, boolean updateFromXML) throws java.io.IOException {
     this(opensimSimulationJNI.new_PathPointSet__SWIG_1(file, updateFromXML), true);
   }
 
-  public PathPointSet(String file) {
+  public PathPointSet(String file) throws java.io.IOException {
     this(opensimSimulationJNI.new_PathPointSet__SWIG_2(file), true);
   }
 

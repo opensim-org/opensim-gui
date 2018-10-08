@@ -61,11 +61,11 @@ public class ContactGeometrySet extends ModelComponentSetContactGeometry {
     this(opensimSimulationJNI.new_ContactGeometrySet__SWIG_0(), true);
   }
 
-  public ContactGeometrySet(String file, boolean updateFromXML) {
+  public ContactGeometrySet(String file, boolean updateFromXML) throws java.io.IOException {
     this(opensimSimulationJNI.new_ContactGeometrySet__SWIG_1(file, updateFromXML), true);
   }
 
-  public ContactGeometrySet(String file) {
+  public ContactGeometrySet(String file) throws java.io.IOException {
     this(opensimSimulationJNI.new_ContactGeometrySet__SWIG_2(file), true);
   }
 

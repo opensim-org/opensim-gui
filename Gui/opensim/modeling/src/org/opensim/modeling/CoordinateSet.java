@@ -69,11 +69,11 @@ public class CoordinateSet extends SetCoordinates {
     this(opensimSimulationJNI.new_CoordinateSet__SWIG_0(), true);
   }
 
-  public CoordinateSet(String file, boolean updateFromXML) {
+  public CoordinateSet(String file, boolean updateFromXML) throws java.io.IOException {
     this(opensimSimulationJNI.new_CoordinateSet__SWIG_1(file, updateFromXML), true);
   }
 
-  public CoordinateSet(String file) {
+  public CoordinateSet(String file) throws java.io.IOException {
     this(opensimSimulationJNI.new_CoordinateSet__SWIG_2(file), true);
   }
 

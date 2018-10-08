@@ -61,11 +61,11 @@ public class JointSet extends ModelComponentSetJoints {
     this(opensimSimulationJNI.new_JointSet__SWIG_0(), true);
   }
 
-  public JointSet(String file, boolean updateFromXML) {
+  public JointSet(String file, boolean updateFromXML) throws java.io.IOException {
     this(opensimSimulationJNI.new_JointSet__SWIG_1(file, updateFromXML), true);
   }
 
-  public JointSet(String file) {
+  public JointSet(String file) throws java.io.IOException {
     this(opensimSimulationJNI.new_JointSet__SWIG_2(file), true);
   }
 

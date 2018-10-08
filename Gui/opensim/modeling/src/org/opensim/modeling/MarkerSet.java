@@ -69,11 +69,11 @@ public class MarkerSet extends ModelComponentSetMarkers {
     this(opensimSimulationJNI.new_MarkerSet__SWIG_0(), true);
   }
 
-  public MarkerSet(String file, boolean updateFromXML) {
+  public MarkerSet(String file, boolean updateFromXML) throws java.io.IOException {
     this(opensimSimulationJNI.new_MarkerSet__SWIG_1(file, updateFromXML), true);
   }
 
-  public MarkerSet(String file) {
+  public MarkerSet(String file) throws java.io.IOException {
     this(opensimSimulationJNI.new_MarkerSet__SWIG_2(file), true);
   }
 

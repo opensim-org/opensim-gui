@@ -61,11 +61,11 @@ public class WrapObjectSet extends ModelComponentSetWrapObjects {
     this(opensimSimulationJNI.new_WrapObjectSet__SWIG_0(), true);
   }
 
-  public WrapObjectSet(String file, boolean updateFromXML) {
+  public WrapObjectSet(String file, boolean updateFromXML) throws java.io.IOException {
     this(opensimSimulationJNI.new_WrapObjectSet__SWIG_1(file, updateFromXML), true);
   }
 
-  public WrapObjectSet(String file) {
+  public WrapObjectSet(String file) throws java.io.IOException {
     this(opensimSimulationJNI.new_WrapObjectSet__SWIG_2(file), true);
   }
 

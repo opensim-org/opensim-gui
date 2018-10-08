@@ -61,11 +61,11 @@ public class ConstraintSet extends ModelComponentSetConstraints {
     this(opensimSimulationJNI.new_ConstraintSet__SWIG_0(), true);
   }
 
-  public ConstraintSet(String file, boolean updateFromXML) {
+  public ConstraintSet(String file, boolean updateFromXML) throws java.io.IOException {
     this(opensimSimulationJNI.new_ConstraintSet__SWIG_1(file, updateFromXML), true);
   }
 
-  public ConstraintSet(String file) {
+  public ConstraintSet(String file) throws java.io.IOException {
     this(opensimSimulationJNI.new_ConstraintSet__SWIG_2(file), true);
   }
 

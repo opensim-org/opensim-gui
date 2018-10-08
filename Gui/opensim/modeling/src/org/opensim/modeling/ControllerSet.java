@@ -93,11 +93,11 @@ public class ControllerSet extends ModelComponentSetControllers {
     this(opensimSimulationJNI.new_ControllerSet__SWIG_0(), true);
   }
 
-  public ControllerSet(String file, boolean updateFromXML) {
+  public ControllerSet(String file, boolean updateFromXML) throws java.io.IOException {
     this(opensimSimulationJNI.new_ControllerSet__SWIG_1(file, updateFromXML), true);
   }
 
-  public ControllerSet(String file) {
+  public ControllerSet(String file) throws java.io.IOException {
     this(opensimSimulationJNI.new_ControllerSet__SWIG_2(file), true);
   }
 

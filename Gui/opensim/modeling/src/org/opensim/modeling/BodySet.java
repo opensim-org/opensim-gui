@@ -61,11 +61,11 @@ public class BodySet extends ModelComponentSetBodies {
     this(opensimSimulationJNI.new_BodySet__SWIG_0(), true);
   }
 
-  public BodySet(String file, boolean updateFromXML) {
+  public BodySet(String file, boolean updateFromXML) throws java.io.IOException {
     this(opensimSimulationJNI.new_BodySet__SWIG_1(file, updateFromXML), true);
   }
 
-  public BodySet(String file) {
+  public BodySet(String file) throws java.io.IOException {
     this(opensimSimulationJNI.new_BodySet__SWIG_2(file), true);
   }
 

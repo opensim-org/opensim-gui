@@ -34,6 +34,7 @@ import org.netbeans.api.progress.ProgressHandleFactory;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.Cancellable;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.BodyScale;
@@ -587,7 +588,12 @@ public class ScaleToolModel extends Observable implements Observer {
       boolean success = true;
       extraMarkerSet = null;
       if(extraMarkerSetFile.isValid()) {
-            extraMarkerSet = new MarkerSet(extraMarkerSetFile.fileName);
+          try {
+              extraMarkerSet = new MarkerSet(extraMarkerSetFile.fileName);
+          } catch (IOException ex) {
+              Exceptions.printStackTrace(ex);
+              return false;
+          }
             unscaledModel.updateMarkerSet(extraMarkerSet);
       }
       
