@@ -53,6 +53,7 @@ import org.opensim.view.motions.MotionDisplayer;
 public class ExperimentalMarker extends MotionObjectBodyPoint {
  
     private String markerName;
+    private double conversion = 1.0;
     public ExperimentalMarker(ExperimentalDataItemType objectType, String baseName, int index) {
         super(objectType, baseName, index);
     }
@@ -86,7 +87,9 @@ public class ExperimentalMarker extends MotionObjectBodyPoint {
     @Override
     void updateDecorations(ArrayDouble interpolatedStates) {
         int idx = getStartIndexInFileNotIncludingTime();
-        setPoint(new double[]{interpolatedStates.get(idx)/1000., interpolatedStates.get(idx+1)/1000., interpolatedStates.get(idx+2)/1000.});
+        setPoint(new double[]{interpolatedStates.get(idx)/conversion, 
+            interpolatedStates.get(idx+1)/conversion, 
+            interpolatedStates.get(idx+2)/conversion});
     }
     
     // Create JSON object to represent ExperimentalMarker
@@ -104,9 +107,11 @@ public class ExperimentalMarker extends MotionObjectBodyPoint {
         StateVector dataAtStartTime = motionDisplayer.getSimmMotionData().getStateVector(0);
         ArrayDouble interpolatedStates = dataAtStartTime.getData();
         int idx = getStartIndexInFileNotIncludingTime();
+        AnnotatedMotion mot = (AnnotatedMotion)motionDisplayer.getSimmMotionData();
+        conversion = mot.getUnitConversion();
         JSONArray pos = new JSONArray();
         for (int i = 0; i < 3; i++) {
-            pos.add(interpolatedStates.get(idx+i));
+            pos.add(interpolatedStates.get(idx+i)/conversion);
         }
         expMarker_json.put("position", pos);
         expMarker_json.put("castShadow", false);
