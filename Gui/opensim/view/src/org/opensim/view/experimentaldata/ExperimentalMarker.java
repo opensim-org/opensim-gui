@@ -107,6 +107,10 @@ public class ExperimentalMarker extends MotionObjectBodyPoint {
         StateVector dataAtStartTime = motionDisplayer.getSimmMotionData().getStateVector(0);
         ArrayDouble interpolatedStates = dataAtStartTime.getData();
         int idx = getStartIndexInFileNotIncludingTime();
+        // By construction ExperimentalMarkers come through AnnotatedMotion which handles unit conversion 
+        // get unit conversion once and save locally, convert data on the fly
+        // TODO: investigate conversion once on loading
+        // TODO: Convert to use opensim-core libraries to do the reading/conversion
         AnnotatedMotion mot = (AnnotatedMotion)motionDisplayer.getSimmMotionData();
         conversion = mot.getUnitConversion();
         JSONArray pos = new JSONArray();
