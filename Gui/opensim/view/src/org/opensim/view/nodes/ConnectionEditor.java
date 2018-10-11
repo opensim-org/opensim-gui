@@ -97,10 +97,10 @@ public class ConnectionEditor {
     private void handleConnectionChange(final String oldValue, final String v, boolean supportUndo) {
 
         try {
-            context.setConnecteeName(comp, connector, v);
+            context.setSocketConnecteeName(connector, v);
          } catch (IOException iae) {
                  new JOptionPane(iae.getMessage(), 
-				JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
+                     JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
                  return; // change failed, no harm done
 
         }
