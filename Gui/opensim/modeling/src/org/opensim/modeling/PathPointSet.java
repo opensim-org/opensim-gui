@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class PathPointSet extends SetPathPoint {
+public class PathPointSet extends SetOfPathPoints {
   private transient long swigCPtr;
 
   public PathPointSet(long cPtr, boolean cMemoryOwn) {
@@ -48,8 +48,8 @@ public class PathPointSet extends SetPathPoint {
     return opensimSimulationJNI.PathPointSet_getClassName();
   }
 
-  public OpenSimObject clone() {
-    long cPtr = opensimSimulationJNI.PathPointSet_clone(swigCPtr, this);
+  public OpenSimObject unused_clone() {
+    long cPtr = opensimSimulationJNI.PathPointSet_unused_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PathPointSet(cPtr, true);
   }
 
@@ -61,8 +61,12 @@ public class PathPointSet extends SetPathPoint {
     this(opensimSimulationJNI.new_PathPointSet__SWIG_0(), true);
   }
 
-  public PathPointSet(PathPointSet aPathPointSet) {
-    this(opensimSimulationJNI.new_PathPointSet__SWIG_1(PathPointSet.getCPtr(aPathPointSet), aPathPointSet), true);
+  public PathPointSet(String file, boolean updateFromXML) throws java.io.IOException {
+    this(opensimSimulationJNI.new_PathPointSet__SWIG_1(file, updateFromXML), true);
+  }
+
+  public PathPointSet(String file) throws java.io.IOException {
+    this(opensimSimulationJNI.new_PathPointSet__SWIG_2(file), true);
   }
 
 }

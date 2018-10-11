@@ -61,11 +61,11 @@ public class SetMarkerPairs extends OpenSimObject {
     this(opensimActuatorsAnalysesToolsJNI.new_SetMarkerPairs__SWIG_0(), true);
   }
 
-  public SetMarkerPairs(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetMarkerPairs(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimActuatorsAnalysesToolsJNI.new_SetMarkerPairs__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetMarkerPairs(String aFileName) {
+  public SetMarkerPairs(String aFileName) throws java.io.IOException {
     this(opensimActuatorsAnalysesToolsJNI.new_SetMarkerPairs__SWIG_2(aFileName), true);
   }
 

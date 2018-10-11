@@ -57,68 +57,12 @@ public class ModelComponentSetContactGeometry extends SetContactGeometry {
     return opensimSimulationJNI.ModelComponentSetContactGeometry_getConcreteClassName(swigCPtr, this);
   }
 
+  public void extendFinalizeFromProperties() {
+    opensimSimulationJNI.ModelComponentSetContactGeometry_extendFinalizeFromProperties(swigCPtr, this);
+  }
+
   public ModelComponentSetContactGeometry() {
-    this(opensimSimulationJNI.new_ModelComponentSetContactGeometry__SWIG_0(), true);
-  }
-
-  public ModelComponentSetContactGeometry(Model model) {
-    this(opensimSimulationJNI.new_ModelComponentSetContactGeometry__SWIG_1(Model.getCPtr(model), model), true);
-  }
-
-  public ModelComponentSetContactGeometry(Model model, String fileName, boolean aUpdateFromXMLNode) {
-    this(opensimSimulationJNI.new_ModelComponentSetContactGeometry__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
-  }
-
-  public ModelComponentSetContactGeometry(Model model, String fileName) {
-    this(opensimSimulationJNI.new_ModelComponentSetContactGeometry__SWIG_3(Model.getCPtr(model), model, fileName), true);
-  }
-
-  public ModelComponentSetContactGeometry(ModelComponentSetContactGeometry source) {
-    this(opensimSimulationJNI.new_ModelComponentSetContactGeometry__SWIG_4(ModelComponentSetContactGeometry.getCPtr(source), source), true);
-  }
-
-  public boolean hasModel() {
-    return opensimSimulationJNI.ModelComponentSetContactGeometry_hasModel(swigCPtr, this);
-  }
-
-  public Model getModel() {
-    return new Model(opensimSimulationJNI.ModelComponentSetContactGeometry_getModel(swigCPtr, this), false);
-  }
-
-  public Model updModel() {
-    return new Model(opensimSimulationJNI.ModelComponentSetContactGeometry_updModel(swigCPtr, this), false);
-  }
-
-  public void setModel(Model model) {
-    opensimSimulationJNI.ModelComponentSetContactGeometry_setModel(swigCPtr, this, Model.getCPtr(model), model);
-  }
-
-  public boolean insert(int aIndex, ContactGeometry aObject) {
-    return opensimSimulationJNI.ModelComponentSetContactGeometry_insert(swigCPtr, this, aIndex, ContactGeometry.getCPtr(aObject), aObject);
-  }
-
-  public boolean set(int aIndex, ContactGeometry aObject, boolean preserveGroups) {
-    return opensimSimulationJNI.ModelComponentSetContactGeometry_set__SWIG_0(swigCPtr, this, aIndex, ContactGeometry.getCPtr(aObject), aObject, preserveGroups);
-  }
-
-  public boolean set(int aIndex, ContactGeometry aObject) {
-    return opensimSimulationJNI.ModelComponentSetContactGeometry_set__SWIG_1(swigCPtr, this, aIndex, ContactGeometry.getCPtr(aObject), aObject);
-  }
-
-  public void invokeConnectToModel(Model model) {
-    opensimSimulationJNI.ModelComponentSetContactGeometry_invokeConnectToModel(swigCPtr, this, Model.getCPtr(model), model);
-  }
-
-  public void invokeInitStateFromProperties(State state) {
-    opensimSimulationJNI.ModelComponentSetContactGeometry_invokeInitStateFromProperties(swigCPtr, this, State.getCPtr(state), state);
-  }
-
-  public void invokeSetPropertiesFromState(State state) {
-    opensimSimulationJNI.ModelComponentSetContactGeometry_invokeSetPropertiesFromState(swigCPtr, this, State.getCPtr(state), state);
-  }
-
-  public void invokeGenerateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimSimulationJNI.ModelComponentSetContactGeometry_invokeGenerateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+    this(opensimSimulationJNI.new_ModelComponentSetContactGeometry(), true);
   }
 
 }

@@ -269,8 +269,12 @@ public class ComponentIterator {
     return opensimCommonJNI.ComponentIterator_isObjectUpToDateWithProperties(swigCPtr, this);
   }
 
+  public void updateXMLNode(SWIGTYPE_p_SimTK__Xml__Element parent, AbstractProperty prop) {
+    opensimCommonJNI.ComponentIterator_updateXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent), AbstractProperty.getCPtr(prop), prop);
+  }
+
   public void updateXMLNode(SWIGTYPE_p_SimTK__Xml__Element parent) {
-    opensimCommonJNI.ComponentIterator_updateXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
+    opensimCommonJNI.ComponentIterator_updateXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
   }
 
   public boolean getInlined() {

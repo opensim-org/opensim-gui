@@ -105,24 +105,24 @@ public class Joint extends ModelComponent {
     opensimSimulationJNI.Joint_constructProperty_frames(swigCPtr, this);
   }
 
-  public void setPropertyIndex_socket_parent_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimSimulationJNI.Joint_PropertyIndex_socket_parent_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_parent_frame(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.Joint_PropertyIndex_socket_parent_frame_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Joint_PropertyIndex_socket_parent_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Joint_PropertyIndex_socket_parent_frame_get(swigCPtr, this), true);
   }
 
   public void connectSocket_parent_frame(OpenSimObject object) {
     opensimSimulationJNI.Joint_connectSocket_parent_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public void setPropertyIndex_socket_child_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimSimulationJNI.Joint_PropertyIndex_socket_child_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_child_frame(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.Joint_PropertyIndex_socket_child_frame_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_child_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Joint_PropertyIndex_socket_child_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_child_frame() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Joint_PropertyIndex_socket_child_frame_get(swigCPtr, this), true);
   }
 
   public void connectSocket_child_frame(OpenSimObject object) {

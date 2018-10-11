@@ -79,6 +79,10 @@ public class Manager {
     return new SWIGTYPE_p_SimTK__Integrator(opensimSimulationJNI.Manager_getIntegrator(swigCPtr, this), false);
   }
 
+  public void setIntegratorAccuracy(double accuracy) {
+    opensimSimulationJNI.Manager_setIntegratorAccuracy(swigCPtr, this, accuracy);
+  }
+
   public void setIntegratorMinimumStepSize(double hmin) {
     opensimSimulationJNI.Manager_setIntegratorMinimumStepSize(swigCPtr, this, hmin);
   }
@@ -201,10 +205,6 @@ public class Manager {
 
   public boolean checkHalt() {
     return opensimSimulationJNI.Manager_checkHalt(swigCPtr, this);
-  }
-
-  public void setIntegratorAccuracy(double accuracy) {
-    opensimSimulationJNI.Manager_setIntegratorAccuracy(swigCPtr, this, accuracy);
   }
 
   public final static class IntegratorMethod {

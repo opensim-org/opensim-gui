@@ -61,11 +61,11 @@ public class SetPathWrap extends OpenSimObject {
     this(opensimSimulationJNI.new_SetPathWrap__SWIG_0(), true);
   }
 
-  public SetPathWrap(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetPathWrap(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetPathWrap__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetPathWrap(String aFileName) {
+  public SetPathWrap(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetPathWrap__SWIG_2(aFileName), true);
   }
 

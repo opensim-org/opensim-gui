@@ -34,6 +34,7 @@ import org.openide.util.NbBundle;
 import org.opensim.modeling.Marker;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimObjectSet;
 import org.opensim.view.markerEditor.MarkersSaveToFileAction;
 import org.opensim.view.markerEditor.MarkersLoadFromFileAction;
 import org.opensim.view.markerEditor.NewMarkerAction;
@@ -46,7 +47,7 @@ public class MarkersNode extends OpenSimObjectSetNode {
     private static ResourceBundle bundle = NbBundle.getBundle(MarkersNode.class);
     //private MarkersDisplayer markersDisplayer;
     private Model model;
-    public MarkersNode(MarkerSet markerSet, Model m) {
+    public MarkersNode(OpenSimObjectSet markerSet, Model m) {
         super(markerSet);
         setDisplayName(NbBundle.getMessage(MarkersNode.class, "CTL_Markers"));
         updateChildNodes(markerSet);
@@ -56,10 +57,10 @@ public class MarkersNode extends OpenSimObjectSetNode {
         addDisplayOption(displayOption.Showable);
     }
 
-    public void updateChildNodes(MarkerSet markerSet) {
+    public void updateChildNodes(OpenSimObjectSet markerSet) {
         for (int markerNum=0; markerNum < markerSet.getSize(); markerNum++ ){
 
-            Marker marker = markerSet.get(markerNum);
+            Marker marker = Marker.safeDownCast(markerSet.get(markerNum));
             Children children = getChildren();
 
             OneMarkerNode node = new OneMarkerNode(marker);

@@ -77,12 +77,12 @@ public class ConditionalPathPoint extends PathPoint {
     return opensimSimulationJNI.ConditionalPathPoint_append_range(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_socket_coordinate_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimSimulationJNI.ConditionalPathPoint_PropertyIndex_socket_coordinate_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_coordinate(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.ConditionalPathPoint_PropertyIndex_socket_coordinate_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_coordinate_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.ConditionalPathPoint_PropertyIndex_socket_coordinate_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_coordinate() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.ConditionalPathPoint_PropertyIndex_socket_coordinate_get(swigCPtr, this), true);
   }
 
   public void connectSocket_coordinate(OpenSimObject object) {

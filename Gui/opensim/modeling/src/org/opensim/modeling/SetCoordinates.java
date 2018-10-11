@@ -61,11 +61,11 @@ public class SetCoordinates extends OpenSimObject {
     this(opensimSimulationJNI.new_SetCoordinates__SWIG_0(), true);
   }
 
-  public SetCoordinates(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetCoordinates(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetCoordinates__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetCoordinates(String aFileName) {
+  public SetCoordinates(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetCoordinates__SWIG_2(aFileName), true);
   }
 

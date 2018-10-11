@@ -817,6 +817,10 @@ public class Millard2012EquilibriumMuscleIterator {
     return new Model(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getModel(swigCPtr, this), false);
   }
 
+  public boolean hasModel() {
+    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_hasModel(swigCPtr, this);
+  }
+
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
     opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_addToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
   }
@@ -1025,8 +1029,12 @@ public class Millard2012EquilibriumMuscleIterator {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_isObjectUpToDateWithProperties(swigCPtr, this);
   }
 
+  public void updateXMLNode(SWIGTYPE_p_SimTK__Xml__Element parent, AbstractProperty prop) {
+    opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_updateXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent), AbstractProperty.getCPtr(prop), prop);
+  }
+
   public void updateXMLNode(SWIGTYPE_p_SimTK__Xml__Element parent) {
-    opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_updateXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
+    opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_updateXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
   }
 
   public boolean getInlined() {

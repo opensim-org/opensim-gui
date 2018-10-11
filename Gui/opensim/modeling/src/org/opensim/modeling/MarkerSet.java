@@ -57,24 +57,24 @@ public class MarkerSet extends ModelComponentSetMarkers {
     return opensimSimulationJNI.MarkerSet_getConcreteClassName(swigCPtr, this);
   }
 
-  public MarkerSet() {
-    this(opensimSimulationJNI.new_MarkerSet__SWIG_0(), true);
-  }
-
-  public MarkerSet(Model aModel, String aMarkersFileName) throws java.io.IOException {
-    this(opensimSimulationJNI.new_MarkerSet__SWIG_1(Model.getCPtr(aModel), aModel, aMarkersFileName), true);
-  }
-
-  public MarkerSet(MarkerSet aMarkerSet) {
-    this(opensimSimulationJNI.new_MarkerSet__SWIG_2(MarkerSet.getCPtr(aMarkerSet), aMarkerSet), true);
-  }
-
   public void getMarkerNames(ArrayStr aMarkerNamesArray) {
     opensimSimulationJNI.MarkerSet_getMarkerNames(swigCPtr, this, ArrayStr.getCPtr(aMarkerNamesArray), aMarkerNamesArray);
   }
 
   public void addNamePrefix(String prefix) {
     opensimSimulationJNI.MarkerSet_addNamePrefix(swigCPtr, this, prefix);
+  }
+
+  public MarkerSet() {
+    this(opensimSimulationJNI.new_MarkerSet__SWIG_0(), true);
+  }
+
+  public MarkerSet(String file, boolean updateFromXML) throws java.io.IOException {
+    this(opensimSimulationJNI.new_MarkerSet__SWIG_1(file, updateFromXML), true);
+  }
+
+  public MarkerSet(String file) throws java.io.IOException {
+    this(opensimSimulationJNI.new_MarkerSet__SWIG_2(file), true);
   }
 
 }

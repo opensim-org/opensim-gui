@@ -37,6 +37,7 @@ import org.openide.util.NbBundle;
 import org.openide.nodes.Children;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.JointSet;
+import org.opensim.modeling.OpenSimObjectSet;
 
 /**
  *
@@ -51,7 +52,7 @@ public class JointsNode extends OpenSimObjectSetNode {
    /**
     * Creates a new instance of JointsNode
     */
-   public JointsNode(JointSet js) {
+   public JointsNode(OpenSimObjectSet js) {
       super(js);
       setDisplayName(NbBundle.getMessage(JointsNode.class, "CTL_Joints"));
       Children children = getChildren();

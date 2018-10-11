@@ -61,11 +61,11 @@ public class SetMarkerWeights extends OpenSimObject {
     this(opensimSimulationJNI.new_SetMarkerWeights__SWIG_0(), true);
   }
 
-  public SetMarkerWeights(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetMarkerWeights(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetMarkerWeights__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetMarkerWeights(String aFileName) {
+  public SetMarkerWeights(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetMarkerWeights__SWIG_2(aFileName), true);
   }
 

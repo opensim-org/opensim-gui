@@ -61,11 +61,11 @@ public class SetBodyScales extends OpenSimObject {
     this(opensimSimulationJNI.new_SetBodyScales__SWIG_0(), true);
   }
 
-  public SetBodyScales(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetBodyScales(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetBodyScales__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetBodyScales(String aFileName) {
+  public SetBodyScales(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetBodyScales__SWIG_2(aFileName), true);
   }
 

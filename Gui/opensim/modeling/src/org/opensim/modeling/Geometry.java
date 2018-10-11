@@ -129,12 +129,12 @@ public class Geometry extends Component {
     opensimSimulationJNI.Geometry_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_socket_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimSimulationJNI.Geometry_PropertyIndex_socket_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_frame(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.Geometry_PropertyIndex_socket_frame_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Geometry_PropertyIndex_socket_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_frame() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Geometry_PropertyIndex_socket_frame_get(swigCPtr, this), true);
   }
 
   public SWIGTYPE_p_PropertyIndex constructSocket_frame() {
@@ -145,12 +145,12 @@ public class Geometry extends Component {
     opensimSimulationJNI.Geometry_connectSocket_frame(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public void setPropertyIndex_input_transform_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimSimulationJNI.Geometry_PropertyIndex_input_transform_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_input_transform(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.Geometry_PropertyIndex_input_transform_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_input_transform_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Geometry_PropertyIndex_input_transform_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_input_transform() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Geometry_PropertyIndex_input_transform_get(swigCPtr, this), true);
   }
 
   public void connectInput_transform(AbstractOutput output, String alias) {

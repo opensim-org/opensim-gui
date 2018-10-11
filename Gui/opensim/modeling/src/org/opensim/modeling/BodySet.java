@@ -61,20 +61,12 @@ public class BodySet extends ModelComponentSetBodies {
     this(opensimSimulationJNI.new_BodySet__SWIG_0(), true);
   }
 
-  public BodySet(Model model) {
-    this(opensimSimulationJNI.new_BodySet__SWIG_1(Model.getCPtr(model), model), true);
+  public BodySet(String file, boolean updateFromXML) throws java.io.IOException {
+    this(opensimSimulationJNI.new_BodySet__SWIG_1(file, updateFromXML), true);
   }
 
-  public BodySet(BodySet aAbsBodySet) {
-    this(opensimSimulationJNI.new_BodySet__SWIG_2(BodySet.getCPtr(aAbsBodySet), aAbsBodySet), true);
-  }
-
-  public BodySet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimSimulationJNI.new_BodySet__SWIG_3(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
-  }
-
-  public BodySet(Model model, String aFileName) {
-    this(opensimSimulationJNI.new_BodySet__SWIG_4(Model.getCPtr(model), model, aFileName), true);
+  public BodySet(String file) throws java.io.IOException {
+    this(opensimSimulationJNI.new_BodySet__SWIG_2(file), true);
   }
 
 }

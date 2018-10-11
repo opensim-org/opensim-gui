@@ -1368,6 +1368,10 @@ public class Model extends ModelComponent {
     return opensimSimulationJNI.Model_getValidationLog(swigCPtr, this);
   }
 
+  public void appendToValidationLog(String note) {
+    opensimSimulationJNI.Model_appendToValidationLog(swigCPtr, this, note);
+  }
+
   public void clearValidationLog() {
     opensimSimulationJNI.Model_clearValidationLog(swigCPtr, this);
   }

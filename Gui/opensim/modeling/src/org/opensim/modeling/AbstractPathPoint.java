@@ -57,12 +57,12 @@ public class AbstractPathPoint extends Point {
     return opensimSimulationJNI.AbstractPathPoint_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_socket_parent_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimSimulationJNI.AbstractPathPoint_PropertyIndex_socket_parent_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_parent_frame(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.AbstractPathPoint_PropertyIndex_socket_parent_frame_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.AbstractPathPoint_PropertyIndex_socket_parent_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.AbstractPathPoint_PropertyIndex_socket_parent_frame_get(swigCPtr, this), true);
   }
 
   public void connectSocket_parent_frame(OpenSimObject object) {

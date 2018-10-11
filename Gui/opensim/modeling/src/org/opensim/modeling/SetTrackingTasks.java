@@ -61,11 +61,11 @@ public class SetTrackingTasks extends OpenSimObject {
     this(opensimActuatorsAnalysesToolsJNI.new_SetTrackingTasks__SWIG_0(), true);
   }
 
-  public SetTrackingTasks(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetTrackingTasks(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimActuatorsAnalysesToolsJNI.new_SetTrackingTasks__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetTrackingTasks(String aFileName) {
+  public SetTrackingTasks(String aFileName) throws java.io.IOException {
     this(opensimActuatorsAnalysesToolsJNI.new_SetTrackingTasks__SWIG_2(aFileName), true);
   }
 

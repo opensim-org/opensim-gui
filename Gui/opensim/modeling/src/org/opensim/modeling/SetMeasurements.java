@@ -61,11 +61,11 @@ public class SetMeasurements extends OpenSimObject {
     this(opensimActuatorsAnalysesToolsJNI.new_SetMeasurements__SWIG_0(), true);
   }
 
-  public SetMeasurements(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetMeasurements(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimActuatorsAnalysesToolsJNI.new_SetMeasurements__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetMeasurements(String aFileName) {
+  public SetMeasurements(String aFileName) throws java.io.IOException {
     this(opensimActuatorsAnalysesToolsJNI.new_SetMeasurements__SWIG_2(aFileName), true);
   }
 

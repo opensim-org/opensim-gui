@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class SetContactGeometry extends OpenSimObject {
+public class SetContactGeometry extends ModelComponent {
   private transient long swigCPtr;
 
   public SetContactGeometry(long cPtr, boolean cMemoryOwn) {
@@ -61,11 +61,11 @@ public class SetContactGeometry extends OpenSimObject {
     this(opensimSimulationJNI.new_SetContactGeometry__SWIG_0(), true);
   }
 
-  public SetContactGeometry(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetContactGeometry(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetContactGeometry__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetContactGeometry(String aFileName) {
+  public SetContactGeometry(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetContactGeometry__SWIG_2(aFileName), true);
   }
 

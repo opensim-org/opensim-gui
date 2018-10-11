@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class SetConstraints extends OpenSimObject {
+public class SetConstraints extends ModelComponent {
   private transient long swigCPtr;
 
   public SetConstraints(long cPtr, boolean cMemoryOwn) {
@@ -61,11 +61,11 @@ public class SetConstraints extends OpenSimObject {
     this(opensimSimulationJNI.new_SetConstraints__SWIG_0(), true);
   }
 
-  public SetConstraints(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetConstraints(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetConstraints__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetConstraints(String aFileName) {
+  public SetConstraints(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetConstraints__SWIG_2(aFileName), true);
   }
 

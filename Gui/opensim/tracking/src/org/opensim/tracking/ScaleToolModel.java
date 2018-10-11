@@ -34,6 +34,7 @@ import org.netbeans.api.progress.ProgressHandleFactory;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.Cancellable;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.BodyScale;
@@ -419,7 +420,7 @@ public class ScaleToolModel extends Observable implements Observer {
       //unscaledModel.setInputFileName("");
       unscaledModel.setOriginalModelPathFromModel(originalModel); // important to keep track of the original path so bone loading works
       //unscaledModel.setup();
-      originalMarkerSet = new MarkerSet(unscaledModel.getMarkerSet());
+      originalMarkerSet = MarkerSet.safeDownCast(unscaledModel.getMarkerSet().clone());
 
       // Create scale tool
       scaleTool = new ScaleTool();
@@ -587,13 +588,13 @@ public class ScaleToolModel extends Observable implements Observer {
       boolean success = true;
       extraMarkerSet = null;
       if(extraMarkerSetFile.isValid()) {
-         try {
-            extraMarkerSet = new MarkerSet(unscaledModel, extraMarkerSetFile.fileName);
-         } catch (IOException ex) {
-            extraMarkerSet = null;
-            success = false;
-            ErrorDialog.displayExceptionDialog(ex);
-         }
+          try {
+              extraMarkerSet = new MarkerSet(extraMarkerSetFile.fileName);
+          } catch (IOException ex) {
+              Exceptions.printStackTrace(ex);
+              return false;
+          }
+            unscaledModel.updateMarkerSet(extraMarkerSet);
       }
       
       resetMarkers(); // reset markers in our unscaled model

@@ -57,16 +57,124 @@ public class WrapCylinderObst extends WrapObject {
     return opensimSimulationJNI.WrapCylinderObst_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_radius(WrapCylinderObst source) {
+    opensimSimulationJNI.WrapCylinderObst_copyProperty_radius(swigCPtr, this, WrapCylinderObst.getCPtr(source), source);
+  }
+
+  public double get_radius(int i) {
+    return opensimSimulationJNI.WrapCylinderObst_get_radius__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_radius(int i) {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapCylinderObst_upd_radius__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_radius(int i, double value) {
+    opensimSimulationJNI.WrapCylinderObst_set_radius__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_radius(double value) {
+    return opensimSimulationJNI.WrapCylinderObst_append_radius(swigCPtr, this, value);
+  }
+
+  public void constructProperty_radius(double initValue) {
+    opensimSimulationJNI.WrapCylinderObst_constructProperty_radius(swigCPtr, this, initValue);
+  }
+
+  public double get_radius() {
+    return opensimSimulationJNI.WrapCylinderObst_get_radius__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_radius() {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapCylinderObst_upd_radius__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_radius(double value) {
+    opensimSimulationJNI.WrapCylinderObst_set_radius__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_length(WrapCylinderObst source) {
+    opensimSimulationJNI.WrapCylinderObst_copyProperty_length(swigCPtr, this, WrapCylinderObst.getCPtr(source), source);
+  }
+
+  public double get_length(int i) {
+    return opensimSimulationJNI.WrapCylinderObst_get_length__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_length(int i) {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapCylinderObst_upd_length__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_length(int i, double value) {
+    opensimSimulationJNI.WrapCylinderObst_set_length__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_length(double value) {
+    return opensimSimulationJNI.WrapCylinderObst_append_length(swigCPtr, this, value);
+  }
+
+  public void constructProperty_length(double initValue) {
+    opensimSimulationJNI.WrapCylinderObst_constructProperty_length(swigCPtr, this, initValue);
+  }
+
+  public double get_length() {
+    return opensimSimulationJNI.WrapCylinderObst_get_length__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_length() {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapCylinderObst_upd_length__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_length(double value) {
+    opensimSimulationJNI.WrapCylinderObst_set_length__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_wrapDirection(WrapCylinderObst source) {
+    opensimSimulationJNI.WrapCylinderObst_copyProperty_wrapDirection(swigCPtr, this, WrapCylinderObst.getCPtr(source), source);
+  }
+
+  public String get_wrapDirection(int i) {
+    return opensimSimulationJNI.WrapCylinderObst_get_wrapDirection__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string upd_wrapDirection(int i) {
+    return new SWIGTYPE_p_std__string(opensimSimulationJNI.WrapCylinderObst_upd_wrapDirection__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_wrapDirection(int i, String value) {
+    opensimSimulationJNI.WrapCylinderObst_set_wrapDirection__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_wrapDirection(String value) {
+    return opensimSimulationJNI.WrapCylinderObst_append_wrapDirection(swigCPtr, this, value);
+  }
+
+  public void constructProperty_wrapDirection(String initValue) {
+    opensimSimulationJNI.WrapCylinderObst_constructProperty_wrapDirection(swigCPtr, this, initValue);
+  }
+
+  public String get_wrapDirection() {
+    return opensimSimulationJNI.WrapCylinderObst_get_wrapDirection__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_wrapDirection() {
+    return new SWIGTYPE_p_std__string(opensimSimulationJNI.WrapCylinderObst_upd_wrapDirection__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_wrapDirection(String value) {
+    opensimSimulationJNI.WrapCylinderObst_set_wrapDirection__SWIG_1(swigCPtr, this, value);
+  }
+
   public WrapCylinderObst() {
-    this(opensimSimulationJNI.new_WrapCylinderObst__SWIG_0(), true);
+    this(opensimSimulationJNI.new_WrapCylinderObst(), true);
   }
 
-  public WrapCylinderObst(WrapCylinderObst aWrapCylinderObst) {
-    this(opensimSimulationJNI.new_WrapCylinderObst__SWIG_1(WrapCylinderObst.getCPtr(aWrapCylinderObst), aWrapCylinderObst), true);
+  public String getWrapTypeName() {
+    return opensimSimulationJNI.WrapCylinderObst_getWrapTypeName(swigCPtr, this);
   }
 
-  public void copyData(WrapCylinderObst aWrapCylinderObst) {
-    opensimSimulationJNI.WrapCylinderObst_copyData(swigCPtr, this, WrapCylinderObst.getCPtr(aWrapCylinderObst), aWrapCylinderObst);
+  public String getDimensionsString() {
+    return opensimSimulationJNI.WrapCylinderObst_getDimensionsString(swigCPtr, this);
   }
 
   public double getRadius() {
@@ -87,18 +195,6 @@ public class WrapCylinderObst extends WrapObject {
 
   public int getWrapDirection() {
     return opensimSimulationJNI.WrapCylinderObst_getWrapDirection(swigCPtr, this);
-  }
-
-  public String getWrapTypeName() {
-    return opensimSimulationJNI.WrapCylinderObst_getWrapTypeName(swigCPtr, this);
-  }
-
-  public String getDimensionsString() {
-    return opensimSimulationJNI.WrapCylinderObst_getDimensionsString(swigCPtr, this);
-  }
-
-  public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
-    opensimSimulationJNI.WrapCylinderObst_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
 }

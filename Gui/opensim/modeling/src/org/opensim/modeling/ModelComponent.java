@@ -69,6 +69,10 @@ public class ModelComponent extends Component {
     return new Model(opensimSimulationJNI.ModelComponent_updModel(swigCPtr, this), false);
   }
 
+  public boolean hasModel() {
+    return opensimSimulationJNI.ModelComponent_hasModel(swigCPtr, this);
+  }
+
   public void preScale(State s, ScaleSet scaleSet) {
     opensimSimulationJNI.ModelComponent_preScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
   }

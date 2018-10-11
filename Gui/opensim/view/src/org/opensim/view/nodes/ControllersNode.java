@@ -31,6 +31,7 @@ import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
 import org.opensim.modeling.Controller;
 import org.opensim.modeling.ControllerSet;
+import org.opensim.modeling.OpenSimObjectSet;
 
 /**
  * Node class to wrap Model's collection of Controllers
@@ -38,16 +39,16 @@ import org.opensim.modeling.ControllerSet;
 public class ControllersNode extends OpenSimObjectSetNode {
     private static ResourceBundle bundle = NbBundle.getBundle(ControllersNode.class);
 
-    public ControllersNode(ControllerSet ControllerSet) {
+    public ControllersNode(OpenSimObjectSet ControllerSet) {
         super(ControllerSet);
         setDisplayName(NbBundle.getMessage(ControllersNode.class, "CTL_Controllers"));
 
         for (int index=0; index < ControllerSet.getSize(); index++ ){
 
-            Controller Controller = ControllerSet.get(index);
+            Controller controller = Controller.safeDownCast(ControllerSet.get(index));
             Children children = getChildren();
 
-            OneControllerNode node = new OneControllerNode(Controller);
+            OneControllerNode node = new OneControllerNode(controller);
             Node[] arrNodes = new Node[1];
             arrNodes[0] = node;
             children.add(arrNodes);

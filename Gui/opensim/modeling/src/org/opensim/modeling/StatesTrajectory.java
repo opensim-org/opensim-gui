@@ -293,8 +293,8 @@ public class StatesTrajectory {
   
   }
 
-  public static StatesTrajectory createFromStatesStorage(Model model, Storage sto, boolean allowMissingColumns, boolean allowExtraColumns, boolean enforceConstraints) {
-    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_0(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns, allowExtraColumns, enforceConstraints), true);
+  public static StatesTrajectory createFromStatesStorage(Model model, Storage sto, boolean allowMissingColumns, boolean allowExtraColumns, boolean assemble) {
+    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_0(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns, allowExtraColumns, assemble), true);
   }
 
   public static StatesTrajectory createFromStatesStorage(Model model, Storage sto, boolean allowMissingColumns, boolean allowExtraColumns) {

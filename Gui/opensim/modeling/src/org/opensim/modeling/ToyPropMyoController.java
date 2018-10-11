@@ -93,24 +93,24 @@ public class ToyPropMyoController extends Controller {
     opensimExampleComponentsJNI.ToyPropMyoController_set_gain__SWIG_1(swigCPtr, this, value);
   }
 
-  public void setPropertyIndex_socket_actuator_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimExampleComponentsJNI.ToyPropMyoController_PropertyIndex_socket_actuator_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_actuator(SWIGTYPE_p_PropertyIndex value) {
+    opensimExampleComponentsJNI.ToyPropMyoController_PropertyIndex_socket_actuator_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_actuator_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimExampleComponentsJNI.ToyPropMyoController_PropertyIndex_socket_actuator_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_actuator() {
+    return new SWIGTYPE_p_PropertyIndex(opensimExampleComponentsJNI.ToyPropMyoController_PropertyIndex_socket_actuator_get(swigCPtr, this), true);
   }
 
   public void connectSocket_actuator(OpenSimObject object) {
     opensimExampleComponentsJNI.ToyPropMyoController_connectSocket_actuator(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public void setPropertyIndex_input_activation_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimExampleComponentsJNI.ToyPropMyoController_PropertyIndex_input_activation_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_input_activation(SWIGTYPE_p_PropertyIndex value) {
+    opensimExampleComponentsJNI.ToyPropMyoController_PropertyIndex_input_activation_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_input_activation_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimExampleComponentsJNI.ToyPropMyoController_PropertyIndex_input_activation_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_input_activation() {
+    return new SWIGTYPE_p_PropertyIndex(opensimExampleComponentsJNI.ToyPropMyoController_PropertyIndex_input_activation_get(swigCPtr, this), true);
   }
 
   public void connectInput_activation(AbstractOutput output, String alias) {

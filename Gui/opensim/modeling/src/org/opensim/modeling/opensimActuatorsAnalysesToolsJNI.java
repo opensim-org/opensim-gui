@@ -245,8 +245,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native boolean BodyActuator_get_spatial_force_is_global__SWIG_1(long jarg1, BodyActuator jarg1_);
   public final static native long BodyActuator_upd_spatial_force_is_global__SWIG_1(long jarg1, BodyActuator jarg1_);
   public final static native void BodyActuator_set_spatial_force_is_global__SWIG_1(long jarg1, BodyActuator jarg1_, boolean jarg2);
-  public final static native void BodyActuator_PropertyIndex_socket_body_connectee_name_set(long jarg1, BodyActuator jarg1_, long jarg2);
-  public final static native long BodyActuator_PropertyIndex_socket_body_connectee_name_get(long jarg1, BodyActuator jarg1_);
+  public final static native void BodyActuator_PropertyIndex_socket_body_set(long jarg1, BodyActuator jarg1_, long jarg2);
+  public final static native long BodyActuator_PropertyIndex_socket_body_get(long jarg1, BodyActuator jarg1_);
   public final static native void BodyActuator_connectSocket_body(long jarg1, BodyActuator jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native long new_BodyActuator__SWIG_0();
   public final static native long new_BodyActuator__SWIG_1(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_, boolean jarg3, boolean jarg4);
@@ -1047,8 +1047,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native String SetIKTasks_getConcreteClassName(long jarg1, SetIKTasks jarg1_);
   public final static native void delete_SetIKTasks(long jarg1);
   public final static native long new_SetIKTasks__SWIG_0();
-  public final static native long new_SetIKTasks__SWIG_1(String jarg1, boolean jarg2);
-  public final static native long new_SetIKTasks__SWIG_2(String jarg1);
+  public final static native long new_SetIKTasks__SWIG_1(String jarg1, boolean jarg2) throws java.io.IOException;
+  public final static native long new_SetIKTasks__SWIG_2(String jarg1) throws java.io.IOException;
   public final static native long new_SetIKTasks__SWIG_3(long jarg1, SetIKTasks jarg1_);
   public final static native void SetIKTasks_setupGroups(long jarg1, SetIKTasks jarg1_);
   public final static native void SetIKTasks_setMemoryOwner(long jarg1, SetIKTasks jarg1_, boolean jarg2);
@@ -1131,8 +1131,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native String SetMarkerPairs_getConcreteClassName(long jarg1, SetMarkerPairs jarg1_);
   public final static native void delete_SetMarkerPairs(long jarg1);
   public final static native long new_SetMarkerPairs__SWIG_0();
-  public final static native long new_SetMarkerPairs__SWIG_1(String jarg1, boolean jarg2);
-  public final static native long new_SetMarkerPairs__SWIG_2(String jarg1);
+  public final static native long new_SetMarkerPairs__SWIG_1(String jarg1, boolean jarg2) throws java.io.IOException;
+  public final static native long new_SetMarkerPairs__SWIG_2(String jarg1) throws java.io.IOException;
   public final static native long new_SetMarkerPairs__SWIG_3(long jarg1, SetMarkerPairs jarg1_);
   public final static native void SetMarkerPairs_setupGroups(long jarg1, SetMarkerPairs jarg1_);
   public final static native void SetMarkerPairs_setMemoryOwner(long jarg1, SetMarkerPairs jarg1_, boolean jarg2);
@@ -1195,8 +1195,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native String SetMeasurements_getConcreteClassName(long jarg1, SetMeasurements jarg1_);
   public final static native void delete_SetMeasurements(long jarg1);
   public final static native long new_SetMeasurements__SWIG_0();
-  public final static native long new_SetMeasurements__SWIG_1(String jarg1, boolean jarg2);
-  public final static native long new_SetMeasurements__SWIG_2(String jarg1);
+  public final static native long new_SetMeasurements__SWIG_1(String jarg1, boolean jarg2) throws java.io.IOException;
+  public final static native long new_SetMeasurements__SWIG_2(String jarg1) throws java.io.IOException;
   public final static native long new_SetMeasurements__SWIG_3(long jarg1, SetMeasurements jarg1_);
   public final static native void SetMeasurements_setupGroups(long jarg1, SetMeasurements jarg1_);
   public final static native void SetMeasurements_setMemoryOwner(long jarg1, SetMeasurements jarg1_, boolean jarg2);
@@ -1565,8 +1565,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native String SetTrackingTasks_getConcreteClassName(long jarg1, SetTrackingTasks jarg1_);
   public final static native void delete_SetTrackingTasks(long jarg1);
   public final static native long new_SetTrackingTasks__SWIG_0();
-  public final static native long new_SetTrackingTasks__SWIG_1(String jarg1, boolean jarg2);
-  public final static native long new_SetTrackingTasks__SWIG_2(String jarg1);
+  public final static native long new_SetTrackingTasks__SWIG_1(String jarg1, boolean jarg2) throws java.io.IOException;
+  public final static native long new_SetTrackingTasks__SWIG_2(String jarg1) throws java.io.IOException;
   public final static native long new_SetTrackingTasks__SWIG_3(long jarg1, SetTrackingTasks jarg1_);
   public final static native void SetTrackingTasks_setupGroups(long jarg1, SetTrackingTasks jarg1_);
   public final static native void SetTrackingTasks_setMemoryOwner(long jarg1, SetTrackingTasks jarg1_, boolean jarg2);
@@ -1982,9 +1982,6 @@ public class opensimActuatorsAnalysesToolsJNI {
   }
   public static void SwigDirector_AnalysisWrapper_updateFromXMLNode(AnalysisWrapper jself, long objectElement, int versionNumber) {
     jself.updateFromXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(objectElement, false), versionNumber);
-  }
-  public static void SwigDirector_AnalysisWrapper_updateXMLNode(AnalysisWrapper jself, long parent) {
-    jself.updateXMLNode(new SWIGTYPE_p_SimTK__Xml__Element(parent, false));
   }
   public static boolean SwigDirector_AnalysisWrapper_isA(AnalysisWrapper jself, String type) {
     return jself.isA(type);

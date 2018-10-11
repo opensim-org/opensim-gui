@@ -165,12 +165,12 @@ public class ContactGeometry extends ModelComponent {
     opensimSimulationJNI.ContactGeometry_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_socket_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimSimulationJNI.ContactGeometry_PropertyIndex_socket_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_frame(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.ContactGeometry_PropertyIndex_socket_frame_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.ContactGeometry_PropertyIndex_socket_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_frame() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.ContactGeometry_PropertyIndex_socket_frame_get(swigCPtr, this), true);
   }
 
   public void connectSocket_frame(OpenSimObject object) {

@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class SetControllers extends OpenSimObject {
+public class SetControllers extends ModelComponent {
   private transient long swigCPtr;
 
   public SetControllers(long cPtr, boolean cMemoryOwn) {
@@ -61,11 +61,11 @@ public class SetControllers extends OpenSimObject {
     this(opensimSimulationJNI.new_SetControllers__SWIG_0(), true);
   }
 
-  public SetControllers(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetControllers(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetControllers__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetControllers(String aFileName) {
+  public SetControllers(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetControllers__SWIG_2(aFileName), true);
   }
 

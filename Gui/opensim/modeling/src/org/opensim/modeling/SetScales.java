@@ -61,11 +61,11 @@ public class SetScales extends OpenSimObject {
     this(opensimCommonJNI.new_SetScales__SWIG_0(), true);
   }
 
-  public SetScales(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetScales(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimCommonJNI.new_SetScales__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetScales(String aFileName) {
+  public SetScales(String aFileName) throws java.io.IOException {
     this(opensimCommonJNI.new_SetScales__SWIG_2(aFileName), true);
   }
 

@@ -65,6 +65,10 @@ public class ModelComponentIterator {
     return new Model(opensimSimulationJNI.ModelComponentIterator_getModel(swigCPtr, this), false);
   }
 
+  public boolean hasModel() {
+    return opensimSimulationJNI.ModelComponentIterator_hasModel(swigCPtr, this);
+  }
+
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
     opensimSimulationJNI.ModelComponentIterator_addToSystem(swigCPtr, this, SWIGTYPE_p_SimTK__MultibodySystem.getCPtr(system));
   }
@@ -273,8 +277,12 @@ public class ModelComponentIterator {
     return opensimSimulationJNI.ModelComponentIterator_isObjectUpToDateWithProperties(swigCPtr, this);
   }
 
+  public void updateXMLNode(SWIGTYPE_p_SimTK__Xml__Element parent, AbstractProperty prop) {
+    opensimSimulationJNI.ModelComponentIterator_updateXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent), AbstractProperty.getCPtr(prop), prop);
+  }
+
   public void updateXMLNode(SWIGTYPE_p_SimTK__Xml__Element parent) {
-    opensimSimulationJNI.ModelComponentIterator_updateXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
+    opensimSimulationJNI.ModelComponentIterator_updateXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
   }
 
   public boolean getInlined() {

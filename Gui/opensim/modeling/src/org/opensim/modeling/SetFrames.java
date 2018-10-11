@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class SetFrames extends OpenSimObject {
+public class SetFrames extends ModelComponent {
   private transient long swigCPtr;
 
   public SetFrames(long cPtr, boolean cMemoryOwn) {
@@ -61,11 +61,11 @@ public class SetFrames extends OpenSimObject {
     this(opensimSimulationJNI.new_SetFrames__SWIG_0(), true);
   }
 
-  public SetFrames(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetFrames(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetFrames__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetFrames(String aFileName) {
+  public SetFrames(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetFrames__SWIG_2(aFileName), true);
   }
 

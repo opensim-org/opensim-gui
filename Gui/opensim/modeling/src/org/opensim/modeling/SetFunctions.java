@@ -61,11 +61,11 @@ public class SetFunctions extends OpenSimObject {
     this(opensimCommonJNI.new_SetFunctions__SWIG_0(), true);
   }
 
-  public SetFunctions(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetFunctions(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimCommonJNI.new_SetFunctions__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetFunctions(String aFileName) {
+  public SetFunctions(String aFileName) throws java.io.IOException {
     this(opensimCommonJNI.new_SetFunctions__SWIG_2(aFileName), true);
   }
 

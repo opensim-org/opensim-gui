@@ -57,68 +57,12 @@ public class ModelComponentSetControllers extends SetControllers {
     return opensimSimulationJNI.ModelComponentSetControllers_getConcreteClassName(swigCPtr, this);
   }
 
+  public void extendFinalizeFromProperties() {
+    opensimSimulationJNI.ModelComponentSetControllers_extendFinalizeFromProperties(swigCPtr, this);
+  }
+
   public ModelComponentSetControllers() {
-    this(opensimSimulationJNI.new_ModelComponentSetControllers__SWIG_0(), true);
-  }
-
-  public ModelComponentSetControllers(Model model) {
-    this(opensimSimulationJNI.new_ModelComponentSetControllers__SWIG_1(Model.getCPtr(model), model), true);
-  }
-
-  public ModelComponentSetControllers(Model model, String fileName, boolean aUpdateFromXMLNode) {
-    this(opensimSimulationJNI.new_ModelComponentSetControllers__SWIG_2(Model.getCPtr(model), model, fileName, aUpdateFromXMLNode), true);
-  }
-
-  public ModelComponentSetControllers(Model model, String fileName) {
-    this(opensimSimulationJNI.new_ModelComponentSetControllers__SWIG_3(Model.getCPtr(model), model, fileName), true);
-  }
-
-  public ModelComponentSetControllers(ModelComponentSetControllers source) {
-    this(opensimSimulationJNI.new_ModelComponentSetControllers__SWIG_4(ModelComponentSetControllers.getCPtr(source), source), true);
-  }
-
-  public boolean hasModel() {
-    return opensimSimulationJNI.ModelComponentSetControllers_hasModel(swigCPtr, this);
-  }
-
-  public Model getModel() {
-    return new Model(opensimSimulationJNI.ModelComponentSetControllers_getModel(swigCPtr, this), false);
-  }
-
-  public Model updModel() {
-    return new Model(opensimSimulationJNI.ModelComponentSetControllers_updModel(swigCPtr, this), false);
-  }
-
-  public void setModel(Model model) {
-    opensimSimulationJNI.ModelComponentSetControllers_setModel(swigCPtr, this, Model.getCPtr(model), model);
-  }
-
-  public boolean insert(int aIndex, Controller aObject) {
-    return opensimSimulationJNI.ModelComponentSetControllers_insert(swigCPtr, this, aIndex, Controller.getCPtr(aObject), aObject);
-  }
-
-  public boolean set(int aIndex, Controller aObject, boolean preserveGroups) {
-    return opensimSimulationJNI.ModelComponentSetControllers_set__SWIG_0(swigCPtr, this, aIndex, Controller.getCPtr(aObject), aObject, preserveGroups);
-  }
-
-  public boolean set(int aIndex, Controller aObject) {
-    return opensimSimulationJNI.ModelComponentSetControllers_set__SWIG_1(swigCPtr, this, aIndex, Controller.getCPtr(aObject), aObject);
-  }
-
-  public void invokeConnectToModel(Model model) {
-    opensimSimulationJNI.ModelComponentSetControllers_invokeConnectToModel(swigCPtr, this, Model.getCPtr(model), model);
-  }
-
-  public void invokeInitStateFromProperties(State state) {
-    opensimSimulationJNI.ModelComponentSetControllers_invokeInitStateFromProperties(swigCPtr, this, State.getCPtr(state), state);
-  }
-
-  public void invokeSetPropertiesFromState(State state) {
-    opensimSimulationJNI.ModelComponentSetControllers_invokeSetPropertiesFromState(swigCPtr, this, State.getCPtr(state), state);
-  }
-
-  public void invokeGenerateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-    opensimSimulationJNI.ModelComponentSetControllers_invokeGenerateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(hints), hints, State.getCPtr(state), state, ArrayDecorativeGeometry.getCPtr(appendToThis), appendToThis);
+    this(opensimSimulationJNI.new_ModelComponentSetControllers(), true);
   }
 
 }

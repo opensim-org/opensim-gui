@@ -61,11 +61,11 @@ public class SetMuscles extends OpenSimObject {
     this(opensimSimulationJNI.new_SetMuscles__SWIG_0(), true);
   }
 
-  public SetMuscles(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetMuscles(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetMuscles__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetMuscles(String aFileName) {
+  public SetMuscles(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetMuscles__SWIG_2(aFileName), true);
   }
 

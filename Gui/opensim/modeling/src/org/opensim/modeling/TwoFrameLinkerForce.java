@@ -81,24 +81,24 @@ public class TwoFrameLinkerForce extends Force {
     opensimSimulationJNI.TwoFrameLinkerForce_constructProperty_frames(swigCPtr, this);
   }
 
-  public void setPropertyIndex_socket_frame1_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimSimulationJNI.TwoFrameLinkerForce_PropertyIndex_socket_frame1_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_frame1(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.TwoFrameLinkerForce_PropertyIndex_socket_frame1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_frame1_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.TwoFrameLinkerForce_PropertyIndex_socket_frame1_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_frame1() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.TwoFrameLinkerForce_PropertyIndex_socket_frame1_get(swigCPtr, this), true);
   }
 
   public void connectSocket_frame1(OpenSimObject object) {
     opensimSimulationJNI.TwoFrameLinkerForce_connectSocket_frame1(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public void setPropertyIndex_socket_frame2_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimSimulationJNI.TwoFrameLinkerForce_PropertyIndex_socket_frame2_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_frame2(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.TwoFrameLinkerForce_PropertyIndex_socket_frame2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_frame2_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.TwoFrameLinkerForce_PropertyIndex_socket_frame2_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_frame2() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.TwoFrameLinkerForce_PropertyIndex_socket_frame2_get(swigCPtr, this), true);
   }
 
   public void connectSocket_frame2(OpenSimObject object) {

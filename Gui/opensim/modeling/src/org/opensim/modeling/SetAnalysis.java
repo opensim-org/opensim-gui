@@ -61,11 +61,11 @@ public class SetAnalysis extends OpenSimObject {
     this(opensimSimulationJNI.new_SetAnalysis__SWIG_0(), true);
   }
 
-  public SetAnalysis(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetAnalysis(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetAnalysis__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetAnalysis(String aFileName) {
+  public SetAnalysis(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetAnalysis__SWIG_2(aFileName), true);
   }
 

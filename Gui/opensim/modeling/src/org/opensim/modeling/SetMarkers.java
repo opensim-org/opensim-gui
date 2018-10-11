@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class SetMarkers extends OpenSimObject {
+public class SetMarkers extends ModelComponent {
   private transient long swigCPtr;
 
   public SetMarkers(long cPtr, boolean cMemoryOwn) {
@@ -61,11 +61,11 @@ public class SetMarkers extends OpenSimObject {
     this(opensimSimulationJNI.new_SetMarkers__SWIG_0(), true);
   }
 
-  public SetMarkers(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetMarkers(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetMarkers__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetMarkers(String aFileName) {
+  public SetMarkers(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetMarkers__SWIG_2(aFileName), true);
   }
 

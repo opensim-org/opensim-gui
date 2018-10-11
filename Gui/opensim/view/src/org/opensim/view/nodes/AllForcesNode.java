@@ -31,10 +31,9 @@ import java.awt.Image;
 import java.net.URL;
 import javax.swing.ImageIcon;
 import java.util.ResourceBundle;
-import javax.swing.Action;
 import org.openide.nodes.Node;
 import org.openide.util.NbBundle;
-import org.opensim.modeling.ForceSet;
+import org.opensim.modeling.OpenSimObjectSet;
 
 /**
  *
@@ -49,7 +48,7 @@ public class AllForcesNode extends OpenSimObjectSetNode {
     /**
      * Creates a new instance of AllForcesNode
      */
-    public AllForcesNode(ForceSet as) {
+    public AllForcesNode(OpenSimObjectSet as) {
         super(as);
         setDisplayName(NbBundle.getMessage(AllForcesNode.class, "CTL_AllForces"));
         /*for (int i=0; i<as.getSize(); i++) {

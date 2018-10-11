@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class SetExternalForces extends OpenSimObject {
+public class SetExternalForces extends ModelComponent {
   private transient long swigCPtr;
 
   public SetExternalForces(long cPtr, boolean cMemoryOwn) {
@@ -61,11 +61,11 @@ public class SetExternalForces extends OpenSimObject {
     this(opensimSimulationJNI.new_SetExternalForces__SWIG_0(), true);
   }
 
-  public SetExternalForces(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetExternalForces(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetExternalForces__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetExternalForces(String aFileName) {
+  public SetExternalForces(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetExternalForces__SWIG_2(aFileName), true);
   }
 

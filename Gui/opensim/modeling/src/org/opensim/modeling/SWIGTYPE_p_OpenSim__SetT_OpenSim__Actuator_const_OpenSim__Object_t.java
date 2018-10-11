@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_OpenSim__XMLDocument {
+public class SWIGTYPE_p_OpenSim__SetT_OpenSim__Actuator_const_OpenSim__Object_t {
   private transient long swigCPtr;
 
-  protected SWIGTYPE_p_OpenSim__XMLDocument(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
+  protected SWIGTYPE_p_OpenSim__SetT_OpenSim__Actuator_const_OpenSim__Object_t(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_OpenSim__XMLDocument() {
+  protected SWIGTYPE_p_OpenSim__SetT_OpenSim__Actuator_const_OpenSim__Object_t() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_OpenSim__XMLDocument obj) {
+  protected static long getCPtr(SWIGTYPE_p_OpenSim__SetT_OpenSim__Actuator_const_OpenSim__Object_t obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

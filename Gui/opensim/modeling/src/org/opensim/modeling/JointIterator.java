@@ -69,12 +69,12 @@ public class JointIterator {
     return new PhysicalOffsetFrame(opensimSimulationJNI.JointIterator_get_frames(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.JointIterator_PropertyIndex_socket_parent_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.JointIterator_PropertyIndex_socket_parent_frame_get(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_child_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.JointIterator_PropertyIndex_socket_child_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_child_frame() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.JointIterator_PropertyIndex_socket_child_frame_get(swigCPtr, this), true);
   }
 
   public boolean get_has_output_power() {
@@ -127,6 +127,10 @@ public class JointIterator {
 
   public Model getModel() {
     return new Model(opensimSimulationJNI.JointIterator_getModel(swigCPtr, this), false);
+  }
+
+  public boolean hasModel() {
+    return opensimSimulationJNI.JointIterator_hasModel(swigCPtr, this);
   }
 
   public void addToSystem(SWIGTYPE_p_SimTK__MultibodySystem system) {
@@ -337,8 +341,12 @@ public class JointIterator {
     return opensimSimulationJNI.JointIterator_isObjectUpToDateWithProperties(swigCPtr, this);
   }
 
+  public void updateXMLNode(SWIGTYPE_p_SimTK__Xml__Element parent, AbstractProperty prop) {
+    opensimSimulationJNI.JointIterator_updateXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent), AbstractProperty.getCPtr(prop), prop);
+  }
+
   public void updateXMLNode(SWIGTYPE_p_SimTK__Xml__Element parent) {
-    opensimSimulationJNI.JointIterator_updateXMLNode(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
+    opensimSimulationJNI.JointIterator_updateXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(parent));
   }
 
   public boolean getInlined() {

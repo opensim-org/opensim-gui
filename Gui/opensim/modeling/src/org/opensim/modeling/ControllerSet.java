@@ -57,30 +57,6 @@ public class ControllerSet extends ModelComponentSetControllers {
     return opensimSimulationJNI.ControllerSet_getConcreteClassName(swigCPtr, this);
   }
 
-  public ControllerSet() {
-    this(opensimSimulationJNI.new_ControllerSet__SWIG_0(), true);
-  }
-
-  public ControllerSet(Model model) {
-    this(opensimSimulationJNI.new_ControllerSet__SWIG_1(Model.getCPtr(model), model), true);
-  }
-
-  public ControllerSet(ControllerSet aControllerSet) {
-    this(opensimSimulationJNI.new_ControllerSet__SWIG_2(ControllerSet.getCPtr(aControllerSet), aControllerSet), true);
-  }
-
-  public ControllerSet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimSimulationJNI.new_ControllerSet__SWIG_3(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
-  }
-
-  public ControllerSet(Model model, String aFileName) {
-    this(opensimSimulationJNI.new_ControllerSet__SWIG_4(Model.getCPtr(model), model, aFileName), true);
-  }
-
-  public void copyData(ControllerSet aAbsControllerSet) {
-    opensimSimulationJNI.ControllerSet_copyData(swigCPtr, this, ControllerSet.getCPtr(aAbsControllerSet), aAbsControllerSet);
-  }
-
   public void constructStorage() {
     opensimSimulationJNI.ControllerSet_constructStorage(swigCPtr, this);
   }
@@ -111,6 +87,18 @@ public class ControllerSet extends ModelComponentSetControllers {
 
   public void printInfo() {
     opensimSimulationJNI.ControllerSet_printInfo(swigCPtr, this);
+  }
+
+  public ControllerSet() {
+    this(opensimSimulationJNI.new_ControllerSet__SWIG_0(), true);
+  }
+
+  public ControllerSet(String file, boolean updateFromXML) throws java.io.IOException {
+    this(opensimSimulationJNI.new_ControllerSet__SWIG_1(file, updateFromXML), true);
+  }
+
+  public ControllerSet(String file) throws java.io.IOException {
+    this(opensimSimulationJNI.new_ControllerSet__SWIG_2(file), true);
   }
 
 }

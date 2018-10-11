@@ -61,11 +61,11 @@ public class SetIKTasks extends OpenSimObject {
     this(opensimActuatorsAnalysesToolsJNI.new_SetIKTasks__SWIG_0(), true);
   }
 
-  public SetIKTasks(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetIKTasks(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimActuatorsAnalysesToolsJNI.new_SetIKTasks__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetIKTasks(String aFileName) {
+  public SetIKTasks(String aFileName) throws java.io.IOException {
     this(opensimActuatorsAnalysesToolsJNI.new_SetIKTasks__SWIG_2(aFileName), true);
   }
 

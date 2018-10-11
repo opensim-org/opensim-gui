@@ -58,19 +58,7 @@ public class ComponentSet extends ModelComponentSetModelComponent {
   }
 
   public ComponentSet() {
-    this(opensimSimulationJNI.new_ComponentSet__SWIG_0(), true);
-  }
-
-  public ComponentSet(Model model) {
-    this(opensimSimulationJNI.new_ComponentSet__SWIG_1(Model.getCPtr(model), model), true);
-  }
-
-  public ComponentSet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimSimulationJNI.new_ComponentSet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
-  }
-
-  public ComponentSet(Model model, String aFileName) {
-    this(opensimSimulationJNI.new_ComponentSet__SWIG_3(Model.getCPtr(model), model, aFileName), true);
+    this(opensimSimulationJNI.new_ComponentSet(), true);
   }
 
 }

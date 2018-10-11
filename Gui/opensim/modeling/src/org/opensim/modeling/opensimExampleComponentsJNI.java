@@ -78,11 +78,11 @@ public class opensimExampleComponentsJNI {
   public final static native double ToyPropMyoController_get_gain__SWIG_1(long jarg1, ToyPropMyoController jarg1_);
   public final static native long ToyPropMyoController_upd_gain__SWIG_1(long jarg1, ToyPropMyoController jarg1_);
   public final static native void ToyPropMyoController_set_gain__SWIG_1(long jarg1, ToyPropMyoController jarg1_, double jarg2);
-  public final static native void ToyPropMyoController_PropertyIndex_socket_actuator_connectee_name_set(long jarg1, ToyPropMyoController jarg1_, long jarg2);
-  public final static native long ToyPropMyoController_PropertyIndex_socket_actuator_connectee_name_get(long jarg1, ToyPropMyoController jarg1_);
+  public final static native void ToyPropMyoController_PropertyIndex_socket_actuator_set(long jarg1, ToyPropMyoController jarg1_, long jarg2);
+  public final static native long ToyPropMyoController_PropertyIndex_socket_actuator_get(long jarg1, ToyPropMyoController jarg1_);
   public final static native void ToyPropMyoController_connectSocket_actuator(long jarg1, ToyPropMyoController jarg1_, long jarg2, OpenSimObject jarg2_);
-  public final static native void ToyPropMyoController_PropertyIndex_input_activation_connectee_name_set(long jarg1, ToyPropMyoController jarg1_, long jarg2);
-  public final static native long ToyPropMyoController_PropertyIndex_input_activation_connectee_name_get(long jarg1, ToyPropMyoController jarg1_);
+  public final static native void ToyPropMyoController_PropertyIndex_input_activation_set(long jarg1, ToyPropMyoController jarg1_, long jarg2);
+  public final static native long ToyPropMyoController_PropertyIndex_input_activation_get(long jarg1, ToyPropMyoController jarg1_);
   public final static native void ToyPropMyoController_connectInput_activation__SWIG_0(long jarg1, ToyPropMyoController jarg1_, long jarg2, AbstractOutput jarg2_, String jarg3);
   public final static native void ToyPropMyoController_connectInput_activation__SWIG_1(long jarg1, ToyPropMyoController jarg1_, long jarg2, AbstractOutput jarg2_);
   public final static native void ToyPropMyoController_connectInput_activation__SWIG_2(long jarg1, ToyPropMyoController jarg1_, long jarg2, AbstractChannel jarg2_, String jarg3);

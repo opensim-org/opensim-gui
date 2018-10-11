@@ -428,7 +428,8 @@ private void jButtonLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     String fileName = FileUtils.getInstance().browseForFilename(ff, true, null);
     if (fileName!=null){
             try {
-                ExternalLoads exLoads = new ExternalLoads(modelLocalCopy, fileName);
+                ExternalLoads exLoads = new ExternalLoads(fileName, true);
+                modelLocalCopy.addComponent(exLoads);
                 modelLocalCopy.initSystem();
                 for(int i=0; i<exLoads.getSize(); i++){
                     ExternalForce ef = exLoads.get(i);

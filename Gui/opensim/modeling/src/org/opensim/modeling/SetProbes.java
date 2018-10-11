@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class SetProbes extends OpenSimObject {
+public class SetProbes extends ModelComponent {
   private transient long swigCPtr;
 
   public SetProbes(long cPtr, boolean cMemoryOwn) {
@@ -61,11 +61,11 @@ public class SetProbes extends OpenSimObject {
     this(opensimSimulationJNI.new_SetProbes__SWIG_0(), true);
   }
 
-  public SetProbes(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetProbes(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetProbes__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetProbes(String aFileName) {
+  public SetProbes(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetProbes__SWIG_2(aFileName), true);
   }
 

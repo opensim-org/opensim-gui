@@ -61,20 +61,12 @@ public class ConstraintSet extends ModelComponentSetConstraints {
     this(opensimSimulationJNI.new_ConstraintSet__SWIG_0(), true);
   }
 
-  public ConstraintSet(Model model) {
-    this(opensimSimulationJNI.new_ConstraintSet__SWIG_1(Model.getCPtr(model), model), true);
+  public ConstraintSet(String file, boolean updateFromXML) throws java.io.IOException {
+    this(opensimSimulationJNI.new_ConstraintSet__SWIG_1(file, updateFromXML), true);
   }
 
-  public ConstraintSet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimSimulationJNI.new_ConstraintSet__SWIG_2(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
-  }
-
-  public ConstraintSet(Model model, String aFileName) {
-    this(opensimSimulationJNI.new_ConstraintSet__SWIG_3(Model.getCPtr(model), model, aFileName), true);
-  }
-
-  public ConstraintSet(ConstraintSet aAbsConstraintSet) {
-    this(opensimSimulationJNI.new_ConstraintSet__SWIG_4(ConstraintSet.getCPtr(aAbsConstraintSet), aAbsConstraintSet), true);
+  public ConstraintSet(String file) throws java.io.IOException {
+    this(opensimSimulationJNI.new_ConstraintSet__SWIG_2(file), true);
   }
 
 }

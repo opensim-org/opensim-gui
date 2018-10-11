@@ -61,20 +61,12 @@ public class JointSet extends ModelComponentSetJoints {
     this(opensimSimulationJNI.new_JointSet__SWIG_0(), true);
   }
 
-  public JointSet(Model model) {
-    this(opensimSimulationJNI.new_JointSet__SWIG_1(Model.getCPtr(model), model), true);
+  public JointSet(String file, boolean updateFromXML) throws java.io.IOException {
+    this(opensimSimulationJNI.new_JointSet__SWIG_1(file, updateFromXML), true);
   }
 
-  public JointSet(JointSet aJointSet) {
-    this(opensimSimulationJNI.new_JointSet__SWIG_2(JointSet.getCPtr(aJointSet), aJointSet), true);
-  }
-
-  public JointSet(Model model, String aFileName, boolean aUpdateFromXMLNode) {
-    this(opensimSimulationJNI.new_JointSet__SWIG_3(Model.getCPtr(model), model, aFileName, aUpdateFromXMLNode), true);
-  }
-
-  public JointSet(Model model, String aFileName) {
-    this(opensimSimulationJNI.new_JointSet__SWIG_4(Model.getCPtr(model), model, aFileName), true);
+  public JointSet(String file) throws java.io.IOException {
+    this(opensimSimulationJNI.new_JointSet__SWIG_2(file), true);
   }
 
 }

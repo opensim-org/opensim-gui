@@ -61,11 +61,11 @@ public class SetActuators extends OpenSimObject {
     this(opensimSimulationJNI.new_SetActuators__SWIG_0(), true);
   }
 
-  public SetActuators(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetActuators(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetActuators__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetActuators(String aFileName) {
+  public SetActuators(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetActuators__SWIG_2(aFileName), true);
   }
 

@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class WrapObjectSet extends SetWrapObject {
+public class WrapObjectSet extends ModelComponentSetWrapObjects {
   private transient long swigCPtr;
 
   public WrapObjectSet(long cPtr, boolean cMemoryOwn) {
@@ -61,8 +61,12 @@ public class WrapObjectSet extends SetWrapObject {
     this(opensimSimulationJNI.new_WrapObjectSet__SWIG_0(), true);
   }
 
-  public WrapObjectSet(WrapObjectSet aWrapObjectSet) {
-    this(opensimSimulationJNI.new_WrapObjectSet__SWIG_1(WrapObjectSet.getCPtr(aWrapObjectSet), aWrapObjectSet), true);
+  public WrapObjectSet(String file, boolean updateFromXML) throws java.io.IOException {
+    this(opensimSimulationJNI.new_WrapObjectSet__SWIG_1(file, updateFromXML), true);
+  }
+
+  public WrapObjectSet(String file) throws java.io.IOException {
+    this(opensimSimulationJNI.new_WrapObjectSet__SWIG_2(file), true);
   }
 
 }

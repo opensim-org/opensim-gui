@@ -61,11 +61,11 @@ public class SetControls extends OpenSimObject {
     this(opensimSimulationJNI.new_SetControls__SWIG_0(), true);
   }
 
-  public SetControls(String aFileName, boolean aUpdateFromXMLNode) {
+  public SetControls(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetControls__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
-  public SetControls(String aFileName) {
+  public SetControls(String aFileName) throws java.io.IOException {
     this(opensimSimulationJNI.new_SetControls__SWIG_2(aFileName), true);
   }
 
