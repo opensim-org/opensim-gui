@@ -1432,6 +1432,7 @@ public class opensimCommonJNI {
   public final static native String AbstractSocket_getConnecteeName__SWIG_0(long jarg1, AbstractSocket jarg1_);
   public final static native String AbstractSocket_getConnecteeName__SWIG_1(long jarg1, AbstractSocket jarg1_, long jarg2);
   public final static native void AbstractSocket_appendConnecteeName(long jarg1, AbstractSocket jarg1_, String jarg2);
+  public final static native long AbstractSocket_getOwner(long jarg1, AbstractSocket jarg1_);
   public final static native void delete_AbstractInput(long jarg1);
   public final static native long AbstractInput_clone(long jarg1, AbstractInput jarg1_);
   public final static native void AbstractInput_connect__SWIG_0(long jarg1, AbstractInput jarg1_, long jarg2, OpenSimObject jarg2_);
