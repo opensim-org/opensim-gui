@@ -93,12 +93,12 @@ public class Station extends Point {
     opensimSimulationJNI.Station_set_location__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_socket_parent_frame_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimSimulationJNI.Station_PropertyIndex_socket_parent_frame_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_parent_frame(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.Station_PropertyIndex_socket_parent_frame_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Station_PropertyIndex_socket_parent_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.Station_PropertyIndex_socket_parent_frame_get(swigCPtr, this), true);
   }
 
   public void connectSocket_parent_frame(OpenSimObject object) {

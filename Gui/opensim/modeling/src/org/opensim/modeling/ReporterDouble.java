@@ -53,12 +53,12 @@ public class ReporterDouble extends AbstractReporter {
     return opensimCommonJNI.ReporterDouble_getConcreteClassName(swigCPtr, this);
   }
 
-  public void setPropertyIndex_input_inputs_connectee_names(SWIGTYPE_p_PropertyIndex value) {
-    opensimCommonJNI.ReporterDouble_PropertyIndex_input_inputs_connectee_names_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_input_inputs(SWIGTYPE_p_PropertyIndex value) {
+    opensimCommonJNI.ReporterDouble_PropertyIndex_input_inputs_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_input_inputs_connectee_names() {
-    return new SWIGTYPE_p_PropertyIndex(opensimCommonJNI.ReporterDouble_PropertyIndex_input_inputs_connectee_names_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_input_inputs() {
+    return new SWIGTYPE_p_PropertyIndex(opensimCommonJNI.ReporterDouble_PropertyIndex_input_inputs_get(swigCPtr, this), true);
   }
 
   public void connectInput_inputs(AbstractOutput output, String alias) {

@@ -129,24 +129,24 @@ public class PointConstraint extends Constraint {
     opensimSimulationJNI.PointConstraint_set_location_body_2__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
-  public void setPropertyIndex_socket_body_1_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimSimulationJNI.PointConstraint_PropertyIndex_socket_body_1_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_body_1(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.PointConstraint_PropertyIndex_socket_body_1_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_body_1_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.PointConstraint_PropertyIndex_socket_body_1_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_body_1() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.PointConstraint_PropertyIndex_socket_body_1_get(swigCPtr, this), true);
   }
 
   public void connectSocket_body_1(OpenSimObject object) {
     opensimSimulationJNI.PointConstraint_connectSocket_body_1(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
-  public void setPropertyIndex_socket_body_2_connectee_name(SWIGTYPE_p_PropertyIndex value) {
-    opensimSimulationJNI.PointConstraint_PropertyIndex_socket_body_2_connectee_name_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
+  public void setPropertyIndex_socket_body_2(SWIGTYPE_p_PropertyIndex value) {
+    opensimSimulationJNI.PointConstraint_PropertyIndex_socket_body_2_set(swigCPtr, this, SWIGTYPE_p_PropertyIndex.getCPtr(value));
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_body_2_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.PointConstraint_PropertyIndex_socket_body_2_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_body_2() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.PointConstraint_PropertyIndex_socket_body_2_get(swigCPtr, this), true);
   }
 
   public void connectSocket_body_2(OpenSimObject object) {

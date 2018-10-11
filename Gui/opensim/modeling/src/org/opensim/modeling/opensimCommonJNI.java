@@ -2464,8 +2464,8 @@ public class opensimCommonJNI {
   public final static native String ReporterDouble_getClassName();
   public final static native long ReporterDouble_clone(long jarg1, ReporterDouble jarg1_);
   public final static native String ReporterDouble_getConcreteClassName(long jarg1, ReporterDouble jarg1_);
-  public final static native void ReporterDouble_PropertyIndex_input_inputs_connectee_names_set(long jarg1, ReporterDouble jarg1_, long jarg2);
-  public final static native long ReporterDouble_PropertyIndex_input_inputs_connectee_names_get(long jarg1, ReporterDouble jarg1_);
+  public final static native void ReporterDouble_PropertyIndex_input_inputs_set(long jarg1, ReporterDouble jarg1_, long jarg2);
+  public final static native long ReporterDouble_PropertyIndex_input_inputs_get(long jarg1, ReporterDouble jarg1_);
   public final static native void ReporterDouble_connectInput_inputs__SWIG_0(long jarg1, ReporterDouble jarg1_, long jarg2, AbstractOutput jarg2_, String jarg3);
   public final static native void ReporterDouble_connectInput_inputs__SWIG_1(long jarg1, ReporterDouble jarg1_, long jarg2, AbstractOutput jarg2_);
   public final static native void ReporterDouble_connectInput_inputs__SWIG_2(long jarg1, ReporterDouble jarg1_, long jarg2, AbstractChannel jarg2_, String jarg3);
@@ -2479,8 +2479,8 @@ public class opensimCommonJNI {
   public final static native String ReporterVec3_getClassName();
   public final static native long ReporterVec3_clone(long jarg1, ReporterVec3 jarg1_);
   public final static native String ReporterVec3_getConcreteClassName(long jarg1, ReporterVec3 jarg1_);
-  public final static native void ReporterVec3_PropertyIndex_input_inputs_connectee_names_set(long jarg1, ReporterVec3 jarg1_, long jarg2);
-  public final static native long ReporterVec3_PropertyIndex_input_inputs_connectee_names_get(long jarg1, ReporterVec3 jarg1_);
+  public final static native void ReporterVec3_PropertyIndex_input_inputs_set(long jarg1, ReporterVec3 jarg1_, long jarg2);
+  public final static native long ReporterVec3_PropertyIndex_input_inputs_get(long jarg1, ReporterVec3 jarg1_);
   public final static native void ReporterVec3_connectInput_inputs__SWIG_0(long jarg1, ReporterVec3 jarg1_, long jarg2, AbstractOutput jarg2_, String jarg3);
   public final static native void ReporterVec3_connectInput_inputs__SWIG_1(long jarg1, ReporterVec3 jarg1_, long jarg2, AbstractOutput jarg2_);
   public final static native void ReporterVec3_connectInput_inputs__SWIG_2(long jarg1, ReporterVec3 jarg1_, long jarg2, AbstractChannel jarg2_, String jarg3);
@@ -2494,8 +2494,8 @@ public class opensimCommonJNI {
   public final static native String ReporterVector_getClassName();
   public final static native long ReporterVector_clone(long jarg1, ReporterVector jarg1_);
   public final static native String ReporterVector_getConcreteClassName(long jarg1, ReporterVector jarg1_);
-  public final static native void ReporterVector_PropertyIndex_input_inputs_connectee_names_set(long jarg1, ReporterVector jarg1_, long jarg2);
-  public final static native long ReporterVector_PropertyIndex_input_inputs_connectee_names_get(long jarg1, ReporterVector jarg1_);
+  public final static native void ReporterVector_PropertyIndex_input_inputs_set(long jarg1, ReporterVector jarg1_, long jarg2);
+  public final static native long ReporterVector_PropertyIndex_input_inputs_get(long jarg1, ReporterVector jarg1_);
   public final static native void ReporterVector_connectInput_inputs__SWIG_0(long jarg1, ReporterVector jarg1_, long jarg2, AbstractOutput jarg2_, String jarg3);
   public final static native void ReporterVector_connectInput_inputs__SWIG_1(long jarg1, ReporterVector jarg1_, long jarg2, AbstractOutput jarg2_);
   public final static native void ReporterVector_connectInput_inputs__SWIG_2(long jarg1, ReporterVector jarg1_, long jarg2, AbstractChannel jarg2_, String jarg3);

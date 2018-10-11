@@ -245,8 +245,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native boolean BodyActuator_get_spatial_force_is_global__SWIG_1(long jarg1, BodyActuator jarg1_);
   public final static native long BodyActuator_upd_spatial_force_is_global__SWIG_1(long jarg1, BodyActuator jarg1_);
   public final static native void BodyActuator_set_spatial_force_is_global__SWIG_1(long jarg1, BodyActuator jarg1_, boolean jarg2);
-  public final static native void BodyActuator_PropertyIndex_socket_body_connectee_name_set(long jarg1, BodyActuator jarg1_, long jarg2);
-  public final static native long BodyActuator_PropertyIndex_socket_body_connectee_name_get(long jarg1, BodyActuator jarg1_);
+  public final static native void BodyActuator_PropertyIndex_socket_body_set(long jarg1, BodyActuator jarg1_, long jarg2);
+  public final static native long BodyActuator_PropertyIndex_socket_body_get(long jarg1, BodyActuator jarg1_);
   public final static native void BodyActuator_connectSocket_body(long jarg1, BodyActuator jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native long new_BodyActuator__SWIG_0();
   public final static native long new_BodyActuator__SWIG_1(long jarg1, Body jarg1_, long jarg2, Vec3 jarg2_, boolean jarg3, boolean jarg4);

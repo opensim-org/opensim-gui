@@ -69,12 +69,12 @@ public class JointIterator {
     return new PhysicalOffsetFrame(opensimSimulationJNI.JointIterator_get_frames(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.JointIterator_PropertyIndex_socket_parent_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_parent_frame() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.JointIterator_PropertyIndex_socket_parent_frame_get(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_child_frame_connectee_name() {
-    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.JointIterator_PropertyIndex_socket_child_frame_connectee_name_get(swigCPtr, this), true);
+  public SWIGTYPE_p_PropertyIndex getPropertyIndex_socket_child_frame() {
+    return new SWIGTYPE_p_PropertyIndex(opensimSimulationJNI.JointIterator_PropertyIndex_socket_child_frame_get(swigCPtr, this), true);
   }
 
   public boolean get_has_output_power() {
