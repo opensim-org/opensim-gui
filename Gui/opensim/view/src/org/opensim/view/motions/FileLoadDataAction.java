@@ -55,7 +55,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
                     Storage newStorage = new Storage();
                     markerData.makeRdStorage(newStorage);
                     AnnotatedMotion amot = new AnnotatedMotion(newStorage, markerData.getMarkerNames());
-                    amot.setUnitConversion(1.0/(markerData.getUnits().convertTo(Units.UnitType.Meters)));
+                    amot.setUnitConversion(markerData.getUnits().convertTo(Units.UnitType.Meters));
                     amot.setName(new File(fileName).getName());
                     amot.setDataRate(markerData.getDataRate());
                     amot.setCameraRate(markerData.getCameraRate());
