@@ -100,4 +100,8 @@ public class AbstractSocket {
     opensimCommonJNI.AbstractSocket_appendConnecteeName(swigCPtr, this, name);
   }
 
+  public Component getOwner() {
+    return new Component(opensimCommonJNI.AbstractSocket_getOwner(swigCPtr, this), false);
+  }
+
 }
