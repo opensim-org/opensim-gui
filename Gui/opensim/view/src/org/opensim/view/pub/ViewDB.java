@@ -1310,6 +1310,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         viz.start();
 
     }
+    /**
+     * 
+     * @return Port number used to communicate with Visualizer as a String
+     */
+    public static String getVisualizationServerPort(){
+        return String.valueOf(JettyMain.getSERVER_PORT());
+    }
 
     public void setCurrentJson() {
         Model cModel = getCurrentModel();

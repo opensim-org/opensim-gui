@@ -46,8 +46,19 @@ public class JettyMain {
     private static boolean serverup = false;
     private static final String serverRootDir = TheApp.getInstallDir();
     private static final String pathToStartPage = "/threejs/editor/";
-    private static final int serverPort = 8002;
+    private static int SERVER_PORT = 8002;
     private static String serverWorkingDir = serverRootDir+"/threejs/editor/";
+    
+    // Use static block to adjust SERVER_PORT if specified
+    static {
+        if (System.getProperty("opensim.port") != null) {
+            int port = Integer.parseInt(System.getProperty("opensim.port"));
+            // Valid numbers are typycally between 81 and 8999
+            if (port > 80 && port < 9000) {
+                SERVER_PORT = port;
+            }
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -58,8 +69,9 @@ public class JettyMain {
     public static void startServer() {
         try {
             if (!serverup){
+                getSERVER_PORT(); // set port based on command line if any
                 // TODO code application logic here
-                Server server = new Server(serverPort);
+                Server server = new Server(SERVER_PORT);
 
                 String appDir = serverRootDir;
                 File fp = new File(appDir);
@@ -104,10 +116,10 @@ public class JettyMain {
     }
 
     /**
-     * @return the serverPort
+     * @return the SERVER_PORT
      */
-    public static int getServerPort() {
-        return serverPort;
+    public static int getSERVER_PORT() {
+        return SERVER_PORT;
     }
 
     /**
