@@ -77,11 +77,8 @@ public class NewMarkerAction extends AbstractAction {
         Model model = markersNode.getModelForNode();
         Vec3 offset = new Vec3(0.11, 0.22, 0.33);
         MarkerSet markerset = model.getMarkerSet();
-        PhysicalFrame frameToUse;
-        if ( model.getBodySet().getSize()==0)
-            frameToUse = model.get_ground(); // model only has Ground
-        else// Model has at least one body in BodySet.
-            frameToUse = model.getBodyList().begin().__deref__();
+        // Alays create new marker in Ground, user can change that later
+        PhysicalFrame frameToUse = model.get_ground(); 
         String newMarkerName = makeUniqueMarkerName(markerset);
         Marker newMarker = new Marker();
         newMarker.setName(newMarkerName);
