@@ -77,18 +77,16 @@ public class NewMarkerAction extends AbstractAction {
         Model model = markersNode.getModelForNode();
         Vec3 offset = new Vec3(0.11, 0.22, 0.33);
         MarkerSet markerset = model.getMarkerSet();
-        Body body = model.getBodySet().get(0);
-        if (body == null) {
-            return;
-        }
+        // Alays create new marker in Ground, user can change that later
+        PhysicalFrame frameToUse = model.get_ground(); 
         String newMarkerName = makeUniqueMarkerName(markerset);
         Marker newMarker = new Marker();
         newMarker.setName(newMarkerName);
         newMarker.set_location(offset);
-        newMarker.setParentFrame(body);
+        newMarker.setParentFrame(frameToUse);
         OpenSimContext context = OpenSimDB.getInstance().getContext(model);
         context.cacheModelAndState();
-        markerset.adoptAndAppend(newMarker);
+        model.addMarker(newMarker); // this makes the model adopt the newMarker internally
         try {
            context.restoreStateFromCachedModel();
        } catch (IOException ex) {
