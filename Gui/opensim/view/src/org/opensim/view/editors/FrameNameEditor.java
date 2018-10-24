@@ -48,6 +48,7 @@ import org.openide.explorer.propertysheet.PropertyEnv;
 import org.openide.explorer.propertysheet.PropertyModel;
 import org.opensim.modeling.Model;
 import org.opensim.view.SingleModelGuiElements;
+import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.PropertyEditorAdaptor;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -126,7 +127,12 @@ public class FrameNameEditor extends PropertyEditorSupport
         
         public void connect(PropertyEditor propertyEditor, PropertyEnv env) {
             editor = propertyEditor;
-            SingleModelGuiElements modelGuiElems = OpenSimDB.getInstance().getModelGuiElements(ViewDB.getCurrentModel());
+            Model model = ViewDB.getCurrentModel();
+            // replace ViewDB.getCurrentModel() with model from object being edited
+            if (env.getBeans().length >0 && env.getBeans()[0] instanceof OpenSimObjectNode){
+                model = ((OpenSimObjectNode) env.getBeans()[0]).getModelForNode();
+            }
+            SingleModelGuiElements modelGuiElems = OpenSimDB.getInstance().getModelGuiElements(model);
             picker.setModel(new DefaultComboBoxModel(modelGuiElems.getFrameNames()));
             reset();
         }
