@@ -43,6 +43,10 @@ public class ActuatorIterator {
     return new Actuator(opensimSimulationJNI.ActuatorIterator___ref__(swigCPtr, this), false);
   }
 
+  public Actuator deref() {
+    return new Actuator(opensimSimulationJNI.ActuatorIterator_deref(swigCPtr, this), false);
+  }
+
   public Actuator __deref__() {
     long cPtr = opensimSimulationJNI.ActuatorIterator___deref__(swigCPtr, this);
     return (cPtr == 0) ? null : new Actuator(cPtr, false);

@@ -43,6 +43,10 @@ public class Millard2012EquilibriumMuscleIterator {
     return new Millard2012EquilibriumMuscle(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator___ref__(swigCPtr, this), false);
   }
 
+  public Millard2012EquilibriumMuscle deref() {
+    return new Millard2012EquilibriumMuscle(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_deref(swigCPtr, this), false);
+  }
+
   public Millard2012EquilibriumMuscle __deref__() {
     long cPtr = opensimSimulationJNI.Millard2012EquilibriumMuscleIterator___deref__(swigCPtr, this);
     return (cPtr == 0) ? null : new Millard2012EquilibriumMuscle(cPtr, false);

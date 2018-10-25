@@ -43,6 +43,10 @@ public class ModelComponentIterator {
     return new ModelComponent(opensimSimulationJNI.ModelComponentIterator___ref__(swigCPtr, this), false);
   }
 
+  public ModelComponent deref() {
+    return new ModelComponent(opensimSimulationJNI.ModelComponentIterator_deref(swigCPtr, this), false);
+  }
+
   public ModelComponent __deref__() {
     long cPtr = opensimSimulationJNI.ModelComponentIterator___deref__(swigCPtr, this);
     return (cPtr == 0) ? null : new ModelComponent(cPtr, false);

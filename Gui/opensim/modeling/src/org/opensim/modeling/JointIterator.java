@@ -43,6 +43,10 @@ public class JointIterator {
     return new Joint(opensimSimulationJNI.JointIterator___ref__(swigCPtr, this), false);
   }
 
+  public Joint deref() {
+    return new Joint(opensimSimulationJNI.JointIterator_deref(swigCPtr, this), false);
+  }
+
   public Joint __deref__() {
     long cPtr = opensimSimulationJNI.JointIterator___deref__(swigCPtr, this);
     return (cPtr == 0) ? null : new Joint(cPtr, false);

@@ -43,6 +43,10 @@ public class FrameIterator {
     return new Frame(opensimSimulationJNI.FrameIterator___ref__(swigCPtr, this), false);
   }
 
+  public Frame deref() {
+    return new Frame(opensimSimulationJNI.FrameIterator_deref(swigCPtr, this), false);
+  }
+
   public Frame __deref__() {
     long cPtr = opensimSimulationJNI.FrameIterator___deref__(swigCPtr, this);
     return (cPtr == 0) ? null : new Frame(cPtr, false);

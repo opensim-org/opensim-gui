@@ -1601,6 +1601,7 @@ public class opensimCommonJNI {
   public final static native void ComponentsList_setFilter(long jarg1, ComponentsList jarg1_, long jarg2, ComponentFilter jarg2_);
   public final static native boolean ComponentIterator_equals(long jarg1, ComponentIterator jarg1_, long jarg2, ComponentIterator jarg2_);
   public final static native long ComponentIterator___ref__(long jarg1, ComponentIterator jarg1_);
+  public final static native long ComponentIterator_deref(long jarg1, ComponentIterator jarg1_);
   public final static native long ComponentIterator___deref__(long jarg1, ComponentIterator jarg1_);
   public final static native long ComponentIterator_next(long jarg1, ComponentIterator jarg1_);
   public final static native void delete_ComponentIterator(long jarg1);

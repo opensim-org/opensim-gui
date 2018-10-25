@@ -57,16 +57,80 @@ public class WrapTorus extends WrapObject {
     return opensimSimulationJNI.WrapTorus_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_inner_radius(WrapTorus source) {
+    opensimSimulationJNI.WrapTorus_copyProperty_inner_radius(swigCPtr, this, WrapTorus.getCPtr(source), source);
+  }
+
+  public double get_inner_radius(int i) {
+    return opensimSimulationJNI.WrapTorus_get_inner_radius__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_inner_radius(int i) {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapTorus_upd_inner_radius__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_inner_radius(int i, double value) {
+    opensimSimulationJNI.WrapTorus_set_inner_radius__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_inner_radius(double value) {
+    return opensimSimulationJNI.WrapTorus_append_inner_radius(swigCPtr, this, value);
+  }
+
+  public void constructProperty_inner_radius(double initValue) {
+    opensimSimulationJNI.WrapTorus_constructProperty_inner_radius(swigCPtr, this, initValue);
+  }
+
+  public double get_inner_radius() {
+    return opensimSimulationJNI.WrapTorus_get_inner_radius__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_inner_radius() {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapTorus_upd_inner_radius__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_inner_radius(double value) {
+    opensimSimulationJNI.WrapTorus_set_inner_radius__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_outer_radius(WrapTorus source) {
+    opensimSimulationJNI.WrapTorus_copyProperty_outer_radius(swigCPtr, this, WrapTorus.getCPtr(source), source);
+  }
+
+  public double get_outer_radius(int i) {
+    return opensimSimulationJNI.WrapTorus_get_outer_radius__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_outer_radius(int i) {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapTorus_upd_outer_radius__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_outer_radius(int i, double value) {
+    opensimSimulationJNI.WrapTorus_set_outer_radius__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_outer_radius(double value) {
+    return opensimSimulationJNI.WrapTorus_append_outer_radius(swigCPtr, this, value);
+  }
+
+  public void constructProperty_outer_radius(double initValue) {
+    opensimSimulationJNI.WrapTorus_constructProperty_outer_radius(swigCPtr, this, initValue);
+  }
+
+  public double get_outer_radius() {
+    return opensimSimulationJNI.WrapTorus_get_outer_radius__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_outer_radius() {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapTorus_upd_outer_radius__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_outer_radius(double value) {
+    opensimSimulationJNI.WrapTorus_set_outer_radius__SWIG_1(swigCPtr, this, value);
+  }
+
   public WrapTorus() {
-    this(opensimSimulationJNI.new_WrapTorus__SWIG_0(), true);
-  }
-
-  public WrapTorus(WrapTorus aWrapTorus) {
-    this(opensimSimulationJNI.new_WrapTorus__SWIG_1(WrapTorus.getCPtr(aWrapTorus), aWrapTorus), true);
-  }
-
-  public void copyData(WrapTorus aWrapTorus) {
-    opensimSimulationJNI.WrapTorus_copyData(swigCPtr, this, WrapTorus.getCPtr(aWrapTorus), aWrapTorus);
+    this(opensimSimulationJNI.new_WrapTorus(), true);
   }
 
   public String getWrapTypeName() {
@@ -87,10 +151,6 @@ public class WrapTorus extends WrapObject {
 
   public void extendScale(State s, ScaleSet scaleSet) {
     opensimSimulationJNI.WrapTorus_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
-  }
-
-  public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
-    opensimSimulationJNI.WrapTorus_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
 }

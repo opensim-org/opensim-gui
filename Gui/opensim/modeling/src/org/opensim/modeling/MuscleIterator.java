@@ -43,6 +43,10 @@ public class MuscleIterator {
     return new Muscle(opensimSimulationJNI.MuscleIterator___ref__(swigCPtr, this), false);
   }
 
+  public Muscle deref() {
+    return new Muscle(opensimSimulationJNI.MuscleIterator_deref(swigCPtr, this), false);
+  }
+
   public Muscle __deref__() {
     long cPtr = opensimSimulationJNI.MuscleIterator___deref__(swigCPtr, this);
     return (cPtr == 0) ? null : new Muscle(cPtr, false);

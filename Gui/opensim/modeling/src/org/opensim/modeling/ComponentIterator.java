@@ -43,6 +43,10 @@ public class ComponentIterator {
     return new Component(opensimCommonJNI.ComponentIterator___ref__(swigCPtr, this), false);
   }
 
+  public Component deref() {
+    return new Component(opensimCommonJNI.ComponentIterator_deref(swigCPtr, this), false);
+  }
+
   public Component __deref__() {
     long cPtr = opensimCommonJNI.ComponentIterator___deref__(swigCPtr, this);
     return (cPtr == 0) ? null : new Component(cPtr, false);

@@ -43,6 +43,10 @@ public class BodyIterator {
     return new Body(opensimSimulationJNI.BodyIterator___ref__(swigCPtr, this), false);
   }
 
+  public Body deref() {
+    return new Body(opensimSimulationJNI.BodyIterator_deref(swigCPtr, this), false);
+  }
+
   public Body __deref__() {
     long cPtr = opensimSimulationJNI.BodyIterator___deref__(swigCPtr, this);
     return (cPtr == 0) ? null : new Body(cPtr, false);

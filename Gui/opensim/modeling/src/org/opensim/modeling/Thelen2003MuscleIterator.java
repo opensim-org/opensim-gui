@@ -43,6 +43,10 @@ public class Thelen2003MuscleIterator {
     return new Thelen2003Muscle(opensimSimulationJNI.Thelen2003MuscleIterator___ref__(swigCPtr, this), false);
   }
 
+  public Thelen2003Muscle deref() {
+    return new Thelen2003Muscle(opensimSimulationJNI.Thelen2003MuscleIterator_deref(swigCPtr, this), false);
+  }
+
   public Thelen2003Muscle __deref__() {
     long cPtr = opensimSimulationJNI.Thelen2003MuscleIterator___deref__(swigCPtr, this);
     return (cPtr == 0) ? null : new Thelen2003Muscle(cPtr, false);
