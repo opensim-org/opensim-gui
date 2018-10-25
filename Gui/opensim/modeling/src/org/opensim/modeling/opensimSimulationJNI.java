@@ -3225,7 +3225,8 @@ public class opensimSimulationJNI {
   public final static native String AbstractTool_getNextAvailableForceName__SWIG_1(long jarg1, AbstractTool jarg1_);
   public final static native long AbstractTool_getExternalLoads(long jarg1, AbstractTool jarg1_);
   public final static native long AbstractTool_updExternalLoads(long jarg1, AbstractTool jarg1_);
-  public final static native boolean AbstractTool_hasExternalLoads(long jarg1, AbstractTool jarg1_);
+  public final static native void AbstractTool_setExternalLoads(long jarg1, AbstractTool jarg1_, long jarg2, ExternalLoads jarg2_);
+  public final static native boolean AbstractTool_modelHasExternalLoads(long jarg1, AbstractTool jarg1_);
   public final static native String AbstractTool_getExternalLoadsFileName(long jarg1, AbstractTool jarg1_);
   public final static native void AbstractTool_setExternalLoadsFileName(long jarg1, AbstractTool jarg1_, String jarg2);
   public final static native long AbstractTool_getForceSetFiles(long jarg1, AbstractTool jarg1_);
@@ -3272,6 +3273,7 @@ public class opensimSimulationJNI {
   public final static native void AbstractTool_printResults__SWIG_3(long jarg1, AbstractTool jarg1_, String jarg2);
   public final static native boolean AbstractTool_createExternalLoads__SWIG_0(long jarg1, AbstractTool jarg1_, String jarg2, long jarg3, Model jarg3_, long jarg4, Storage jarg4_);
   public final static native boolean AbstractTool_createExternalLoads__SWIG_1(long jarg1, AbstractTool jarg1_, String jarg2, long jarg3, Model jarg3_);
+  public final static native void AbstractTool_removeExternalLoadsFromModel(long jarg1, AbstractTool jarg1_);
   public final static native void AbstractTool_updateFromXMLNode(long jarg1, AbstractTool jarg1_, long jarg2, int jarg3);
   public final static native void AbstractTool_loadQStorage(long jarg1, AbstractTool jarg1_, String jarg2, long jarg3, Storage jarg3_);
   public final static native long Point_safeDownCast(long jarg1, OpenSimObject jarg1_);

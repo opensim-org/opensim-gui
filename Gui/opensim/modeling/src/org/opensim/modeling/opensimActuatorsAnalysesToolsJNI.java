@@ -1386,6 +1386,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native void DynamicsTool_setExcludedForces(long jarg1, DynamicsTool jarg1_, long jarg2, ArrayStr jarg2_);
   public final static native boolean DynamicsTool_createExternalLoads__SWIG_0(long jarg1, DynamicsTool jarg1_, String jarg2, long jarg3, Model jarg3_, long jarg4, Storage jarg4_);
   public final static native boolean DynamicsTool_createExternalLoads__SWIG_1(long jarg1, DynamicsTool jarg1_, String jarg2, long jarg3, Model jarg3_);
+  public final static native boolean DynamicsTool_modelHasExternalLoads(long jarg1, DynamicsTool jarg1_);
+  public final static native void DynamicsTool_removeExternalLoadsFromModel(long jarg1, DynamicsTool jarg1_);
   public final static native boolean DynamicsTool_run(long jarg1, DynamicsTool jarg1_) throws java.io.IOException;
   public final static native long InverseDynamicsTool_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void InverseDynamicsTool_assign(long jarg1, InverseDynamicsTool jarg1_, long jarg2, OpenSimObject jarg2_);

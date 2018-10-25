@@ -117,6 +117,14 @@ public class DynamicsTool extends Tool {
     return opensimActuatorsAnalysesToolsJNI.DynamicsTool_createExternalLoads__SWIG_1(swigCPtr, this, aExternalLoadsFileName, Model.getCPtr(aModel), aModel);
   }
 
+  public boolean modelHasExternalLoads() {
+    return opensimActuatorsAnalysesToolsJNI.DynamicsTool_modelHasExternalLoads(swigCPtr, this);
+  }
+
+  public void removeExternalLoadsFromModel() {
+    opensimActuatorsAnalysesToolsJNI.DynamicsTool_removeExternalLoadsFromModel(swigCPtr, this);
+  }
+
   public boolean run() throws java.io.IOException {
     return opensimActuatorsAnalysesToolsJNI.DynamicsTool_run(swigCPtr, this);
   }

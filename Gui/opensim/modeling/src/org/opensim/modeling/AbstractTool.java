@@ -89,8 +89,12 @@ public class AbstractTool extends OpenSimObject {
     return new ExternalLoads(opensimSimulationJNI.AbstractTool_updExternalLoads(swigCPtr, this), false);
   }
 
-  public boolean hasExternalLoads() {
-    return opensimSimulationJNI.AbstractTool_hasExternalLoads(swigCPtr, this);
+  public void setExternalLoads(ExternalLoads el) {
+    opensimSimulationJNI.AbstractTool_setExternalLoads(swigCPtr, this, ExternalLoads.getCPtr(el), el);
+  }
+
+  public boolean modelHasExternalLoads() {
+    return opensimSimulationJNI.AbstractTool_modelHasExternalLoads(swigCPtr, this);
   }
 
   public String getExternalLoadsFileName() {
@@ -275,6 +279,10 @@ public class AbstractTool extends OpenSimObject {
 
   public boolean createExternalLoads(String aExternalLoadsFileName, Model aModel) {
     return opensimSimulationJNI.AbstractTool_createExternalLoads__SWIG_1(swigCPtr, this, aExternalLoadsFileName, Model.getCPtr(aModel), aModel);
+  }
+
+  public void removeExternalLoadsFromModel() {
+    opensimSimulationJNI.AbstractTool_removeExternalLoadsFromModel(swigCPtr, this);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
