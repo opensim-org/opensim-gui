@@ -1,6 +1,0 @@
-Manifest-Version: 1.0
-OpenIDE-Module: vtk
-OpenIDE-Module-Layer: vtk/layer.xml
-OpenIDE-Module-Localizing-Bundle: vtk/Bundle.properties
-OpenIDE-Module-Specification-Version: 1.0
-
