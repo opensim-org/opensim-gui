@@ -512,14 +512,14 @@ public class MotionDisplayer {
          Coordinate co = coords.get(i);
          // GenCoord
          String cName = co.getName();
-         if (cName.equals(columnName)||cName.equals(co.getRelativePathName(model))){
+         if (cName.equals(columnName)||columnName.equals(co.getStateVariableNames().get(0))) {
             mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.GenCoord);
             mapIndicesToObjects.put(columnIndex, co); //co.setValue();
             return 1;
          }
          // GenCoord_Velocity
-         if (columnName.endsWith("_vel")|| columnName.endsWith("_u")){ //_u
-            if (columnName.equals(cName+"_vel")|| columnName.equals(cName+"_u")) //_u
+         if (columnName.equals(cName+"_vel")|| columnName.equals(cName+"_u") ||
+                columnName.equals(co.getStateVariableNames().get(1))) { //_u 
                mapIndicesToObjectTypes.put(columnIndex, ObjectTypesInMotionFiles.GenCoord_Velocity);
                mapIndicesToObjects.put(columnIndex, co); 
                return 1;
