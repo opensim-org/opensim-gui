@@ -638,7 +638,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          // The combo box containing the body the point is attached to
          javax.swing.JComboBox comboBox = new javax.swing.JComboBox();
          comboBox.setModel(new javax.swing.DefaultComboBoxModel(physicalFrameNames));
-         comboBox.setSelectedIndex(findElement(physicalFrameNames, pathPoints.get(i).getBodyName()));
+         comboBox.setSelectedIndex(findElement(physicalFrameNames, pathPoints.get(i).getParentFrame().getAbsolutePathString()));
          comboBox.setBounds(x, height, 90, 21);
          comboBox.setToolTipText("Frame the attachment point is fixed to");
          comboBox.addActionListener(new java.awt.event.ActionListener() {
