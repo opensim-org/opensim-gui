@@ -166,9 +166,9 @@ public class SingleModelGuiElements {
             ArrayList<String> bNames = new ArrayList<String>();
             ArrayList<String> phFrameNames = new ArrayList<String>();
             while (!bi.equals(frames.end())) {
-                bNames.add(bi.getName());
+                bNames.add(bi.getAbsolutePathString());
                 if (PhysicalFrame.safeDownCast(bi.__deref__())!= null)
-                    phFrameNames.add(bi.getName());
+                    phFrameNames.add(bi.getAbsolutePathString());
                 bi.next();
             }
             frameNames = new String[bNames.size()];

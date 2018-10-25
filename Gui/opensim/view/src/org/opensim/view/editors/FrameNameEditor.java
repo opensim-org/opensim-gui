@@ -48,6 +48,7 @@ import org.openide.explorer.propertysheet.PropertyEnv;
 import org.openide.explorer.propertysheet.PropertyModel;
 import org.opensim.modeling.Model;
 import org.opensim.view.SingleModelGuiElements;
+import org.opensim.view.nodes.OpenSimObjectNode;
 import org.opensim.view.nodes.PropertyEditorAdaptor;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -96,10 +97,14 @@ public class FrameNameEditor extends PropertyEditorSupport
 
     public void attachEnv(PropertyEnv propertyEnv) {
         propertyEnv.registerInplaceEditorFactory(this);
+        if (propertyEnv.getBeans().length >0 && propertyEnv.getBeans()[0] instanceof OpenSimObjectNode){
+                mdl = ((OpenSimObjectNode) propertyEnv.getBeans()[0]).getModelForNode();
+        }
     }
 
     private InplaceEditor ed = null;
-
+    Model mdl = null;
+    
     public InplaceEditor getInplaceEditor() {
         if (ed == null) {
             ed = new Inplace();
@@ -109,9 +114,9 @@ public class FrameNameEditor extends PropertyEditorSupport
     }
 
     public void propertyChange(PropertyChangeEvent evt) {
-        // ignoe trivial events
+        // ignore trivial events
         if (evt.getNewValue()==null && evt.getOldValue()==null) return;
-        Model mdl = ViewDB.getCurrentModel();
+        
         PropertyEditorAdaptor pea = new PropertyEditorAdaptor(mdl); // Need Model, Object, Property, Node
         pea.handleModelChange();
     }
@@ -123,10 +128,16 @@ public class FrameNameEditor extends PropertyEditorSupport
     
         private final JComboBox picker = new JComboBox();
         private PropertyEditor editor = null;
+        private Model mdl = null;
         
         public void connect(PropertyEditor propertyEditor, PropertyEnv env) {
             editor = propertyEditor;
-            SingleModelGuiElements modelGuiElems = OpenSimDB.getInstance().getModelGuiElements(ViewDB.getCurrentModel());
+            mdl = ViewDB.getCurrentModel();
+            // replace ViewDB.getCurrentModel() with model from object being edited
+            if (env.getBeans().length >0 && env.getBeans()[0] instanceof OpenSimObjectNode){
+                mdl = ((OpenSimObjectNode) env.getBeans()[0]).getModelForNode();
+            }
+            SingleModelGuiElements modelGuiElems = OpenSimDB.getInstance().getModelGuiElements(mdl);
             picker.setModel(new DefaultComboBoxModel(modelGuiElems.getFrameNames()));
             reset();
         }

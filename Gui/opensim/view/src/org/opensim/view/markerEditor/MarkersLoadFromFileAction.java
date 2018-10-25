@@ -83,38 +83,37 @@ public class MarkersLoadFromFileAction extends AbstractAction {
            Exceptions.printStackTrace(ex);
            return;
        }
-        model.updateMarkerSet(newMarkerSet);
-        MarkerSet modelMarkerSet = model.getMarkerSet();
-        OpenSimContext context = OpenSimDB.getInstance().getContext(model);
-        ArrayStr existingNames = new ArrayStr();
-        modelMarkerSet.getMarkerNames(existingNames);
+        //
+        // Will make sure no marker in newMarkerSet is already in model since
+        // updateMarkerSet will delete the old Marker causing GUI to hold to a stale 
+        // pointer/reference.
+        MarkerSet markersToAdd = new MarkerSet(); // for passing to model
         String errorMessages = "";
         boolean errorsToReport = false;
-        context.cacheModelAndState();
-        Vector<OpenSimObject> markersAdded = new Vector<OpenSimObject>();
+
         for (int i=0; i<newMarkerSet.getSize(); i++){
              Marker newMarker = newMarkerSet.get(i);
              // Check name duplication
-             if (existingNames.findIndex(newMarker.getName())!= -1){
+             if (model.getMarkerSet().getIndex(newMarker.getName())!= -1){
                  errorMessages = errorMessages.concat("Marker name "+newMarker.getName()+ " already in use. Ignoring..\n");
                  errorsToReport = true;
                  continue;
              }
-             // Ideally we use cloneAndAppend but the clone loses track of frame!
-             modelMarkerSet.adoptAndAppend(newMarker);
-             // Notify the world so that navigator and visualization update once at end
-             //new NewMarkerAction().addMarkers(newMarker, true);
-             markersAdded.add(newMarker);
-             modelMarkerSet.getMarkerNames(existingNames);
+             // This marker will be added
+             markersToAdd.cloneAndAppend(newMarker);
         }
-        try {
-           context.restoreStateFromCachedModel();
-        } catch (IOException ex) {
-           ErrorDialog.displayExceptionDialog(ex);
-        }       
-        // This hack is so that the adopted Marker isn't gc'ed
-         newMarkerSet.setMemoryOwner(false);
-         new NewMarkerAction().addMarkers(markersAdded, false);
+        // This is the meat of the functionality where passed in MarkerSet is "merged" with model's MarkerSet.
+        model.updateMarkerSet(markersToAdd);
+        OpenSimContext context = OpenSimDB.getInstance().getContext(model);
+        // This will do the full recreation of System and save/restore of state so we don't lose configuration
+        context.recreateSystemAfterSystemExistsKeepStage();
+
+        // The remaining part is to update the GUI tree view and visualization to show the newly added Markers
+        Vector<OpenSimObject> markersAdded = new Vector<OpenSimObject>(); // for GUI update
+        for (int i=0; i < markersToAdd.getSize(); i++){
+            markersAdded.add(model.getMarkerSet().get(markersToAdd.get(i).getName()));
+        }
+         new NewMarkerAction().addMarkers(markersAdded, true);
         if (errorsToReport){
             DialogDisplayer.getDefault().notify(
                     new NotifyDescriptor.Message("Following errors were encountered " + errorMessages));
