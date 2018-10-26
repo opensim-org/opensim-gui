@@ -197,6 +197,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
           String testName = cs.get(i).getRelativePathName(modelForMotion);
          if (newMotion.getStateIndex(cs.get(i).getName())!=-1 ||
                  newMotion.getStateIndex(testName+"/value")!= -1 ||
+                 // account for missing "/jointset" in state name specification
                  testName.length() > 9 && newMotion.getStateIndex(testName.substring(9)+"/value")!= -1) {
             numUsedColumns++;
             return true;
