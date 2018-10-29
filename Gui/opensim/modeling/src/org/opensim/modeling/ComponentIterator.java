@@ -85,6 +85,10 @@ public class ComponentIterator {
     return opensimCommonJNI.ComponentIterator_hasSystem(swigCPtr, this);
   }
 
+  public boolean isComponentInOwnershipTree(Component component) {
+    return opensimCommonJNI.ComponentIterator_isComponentInOwnershipTree(swigCPtr, this, Component.getCPtr(component), component);
+  }
+
   public String getAbsolutePathString() {
     return opensimCommonJNI.ComponentIterator_getAbsolutePathString(swigCPtr, this);
   }
@@ -93,8 +97,12 @@ public class ComponentIterator {
     return new SWIGTYPE_p_ComponentPath(opensimCommonJNI.ComponentIterator_getAbsolutePath(swigCPtr, this), true);
   }
 
-  public String getRelativePathName(Component wrt) {
-    return opensimCommonJNI.ComponentIterator_getRelativePathName(swigCPtr, this, Component.getCPtr(wrt), wrt);
+  public String getRelativePathString(Component wrt) {
+    return opensimCommonJNI.ComponentIterator_getRelativePathString(swigCPtr, this, Component.getCPtr(wrt), wrt);
+  }
+
+  public SWIGTYPE_p_ComponentPath getRelativePath(Component wrt) {
+    return new SWIGTYPE_p_ComponentPath(opensimCommonJNI.ComponentIterator_getRelativePath(swigCPtr, this, Component.getCPtr(wrt), wrt), true);
   }
 
   public boolean hasComponent(String pathname) {
@@ -227,6 +235,10 @@ public class ComponentIterator {
 
   public boolean hasOwner() {
     return opensimCommonJNI.ComponentIterator_hasOwner(swigCPtr, this);
+  }
+
+  public Component getRoot() {
+    return new Component(opensimCommonJNI.ComponentIterator_getRoot(swigCPtr, this), false);
   }
 
   public ComponentsList getComponentsList() {

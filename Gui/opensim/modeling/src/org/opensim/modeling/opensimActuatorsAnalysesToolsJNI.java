@@ -1843,7 +1843,7 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native void OpenSimContext_realizeVelocity(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_cacheModelAndState(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_restoreStateFromCachedModel(long jarg1, OpenSimContext jarg1_) throws java.io.IOException;
-  public final static native void OpenSimContext_setSocketConnecteeName(long jarg1, OpenSimContext jarg1_, long jarg2, AbstractSocket jarg2_, String jarg3) throws java.io.IOException;
+  public final static native void OpenSimContext_setSocketConnecteePath(long jarg1, OpenSimContext jarg1_, long jarg2, AbstractSocket jarg2_, String jarg3) throws java.io.IOException;
   public final static native void delete_OpenSimContext(long jarg1);
   public final static native long OpenSimJavaObject_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimJavaObject_assign(long jarg1, OpenSimJavaObject jarg1_, long jarg2, OpenSimObject jarg2_);

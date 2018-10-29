@@ -845,6 +845,10 @@ public class Millard2012EquilibriumMuscleIterator {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_hasSystem(swigCPtr, this);
   }
 
+  public boolean isComponentInOwnershipTree(Component component) {
+    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_isComponentInOwnershipTree(swigCPtr, this, Component.getCPtr(component), component);
+  }
+
   public String getAbsolutePathString() {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getAbsolutePathString(swigCPtr, this);
   }
@@ -853,8 +857,12 @@ public class Millard2012EquilibriumMuscleIterator {
     return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getAbsolutePath(swigCPtr, this), true);
   }
 
-  public String getRelativePathName(Component wrt) {
-    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getRelativePathName(swigCPtr, this, Component.getCPtr(wrt), wrt);
+  public String getRelativePathString(Component wrt) {
+    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getRelativePathString(swigCPtr, this, Component.getCPtr(wrt), wrt);
+  }
+
+  public SWIGTYPE_p_ComponentPath getRelativePath(Component wrt) {
+    return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getRelativePath(swigCPtr, this, Component.getCPtr(wrt), wrt), true);
   }
 
   public boolean hasComponent(String pathname) {
@@ -987,6 +995,10 @@ public class Millard2012EquilibriumMuscleIterator {
 
   public boolean hasOwner() {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_hasOwner(swigCPtr, this);
+  }
+
+  public Component getRoot() {
+    return new Component(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getRoot(swigCPtr, this), false);
   }
 
   public ComponentsList getComponentsList() {

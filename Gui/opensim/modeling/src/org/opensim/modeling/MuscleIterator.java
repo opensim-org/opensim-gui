@@ -633,6 +633,10 @@ public class MuscleIterator {
     return opensimSimulationJNI.MuscleIterator_hasSystem(swigCPtr, this);
   }
 
+  public boolean isComponentInOwnershipTree(Component component) {
+    return opensimSimulationJNI.MuscleIterator_isComponentInOwnershipTree(swigCPtr, this, Component.getCPtr(component), component);
+  }
+
   public String getAbsolutePathString() {
     return opensimSimulationJNI.MuscleIterator_getAbsolutePathString(swigCPtr, this);
   }
@@ -641,8 +645,12 @@ public class MuscleIterator {
     return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.MuscleIterator_getAbsolutePath(swigCPtr, this), true);
   }
 
-  public String getRelativePathName(Component wrt) {
-    return opensimSimulationJNI.MuscleIterator_getRelativePathName(swigCPtr, this, Component.getCPtr(wrt), wrt);
+  public String getRelativePathString(Component wrt) {
+    return opensimSimulationJNI.MuscleIterator_getRelativePathString(swigCPtr, this, Component.getCPtr(wrt), wrt);
+  }
+
+  public SWIGTYPE_p_ComponentPath getRelativePath(Component wrt) {
+    return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.MuscleIterator_getRelativePath(swigCPtr, this, Component.getCPtr(wrt), wrt), true);
   }
 
   public boolean hasComponent(String pathname) {
@@ -775,6 +783,10 @@ public class MuscleIterator {
 
   public boolean hasOwner() {
     return opensimSimulationJNI.MuscleIterator_hasOwner(swigCPtr, this);
+  }
+
+  public Component getRoot() {
+    return new Component(opensimSimulationJNI.MuscleIterator_getRoot(swigCPtr, this), false);
   }
 
   public ComponentsList getComponentsList() {

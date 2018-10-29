@@ -153,6 +153,10 @@ public class ActuatorIterator {
     return opensimSimulationJNI.ActuatorIterator_hasSystem(swigCPtr, this);
   }
 
+  public boolean isComponentInOwnershipTree(Component component) {
+    return opensimSimulationJNI.ActuatorIterator_isComponentInOwnershipTree(swigCPtr, this, Component.getCPtr(component), component);
+  }
+
   public String getAbsolutePathString() {
     return opensimSimulationJNI.ActuatorIterator_getAbsolutePathString(swigCPtr, this);
   }
@@ -161,8 +165,12 @@ public class ActuatorIterator {
     return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.ActuatorIterator_getAbsolutePath(swigCPtr, this), true);
   }
 
-  public String getRelativePathName(Component wrt) {
-    return opensimSimulationJNI.ActuatorIterator_getRelativePathName(swigCPtr, this, Component.getCPtr(wrt), wrt);
+  public String getRelativePathString(Component wrt) {
+    return opensimSimulationJNI.ActuatorIterator_getRelativePathString(swigCPtr, this, Component.getCPtr(wrt), wrt);
+  }
+
+  public SWIGTYPE_p_ComponentPath getRelativePath(Component wrt) {
+    return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.ActuatorIterator_getRelativePath(swigCPtr, this, Component.getCPtr(wrt), wrt), true);
   }
 
   public boolean hasComponent(String pathname) {
@@ -295,6 +303,10 @@ public class ActuatorIterator {
 
   public boolean hasOwner() {
     return opensimSimulationJNI.ActuatorIterator_hasOwner(swigCPtr, this);
+  }
+
+  public Component getRoot() {
+    return new Component(opensimSimulationJNI.ActuatorIterator_getRoot(swigCPtr, this), false);
   }
 
   public ComponentsList getComponentsList() {

@@ -72,32 +72,36 @@ public class AbstractSocket {
     opensimCommonJNI.AbstractSocket_connect(swigCPtr, this, OpenSimObject.getCPtr(connectee), connectee);
   }
 
-  public void findAndConnect(Component root) {
-    opensimCommonJNI.AbstractSocket_findAndConnect(swigCPtr, this, Component.getCPtr(root), root);
+  public void finalizeConnection(Component root) {
+    opensimCommonJNI.AbstractSocket_finalizeConnection(swigCPtr, this, Component.getCPtr(root), root);
   }
 
   public void disconnect() {
     opensimCommonJNI.AbstractSocket_disconnect(swigCPtr, this);
   }
 
-  public void setConnecteeName(String name) {
-    opensimCommonJNI.AbstractSocket_setConnecteeName__SWIG_0(swigCPtr, this, name);
+  public void setConnecteePath(String name) {
+    opensimCommonJNI.AbstractSocket_setConnecteePath__SWIG_0(swigCPtr, this, name);
   }
 
-  public void setConnecteeName(String name, long ix) {
-    opensimCommonJNI.AbstractSocket_setConnecteeName__SWIG_1(swigCPtr, this, name, ix);
+  public void setConnecteePath(String name, long ix) {
+    opensimCommonJNI.AbstractSocket_setConnecteePath__SWIG_1(swigCPtr, this, name, ix);
   }
 
-  public String getConnecteeName() {
-    return opensimCommonJNI.AbstractSocket_getConnecteeName__SWIG_0(swigCPtr, this);
+  public String getConnecteePath() {
+    return opensimCommonJNI.AbstractSocket_getConnecteePath__SWIG_0(swigCPtr, this);
   }
 
-  public String getConnecteeName(long ix) {
-    return opensimCommonJNI.AbstractSocket_getConnecteeName__SWIG_1(swigCPtr, this, ix);
+  public String getConnecteePath(long ix) {
+    return opensimCommonJNI.AbstractSocket_getConnecteePath__SWIG_1(swigCPtr, this, ix);
   }
 
-  public void appendConnecteeName(String name) {
-    opensimCommonJNI.AbstractSocket_appendConnecteeName(swigCPtr, this, name);
+  public void appendConnecteePath(String name) {
+    opensimCommonJNI.AbstractSocket_appendConnecteePath(swigCPtr, this, name);
+  }
+
+  public void clearConnecteePath() {
+    opensimCommonJNI.AbstractSocket_clearConnecteePath(swigCPtr, this);
   }
 
   public Component getOwner() {

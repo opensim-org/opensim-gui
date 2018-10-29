@@ -793,6 +793,10 @@ public class Thelen2003MuscleIterator {
     return opensimSimulationJNI.Thelen2003MuscleIterator_hasSystem(swigCPtr, this);
   }
 
+  public boolean isComponentInOwnershipTree(Component component) {
+    return opensimSimulationJNI.Thelen2003MuscleIterator_isComponentInOwnershipTree(swigCPtr, this, Component.getCPtr(component), component);
+  }
+
   public String getAbsolutePathString() {
     return opensimSimulationJNI.Thelen2003MuscleIterator_getAbsolutePathString(swigCPtr, this);
   }
@@ -801,8 +805,12 @@ public class Thelen2003MuscleIterator {
     return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.Thelen2003MuscleIterator_getAbsolutePath(swigCPtr, this), true);
   }
 
-  public String getRelativePathName(Component wrt) {
-    return opensimSimulationJNI.Thelen2003MuscleIterator_getRelativePathName(swigCPtr, this, Component.getCPtr(wrt), wrt);
+  public String getRelativePathString(Component wrt) {
+    return opensimSimulationJNI.Thelen2003MuscleIterator_getRelativePathString(swigCPtr, this, Component.getCPtr(wrt), wrt);
+  }
+
+  public SWIGTYPE_p_ComponentPath getRelativePath(Component wrt) {
+    return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.Thelen2003MuscleIterator_getRelativePath(swigCPtr, this, Component.getCPtr(wrt), wrt), true);
   }
 
   public boolean hasComponent(String pathname) {
@@ -935,6 +943,10 @@ public class Thelen2003MuscleIterator {
 
   public boolean hasOwner() {
     return opensimSimulationJNI.Thelen2003MuscleIterator_hasOwner(swigCPtr, this);
+  }
+
+  public Component getRoot() {
+    return new Component(opensimSimulationJNI.Thelen2003MuscleIterator_getRoot(swigCPtr, this), false);
   }
 
   public ComponentsList getComponentsList() {
