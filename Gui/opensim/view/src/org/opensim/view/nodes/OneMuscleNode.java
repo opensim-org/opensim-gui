@@ -56,7 +56,7 @@ public class OneMuscleNode extends OneActuatorNode {
     /** Creates a new instance of OneMuscleNode */
     public OneMuscleNode(Muscle actuator) {
         super(actuator);
-        setShortDescription(bundle.getString("HINT_MuscleNode"));
+        setShortDescription(actuator.getAbsolutePathString());
     }
     public Image getIcon(int i) {
         URL imageURL;
