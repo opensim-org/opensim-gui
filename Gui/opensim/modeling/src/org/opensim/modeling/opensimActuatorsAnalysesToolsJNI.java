@@ -1384,8 +1384,7 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native double DynamicsTool_getEndTime(long jarg1, DynamicsTool jarg1_);
   public final static native void DynamicsTool_setModel(long jarg1, DynamicsTool jarg1_, long jarg2, Model jarg2_);
   public final static native void DynamicsTool_setExcludedForces(long jarg1, DynamicsTool jarg1_, long jarg2, ArrayStr jarg2_);
-  public final static native boolean DynamicsTool_createExternalLoads__SWIG_0(long jarg1, DynamicsTool jarg1_, String jarg2, long jarg3, Model jarg3_, long jarg4, Storage jarg4_);
-  public final static native boolean DynamicsTool_createExternalLoads__SWIG_1(long jarg1, DynamicsTool jarg1_, String jarg2, long jarg3, Model jarg3_);
+  public final static native boolean DynamicsTool_createExternalLoads(long jarg1, DynamicsTool jarg1_, String jarg2, long jarg3, Model jarg3_);
   public final static native boolean DynamicsTool_modelHasExternalLoads(long jarg1, DynamicsTool jarg1_);
   public final static native void DynamicsTool_removeExternalLoadsFromModel(long jarg1, DynamicsTool jarg1_);
   public final static native boolean DynamicsTool_run(long jarg1, DynamicsTool jarg1_) throws java.io.IOException;

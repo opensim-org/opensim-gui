@@ -3271,8 +3271,7 @@ public class opensimSimulationJNI {
   public final static native void AbstractTool_printResults__SWIG_1(long jarg1, AbstractTool jarg1_, String jarg2, String jarg3, double jarg4);
   public final static native void AbstractTool_printResults__SWIG_2(long jarg1, AbstractTool jarg1_, String jarg2, String jarg3);
   public final static native void AbstractTool_printResults__SWIG_3(long jarg1, AbstractTool jarg1_, String jarg2);
-  public final static native boolean AbstractTool_createExternalLoads__SWIG_0(long jarg1, AbstractTool jarg1_, String jarg2, long jarg3, Model jarg3_, long jarg4, Storage jarg4_);
-  public final static native boolean AbstractTool_createExternalLoads__SWIG_1(long jarg1, AbstractTool jarg1_, String jarg2, long jarg3, Model jarg3_);
+  public final static native boolean AbstractTool_createExternalLoads(long jarg1, AbstractTool jarg1_, String jarg2, long jarg3, Model jarg3_);
   public final static native void AbstractTool_removeExternalLoadsFromModel(long jarg1, AbstractTool jarg1_);
   public final static native void AbstractTool_updateFromXMLNode(long jarg1, AbstractTool jarg1_, long jarg2, int jarg3);
   public final static native void AbstractTool_loadQStorage(long jarg1, AbstractTool jarg1_, String jarg2, long jarg3, Storage jarg3_);

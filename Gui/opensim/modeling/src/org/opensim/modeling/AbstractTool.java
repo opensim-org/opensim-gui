@@ -273,12 +273,8 @@ public class AbstractTool extends OpenSimObject {
     opensimSimulationJNI.AbstractTool_printResults__SWIG_3(swigCPtr, this, aBaseName);
   }
 
-  public boolean createExternalLoads(String aExternalLoadsFileName, Model aModel, Storage loadKinematics) {
-    return opensimSimulationJNI.AbstractTool_createExternalLoads__SWIG_0(swigCPtr, this, aExternalLoadsFileName, Model.getCPtr(aModel), aModel, Storage.getCPtr(loadKinematics), loadKinematics);
-  }
-
-  public boolean createExternalLoads(String aExternalLoadsFileName, Model aModel) {
-    return opensimSimulationJNI.AbstractTool_createExternalLoads__SWIG_1(swigCPtr, this, aExternalLoadsFileName, Model.getCPtr(aModel), aModel);
+  public boolean createExternalLoads(String externalLoadsFileName, Model model) {
+    return opensimSimulationJNI.AbstractTool_createExternalLoads(swigCPtr, this, externalLoadsFileName, Model.getCPtr(model), model);
   }
 
   public void removeExternalLoadsFromModel() {
