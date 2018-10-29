@@ -69,7 +69,7 @@ public class JettyMain {
     public static void startServer() {
         try {
             if (!serverup){
-                getSERVER_PORT(); // set port based on command line if any
+                
                 // TODO code application logic here
                 Server server = new Server(SERVER_PORT);
 
