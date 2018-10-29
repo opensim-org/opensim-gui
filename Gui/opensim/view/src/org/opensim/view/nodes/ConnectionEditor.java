@@ -81,23 +81,23 @@ public class ConnectionEditor {
     }
 
     // String Properties
-    public String getConnectedToName() {
-        return connector.getConnecteeName();
+    public String getConnectedToPath() {
+        return connector.getConnecteePath();
     }
 
-    public void setConnectedToName(String v) {
-        setConnectedToNameAndPropagateChange(v, true);
+    public void setConnectedToPath(String v) {
+        setConnectedToPathAndPropagateChange(v, true);
     }
 
-    private void setConnectedToNameAndPropagateChange(String v, boolean supportUndo) {
-        String oldValue = getConnectedToName();
+    private void setConnectedToPathAndPropagateChange(String v, boolean supportUndo) {
+        String oldValue = getConnectedToPath();
         handleConnectionChange(oldValue, v, supportUndo);
     }
 
     private void handleConnectionChange(final String oldValue, final String v, boolean supportUndo) {
 
         try {
-            context.setSocketConnecteeName(connector, v);
+            context.setSocketConnecteePath(connector, v);
          } catch (IOException iae) {
                  new JOptionPane(iae.getMessage(), 
                      JOptionPane.ERROR_MESSAGE).createDialog(null, "Error").setVisible(true);
@@ -112,7 +112,7 @@ public class ConnectionEditor {
                 @Override
                 public void undo() throws CannotUndoException {
                     super.undo();
-                    setConnectedToNameAndPropagateChange(oldValue, false);
+                    setConnectedToPathAndPropagateChange(oldValue, false);
                 }
 
                 @Override
@@ -123,7 +123,7 @@ public class ConnectionEditor {
                 @Override
                 public void redo() throws CannotRedoException {
                     super.redo();
-                    setConnectedToNameAndPropagateChange(v, true);
+                    setConnectedToPathAndPropagateChange(v, true);
                 }
                  @Override
                 public String getRedoPresentationName() {

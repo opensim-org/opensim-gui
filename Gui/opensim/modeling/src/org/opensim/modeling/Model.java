@@ -783,6 +783,14 @@ public class Model extends ModelComponent {
     this(opensimSimulationJNI.new_Model__SWIG_1(filename), true);
   }
 
+  public void finalizeConnections() {
+    opensimSimulationJNI.Model_finalizeConnections__SWIG_0(swigCPtr, this);
+  }
+
+  public void finalizeConnections(Component root) {
+    opensimSimulationJNI.Model_finalizeConnections__SWIG_1_0(swigCPtr, this, Component.getCPtr(root), root);
+  }
+
   public void setup() throws java.io.IOException {
     opensimSimulationJNI.Model_setup(swigCPtr, this);
   }

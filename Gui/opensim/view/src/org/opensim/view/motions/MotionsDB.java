@@ -195,7 +195,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       int numUsedColumns = 0;    // Keep track of how many columns correspond to Coords or Markers
       for(int i=0; i<numCoordinates; i++){
          if (newMotion.getStateIndex(cs.get(i).getName())!=-1 ||
-                 newMotion.getStateIndex(cs.get(i).getRelativePathName(modelForMotion)+"/value")!= -1){
+                 newMotion.getStateIndex(cs.get(i).getStateVariableNames().get(0))!= -1){
             numUsedColumns++;
             return true;
          }

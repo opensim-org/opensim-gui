@@ -353,8 +353,8 @@ public class OpenSimContext extends OpenSimObject {
     opensimActuatorsAnalysesToolsJNI.OpenSimContext_restoreStateFromCachedModel(swigCPtr, this);
   }
 
-  public void setSocketConnecteeName(AbstractSocket socket, String newValue) throws java.io.IOException {
-    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setSocketConnecteeName(swigCPtr, this, AbstractSocket.getCPtr(socket), socket, newValue);
+  public void setSocketConnecteePath(AbstractSocket socket, String newValue) throws java.io.IOException {
+    opensimActuatorsAnalysesToolsJNI.OpenSimContext_setSocketConnecteePath(swigCPtr, this, AbstractSocket.getCPtr(socket), socket, newValue);
   }
 
 }

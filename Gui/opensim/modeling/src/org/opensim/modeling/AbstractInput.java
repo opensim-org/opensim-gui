@@ -84,12 +84,12 @@ public class AbstractInput extends AbstractSocket {
     return opensimCommonJNI.AbstractInput_getLabel__SWIG_1(swigCPtr, this, index);
   }
 
-  public static boolean parseConnecteeName(String connecteeName, SWIGTYPE_p_std__string componentPath, SWIGTYPE_p_std__string outputName, SWIGTYPE_p_std__string channelName, SWIGTYPE_p_std__string alias) {
-    return opensimCommonJNI.AbstractInput_parseConnecteeName(connecteeName, SWIGTYPE_p_std__string.getCPtr(componentPath), SWIGTYPE_p_std__string.getCPtr(outputName), SWIGTYPE_p_std__string.getCPtr(channelName), SWIGTYPE_p_std__string.getCPtr(alias));
+  public static boolean parseConnecteePath(String connecteePath, SWIGTYPE_p_std__string componentPath, SWIGTYPE_p_std__string outputName, SWIGTYPE_p_std__string channelName, SWIGTYPE_p_std__string alias) {
+    return opensimCommonJNI.AbstractInput_parseConnecteePath(connecteePath, SWIGTYPE_p_std__string.getCPtr(componentPath), SWIGTYPE_p_std__string.getCPtr(outputName), SWIGTYPE_p_std__string.getCPtr(channelName), SWIGTYPE_p_std__string.getCPtr(alias));
   }
 
-  public static String composeConnecteeName(String componentPath, String outputName, String channelName, String alias) {
-    return opensimCommonJNI.AbstractInput_composeConnecteeName(componentPath, outputName, channelName, alias);
+  public static String composeConnecteePath(String componentPath, String outputName, String channelName, String alias) {
+    return opensimCommonJNI.AbstractInput_composeConnecteePath(componentPath, outputName, channelName, alias);
   }
 
 }

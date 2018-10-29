@@ -109,12 +109,16 @@ public class DynamicsTool extends Tool {
     opensimActuatorsAnalysesToolsJNI.DynamicsTool_setExcludedForces(swigCPtr, this, ArrayStr.getCPtr(aExcluded), aExcluded);
   }
 
-  public boolean createExternalLoads(String aExternalLoadsFileName, Model aModel, Storage loadKinematics) {
-    return opensimActuatorsAnalysesToolsJNI.DynamicsTool_createExternalLoads__SWIG_0(swigCPtr, this, aExternalLoadsFileName, Model.getCPtr(aModel), aModel, Storage.getCPtr(loadKinematics), loadKinematics);
+  public boolean createExternalLoads(String externalLoadsFileName, Model model) {
+    return opensimActuatorsAnalysesToolsJNI.DynamicsTool_createExternalLoads(swigCPtr, this, externalLoadsFileName, Model.getCPtr(model), model);
   }
 
-  public boolean createExternalLoads(String aExternalLoadsFileName, Model aModel) {
-    return opensimActuatorsAnalysesToolsJNI.DynamicsTool_createExternalLoads__SWIG_1(swigCPtr, this, aExternalLoadsFileName, Model.getCPtr(aModel), aModel);
+  public boolean modelHasExternalLoads() {
+    return opensimActuatorsAnalysesToolsJNI.DynamicsTool_modelHasExternalLoads(swigCPtr, this);
+  }
+
+  public void removeExternalLoadsFromModel() {
+    opensimActuatorsAnalysesToolsJNI.DynamicsTool_removeExternalLoadsFromModel(swigCPtr, this);
   }
 
   public boolean run() throws java.io.IOException {

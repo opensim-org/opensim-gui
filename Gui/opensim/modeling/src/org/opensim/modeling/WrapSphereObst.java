@@ -57,16 +57,80 @@ public class WrapSphereObst extends WrapObject {
     return opensimSimulationJNI.WrapSphereObst_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_radius(WrapSphereObst source) {
+    opensimSimulationJNI.WrapSphereObst_copyProperty_radius(swigCPtr, this, WrapSphereObst.getCPtr(source), source);
+  }
+
+  public double get_radius(int i) {
+    return opensimSimulationJNI.WrapSphereObst_get_radius__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_radius(int i) {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapSphereObst_upd_radius__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_radius(int i, double value) {
+    opensimSimulationJNI.WrapSphereObst_set_radius__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_radius(double value) {
+    return opensimSimulationJNI.WrapSphereObst_append_radius(swigCPtr, this, value);
+  }
+
+  public void constructProperty_radius(double initValue) {
+    opensimSimulationJNI.WrapSphereObst_constructProperty_radius(swigCPtr, this, initValue);
+  }
+
+  public double get_radius() {
+    return opensimSimulationJNI.WrapSphereObst_get_radius__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_radius() {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapSphereObst_upd_radius__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_radius(double value) {
+    opensimSimulationJNI.WrapSphereObst_set_radius__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_length(WrapSphereObst source) {
+    opensimSimulationJNI.WrapSphereObst_copyProperty_length(swigCPtr, this, WrapSphereObst.getCPtr(source), source);
+  }
+
+  public double get_length(int i) {
+    return opensimSimulationJNI.WrapSphereObst_get_length__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_length(int i) {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapSphereObst_upd_length__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_length(int i, double value) {
+    opensimSimulationJNI.WrapSphereObst_set_length__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_length(double value) {
+    return opensimSimulationJNI.WrapSphereObst_append_length(swigCPtr, this, value);
+  }
+
+  public void constructProperty_length(double initValue) {
+    opensimSimulationJNI.WrapSphereObst_constructProperty_length(swigCPtr, this, initValue);
+  }
+
+  public double get_length() {
+    return opensimSimulationJNI.WrapSphereObst_get_length__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_length() {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapSphereObst_upd_length__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_length(double value) {
+    opensimSimulationJNI.WrapSphereObst_set_length__SWIG_1(swigCPtr, this, value);
+  }
+
   public WrapSphereObst() {
-    this(opensimSimulationJNI.new_WrapSphereObst__SWIG_0(), true);
-  }
-
-  public WrapSphereObst(WrapSphereObst aWrapSphereObst) {
-    this(opensimSimulationJNI.new_WrapSphereObst__SWIG_1(WrapSphereObst.getCPtr(aWrapSphereObst), aWrapSphereObst), true);
-  }
-
-  public void copyData(WrapSphereObst aWrapSphereObst) {
-    opensimSimulationJNI.WrapSphereObst_copyData(swigCPtr, this, WrapSphereObst.getCPtr(aWrapSphereObst), aWrapSphereObst);
+    this(opensimSimulationJNI.new_WrapSphereObst(), true);
   }
 
   public double getRadius() {
@@ -91,10 +155,6 @@ public class WrapSphereObst extends WrapObject {
 
   public String getDimensionsString() {
     return opensimSimulationJNI.WrapSphereObst_getDimensionsString(swigCPtr, this);
-  }
-
-  public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
-    opensimSimulationJNI.WrapSphereObst_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
 }
