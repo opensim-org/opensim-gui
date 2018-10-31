@@ -159,7 +159,7 @@ public class OneMarkerNode extends OneComponentNode{
     }
     public String getConnectedToFrame() {
         Marker obj = Marker.safeDownCast(getOpenSimObject());
-        return obj.getParentFrame().getName();
+        return obj.getParentFrame().getAbsolutePathString();
     }
     public void setConnectedToFrame(String newParentFrame) {
         Marker obj = Marker.safeDownCast(getOpenSimObject());
@@ -199,6 +199,7 @@ public class OneMarkerNode extends OneComponentNode{
        ExplorerTopComponent.addUndoableEdit(auEdit);
 
         obj.changeFramePreserveLocation(context.getCurrentStateRef(), PhysicalFrame.safeDownCast(comp));
+        obj.getSocket("parent_frame").finalizeConnection(obj.getRoot());
         //System.out.println(obj.dump());
         ViewDB.getInstance().updateComponentVisuals(model, obj, true);
         // Mark model dirty

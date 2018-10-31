@@ -43,6 +43,10 @@ public class FrameIterator {
     return new Frame(opensimSimulationJNI.FrameIterator___ref__(swigCPtr, this), false);
   }
 
+  public Frame deref() {
+    return new Frame(opensimSimulationJNI.FrameIterator_deref(swigCPtr, this), false);
+  }
+
   public Frame __deref__() {
     long cPtr = opensimSimulationJNI.FrameIterator___deref__(swigCPtr, this);
     return (cPtr == 0) ? null : new Frame(cPtr, false);
@@ -201,6 +205,10 @@ public class FrameIterator {
     return opensimSimulationJNI.FrameIterator_hasSystem(swigCPtr, this);
   }
 
+  public boolean isComponentInOwnershipTree(Component component) {
+    return opensimSimulationJNI.FrameIterator_isComponentInOwnershipTree(swigCPtr, this, Component.getCPtr(component), component);
+  }
+
   public String getAbsolutePathString() {
     return opensimSimulationJNI.FrameIterator_getAbsolutePathString(swigCPtr, this);
   }
@@ -209,8 +217,12 @@ public class FrameIterator {
     return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.FrameIterator_getAbsolutePath(swigCPtr, this), true);
   }
 
-  public String getRelativePathName(Component wrt) {
-    return opensimSimulationJNI.FrameIterator_getRelativePathName(swigCPtr, this, Component.getCPtr(wrt), wrt);
+  public String getRelativePathString(Component wrt) {
+    return opensimSimulationJNI.FrameIterator_getRelativePathString(swigCPtr, this, Component.getCPtr(wrt), wrt);
+  }
+
+  public SWIGTYPE_p_ComponentPath getRelativePath(Component wrt) {
+    return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.FrameIterator_getRelativePath(swigCPtr, this, Component.getCPtr(wrt), wrt), true);
   }
 
   public boolean hasComponent(String pathname) {
@@ -343,6 +355,10 @@ public class FrameIterator {
 
   public boolean hasOwner() {
     return opensimSimulationJNI.FrameIterator_hasOwner(swigCPtr, this);
+  }
+
+  public Component getRoot() {
+    return new Component(opensimSimulationJNI.FrameIterator_getRoot(swigCPtr, this), false);
   }
 
   public ComponentsList getComponentsList() {

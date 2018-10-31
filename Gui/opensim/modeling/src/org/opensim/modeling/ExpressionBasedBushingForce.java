@@ -469,16 +469,28 @@ public class ExpressionBasedBushingForce extends TwoFrameLinkerForce {
     this(opensimSimulationJNI.new_ExpressionBasedBushingForce__SWIG_0(), true);
   }
 
+  public ExpressionBasedBushingForce(String name, PhysicalFrame frame1, PhysicalFrame frame2) {
+    this(opensimSimulationJNI.new_ExpressionBasedBushingForce__SWIG_1(name, PhysicalFrame.getCPtr(frame1), frame1, PhysicalFrame.getCPtr(frame2), frame2), true);
+  }
+
   public ExpressionBasedBushingForce(String name, String frame1Name, String frame2Name) {
-    this(opensimSimulationJNI.new_ExpressionBasedBushingForce__SWIG_1(name, frame1Name, frame2Name), true);
+    this(opensimSimulationJNI.new_ExpressionBasedBushingForce__SWIG_2(name, frame1Name, frame2Name), true);
+  }
+
+  public ExpressionBasedBushingForce(String name, PhysicalFrame frame1, Vec3 point1, Vec3 orientation1, PhysicalFrame frame2, Vec3 point2, Vec3 orientation2) {
+    this(opensimSimulationJNI.new_ExpressionBasedBushingForce__SWIG_3(name, PhysicalFrame.getCPtr(frame1), frame1, Vec3.getCPtr(point1), point1, Vec3.getCPtr(orientation1), orientation1, PhysicalFrame.getCPtr(frame2), frame2, Vec3.getCPtr(point2), point2, Vec3.getCPtr(orientation2), orientation2), true);
   }
 
   public ExpressionBasedBushingForce(String name, String frame1Name, Vec3 point1, Vec3 orientation1, String frame2Name, Vec3 point2, Vec3 orientation2) {
-    this(opensimSimulationJNI.new_ExpressionBasedBushingForce__SWIG_2(name, frame1Name, Vec3.getCPtr(point1), point1, Vec3.getCPtr(orientation1), orientation1, frame2Name, Vec3.getCPtr(point2), point2, Vec3.getCPtr(orientation2), orientation2), true);
+    this(opensimSimulationJNI.new_ExpressionBasedBushingForce__SWIG_4(name, frame1Name, Vec3.getCPtr(point1), point1, Vec3.getCPtr(orientation1), orientation1, frame2Name, Vec3.getCPtr(point2), point2, Vec3.getCPtr(orientation2), orientation2), true);
+  }
+
+  public ExpressionBasedBushingForce(String name, PhysicalFrame frame1, Vec3 point1, Vec3 orientation1, PhysicalFrame frame2, Vec3 point2, Vec3 orientation2, Vec3 transStiffness, Vec3 rotStiffness, Vec3 transDamping, Vec3 rotDamping) {
+    this(opensimSimulationJNI.new_ExpressionBasedBushingForce__SWIG_5(name, PhysicalFrame.getCPtr(frame1), frame1, Vec3.getCPtr(point1), point1, Vec3.getCPtr(orientation1), orientation1, PhysicalFrame.getCPtr(frame2), frame2, Vec3.getCPtr(point2), point2, Vec3.getCPtr(orientation2), orientation2, Vec3.getCPtr(transStiffness), transStiffness, Vec3.getCPtr(rotStiffness), rotStiffness, Vec3.getCPtr(transDamping), transDamping, Vec3.getCPtr(rotDamping), rotDamping), true);
   }
 
   public ExpressionBasedBushingForce(String name, String frame1Name, Vec3 point1, Vec3 orientation1, String frame2Name, Vec3 point2, Vec3 orientation2, Vec3 transStiffness, Vec3 rotStiffness, Vec3 transDamping, Vec3 rotDamping) {
-    this(opensimSimulationJNI.new_ExpressionBasedBushingForce__SWIG_3(name, frame1Name, Vec3.getCPtr(point1), point1, Vec3.getCPtr(orientation1), orientation1, frame2Name, Vec3.getCPtr(point2), point2, Vec3.getCPtr(orientation2), orientation2, Vec3.getCPtr(transStiffness), transStiffness, Vec3.getCPtr(rotStiffness), rotStiffness, Vec3.getCPtr(transDamping), transDamping, Vec3.getCPtr(rotDamping), rotDamping), true);
+    this(opensimSimulationJNI.new_ExpressionBasedBushingForce__SWIG_6(name, frame1Name, Vec3.getCPtr(point1), point1, Vec3.getCPtr(orientation1), orientation1, frame2Name, Vec3.getCPtr(point2), point2, Vec3.getCPtr(orientation2), orientation2, Vec3.getCPtr(transStiffness), transStiffness, Vec3.getCPtr(rotStiffness), rotStiffness, Vec3.getCPtr(transDamping), transDamping, Vec3.getCPtr(rotDamping), rotDamping), true);
   }
 
   public void setMomentVisualScale(double scale) {

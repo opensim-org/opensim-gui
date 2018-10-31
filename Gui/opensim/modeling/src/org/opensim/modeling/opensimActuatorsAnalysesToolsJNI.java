@@ -1384,8 +1384,9 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native double DynamicsTool_getEndTime(long jarg1, DynamicsTool jarg1_);
   public final static native void DynamicsTool_setModel(long jarg1, DynamicsTool jarg1_, long jarg2, Model jarg2_);
   public final static native void DynamicsTool_setExcludedForces(long jarg1, DynamicsTool jarg1_, long jarg2, ArrayStr jarg2_);
-  public final static native boolean DynamicsTool_createExternalLoads__SWIG_0(long jarg1, DynamicsTool jarg1_, String jarg2, long jarg3, Model jarg3_, long jarg4, Storage jarg4_);
-  public final static native boolean DynamicsTool_createExternalLoads__SWIG_1(long jarg1, DynamicsTool jarg1_, String jarg2, long jarg3, Model jarg3_);
+  public final static native boolean DynamicsTool_createExternalLoads(long jarg1, DynamicsTool jarg1_, String jarg2, long jarg3, Model jarg3_);
+  public final static native boolean DynamicsTool_modelHasExternalLoads(long jarg1, DynamicsTool jarg1_);
+  public final static native void DynamicsTool_removeExternalLoadsFromModel(long jarg1, DynamicsTool jarg1_);
   public final static native boolean DynamicsTool_run(long jarg1, DynamicsTool jarg1_) throws java.io.IOException;
   public final static native long InverseDynamicsTool_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void InverseDynamicsTool_assign(long jarg1, InverseDynamicsTool jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -1841,7 +1842,7 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native void OpenSimContext_realizeVelocity(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_cacheModelAndState(long jarg1, OpenSimContext jarg1_);
   public final static native void OpenSimContext_restoreStateFromCachedModel(long jarg1, OpenSimContext jarg1_) throws java.io.IOException;
-  public final static native void OpenSimContext_setSocketConnecteeName(long jarg1, OpenSimContext jarg1_, long jarg2, AbstractSocket jarg2_, String jarg3) throws java.io.IOException;
+  public final static native void OpenSimContext_setSocketConnecteePath(long jarg1, OpenSimContext jarg1_, long jarg2, AbstractSocket jarg2_, String jarg3) throws java.io.IOException;
   public final static native void delete_OpenSimContext(long jarg1);
   public final static native long OpenSimJavaObject_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimJavaObject_assign(long jarg1, OpenSimJavaObject jarg1_, long jarg2, OpenSimObject jarg2_);

@@ -1890,7 +1890,7 @@ public class JPlotterPanel extends javax.swing.JPanel
       // Coordinate name now changed to full path in states file for 4.0
       if (builtinMuscleCurve && currentModel.getCoordinateSet().contains(domainName)){
           Coordinate coord = currentModel.getCoordinateSet().get(domainName);
-          return (coord.getRelativePathName(currentModel)+"/value");
+          return (coord.getStateVariableNames().get(0));
       }
       return domainName;
    }

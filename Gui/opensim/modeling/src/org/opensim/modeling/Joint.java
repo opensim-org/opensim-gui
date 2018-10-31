@@ -177,6 +177,10 @@ public class Joint extends ModelComponent {
     return opensimSimulationJNI.Joint_isCoordinateUsed(swigCPtr, this, Coordinate.getCPtr(aCoordinate), aCoordinate);
   }
 
+  public void addFrame(PhysicalOffsetFrame frame) {
+    opensimSimulationJNI.Joint_addFrame(swigCPtr, this, PhysicalOffsetFrame.getCPtr(frame), frame);
+  }
+
   public SpatialVec calcEquivalentSpatialForce(State state, Vector mobilityForces) {
     return new SpatialVec(opensimSimulationJNI.Joint_calcEquivalentSpatialForce(swigCPtr, this, State.getCPtr(state), state, Vector.getCPtr(mobilityForces), mobilityForces), true);
   }

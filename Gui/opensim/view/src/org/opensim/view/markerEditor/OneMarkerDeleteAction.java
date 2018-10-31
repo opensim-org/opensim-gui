@@ -135,14 +135,12 @@ public final class OneMarkerDeleteAction extends CallableSystemAction {
         // Use Editing call sequence since removing a marker requires 
         // recreation of tree traversal/initialization
         OpenSimContext context = OpenSimDB.getInstance().getContext(model);
-        context.cacheModelAndState();
+        //context.cacheModelAndState();
         for (int i=0; i<markers.size(); i++)
             markerset.remove(Marker.safeDownCast(markers.get(i)));
-        try {
-            context.restoreStateFromCachedModel();
-        } catch (IOException ex) {
-            ErrorDialog.displayExceptionDialog(ex);
-        }
+        // invoke initSystem on the modified model so that traversal is updated and markers are 
+        // removed from component tree
+        context.recreateSystemAfterSystemExistsKeepStage();
         // Update the marker name list in the ViewDB.
         OpenSimDB.getInstance().getModelGuiElements(model).updateMarkerNames();
         SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(model);

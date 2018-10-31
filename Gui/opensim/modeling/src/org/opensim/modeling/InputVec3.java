@@ -56,8 +56,8 @@ public class InputVec3 extends AbstractInput {
     opensimCommonJNI.InputVec3_connect__SWIG_3(swigCPtr, this, AbstractChannel.getCPtr(channel), channel);
   }
 
-  public void findAndConnect(Component root) {
-    opensimCommonJNI.InputVec3_findAndConnect(swigCPtr, this, Component.getCPtr(root), root);
+  public void finalizeConnection(Component root) {
+    opensimCommonJNI.InputVec3_finalizeConnection(swigCPtr, this, Component.getCPtr(root), root);
   }
 
   public void disconnect() {

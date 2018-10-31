@@ -44,7 +44,7 @@
         <echoproperties/>
     </target>
     <target name="copy-java-bindings" description="Copy results of builing opensim-core with Java Bindings to gui">
-        <copy todir="modeling/src/org/opensim/modeling"> <!--overwrite="true"-->
+        <copy todir="modeling/src/org/opensim/modeling" overwrite="true">
             <fileset dir="${apiJava.dir}/opensim/modeling" />
         </copy>
     </target>
