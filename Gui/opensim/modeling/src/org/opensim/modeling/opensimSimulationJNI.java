@@ -3225,8 +3225,12 @@ public class opensimSimulationJNI {
   public final static native String AbstractTool_getNextAvailableForceName__SWIG_1(long jarg1, AbstractTool jarg1_);
   public final static native long AbstractTool_getExternalLoads(long jarg1, AbstractTool jarg1_);
   public final static native long AbstractTool_updExternalLoads(long jarg1, AbstractTool jarg1_);
+<<<<<<< HEAD
   public final static native void AbstractTool_setExternalLoads(long jarg1, AbstractTool jarg1_, long jarg2, ExternalLoads jarg2_);
   public final static native boolean AbstractTool_modelHasExternalLoads(long jarg1, AbstractTool jarg1_);
+=======
+  public final static native boolean AbstractTool_hasExternalLoads(long jarg1, AbstractTool jarg1_);
+>>>>>>> 58fa7c06244ed047086bf479cbe0ec8713a1e193
   public final static native String AbstractTool_getExternalLoadsFileName(long jarg1, AbstractTool jarg1_);
   public final static native void AbstractTool_setExternalLoadsFileName(long jarg1, AbstractTool jarg1_, String jarg2);
   public final static native long AbstractTool_getForceSetFiles(long jarg1, AbstractTool jarg1_);
