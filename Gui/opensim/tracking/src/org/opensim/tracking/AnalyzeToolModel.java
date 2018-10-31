@@ -234,10 +234,6 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
       if (staticOptimizationMode) toolName = "Static Optimization Tool";
       else toolName = "Analyze Tool";
 
-      // In inverse dynamisc mode, we know for sure we'll need a real dynamics engine, so check this up front
-      if(staticOptimizationMode && model.getSimbodyEngine().getConcreteClassName().equals("SimmKinematicsEngine"))
-         throw new IOException(toolName+" requires a model with SdfastEngine or SimbodyEngine; SimmKinematicsEngine does not support dynamics.");
-
       AnalyzeTool dTool = new AnalyzeTool();
       dTool.setModel(model);
       setTool(dTool);
