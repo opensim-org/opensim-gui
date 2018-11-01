@@ -120,6 +120,8 @@ public class OneComponentNode extends OpenSimObjectNode {
             nextNodeProp.setValue("canEditAsText", Boolean.FALSE);
             nextNodeProp.setValue("suppressCustomEditor", Boolean.TRUE);
             nextNodeProp.setName(outputName);
+            // String to show at bottom of Properties panel 
+            nextNodeProp.setShortDescription(anOutput.getPathName());
             sheetSet.put(nextNodeProp);
         } catch (NoSuchMethodException ex) {
             Exceptions.printStackTrace(ex);
