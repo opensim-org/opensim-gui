@@ -57,6 +57,8 @@ public class JettyMain {
             if (port > 80 && port < 9000) {
                 SERVER_PORT = port;
             }
+            else
+                System.out.println("Port number outside range (80 , 9000): port 8002 will be used");
         }
     }
     /**
