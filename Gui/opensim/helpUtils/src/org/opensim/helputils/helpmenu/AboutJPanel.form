@@ -16,7 +16,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" alignment="0" pref="526" max="32767" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="0" pref="517" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -50,7 +50,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="521" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="512" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -73,6 +73,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jPanel5" max="32767" attributes="0"/>
@@ -92,12 +93,12 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="77" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="32" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="487" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="491" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
@@ -109,34 +110,37 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="-2" pref="120" max="-2" attributes="0"/>
-                              </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jLabel2" alignment="0" pref="212" max="32767" attributes="1"/>
+                                      <Component id="jLabel2" alignment="0" max="32767" attributes="1"/>
                                       <Component id="jLabel4" alignment="0" max="32767" attributes="1"/>
                                       <Component id="jLabel6" max="32767" attributes="1"/>
                                       <Component id="jLabel5" alignment="1" max="32767" attributes="1"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel3" min="-2" pref="151" max="-2" attributes="1"/>
-                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="4" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="jLabel7" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <EmptySpace pref="68" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="operatingSystemString" pref="210" max="32767" attributes="1"/>
-                                      <Component id="jreString" alignment="0" pref="202" max="32767" attributes="1"/>
+                                      <Component id="operatingSystemString" pref="293" max="32767" attributes="1"/>
+                                      <Component id="jreString" alignment="0" max="32767" attributes="1"/>
                                       <Group type="102" attributes="0">
                                           <Group type="103" groupAlignment="0" attributes="0">
                                               <Component id="VMvendorString" min="-2" max="-2" attributes="0"/>
@@ -145,7 +149,7 @@
                                               <Component id="compilerVersionLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                               <Component id="libraryPathString" alignment="0" min="-2" max="-2" attributes="0"/>
                                           </Group>
-                                          <EmptySpace min="0" pref="43" max="32767" attributes="0"/>
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
@@ -160,7 +164,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jVersionTextField" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -346,10 +350,10 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jScrollPane5" pref="271" max="32767" attributes="0"/>
                           <Component id="jScrollPane1" max="32767" attributes="0"/>
+                          <Component id="jScrollPane5" pref="290" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="373" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jPanel3" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -360,13 +364,13 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Component id="jScrollPane1" min="-2" pref="138" max="-2" attributes="1"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jScrollPane5" min="-2" pref="156" max="-2" attributes="1"/>
+                              <Component id="jScrollPane1" min="-2" pref="105" max="-2" attributes="1"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="jScrollPane5" min="-2" pref="216" max="-2" attributes="1"/>
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="32767" attributes="0"/>
-                      <Component id="jPanel8" max="32767" attributes="0"/>
+                      <Component id="jPanel8" pref="137" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -418,7 +422,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="111" max="-2" attributes="0"/>
-                          <Component id="jScrollPane4" min="-2" pref="271" max="-2" attributes="0"/>
+                          <Component id="jScrollPane4" min="-2" pref="290" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -426,8 +430,8 @@
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="jScrollPane4" min="-2" pref="148" max="-2" attributes="1"/>
-                          <EmptySpace min="0" pref="21" max="32767" attributes="0"/>
+                          <Component id="jScrollPane4" min="-2" pref="146" max="-2" attributes="1"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -494,7 +498,7 @@
                     </Property>
                     <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="To sustain the OpenSim project, please acknowledge us by citing the following paper: &#xa;Delp, S.L., Anderson, F.C., Arnold, A. S., Loan, P., Habib, A., John, C., Guendelman, E., Thelen, D.G.   OpenSim: Open-source software to create and analyze dynamic simulations of movement.  IEEE Transactions on Biomedical Engineering, Nov. 2007.  &#xa;&#xa;For more details see http://opensim.stanford.edu. Other citations and contributions are noted within the application."/>
+                    <Property name="text" type="java.lang.String" value="Please help sustain the OpenSim project by citing the following publications in your work:&#xa; &#xa;* OpenSim: Open-source software to create and analyze dynamic simulations of movement. IEEE T Biomed Eng, 2007.&#xa;* OpenSim: a musculoskeletal modeling and simulation framework for in silico investigations and exchange.Procedia IUTAM, 2011.&#xa;* What is a Moment Arm? ASME IDETC/CIE 2013&#xa;* OpenSim: Simulating musculoskeletal dynamics and neuromuscular control to study human and animal movement. PLOS Comp Biol, 2018.&#xa;&#xa;For more details see http://opensim.stanford.edu. "/>
                     <Property name="wrapStyleWord" type="boolean" value="true"/>
                     <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                       <Insets value="[0, 5, 0, 0]"/>
@@ -528,7 +532,7 @@
                     </Property>
                     <Property name="lineWrap" type="boolean" value="true"/>
                     <Property name="rows" type="int" value="5"/>
-                    <Property name="text" type="java.lang.String" value="The OpenSim GUI is an application for musculoskeletal modeling and simulation. It is supported by US NIH National Center for Physics-Based Simulation of Biological Structures (Simbios; U54 GM072970), US NIH National Center for Simulation in Rehabilitation Research (NCSRR; R24 HD065690, P2C HD065690), US NIH Mobilize Center (U54 EB020405), and US DARPA Warrior Web (W911QX-12-C-0018)."/>
+                    <Property name="text" type="java.lang.String" value="OpenSim is an application for musculoskeletal modeling and simulation. It is supported by US NIH National Center for Physics-Based Simulation of Biological Structures (Simbios; U54 GM072970), US NIH National Center for Simulation in Rehabilitation Research (NCSRR; R24 HD065690, P2C HD065690), US NIH Mobilize Center (U54 EB020405), and US DARPA Warrior Web (W911QX-12-C-0018)."/>
                     <Property name="wrapStyleWord" type="boolean" value="true"/>
                     <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
                       <Insets value="[5, 5, 0, 0]"/>

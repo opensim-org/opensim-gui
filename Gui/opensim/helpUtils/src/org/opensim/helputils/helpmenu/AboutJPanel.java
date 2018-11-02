@@ -112,7 +112,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 521, Short.MAX_VALUE)
+            .add(0, 512, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -125,11 +125,11 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 77, Short.MAX_VALUE)
+            .add(0, 32, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 487, Short.MAX_VALUE)
+            .add(0, 491, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -186,26 +186,28 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
                 .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanel5Layout.createSequentialGroup()
                         .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel7)
-                            .add(jLabel8)
-                            .add(jLabel1)
-                            .add(jLabel9))
-                        .add(120, 120, 120))
-                    .add(jPanel5Layout.createSequentialGroup()
-                        .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 212, Short.MAX_VALUE)
+                            .add(jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(jLabel4, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(jLabel6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(jPanel5Layout.createSequentialGroup()
                                 .add(jLabel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 151, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)))
+                                .add(0, 4, Short.MAX_VALUE)))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED))
+                    .add(jPanel5Layout.createSequentialGroup()
+                        .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(jLabel7)
+                            .add(jLabel8)
+                            .add(jLabel9)
+                            .add(jPanel5Layout.createSequentialGroup()
+                                .add(21, 21, 21)
+                                .add(jLabel1)))
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 68, Short.MAX_VALUE)))
                 .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanel5Layout.createSequentialGroup()
                         .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(operatingSystemString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .add(jreString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                            .add(operatingSystemString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 293, Short.MAX_VALUE)
+                            .add(jreString, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(jPanel5Layout.createSequentialGroup()
                                 .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                                     .add(VMvendorString)
@@ -213,7 +215,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
                                     .add(jLabelOpenSimHomeString)
                                     .add(compilerVersionLabel)
                                     .add(libraryPathString))
-                                .add(0, 43, Short.MAX_VALUE)))
+                                .add(0, 0, Short.MAX_VALUE)))
                         .addContainerGap())
                     .add(jVersionTextField)))
         );
@@ -222,7 +224,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
             .add(jPanel5Layout.createSequentialGroup()
                 .add(27, 27, 27)
                 .add(jLabel1)
-                .add(15, 15, 15)
+                .add(30, 30, 30)
                 .add(jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jLabel2)
                     .add(jVersionTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
@@ -262,6 +264,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jDetailsPanelLayout.setHorizontalGroup(
             jDetailsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jDetailsPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .add(jPanel4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jPanel5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -320,14 +323,14 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
             jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel8Layout.createSequentialGroup()
                 .add(111, 111, 111)
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 271, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 290, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel8Layout.createSequentialGroup()
-                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 148, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(0, 21, Short.MAX_VALUE))
+                .add(jScrollPane4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 146, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 0, Short.MAX_VALUE))
         );
 
         jScrollPane5.setBorder(null);
@@ -339,7 +342,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jTextArea5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea5.setLineWrap(true);
         jTextArea5.setRows(5);
-        jTextArea5.setText("To sustain the OpenSim project, please acknowledge us by citing the following paper: \nDelp, S.L., Anderson, F.C., Arnold, A. S., Loan, P., Habib, A., John, C., Guendelman, E., Thelen, D.G.   OpenSim: Open-source software to create and analyze dynamic simulations of movement.  IEEE Transactions on Biomedical Engineering, Nov. 2007.  \n\nFor more details see http://opensim.stanford.edu. Other citations and contributions are noted within the application.");
+        jTextArea5.setText("Please help sustain the OpenSim project by citing the following publications in your work:\n \n* OpenSim: Open-source software to create and analyze dynamic simulations of movement. IEEE T Biomed Eng, 2007.\n* OpenSim: a musculoskeletal modeling and simulation framework for in silico investigations and exchange.Procedia IUTAM, 2011.\n* What is a Moment Arm? ASME IDETC/CIE 2013\n* OpenSim: Simulating musculoskeletal dynamics and neuromuscular control to study human and animal movement. PLOS Comp Biol, 2018.\n\nFor more details see http://opensim.stanford.edu. ");
         jTextArea5.setWrapStyleWord(true);
         jTextArea5.setMargin(new java.awt.Insets(0, 5, 0, 0));
         jScrollPane5.setViewportView(jTextArea5);
@@ -353,7 +356,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jTextArea2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea2.setLineWrap(true);
         jTextArea2.setRows(5);
-        jTextArea2.setText("The OpenSim GUI is an application for musculoskeletal modeling and simulation. It is supported by US NIH National Center for Physics-Based Simulation of Biological Structures (Simbios; U54 GM072970), US NIH National Center for Simulation in Rehabilitation Research (NCSRR; R24 HD065690, P2C HD065690), US NIH Mobilize Center (U54 EB020405), and US DARPA Warrior Web (W911QX-12-C-0018).");
+        jTextArea2.setText("OpenSim is an application for musculoskeletal modeling and simulation. It is supported by US NIH National Center for Physics-Based Simulation of Biological Structures (Simbios; U54 GM072970), US NIH National Center for Simulation in Rehabilitation Research (NCSRR; R24 HD065690, P2C HD065690), US NIH Mobilize Center (U54 EB020405), and US DARPA Warrior Web (W911QX-12-C-0018).");
         jTextArea2.setWrapStyleWord(true);
         jTextArea2.setMargin(new java.awt.Insets(5, 5, 0, 0));
         jScrollPane1.setViewportView(jTextArea2);
@@ -368,9 +371,9 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
             .add(jCreditsPanelLayout.createSequentialGroup()
                 .add(111, 111, 111)
                 .add(jCreditsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                    .add(jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 271, Short.MAX_VALUE)
-                    .add(jScrollPane1))
-                .add(373, 373, 373)
+                    .add(jScrollPane1)
+                    .add(jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jCreditsPanelLayout.setVerticalGroup(
@@ -379,11 +382,11 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
                 .add(jCreditsPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jCreditsPanelLayout.createSequentialGroup()
-                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 138, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jScrollPane5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 156, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 105, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(jScrollPane5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 216, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(jPanel8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jPanel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 137, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -393,7 +396,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 526, Short.MAX_VALUE)
+            .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
