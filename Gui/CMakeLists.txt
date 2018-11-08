@@ -13,8 +13,8 @@ endif()
 # etc
 INSTALL(DIRECTORY opensim/dist/opensim/opensim/etc/ DESTINATION etc)
 # Scripts
-INSTALL(DIRECTORY opensim/Scripts/ DESTINATION Scripts/GUI_Scripting PATTERN ".svn" EXCLUDE
-																	 PATTERN "opensim/Scripts/Metabolics_example_scripts" EXCLUDE)
+INSTALL(DIRECTORY opensim/Scripts/ DESTINATION Scripts/GUI_Scripting PATTERN ".svn" EXCLUDE)
+
 # remaining folders
 INSTALL(DIRECTORY opensim/dist/opensim/opensim/ide/ DESTINATION ide)
 INSTALL(DIRECTORY opensim/dist/opensim/opensim/platform/ DESTINATION platform)
@@ -35,4 +35,3 @@ INSTALL_FILES(/doc/ FILES  ${TUTORIAL_FILES})
 INCLUDE(${CMAKE_ROOT}/Modules/FindJava.cmake)
 SET(JRE_TO_PACKAGE "" CACHE PATH "jdk folder to include with distro")
 INSTALL(DIRECTORY ${JRE_TO_PACKAGE} DESTINATION jdk)
-
