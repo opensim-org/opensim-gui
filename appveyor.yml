@@ -76,8 +76,7 @@ build_script:
   
 test_script:
   ## Run tests.
-  - echo "No tests yet."
-  # ant run
+  - cmake --build . --target Test --config Release
 
 after_test:
   ## On master branch, create package for OpenSim.

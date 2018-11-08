@@ -129,7 +129,9 @@ if (APPLE)
             "${CMAKE_CURRENT_SOURCE_DIR}/nbproject/private/platform-private.properties")
         if (NOT EXISTS ${PLATFORM_PRIVATE_PROPERTIES_FILE})
             file(WRITE ${PLATFORM_PRIVATE_PROPERTIES_FILE}
-                "run.args.extra=-J-Djava.library.path=${OpenSim_LIB_DIR}")
+                "run.args.extra=-J-Djava.library.path=${OpenSim_LIB_DIR}\n")
+            file(APPEND ${PLATFORM_PRIVATE_PROPERTIES_FILE}
+                "test.run.args=-Djava.library.path=${OpenSim_LIB_DIR}")
         endif()
     endif()
     add_custom_target(PrepareInstaller ALL
