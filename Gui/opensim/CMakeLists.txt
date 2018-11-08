@@ -143,3 +143,10 @@ if (APPLE)
                   COMMENT "Build OpenSim.app.")
     add_dependencies(PrepareInstaller opensim-models)
 endif()
+
+add_custom_target(Test ALL
+                  COMMAND ${Ant_EXECUTABLE} test
+                  ${ANT_ARGS}
+                  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
+                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                  COMMENT "Run Ant tests.")
