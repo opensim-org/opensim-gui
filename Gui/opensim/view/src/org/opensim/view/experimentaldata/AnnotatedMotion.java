@@ -120,7 +120,7 @@ public class AnnotatedMotion extends Storage {
                 getBoundingBox()[4]+", "+
                 getBoundingBox()[5]
                 );
-        for (int i=0; i<6; i++) getBoundingBox()[i] *= getUnitConversion();
+        for (int i=0; i<6; i++) getBoundingBox()[i]/= getUnitConversion();
         setBoundingBoxComputed(true);
     }
 
@@ -273,7 +273,7 @@ public class AnnotatedMotion extends Storage {
 
     public void setUnitConversion(double unitConversion) {
         this.unitConversion = unitConversion;
-        for (int i=0; i<6; i++) getBoundingBox()[i]*= unitConversion;
+        for (int i=0; i<6; i++) getBoundingBox()[i]/= unitConversion;
     }
 
     public boolean isBoundingBoxComputed() {
