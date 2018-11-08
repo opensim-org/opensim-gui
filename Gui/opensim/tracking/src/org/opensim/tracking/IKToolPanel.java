@@ -82,6 +82,7 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
       outputMotionFilePath.setIncludeOpenButton(false);
       outputMotionFilePath.setDirectoriesOnly(false);
       outputMotionFilePath.setCheckIfFileExists(false);
+      outputMotionFilePath.setSaveMode(true);
       updateModelDataFromModel();
       updateFromModel();
 
