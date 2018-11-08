@@ -87,9 +87,9 @@ public class ExperimentalMarker extends MotionObjectBodyPoint {
     @Override
     void updateDecorations(ArrayDouble interpolatedStates) {
         int idx = getStartIndexInFileNotIncludingTime();
-        setPoint(new double[]{interpolatedStates.get(idx)*conversion, 
-            interpolatedStates.get(idx+1)*conversion, 
-            interpolatedStates.get(idx+2)*conversion});
+        setPoint(new double[]{interpolatedStates.get(idx)/conversion, 
+            interpolatedStates.get(idx+1)/conversion, 
+            interpolatedStates.get(idx+2)/conversion});
     }
     
     // Create JSON object to represent ExperimentalMarker
@@ -115,7 +115,7 @@ public class ExperimentalMarker extends MotionObjectBodyPoint {
         conversion = mot.getUnitConversion();
         JSONArray pos = new JSONArray();
         for (int i = 0; i < 3; i++) {
-            pos.add(interpolatedStates.get(idx+i)*conversion);
+            pos.add(interpolatedStates.get(idx+i)/conversion);
         }
         expMarker_json.put("position", pos);
         expMarker_json.put("castShadow", false);
