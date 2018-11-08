@@ -88,11 +88,11 @@ public class AbstractTool extends OpenSimObject {
   public ExternalLoads updExternalLoads() {
     return new ExternalLoads(opensimSimulationJNI.AbstractTool_updExternalLoads(swigCPtr, this), false);
   }
-  
+
   public void setExternalLoads(ExternalLoads el) {
     opensimSimulationJNI.AbstractTool_setExternalLoads(swigCPtr, this, ExternalLoads.getCPtr(el), el);
   }
-  
+
   public boolean modelHasExternalLoads() {
     return opensimSimulationJNI.AbstractTool_modelHasExternalLoads(swigCPtr, this);
   }
