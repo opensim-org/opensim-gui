@@ -96,7 +96,7 @@ public class OpenSimObjectModel extends AbstractTreeTableModel {
     this.isEditable = isEditable;
     root = new PropertyNode(obj);
     if (numFormat instanceof DecimalFormat) {
-      ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
+      ((DecimalFormat) numFormat).applyPattern("###0.#########");
     }
   }
 

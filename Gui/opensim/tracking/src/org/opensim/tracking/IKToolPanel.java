@@ -59,7 +59,7 @@ public class IKToolPanel extends BaseToolPanel implements Observer {
       ikToolModel = new IKToolModel(model);
 
       if (numFormat instanceof DecimalFormat) {
-        ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
+        ((DecimalFormat) numFormat).applyPattern("###0.#########");
       }
       
       helpButton.addActionListener(new ActionListener() {

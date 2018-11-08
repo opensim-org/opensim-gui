@@ -63,7 +63,7 @@ public class IKTaskSetPanel extends javax.swing.JPanel implements ListSelectionL
       ikCoordinateTasksTableModel = new IKTasksTableModel(ikCommonModel.getIKCoordinateTasksModel(), "Coordinate");
 
       if (numFormat instanceof DecimalFormat) {
-        ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
+        ((DecimalFormat) numFormat).applyPattern("###0.#########");
       }
 
       initComponents();

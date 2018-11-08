@@ -1985,7 +1985,7 @@ public class JPlotterPanel extends javax.swing.JPanel
               try {
                  NumberFormat numFormat = NumberFormat.getInstance();
                  if (numFormat instanceof DecimalFormat) {
-                    ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
+                    ((DecimalFormat) numFormat).applyPattern("###0.#########");
                  }
                  double valueFromTextField = numFormat.parse(text).doubleValue();
                  jFormattedTextField.setText(numFormat.format(valueFromTextField));
