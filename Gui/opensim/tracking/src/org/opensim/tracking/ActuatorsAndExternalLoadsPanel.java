@@ -80,7 +80,7 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
       this.model = model;
 
       if (numFormat instanceof DecimalFormat) {
-        ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
+        ((DecimalFormat) numFormat).applyPattern("###0.#########");
       }
 
       initComponents();

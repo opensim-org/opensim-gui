@@ -69,8 +69,8 @@ scaleTool.run();
 ## load Scaled Model
 # Load model 
 loadModel(scaleModelName)
-# Get a handle to the current model
-myModel = getCurrentModel()
+# Create a copy of the scaled model for use with the tools.
+myModel = getCurrentModel().clone()
 #initialize
 myModel.initSystem()
 myState = myModel.initSystem()

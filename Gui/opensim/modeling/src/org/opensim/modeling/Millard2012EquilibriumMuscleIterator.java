@@ -853,16 +853,16 @@ public class Millard2012EquilibriumMuscleIterator {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getAbsolutePathString(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_ComponentPath getAbsolutePath() {
-    return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getAbsolutePath(swigCPtr, this), true);
+  public ComponentPath getAbsolutePath() {
+    return new ComponentPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getAbsolutePath(swigCPtr, this), true);
   }
 
   public String getRelativePathString(Component wrt) {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getRelativePathString(swigCPtr, this, Component.getCPtr(wrt), wrt);
   }
 
-  public SWIGTYPE_p_ComponentPath getRelativePath(Component wrt) {
-    return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getRelativePath(swigCPtr, this, Component.getCPtr(wrt), wrt), true);
+  public ComponentPath getRelativePath(Component wrt) {
+    return new ComponentPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getRelativePath(swigCPtr, this, Component.getCPtr(wrt), wrt), true);
   }
 
   public boolean hasComponent(String pathname) {
@@ -999,6 +999,16 @@ public class Millard2012EquilibriumMuscleIterator {
 
   public Component getRoot() {
     return new Component(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getRoot(swigCPtr, this), false);
+  }
+
+  public Component findComponent(ComponentPath pathToFind) {
+    long cPtr = opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_findComponent__SWIG_2(swigCPtr, this, ComponentPath.getCPtr(pathToFind), pathToFind);
+    return (cPtr == 0) ? null : new Component(cPtr, false);
+  }
+
+  public Component findComponent(String pathToFind) {
+    long cPtr = opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_findComponent__SWIG_3(swigCPtr, this, pathToFind);
+    return (cPtr == 0) ? null : new Component(cPtr, false);
   }
 
   public ComponentsList getComponentsList() {

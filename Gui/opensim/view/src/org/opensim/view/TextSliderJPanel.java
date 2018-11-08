@@ -62,7 +62,7 @@ public class TextSliderJPanel extends javax.swing.JPanel implements ChangeListen
     /** Creates new form TextSliderJPanel */
     public TextSliderJPanel() {
        if (numFormat instanceof DecimalFormat) {
-         ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
+         ((DecimalFormat) numFormat).applyPattern("###0.#########");
        }
 
        initComponents();

@@ -1635,9 +1635,11 @@ public class JPlotterPanel extends javax.swing.JPanel
       //double[] saveStates = new double[numStates];
       // FIX40 openSimContext.getStates(saveStates);
       State saveState = openSimContext.getCurrentStateCopy();
-      //openSimContext.cacheModelAndState();
-      Storage extendedMotionStorage;
-      int key = (int) (java.lang.Math.random()*100);
+      // We'll cache in the Y vector of the state to restore it after running the tool since the tool
+      // leaves the model at an undefined position 
+       org.opensim.modeling.Vector saveY = new org.opensim.modeling.Vector(saveState.getY());
+
+       int key = (int) (java.lang.Math.random()*100);
       if (motion != null && motion instanceof PlotterSourceMotion){
          tool.setStartTime( motion.getStorage().getFirstTime());
          tool.setFinalTime( motion.getStorage().getLastTime());
@@ -1702,13 +1704,10 @@ public class JPlotterPanel extends javax.swing.JPanel
       } catch (IOException ex) {
          ErrorDialog.displayExceptionDialog(ex);
       }
-      /*
-        try {
-            openSimContext.restoreStateFromCachedModel();
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        } */
+      // Restore the state vector we saved beforehand so the model pose doesn't change in GUI (issue #1052)
+      openSimContext.getCurrentStateRef().setY(saveY);
       openSimContext.realizeVelocity();
+
       MuscleAnalysis analysis = MuscleAnalysis.safeDownCast(currentModel.getAnalysisSet().get("MuscleAnalysis"));
       analysisSource.updateStorage(analysis);
       //analysisSource.getStorage().print("toolOutput"/*+key*/+".sto");
@@ -1985,7 +1984,7 @@ public class JPlotterPanel extends javax.swing.JPanel
               try {
                  NumberFormat numFormat = NumberFormat.getInstance();
                  if (numFormat instanceof DecimalFormat) {
-                    ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
+                    ((DecimalFormat) numFormat).applyPattern("###0.#########");
                  }
                  double valueFromTextField = numFormat.parse(text).doubleValue();
                  jFormattedTextField.setText(numFormat.format(valueFromTextField));

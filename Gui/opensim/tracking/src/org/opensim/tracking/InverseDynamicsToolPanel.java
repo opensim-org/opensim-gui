@@ -75,7 +75,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
    public InverseDynamicsToolPanel(Model model) throws IOException {
       toolModel = new InverseDynamicsToolModel(model);
       if (numFormat instanceof DecimalFormat) {
-        ((DecimalFormat) numFormat).applyPattern("#,##0.############");
+        ((DecimalFormat) numFormat).applyPattern("###0.############");
       }
       
       initComponents();

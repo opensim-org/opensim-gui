@@ -801,16 +801,16 @@ public class Thelen2003MuscleIterator {
     return opensimSimulationJNI.Thelen2003MuscleIterator_getAbsolutePathString(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_ComponentPath getAbsolutePath() {
-    return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.Thelen2003MuscleIterator_getAbsolutePath(swigCPtr, this), true);
+  public ComponentPath getAbsolutePath() {
+    return new ComponentPath(opensimSimulationJNI.Thelen2003MuscleIterator_getAbsolutePath(swigCPtr, this), true);
   }
 
   public String getRelativePathString(Component wrt) {
     return opensimSimulationJNI.Thelen2003MuscleIterator_getRelativePathString(swigCPtr, this, Component.getCPtr(wrt), wrt);
   }
 
-  public SWIGTYPE_p_ComponentPath getRelativePath(Component wrt) {
-    return new SWIGTYPE_p_ComponentPath(opensimSimulationJNI.Thelen2003MuscleIterator_getRelativePath(swigCPtr, this, Component.getCPtr(wrt), wrt), true);
+  public ComponentPath getRelativePath(Component wrt) {
+    return new ComponentPath(opensimSimulationJNI.Thelen2003MuscleIterator_getRelativePath(swigCPtr, this, Component.getCPtr(wrt), wrt), true);
   }
 
   public boolean hasComponent(String pathname) {
@@ -947,6 +947,16 @@ public class Thelen2003MuscleIterator {
 
   public Component getRoot() {
     return new Component(opensimSimulationJNI.Thelen2003MuscleIterator_getRoot(swigCPtr, this), false);
+  }
+
+  public Component findComponent(ComponentPath pathToFind) {
+    long cPtr = opensimSimulationJNI.Thelen2003MuscleIterator_findComponent__SWIG_2(swigCPtr, this, ComponentPath.getCPtr(pathToFind), pathToFind);
+    return (cPtr == 0) ? null : new Component(cPtr, false);
+  }
+
+  public Component findComponent(String pathToFind) {
+    long cPtr = opensimSimulationJNI.Thelen2003MuscleIterator_findComponent__SWIG_3(swigCPtr, this, pathToFind);
+    return (cPtr == 0) ? null : new Component(cPtr, false);
   }
 
   public ComponentsList getComponentsList() {

@@ -72,6 +72,14 @@ public class AbstractSocket {
     opensimCommonJNI.AbstractSocket_connect(swigCPtr, this, OpenSimObject.getCPtr(connectee), connectee);
   }
 
+  public void findAndConnect(SWIGTYPE_p_ComponentPath connectee) {
+    opensimCommonJNI.AbstractSocket_findAndConnect__SWIG_0(swigCPtr, this, SWIGTYPE_p_ComponentPath.getCPtr(connectee));
+  }
+
+  public void findAndConnect(String connectee) {
+    opensimCommonJNI.AbstractSocket_findAndConnect__SWIG_1(swigCPtr, this, connectee);
+  }
+
   public void finalizeConnection(Component root) {
     opensimCommonJNI.AbstractSocket_finalizeConnection(swigCPtr, this, Component.getCPtr(root), root);
   }
