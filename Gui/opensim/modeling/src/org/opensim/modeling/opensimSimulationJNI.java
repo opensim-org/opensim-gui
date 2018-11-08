@@ -6312,6 +6312,7 @@ public class opensimSimulationJNI {
   public final static native long simulate__SWIG_1(long jarg1, Model jarg1_, long jarg2, State jarg2_, double jarg3);
   public final static native void updatePre40KinematicsFilesFor40MotionType__SWIG_0(long jarg1, Model jarg1_, long jarg2, StdVectorString jarg2_, String jarg3);
   public final static native void updatePre40KinematicsFilesFor40MotionType__SWIG_1(long jarg1, Model jarg1_, long jarg2, StdVectorString jarg2_);
+  public final static native void updateSocketConnecteesBySearch(long jarg1, Model jarg1_);
   public final static native long new_FrameList__SWIG_0(long jarg1, Component jarg1_, long jarg2, ComponentFilter jarg2_);
   public final static native long new_FrameList__SWIG_1(long jarg1, Component jarg1_);
   public final static native void delete_FrameList(long jarg1);
@@ -6402,6 +6403,8 @@ public class opensimSimulationJNI {
   public final static native long FrameIterator_getOwner(long jarg1, FrameIterator jarg1_);
   public final static native boolean FrameIterator_hasOwner(long jarg1, FrameIterator jarg1_);
   public final static native long FrameIterator_getRoot(long jarg1, FrameIterator jarg1_);
+  public final static native long FrameIterator_findComponent__SWIG_2(long jarg1, FrameIterator jarg1_, long jarg2, ComponentPath jarg2_);
+  public final static native long FrameIterator_findComponent__SWIG_3(long jarg1, FrameIterator jarg1_, String jarg2);
   public final static native long FrameIterator_getComponentsList(long jarg1, FrameIterator jarg1_);
   public final static native boolean FrameIterator_isEqualTo(long jarg1, FrameIterator jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String FrameIterator_getName(long jarg1, FrameIterator jarg1_);
@@ -6527,6 +6530,8 @@ public class opensimSimulationJNI {
   public final static native long BodyIterator_getOwner(long jarg1, BodyIterator jarg1_);
   public final static native boolean BodyIterator_hasOwner(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_getRoot(long jarg1, BodyIterator jarg1_);
+  public final static native long BodyIterator_findComponent__SWIG_2(long jarg1, BodyIterator jarg1_, long jarg2, ComponentPath jarg2_);
+  public final static native long BodyIterator_findComponent__SWIG_3(long jarg1, BodyIterator jarg1_, String jarg2);
   public final static native long BodyIterator_getComponentsList(long jarg1, BodyIterator jarg1_);
   public final static native boolean BodyIterator_isEqualTo(long jarg1, BodyIterator jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String BodyIterator_getName(long jarg1, BodyIterator jarg1_);
@@ -6743,6 +6748,8 @@ public class opensimSimulationJNI {
   public final static native long MuscleIterator_getOwner(long jarg1, MuscleIterator jarg1_);
   public final static native boolean MuscleIterator_hasOwner(long jarg1, MuscleIterator jarg1_);
   public final static native long MuscleIterator_getRoot(long jarg1, MuscleIterator jarg1_);
+  public final static native long MuscleIterator_findComponent__SWIG_2(long jarg1, MuscleIterator jarg1_, long jarg2, ComponentPath jarg2_);
+  public final static native long MuscleIterator_findComponent__SWIG_3(long jarg1, MuscleIterator jarg1_, String jarg2);
   public final static native long MuscleIterator_getComponentsList(long jarg1, MuscleIterator jarg1_);
   public final static native boolean MuscleIterator_isEqualTo(long jarg1, MuscleIterator jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String MuscleIterator_getName(long jarg1, MuscleIterator jarg1_);
@@ -6824,6 +6831,8 @@ public class opensimSimulationJNI {
   public final static native long ModelComponentIterator_getOwner(long jarg1, ModelComponentIterator jarg1_);
   public final static native boolean ModelComponentIterator_hasOwner(long jarg1, ModelComponentIterator jarg1_);
   public final static native long ModelComponentIterator_getRoot(long jarg1, ModelComponentIterator jarg1_);
+  public final static native long ModelComponentIterator_findComponent__SWIG_2(long jarg1, ModelComponentIterator jarg1_, long jarg2, ComponentPath jarg2_);
+  public final static native long ModelComponentIterator_findComponent__SWIG_3(long jarg1, ModelComponentIterator jarg1_, String jarg2);
   public final static native long ModelComponentIterator_getComponentsList(long jarg1, ModelComponentIterator jarg1_);
   public final static native boolean ModelComponentIterator_isEqualTo(long jarg1, ModelComponentIterator jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String ModelComponentIterator_getName(long jarg1, ModelComponentIterator jarg1_);
@@ -6921,6 +6930,8 @@ public class opensimSimulationJNI {
   public final static native long JointIterator_getOwner(long jarg1, JointIterator jarg1_);
   public final static native boolean JointIterator_hasOwner(long jarg1, JointIterator jarg1_);
   public final static native long JointIterator_getRoot(long jarg1, JointIterator jarg1_);
+  public final static native long JointIterator_findComponent__SWIG_2(long jarg1, JointIterator jarg1_, long jarg2, ComponentPath jarg2_);
+  public final static native long JointIterator_findComponent__SWIG_3(long jarg1, JointIterator jarg1_, String jarg2);
   public final static native long JointIterator_getComponentsList(long jarg1, JointIterator jarg1_);
   public final static native boolean JointIterator_isEqualTo(long jarg1, JointIterator jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String JointIterator_getName(long jarg1, JointIterator jarg1_);
@@ -7017,6 +7028,8 @@ public class opensimSimulationJNI {
   public final static native long ActuatorIterator_getOwner(long jarg1, ActuatorIterator jarg1_);
   public final static native boolean ActuatorIterator_hasOwner(long jarg1, ActuatorIterator jarg1_);
   public final static native long ActuatorIterator_getRoot(long jarg1, ActuatorIterator jarg1_);
+  public final static native long ActuatorIterator_findComponent__SWIG_2(long jarg1, ActuatorIterator jarg1_, long jarg2, ComponentPath jarg2_);
+  public final static native long ActuatorIterator_findComponent__SWIG_3(long jarg1, ActuatorIterator jarg1_, String jarg2);
   public final static native long ActuatorIterator_getComponentsList(long jarg1, ActuatorIterator jarg1_);
   public final static native boolean ActuatorIterator_isEqualTo(long jarg1, ActuatorIterator jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String ActuatorIterator_getName(long jarg1, ActuatorIterator jarg1_);
@@ -8146,6 +8159,8 @@ public class opensimSimulationJNI {
   public final static native long Thelen2003MuscleIterator_getOwner(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native boolean Thelen2003MuscleIterator_hasOwner(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native long Thelen2003MuscleIterator_getRoot(long jarg1, Thelen2003MuscleIterator jarg1_);
+  public final static native long Thelen2003MuscleIterator_findComponent__SWIG_2(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, ComponentPath jarg2_);
+  public final static native long Thelen2003MuscleIterator_findComponent__SWIG_3(long jarg1, Thelen2003MuscleIterator jarg1_, String jarg2);
   public final static native long Thelen2003MuscleIterator_getComponentsList(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native boolean Thelen2003MuscleIterator_isEqualTo(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String Thelen2003MuscleIterator_getName(long jarg1, Thelen2003MuscleIterator jarg1_);
@@ -8415,6 +8430,8 @@ public class opensimSimulationJNI {
   public final static native long Millard2012EquilibriumMuscleIterator_getOwner(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native boolean Millard2012EquilibriumMuscleIterator_hasOwner(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native long Millard2012EquilibriumMuscleIterator_getRoot(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
+  public final static native long Millard2012EquilibriumMuscleIterator_findComponent__SWIG_2(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, ComponentPath jarg2_);
+  public final static native long Millard2012EquilibriumMuscleIterator_findComponent__SWIG_3(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, String jarg2);
   public final static native long Millard2012EquilibriumMuscleIterator_getComponentsList(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native boolean Millard2012EquilibriumMuscleIterator_isEqualTo(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String Millard2012EquilibriumMuscleIterator_getName(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);

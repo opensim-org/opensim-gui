@@ -93,16 +93,16 @@ public class ComponentIterator {
     return opensimCommonJNI.ComponentIterator_getAbsolutePathString(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_ComponentPath getAbsolutePath() {
-    return new SWIGTYPE_p_ComponentPath(opensimCommonJNI.ComponentIterator_getAbsolutePath(swigCPtr, this), true);
+  public ComponentPath getAbsolutePath() {
+    return new ComponentPath(opensimCommonJNI.ComponentIterator_getAbsolutePath(swigCPtr, this), true);
   }
 
   public String getRelativePathString(Component wrt) {
     return opensimCommonJNI.ComponentIterator_getRelativePathString(swigCPtr, this, Component.getCPtr(wrt), wrt);
   }
 
-  public SWIGTYPE_p_ComponentPath getRelativePath(Component wrt) {
-    return new SWIGTYPE_p_ComponentPath(opensimCommonJNI.ComponentIterator_getRelativePath(swigCPtr, this, Component.getCPtr(wrt), wrt), true);
+  public ComponentPath getRelativePath(Component wrt) {
+    return new ComponentPath(opensimCommonJNI.ComponentIterator_getRelativePath(swigCPtr, this, Component.getCPtr(wrt), wrt), true);
   }
 
   public boolean hasComponent(String pathname) {
@@ -239,6 +239,16 @@ public class ComponentIterator {
 
   public Component getRoot() {
     return new Component(opensimCommonJNI.ComponentIterator_getRoot(swigCPtr, this), false);
+  }
+
+  public Component findComponent(ComponentPath pathToFind) {
+    long cPtr = opensimCommonJNI.ComponentIterator_findComponent__SWIG_2(swigCPtr, this, ComponentPath.getCPtr(pathToFind), pathToFind);
+    return (cPtr == 0) ? null : new Component(cPtr, false);
+  }
+
+  public Component findComponent(String pathToFind) {
+    long cPtr = opensimCommonJNI.ComponentIterator_findComponent__SWIG_3(swigCPtr, this, pathToFind);
+    return (cPtr == 0) ? null : new Component(cPtr, false);
   }
 
   public ComponentsList getComponentsList() {

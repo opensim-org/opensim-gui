@@ -25,4 +25,8 @@ public class opensimSimulation {
     opensimSimulationJNI.updatePre40KinematicsFilesFor40MotionType__SWIG_1(Model.getCPtr(model), model, StdVectorString.getCPtr(filePaths), filePaths);
   }
 
+  public static void updateSocketConnecteesBySearch(Model model) {
+    opensimSimulationJNI.updateSocketConnecteesBySearch(Model.getCPtr(model), model);
+  }
+
 }
