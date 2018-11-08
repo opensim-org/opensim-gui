@@ -85,7 +85,7 @@ public class ScaleToolPanel extends BaseToolPanel implements Observer {
       //scaleToolModel.loadSettings("C:\\eran\\dev\\simbios\\opensim\\Trunk\\OpenSim\\Examples\\Gait2354\\subject01_Setup_Scale.xml");
 
       if (numFormat instanceof DecimalFormat) {
-        ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
+        ((DecimalFormat) numFormat).applyPattern("###0.#########");
       }
 
       

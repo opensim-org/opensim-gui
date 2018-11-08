@@ -139,7 +139,7 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       });
              
       if (numFormat instanceof DecimalFormat) {
-        ((DecimalFormat) numFormat).applyPattern("#,##0.############");
+        ((DecimalFormat) numFormat).applyPattern("###0.############");
       }
 
       initComponents();

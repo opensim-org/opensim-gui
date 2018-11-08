@@ -64,7 +64,7 @@ public class ScaleFactorsPanel extends javax.swing.JPanel implements Observer {
       this.measurementSetDialog = measurementSetDialog;
 
       if (numFormat instanceof DecimalFormat) {
-        ((DecimalFormat) numFormat).applyPattern("#,##0.#########");
+        ((DecimalFormat) numFormat).applyPattern("###0.#########");
       }
 
       initComponents();

@@ -46,7 +46,7 @@ public class MarkerDataInfoPanel extends javax.swing.JPanel {
    /** Creates new form TRCFileInfoPanel */
    public MarkerDataInfoPanel() {
       if (doubleFormat instanceof DecimalFormat) {
-        ((DecimalFormat) doubleFormat).applyPattern("#,##0.#########");
+        ((DecimalFormat) doubleFormat).applyPattern("###0.#########");
       }
 
       initComponents();
