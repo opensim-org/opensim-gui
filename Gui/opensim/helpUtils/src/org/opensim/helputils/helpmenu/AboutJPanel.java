@@ -115,7 +115,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 504, Short.MAX_VALUE)
+            .add(0, 495, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("About", jPanel1);
@@ -128,7 +128,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 504, Short.MAX_VALUE)
+            .add(0, 495, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -296,7 +296,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jTextArea5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea5.setLineWrap(true);
         jTextArea5.setRows(5);
-        jTextArea5.setText("To sustain the OpenSim project, please acknowledge us by citing the following paper:\n\nSeth, et al. OpenSim: Simulating musculoskeletal dynamics and neuromuscular control to study human and animal movement. Plos Computational Biology, 14(7), 2018.\n\nFor additional details about how to acknowledge model, software, and simulation developers in your work, see https://simtk-confluence.stanford.edu:8443/display/OpenSim/License+for+OpenSim+3.0+and+Later\n");
+        jTextArea5.setText("Please help sustain the OpenSim project by citing the following publications in your work:\n * OpenSim: Open-source software to create and analyze dynamic simulations of movement. IEEE T Biomed Eng, 2007.\n * OpenSim: a musculoskeletal modeling and simulation framework for in silico investigations and exchange. Procedia IUTAM, 2011.\n * What is a Moment Arm? ASME IDETC/CIE 2013\n * OpenSim: Simulating musculoskeletal dynamics and neuromuscular control to study human and animal movement. PLOS Comp Biol, 2018.\n\nFor more details see http://opensim.stanford.edu.");
         jTextArea5.setWrapStyleWord(true);
         jTextArea5.setAlignmentY(0.0F);
         jTextArea5.setMargin(new java.awt.Insets(0, 5, 0, 0));
@@ -325,7 +325,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
                 .add(113, 113, 113)
                 .add(jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(jScrollPane4)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane5, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                     .add(org.jdesktop.layout.GroupLayout.TRAILING, jScrollPane1))
                 .add(0, 0, 0))
         );
@@ -333,10 +333,10 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
             jPanel8Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 117, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(18, 18, 18)
-                .add(jScrollPane5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 170, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jScrollPane1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 139, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jScrollPane5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 180, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jScrollPane4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 152, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
