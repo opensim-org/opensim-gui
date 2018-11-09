@@ -446,7 +446,7 @@
                         </Property>
                         <Property name="lineWrap" type="boolean" value="true"/>
                         <Property name="rows" type="int" value="5"/>
-                        <Property name="text" type="java.lang.String" value="Please help sustain the OpenSim project by citing the following publications in your work:&#xa; * OpenSim: Open-source software to create and analyze dynamic simulations of movement. IEEE T Biomed Eng, 2007.&#xa; * OpenSim: a musculoskeletal modeling and simulation framework for in silico investigations and exchange. Procedia IUTAM, 2011.&#xa; * What is a Moment Arm? ASME IDETC/CIE 2013&#xa; * OpenSim: Simulating musculoskeletal dynamics and neuromuscular control to study human and animal movement. PLOS Comp Biol, 2018.&#xa;&#xa;For more details see http://opensim.stanford.edu."/>
+                        <Property name="text" type="java.lang.String" value="To sustain the OpenSim project, please acknowledge us by citing the paper entitled &quot;OpenSim: Simulating musculoskeletal dynamics and neuromuscular control to study human and animal movement.&quot; https://doi.org/10.1371/journal.pcbi.100622&#xa;&#xa;For additional details about how to acknowledge model, software, and simulation developers in your work, see https://simtk-confluence.stanford.edu:8443/display/OpenSim/License+for+OpenSim+3.0+and+Later"/>
                         <Property name="wrapStyleWord" type="boolean" value="true"/>
                         <Property name="alignmentY" type="float" value="0.0"/>
                         <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
