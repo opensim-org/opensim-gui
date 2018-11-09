@@ -60,7 +60,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
     /** Creates new form AboutJPanel */
     public AboutJPanel() {        
         initComponents();
-        this.setPreferredSize(new Dimension(410, 505));
+        this.setPreferredSize(new Dimension(450, 550));
         populateDetailsPanel();
     }
     
@@ -103,8 +103,9 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea2 = new javax.swing.JTextArea();
 
-        jTabbedPane1.setMaximumSize(new java.awt.Dimension(410, 515));
-        jTabbedPane1.setMinimumSize(new java.awt.Dimension(410, 515));
+        jTabbedPane1.setMaximumSize(new java.awt.Dimension(450, 550));
+        jTabbedPane1.setMinimumSize(new java.awt.Dimension(450, 550));
+        jTabbedPane1.setPreferredSize(new java.awt.Dimension(450, 550));
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -114,7 +115,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 501, Short.MAX_VALUE)
+            .add(0, 504, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("About", jPanel1);
@@ -127,7 +128,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 501, Short.MAX_VALUE)
+            .add(0, 504, Short.MAX_VALUE)
         );
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
@@ -407,7 +408,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
     public void paint(Graphics g) {
        super.paint(g);
         if (jTabbedPane1.getSelectedIndex()==0){
-            g.drawImage( getAboutImage(), 15, 25, 380, 472, this );
+            g.drawImage( getAboutImage(), 35, 39, 380, 472, this );
         }
         else if (jTabbedPane1.getSelectedIndex()==1){
            g.drawImage( getOpenSimImage(), 15, 40, 48, 48, this );
