@@ -169,10 +169,12 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
             // Since the analysis will go out of scope and potentially get deleted
             // make a fresh copy of the activation Storage
             // it will be free'd when not in use anymore (gc)
-            Storage storageCopy = new Storage(soA.getActivationStorage(), true);
-            MuscleColoringFunction mcbya = new MuscleColorByActivationStorage(
-                OpenSimDB.getInstance().getContext(getOriginalModel()), storageCopy);
-            MotionsDB.getInstance().getDisplayerForMotion(motion).setMuscleColoringFunction(mcbya);
+            if (soA.getActivationStorage()!=null){ // This will be null if SO failed to run, don't try to load it
+                Storage storageCopy = new Storage(soA.getActivationStorage(), true);
+                MuscleColoringFunction mcbya = new MuscleColorByActivationStorage(
+                    OpenSimDB.getInstance().getContext(getOriginalModel()), storageCopy);
+                MotionsDB.getInstance().getDisplayerForMotion(motion).setMuscleColoringFunction(mcbya);
+            }
          } 
          getModel().removeAnalysis(animationCallback, false);
          getModel().removeAnalysis(interruptingCallback, false);
