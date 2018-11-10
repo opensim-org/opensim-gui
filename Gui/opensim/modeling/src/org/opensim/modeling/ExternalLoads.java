@@ -126,4 +126,8 @@ public class ExternalLoads extends ModelComponentSetExternalForces {
     return (cPtr == 0) ? null : new ExternalForce(cPtr, false);
   }
 
+  public void clearLoadedFromFile() {
+    opensimSimulationJNI.ExternalLoads_clearLoadedFromFile(swigCPtr, this);
+  }
+
 }

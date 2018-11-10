@@ -2253,6 +2253,7 @@ public class opensimSimulationJNI {
   public final static native void ExternalLoads_transformPointsExpressedInGroundToAppliedBodies__SWIG_1(long jarg1, ExternalLoads jarg1_, long jarg2, Storage jarg2_, double jarg3);
   public final static native void ExternalLoads_transformPointsExpressedInGroundToAppliedBodies__SWIG_2(long jarg1, ExternalLoads jarg1_, long jarg2, Storage jarg2_);
   public final static native long ExternalLoads_transformPointExpressedInGroundToAppliedBody(long jarg1, ExternalLoads jarg1_, long jarg2, ExternalForce jarg2_, long jarg3, Storage jarg3_, double jarg4, double jarg5);
+  public final static native void ExternalLoads_clearLoadedFromFile(long jarg1, ExternalLoads jarg1_);
   public final static native long PrescribedForce_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void PrescribedForce_assign(long jarg1, PrescribedForce jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String PrescribedForce_getClassName();

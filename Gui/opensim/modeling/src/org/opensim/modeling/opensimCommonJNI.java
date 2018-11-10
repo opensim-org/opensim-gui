@@ -46,12 +46,8 @@ public class opensimCommonJNI {
       }
   }
 
-  public final static native String GET_SYSTEM_INFO_get();
-  public final static native String GET_COMPILER_INFO_get();
-  public final static native String GET_OS_NAME_get();
-  public final static native String GET_OSIM_VERSION_get();
-  public final static native void OpenSimVersion_set(String jarg1);
-  public final static native String OpenSimVersion_get();
+  public final static native void opensim_version_common(long jarg1, long jarg2, long jarg3);
+  public final static native void opensim_about_common(String jarg1, int jarg2, String jarg3);
   public final static native String GetVersionAndDate();
   public final static native String GetVersion();
   public final static native String GetOSInfoVerbose();
