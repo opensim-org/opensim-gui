@@ -8,13 +8,13 @@
 
 package org.opensim.modeling;
 
-public class opensimCommon implements opensimCommonConstants {
-  public static void setOpenSimVersion(String value) {
-    opensimCommonJNI.OpenSimVersion_set(value);
+public class opensimCommon {
+  public static void opensim_version_common(SWIGTYPE_p_int major, SWIGTYPE_p_int minor, SWIGTYPE_p_int build) {
+    opensimCommonJNI.opensim_version_common(SWIGTYPE_p_int.getCPtr(major), SWIGTYPE_p_int.getCPtr(minor), SWIGTYPE_p_int.getCPtr(build));
   }
 
-  public static String getOpenSimVersion() {
-    return opensimCommonJNI.OpenSimVersion_get();
+  public static void opensim_about_common(String key, int maxlen, String value) {
+    opensimCommonJNI.opensim_about_common(key, maxlen, value);
   }
 
   public static String GetVersionAndDate() {
