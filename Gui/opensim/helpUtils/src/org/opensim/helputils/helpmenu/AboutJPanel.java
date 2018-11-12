@@ -296,7 +296,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         jTextArea5.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jTextArea5.setLineWrap(true);
         jTextArea5.setRows(5);
-        jTextArea5.setText("To sustain the OpenSim project, please acknowledge us by citing the paper entitled \"OpenSim: Simulating musculoskeletal dynamics and neuromuscular control to study human and animal movement.\" https://doi.org/10.1371/journal.pcbi.100622\n\nFor additional details about how to acknowledge model, software, and simulation developers in your work, see https://simtk-confluence.stanford.edu:8443/display/OpenSim/License+for+OpenSim+3.0+and+Later");
+        jTextArea5.setText("To sustain the OpenSim project, please acknowledge us by citing the paper entitled \"OpenSim: Simulating musculoskeletal dynamics and neuromuscular control to study human and animal movement.\" https://doi.org/10.1371/journal.pcbi.1006223\n\nFor additional details about how to acknowledge model, software, and simulation developers in your work, see https://simtk-confluence.stanford.edu:8443/display/OpenSim/License+for+OpenSim+4.0+and+Later");
         jTextArea5.setWrapStyleWord(true);
         jTextArea5.setAlignmentY(0.0F);
         jTextArea5.setMargin(new java.awt.Insets(0, 5, 0, 0));
