@@ -180,6 +180,7 @@ public class ModelVisualizationJson extends JSONObject {
         ComponentsList mcList = subtreeRoot.getComponentsList();
         ComponentIterator mcIter = mcList.begin();
         mcIter = mcList.begin();
+        mdh.set_show_frames(true); // This is needed so that Frames that are optionally visible are accounted for
         while (!mcIter.equals(mcList.end())) {
             Component comp = mcIter.__deref__();
             boolean visibleStatus = true;
@@ -212,6 +213,7 @@ public class ModelVisualizationJson extends JSONObject {
             }
             mcIter.next();
         }
+        mdh.set_show_frames(false);
         return msg;
     }
 
