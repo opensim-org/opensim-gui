@@ -1,6 +1,6 @@
 #connectRodToGroundWithPinJoint.py
 # This script must be executed following createRodForPendulum.py
-# in order for the 'rode' body to exist.
+# in order for the 'rod' body to exist.
 
 
 # define Frames where joints will attach
