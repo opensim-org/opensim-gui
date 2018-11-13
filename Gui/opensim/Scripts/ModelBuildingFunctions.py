@@ -61,19 +61,19 @@ def connectBodyWithJoint(model, parentFrame, childOnBody, jointName, jointType):
 	model.addJoint(joint)
 	return joint
 
-def addOffsetToFrame(baseFrame, offSetName, trans=None, rot=None):
+def addOffsetToFrame(baseFrame, offsetName, trans=None, rot=None):
 	""" Define a PhysicalOffsetFrame in terms of its translational and rotational
 		offset with respect to a base (Physical) frame and add it to the model.
 		Arguments:
 			baseFrame: the PhysicalFrame in the model to offset.
-		   offSetName: the name (string) of the OffsetFrame to be added
+		   offsetName: the name (string) of the OffsetFrame to be added
 				trans: Translational offset (Vec3) in base frame coordinates
 				  rot: Rotational offset in the base frame as body fixed X-Y-Z Euler angles (Vec3)
 		return:
 			offset: the PhysicalOffsetFrame added to the model
 	"""
 	offset = modeling.PhysicalOffsetFrame()
-	offset.setName(offSetName)
+	offset.setName(offsetName)
 	if not trans is None:
 		offset.set_translation(trans)
 		
