@@ -19,6 +19,7 @@ nuget:
   disable_publish_on_pr: true
 
 environment:
+  # Avoid slow downloads on Azure.
   APPVEYOR_BUILD_ARTIFACT_STORAGE: gce-artifacts-us
 
 init:
