@@ -19,7 +19,7 @@ nuget:
   disable_publish_on_pr: true
 
 environment:
-  SOURCEFORGE_OPENSIM_BOT_PASSWORD:
+  APPVEYOR_BUILD_ARTIFACT_STORAGE: gce-artifacts-us
 
 init:
   ## Set environment variables.
@@ -95,15 +95,15 @@ after_test:
   # - IF DEFINED DISTR 7z a C:\OpenSim-%VERSION%.zip %APPVEYOR_BUILD_FOLDER%\Gui\opensim\dist\installer\opensim\
   # - IF DEFINED DISTR appveyor PushArtifact C:\OpenSim-%VERSION%.zip
 
-deploy:
-  provider: SFTP
-  protocol: ftps
-  host: frs.sourceforge.net
-  username: opensim-bot,myosin
-  password:
-    secure: OlJM0z185NHw/D0pXoEZdw==
-  folder: /home/frs/project/myosin/opensim-gui
-  artifact: OpenSim-%VERSION%-win64.exe
-  # TODO   on:
-  # TODO     branch: master
+# deploy:
+#   provider: SFTP
+#   protocol: ftps
+#   host: frs.sourceforge.net
+#   username: opensim-bot,myosin
+#   password:
+#     secure: OlJM0z185NHw/D0pXoEZdw==
+#   folder: /home/frs/project/myosin/opensim-gui
+#   artifact: OpenSim-%VERSION%-win64.exe
+#   # TODO   on:
+#   # TODO     branch: master
 
