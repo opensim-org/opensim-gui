@@ -28,14 +28,14 @@ def addBodyToModel(model, bodyName):
 	model.addBody(body)
 	return body
 
-def connectBodyWithJoint(model, parentFrame, childOnBody, jointName, jointType):
-	"""Connect a Body in the model according to specified parent and child
-	(on Body) frames by a joint of the specified joint type.
+def connectBodyWithJoint(model, parentFrame, childFrame, jointName, jointType):
+	"""Connect a childFrame on a Body to a parentFrame (on another Body or Ground)  
+	in the model using a Joint of the specified type.
 	Arguments:
 	model: model to be modified.
-	parentFrame: the Body (or affixed Frame) to be connected as the parent frame;
+	parentFrame: the Body (or affixed offset) to be connected as the parent frame;
 				 any PhysicalFrame already in the model is suitable.
-	childOnBody: the child Body (or offset) Frame to be connected as the child frame;
+	childFrame:  the Body (or affixed offset) to be connected as the child frame;
 				 can be any PhysicalFrame that is not the parent Frame.
 	jointName:   name to be given to the newly-created Joint.
 	jointType is one of: 
@@ -57,7 +57,7 @@ def connectBodyWithJoint(model, parentFrame, childOnBody, jointName, jointType):
 	module = sys.modules['org.opensim.modeling']
 	JointClass = getattr(module, jointType)
 	# Instantiate the user-requested Joint class.
-	joint = JointClass(jointName, parentFrame, childOnBody)
+	joint = JointClass(jointName, parentFrame, childFrame)
 	model.addJoint(joint)
 	return joint
 
