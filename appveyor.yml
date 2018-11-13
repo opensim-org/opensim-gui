@@ -103,7 +103,7 @@ deploy:
   password:
     secure: OlJM0z185NHw/D0pXoEZdw==
   folder: /home/frs/project/myosin/opensim-gui
-  artifact: %APPVEYOR_BUILD_FOLDER%/Gui/opensim/dist/installer/OpenSim-%VERSION%-win64.exe
+  artifact: OpenSim-%VERSION%-win64.exe
   # TODO   on:
   # TODO     branch: master
 
