@@ -1,4 +1,7 @@
 #connectRodToGroundWithPinJoint.py
+# This script must be executed following createRodForPendulum.py
+# in order for the 'rode' body to exist.
+
 
 # define Frames where joints will attach
 P_in_g = addOffsetToFrame(ground, 'P_in_ground', modeling.Vec3(0,length,0))
