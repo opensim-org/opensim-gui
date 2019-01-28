@@ -68,7 +68,7 @@ public final class ObjectDisplayColorAction extends ObjectAppearanceChangeAction
 
 
     //--------------------------------------------------------------------------
-    private static void applyOperationToNode(final OneComponentNode objectNode, double[] newColorComponents) {
+    public static void applyOperationToNode(final OneComponentNode objectNode, double[] newColorComponents) {
         boolean hasColor = (objectNode instanceof ColorableInterface);
         if (hasColor) {
             //PropertyEditorAdaptor pea = new PropertyEditorAdaptor("color", objectNode);
