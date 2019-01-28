@@ -50,6 +50,7 @@ import org.eclipse.jetty.WebSocketDB;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openide.awt.StatusDisplayer;
+import org.openide.nodes.Node;
 import org.openide.util.Exceptions;
 import org.openide.util.Lookup;
 import org.openide.util.LookupEvent;
@@ -66,6 +67,7 @@ import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
+import org.opensim.view.nodes.OneComponentNode;
 
 
 /**
@@ -531,10 +533,12 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
           Component mc = Component.safeDownCast(object);
           if (mc!=null){
-              // FOX40 getModelVisuals(mc.getModel()).setObjectColor(object, colorComponents);
+              Node node = ExplorerTopComponent.getDefault().findNodeForObject(object);
+              if (node instanceof OneComponentNode)
+                ObjectDisplayColorAction.applyOperationToNode((OneComponentNode)node, colorComponents);
           }
       
-      renderAll();
+      //renderAll();
    }
    
    /**
@@ -542,8 +546,9 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     */
    //-----------------------------------------------------------------------------
    public static void setObjectOpacity( OpenSimObject object, double newOpacity ) {
-    if (object instanceof Geometry)
-          ((Geometry)object).setOpacity(newOpacity);    
+       Node node = ExplorerTopComponent.getDefault().findNodeForObject(object);
+       if (node instanceof ColorableInterface)
+          ((ColorableInterface) node).setOpacity(newOpacity);
    }
    
    /**
