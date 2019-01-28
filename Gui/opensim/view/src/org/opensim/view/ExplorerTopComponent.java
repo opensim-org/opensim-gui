@@ -360,12 +360,28 @@ final public class ExplorerTopComponent extends TopComponent
         selectNodeForObject(oObject );
     }
     public void selectNodeForObject(OpenSimObject oObject) {
+        Node objectNode = findNodeForObject(oObject);
+        if (objectNode != null) {
+            try {
+                findInstance().getExplorerManager().setSelectedNodes(new Node[]{objectNode});
+                this.setActivatedNodes(new Node[]{objectNode});
+                ((OpenSimNode) objectNode).refreshNode();
+                requestActive();
+            } catch (PropertyVetoException ex) {
+                Exceptions.printStackTrace(ex);
+            }
+        }
+        //return ret;
+    }
+
+    public Node findNodeForObject(OpenSimObject oObject) {
+        Node objectNode = null;
         Children children = getExplorerManager().getRootContext().getChildren();
         Node[] nodes = children.getNodes();
         for (int i = 0; i < nodes.length; i++) {
             if (nodes[i] instanceof OneModelNode) {
                 OneModelNode modelNode = ((OneModelNode) (nodes[i]));
-                Node objectNode = findObjectNode(modelNode, oObject);
+                objectNode = findObjectNode(modelNode, oObject);
                 // Hack to select Muscle based on selected PathPoint
                 if (oObject instanceof AbstractPathPoint){
                     AbstractPathPoint ppt = (AbstractPathPoint)oObject;
@@ -375,23 +391,11 @@ final public class ExplorerTopComponent extends TopComponent
                     
                 }
                 if (objectNode != null) {
-                    try {
-//                        Node[] previouslySelectedNodes = findInstance().getExplorerManager().getSelectedNodes();
-//                        Node[] newSelectedNodes = new Node[previouslySelectedNodes.length+1];
-//                        System.arraycopy(previouslySelectedNodes, 0, newSelectedNodes, 0, previouslySelectedNodes.length);
-//                        newSelectedNodes[previouslySelectedNodes.length] = objectNode;
-                        findInstance().getExplorerManager().setSelectedNodes(new Node[]{objectNode});
-                        this.setActivatedNodes(new Node[]{objectNode});
-                        ((OpenSimNode)objectNode).refreshNode();
-                        requestActive();
-                    } catch (PropertyVetoException ex) {
-                        Exceptions.printStackTrace(ex);
-                    }
                     break;
                 }
             }
         }
-        //return ret;
+        return objectNode;
     }
 
     private Node findObjectNode(Node topNode, OpenSimObject openSimObject) {
