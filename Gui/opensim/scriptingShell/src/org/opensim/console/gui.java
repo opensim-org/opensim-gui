@@ -334,7 +334,13 @@ public final class gui {
      * Perform operation in current graphics window equivalent to pressing c while the window has focus
      * @param c 
      */
-    static public void gfxWindowSendKey(final char c){
+    static public void gfxWindowSendKey(final String s){
+        SwingUtilities.invokeLater(new Runnable(){
+
+            @Override
+            public void run() {
+                ViewDB.getInstance().sendStringToVisualizer(s);
+            }});        
     }
     /**
      * Get the full name of the directory used as a root for the Scripts.

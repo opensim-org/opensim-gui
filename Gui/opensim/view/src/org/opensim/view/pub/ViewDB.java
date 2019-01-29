@@ -1462,4 +1462,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         Vec3 offsetAsVec3 = new Vec3(xValue, yValue, zValue);
         return offsetAsVec3;
     }
+	// Send a String (typically a single letter) to visualizer
+    public void sendStringToVisualizer(final String string){
+        JSONObject msgJson = new JSONObject();
+        msgJson.put("Op", "handleKeyString");
+        msgJson.put("string", string.toUpperCase());
+        WebSocketDB.getInstance().broadcastMessageJson(msgJson, null);
+    }
 }
