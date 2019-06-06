@@ -406,8 +406,8 @@ public class AnnotatedMotion extends Storage {
                 getSize()+"\t"+markerNames.size()+"\tmm\t"+
                 getDataRate()+"\t"+ "1\t"+getSize());
         writer.newLine();
-        writer.write("Frame#      Time ");
-        String headerLine = "   ";
+        writer.write("Frame#\tTime\t");
+        String headerLine = "\t\t";
         for (int i = 0; i < markerNames.size(); i++) {
             writer.write(markerNames.get(i) + "\t\t\t");
             headerLine = headerLine.concat("X" + (i+1) + "\t" + "Y" + (i+1) + "\t" + "Z" + (i+1) + "\t");
