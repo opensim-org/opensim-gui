@@ -231,12 +231,8 @@ public class OpenSimObject {
     return opensimCommonJNI.OpenSimObject_print(swigCPtr, this, fileName);
   }
 
-  public String dump(boolean dumpName) {
-    return opensimCommonJNI.OpenSimObject_dump__SWIG_0(swigCPtr, this, dumpName);
-  }
-
   public String dump() {
-    return opensimCommonJNI.OpenSimObject_dump__SWIG_1(swigCPtr, this);
+    return opensimCommonJNI.OpenSimObject_dump(swigCPtr, this);
   }
 
   public static String getClassName() {

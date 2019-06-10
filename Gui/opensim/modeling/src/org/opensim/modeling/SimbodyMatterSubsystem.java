@@ -99,16 +99,16 @@ public class SimbodyMatterSubsystem {
     opensimSimbodyJNI.SimbodyMatterSubsystem_calcSystemJacobian__SWIG_1(swigCPtr, this, State.getCPtr(state), state, Matrix.getCPtr(J_G), J_G);
   }
 
-  public void multiplyByStationJacobian(State state, SimTKArrayMobilizedBodyIndex onBodyB, SimTKArrayVec3 stationPInB, Vector u, VectorOfVec3 JSu) {
-    opensimSimbodyJNI.SimbodyMatterSubsystem_multiplyByStationJacobian__SWIG_0(swigCPtr, this, State.getCPtr(state), state, SimTKArrayMobilizedBodyIndex.getCPtr(onBodyB), onBodyB, SimTKArrayVec3.getCPtr(stationPInB), stationPInB, Vector.getCPtr(u), u, VectorOfVec3.getCPtr(JSu), JSu);
+  public void multiplyByStationJacobian(State state, SimTKArrayMobilizedBodyIndex onBodyB, SimTKArrayVec3 stationPInB, Vector u, VectorVec3 JSu) {
+    opensimSimbodyJNI.SimbodyMatterSubsystem_multiplyByStationJacobian__SWIG_0(swigCPtr, this, State.getCPtr(state), state, SimTKArrayMobilizedBodyIndex.getCPtr(onBodyB), onBodyB, SimTKArrayVec3.getCPtr(stationPInB), stationPInB, Vector.getCPtr(u), u, VectorVec3.getCPtr(JSu), JSu);
   }
 
   public Vec3 multiplyByStationJacobian(State state, int onBodyB, Vec3 stationPInB, Vector u) {
     return new Vec3(opensimSimbodyJNI.SimbodyMatterSubsystem_multiplyByStationJacobian__SWIG_1(swigCPtr, this, State.getCPtr(state), state, onBodyB, Vec3.getCPtr(stationPInB), stationPInB, Vector.getCPtr(u), u), true);
   }
 
-  public void multiplyByStationJacobianTranspose(State state, SimTKArrayMobilizedBodyIndex onBodyB, SimTKArrayVec3 stationPInB, VectorOfVec3 f_GP, Vector f) {
-    opensimSimbodyJNI.SimbodyMatterSubsystem_multiplyByStationJacobianTranspose__SWIG_0(swigCPtr, this, State.getCPtr(state), state, SimTKArrayMobilizedBodyIndex.getCPtr(onBodyB), onBodyB, SimTKArrayVec3.getCPtr(stationPInB), stationPInB, VectorOfVec3.getCPtr(f_GP), f_GP, Vector.getCPtr(f), f);
+  public void multiplyByStationJacobianTranspose(State state, SimTKArrayMobilizedBodyIndex onBodyB, SimTKArrayVec3 stationPInB, VectorVec3 f_GP, Vector f) {
+    opensimSimbodyJNI.SimbodyMatterSubsystem_multiplyByStationJacobianTranspose__SWIG_0(swigCPtr, this, State.getCPtr(state), state, SimTKArrayMobilizedBodyIndex.getCPtr(onBodyB), onBodyB, SimTKArrayVec3.getCPtr(stationPInB), stationPInB, VectorVec3.getCPtr(f_GP), f_GP, Vector.getCPtr(f), f);
   }
 
   public void multiplyByStationJacobianTranspose(State state, int onBodyB, Vec3 stationPInB, Vec3 f_GP, Vector f) {
@@ -119,8 +119,8 @@ public class SimbodyMatterSubsystem {
     opensimSimbodyJNI.SimbodyMatterSubsystem_calcStationJacobian__SWIG_0(swigCPtr, this, State.getCPtr(state), state, SimTKArrayMobilizedBodyIndex.getCPtr(onBodyB), onBodyB, SimTKArrayVec3.getCPtr(stationPInB), stationPInB, MatrixVec3.getCPtr(JS), JS);
   }
 
-  public void calcStationJacobian(State state, int onBodyB, Vec3 stationPInB, RowVectorOfVec3 JS) {
-    opensimSimbodyJNI.SimbodyMatterSubsystem_calcStationJacobian__SWIG_1(swigCPtr, this, State.getCPtr(state), state, onBodyB, Vec3.getCPtr(stationPInB), stationPInB, RowVectorOfVec3.getCPtr(JS), JS);
+  public void calcStationJacobian(State state, int onBodyB, Vec3 stationPInB, RowVectorVec3 JS) {
+    opensimSimbodyJNI.SimbodyMatterSubsystem_calcStationJacobian__SWIG_1(swigCPtr, this, State.getCPtr(state), state, onBodyB, Vec3.getCPtr(stationPInB), stationPInB, RowVectorVec3.getCPtr(JS), JS);
   }
 
   public void calcStationJacobian(State state, SimTKArrayMobilizedBodyIndex onBodyB, SimTKArrayVec3 stationPInB, Matrix JS) {
@@ -131,8 +131,8 @@ public class SimbodyMatterSubsystem {
     opensimSimbodyJNI.SimbodyMatterSubsystem_calcStationJacobian__SWIG_3(swigCPtr, this, State.getCPtr(state), state, onBodyB, Vec3.getCPtr(stationPInB), stationPInB, Matrix.getCPtr(JS), JS);
   }
 
-  public void calcBiasForStationJacobian(State state, SimTKArrayMobilizedBodyIndex onBodyB, SimTKArrayVec3 stationPInB, VectorOfVec3 JSDotu) {
-    opensimSimbodyJNI.SimbodyMatterSubsystem_calcBiasForStationJacobian__SWIG_0(swigCPtr, this, State.getCPtr(state), state, SimTKArrayMobilizedBodyIndex.getCPtr(onBodyB), onBodyB, SimTKArrayVec3.getCPtr(stationPInB), stationPInB, VectorOfVec3.getCPtr(JSDotu), JSDotu);
+  public void calcBiasForStationJacobian(State state, SimTKArrayMobilizedBodyIndex onBodyB, SimTKArrayVec3 stationPInB, VectorVec3 JSDotu) {
+    opensimSimbodyJNI.SimbodyMatterSubsystem_calcBiasForStationJacobian__SWIG_0(swigCPtr, this, State.getCPtr(state), state, SimTKArrayMobilizedBodyIndex.getCPtr(onBodyB), onBodyB, SimTKArrayVec3.getCPtr(stationPInB), stationPInB, VectorVec3.getCPtr(JSDotu), JSDotu);
   }
 
   public void calcBiasForStationJacobian(State state, SimTKArrayMobilizedBodyIndex onBodyB, SimTKArrayVec3 stationPInB, Vector JSDotu) {

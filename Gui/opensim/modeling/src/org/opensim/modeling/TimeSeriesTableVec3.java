@@ -89,8 +89,8 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
     return new RowVectorViewVec3(opensimCommonJNI.TimeSeriesTableVec3_updNearestRow__SWIG_1(swigCPtr, this, time), true);
   }
 
-  public RowVectorOfVec3 averageRow(double beginTime, double endTime) {
-    return new RowVectorOfVec3(opensimCommonJNI.TimeSeriesTableVec3_averageRow(swigCPtr, this, beginTime, endTime), true);
+  public RowVectorVec3 averageRow(double beginTime, double endTime) {
+    return new RowVectorVec3(opensimCommonJNI.TimeSeriesTableVec3_averageRow(swigCPtr, this, beginTime, endTime), true);
   }
 
   public TimeSeriesTableVec3 clone() {

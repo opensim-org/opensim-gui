@@ -319,6 +319,10 @@ public class ComponentIterator {
     return opensimCommonJNI.ComponentIterator_print(swigCPtr, this, fileName);
   }
 
+  public String dump() {
+    return opensimCommonJNI.ComponentIterator_dump(swigCPtr, this);
+  }
+
   public boolean isA(String type) {
     return opensimCommonJNI.ComponentIterator_isA(swigCPtr, this, type);
   }

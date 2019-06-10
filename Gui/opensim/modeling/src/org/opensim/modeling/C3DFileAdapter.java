@@ -58,12 +58,12 @@ public class C3DFileAdapter extends FileAdapter {
     return C3DFileAdapter.ForceLocation.swigToEnum(opensimCommonJNI.C3DFileAdapter_getLocationForForceExpression(swigCPtr, this));
   }
 
-  public static StdMapStringTimeSeriesTableVec3 read(String fileName, C3DFileAdapter.ForceLocation wrt) {
-    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_read__SWIG_0(fileName, wrt.swigValue()), true);
+  public static StdMapStringTimeSeriesTableVec3 readFile(String fileName, C3DFileAdapter.ForceLocation wrt) {
+    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_readFile__SWIG_0(fileName, wrt.swigValue()), true);
   }
 
-  public static StdMapStringTimeSeriesTableVec3 read(String fileName) {
-    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_read__SWIG_1(fileName), true);
+  public static StdMapStringTimeSeriesTableVec3 readFile(String fileName) {
+    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_readFile__SWIG_1(fileName), true);
   }
 
   public static void write(StdMapStringTimeSeriesTableVec3 markerTable, String fileName) {
@@ -78,8 +78,8 @@ public class C3DFileAdapter extends FileAdapter {
     return opensimCommonJNI.C3DFileAdapter__forces_get();
   }
 
-  public StdMapStringTimeSeriesTableVec3 read(String fileName, long wrt) {
-    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_read__SWIG_2(swigCPtr, this, fileName, wrt), true);
+  public StdMapStringTimeSeriesTableVec3 readFile(String fileName, long wrt) {
+    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_readFile__SWIG_2(swigCPtr, this, fileName, wrt), true);
   }
 
   public final static class ForceLocation {

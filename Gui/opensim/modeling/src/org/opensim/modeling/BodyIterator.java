@@ -146,6 +146,10 @@ public class BodyIterator {
     return opensimSimulationJNI.BodyIterator__has_output_position_get(swigCPtr, this);
   }
 
+  public boolean get_has_output_rotation() {
+    return opensimSimulationJNI.BodyIterator__has_output_rotation_get(swigCPtr, this);
+  }
+
   public boolean get_has_output_transform() {
     return opensimSimulationJNI.BodyIterator__has_output_transform_get(swigCPtr, this);
   }
@@ -240,6 +244,10 @@ public class BodyIterator {
 
   public Vec3 getPositionInGround(State state) {
     return new Vec3(opensimSimulationJNI.BodyIterator_getPositionInGround(swigCPtr, this, State.getCPtr(state), state), true);
+  }
+
+  public SWIGTYPE_p_SimTK__Rotation_T_SimTK__Real_t getRotationInGround(State state) {
+    return new SWIGTYPE_p_SimTK__Rotation_T_SimTK__Real_t(opensimSimulationJNI.BodyIterator_getRotationInGround(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
   public Model getModel() {
@@ -502,6 +510,10 @@ public class BodyIterator {
 
   public boolean print(String fileName) {
     return opensimSimulationJNI.BodyIterator_print(swigCPtr, this, fileName);
+  }
+
+  public String dump() {
+    return opensimSimulationJNI.BodyIterator_dump(swigCPtr, this);
   }
 
   public boolean isA(String type) {

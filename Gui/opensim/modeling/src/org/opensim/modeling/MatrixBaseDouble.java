@@ -59,10 +59,6 @@ public class MatrixBaseDouble {
     opensimSimbodyJNI.MatrixBaseDouble_clear(swigCPtr, this);
   }
 
-  public MatrixBaseDouble elementwiseAssign(int s) {
-    return new MatrixBaseDouble(opensimSimbodyJNI.MatrixBaseDouble_elementwiseAssign(swigCPtr, this, s), false);
-  }
-
   public MatrixBaseDouble setTo(double t) {
     return new MatrixBaseDouble(opensimSimbodyJNI.MatrixBaseDouble_setTo(swigCPtr, this, t), false);
   }

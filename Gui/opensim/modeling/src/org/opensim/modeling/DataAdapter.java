@@ -44,4 +44,13 @@ public class DataAdapter {
     return opensimCommonJNI.DataAdapter_registerDataAdapter(identifier, DataAdapter.getCPtr(adapter), adapter);
   }
 
+  public StdMapStringAbstractDataTable read(String dataSourceSpecification) {
+    return new StdMapStringAbstractDataTable(opensimCommonJNI.DataAdapter_read(swigCPtr, this, dataSourceSpecification), true);
+  }
+
+  public AbstractDataTable getDataTable(StdMapStringAbstractDataTable tables, String tableName) {
+    long cPtr = opensimCommonJNI.DataAdapter_getDataTable(swigCPtr, this, StdMapStringAbstractDataTable.getCPtr(tables), tables, tableName);
+    return (cPtr == 0) ? null : new AbstractDataTable(cPtr, true);
+  }
+
 }

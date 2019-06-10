@@ -225,6 +225,10 @@ public class MarkersReference extends ReferenceVec3 {
     return opensimSimulationJNI.MarkersReference_getSamplingFrequency(swigCPtr, this);
   }
 
+  public SetMarkerWeights getMarkerWeightSet() {
+    return new SetMarkerWeights(opensimSimulationJNI.MarkersReference_getMarkerWeightSet(swigCPtr, this), false);
+  }
+
   public SetMarkerWeights updMarkerWeightSet() {
     return new SetMarkerWeights(opensimSimulationJNI.MarkersReference_updMarkerWeightSet(swigCPtr, this), false);
   }
