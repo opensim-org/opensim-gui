@@ -61,48 +61,48 @@ public class DataTableQuaternion extends AbstractDataTable {
     return opensimCommonJNI.DataTableQuaternion_numComponentsPerElement(swigCPtr, this);
   }
 
-  public void appendRow(double indRow, SWIGTYPE_p_std__initializer_listT_SimTK__Quaternion_t container) {
-    opensimCommonJNI.DataTableQuaternion_appendRow__SWIG_1(swigCPtr, this, indRow, SWIGTYPE_p_std__initializer_listT_SimTK__Quaternion_t.getCPtr(container));
+  public void appendRow(double indRow, SWIGTYPE_p_std__initializer_listT_SimTK__Quaternion_T_double_t_t container) {
+    opensimCommonJNI.DataTableQuaternion_appendRow__SWIG_1(swigCPtr, this, indRow, SWIGTYPE_p_std__initializer_listT_SimTK__Quaternion_T_double_t_t.getCPtr(container));
   }
 
-  public void appendRow(double indRow, SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t depRow) {
-    opensimCommonJNI.DataTableQuaternion_appendRow__SWIG_3(swigCPtr, this, indRow, SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t.getCPtr(depRow));
+  public void appendRow(double indRow, RowVectorQuaternion depRow) {
+    opensimCommonJNI.DataTableQuaternion_appendRow__SWIG_3(swigCPtr, this, indRow, RowVectorQuaternion.getCPtr(depRow), depRow);
   }
 
-  public void appendRow(double indRow, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t depRow) {
-    opensimCommonJNI.DataTableQuaternion_appendRow__SWIG_4(swigCPtr, this, indRow, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t.getCPtr(depRow));
+  public void appendRow(double indRow, RowVectorViewQuaternion depRow) {
+    opensimCommonJNI.DataTableQuaternion_appendRow__SWIG_4(swigCPtr, this, indRow, RowVectorViewQuaternion.getCPtr(depRow), depRow);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t getRowAtIndex(long index) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.DataTableQuaternion_getRowAtIndex(swigCPtr, this, index), true);
+  public RowVectorViewQuaternion getRowAtIndex(long index) {
+    return new RowVectorViewQuaternion(opensimCommonJNI.DataTableQuaternion_getRowAtIndex(swigCPtr, this, index), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t getRow(double ind) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.DataTableQuaternion_getRow(swigCPtr, this, ind), true);
+  public RowVectorViewQuaternion getRow(double ind) {
+    return new RowVectorViewQuaternion(opensimCommonJNI.DataTableQuaternion_getRow(swigCPtr, this, ind), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t updRowAtIndex(long index) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.DataTableQuaternion_updRowAtIndex(swigCPtr, this, index), true);
+  public RowVectorViewQuaternion updRowAtIndex(long index) {
+    return new RowVectorViewQuaternion(opensimCommonJNI.DataTableQuaternion_updRowAtIndex(swigCPtr, this, index), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t updRow(double ind) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.DataTableQuaternion_updRow(swigCPtr, this, ind), true);
+  public RowVectorViewQuaternion updRow(double ind) {
+    return new RowVectorViewQuaternion(opensimCommonJNI.DataTableQuaternion_updRow(swigCPtr, this, ind), true);
   }
 
-  public void setRowAtIndex(long index, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t depRow) {
-    opensimCommonJNI.DataTableQuaternion_setRowAtIndex__SWIG_0(swigCPtr, this, index, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t.getCPtr(depRow));
+  public void setRowAtIndex(long index, RowVectorViewQuaternion depRow) {
+    opensimCommonJNI.DataTableQuaternion_setRowAtIndex__SWIG_0(swigCPtr, this, index, RowVectorViewQuaternion.getCPtr(depRow), depRow);
   }
 
-  public void setRowAtIndex(long index, SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t depRow) {
-    opensimCommonJNI.DataTableQuaternion_setRowAtIndex__SWIG_1(swigCPtr, this, index, SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t.getCPtr(depRow));
+  public void setRowAtIndex(long index, RowVectorQuaternion depRow) {
+    opensimCommonJNI.DataTableQuaternion_setRowAtIndex__SWIG_1(swigCPtr, this, index, RowVectorQuaternion.getCPtr(depRow), depRow);
   }
 
-  public void setRow(double ind, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t depRow) {
-    opensimCommonJNI.DataTableQuaternion_setRow__SWIG_0(swigCPtr, this, ind, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t.getCPtr(depRow));
+  public void setRow(double ind, RowVectorViewQuaternion depRow) {
+    opensimCommonJNI.DataTableQuaternion_setRow__SWIG_0(swigCPtr, this, ind, RowVectorViewQuaternion.getCPtr(depRow), depRow);
   }
 
-  public void setRow(double ind, SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t depRow) {
-    opensimCommonJNI.DataTableQuaternion_setRow__SWIG_1(swigCPtr, this, ind, SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t.getCPtr(depRow));
+  public void setRow(double ind, RowVectorQuaternion depRow) {
+    opensimCommonJNI.DataTableQuaternion_setRow__SWIG_1(swigCPtr, this, ind, RowVectorQuaternion.getCPtr(depRow), depRow);
   }
 
   public void removeRowAtIndex(long index) {
@@ -117,52 +117,52 @@ public class DataTableQuaternion extends AbstractDataTable {
     return new StdVectorDouble(opensimCommonJNI.DataTableQuaternion_getIndependentColumn(swigCPtr, this), false);
   }
 
-  public void appendColumn(String columnLabel, SWIGTYPE_p_std__initializer_listT_SimTK__Quaternion_t container) {
-    opensimCommonJNI.DataTableQuaternion_appendColumn__SWIG_1(swigCPtr, this, columnLabel, SWIGTYPE_p_std__initializer_listT_SimTK__Quaternion_t.getCPtr(container));
+  public void appendColumn(String columnLabel, SWIGTYPE_p_std__initializer_listT_SimTK__Quaternion_T_double_t_t container) {
+    opensimCommonJNI.DataTableQuaternion_appendColumn__SWIG_1(swigCPtr, this, columnLabel, SWIGTYPE_p_std__initializer_listT_SimTK__Quaternion_T_double_t_t.getCPtr(container));
   }
 
-  public void appendColumn(String columnLabel, SWIGTYPE_p_SimTK__Vector_T_SimTK__Quaternion_t depCol) {
-    opensimCommonJNI.DataTableQuaternion_appendColumn__SWIG_3(swigCPtr, this, columnLabel, SWIGTYPE_p_SimTK__Vector_T_SimTK__Quaternion_t.getCPtr(depCol));
+  public void appendColumn(String columnLabel, VectorQuaternion depCol) {
+    opensimCommonJNI.DataTableQuaternion_appendColumn__SWIG_3(swigCPtr, this, columnLabel, VectorQuaternion.getCPtr(depCol), depCol);
   }
 
-  public void appendColumn(String columnLabel, SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_t depCol) {
-    opensimCommonJNI.DataTableQuaternion_appendColumn__SWIG_4(swigCPtr, this, columnLabel, SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_t.getCPtr(depCol));
+  public void appendColumn(String columnLabel, SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t depCol) {
+    opensimCommonJNI.DataTableQuaternion_appendColumn__SWIG_4(swigCPtr, this, columnLabel, SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t.getCPtr(depCol));
   }
 
-  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_t getDependentColumnAtIndex(long index) {
-    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_t(opensimCommonJNI.DataTableQuaternion_getDependentColumnAtIndex(swigCPtr, this, index), true);
+  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t getDependentColumnAtIndex(long index) {
+    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t(opensimCommonJNI.DataTableQuaternion_getDependentColumnAtIndex(swigCPtr, this, index), true);
   }
 
-  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_t getDependentColumn(String columnLabel) {
-    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_t(opensimCommonJNI.DataTableQuaternion_getDependentColumn(swigCPtr, this, columnLabel), true);
+  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t getDependentColumn(String columnLabel) {
+    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t(opensimCommonJNI.DataTableQuaternion_getDependentColumn(swigCPtr, this, columnLabel), true);
   }
 
-  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_t updDependentColumnAtIndex(long index) {
-    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_t(opensimCommonJNI.DataTableQuaternion_updDependentColumnAtIndex(swigCPtr, this, index), true);
+  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t updDependentColumnAtIndex(long index) {
+    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t(opensimCommonJNI.DataTableQuaternion_updDependentColumnAtIndex(swigCPtr, this, index), true);
   }
 
-  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_t updDependentColumn(String columnLabel) {
-    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_t(opensimCommonJNI.DataTableQuaternion_updDependentColumn(swigCPtr, this, columnLabel), true);
+  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t updDependentColumn(String columnLabel) {
+    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t(opensimCommonJNI.DataTableQuaternion_updDependentColumn(swigCPtr, this, columnLabel), true);
   }
 
   public void setIndependentValueAtIndex(long rowIndex, double value) {
     opensimCommonJNI.DataTableQuaternion_setIndependentValueAtIndex(swigCPtr, this, rowIndex, value);
   }
 
-  public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_t getMatrix() {
-    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_t(opensimCommonJNI.DataTableQuaternion_getMatrix(swigCPtr, this), false);
+  public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_T_double_t_t getMatrix() {
+    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_T_double_t_t(opensimCommonJNI.DataTableQuaternion_getMatrix(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_t getMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
-    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_t(opensimCommonJNI.DataTableQuaternion_getMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
+  public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_T_double_t_t getMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
+    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_T_double_t_t(opensimCommonJNI.DataTableQuaternion_getMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
   }
 
-  public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_t updMatrix() {
-    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_t(opensimCommonJNI.DataTableQuaternion_updMatrix(swigCPtr, this), false);
+  public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_T_double_t_t updMatrix() {
+    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_T_double_t_t(opensimCommonJNI.DataTableQuaternion_updMatrix(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_t updMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
-    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_t(opensimCommonJNI.DataTableQuaternion_updMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
+  public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_T_double_t_t updMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
+    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__Quaternion_T_double_t_t(opensimCommonJNI.DataTableQuaternion_updMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
   }
 
   public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData, long splitSize, long maxWidth, long precision) {

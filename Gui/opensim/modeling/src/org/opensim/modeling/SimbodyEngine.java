@@ -90,8 +90,8 @@ public class SimbodyEngine extends OpenSimObject {
     opensimSimulationJNI.SimbodyEngine_connectSimbodyEngineToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
-  public void computeReactions(State s, VectorOfVec3 rForces, VectorOfVec3 rTorques) {
-    opensimSimulationJNI.SimbodyEngine_computeReactions(swigCPtr, this, State.getCPtr(s), s, VectorOfVec3.getCPtr(rForces), rForces, VectorOfVec3.getCPtr(rTorques), rTorques);
+  public void computeReactions(State s, VectorVec3 rForces, VectorVec3 rTorques) {
+    opensimSimulationJNI.SimbodyEngine_computeReactions(swigCPtr, this, State.getCPtr(s), s, VectorVec3.getCPtr(rForces), rForces, VectorVec3.getCPtr(rTorques), rTorques);
   }
 
   public void formCompleteStorages(State s, Storage aQIn, SWIGTYPE_p_p_OpenSim__Storage rQComplete, SWIGTYPE_p_p_OpenSim__Storage rUComplete) {

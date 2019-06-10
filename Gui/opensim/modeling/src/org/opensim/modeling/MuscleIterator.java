@@ -867,6 +867,10 @@ public class MuscleIterator {
     return opensimSimulationJNI.MuscleIterator_print(swigCPtr, this, fileName);
   }
 
+  public String dump() {
+    return opensimSimulationJNI.MuscleIterator_dump(swigCPtr, this);
+  }
+
   public boolean isA(String type) {
     return opensimSimulationJNI.MuscleIterator_isA(swigCPtr, this, type);
   }

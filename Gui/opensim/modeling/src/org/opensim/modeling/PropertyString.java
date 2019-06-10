@@ -65,11 +65,7 @@ public class PropertyString extends AbstractProperty {
   }
 
   public int appendValue(String value) {
-    return opensimCommonJNI.PropertyString_appendValue__SWIG_0(swigCPtr, this, value);
-  }
-
-  public int appendValue(SWIGTYPE_p_std__string value) {
-    return opensimCommonJNI.PropertyString_appendValue__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(value));
+    return opensimCommonJNI.PropertyString_appendValue(swigCPtr, this, value);
   }
 
   public int adoptAndAppendValue(SWIGTYPE_p_std__string value) {

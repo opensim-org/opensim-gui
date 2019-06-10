@@ -45,8 +45,8 @@ public class TimeSeriesTableVec6 extends DataTableVec6 {
     this(opensimCommonJNI.new_TimeSeriesTableVec6__SWIG_1(TimeSeriesTableVec6.getCPtr(arg0), arg0), true);
   }
 
-  public TimeSeriesTableVec6(StdVectorDouble indVec, SWIGTYPE_p_SimTK__Matrix_T_SimTK__VecT_6_double_1_t_t depData, StdVectorString labels) {
-    this(opensimCommonJNI.new_TimeSeriesTableVec6__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, SWIGTYPE_p_SimTK__Matrix_T_SimTK__VecT_6_double_1_t_t.getCPtr(depData), StdVectorString.getCPtr(labels), labels), true);
+  public TimeSeriesTableVec6(StdVectorDouble indVec, MatrixVec6 depData, StdVectorString labels) {
+    this(opensimCommonJNI.new_TimeSeriesTableVec6__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, MatrixVec6.getCPtr(depData), depData, StdVectorString.getCPtr(labels), labels), true);
   }
 
   public TimeSeriesTableVec6(StdVectorDouble indVec) {
@@ -73,24 +73,24 @@ public class TimeSeriesTableVec6 extends DataTableVec6 {
     return opensimCommonJNI.TimeSeriesTableVec6_getNearestRowIndexForTime__SWIG_1(swigCPtr, this, time);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t getNearestRow(double time, boolean restrictToTimeRange) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.TimeSeriesTableVec6_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+  public RowVectorViewVec6 getNearestRow(double time, boolean restrictToTimeRange) {
+    return new RowVectorViewVec6(opensimCommonJNI.TimeSeriesTableVec6_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t getNearestRow(double time) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.TimeSeriesTableVec6_getNearestRow__SWIG_1(swigCPtr, this, time), true);
+  public RowVectorViewVec6 getNearestRow(double time) {
+    return new RowVectorViewVec6(opensimCommonJNI.TimeSeriesTableVec6_getNearestRow__SWIG_1(swigCPtr, this, time), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t updNearestRow(double time, boolean restrictToTimeRange) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.TimeSeriesTableVec6_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+  public RowVectorViewVec6 updNearestRow(double time, boolean restrictToTimeRange) {
+    return new RowVectorViewVec6(opensimCommonJNI.TimeSeriesTableVec6_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t updNearestRow(double time) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.TimeSeriesTableVec6_updNearestRow__SWIG_1(swigCPtr, this, time), true);
+  public RowVectorViewVec6 updNearestRow(double time) {
+    return new RowVectorViewVec6(opensimCommonJNI.TimeSeriesTableVec6_updNearestRow__SWIG_1(swigCPtr, this, time), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t averageRow(double beginTime, double endTime) {
-    return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.TimeSeriesTableVec6_averageRow(swigCPtr, this, beginTime, endTime), true);
+  public RowVectorVec6 averageRow(double beginTime, double endTime) {
+    return new RowVectorVec6(opensimCommonJNI.TimeSeriesTableVec6_averageRow(swigCPtr, this, beginTime, endTime), true);
   }
 
   public TimeSeriesTableVec6 clone() {

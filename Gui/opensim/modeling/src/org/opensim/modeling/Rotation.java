@@ -335,12 +335,20 @@ public class Rotation extends Mat33 {
     return new Vec3(opensimSimbodyJNI.Rotation_multiply__SWIG_0(swigCPtr, this, Vec3.getCPtr(v), v), true);
   }
 
-  public RowVectorOfVec3 multiply(RowVectorOfVec3 row) {
-    return new RowVectorOfVec3(opensimSimbodyJNI.Rotation_multiply__SWIG_1(swigCPtr, this, RowVectorOfVec3.getCPtr(row), row), true);
+  public Rotation multiply(Rotation r) {
+    return new Rotation(opensimSimbodyJNI.Rotation_multiply__SWIG_1(swigCPtr, this, Rotation.getCPtr(r), r), true);
   }
 
-  public RowVectorOfVec3 multiply(RowVectorViewVec3 row) {
-    return new RowVectorOfVec3(opensimSimbodyJNI.Rotation_multiply__SWIG_2(swigCPtr, this, RowVectorViewVec3.getCPtr(row), row), true);
+  public Rotation multiply(InverseRotation r) {
+    return new Rotation(opensimSimbodyJNI.Rotation_multiply__SWIG_2(swigCPtr, this, InverseRotation.getCPtr(r), r), true);
+  }
+
+  public RowVectorVec3 multiply(RowVectorVec3 row) {
+    return new RowVectorVec3(opensimSimbodyJNI.Rotation_multiply__SWIG_3(swigCPtr, this, RowVectorVec3.getCPtr(row), row), true);
+  }
+
+  public RowVectorVec3 multiply(RowVectorViewVec3 row) {
+    return new RowVectorVec3(opensimSimbodyJNI.Rotation_multiply__SWIG_4(swigCPtr, this, RowVectorViewVec3.getCPtr(row), row), true);
   }
 
 }

@@ -65,44 +65,44 @@ public class DataTableVec6 extends AbstractDataTable {
     opensimCommonJNI.DataTableVec6_appendRow__SWIG_1(swigCPtr, this, indRow, SWIGTYPE_p_std__initializer_listT_SimTK__VecT_6_double_1_t_t.getCPtr(container));
   }
 
-  public void appendRow(double indRow, SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t depRow) {
-    opensimCommonJNI.DataTableVec6_appendRow__SWIG_3(swigCPtr, this, indRow, SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t.getCPtr(depRow));
+  public void appendRow(double indRow, RowVectorVec6 depRow) {
+    opensimCommonJNI.DataTableVec6_appendRow__SWIG_3(swigCPtr, this, indRow, RowVectorVec6.getCPtr(depRow), depRow);
   }
 
-  public void appendRow(double indRow, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t depRow) {
-    opensimCommonJNI.DataTableVec6_appendRow__SWIG_4(swigCPtr, this, indRow, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t.getCPtr(depRow));
+  public void appendRow(double indRow, RowVectorViewVec6 depRow) {
+    opensimCommonJNI.DataTableVec6_appendRow__SWIG_4(swigCPtr, this, indRow, RowVectorViewVec6.getCPtr(depRow), depRow);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t getRowAtIndex(long index) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.DataTableVec6_getRowAtIndex(swigCPtr, this, index), true);
+  public RowVectorViewVec6 getRowAtIndex(long index) {
+    return new RowVectorViewVec6(opensimCommonJNI.DataTableVec6_getRowAtIndex(swigCPtr, this, index), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t getRow(double ind) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.DataTableVec6_getRow(swigCPtr, this, ind), true);
+  public RowVectorViewVec6 getRow(double ind) {
+    return new RowVectorViewVec6(opensimCommonJNI.DataTableVec6_getRow(swigCPtr, this, ind), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t updRowAtIndex(long index) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.DataTableVec6_updRowAtIndex(swigCPtr, this, index), true);
+  public RowVectorViewVec6 updRowAtIndex(long index) {
+    return new RowVectorViewVec6(opensimCommonJNI.DataTableVec6_updRowAtIndex(swigCPtr, this, index), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t updRow(double ind) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.DataTableVec6_updRow(swigCPtr, this, ind), true);
+  public RowVectorViewVec6 updRow(double ind) {
+    return new RowVectorViewVec6(opensimCommonJNI.DataTableVec6_updRow(swigCPtr, this, ind), true);
   }
 
-  public void setRowAtIndex(long index, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t depRow) {
-    opensimCommonJNI.DataTableVec6_setRowAtIndex__SWIG_0(swigCPtr, this, index, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t.getCPtr(depRow));
+  public void setRowAtIndex(long index, RowVectorViewVec6 depRow) {
+    opensimCommonJNI.DataTableVec6_setRowAtIndex__SWIG_0(swigCPtr, this, index, RowVectorViewVec6.getCPtr(depRow), depRow);
   }
 
-  public void setRowAtIndex(long index, SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t depRow) {
-    opensimCommonJNI.DataTableVec6_setRowAtIndex__SWIG_1(swigCPtr, this, index, SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t.getCPtr(depRow));
+  public void setRowAtIndex(long index, RowVectorVec6 depRow) {
+    opensimCommonJNI.DataTableVec6_setRowAtIndex__SWIG_1(swigCPtr, this, index, RowVectorVec6.getCPtr(depRow), depRow);
   }
 
-  public void setRow(double ind, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t depRow) {
-    opensimCommonJNI.DataTableVec6_setRow__SWIG_0(swigCPtr, this, ind, SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_6_double_1_t_t.getCPtr(depRow));
+  public void setRow(double ind, RowVectorViewVec6 depRow) {
+    opensimCommonJNI.DataTableVec6_setRow__SWIG_0(swigCPtr, this, ind, RowVectorViewVec6.getCPtr(depRow), depRow);
   }
 
-  public void setRow(double ind, SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t depRow) {
-    opensimCommonJNI.DataTableVec6_setRow__SWIG_1(swigCPtr, this, ind, SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_6_double_1_t_t.getCPtr(depRow));
+  public void setRow(double ind, RowVectorVec6 depRow) {
+    opensimCommonJNI.DataTableVec6_setRow__SWIG_1(swigCPtr, this, ind, RowVectorVec6.getCPtr(depRow), depRow);
   }
 
   public void removeRowAtIndex(long index) {
@@ -121,48 +121,48 @@ public class DataTableVec6 extends AbstractDataTable {
     opensimCommonJNI.DataTableVec6_appendColumn__SWIG_1(swigCPtr, this, columnLabel, SWIGTYPE_p_std__initializer_listT_SimTK__VecT_6_double_1_t_t.getCPtr(container));
   }
 
-  public void appendColumn(String columnLabel, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_6_double_1_t_t depCol) {
-    opensimCommonJNI.DataTableVec6_appendColumn__SWIG_3(swigCPtr, this, columnLabel, SWIGTYPE_p_SimTK__Vector_T_SimTK__VecT_6_double_1_t_t.getCPtr(depCol));
+  public void appendColumn(String columnLabel, VectorVec6 depCol) {
+    opensimCommonJNI.DataTableVec6_appendColumn__SWIG_3(swigCPtr, this, columnLabel, VectorVec6.getCPtr(depCol), depCol);
   }
 
-  public void appendColumn(String columnLabel, SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_6_double_1_t_t depCol) {
-    opensimCommonJNI.DataTableVec6_appendColumn__SWIG_4(swigCPtr, this, columnLabel, SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_6_double_1_t_t.getCPtr(depCol));
+  public void appendColumn(String columnLabel, VectorViewVec6 depCol) {
+    opensimCommonJNI.DataTableVec6_appendColumn__SWIG_4(swigCPtr, this, columnLabel, VectorViewVec6.getCPtr(depCol), depCol);
   }
 
-  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_6_double_1_t_t getDependentColumnAtIndex(long index) {
-    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.DataTableVec6_getDependentColumnAtIndex(swigCPtr, this, index), true);
+  public VectorViewVec6 getDependentColumnAtIndex(long index) {
+    return new VectorViewVec6(opensimCommonJNI.DataTableVec6_getDependentColumnAtIndex(swigCPtr, this, index), true);
   }
 
-  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_6_double_1_t_t getDependentColumn(String columnLabel) {
-    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.DataTableVec6_getDependentColumn(swigCPtr, this, columnLabel), true);
+  public VectorViewVec6 getDependentColumn(String columnLabel) {
+    return new VectorViewVec6(opensimCommonJNI.DataTableVec6_getDependentColumn(swigCPtr, this, columnLabel), true);
   }
 
-  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_6_double_1_t_t updDependentColumnAtIndex(long index) {
-    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.DataTableVec6_updDependentColumnAtIndex(swigCPtr, this, index), true);
+  public VectorViewVec6 updDependentColumnAtIndex(long index) {
+    return new VectorViewVec6(opensimCommonJNI.DataTableVec6_updDependentColumnAtIndex(swigCPtr, this, index), true);
   }
 
-  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_6_double_1_t_t updDependentColumn(String columnLabel) {
-    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.DataTableVec6_updDependentColumn(swigCPtr, this, columnLabel), true);
+  public VectorViewVec6 updDependentColumn(String columnLabel) {
+    return new VectorViewVec6(opensimCommonJNI.DataTableVec6_updDependentColumn(swigCPtr, this, columnLabel), true);
   }
 
   public void setIndependentValueAtIndex(long rowIndex, double value) {
     opensimCommonJNI.DataTableVec6_setIndependentValueAtIndex(swigCPtr, this, rowIndex, value);
   }
 
-  public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__VecT_6_double_1_t_t getMatrix() {
-    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.DataTableVec6_getMatrix(swigCPtr, this), false);
+  public MatrixViewVec6 getMatrix() {
+    return new MatrixViewVec6(opensimCommonJNI.DataTableVec6_getMatrix(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__VecT_6_double_1_t_t getMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
-    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.DataTableVec6_getMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
+  public MatrixViewVec6 getMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
+    return new MatrixViewVec6(opensimCommonJNI.DataTableVec6_getMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
   }
 
-  public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__VecT_6_double_1_t_t updMatrix() {
-    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.DataTableVec6_updMatrix(swigCPtr, this), false);
+  public MatrixViewVec6 updMatrix() {
+    return new MatrixViewVec6(opensimCommonJNI.DataTableVec6_updMatrix(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_SimTK__MatrixView_T_SimTK__VecT_6_double_1_t_t updMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
-    return new SWIGTYPE_p_SimTK__MatrixView_T_SimTK__VecT_6_double_1_t_t(opensimCommonJNI.DataTableVec6_updMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
+  public MatrixViewVec6 updMatrixBlock(long rowStart, long columnStart, long numRows, long numColumns) {
+    return new MatrixViewVec6(opensimCommonJNI.DataTableVec6_updMatrixBlock(swigCPtr, this, rowStart, columnStart, numRows, numColumns), true);
   }
 
   public String toString(StdVectorInt rows, StdVectorString columnLabels, boolean withMetaData, long splitSize, long maxWidth, long precision) {

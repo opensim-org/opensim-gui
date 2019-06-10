@@ -387,6 +387,10 @@ public class ActuatorIterator {
     return opensimSimulationJNI.ActuatorIterator_print(swigCPtr, this, fileName);
   }
 
+  public String dump() {
+    return opensimSimulationJNI.ActuatorIterator_dump(swigCPtr, this);
+  }
+
   public boolean isA(String type) {
     return opensimSimulationJNI.ActuatorIterator_isA(swigCPtr, this, type);
   }
