@@ -1079,6 +1079,10 @@ public class Millard2012EquilibriumMuscleIterator {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_print(swigCPtr, this, fileName);
   }
 
+  public String dump() {
+    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_dump(swigCPtr, this);
+  }
+
   public boolean isA(String type) {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_isA(swigCPtr, this, type);
   }

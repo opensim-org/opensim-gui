@@ -130,6 +130,14 @@ public class Frame extends ModelComponent {
     return opensimSimulationJNI.Frame__has_output_position_get(swigCPtr, this);
   }
 
+  public void set_has_output_rotation(boolean value) {
+    opensimSimulationJNI.Frame__has_output_rotation_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_rotation() {
+    return opensimSimulationJNI.Frame__has_output_rotation_get(swigCPtr, this);
+  }
+
   public void set_has_output_transform(boolean value) {
     opensimSimulationJNI.Frame__has_output_transform_set(swigCPtr, this, value);
   }
@@ -252,6 +260,10 @@ public class Frame extends ModelComponent {
 
   public Vec3 getPositionInGround(State state) {
     return new Vec3(opensimSimulationJNI.Frame_getPositionInGround(swigCPtr, this, State.getCPtr(state), state), true);
+  }
+
+  public SWIGTYPE_p_SimTK__Rotation_T_SimTK__Real_t getRotationInGround(State state) {
+    return new SWIGTYPE_p_SimTK__Rotation_T_SimTK__Real_t(opensimSimulationJNI.Frame_getRotationInGround(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
   private void private_attachGeometry(Geometry geom) {

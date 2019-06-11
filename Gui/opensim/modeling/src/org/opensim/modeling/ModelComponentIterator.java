@@ -327,6 +327,10 @@ public class ModelComponentIterator {
     return opensimSimulationJNI.ModelComponentIterator_print(swigCPtr, this, fileName);
   }
 
+  public String dump() {
+    return opensimSimulationJNI.ModelComponentIterator_dump(swigCPtr, this);
+  }
+
   public boolean isA(String type) {
     return opensimSimulationJNI.ModelComponentIterator_isA(swigCPtr, this, type);
   }

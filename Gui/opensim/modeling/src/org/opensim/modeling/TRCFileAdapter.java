@@ -50,8 +50,8 @@ public class TRCFileAdapter extends FileAdapter {
     return (cPtr == 0) ? null : new TRCFileAdapter(cPtr, true);
   }
 
-  public static TimeSeriesTableVec3 read(String filename) {
-    return new TimeSeriesTableVec3(opensimCommonJNI.TRCFileAdapter_read(filename), true);
+  public static TimeSeriesTableVec3 readFile(String filename) {
+    return new TimeSeriesTableVec3(opensimCommonJNI.TRCFileAdapter_readFile(filename), true);
   }
 
   public static void write(TimeSeriesTableVec3 table, String filename) {

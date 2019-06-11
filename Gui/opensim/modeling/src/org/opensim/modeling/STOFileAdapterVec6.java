@@ -48,8 +48,8 @@ public class STOFileAdapterVec6 {
     return (cPtr == 0) ? null : new STOFileAdapterVec6(cPtr, true);
   }
 
-  public static TimeSeriesTableVec6 read(String fileName) {
-    return new TimeSeriesTableVec6(opensimCommonJNI.STOFileAdapterVec6_read(fileName), true);
+  public static TimeSeriesTableVec6 readFile(String fileName) {
+    return new TimeSeriesTableVec6(opensimCommonJNI.STOFileAdapterVec6_readFile(fileName), true);
   }
 
   public static void write(TimeSeriesTableVec6 table, String fileName) {

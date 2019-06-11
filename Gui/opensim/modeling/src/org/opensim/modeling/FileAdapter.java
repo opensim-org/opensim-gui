@@ -37,10 +37,6 @@ public class FileAdapter extends DataAdapter {
     super.delete();
   }
 
-  public static StdMapStringAbstractDataTable readFile(String fileName) {
-    return new StdMapStringAbstractDataTable(opensimCommonJNI.FileAdapter_readFile(fileName), true);
-  }
-
   public static void writeFile(SWIGTYPE_p_std__mapT_std__string_OpenSim__AbstractDataTable_const_p_t tables, String fileName) {
     opensimCommonJNI.FileAdapter_writeFile(SWIGTYPE_p_std__mapT_std__string_OpenSim__AbstractDataTable_const_p_t.getCPtr(tables), fileName);
   }
@@ -51,6 +47,10 @@ public class FileAdapter extends DataAdapter {
 
   public static StdVectorString getNextLine(SWIGTYPE_p_std__istream stream, String delims) {
     return new StdVectorString(opensimCommonJNI.FileAdapter_getNextLine(SWIGTYPE_p_std__istream.getCPtr(stream), delims), true);
+  }
+
+  public static StdVectorString tokenize(String str, String delims) {
+    return new StdVectorString(opensimCommonJNI.FileAdapter_tokenize(str, delims), true);
   }
 
 }

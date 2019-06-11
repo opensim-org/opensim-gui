@@ -391,6 +391,10 @@ public class JointIterator {
     return opensimSimulationJNI.JointIterator_print(swigCPtr, this, fileName);
   }
 
+  public String dump() {
+    return opensimSimulationJNI.JointIterator_dump(swigCPtr, this);
+  }
+
   public boolean isA(String type) {
     return opensimSimulationJNI.JointIterator_isA(swigCPtr, this, type);
   }

@@ -65,8 +65,8 @@ public class DataTableVec3 extends AbstractDataTable {
     opensimCommonJNI.DataTableVec3_appendRow__SWIG_1(swigCPtr, this, indRow, SWIGTYPE_p_std__initializer_listT_SimTK__VecT_3_double_1_t_t.getCPtr(container));
   }
 
-  public void appendRow(double indRow, RowVectorOfVec3 depRow) {
-    opensimCommonJNI.DataTableVec3_appendRow__SWIG_3(swigCPtr, this, indRow, RowVectorOfVec3.getCPtr(depRow), depRow);
+  public void appendRow(double indRow, RowVectorVec3 depRow) {
+    opensimCommonJNI.DataTableVec3_appendRow__SWIG_3(swigCPtr, this, indRow, RowVectorVec3.getCPtr(depRow), depRow);
   }
 
   public void appendRow(double indRow, RowVectorViewVec3 depRow) {
@@ -93,16 +93,16 @@ public class DataTableVec3 extends AbstractDataTable {
     opensimCommonJNI.DataTableVec3_setRowAtIndex__SWIG_0(swigCPtr, this, index, RowVectorViewVec3.getCPtr(depRow), depRow);
   }
 
-  public void setRowAtIndex(long index, RowVectorOfVec3 depRow) {
-    opensimCommonJNI.DataTableVec3_setRowAtIndex__SWIG_1(swigCPtr, this, index, RowVectorOfVec3.getCPtr(depRow), depRow);
+  public void setRowAtIndex(long index, RowVectorVec3 depRow) {
+    opensimCommonJNI.DataTableVec3_setRowAtIndex__SWIG_1(swigCPtr, this, index, RowVectorVec3.getCPtr(depRow), depRow);
   }
 
   public void setRow(double ind, RowVectorViewVec3 depRow) {
     opensimCommonJNI.DataTableVec3_setRow__SWIG_0(swigCPtr, this, ind, RowVectorViewVec3.getCPtr(depRow), depRow);
   }
 
-  public void setRow(double ind, RowVectorOfVec3 depRow) {
-    opensimCommonJNI.DataTableVec3_setRow__SWIG_1(swigCPtr, this, ind, RowVectorOfVec3.getCPtr(depRow), depRow);
+  public void setRow(double ind, RowVectorVec3 depRow) {
+    opensimCommonJNI.DataTableVec3_setRow__SWIG_1(swigCPtr, this, ind, RowVectorVec3.getCPtr(depRow), depRow);
   }
 
   public void removeRowAtIndex(long index) {
@@ -121,8 +121,8 @@ public class DataTableVec3 extends AbstractDataTable {
     opensimCommonJNI.DataTableVec3_appendColumn__SWIG_1(swigCPtr, this, columnLabel, SWIGTYPE_p_std__initializer_listT_SimTK__VecT_3_double_1_t_t.getCPtr(container));
   }
 
-  public void appendColumn(String columnLabel, VectorOfVec3 depCol) {
-    opensimCommonJNI.DataTableVec3_appendColumn__SWIG_3(swigCPtr, this, columnLabel, VectorOfVec3.getCPtr(depCol), depCol);
+  public void appendColumn(String columnLabel, VectorVec3 depCol) {
+    opensimCommonJNI.DataTableVec3_appendColumn__SWIG_3(swigCPtr, this, columnLabel, VectorVec3.getCPtr(depCol), depCol);
   }
 
   public void appendColumn(String columnLabel, VectorViewVec3 depCol) {

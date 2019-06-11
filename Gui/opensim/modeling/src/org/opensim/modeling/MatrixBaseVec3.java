@@ -59,10 +59,6 @@ public class MatrixBaseVec3 {
     opensimSimbodyJNI.MatrixBaseVec3_clear(swigCPtr, this);
   }
 
-  public MatrixBaseVec3 elementwiseAssign(int s) {
-    return new MatrixBaseVec3(opensimSimbodyJNI.MatrixBaseVec3_elementwiseAssign(swigCPtr, this, s), false);
-  }
-
   public MatrixBaseVec3 setTo(Vec3 t) {
     return new MatrixBaseVec3(opensimSimbodyJNI.MatrixBaseVec3_setTo(swigCPtr, this, Vec3.getCPtr(t), t), false);
   }

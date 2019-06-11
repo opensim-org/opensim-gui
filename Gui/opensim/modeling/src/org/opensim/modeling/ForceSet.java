@@ -119,7 +119,15 @@ public class ForceSet extends ModelComponentSetForces {
   }
 
   public ForceSet() {
-    this(opensimSimulationJNI.new_ForceSet(), true);
+    this(opensimSimulationJNI.new_ForceSet__SWIG_0(), true);
+  }
+
+  public ForceSet(String file, boolean updateFromXML) throws java.io.IOException {
+    this(opensimSimulationJNI.new_ForceSet__SWIG_1(file, updateFromXML), true);
+  }
+
+  public ForceSet(String file) throws java.io.IOException {
+    this(opensimSimulationJNI.new_ForceSet__SWIG_2(file), true);
   }
 
 }

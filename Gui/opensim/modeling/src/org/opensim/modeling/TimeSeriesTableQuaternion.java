@@ -45,8 +45,8 @@ public class TimeSeriesTableQuaternion extends DataTableQuaternion {
     this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_1(TimeSeriesTableQuaternion.getCPtr(arg0), arg0), true);
   }
 
-  public TimeSeriesTableQuaternion(StdVectorDouble indVec, SWIGTYPE_p_SimTK__Matrix_T_SimTK__Quaternion_t depData, StdVectorString labels) {
-    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, SWIGTYPE_p_SimTK__Matrix_T_SimTK__Quaternion_t.getCPtr(depData), StdVectorString.getCPtr(labels), labels), true);
+  public TimeSeriesTableQuaternion(StdVectorDouble indVec, MatrixQuaternion depData, StdVectorString labels) {
+    this(opensimCommonJNI.new_TimeSeriesTableQuaternion__SWIG_2(StdVectorDouble.getCPtr(indVec), indVec, MatrixQuaternion.getCPtr(depData), depData, StdVectorString.getCPtr(labels), labels), true);
   }
 
   public TimeSeriesTableQuaternion(StdVectorDouble indVec) {
@@ -73,37 +73,29 @@ public class TimeSeriesTableQuaternion extends DataTableQuaternion {
     return opensimCommonJNI.TimeSeriesTableQuaternion_getNearestRowIndexForTime__SWIG_1(swigCPtr, this, time);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t getNearestRow(double time, boolean restrictToTimeRange) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+  public RowVectorViewQuaternion getNearestRow(double time, boolean restrictToTimeRange) {
+    return new RowVectorViewQuaternion(opensimCommonJNI.TimeSeriesTableQuaternion_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t getNearestRow(double time) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_getNearestRow__SWIG_1(swigCPtr, this, time), true);
+  public RowVectorViewQuaternion getNearestRow(double time) {
+    return new RowVectorViewQuaternion(opensimCommonJNI.TimeSeriesTableQuaternion_getNearestRow__SWIG_1(swigCPtr, this, time), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t updNearestRow(double time, boolean restrictToTimeRange) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
+  public RowVectorViewQuaternion updNearestRow(double time, boolean restrictToTimeRange) {
+    return new RowVectorViewQuaternion(opensimCommonJNI.TimeSeriesTableQuaternion_updNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t updNearestRow(double time) {
-    return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_updNearestRow__SWIG_1(swigCPtr, this, time), true);
+  public RowVectorViewQuaternion updNearestRow(double time) {
+    return new RowVectorViewQuaternion(opensimCommonJNI.TimeSeriesTableQuaternion_updNearestRow__SWIG_1(swigCPtr, this, time), true);
   }
 
-  public SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t averageRow(double beginTime, double endTime) {
-    return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__Quaternion_t(opensimCommonJNI.TimeSeriesTableQuaternion_averageRow(swigCPtr, this, beginTime, endTime), true);
+  public RowVectorQuaternion averageRow(double beginTime, double endTime) {
+    return new RowVectorQuaternion(opensimCommonJNI.TimeSeriesTableQuaternion_averageRow(swigCPtr, this, beginTime, endTime), true);
   }
 
   public TimeSeriesTableQuaternion clone() {
     long cPtr = opensimCommonJNI.TimeSeriesTableQuaternion_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new TimeSeriesTableQuaternion(cPtr, true);
-  }
-
-  public TimeSeriesTable flatten() {
-    return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableQuaternion_flatten__SWIG_0(swigCPtr, this), true);
-  }
-
-  public TimeSeriesTable flatten(StdVectorString suffixes) {
-    return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableQuaternion_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
   }
 
 }
