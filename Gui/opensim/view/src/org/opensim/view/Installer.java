@@ -170,10 +170,9 @@ public class Installer extends ModuleInstall {
          String saved=TheApp.getCurrentVersionPreferences().get("Paths: Geometry Search Path", defaultGeometryPath);
          if (saved.isEmpty()||saved.equalsIgnoreCase("")){
              saved = defaultGeometryPath;
+             TheApp.getCurrentVersionPreferences().put("Paths: Geometry Search Path", saved);
          }
-         else if (!saved.contains(defaultGeometryPath))
-             saved = saved.concat(File.pathSeparator+defaultGeometryPath);
-         TheApp.getCurrentVersionPreferences().put("Paths: Geometry Search Path", saved);
+         // If saved is not blank we assume user knows what s/he's doing and leave it alone. Fixes issue #1115
          // Push changes to API side
          GeometryFileLocator.updateGeometrySearchPathsFromPreferences();
 
