@@ -18,7 +18,7 @@ public final class MobileRehabWizardVisualPanel3 extends JPanel {
 
     @Override
     public String getName() {
-        return "Step #3";
+        return "Calibration Protocol";
     }
 
     /**
@@ -37,7 +37,7 @@ public final class MobileRehabWizardVisualPanel3 extends JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 223, Short.MAX_VALUE)
+            .addGap(0, 144, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

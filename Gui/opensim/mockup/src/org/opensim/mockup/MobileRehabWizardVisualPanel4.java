@@ -18,7 +18,7 @@ public final class MobileRehabWizardVisualPanel4 extends JPanel {
 
     @Override
     public String getName() {
-        return "Step #4";
+        return "Quantities of Interest";
     }
 
     /**
@@ -37,7 +37,7 @@ public final class MobileRehabWizardVisualPanel4 extends JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGap(0, 144, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
