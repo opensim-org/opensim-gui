@@ -7,4 +7,5 @@ request related to the change, then we may provide the commit.
 v4.1
 ====
 - Fix issue #1112: TRC file written by GUI cannot be read by TRCFileAdapter 
-- 
+- Fix issue #1105: GUI adding offset to Experimental Data by default
+
