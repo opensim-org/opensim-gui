@@ -623,7 +623,7 @@ public class ModelVisualizationJson extends JSONObject {
         model_object.put("uuid", modelUUID.toString());
         model_object.put("type", "Group");
         model_object.put("opensimType", "Model");
-        model_object.put("name", "OpenSimModel");
+        model_object.put("name", model.getName());
         model_object.put("children", new JSONArray());
         model_object.put("matrix", JSONUtilities.createMatrixFromTransform(getTransformWRTScene(), new Vec3(1.), 1.0));
         put("object", model_object);
