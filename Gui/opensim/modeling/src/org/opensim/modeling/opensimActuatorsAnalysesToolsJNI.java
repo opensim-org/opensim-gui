@@ -1756,11 +1756,6 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native long InverseKinematicsTool_getIKTaskSet(long jarg1, InverseKinematicsTool jarg1_);
   public final static native boolean InverseKinematicsTool_run(long jarg1, InverseKinematicsTool jarg1_) throws java.io.IOException;
   public final static native void InverseKinematicsTool_populateReferences(long jarg1, InverseKinematicsTool jarg1_, long jarg2, MarkersReference jarg2_, long jarg3, SimTKArrayCoordinateReference jarg3_);
-  public final static native long new_SimmFileWriter__SWIG_0();
-  public final static native long new_SimmFileWriter__SWIG_1(long jarg1, Model jarg1_);
-  public final static native void delete_SimmFileWriter(long jarg1);
-  public final static native boolean SimmFileWriter_writeMuscleFile(long jarg1, SimmFileWriter jarg1_, String jarg2);
-  public final static native boolean SimmFileWriter_writeJointFile(long jarg1, SimmFileWriter jarg1_, String jarg2);
   public final static native void mapCxxExceptionsToJava_set(boolean jarg1);
   public final static native boolean mapCxxExceptionsToJava_get();
   public final static native long OpenSimContext_safeDownCast(long jarg1, OpenSimObject jarg1_);
