@@ -18,7 +18,7 @@ public final class MobileRehabWizardVisualPanel3 extends JPanel {
 
     @Override
     public String getName() {
-        return "Calibration Protocol";
+        return "Calibration";
     }
 
     /**

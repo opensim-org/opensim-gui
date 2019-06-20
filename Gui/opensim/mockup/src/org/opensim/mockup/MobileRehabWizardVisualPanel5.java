@@ -18,7 +18,7 @@ public final class MobileRehabWizardVisualPanel5 extends JPanel {
 
     @Override
     public String getName() {
-        return "Validation";
+        return "Comparison to Benchmarks";
     }
 
     /**

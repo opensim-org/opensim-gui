@@ -18,7 +18,7 @@ public final class MobileRehabWizardVisualPanel4 extends JPanel {
 
     @Override
     public String getName() {
-        return "Quantities of Interest";
+        return "Outcomes of Interest";
     }
 
     /**
