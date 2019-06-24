@@ -1897,6 +1897,8 @@ public class opensimCommonJNI {
   public final static native void DataTable_appendColumn__SWIG_1(long jarg1, DataTable jarg1_, String jarg2, long jarg3);
   public final static native void DataTable_appendColumn__SWIG_3(long jarg1, DataTable jarg1_, String jarg2, long jarg3, Vector jarg3_);
   public final static native void DataTable_appendColumn__SWIG_4(long jarg1, DataTable jarg1_, String jarg2, long jarg3, VectorView jarg3_);
+  public final static native void DataTable_removeColumnAtIndex(long jarg1, DataTable jarg1_, long jarg2);
+  public final static native void DataTable_removeColumn(long jarg1, DataTable jarg1_, String jarg2);
   public final static native long DataTable_getDependentColumnAtIndex(long jarg1, DataTable jarg1_, long jarg2);
   public final static native long DataTable_getDependentColumn(long jarg1, DataTable jarg1_, String jarg2);
   public final static native long DataTable_updDependentColumnAtIndex(long jarg1, DataTable jarg1_, long jarg2);
@@ -1946,6 +1948,8 @@ public class opensimCommonJNI {
   public final static native void DataTableVec3_appendColumn__SWIG_1(long jarg1, DataTableVec3 jarg1_, String jarg2, long jarg3);
   public final static native void DataTableVec3_appendColumn__SWIG_3(long jarg1, DataTableVec3 jarg1_, String jarg2, long jarg3, VectorVec3 jarg3_);
   public final static native void DataTableVec3_appendColumn__SWIG_4(long jarg1, DataTableVec3 jarg1_, String jarg2, long jarg3, VectorViewVec3 jarg3_);
+  public final static native void DataTableVec3_removeColumnAtIndex(long jarg1, DataTableVec3 jarg1_, long jarg2);
+  public final static native void DataTableVec3_removeColumn(long jarg1, DataTableVec3 jarg1_, String jarg2);
   public final static native long DataTableVec3_getDependentColumnAtIndex(long jarg1, DataTableVec3 jarg1_, long jarg2);
   public final static native long DataTableVec3_getDependentColumn(long jarg1, DataTableVec3 jarg1_, String jarg2);
   public final static native long DataTableVec3_updDependentColumnAtIndex(long jarg1, DataTableVec3 jarg1_, long jarg2);
@@ -1987,6 +1991,8 @@ public class opensimCommonJNI {
   public final static native void DataTableUnitVec3_appendColumn__SWIG_1(long jarg1, DataTableUnitVec3 jarg1_, String jarg2, long jarg3);
   public final static native void DataTableUnitVec3_appendColumn__SWIG_3(long jarg1, DataTableUnitVec3 jarg1_, String jarg2, long jarg3);
   public final static native void DataTableUnitVec3_appendColumn__SWIG_4(long jarg1, DataTableUnitVec3 jarg1_, String jarg2, long jarg3);
+  public final static native void DataTableUnitVec3_removeColumnAtIndex(long jarg1, DataTableUnitVec3 jarg1_, long jarg2);
+  public final static native void DataTableUnitVec3_removeColumn(long jarg1, DataTableUnitVec3 jarg1_, String jarg2);
   public final static native long DataTableUnitVec3_getDependentColumnAtIndex(long jarg1, DataTableUnitVec3 jarg1_, long jarg2);
   public final static native long DataTableUnitVec3_getDependentColumn(long jarg1, DataTableUnitVec3 jarg1_, String jarg2);
   public final static native long DataTableUnitVec3_updDependentColumnAtIndex(long jarg1, DataTableUnitVec3 jarg1_, long jarg2);
@@ -2028,6 +2034,8 @@ public class opensimCommonJNI {
   public final static native void DataTableQuaternion_appendColumn__SWIG_1(long jarg1, DataTableQuaternion jarg1_, String jarg2, long jarg3);
   public final static native void DataTableQuaternion_appendColumn__SWIG_3(long jarg1, DataTableQuaternion jarg1_, String jarg2, long jarg3, VectorQuaternion jarg3_);
   public final static native void DataTableQuaternion_appendColumn__SWIG_4(long jarg1, DataTableQuaternion jarg1_, String jarg2, long jarg3);
+  public final static native void DataTableQuaternion_removeColumnAtIndex(long jarg1, DataTableQuaternion jarg1_, long jarg2);
+  public final static native void DataTableQuaternion_removeColumn(long jarg1, DataTableQuaternion jarg1_, String jarg2);
   public final static native long DataTableQuaternion_getDependentColumnAtIndex(long jarg1, DataTableQuaternion jarg1_, long jarg2);
   public final static native long DataTableQuaternion_getDependentColumn(long jarg1, DataTableQuaternion jarg1_, String jarg2);
   public final static native long DataTableQuaternion_updDependentColumnAtIndex(long jarg1, DataTableQuaternion jarg1_, long jarg2);
@@ -2069,6 +2077,8 @@ public class opensimCommonJNI {
   public final static native void DataTableVec6_appendColumn__SWIG_1(long jarg1, DataTableVec6 jarg1_, String jarg2, long jarg3);
   public final static native void DataTableVec6_appendColumn__SWIG_3(long jarg1, DataTableVec6 jarg1_, String jarg2, long jarg3, VectorVec6 jarg3_);
   public final static native void DataTableVec6_appendColumn__SWIG_4(long jarg1, DataTableVec6 jarg1_, String jarg2, long jarg3, VectorViewVec6 jarg3_);
+  public final static native void DataTableVec6_removeColumnAtIndex(long jarg1, DataTableVec6 jarg1_, long jarg2);
+  public final static native void DataTableVec6_removeColumn(long jarg1, DataTableVec6 jarg1_, String jarg2);
   public final static native long DataTableVec6_getDependentColumnAtIndex(long jarg1, DataTableVec6 jarg1_, long jarg2);
   public final static native long DataTableVec6_getDependentColumn(long jarg1, DataTableVec6 jarg1_, String jarg2);
   public final static native long DataTableVec6_updDependentColumnAtIndex(long jarg1, DataTableVec6 jarg1_, long jarg2);
@@ -2110,6 +2120,8 @@ public class opensimCommonJNI {
   public final static native void DataTableSpatialVec_appendColumn__SWIG_1(long jarg1, DataTableSpatialVec jarg1_, String jarg2, long jarg3);
   public final static native void DataTableSpatialVec_appendColumn__SWIG_3(long jarg1, DataTableSpatialVec jarg1_, String jarg2, long jarg3, VectorOfSpatialVec jarg3_);
   public final static native void DataTableSpatialVec_appendColumn__SWIG_4(long jarg1, DataTableSpatialVec jarg1_, String jarg2, long jarg3);
+  public final static native void DataTableSpatialVec_removeColumnAtIndex(long jarg1, DataTableSpatialVec jarg1_, long jarg2);
+  public final static native void DataTableSpatialVec_removeColumn(long jarg1, DataTableSpatialVec jarg1_, String jarg2);
   public final static native long DataTableSpatialVec_getDependentColumnAtIndex(long jarg1, DataTableSpatialVec jarg1_, long jarg2);
   public final static native long DataTableSpatialVec_getDependentColumn(long jarg1, DataTableSpatialVec jarg1_, String jarg2);
   public final static native long DataTableSpatialVec_updDependentColumnAtIndex(long jarg1, DataTableSpatialVec jarg1_, long jarg2);
@@ -2151,6 +2163,8 @@ public class opensimCommonJNI {
   public final static native void DataTableMat33_appendColumn__SWIG_1(long jarg1, DataTableMat33 jarg1_, String jarg2, long jarg3);
   public final static native void DataTableMat33_appendColumn__SWIG_3(long jarg1, DataTableMat33 jarg1_, String jarg2, long jarg3, VectorMat33 jarg3_);
   public final static native void DataTableMat33_appendColumn__SWIG_4(long jarg1, DataTableMat33 jarg1_, String jarg2, long jarg3, VectorViewMat33 jarg3_);
+  public final static native void DataTableMat33_removeColumnAtIndex(long jarg1, DataTableMat33 jarg1_, long jarg2);
+  public final static native void DataTableMat33_removeColumn(long jarg1, DataTableMat33 jarg1_, String jarg2);
   public final static native long DataTableMat33_getDependentColumnAtIndex(long jarg1, DataTableMat33 jarg1_, long jarg2);
   public final static native long DataTableMat33_getDependentColumn(long jarg1, DataTableMat33 jarg1_, String jarg2);
   public final static native long DataTableMat33_updDependentColumnAtIndex(long jarg1, DataTableMat33 jarg1_, long jarg2);
@@ -2191,6 +2205,8 @@ public class opensimCommonJNI {
   public final static native void DataTableRotation_appendColumn__SWIG_1(long jarg1, DataTableRotation jarg1_, String jarg2, long jarg3);
   public final static native void DataTableRotation_appendColumn__SWIG_3(long jarg1, DataTableRotation jarg1_, String jarg2, long jarg3, VectorRotation jarg3_);
   public final static native void DataTableRotation_appendColumn__SWIG_4(long jarg1, DataTableRotation jarg1_, String jarg2, long jarg3);
+  public final static native void DataTableRotation_removeColumnAtIndex(long jarg1, DataTableRotation jarg1_, long jarg2);
+  public final static native void DataTableRotation_removeColumn(long jarg1, DataTableRotation jarg1_, String jarg2);
   public final static native long DataTableRotation_getDependentColumnAtIndex(long jarg1, DataTableRotation jarg1_, long jarg2);
   public final static native long DataTableRotation_getDependentColumn(long jarg1, DataTableRotation jarg1_, String jarg2);
   public final static native long DataTableRotation_updDependentColumnAtIndex(long jarg1, DataTableRotation jarg1_, long jarg2);
