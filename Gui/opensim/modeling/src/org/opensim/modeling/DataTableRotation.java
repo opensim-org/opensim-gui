@@ -129,6 +129,14 @@ public class DataTableRotation extends AbstractDataTable {
     opensimCommonJNI.DataTableRotation_appendColumn__SWIG_4(swigCPtr, this, columnLabel, SWIGTYPE_p_SimTK__VectorView_T_SimTK__Rotation_T_double_t_t.getCPtr(depCol));
   }
 
+  public void removeColumnAtIndex(long index) {
+    opensimCommonJNI.DataTableRotation_removeColumnAtIndex(swigCPtr, this, index);
+  }
+
+  public void removeColumn(String columnLabel) {
+    opensimCommonJNI.DataTableRotation_removeColumn(swigCPtr, this, columnLabel);
+  }
+
   public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Rotation_T_double_t_t getDependentColumnAtIndex(long index) {
     return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Rotation_T_double_t_t(opensimCommonJNI.DataTableRotation_getDependentColumnAtIndex(swigCPtr, this, index), true);
   }

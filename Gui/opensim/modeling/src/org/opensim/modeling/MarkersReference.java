@@ -169,12 +169,12 @@ public class MarkersReference extends ReferenceVec3 {
     this(opensimSimulationJNI.new_MarkersReference__SWIG_0(), true);
   }
 
-  public MarkersReference(String markerFileName, Units modelUnits) {
-    this(opensimSimulationJNI.new_MarkersReference__SWIG_1(markerFileName, Units.getCPtr(modelUnits), modelUnits), true);
+  public MarkersReference(String markerFileName, SetMarkerWeights markerWeightSet, Units modelUnits) {
+    this(opensimSimulationJNI.new_MarkersReference__SWIG_1(markerFileName, SetMarkerWeights.getCPtr(markerWeightSet), markerWeightSet, Units.getCPtr(modelUnits), modelUnits), true);
   }
 
-  public MarkersReference(String markerFileName) {
-    this(opensimSimulationJNI.new_MarkersReference__SWIG_2(markerFileName), true);
+  public MarkersReference(String markerFileName, SetMarkerWeights markerWeightSet) {
+    this(opensimSimulationJNI.new_MarkersReference__SWIG_2(markerFileName, SetMarkerWeights.getCPtr(markerWeightSet), markerWeightSet), true);
   }
 
   public MarkersReference(TimeSeriesTableVec3 markerData, SetMarkerWeights markerWeightSet, Units units) {
@@ -185,16 +185,12 @@ public class MarkersReference extends ReferenceVec3 {
     this(opensimSimulationJNI.new_MarkersReference__SWIG_4(TimeSeriesTableVec3.getCPtr(markerData), markerData, SetMarkerWeights.getCPtr(markerWeightSet), markerWeightSet), true);
   }
 
-  public MarkersReference(TimeSeriesTableVec3 markerData) {
-    this(opensimSimulationJNI.new_MarkersReference__SWIG_5(TimeSeriesTableVec3.getCPtr(markerData), markerData), true);
+  public void initializeFromMarkersFile(String markerFile, SetMarkerWeights markerWeightSet, Units modelUnits) {
+    opensimSimulationJNI.MarkersReference_initializeFromMarkersFile__SWIG_0(swigCPtr, this, markerFile, SetMarkerWeights.getCPtr(markerWeightSet), markerWeightSet, Units.getCPtr(modelUnits), modelUnits);
   }
 
-  public void loadMarkersFile(String markerFile, Units modelUnits) {
-    opensimSimulationJNI.MarkersReference_loadMarkersFile__SWIG_0(swigCPtr, this, markerFile, Units.getCPtr(modelUnits), modelUnits);
-  }
-
-  public void loadMarkersFile(String markerFile) {
-    opensimSimulationJNI.MarkersReference_loadMarkersFile__SWIG_1(swigCPtr, this, markerFile);
+  public void initializeFromMarkersFile(String markerFile, SetMarkerWeights markerWeightSet) {
+    opensimSimulationJNI.MarkersReference_initializeFromMarkersFile__SWIG_1(swigCPtr, this, markerFile, SetMarkerWeights.getCPtr(markerWeightSet), markerWeightSet);
   }
 
   public int getNumRefs() {

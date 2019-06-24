@@ -6170,14 +6170,13 @@ public class opensimSimulationJNI {
   public final static native long MarkersReference_upd_default_weight__SWIG_1(long jarg1, MarkersReference jarg1_);
   public final static native void MarkersReference_set_default_weight__SWIG_1(long jarg1, MarkersReference jarg1_, double jarg2);
   public final static native long new_MarkersReference__SWIG_0();
-  public final static native long new_MarkersReference__SWIG_1(String jarg1, long jarg2, Units jarg2_);
-  public final static native long new_MarkersReference__SWIG_2(String jarg1);
+  public final static native long new_MarkersReference__SWIG_1(String jarg1, long jarg2, SetMarkerWeights jarg2_, long jarg3, Units jarg3_);
+  public final static native long new_MarkersReference__SWIG_2(String jarg1, long jarg2, SetMarkerWeights jarg2_);
   public final static native long new_MarkersReference__SWIG_3(long jarg1, TimeSeriesTableVec3 jarg1_, long jarg2, SetMarkerWeights jarg2_, long jarg3, Units jarg3_);
   public final static native long new_MarkersReference__SWIG_4(long jarg1, TimeSeriesTableVec3 jarg1_, long jarg2, SetMarkerWeights jarg2_);
-  public final static native long new_MarkersReference__SWIG_5(long jarg1, TimeSeriesTableVec3 jarg1_);
   public final static native void delete_MarkersReference(long jarg1);
-  public final static native void MarkersReference_loadMarkersFile__SWIG_0(long jarg1, MarkersReference jarg1_, String jarg2, long jarg3, Units jarg3_);
-  public final static native void MarkersReference_loadMarkersFile__SWIG_1(long jarg1, MarkersReference jarg1_, String jarg2);
+  public final static native void MarkersReference_initializeFromMarkersFile__SWIG_0(long jarg1, MarkersReference jarg1_, String jarg2, long jarg3, SetMarkerWeights jarg3_, long jarg4, Units jarg4_);
+  public final static native void MarkersReference_initializeFromMarkersFile__SWIG_1(long jarg1, MarkersReference jarg1_, String jarg2, long jarg3, SetMarkerWeights jarg3_);
   public final static native int MarkersReference_getNumRefs(long jarg1, MarkersReference jarg1_);
   public final static native long MarkersReference_getValidTimeRange(long jarg1, MarkersReference jarg1_);
   public final static native long MarkersReference_getNames(long jarg1, MarkersReference jarg1_);
