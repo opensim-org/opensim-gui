@@ -42,7 +42,7 @@ public class MuscleNoColoringFunction extends MuscleColoringFunction{
     }
     @Override
     public double getColor(Muscle msl){
-        double color = 1.0;
+        double color = -1.0;
         return color;
     }
 }

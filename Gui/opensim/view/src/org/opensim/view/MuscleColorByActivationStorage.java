@@ -56,7 +56,8 @@ public class MuscleColorByActivationStorage extends MuscleColoringFunction {
         //System.out.println("coloring by data at time ="+actData.getTime()+" sim time = "+dContext.getTime());
         
         int idx = activationLabels.findIndex(msl.getName())-1;
-        if (idx <= 0) return 0;
+        if (idx < 0) 
+            return -1.0;    // indicate not coloring by activation
         double color = actData.getData().get(idx);
         // Apply this transfer function to get better results from the color map
         color = activationColorFactor * (1-Math.exp(-activationColorTau*color));
