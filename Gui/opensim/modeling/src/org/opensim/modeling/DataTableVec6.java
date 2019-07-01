@@ -129,6 +129,14 @@ public class DataTableVec6 extends AbstractDataTable {
     opensimCommonJNI.DataTableVec6_appendColumn__SWIG_4(swigCPtr, this, columnLabel, VectorViewVec6.getCPtr(depCol), depCol);
   }
 
+  public void removeColumnAtIndex(long index) {
+    opensimCommonJNI.DataTableVec6_removeColumnAtIndex(swigCPtr, this, index);
+  }
+
+  public void removeColumn(String columnLabel) {
+    opensimCommonJNI.DataTableVec6_removeColumn(swigCPtr, this, columnLabel);
+  }
+
   public VectorViewVec6 getDependentColumnAtIndex(long index) {
     return new VectorViewVec6(opensimCommonJNI.DataTableVec6_getDependentColumnAtIndex(swigCPtr, this, index), true);
   }

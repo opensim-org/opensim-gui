@@ -129,6 +129,14 @@ public class DataTableMat33 extends AbstractDataTable {
     opensimCommonJNI.DataTableMat33_appendColumn__SWIG_4(swigCPtr, this, columnLabel, VectorViewMat33.getCPtr(depCol), depCol);
   }
 
+  public void removeColumnAtIndex(long index) {
+    opensimCommonJNI.DataTableMat33_removeColumnAtIndex(swigCPtr, this, index);
+  }
+
+  public void removeColumn(String columnLabel) {
+    opensimCommonJNI.DataTableMat33_removeColumn(swigCPtr, this, columnLabel);
+  }
+
   public VectorViewMat33 getDependentColumnAtIndex(long index) {
     return new VectorViewMat33(opensimCommonJNI.DataTableMat33_getDependentColumnAtIndex(swigCPtr, this, index), true);
   }

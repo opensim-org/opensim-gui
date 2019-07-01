@@ -129,6 +129,14 @@ public class DataTableSpatialVec extends AbstractDataTable {
     opensimCommonJNI.DataTableSpatialVec_appendColumn__SWIG_4(swigCPtr, this, columnLabel, SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t.getCPtr(depCol));
   }
 
+  public void removeColumnAtIndex(long index) {
+    opensimCommonJNI.DataTableSpatialVec_removeColumnAtIndex(swigCPtr, this, index);
+  }
+
+  public void removeColumn(String columnLabel) {
+    opensimCommonJNI.DataTableSpatialVec_removeColumn(swigCPtr, this, columnLabel);
+  }
+
   public SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t getDependentColumnAtIndex(long index) {
     return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimCommonJNI.DataTableSpatialVec_getDependentColumnAtIndex(swigCPtr, this, index), true);
   }
