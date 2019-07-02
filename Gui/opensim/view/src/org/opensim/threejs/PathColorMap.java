@@ -14,5 +14,7 @@ import org.opensim.modeling.Vec3;
  * @author Ayman-NMBL
  */
 public interface PathColorMap {
+    // Color is either extracted from state or computed from provideActivation
+    // provideActivation > 0.0 takes precedence 
     abstract Vec3 getColor(GeometryPath path, State state, double provideActivation);
 }
