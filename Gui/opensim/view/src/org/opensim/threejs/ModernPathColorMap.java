@@ -29,6 +29,10 @@ public class ModernPathColorMap implements PathColorMap {
         if (activation > 0){
             activationBasedColor = new Vec3(activation, 0, 1-activation);
         }
+        else if (activation < -1.01){ // unused, show as outside blue-red spectrum 
+            return new Vec3(1.0, 1.0, 0.0);
+            
+        }
         double redness = activationBasedColor.get(0);
         Vec3 mappedColor = new Vec3(0.6435 + 0.07588*redness,
             0.7009 - 0.6396*redness,

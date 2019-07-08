@@ -23,6 +23,10 @@ public class LegacyPathColorMap implements PathColorMap {
         if (activation > 0.){
             return new Vec3(activation, 0, 1-activation);
         }
+        else if (activation < -1.01){ // unused show as outside red-blue spectrum
+            return new Vec3(1.0, 1.0, 0.0);
+            
+        }
         return path.getColor(state);
     }
     

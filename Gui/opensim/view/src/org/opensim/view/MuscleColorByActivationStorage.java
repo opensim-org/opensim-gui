@@ -57,7 +57,7 @@ public class MuscleColorByActivationStorage extends MuscleColoringFunction {
         
         int idx = activationLabels.findIndex(msl.getName())-1;
         if (idx < 0) 
-            return -1.0;    // indicate not coloring by activation
+            return -2.0;    // indicate no activation found
         double color = actData.getData().get(idx);
         // Apply this transfer function to get better results from the color map
         color = activationColorFactor * (1-Math.exp(-activationColorTau*color));
