@@ -642,8 +642,6 @@ public class MotionDisplayer {
           int dataSize = states.getSize();
           AnnotatedMotion mot = (AnnotatedMotion)simmMotionData;
           Vector<ExperimentalDataObject> objects=mot.getClassified();
-          boolean markersModified=false;
-          boolean forcesModified=false;
           mot.updateDecorations(interpolatedStates);
           return;
       }
