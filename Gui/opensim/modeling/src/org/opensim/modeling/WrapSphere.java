@@ -57,16 +57,44 @@ public class WrapSphere extends WrapObject {
     return opensimSimulationJNI.WrapSphere_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_radius(WrapSphere source) {
+    opensimSimulationJNI.WrapSphere_copyProperty_radius(swigCPtr, this, WrapSphere.getCPtr(source), source);
+  }
+
+  public double get_radius(int i) {
+    return opensimSimulationJNI.WrapSphere_get_radius__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_radius(int i) {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapSphere_upd_radius__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_radius(int i, double value) {
+    opensimSimulationJNI.WrapSphere_set_radius__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_radius(double value) {
+    return opensimSimulationJNI.WrapSphere_append_radius(swigCPtr, this, value);
+  }
+
+  public void constructProperty_radius(double initValue) {
+    opensimSimulationJNI.WrapSphere_constructProperty_radius(swigCPtr, this, initValue);
+  }
+
+  public double get_radius() {
+    return opensimSimulationJNI.WrapSphere_get_radius__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_radius() {
+    return new SWIGTYPE_p_double(opensimSimulationJNI.WrapSphere_upd_radius__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_radius(double value) {
+    opensimSimulationJNI.WrapSphere_set_radius__SWIG_1(swigCPtr, this, value);
+  }
+
   public WrapSphere() {
-    this(opensimSimulationJNI.new_WrapSphere__SWIG_0(), true);
-  }
-
-  public WrapSphere(WrapSphere aWrapSphere) {
-    this(opensimSimulationJNI.new_WrapSphere__SWIG_1(WrapSphere.getCPtr(aWrapSphere), aWrapSphere), true);
-  }
-
-  public void copyData(WrapSphere aWrapSphere) {
-    opensimSimulationJNI.WrapSphere_copyData(swigCPtr, this, WrapSphere.getCPtr(aWrapSphere), aWrapSphere);
+    this(opensimSimulationJNI.new_WrapSphere(), true);
   }
 
   public String getWrapTypeName() {
@@ -83,10 +111,6 @@ public class WrapSphere extends WrapObject {
 
   public void extendScale(State s, ScaleSet scaleSet) {
     opensimSimulationJNI.WrapSphere_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
-  }
-
-  public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
-    opensimSimulationJNI.WrapSphere_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
 }

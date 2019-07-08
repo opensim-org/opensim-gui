@@ -521,6 +521,10 @@ public class FunctionBasedBushingForce extends TwoFrameLinkerForce {
     opensimSimulationJNI.FunctionBasedBushingForce_setVisualAspectRatio(swigCPtr, this, ratio);
   }
 
+  public void extendFinalizeFromProperties() {
+    opensimSimulationJNI.FunctionBasedBushingForce_extendFinalizeFromProperties(swigCPtr, this);
+  }
+
   public Vec6 calcStiffnessForce(State state) {
     return new Vec6(opensimSimulationJNI.FunctionBasedBushingForce_calcStiffnessForce(swigCPtr, this, State.getCPtr(state), state), true);
   }

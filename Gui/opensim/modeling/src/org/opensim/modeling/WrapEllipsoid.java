@@ -57,16 +57,44 @@ public class WrapEllipsoid extends WrapObject {
     return opensimSimulationJNI.WrapEllipsoid_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_dimensions(WrapEllipsoid source) {
+    opensimSimulationJNI.WrapEllipsoid_copyProperty_dimensions(swigCPtr, this, WrapEllipsoid.getCPtr(source), source);
+  }
+
+  public Vec3 get_dimensions(int i) {
+    return new Vec3(opensimSimulationJNI.WrapEllipsoid_get_dimensions__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public Vec3 upd_dimensions(int i) {
+    return new Vec3(opensimSimulationJNI.WrapEllipsoid_upd_dimensions__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_dimensions(int i, Vec3 value) {
+    opensimSimulationJNI.WrapEllipsoid_set_dimensions__SWIG_0(swigCPtr, this, i, Vec3.getCPtr(value), value);
+  }
+
+  public int append_dimensions(Vec3 value) {
+    return opensimSimulationJNI.WrapEllipsoid_append_dimensions(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
+  public void constructProperty_dimensions(Vec3 initValue) {
+    opensimSimulationJNI.WrapEllipsoid_constructProperty_dimensions(swigCPtr, this, Vec3.getCPtr(initValue), initValue);
+  }
+
+  public Vec3 get_dimensions() {
+    return new Vec3(opensimSimulationJNI.WrapEllipsoid_get_dimensions__SWIG_1(swigCPtr, this), false);
+  }
+
+  public Vec3 upd_dimensions() {
+    return new Vec3(opensimSimulationJNI.WrapEllipsoid_upd_dimensions__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_dimensions(Vec3 value) {
+    opensimSimulationJNI.WrapEllipsoid_set_dimensions__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
+  }
+
   public WrapEllipsoid() {
-    this(opensimSimulationJNI.new_WrapEllipsoid__SWIG_0(), true);
-  }
-
-  public WrapEllipsoid(WrapEllipsoid aWrapEllipsoid) {
-    this(opensimSimulationJNI.new_WrapEllipsoid__SWIG_1(WrapEllipsoid.getCPtr(aWrapEllipsoid), aWrapEllipsoid), true);
-  }
-
-  public void copyData(WrapEllipsoid aWrapEllipsoid) {
-    opensimSimulationJNI.WrapEllipsoid_copyData(swigCPtr, this, WrapEllipsoid.getCPtr(aWrapEllipsoid), aWrapEllipsoid);
+    this(opensimSimulationJNI.new_WrapEllipsoid(), true);
   }
 
   public String getWrapTypeName() {
@@ -83,10 +111,6 @@ public class WrapEllipsoid extends WrapObject {
 
   public void extendScale(State s, ScaleSet scaleSet) {
     opensimSimulationJNI.WrapEllipsoid_extendScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
-  }
-
-  public void connectToModelAndBody(Model aModel, PhysicalFrame aBody) {
-    opensimSimulationJNI.WrapEllipsoid_connectToModelAndBody(swigCPtr, this, Model.getCPtr(aModel), aModel, PhysicalFrame.getCPtr(aBody), aBody);
   }
 
 }
