@@ -10,6 +10,7 @@ import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.State;
 import org.opensim.modeling.Vec3;
 import org.opensim.utils.TheApp;
+import org.opensim.view.MuscleColorByActivationStorage;
 
 /**
  *
@@ -29,7 +30,7 @@ public class ModernPathColorMap implements PathColorMap {
         if (activation > 0){
             activationBasedColor = new Vec3(activation, 0, 1-activation);
         }
-        else if (activation < -1.01){ // unused, show as outside blue-red spectrum 
+        else if (activation == MuscleColorByActivationStorage.UNUSED_MSL){ // unused, show as outside blue-red spectrum 
             return new Vec3(1.0, 1.0, 0.0);
             
         }
