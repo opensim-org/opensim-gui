@@ -31,7 +31,7 @@ public class ModernPathColorMap implements PathColorMap {
             activationBasedColor = new Vec3(activation, 0, 1-activation);
         }
         else if (activation == MuscleColorByActivationStorage.UNUSED_MSL){ // unused, show as outside blue-red spectrum 
-            return new Vec3(1.0, 1.0, 0.0);
+            return new Vec3(0.8, 0.8, 0.8);
             
         }
         double redness = activationBasedColor.get(0);
