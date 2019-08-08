@@ -41,7 +41,7 @@ import org.opensim.view.pub.OpenSimDB;
 public final class ToolbarRunForwardAction extends CallableSystemAction implements Observer {
    
     private boolean enabled = true;
-    private double finalTime = 1000.0;
+    private double finalTime = 5.0;
     
     public ToolbarRunForwardAction() {
         SimulationDB.getInstance().addObserver(this);
