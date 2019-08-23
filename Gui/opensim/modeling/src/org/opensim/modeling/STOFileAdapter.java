@@ -48,10 +48,6 @@ public class STOFileAdapter {
     return (cPtr == 0) ? null : new STOFileAdapter(cPtr, true);
   }
 
-  public static TimeSeriesTable readFile(String fileName) {
-    return new TimeSeriesTable(opensimCommonJNI.STOFileAdapter_readFile(fileName), true);
-  }
-
   public static void write(TimeSeriesTable table, String fileName) {
     opensimCommonJNI.STOFileAdapter_write(TimeSeriesTable.getCPtr(table), table, fileName);
   }
