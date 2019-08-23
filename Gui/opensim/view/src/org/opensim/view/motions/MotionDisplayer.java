@@ -230,7 +230,7 @@ public class MotionDisplayer {
     public void setMuscleColoringFunction(MuscleColoringFunction mcbya) {
         mcf = mcbya;
         // Push it down to muscle displayers
-        
+        ViewDB.getInstance().updateModelDisplayNoRepaint(model, true, true);
     }
 
     public void addMotionObjectsToFrame(JSONArray transforms_json, JSONArray paths_json) {
@@ -642,8 +642,6 @@ public class MotionDisplayer {
           int dataSize = states.getSize();
           AnnotatedMotion mot = (AnnotatedMotion)simmMotionData;
           Vector<ExperimentalDataObject> objects=mot.getClassified();
-          boolean markersModified=false;
-          boolean forcesModified=false;
           mot.updateDecorations(interpolatedStates);
           return;
       }
