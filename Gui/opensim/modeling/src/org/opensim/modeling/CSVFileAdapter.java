@@ -48,10 +48,6 @@ public class CSVFileAdapter {
     return (cPtr == 0) ? null : new CSVFileAdapter(cPtr, true);
   }
 
-  public static TimeSeriesTable readFile(String fileName) {
-    return new TimeSeriesTable(opensimCommonJNI.CSVFileAdapter_readFile(fileName), true);
-  }
-
   public static void write(TimeSeriesTable table, String fileName) {
     opensimCommonJNI.CSVFileAdapter_write(TimeSeriesTable.getCPtr(table), table, fileName);
   }

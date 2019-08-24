@@ -51,23 +51,25 @@ public class C3DFileAdapter extends FileAdapter {
   }
 
   public void setLocationForForceExpression(C3DFileAdapter.ForceLocation location) {
-    opensimCommonJNI.C3DFileAdapter_setLocationForForceExpression(swigCPtr, this, location.swigValue());
+    opensimCommonJNI.C3DFileAdapter_setLocationForForceExpression__SWIG_0(swigCPtr, this, location.swigValue());
   }
 
   public C3DFileAdapter.ForceLocation getLocationForForceExpression() {
     return C3DFileAdapter.ForceLocation.swigToEnum(opensimCommonJNI.C3DFileAdapter_getLocationForForceExpression(swigCPtr, this));
   }
 
-  public static StdMapStringTimeSeriesTableVec3 readFile(String fileName, C3DFileAdapter.ForceLocation wrt) {
-    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_readFile__SWIG_0(fileName, wrt.swigValue()), true);
-  }
-
-  public static StdMapStringTimeSeriesTableVec3 readFile(String fileName) {
-    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_readFile__SWIG_1(fileName), true);
-  }
-
   public static void write(StdMapStringTimeSeriesTableVec3 markerTable, String fileName) {
     opensimCommonJNI.C3DFileAdapter_write(StdMapStringTimeSeriesTableVec3.getCPtr(markerTable), markerTable, fileName);
+  }
+
+  public TimeSeriesTableVec3 getMarkersTable(StdMapStringAbstractDataTable tables) {
+    long cPtr = opensimCommonJNI.C3DFileAdapter_getMarkersTable(swigCPtr, this, StdMapStringAbstractDataTable.getCPtr(tables), tables);
+    return (cPtr == 0) ? null : new TimeSeriesTableVec3(cPtr, true);
+  }
+
+  public TimeSeriesTableVec3 getForcesTable(StdMapStringAbstractDataTable tables) {
+    long cPtr = opensimCommonJNI.C3DFileAdapter_getForcesTable(swigCPtr, this, StdMapStringAbstractDataTable.getCPtr(tables), tables);
+    return (cPtr == 0) ? null : new TimeSeriesTableVec3(cPtr, true);
   }
 
   public static String get_markers() {
@@ -78,8 +80,8 @@ public class C3DFileAdapter extends FileAdapter {
     return opensimCommonJNI.C3DFileAdapter__forces_get();
   }
 
-  public StdMapStringTimeSeriesTableVec3 readFile(String fileName, long wrt) {
-    return new StdMapStringTimeSeriesTableVec3(opensimCommonJNI.C3DFileAdapter_readFile__SWIG_2(swigCPtr, this, fileName, wrt), true);
+  public void setLocationForForceExpression(long wrt) {
+    opensimCommonJNI.C3DFileAdapter_setLocationForForceExpression__SWIG_1(swigCPtr, this, wrt);
   }
 
   public final static class ForceLocation {
