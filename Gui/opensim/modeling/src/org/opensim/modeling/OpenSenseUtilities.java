@@ -35,20 +35,24 @@ public class OpenSenseUtilities {
     }
   }
 
-  public static TimeSeriesTableRotation convertQuaternionsToRotations(TimeSeriesTableQuaternion qauternionsTable, SimTKArrayInt startEnd, String baseImuName, CoordinateAxis baseHeadingAxis) {
-    return new TimeSeriesTableRotation(opensimSimulationJNI.OpenSenseUtilities_convertQuaternionsToRotations__SWIG_0(TimeSeriesTableQuaternion.getCPtr(qauternionsTable), qauternionsTable, SimTKArrayInt.getCPtr(startEnd), startEnd, baseImuName, CoordinateAxis.getCPtr(baseHeadingAxis), baseHeadingAxis), true);
+  public static TimeSeriesTableRotation convertQuaternionsToRotations(TimeSeriesTableQuaternion qauternionsTable, SimTKArrayInt startEnd, String baseImuName, CoordinateDirection baseHeadingDirection, Rotation sensorToOpenSim) {
+    return new TimeSeriesTableRotation(opensimSimulationJNI.OpenSenseUtilities_convertQuaternionsToRotations__SWIG_0(TimeSeriesTableQuaternion.getCPtr(qauternionsTable), qauternionsTable, SimTKArrayInt.getCPtr(startEnd), startEnd, baseImuName, CoordinateDirection.getCPtr(baseHeadingDirection), baseHeadingDirection, Rotation.getCPtr(sensorToOpenSim), sensorToOpenSim), true);
+  }
+
+  public static TimeSeriesTableRotation convertQuaternionsToRotations(TimeSeriesTableQuaternion qauternionsTable, SimTKArrayInt startEnd, String baseImuName, CoordinateDirection baseHeadingDirection) {
+    return new TimeSeriesTableRotation(opensimSimulationJNI.OpenSenseUtilities_convertQuaternionsToRotations__SWIG_1(TimeSeriesTableQuaternion.getCPtr(qauternionsTable), qauternionsTable, SimTKArrayInt.getCPtr(startEnd), startEnd, baseImuName, CoordinateDirection.getCPtr(baseHeadingDirection), baseHeadingDirection), true);
   }
 
   public static TimeSeriesTableRotation convertQuaternionsToRotations(TimeSeriesTableQuaternion qauternionsTable, SimTKArrayInt startEnd, String baseImuName) {
-    return new TimeSeriesTableRotation(opensimSimulationJNI.OpenSenseUtilities_convertQuaternionsToRotations__SWIG_1(TimeSeriesTableQuaternion.getCPtr(qauternionsTable), qauternionsTable, SimTKArrayInt.getCPtr(startEnd), startEnd, baseImuName), true);
+    return new TimeSeriesTableRotation(opensimSimulationJNI.OpenSenseUtilities_convertQuaternionsToRotations__SWIG_2(TimeSeriesTableQuaternion.getCPtr(qauternionsTable), qauternionsTable, SimTKArrayInt.getCPtr(startEnd), startEnd, baseImuName), true);
   }
 
   public static TimeSeriesTableRotation convertQuaternionsToRotations(TimeSeriesTableQuaternion qauternionsTable, SimTKArrayInt startEnd) {
-    return new TimeSeriesTableRotation(opensimSimulationJNI.OpenSenseUtilities_convertQuaternionsToRotations__SWIG_2(TimeSeriesTableQuaternion.getCPtr(qauternionsTable), qauternionsTable, SimTKArrayInt.getCPtr(startEnd), startEnd), true);
+    return new TimeSeriesTableRotation(opensimSimulationJNI.OpenSenseUtilities_convertQuaternionsToRotations__SWIG_3(TimeSeriesTableQuaternion.getCPtr(qauternionsTable), qauternionsTable, SimTKArrayInt.getCPtr(startEnd), startEnd), true);
   }
 
   public static TimeSeriesTableRotation convertQuaternionsToRotations(TimeSeriesTableQuaternion qauternionsTable) {
-    return new TimeSeriesTableRotation(opensimSimulationJNI.OpenSenseUtilities_convertQuaternionsToRotations__SWIG_3(TimeSeriesTableQuaternion.getCPtr(qauternionsTable), qauternionsTable), true);
+    return new TimeSeriesTableRotation(opensimSimulationJNI.OpenSenseUtilities_convertQuaternionsToRotations__SWIG_4(TimeSeriesTableQuaternion.getCPtr(qauternionsTable), qauternionsTable), true);
   }
 
   public static Model calibrateModelFromOrientations(String modelCalibrationPoseFile, String calibrationOrientationsFile, String baseImuName, CoordinateAxis baseHeadingAxis, boolean visualizeCalibratedModel) {

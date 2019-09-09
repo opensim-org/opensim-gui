@@ -48,10 +48,6 @@ public class STOFileAdapterSpatialVec {
     return (cPtr == 0) ? null : new STOFileAdapterSpatialVec(cPtr, true);
   }
 
-  public static TimeSeriesTableSpatialVec readFile(String fileName) {
-    return new TimeSeriesTableSpatialVec(opensimCommonJNI.STOFileAdapterSpatialVec_readFile(fileName), true);
-  }
-
   public static void write(TimeSeriesTableSpatialVec table, String fileName) {
     opensimCommonJNI.STOFileAdapterSpatialVec_write(TimeSeriesTableSpatialVec.getCPtr(table), table, fileName);
   }

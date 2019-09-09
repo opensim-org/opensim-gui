@@ -53,4 +53,9 @@ public class FileAdapter extends DataAdapter {
     return new StdVectorString(opensimCommonJNI.FileAdapter_tokenize(str, delims), true);
   }
 
+  public static DataAdapter createAdapterFromExtension(String fileName) {
+    long cPtr = opensimCommonJNI.FileAdapter_createAdapterFromExtension(fileName);
+    return (cPtr == 0) ? null : new DataAdapter(cPtr, true);
+  }
+
 }

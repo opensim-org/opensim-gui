@@ -48,10 +48,6 @@ public class STOFileAdapterQuaternion {
     return (cPtr == 0) ? null : new STOFileAdapterQuaternion(cPtr, true);
   }
 
-  public static TimeSeriesTableQuaternion readFile(String fileName) {
-    return new TimeSeriesTableQuaternion(opensimCommonJNI.STOFileAdapterQuaternion_readFile(fileName), true);
-  }
-
   public static void write(TimeSeriesTableQuaternion table, String fileName) {
     opensimCommonJNI.STOFileAdapterQuaternion_write(TimeSeriesTableQuaternion.getCPtr(table), table, fileName);
   }

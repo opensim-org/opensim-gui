@@ -6405,10 +6405,11 @@ public class opensimSimulationJNI {
   public final static native double InverseKinematicsSolver_computeCurrentOrientationError__SWIG_1(long jarg1, InverseKinematicsSolver jarg1_, int jarg2);
   public final static native void InverseKinematicsSolver_computeCurrentOrientationErrors(long jarg1, InverseKinematicsSolver jarg1_, long jarg2, SimTKArrayDouble jarg2_);
   public final static native String InverseKinematicsSolver_getOrientationSensorNameForIndex(long jarg1, InverseKinematicsSolver jarg1_, int jarg2);
-  public final static native long OpenSenseUtilities_convertQuaternionsToRotations__SWIG_0(long jarg1, TimeSeriesTableQuaternion jarg1_, long jarg2, SimTKArrayInt jarg2_, String jarg3, long jarg4, CoordinateAxis jarg4_);
-  public final static native long OpenSenseUtilities_convertQuaternionsToRotations__SWIG_1(long jarg1, TimeSeriesTableQuaternion jarg1_, long jarg2, SimTKArrayInt jarg2_, String jarg3);
-  public final static native long OpenSenseUtilities_convertQuaternionsToRotations__SWIG_2(long jarg1, TimeSeriesTableQuaternion jarg1_, long jarg2, SimTKArrayInt jarg2_);
-  public final static native long OpenSenseUtilities_convertQuaternionsToRotations__SWIG_3(long jarg1, TimeSeriesTableQuaternion jarg1_);
+  public final static native long OpenSenseUtilities_convertQuaternionsToRotations__SWIG_0(long jarg1, TimeSeriesTableQuaternion jarg1_, long jarg2, SimTKArrayInt jarg2_, String jarg3, long jarg4, CoordinateDirection jarg4_, long jarg5, Rotation jarg5_);
+  public final static native long OpenSenseUtilities_convertQuaternionsToRotations__SWIG_1(long jarg1, TimeSeriesTableQuaternion jarg1_, long jarg2, SimTKArrayInt jarg2_, String jarg3, long jarg4, CoordinateDirection jarg4_);
+  public final static native long OpenSenseUtilities_convertQuaternionsToRotations__SWIG_2(long jarg1, TimeSeriesTableQuaternion jarg1_, long jarg2, SimTKArrayInt jarg2_, String jarg3);
+  public final static native long OpenSenseUtilities_convertQuaternionsToRotations__SWIG_3(long jarg1, TimeSeriesTableQuaternion jarg1_, long jarg2, SimTKArrayInt jarg2_);
+  public final static native long OpenSenseUtilities_convertQuaternionsToRotations__SWIG_4(long jarg1, TimeSeriesTableQuaternion jarg1_);
   public final static native long OpenSenseUtilities_calibrateModelFromOrientations__SWIG_0(String jarg1, String jarg2, String jarg3, long jarg4, CoordinateAxis jarg4_, boolean jarg5);
   public final static native long OpenSenseUtilities_calibrateModelFromOrientations__SWIG_1(String jarg1, String jarg2, String jarg3, long jarg4, CoordinateAxis jarg4_);
   public final static native long OpenSenseUtilities_calibrateModelFromOrientations__SWIG_2(String jarg1, String jarg2, String jarg3);
