@@ -164,6 +164,11 @@ public class opensimSimbodyJNI {
   public final static native String Vec2_toString(long jarg1, Vec2 jarg1_);
   public final static native void Vec2_set(long jarg1, Vec2 jarg1_, int jarg2, double jarg3);
   public final static native double Vec2_get(long jarg1, Vec2 jarg1_, int jarg2);
+  public final static native long Vec2_scalarEq(long jarg1, Vec2 jarg1_, double jarg2);
+  public final static native long Vec2_scalarPlusEq(long jarg1, Vec2 jarg1_, double jarg2);
+  public final static native long Vec2_scalarMinusEq(long jarg1, Vec2 jarg1_, double jarg2);
+  public final static native long Vec2_scalarTimesEq(long jarg1, Vec2 jarg1_, double jarg2);
+  public final static native long Vec2_scalarDivideEq(long jarg1, Vec2 jarg1_, double jarg2);
   public final static native void delete_Vec2(long jarg1);
   public final static native int Vec3_size();
   public final static native int Vec3_nrow();
@@ -191,6 +196,11 @@ public class opensimSimbodyJNI {
   public final static native String Vec3_toString(long jarg1, Vec3 jarg1_);
   public final static native void Vec3_set(long jarg1, Vec3 jarg1_, int jarg2, double jarg3);
   public final static native double Vec3_get(long jarg1, Vec3 jarg1_, int jarg2);
+  public final static native long Vec3_scalarEq(long jarg1, Vec3 jarg1_, double jarg2);
+  public final static native long Vec3_scalarPlusEq(long jarg1, Vec3 jarg1_, double jarg2);
+  public final static native long Vec3_scalarMinusEq(long jarg1, Vec3 jarg1_, double jarg2);
+  public final static native long Vec3_scalarTimesEq(long jarg1, Vec3 jarg1_, double jarg2);
+  public final static native long Vec3_scalarDivideEq(long jarg1, Vec3 jarg1_, double jarg2);
   public final static native void delete_Vec3(long jarg1);
   public final static native int Vec4_size();
   public final static native int Vec4_nrow();
@@ -218,6 +228,11 @@ public class opensimSimbodyJNI {
   public final static native String Vec4_toString(long jarg1, Vec4 jarg1_);
   public final static native void Vec4_set(long jarg1, Vec4 jarg1_, int jarg2, double jarg3);
   public final static native double Vec4_get(long jarg1, Vec4 jarg1_, int jarg2);
+  public final static native long Vec4_scalarEq(long jarg1, Vec4 jarg1_, double jarg2);
+  public final static native long Vec4_scalarPlusEq(long jarg1, Vec4 jarg1_, double jarg2);
+  public final static native long Vec4_scalarMinusEq(long jarg1, Vec4 jarg1_, double jarg2);
+  public final static native long Vec4_scalarTimesEq(long jarg1, Vec4 jarg1_, double jarg2);
+  public final static native long Vec4_scalarDivideEq(long jarg1, Vec4 jarg1_, double jarg2);
   public final static native void delete_Vec4(long jarg1);
   public final static native int Vec6_size();
   public final static native int Vec6_nrow();
@@ -245,6 +260,11 @@ public class opensimSimbodyJNI {
   public final static native String Vec6_toString(long jarg1, Vec6 jarg1_);
   public final static native void Vec6_set(long jarg1, Vec6 jarg1_, int jarg2, double jarg3);
   public final static native double Vec6_get(long jarg1, Vec6 jarg1_, int jarg2);
+  public final static native long Vec6_scalarEq(long jarg1, Vec6 jarg1_, double jarg2);
+  public final static native long Vec6_scalarPlusEq(long jarg1, Vec6 jarg1_, double jarg2);
+  public final static native long Vec6_scalarMinusEq(long jarg1, Vec6 jarg1_, double jarg2);
+  public final static native long Vec6_scalarTimesEq(long jarg1, Vec6 jarg1_, double jarg2);
+  public final static native long Vec6_scalarDivideEq(long jarg1, Vec6 jarg1_, double jarg2);
   public final static native void delete_Vec6(long jarg1);
   public final static native int Mat33_size();
   public final static native int Mat33_nrow();
