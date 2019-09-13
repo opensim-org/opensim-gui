@@ -322,7 +322,7 @@ public class ModelVisualizationJson extends JSONObject {
                                 wrapPointUUIDs.add(ppt_uuid);
                                 
                                 // Also create a computed ppt for use when wrapping is inactive
-                                computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(firstPoint, secondPoint, 0.99));
+                                computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(firstPoint, secondPoint, NEAR_END));
                                 
                             }
                             wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
@@ -368,6 +368,7 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("ground", retrieveUuidFromJson(modelGroundJson).toString());
         return obj_json;
     }
+    private static final double NEAR_END = 0.01;
 
     private void addParentUuid(AbstractPathPoint firstPoint, JSONObject pointJson) {
         PhysicalFrame bodyFrame = firstPoint.getBody();
@@ -703,7 +704,7 @@ public class ModelVisualizationJson extends JSONObject {
         appendToFrame(bodyTransforms_json, colorByState, geompaths_json);
         return msg;
     }
-
+    /// UPDATE #2
     public void appendToFrame(JSONArray bodyTransforms_json, boolean colorByState, JSONArray geompaths_json) {
         Iterator<Integer> bodyIdIter = mapBodyIndicesToFrames.keySet().iterator();
         if (ready) { // Avoid trying to send a frame before Json is completely populated
@@ -764,6 +765,7 @@ public class ModelVisualizationJson extends JSONObject {
                 } 
             }
             PhysicalFrame ground = mapBodyIndicesToFrames.get(0);
+            // RECOMPUTE POINTS AS NO WRAPPING, points close to one end
             for (UUID computedPointUUID: computedPathPoints.keySet()){
                 ComputedPathPointInfo computedPointInfo = computedPathPoints.get(computedPointUUID);
                 Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, computedPointInfo.ratio);
@@ -1150,7 +1152,7 @@ public class ModelVisualizationJson extends JSONObject {
         while (!pathpointsArray.get(index + numPost).isActive(state)) {
             numPost++;
         }
-        double ratio = 0.99;//((double) numPre) / (numPre + numPost);
+        double ratio = NEAR_END;//Where to "park" intermediate Points used to visualize wrapping when wrapping is not engaged.
         AbstractPathPoint curPoint = pathpointsArray.get(index);
         AbstractPathPoint prePoint = pathpointsArray.get(index - numPre);
         AbstractPathPoint postPoint = pathpointsArray.get(index + numPost);
@@ -1195,7 +1197,7 @@ public class ModelVisualizationJson extends JSONObject {
             Vec3 location = computePointLocationFromNeighbors(lastPathPoint, mapBodyIndicesToFrames.get(0), currentPathPoint, ratio);
             JSONObject bpptInBodyJson =createPathPointObjectJson(null, "", false, location, matuuid.toString(), false);
             UUID ppt_uuid = retrieveUuidFromJson(bpptInBodyJson);
-            computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(lastPathPoint, currentPathPoint, .99));
+            computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(lastPathPoint, currentPathPoint, NEAR_END));
             if (activeState==null){ // recreate mode need to add bpptInBodyJson to points rather than uuid only
                 bpptInBodyJson.put("parent", retrieveUuidFromJson(modelGroundJson).toString());
                 points.add(bpptInBodyJson);
@@ -1424,6 +1426,7 @@ public class ModelVisualizationJson extends JSONObject {
             else if (secondIndex == -1){ // Conditional Path point that's inactive
             }
             else {
+                // Reset all intermediate points to computed position in case wrap was disengaged, they will be updated below
                 for (int wrappointIndex = firstIndex + 1; wrappointIndex < secondIndex; wrappointIndex++) {
                     AbstractPathPoint nextPathPoint = actualPath.get(wrappointIndex);
                     PathWrapPoint pathWrapPoint = PathWrapPoint.safeDownCast(nextPathPoint);
@@ -1456,6 +1459,8 @@ public class ModelVisualizationJson extends JSONObject {
                                 }
                                 wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
                             }
+                            else
+                                if (verbose) System.out.println("Existing wrap found, updating");
                             for (int j = 0; j < indicesToUse.length; j++) {
                                 Vec3 globalLocation = wrapPtsFrame.findStationLocationInAnotherFrame(state, pathwrap.get(indicesToUse[j]), mapBodyIndicesToFrames.get(0));
                                 // Update location from wrapping
@@ -1553,6 +1558,7 @@ public class ModelVisualizationJson extends JSONObject {
     /* Create visuals for GeometryPath, including pathpoints, caps, visible represents user intention for
     * the muscle body and endcaps only, everything else is controlled separately
     */
+    //// CREATE #1
     private UUID createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, JSONArray json_geometries, 
                                             JSONArray json_materials, boolean visible) {
         // Create material for path
@@ -1658,7 +1664,7 @@ public class ModelVisualizationJson extends JSONObject {
                                 pathpointActive_jsonArr.add(false);
                                 wrapPointUUIDs.add(ppt_uuid);
                                 // Also create a computed ppt for use when wrapping is inactive
-                                computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(firstPoint, secondPoint, 0.99));
+                                computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(firstPoint, secondPoint, NEAR_END));
                                 
                             }
                             wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
