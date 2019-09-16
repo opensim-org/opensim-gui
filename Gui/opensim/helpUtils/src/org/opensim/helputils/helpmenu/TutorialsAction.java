@@ -67,12 +67,12 @@ public final class TutorialsAction extends CallableSystemAction {
       };
 
       // Add online examples
-      displayMenu.add(new BrowserPageDisplayerAction("Online Examples", "https://simtk-confluence.stanford.edu/display/OpenSim/Examples+and+Tutorials"));
+      displayMenu.add(new BrowserPageDisplayerAction("Online Examples", "https://simtk-confluence.stanford.edu/display/OpenSim40/Examples+and+Tutorials"));
 
       // Adding tutorials
-      displayMenu.add(new BrowserPageDisplayerAction("OpenSimTutorial1", "https://simtk-confluence.stanford.edu/display/OpenSim/Tutorial+1+-+Intro+to+Musculoskeletal+Modeling"));
-      displayMenu.add(new BrowserPageDisplayerAction("OpenSimTutorial2", "https://simtk-confluence.stanford.edu/display/OpenSim/Tutorial+2+-+Simulation+and+Analysis+of+a+Tendon+Transfer+Surgery"));
-      displayMenu.add(new BrowserPageDisplayerAction("OpenSimTutorial3", "https://simtk-confluence.stanford.edu/display/OpenSim/Tutorial+3+-+Scaling%2C+Inverse+Kinematics%2C+and+Inverse+Dynamics"));
+      displayMenu.add(new BrowserPageDisplayerAction("OpenSimTutorial1", "https://simtk-confluence.stanford.edu/display/OpenSim40/Tutorial+1+-+Intro+to+Musculoskeletal+Modeling"));
+      displayMenu.add(new BrowserPageDisplayerAction("OpenSimTutorial2", "https://simtk-confluence.stanford.edu/display/OpenSim40/Tutorial+2+-+Simulation+and+Analysis+of+a+Tendon+Transfer+Surgery"));
+      displayMenu.add(new BrowserPageDisplayerAction("OpenSimTutorial3", "https://simtk-confluence.stanford.edu/display/OpenSim40/Tutorial+3+-+Scaling%2C+Inverse+Kinematics%2C+and+Inverse+Dynamics"));
 
       return displayMenu;
     }
