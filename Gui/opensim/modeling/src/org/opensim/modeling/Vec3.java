@@ -139,4 +139,24 @@ public class Vec3 {
     return opensimSimbodyJNI.Vec3_get(swigCPtr, this, i);
   }
 
+  public Vec3 scalarEq(double ee) {
+    return new Vec3(opensimSimbodyJNI.Vec3_scalarEq(swigCPtr, this, ee), false);
+  }
+
+  public Vec3 scalarPlusEq(double ee) {
+    return new Vec3(opensimSimbodyJNI.Vec3_scalarPlusEq(swigCPtr, this, ee), false);
+  }
+
+  public Vec3 scalarMinusEq(double ee) {
+    return new Vec3(opensimSimbodyJNI.Vec3_scalarMinusEq(swigCPtr, this, ee), false);
+  }
+
+  public Vec3 scalarTimesEq(double ee) {
+    return new Vec3(opensimSimbodyJNI.Vec3_scalarTimesEq(swigCPtr, this, ee), false);
+  }
+
+  public Vec3 scalarDivideEq(double ee) {
+    return new Vec3(opensimSimbodyJNI.Vec3_scalarDivideEq(swigCPtr, this, ee), false);
+  }
+
 }
