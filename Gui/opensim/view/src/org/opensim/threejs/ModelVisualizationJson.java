@@ -1418,7 +1418,7 @@ public class ModelVisualizationJson extends JSONObject {
         JSONArray pathpointJsonArray = pathsWithWrapping.get(path);
         int numWrapObjects = path.getWrapSet().getSize();
         PathPointSet pathPointSetNoWrap = path.getPathPointSet();
-        int newWrapCount = (actualPath.getSize() - pathPointSetNoWrap.getSize());
+        int newWrapCount = (actualPath.getSize() - pathPointSetNoWrap.getSize())/2;
         boolean wrapChange = (newWrapCount != 0) && (previousWrapCount.intValue()>newWrapCount);
         if (wrapChange)
             System.out.println("WrapChange detected");
