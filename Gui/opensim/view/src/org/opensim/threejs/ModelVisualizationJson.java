@@ -1489,7 +1489,7 @@ public class ModelVisualizationJson extends JSONObject {
             firstIndex = secondIndex;
             firstPoint = secondPoint;
         }
-        
+        pathWrapCount.put(path, newWrapCount);
     }
 
     private UUID addPathPointObjectToParent(AbstractPathPoint pathPoint, String material, boolean visible) {
