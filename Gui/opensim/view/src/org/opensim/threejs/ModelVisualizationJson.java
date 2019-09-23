@@ -330,8 +330,10 @@ public class ModelVisualizationJson extends JSONObject {
                             wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
                             // Add new pathWrapPoint to pathWrapCurrent
                             ArrayList<PathWrapPoint> currentWrap = pathWrapCurrent.get(path);
-                            currentWrap.add(pathWrapPoint);
-                            pathWrapCurrent.put(path, currentWrap);
+                            if (currentWrap!= null){
+                                currentWrap.add(pathWrapPoint);
+                                pathWrapCurrent.put(path, currentWrap);
+                            }
     
                         }
                     }
@@ -1416,8 +1418,37 @@ public class ModelVisualizationJson extends JSONObject {
                         new HashMap<OpenSimObject, UUID>();
     
     private void updatePathWithWrapping(GeometryPath path, JSONArray bodyTransforms) {
-        ArrayList<PathWrapPoint> previousWrap = pathWrapCurrent.get(path);
         ArrayPathPoint actualPath =path.getCurrentPath(state);
+        ArrayList<PathWrapPoint> previousWrap = pathWrapCurrent.get(path);
+        ArrayList<PathWrapPoint> currentWrap = new ArrayList<PathWrapPoint>();
+        if (previousWrap != null){ // There was oldWrap and Path has multiple wrap objects
+            int oldCount = previousWrap.size();
+            //System.out.println("oldCount = "+oldCount);
+            PhysicalFrame ground = mapBodyIndicesToFrames.get(0);
+            for (int i=0; i <oldCount; i++){
+                boolean firstWrapPoint = (i==0);
+                int foundIndex = actualPath.findIndex(previousWrap.get(i));
+                //System.out.println("foundIndex = "+foundIndex);
+                if (foundIndex==-1 && !firstWrapPoint){ // Wrap was disengaged
+                    // Move corresponding "computed" path points to next non-wrap point
+                    System.out.println("Move computed wrap points for "+
+                            previousWrap.get(i).getName()+" to "+actualPath.get(foundIndex+1));
+                    // get UUIDs for this pathpoint
+                    ArrayList<UUID> wrapPointUUIDs = wrapPathPoints.get(previousWrap.get(i));
+                    for (UUID computedPointUUID: wrapPointUUIDs){
+                        ComputedPathPointInfo computedPointInfo = computedPathPoints.get(computedPointUUID);
+                        Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, 1 - computedPointInfo.ratio);
+                        Transform localTransform = new Transform();
+                        localTransform.setP(loc);
+                        JSONObject pathpointXform_json = new JSONObject();
+                        pathpointXform_json.put("uuid", computedPointUUID.toString());
+                        pathpointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1., 1., 1.), visScaleFactor));
+                        bodyTransforms.add(pathpointXform_json);
+                    }
+
+                }
+            }
+        }
         JSONArray pathpointJsonArray = pathsWithWrapping.get(path);
         int numWrapObjects = path.getWrapSet().getSize();
         PathPointSet pathPointSetNoWrap = path.getPathPointSet();
@@ -1482,6 +1513,7 @@ public class ModelVisualizationJson extends JSONObject {
                                 oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
                                 bodyTransforms.add(oneBodyXform_json);
                             }
+                            currentWrap.add(pathWrapPoint);
                         }
                     }
                 }
@@ -1489,6 +1521,8 @@ public class ModelVisualizationJson extends JSONObject {
             firstIndex = secondIndex;
             firstPoint = secondPoint;
         }
+        if (numWrapObjects > 1)
+            pathWrapCurrent.put(path, currentWrap);
     }
 
     private UUID addPathPointObjectToParent(AbstractPathPoint pathPoint, String material, boolean visible) {
@@ -1682,8 +1716,10 @@ public class ModelVisualizationJson extends JSONObject {
                             }
                             wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
                             ArrayList<PathWrapPoint> currentWrap = pathWrapCurrent.get(path);
-                            currentWrap.add(pathWrapPoint);
-                            pathWrapCurrent.put(path, currentWrap);
+                            if (currentWrap!= null){ // only in case multiple wrap objects this would be non-null
+                                currentWrap.add(pathWrapPoint);
+                                pathWrapCurrent.put(path, currentWrap);
+                            }
                         }
                     }
                 }
