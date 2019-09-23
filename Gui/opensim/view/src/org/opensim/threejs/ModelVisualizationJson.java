@@ -251,7 +251,7 @@ public class ModelVisualizationJson extends JSONObject {
         // This includes inactive ConditionalPoints but no Wrapping
         int numWrapObjects = path.getWrapSet().getSize();
         if (numWrapObjects > 1)
-            pathWrapCount.put(path, 0); // Keep track of # current Wraps
+            pathWrapCurrent.put(path, new ArrayList<PathWrapPoint>()); // Keep track of # current Wraps
         final PathPointSet pathPointSetNoWrap = path.getPathPointSet();
         // Create viz for currentPoint
         int i=0;
@@ -328,8 +328,11 @@ public class ModelVisualizationJson extends JSONObject {
                                 
                             }
                             wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
-                            Integer previousWrapCount = pathWrapCount.get(path);
-                            pathWrapCount.put(path, previousWrapCount + 1);
+                            // Add new pathWrapPoint to pathWrapCurrent
+                            ArrayList<PathWrapPoint> currentWrap = pathWrapCurrent.get(path);
+                            currentWrap.add(pathWrapPoint);
+                            pathWrapCurrent.put(path, currentWrap);
+    
                         }
                     }
                 }
@@ -1393,7 +1396,7 @@ public class ModelVisualizationJson extends JSONObject {
     // List of paths used for generating visualizer frames
     private final HashMap<GeometryPath, UUID> pathMaterials = new HashMap<GeometryPath, UUID>();
     private final HashMap<GeometryPath, UUID> pathList = new HashMap<GeometryPath, UUID>();
-    private final HashMap<GeometryPath, Integer> pathWrapCount = new HashMap<GeometryPath, Integer>();
+    private final HashMap<GeometryPath, ArrayList<PathWrapPoint>> pathWrapCurrent = new HashMap<GeometryPath, ArrayList<PathWrapPoint>>();
     // List of all Components that need special treatment as in not statically attached:
     // MovingPathPoint for now
     private final HashMap<Component, UUID> movingComponents = new HashMap<Component, UUID>();
@@ -1413,15 +1416,12 @@ public class ModelVisualizationJson extends JSONObject {
                         new HashMap<OpenSimObject, UUID>();
     
     private void updatePathWithWrapping(GeometryPath path, JSONArray bodyTransforms) {
-        Integer previousWrapCount = pathWrapCount.get(path);
+        ArrayList<PathWrapPoint> previousWrap = pathWrapCurrent.get(path);
         ArrayPathPoint actualPath =path.getCurrentPath(state);
         JSONArray pathpointJsonArray = pathsWithWrapping.get(path);
         int numWrapObjects = path.getWrapSet().getSize();
         PathPointSet pathPointSetNoWrap = path.getPathPointSet();
-        int newWrapCount = (actualPath.getSize() - pathPointSetNoWrap.getSize())/2;
-        boolean wrapChange = (newWrapCount != 0) && (previousWrapCount.intValue()>newWrapCount);
-        if (wrapChange)
-            System.out.println("WrapChange detected");
+
         int firstIndex = 0; // by construction
         AbstractPathPoint firstPoint = pathPointSetNoWrap.get(firstIndex);
         int numIntermediatePoints = NUM_PATHPOINTS_PER_WRAP_OBJECT * numWrapObjects;
@@ -1489,7 +1489,6 @@ public class ModelVisualizationJson extends JSONObject {
             firstIndex = secondIndex;
             firstPoint = secondPoint;
         }
-        pathWrapCount.put(path, newWrapCount);
     }
 
     private UUID addPathPointObjectToParent(AbstractPathPoint pathPoint, String material, boolean visible) {
@@ -1599,7 +1598,7 @@ public class ModelVisualizationJson extends JSONObject {
         // This includes inactive ConditionalPoints but no Wrapping
         int numWrapObjects = path.getWrapSet().getSize();
         if (numWrapObjects > 1)
-            pathWrapCount.put(path, 0); // Keep track of # current Wraps
+            pathWrapCurrent.put(path, new ArrayList<PathWrapPoint>()); // Keep track of current Wraps
 
         final PathPointSet pathPointSetNoWrap = path.getPathPointSet();
         
@@ -1682,8 +1681,9 @@ public class ModelVisualizationJson extends JSONObject {
                                 
                             }
                             wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
-                            pathWrapCount.put(path, pathWrapCount.get(path)+1); // Keep track of # current Wraps
-
+                            ArrayList<PathWrapPoint> currentWrap = pathWrapCurrent.get(path);
+                            currentWrap.add(pathWrapPoint);
+                            pathWrapCurrent.put(path, currentWrap);
                         }
                     }
                 }
