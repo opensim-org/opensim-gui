@@ -10,4 +10,7 @@ v4.1
 - Fix issue #1105: GUI adding offset to Experimental Data by default
 - Fix issue #1123: GUI displays disabled muscles in red-blue range during/after StaticOptimization.
 - Fix issue #1127: Changes default time in the toolbar forward simulation tool to 5 seconds. 
+- Fix issue #2569: Handle moving path points properly when they appear first on GeometryPath for visualization purposes
+- Fix issue #1111: Handle muscle paths that wrap around multiple wrap objects when wrapping disengages.
+
 
