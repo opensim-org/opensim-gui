@@ -789,7 +789,6 @@ public class ModelVisualizationJson extends JSONObject {
                 
                 // Update status of Wrappoints accordingly
                 for (GeometryPath path:pathsWithWrapping.keySet()){
-                    System.out.println("Processing PathWithWrapping:"+path.getOwner().getName());
                     updatePathWithWrapping(path, bodyTransforms_json);
                 }
             }            // Computed points need recomputation
@@ -1431,13 +1430,14 @@ public class ModelVisualizationJson extends JSONObject {
                 //System.out.println("foundIndex = "+foundIndex);
                 if (foundIndex==-1 && !firstWrapPoint){ // Wrap was disengaged
                     // Move corresponding "computed" path points to next non-wrap point
-                    System.out.println("Move computed wrap points for "+
-                            previousWrap.get(i).getName()+" to "+actualPath.get(foundIndex+1));
+                    //System.out.println("Move computed wrap points for "+previousWrap.get(i).getName());
                     // get UUIDs for this pathpoint
                     ArrayList<UUID> wrapPointUUIDs = wrapPathPoints.get(previousWrap.get(i));
                     for (UUID computedPointUUID: wrapPointUUIDs){
                         ComputedPathPointInfo computedPointInfo = computedPathPoints.get(computedPointUUID);
-                        Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, 1 - computedPointInfo.ratio);
+                        computedPointInfo.ratio = 1 - computedPointInfo.ratio;
+                        Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, computedPointInfo.ratio);
+                        // May need to update the map for next frame as well
                         Transform localTransform = new Transform();
                         localTransform.setP(loc);
                         JSONObject pathpointXform_json = new JSONObject();
@@ -1646,6 +1646,11 @@ public class ModelVisualizationJson extends JSONObject {
         int i=0;
         AbstractPathPoint firstPoint = pathPointSetNoWrap.get(i);
         UUID pathpoint_uuid = addPathPointObjectToParent(firstPoint, pathpt_mat_uuid.toString(), visible);
+        // Fix issue #2569 where moving pathpoint is not handled properly if first in path
+        if (MovingPathPoint.safeDownCast(firstPoint) != null) {
+                movingComponents.put(firstPoint, pathpoint_uuid);
+                //System.out.println("Process Moving Path point "+pathPoint.getName());
+        }
         pathpointActive_jsonArr.add(true);
         addComponentToUUIDMap(firstPoint, pathpoint_uuid);
         pathpoint_jsonArr.add(pathpoint_uuid.toString());
