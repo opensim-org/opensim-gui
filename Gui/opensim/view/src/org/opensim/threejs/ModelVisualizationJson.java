@@ -52,6 +52,7 @@ import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.ConditionalPathPoint;
 import org.opensim.modeling.DecorativeGeometry;
+import org.opensim.modeling.Force;
 import org.opensim.modeling.Frame;
 import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.Geometry;
@@ -920,7 +921,8 @@ public class ModelVisualizationJson extends JSONObject {
             JSONObject commandJson = CommandComposerThreejs.createAppearanceChangeJson(prop, objectUuid);
             guiJson.put("command", commandJson);
             String commandName = (String) commandJson.get("name");
-            if (Muscle.safeDownCast(mc)!=null && commandName.equalsIgnoreCase("SetVisible"))
+            Force mcAsForce = Force.safeDownCast(mc);
+            if (mcAsForce!=null && mcAsForce.hasGeometryPath() && commandName.equalsIgnoreCase("SetVisible"))
                commandJson.put("type", "SetValueCommandMuscle");
         }
         return guiJson;
@@ -1330,11 +1332,11 @@ public class ModelVisualizationJson extends JSONObject {
      * propagated to the corresponding Path points that live in a separate part(s)
      * in the scene graph (e.g. on different bodies)
      * 
-     * @param muscle
+     * @param force that has GeometryPath
      * @param prop
      * @param commands 
      */
-    public void propagateGeometryPathCommandsToPathPoints(Muscle muscle, AbstractProperty prop, JSONArray commands) {
+    public void propagateGeometryPathCommandsToPathPoints(Force force, AbstractProperty prop, JSONArray commands) {
         // if anything but show/hide, apply same to first pathpoint
         int lastIndex = commands.size()-1;
         JSONObject lastCommand = (JSONObject) commands.get(lastIndex);
@@ -1344,7 +1346,8 @@ public class ModelVisualizationJson extends JSONObject {
         }
         else {
             JSONObject pathpointCommand = (JSONObject) lastCommand.clone();
-            GeometryPath gPath = muscle.getGeometryPath();
+            
+            GeometryPath gPath = GeometryPath.safeDownCast(force.getPropertyByName("GeometryPath").getValueAsObject());
             
             pathpointCommand.put("objectUuid", getFirstPathPointUUID4GeometryPath(gPath).toString());
             commands.add(pathpointCommand);
