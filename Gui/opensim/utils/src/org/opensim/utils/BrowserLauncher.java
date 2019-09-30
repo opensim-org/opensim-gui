@@ -5,7 +5,7 @@
 //  December 10, 2005                                  //
 //  Supports: Mac OS X, GNU/Linux, Unix, Windows XP    //
 //  Example Usage:                                     //
-//     String url = "http://simtk.org/";       //
+//     String url = "https://simtk.org/";       //
 //     BareBonesBrowserLaunch.openURL(url);            //
 //  Public Domain Software -- Free to Use as You Like  //
 /////////////////////////////////////////////////////////
