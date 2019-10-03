@@ -791,15 +791,13 @@ public class ModelVisualizationJson extends JSONObject {
                 UUID pathUUID = pathList.get(geomPathObject);
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
-                // Allow non-muscles to provide colors if (Muscle.safeDownCast(geomPathObject.getOwner())!= null){
-                    Vec3 pathColor = colorByState ? currentPathColorMap.getColor(geomPathObject, state, -1) : geomPathObject.getDefaultColor();
-                
-                    if (verbose)
-                        System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
-                    String colorString = JSONUtilities.mapColorToRGBA(pathColor);
-                    pathUpdate_json.put("color", colorString);
-                    geompaths_json.add(pathUpdate_json);
-                //}
+                Vec3 pathColor = colorByState ? currentPathColorMap.getColor(geomPathObject, state, -1) : geomPathObject.getDefaultColor();
+            
+                if (verbose)
+                    System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
+                String colorString = JSONUtilities.mapColorToRGBA(pathColor);
+                pathUpdate_json.put("color", colorString);
+                geompaths_json.add(pathUpdate_json);
             }
             // Have AddOns update their tranasforms
             for (VisualizerAddOn nextAddOn:visualizerAddOns){
