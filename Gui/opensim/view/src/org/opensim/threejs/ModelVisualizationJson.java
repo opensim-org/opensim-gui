@@ -1344,11 +1344,15 @@ public class ModelVisualizationJson extends JSONObject {
         }
         else {
             JSONObject pathpointCommand = (JSONObject) lastCommand.clone();
-            
-            GeometryPath gPath = GeometryPath.safeDownCast(force.getPropertyByName("GeometryPath").getValueAsObject());
-            
-            pathpointCommand.put("objectUuid", getFirstPathPointUUID4GeometryPath(gPath).toString());
-            commands.add(pathpointCommand);
+            if (force.hasGeometryPath()){
+                GeometryPath gPath = GeometryPath.safeDownCast(force.getPropertyByName("GeometryPath").getValueAsObject());
+
+                pathpointCommand.put("objectUuid", getFirstPathPointUUID4GeometryPath(gPath).toString());
+                commands.add(pathpointCommand);
+            }
+            else { // internal error, shouldn't be here propagating visualization changes to GeometryPath where none exists
+                throw new UnsupportedOperationException("Trying to update GeometryPath of Force that has no GeometryPath:"+force.getName());
+            }
         }
     }
     /* Utility to allow utility visualization classes to provide their corresponding
