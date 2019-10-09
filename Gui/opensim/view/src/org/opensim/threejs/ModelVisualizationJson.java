@@ -52,6 +52,7 @@ import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.ConditionalPathPoint;
 import org.opensim.modeling.DecorativeGeometry;
+import org.opensim.modeling.Force;
 import org.opensim.modeling.Frame;
 import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.Geometry;
@@ -790,15 +791,13 @@ public class ModelVisualizationJson extends JSONObject {
                 UUID pathUUID = pathList.get(geomPathObject);
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
-                if (Muscle.safeDownCast(geomPathObject.getOwner())!= null){
-                    Vec3 pathColor = colorByState ? currentPathColorMap.getColor(geomPathObject, state, -1) : geomPathObject.getDefaultColor();
-                
-                    if (verbose)
-                        System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
-                    String colorString = JSONUtilities.mapColorToRGBA(pathColor);
-                    pathUpdate_json.put("color", colorString);
-                    geompaths_json.add(pathUpdate_json);
-                }
+                Vec3 pathColor = colorByState ? currentPathColorMap.getColor(geomPathObject, state, -1) : geomPathObject.getDefaultColor();
+            
+                if (verbose)
+                    System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
+                String colorString = JSONUtilities.mapColorToRGBA(pathColor);
+                pathUpdate_json.put("color", colorString);
+                geompaths_json.add(pathUpdate_json);
             }
             // Have AddOns update their tranasforms
             for (VisualizerAddOn nextAddOn:visualizerAddOns){
@@ -920,7 +919,8 @@ public class ModelVisualizationJson extends JSONObject {
             JSONObject commandJson = CommandComposerThreejs.createAppearanceChangeJson(prop, objectUuid);
             guiJson.put("command", commandJson);
             String commandName = (String) commandJson.get("name");
-            if (Muscle.safeDownCast(mc)!=null && commandName.equalsIgnoreCase("SetVisible"))
+            Force mcAsForce = Force.safeDownCast(mc);
+            if (mcAsForce!=null && mcAsForce.hasGeometryPath() && commandName.equalsIgnoreCase("SetVisible"))
                commandJson.put("type", "SetValueCommandMuscle");
         }
         return guiJson;
@@ -1330,11 +1330,11 @@ public class ModelVisualizationJson extends JSONObject {
      * propagated to the corresponding Path points that live in a separate part(s)
      * in the scene graph (e.g. on different bodies)
      * 
-     * @param muscle
+     * @param force that has GeometryPath
      * @param prop
      * @param commands 
      */
-    public void propagateGeometryPathCommandsToPathPoints(Muscle muscle, AbstractProperty prop, JSONArray commands) {
+    public void propagateGeometryPathCommandsToPathPoints(Force force, AbstractProperty prop, JSONArray commands) {
         // if anything but show/hide, apply same to first pathpoint
         int lastIndex = commands.size()-1;
         JSONObject lastCommand = (JSONObject) commands.get(lastIndex);
@@ -1344,10 +1344,15 @@ public class ModelVisualizationJson extends JSONObject {
         }
         else {
             JSONObject pathpointCommand = (JSONObject) lastCommand.clone();
-            GeometryPath gPath = muscle.getGeometryPath();
-            
-            pathpointCommand.put("objectUuid", getFirstPathPointUUID4GeometryPath(gPath).toString());
-            commands.add(pathpointCommand);
+            if (force.hasGeometryPath()){
+                GeometryPath gPath = GeometryPath.safeDownCast(force.getPropertyByName("GeometryPath").getValueAsObject());
+
+                pathpointCommand.put("objectUuid", getFirstPathPointUUID4GeometryPath(gPath).toString());
+                commands.add(pathpointCommand);
+            }
+            else { // internal error, shouldn't be here propagating visualization changes to GeometryPath where none exists
+                throw new UnsupportedOperationException("Trying to update GeometryPath of Force that has no GeometryPath:"+force.getName());
+            }
         }
     }
     /* Utility to allow utility visualization classes to provide their corresponding
