@@ -11,6 +11,6 @@ v4.1
 - Fix issue [#1123](https://github.com/opensim-org/opensim-gui/issues/1123): GUI displays disabled muscles in red-blue range during/after StaticOptimization.
 - Fix issue [#1127](https://github.com/opensim-org/opensim-gui/issues/1127): Change default time in the toolbar forward simulation tool to 5 seconds. 
 - Fix issue [#1107](https://github.com/opensim-org/opensim-gui/issues/1107): Shading of model markers is not consistent with experimental markers
+- Fix issue [#1139](https://github.com/opensim-org/opensim-gui/issues/1139): Fix visualization of PathActuators and Ligaments to mimic Muscle Path visualization
 - Fix issue [#1141](https://github.com/opensim-org/opensim-gui/issues/1141): Handle moving path points properly when they appear first on GeometryPath for visualization purposes
 - Fix issue [#1111](https://github.com/opensim-org/opensim-gui/issues/1111): Handle muscle paths that wrap around multiple wrap objects when wrapping disengages.
-
