@@ -115,12 +115,20 @@ public class Rotation extends Mat33 {
     opensimSimbodyJNI.Rotation_setRotationToBodyFixedXYZ__SWIG_0(swigCPtr, this, Vec3.getCPtr(v), v);
   }
 
+  public Rotation(Quaternion q) {
+    this(opensimSimbodyJNI.new_Rotation__SWIG_6(Quaternion.getCPtr(q), q), true);
+  }
+
+  public Rotation setRotationFromQuaternion(Quaternion q) {
+    return new Rotation(opensimSimbodyJNI.Rotation_setRotationFromQuaternion(swigCPtr, this, Quaternion.getCPtr(q), q), false);
+  }
+
   public Rotation(Mat33 m, boolean arg1) {
-    this(opensimSimbodyJNI.new_Rotation__SWIG_6(Mat33.getCPtr(m), m, arg1), true);
+    this(opensimSimbodyJNI.new_Rotation__SWIG_7(Mat33.getCPtr(m), m, arg1), true);
   }
 
   public Rotation(Mat33 m) {
-    this(opensimSimbodyJNI.new_Rotation__SWIG_7(Mat33.getCPtr(m), m), true);
+    this(opensimSimbodyJNI.new_Rotation__SWIG_8(Mat33.getCPtr(m), m), true);
   }
 
   public Rotation setRotationFromApproximateMat33(Mat33 m) {
@@ -128,7 +136,7 @@ public class Rotation extends Mat33 {
   }
 
   public Rotation(UnitVec3 uvec, CoordinateAxis axis) {
-    this(opensimSimbodyJNI.new_Rotation__SWIG_8(UnitVec3.getCPtr(uvec), uvec, CoordinateAxis.getCPtr(axis), axis), true);
+    this(opensimSimbodyJNI.new_Rotation__SWIG_9(UnitVec3.getCPtr(uvec), uvec, CoordinateAxis.getCPtr(axis), axis), true);
   }
 
   public Rotation setRotationFromOneAxis(UnitVec3 uvec, CoordinateAxis axis) {
@@ -136,7 +144,7 @@ public class Rotation extends Mat33 {
   }
 
   public Rotation(UnitVec3 uveci, CoordinateAxis axisi, Vec3 vecjApprox, CoordinateAxis axisjApprox) {
-    this(opensimSimbodyJNI.new_Rotation__SWIG_9(UnitVec3.getCPtr(uveci), uveci, CoordinateAxis.getCPtr(axisi), axisi, Vec3.getCPtr(vecjApprox), vecjApprox, CoordinateAxis.getCPtr(axisjApprox), axisjApprox), true);
+    this(opensimSimbodyJNI.new_Rotation__SWIG_10(UnitVec3.getCPtr(uveci), uveci, CoordinateAxis.getCPtr(axisi), axisi, Vec3.getCPtr(vecjApprox), vecjApprox, CoordinateAxis.getCPtr(axisjApprox), axisjApprox), true);
   }
 
   public Rotation setRotationFromTwoAxes(UnitVec3 uveci, CoordinateAxis axisi, Vec3 vecjApprox, CoordinateAxis axisjApprox) {
@@ -153,6 +161,10 @@ public class Rotation extends Mat33 {
 
   public Vec3 convertThreeAxesRotationToThreeAngles(BodyOrSpaceType bodyOrSpace, CoordinateAxis axis1, CoordinateAxis axis2, CoordinateAxis axis3) {
     return new Vec3(opensimSimbodyJNI.Rotation_convertThreeAxesRotationToThreeAngles(swigCPtr, this, bodyOrSpace.swigValue(), CoordinateAxis.getCPtr(axis1), axis1, CoordinateAxis.getCPtr(axis2), axis2, CoordinateAxis.getCPtr(axis3), axis3), true);
+  }
+
+  public SWIGTYPE_p_SimTK__Quaternion_T_SimTK__Real_t convertRotationToQuaternion() {
+    return new SWIGTYPE_p_SimTK__Quaternion_T_SimTK__Real_t(opensimSimbodyJNI.Rotation_convertRotationToQuaternion(swigCPtr, this), true);
   }
 
   public Vec4 convertRotationToAngleAxis() {
@@ -188,7 +200,7 @@ public class Rotation extends Mat33 {
   }
 
   public Rotation(InverseRotation arg0) {
-    this(opensimSimbodyJNI.new_Rotation__SWIG_10(InverseRotation.getCPtr(arg0), arg0), true);
+    this(opensimSimbodyJNI.new_Rotation__SWIG_11(InverseRotation.getCPtr(arg0), arg0), true);
   }
 
   public InverseRotation invert() {
