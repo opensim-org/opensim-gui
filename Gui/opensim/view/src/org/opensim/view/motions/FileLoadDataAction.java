@@ -30,12 +30,15 @@ import java.io.File;
 import java.io.IOException;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
+import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.modeling.DataTable;
 import org.opensim.modeling.MarkerData;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.TimeSeriesTableQuaternion;
 import org.opensim.modeling.Units;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
@@ -48,7 +51,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
         // TODO implement action body
         String fileName = FileUtils.getInstance().browseForFilename(".trc,.mot,.sto", "Experimental data file");
         if (fileName != null){
-            if (fileName.toLowerCase().endsWith(".trc") || fileName.toLowerCase().endsWith(".sto")){
+            if (fileName.toLowerCase().endsWith(".trc")){
                 MarkerData markerData;
                 try {
                     markerData = new MarkerData(fileName);
@@ -71,12 +74,12 @@ public final class FileLoadDataAction extends CallableSystemAction {
                     NotifyDescriptor.Message dlg =
                           new NotifyDescriptor.Message("Couldn't load data and/or model for display.\n"+
                                 "Possible reasons: data file has incorrect format or resource file _openSimlab.osim missing.");
-                  DialogDisplayer.getDefault().notify(dlg);   
-            return;
+                    DialogDisplayer.getDefault().notify(dlg);   
+                    return;
 
                 }
             }
-            else if (fileName.toLowerCase().endsWith(".mot")){
+            else if (fileName.toLowerCase().endsWith(".mot")||fileName.toLowerCase().endsWith(".sto")){
                     Storage newStorage=null;
                     try {
                         newStorage = new Storage(fileName);
@@ -98,6 +101,20 @@ public final class FileLoadDataAction extends CallableSystemAction {
                     amot.setModel(modelForDataImport);
                     MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
                     MotionsDB.getInstance().saveStorageFileName(amot, fileName);
+            }
+            else if (fileName.toLowerCase().endsWith(".sto")){ // unused for now
+                try {
+                    // This could be a quatTable of doubles, Vec3, Quaternion or other
+                    
+                    TimeSeriesTableQuaternion quatTable= new TimeSeriesTableQuaternion(fileName);
+                    System.out.println(quatTable.getNumRows());
+                    System.out.println(quatTable.getNumColumns());
+                    System.out.println(quatTable.numComponentsPerElement());
+                    
+                    Storage storage = new Storage(fileName);
+                } catch (IOException ex) {
+                    Exceptions.printStackTrace(ex);
+                }
             }
         }
     }
