@@ -38,6 +38,8 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.PhysicalFrame;
+import org.opensim.modeling.Quaternion;
+import org.opensim.modeling.Rotation;
 import org.opensim.modeling.State;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Transform;
@@ -55,190 +57,53 @@ import org.opensim.view.pub.OpenSimDB;
 public class MotionObjectOrientation extends MotionObjectBodyPoint {
 
     double[] offset = new double[]{0, 0, 0};
-    String forceIdentifier="";
-    String forceExpressedInBodyName = "ground";
-    private String forceAppliedToBody = "ground";
-
+    private Quaternion quaternion;
     private boolean specifyPoint;
-    private String forceComponent = "All";
-    private String torqueIdentifier="";
-    private boolean specifyTorque=false;
-    private Vec3 direction = new Vec3();
     private Vec3 color = new Vec3();
-    private double length= 1.0;
     
-    public MotionObjectOrientation(ExperimentalDataItemType objectType, String baseName, int forceIndex) {
-        super(objectType, baseName, forceIndex);
-        setForceIdentifier(baseName);
+    public MotionObjectOrientation(ExperimentalDataItemType objectType, String baseName, int startIndex) {
+        super(objectType, baseName, startIndex);
    }
 
     MotionObjectOrientation(MotionObjectOrientation pf) {
         this(pf.getObjectType(), pf.getName(), pf.getStartIndexInFileNotIncludingTime());
-        offset = pf.offset;
-        forceIdentifier = pf.forceIdentifier;
-        forceExpressedInBodyName = pf.forceExpressedInBodyName;
-        forceAppliedToBody = pf.forceAppliedToBody;
-        specifyPoint = pf.specifyPoint;
-        forceComponent = pf.forceComponent;
-        torqueIdentifier = pf.torqueIdentifier;
-        specifyTorque = pf.specifyTorque;
     }
-
-    void setForceExpressedInBodyName(String selected) {
-        forceExpressedInBodyName = selected;
+    public String getConcreteClassName() {
+        return "Sensor";
     }
-
-    public void setForceIdentifier(String makeIdentifier) {
-        forceIdentifier = makeIdentifier;
-    }
-
-    String getForceExpressedInBodyName() {
-        return forceExpressedInBodyName;
-    }
-
-    boolean appliesForce() {
-        return true;
-    }
-
-    public String getForceIdentifier() {
-        return forceIdentifier;
-    }
-
-    
-    boolean specifiesPoint() {
-        return specifyPoint;
-    }
-
-    @Override
-    public void setObjectType(ExperimentalDataItemType objectType) {
-        super.setObjectType(objectType);
-        if (objectType==ExperimentalDataItemType.BodyForceData)
-            specifyPoint = false;
-        else
-            specifyPoint = true;
-    }
-
     /**
-     * @return the forceComponent
+     * @return the quaternion
      */
-    public String getForceComponent() {
-        return forceComponent;
+    public Quaternion getQuaternion() {
+        return quaternion;
     }
 
-    /**
-     * @param forceComponent the forceComponent to set
-     */
-    public void setForceComponent(String forceComponent) {
-        this.forceComponent = forceComponent;
-    }
-
-    /**
-     * @return the forceAppliedToBody
-     */
-    public String getForceAppliedToBody() {
-        return forceAppliedToBody;
-    }
-
-    /**
-     * @param forceAppliedToBody the forceAppliedToBody to set
-     */
-    public void setForceAppliedToBody(String forceAppliedToBody) {
-        this.forceAppliedToBody = forceAppliedToBody;
-    }
-
-    /**
-     * @return the specifyTorque
-     */
-    public boolean isSpecifyTorque() {
-        return specifyTorque;
-    }
-
-    /**
-     * @param specifyTorque the specifyTorque to set
-     */
-    public void setSpecifyTorque(boolean specifyTorque) {
-        this.specifyTorque = specifyTorque;
-    }
-
-    /**
-     * @return the torqueIdentifier
-     */
-    public String getTorqueIdentifier() {
-        return torqueIdentifier;
-    }
-
-    /**
-     * @param torqueIdentifier the torqueIdentifier to set
-     */
-    public void setTorqueIdentifier(String torqueIdentifier) {
-        this.torqueIdentifier = torqueIdentifier;
-    }
-    
-    @Override
-    public void generateDecorations(boolean fixed, ModelDisplayHints hints, State state, ArrayDecorativeGeometry appendToThis) {
-        if (!fixed){
-            Transform xform = new Transform();
-            // Transform position copied from base class point (responsible for setting self from data/Storage)
-            // indexOnBody is set to index in file so generated names for visualizer are unique (helpful for debugging)
-            xform.setP(new Vec3(point[0], point[1], point[2]));
-            appendToThis.push_back(new DecorativeArrow(new Vec3(0, 0, 0)).setBodyId(0).setColor(color).setOpacity(0.5).setIndexOnBody(getStartIndexInFileNotIncludingTime()).setTransform(xform));            
-        }
-    }
    @Override
     void updateDecorations(ArrayDouble interpolatedStates) {
         int idx = getStartIndexInFileNotIncludingTime();
         // if Point not in ground, transform into Ground since Arrow is in Ground by default
         // and we don't want to change scene graph layout for easy book-keeping
-        super.setPoint(new double[]{interpolatedStates.get(idx + 3), interpolatedStates.get(idx + 4), interpolatedStates.get(idx + 5)});
-        double[] forceLocal = new double[]{interpolatedStates.get(idx), 
+        super.setPoint(offset);
+        quaternion = new Quaternion(interpolatedStates.get(idx), 
                               interpolatedStates.get(idx+1), 
-                              interpolatedStates.get(idx+2)};
-        if (!forceExpressedInBodyName.equalsIgnoreCase("ground")){
-            Vec3 localDirection = new Vec3();
-            for (int i=0; i<3; i++) 
-                localDirection.set(i, forceLocal[i]);
-            applyForceComponent(localDirection, interpolatedStates, idx);
-            for (int i=0; i<3; i++) 
-                forceLocal[i] = localDirection.get(i);
-            // Convertback to double[]
-            double[] forceGlobal = new double[3]; 
-            Model model = getModel();
-            OpenSimContext dContext= OpenSimDB.getInstance().getContext(model);
-            Component c = model.getComponent(getForceExpressedInBodyName());
-            PhysicalFrame f = PhysicalFrame.safeDownCast(c);
-            dContext.transform(f, forceLocal, model.get_ground(), forceGlobal);
-            for (int i=0; i<3; i++) 
-                getDirection().set(i, forceGlobal[i]);
-        }
-        else
-            applyForceComponent(getDirection(), interpolatedStates, idx);
+                              interpolatedStates.get(idx+2),
+                interpolatedStates.get(idx+3));
+
     }
 
-    private void applyForceComponent(Vec3 direction1, ArrayDouble interpolatedStates, int idx) {
-        if (forceComponent.equalsIgnoreCase("all")) {
-            for (int i = 0; i < 3; i++) {
-                direction1.set(i, interpolatedStates.get(idx + i));
-            }
-        } else {
-            String componentNames = "xyz";
-            int componentIndex = componentNames.indexOf(forceComponent);
-            for (int i = 0; i < 3; i++) {
-                direction1.set(i, 0);
-            }
-            direction1.set(componentIndex, interpolatedStates.get(idx + componentIndex));
-        }
-    }
-    // Create JSON object to represent ExperimentalForce
+    // Create JSON object to represent IMU Sensor
     @Override
     public JSONObject createDecorationJson(ArrayList<UUID> comp_uuids, MotionDisplayer motionDisplayer) {
         
         // Create Object with proper name, add it to ground, update Map of Object to UUID
-        JSONObject expForce_json = new JSONObject();
-        UUID forcrep_uuid = UUID.randomUUID(); //3f63, acf9
-        expForce_json.put("uuid", forcrep_uuid.toString());
-        expForce_json.put("type", "Arrow");
-        expForce_json.put("opensimtype", "ExperimentalForce");
-        expForce_json.put("name", getName());
+        JSONObject expSensor_json = new JSONObject();
+        UUID imurep_uuid = UUID.randomUUID(); //3f63, acf9
+        expSensor_json.put("uuid", imurep_uuid.toString());
+        expSensor_json.put("type", "Mesh");
+        expSensor_json.put("opensimtype", "ExperimentalSensor");
+        expSensor_json.put("name", getName());
+        expSensor_json.put("geometry", motionDisplayer.getExperimentalSensorGeometryJson().get("uuid"));
+        expSensor_json.put("material", motionDisplayer.getExperimentalSensorMaterialJson().get("uuid"));
         //dir -- direction from origin. Must be a unit vector. 
         //origin -- Point at which the arrow starts.
         //length -- length of the arrow. Default is 1.
@@ -249,53 +114,24 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         ArrayDouble interpolatedStates = dataAtStartTime.getData();
         int idx = getStartIndexInFileNotIncludingTime();
         JSONArray origin = new JSONArray();
-        for (int i = 0; i < 3; i++) {
-            origin.add(interpolatedStates.get(idx+3+i));
-            point[i]=interpolatedStates.get(idx+3+i);
-        }
-        expForce_json.put("origin", origin);
-        expForce_json.put("length", 1.0);
-        JSONArray dir = new JSONArray();
-        for (int i = 0; i < 3; i++) {
-            dir.add(interpolatedStates.get(idx+i));
-            direction.set(i, interpolatedStates.get(idx+i));
-        }
-        expForce_json.put("dir", dir);
-        expForce_json.put("castShadow", false);
-        expForce_json.put("userData", "NonEditable");
-        expForce_json.put("color", JSONUtilities.mapColorToHex(motionDisplayer.getDefaultForceColorVec3()));
+        for (int i=0; i<3; i++) origin.add(i, offset[i]);
+        expSensor_json.put("origin", origin);
+        expSensor_json.put("castShadow", false);
+        expSensor_json.put("userData", "NonEditable");
+        push_rotation_to_matrix(interpolatedStates, idx, expSensor_json);
+        comp_uuids.add(imurep_uuid);
+        return expSensor_json;
+    }
+
+    private void push_rotation_to_matrix(ArrayDouble interpolatedStates, int idx, JSONObject expSensor_json) {
         Transform xform = new Transform();
-        double length = Math.sqrt(Math.pow(direction.get(0),2)+
-                Math.pow(direction.get(1),2)+Math.pow(direction.get(2),2))/1000;
-        UnitVec3 dirNorm = new UnitVec3(direction);
-        xform.setP(new Vec3(point[0], point[1], point[2]));
-        for (int i=0; i<3; i++)
-              xform.R().set(i, 1, dirNorm.get(i));
-        expForce_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1, length ,1), 
+        quaternion = new Quaternion(interpolatedStates.get(idx),
+                interpolatedStates.get(idx+1), interpolatedStates.get(idx+2),
+                interpolatedStates.get(idx+3));
+        Rotation rot = new Rotation(quaternion);
+        Vec3 p =new Vec3(point[0], point[1], point[2]);
+        xform.set(rot, p);
+        expSensor_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1, 1 ,1), 
                 ModelVisualizationJson.getVisScaleFactor()));
-        comp_uuids.add(forcrep_uuid);
-        return expForce_json;
     }
-
-    /**
-     * @return the direction
-     */
-    public Vec3 getDirection() {
-        return direction;
-    }
-
-    /**
-     * @return the color
-     */
-    public Vec3 getColor() {
-        return color;
-    }
-
-    /**
-     * @return the length
-     */
-    public double getLength() {
-        return length;
-    }
-
 }

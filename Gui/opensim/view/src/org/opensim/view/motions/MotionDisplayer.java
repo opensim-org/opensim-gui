@@ -62,6 +62,7 @@ import org.opensim.modeling.MuscleList;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
+import org.opensim.modeling.Rotation;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.Transform;
@@ -78,6 +79,7 @@ import org.opensim.view.experimentaldata.ExperimentalDataObject;
 import org.opensim.view.experimentaldata.ExperimentalMarker;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.experimentaldata.MotionObjectBodyPoint;
+import org.opensim.view.experimentaldata.MotionObjectOrientation;
 import org.opensim.view.experimentaldata.MotionObjectPointForce;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -101,6 +103,8 @@ public class MotionDisplayer {
     // Create JSONs for geometry and material and use them for all objects of this type so that they all change together
     private JSONObject experimentalMarkerGeometryJson=null;
     private JSONObject experimentalMarkerMaterialJson=null;
+    private JSONObject experimentalSensorGeometryJson=null;
+    private JSONObject experimentalSensorMaterialJson=null;
     private Vec3 defaultExperimentalMarkerColor = new Vec3(0., 0., 1.);
     private ModelVisualizationJson modelVisJson=null;
     JSONObject motionObjectsRoot=null;
@@ -284,6 +288,17 @@ public class MotionDisplayer {
                         JSONUtilities.createMatrixFromTransform(xform, new Vec3(1, length ,1), modelVisJson.getVisScaleFactor()));
                 transforms_json.add(motionObjectTransform);
             }
+            else if (nextObject instanceof MotionObjectOrientation) {
+                // update transform based on new orientation
+                MotionObjectOrientation orient = (MotionObjectOrientation) nextObject;
+                double[] point = orient.getPoint();
+                Vec3 p = new Vec3(point[0], point[1], point[2]);
+                xform.set(new Rotation(orient.getQuaternion()), p);
+                motionObjectTransform.put("uuid", nextObject.getDataObjectUUID().toString());
+                motionObjectTransform.put("matrix",
+                        JSONUtilities.createMatrixFromTransform(xform, unitScale, modelVisJson.getVisScaleFactor()));
+                transforms_json.add(motionObjectTransform);
+            }
         }
      }
 
@@ -313,8 +328,10 @@ public class MotionDisplayer {
         JSONObject topJson = new JSONObject();
         JSONArray jsonGeomArray = new JSONArray();
         jsonGeomArray.add(getExperimentalMarkerGeometryJson());
+        jsonGeomArray.add(getExperimentalSensorGeometryJson());
         JSONArray jsonMatArray = new JSONArray();
         jsonMatArray.add(getExperimentalMarkerMaterialJson());
+        jsonMatArray.add(getExperimentalSensorMaterialJson());
         topJson.put("geometries", jsonGeomArray);
         topJson.put("materials", jsonMatArray);
         topJson.put("object", motionObjectsRoot);
@@ -386,12 +403,7 @@ public class MotionDisplayer {
             createMotionObjectsGroupJson();
             addExperimentalDataObjectsToJson(objects);
             for(ExperimentalDataObject nextObject:objects){
-                if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
-                    bindMarkerToVisualizerObjectKeepHandle(nextObject);
-                } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                    bindForceVisualizerObjectKeepHandle(nextObject);
-                } 
-                
+               bindExperimentalDataObjectToVisualizerObjectKeepHandle(nextObject);
             }
             // create objects and cache their uuids
             //createTrails(model);
@@ -468,11 +480,7 @@ public class MotionDisplayer {
         }
     }
 
-    private void bindForceVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
-        nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
-    }
-
-    private void bindMarkerToVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
+    private void bindExperimentalDataObjectToVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
         nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
     }
 
@@ -715,14 +723,7 @@ public class MotionDisplayer {
             Vector<ExperimentalDataObject> objects=mot.getClassified();
             mot.setMotionDisplayer(this);
             for(ExperimentalDataObject nextObject:objects){
-                if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
-                    bindMarkerToVisualizerObjectKeepHandle(nextObject);
-                } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                    bindForceVisualizerObjectKeepHandle(nextObject);
-                } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
-                    bindForceVisualizerObjectKeepHandle(nextObject);
-                }
-                
+               bindExperimentalDataObjectToVisualizerObjectKeepHandle(nextObject);
             }
             //createTrails(model);
             return;
@@ -758,6 +759,35 @@ public class MotionDisplayer {
             JSONArray json_materials = (JSONArray) modelVisJson.get("materials");
             json_materials.add(getExperimentalMarkerMaterialJson());
         }
+       if (getExperimentalSensorGeometryJson() == null) {
+            experimentalSensorGeometryJson = new JSONObject();
+            UUID uuidForSensorGeometry = UUID.randomUUID();
+            experimentalSensorGeometryJson.put("uuid", uuidForSensorGeometry.toString());
+            experimentalSensorGeometryJson.put("type", "BoxGeometry");
+            experimentalSensorGeometryJson.put("width", 0.01*2*ModelVisualizationJson.getVisScaleFactor());
+            experimentalSensorGeometryJson.put("height", 0.02*2*ModelVisualizationJson.getVisScaleFactor());
+            experimentalSensorGeometryJson.put("depth", 0.04*2*ModelVisualizationJson.getVisScaleFactor());
+            experimentalSensorGeometryJson.put("radialSegments", 1);
+            experimentalSensorGeometryJson.put("heightSegments", 1);            
+            experimentalSensorGeometryJson.put("name", "DefaultExperimentalSensor");
+            JSONArray json_geometries = (JSONArray) modelVisJson.get("geometries");
+            json_geometries.add(experimentalSensorGeometryJson);
+
+            experimentalSensorMaterialJson = new JSONObject();
+            UUID uuidForSensorMaterial = UUID.randomUUID();
+            experimentalSensorMaterialJson.put("uuid", uuidForSensorMaterial.toString());
+            String colorString = JSONUtilities.mapColorToRGBA(new Vec3(1., 1., 0.));
+            experimentalSensorMaterialJson.put("type", "MeshPhongMaterial");
+            experimentalSensorMaterialJson.put("shininess", 30);
+            experimentalSensorMaterialJson.put("transparent", true);
+            experimentalSensorMaterialJson.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+            experimentalSensorMaterialJson.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
+            experimentalSensorMaterialJson.put("side", 2);
+            experimentalSensorMaterialJson.put("wireframe", false);
+            experimentalSensorMaterialJson.put("color", colorString);
+            JSONArray json_materials = (JSONArray) modelVisJson.get("materials");
+            json_materials.add(experimentalSensorMaterialJson);
+        }        
         
     }
 
@@ -857,4 +887,34 @@ public class MotionDisplayer {
             }
         }
    }
+    /**
+     * @return the experimentalSensorGeometryJson
+     */
+    public JSONObject getExperimentalSensorGeometryJson() {
+        return experimentalSensorGeometryJson;
+    }
+
+    /**
+     * @param experimentalSensorGeometryJson the experimentalSensorGeometryJson
+     * to set
+     */
+    public void setExperimentalSensorGeometryJson(JSONObject experimentalSensorGeometryJson) {
+        this.experimentalSensorGeometryJson = experimentalSensorGeometryJson;
+    }
+
+    /**
+     * @return the experimentalSensorMaterialJson
+     */
+    public JSONObject getExperimentalSensorMaterialJson() {
+        return experimentalSensorMaterialJson;
+    }
+
+    /**
+     * @param experimentalSensorMaterialJson the experimentalSensorMaterialJson
+     * to set
+     */
+    public void setExperimentalSensorMaterialJson(JSONObject experimentalSensorMaterialJson) {
+        this.experimentalSensorMaterialJson = experimentalSensorMaterialJson;
+    }
+
 }
