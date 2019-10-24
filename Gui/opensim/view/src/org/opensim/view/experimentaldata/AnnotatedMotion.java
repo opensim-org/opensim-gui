@@ -147,6 +147,12 @@ public class AnnotatedMotion extends Storage {
         forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.BodyForceData));
         return forces;
     }
+    
+    public Vector<String> getSensorNames() {
+        Vector<String> sensors= getNamesOfObjectsOfType(ExperimentalDataItemType.MarkerData);
+        sensors.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.OrientationData));
+        return sensors;
+    }
 
     private void setupPatterns() {
         patterns.add(0,  new String[]{"_vx", "_vy", "_vz", "_px", "_py", "_pz"});
