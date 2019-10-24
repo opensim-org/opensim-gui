@@ -31,7 +31,18 @@
 
 package org.opensim.view.experimentaldata;
 
+import java.beans.PropertyEditorSupport;
 import org.openide.nodes.Children;
+import org.openide.nodes.Node;
+import org.openide.nodes.PropertySupport;
+import org.openide.nodes.PropertySupport.Reflection;
+import org.openide.nodes.Sheet;
+import org.openide.util.Exceptions;
+import org.opensim.modeling.AbstractSocket;
+import org.opensim.modeling.Marker;
+import org.opensim.modeling.Model;
+import org.opensim.view.nodes.EditorRegistry;
+import org.opensim.view.nodes.MarkerAdapter;
 
 /**
  *
@@ -53,6 +64,26 @@ public class ExperimentalSensorNode extends ExperimentalDataNode {
     
     public String getHtmlDisplayName() {
         return sensorName;
+    }
+    @Override
+    public Sheet createSheet() {
+        Sheet sheet;
+        sheet = super.createSheet();
+        try {
+            Sheet.Set set = sheet.get(Sheet.PROPERTIES);
+            // Add property for Location
+            MotionObjectOrientation obj = (MotionObjectOrientation) getDataObject();
+            PropertySupport.Reflection locationNodeProp;
+            locationNodeProp = new PropertySupport.Reflection(obj, String.class, "getOffsetAsString", "setOffsetFromString");
+            ((Node.Property) locationNodeProp).setValue("oneline", Boolean.TRUE);
+            ((Node.Property) locationNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
+            locationNodeProp.setName("location");
+            locationNodeProp.setShortDescription("Display offset in OpenSim ground frame");
+            set.put(locationNodeProp);
+        } catch (NoSuchMethodException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        return sheet;
     }
 
 }
