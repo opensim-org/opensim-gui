@@ -117,21 +117,21 @@ public class ExperimentalSensorSetNode extends OpenSimNode {
             }
         }
     }
-/*
+
     @Override
     public Sheet createSheet() {
          Sheet defaultSheet = super.createSheet();
         try {
             Sheet.Set set = defaultSheet.get(Sheet.PROPERTIES);
             PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(this, Color.class, "getColor", "setColorUI");
-            nextNodeProp.setName("marker color");
+            nextNodeProp.setName("Sensor color");
             set.put(nextNodeProp);
-
+            /*
             PropertySupport.Reflection nextNodeProp2= new PropertySupport.Reflection(this, double.class, "getSensorRadius", "setSensorRadiusUI");
             nextNodeProp2.setName("marker radius (mm)");
             nextNodeProp2.setShortDescription("Number to scale current visualization with");
             set.put(nextNodeProp2);
-
+            */
             return defaultSheet;
         } catch (NoSuchMethodException ex) {
             Exceptions.printStackTrace(ex);
@@ -171,7 +171,7 @@ public class ExperimentalSensorSetNode extends OpenSimNode {
         Vec3 colorAsVec3 =  motionDisplayer.getDefaultExperimentalSensorColor();
         return new Color((float)colorAsVec3.get(0), (float)colorAsVec3.get(1), (float)colorAsVec3.get(2));
     }
-   
+   /*
     public void setSensorRadiusUI(double newRadius) {
         setSensorRadiusUI(newRadius, true);
     }
@@ -194,7 +194,7 @@ public class ExperimentalSensorSetNode extends OpenSimNode {
             };
             ExplorerTopComponent.addUndoableEdit(auEdit);
         }       
-        motionDisplayer.setExperimentalSensorRadius(newRadius);
+        //motionDisplayer.setExperimentalSensorRadius(newRadius);
         
         refreshNode();
     }
@@ -206,5 +206,5 @@ public class ExperimentalSensorSetNode extends OpenSimNode {
        }
         return motionDisplayer.getExperimentalSensorRadius();
     }
-*/
+    */
 }

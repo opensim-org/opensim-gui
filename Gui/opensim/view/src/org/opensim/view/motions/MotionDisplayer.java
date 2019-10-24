@@ -106,11 +106,39 @@ public class MotionDisplayer {
     private JSONObject experimentalSensorGeometryJson=null;
     private JSONObject experimentalSensorMaterialJson=null;
     private Vec3 defaultExperimentalMarkerColor = new Vec3(0., 0., 1.);
+    private Vec3 defaultExperimentalSensorColor = new Vec3(.2, .3, .5);
     private ModelVisualizationJson modelVisJson=null;
     JSONObject motionObjectsRoot=null;
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
     private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
             new HashMap<OpenSimObject, ArrayList<UUID>>();
+
+    public double getExperimentalSensorRadius() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public Vec3 getDefaultExperimentalSensorColor() {
+        return defaultExperimentalSensorColor;
+    }
+
+    public void setDefaultExperimentalSensorColor(Color color) {
+        float[] colorFloat = new float[3];
+        color.getColorComponents(colorFloat);
+        Vec3 colorAsVec3 = new Vec3();
+        for (int i =0; i <3; i++) 
+            colorAsVec3.set(i, (double) colorFloat[i]);
+ 
+        defaultExperimentalSensorColor = colorAsVec3;
+        Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
+        for (OpenSimObject expObj : expermintalDataObjects){
+            // Find first ExperimentalMarker and change its Material, this will affect all of them
+            if (expObj instanceof MotionObjectOrientation){
+                UUID expObjectUUID = mapComponentToUUID.get(expObj).get(0); 
+                ViewDB.getInstance().applyColorToObjectByUUID(model, expObjectUUID, colorAsVec3);  
+            }
+        }
+
+    }
 
     public enum ObjectTypesInMotionFiles{GenCoord, 
                                          GenCoord_Velocity, 
@@ -765,8 +793,8 @@ public class MotionDisplayer {
             experimentalSensorGeometryJson.put("uuid", uuidForSensorGeometry.toString());
             experimentalSensorGeometryJson.put("type", "BoxGeometry");
             experimentalSensorGeometryJson.put("width", 0.01*2*ModelVisualizationJson.getVisScaleFactor());
-            experimentalSensorGeometryJson.put("height", 0.02*2*ModelVisualizationJson.getVisScaleFactor());
-            experimentalSensorGeometryJson.put("depth", 0.04*2*ModelVisualizationJson.getVisScaleFactor());
+            experimentalSensorGeometryJson.put("height", 0.03*2*ModelVisualizationJson.getVisScaleFactor());
+            experimentalSensorGeometryJson.put("depth", 0.09*2*ModelVisualizationJson.getVisScaleFactor());
             experimentalSensorGeometryJson.put("radialSegments", 1);
             experimentalSensorGeometryJson.put("heightSegments", 1);            
             experimentalSensorGeometryJson.put("name", "DefaultExperimentalSensor");
@@ -776,7 +804,7 @@ public class MotionDisplayer {
             experimentalSensorMaterialJson = new JSONObject();
             UUID uuidForSensorMaterial = UUID.randomUUID();
             experimentalSensorMaterialJson.put("uuid", uuidForSensorMaterial.toString());
-            String colorString = JSONUtilities.mapColorToRGBA(new Vec3(1., 1., 0.));
+            String colorString = JSONUtilities.mapColorToRGBA(getDefaultExperimentalSensorColor());
             experimentalSensorMaterialJson.put("type", "MeshPhongMaterial");
             experimentalSensorMaterialJson.put("shininess", 30);
             experimentalSensorMaterialJson.put("transparent", true);
