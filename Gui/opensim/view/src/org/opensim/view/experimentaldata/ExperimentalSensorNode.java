@@ -7,7 +7,7 @@
  * U.S. NIH and DARPA. See http://opensim.stanford.edu and the README file    *
  * for more information including specific grant numbers.                     *
  *                                                                            *
- * Copyright (c) 2005-2017 Stanford University and the Authors                *
+ * Copyright (c) 2005-2019 Stanford University and the Authors                *
  * Author(s): Ayman Habib                                                     *
  *                                                                            *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may    *
@@ -22,11 +22,6 @@
  * -------------------------------------------------------------------------- */
 /*
  * ExperimentalSensorNode.java
- *
- * Created on February 23, 2009, 12:35 PM
- *
- * To change this template, choose Tools | Template Manager
- * and open the template in the editor.
  */
 
 package org.opensim.view.experimentaldata;
@@ -71,7 +66,7 @@ public class ExperimentalSensorNode extends ExperimentalDataNode {
         sheet = super.createSheet();
         try {
             Sheet.Set set = sheet.get(Sheet.PROPERTIES);
-            // Add property for Location
+            // Add property for Location to allow users to move visualization around
             MotionObjectOrientation obj = (MotionObjectOrientation) getDataObject();
             PropertySupport.Reflection locationNodeProp;
             locationNodeProp = new PropertySupport.Reflection(obj, String.class, "getPointAsString", "setPointFromString");

@@ -7,7 +7,7 @@
  * U.S. NIH and DARPA. See http://opensim.stanford.edu and the README file    *
  * for more information including specific grant numbers.                     *
  *                                                                            *
- * Copyright (c) 2005-2017 Stanford University and the Authors                *
+ * Copyright (c) 2005-2019 Stanford University and the Authors                *
  * Author(s): Ayman Habib                                                     *
  *                                                                            *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may    *
@@ -22,10 +22,6 @@
  * -------------------------------------------------------------------------- */
 /*
  * ExperimentalDataObject.java
- *
- * Created on March 10, 2009, 10:56 AM
- *
- *
  *
  */
 package org.opensim.view.experimentaldata;
@@ -117,94 +113,4 @@ public class ExperimentalSensorSetNode extends OpenSimNode {
             }
         }
     }
-
-    @Override
-    public Sheet createSheet() {
-         Sheet defaultSheet = super.createSheet();
-        try {
-            Sheet.Set set = defaultSheet.get(Sheet.PROPERTIES);
-            PropertySupport.Reflection nextNodeProp = new PropertySupport.Reflection(this, Color.class, "getColor", "setColorUI");
-            nextNodeProp.setName("Sensor color");
-            set.put(nextNodeProp);
-            /*
-            PropertySupport.Reflection nextNodeProp2= new PropertySupport.Reflection(this, double.class, "getSensorRadius", "setSensorRadiusUI");
-            nextNodeProp2.setName("marker radius (mm)");
-            nextNodeProp2.setShortDescription("Number to scale current visualization with");
-            set.put(nextNodeProp2);
-            */
-            return defaultSheet;
-        } catch (NoSuchMethodException ex) {
-            Exceptions.printStackTrace(ex);
-        }
-        return defaultSheet;
-    }
-    void setColorUI(final Color color, boolean allowUndo) {
-        final Color oldColor = getColor();
-        if (allowUndo){
-            AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
-                @Override
-               public void undo() throws CannotUndoException {
-                   super.undo();
-                   setColorUI(oldColor, false);
-               }
-                @Override
-               public void redo() throws CannotRedoException {
-                   super.redo();
-                   setColorUI(color, true);
-               }
-            };
-            ExplorerTopComponent.addUndoableEdit(auEdit);
-        }
-        motionDisplayer.setDefaultExperimentalSensorColor(color);
-        
-        refreshNode();
-    }
-    public void setColorUI(final Color color) {
-        setColorUI(color, true);
-    }
-    
-    public Color getColor()
-    {
-        if (motionDisplayer==null){
-            motionDisplayer = dMotion.getMotionDisplayer();
-        }
-        Vec3 colorAsVec3 =  motionDisplayer.getDefaultExperimentalSensorColor();
-        return new Color((float)colorAsVec3.get(0), (float)colorAsVec3.get(1), (float)colorAsVec3.get(2));
-    }
-   /*
-    public void setSensorRadiusUI(double newRadius) {
-        setSensorRadiusUI(newRadius, true);
-    }
-    
-    void setSensorRadiusUI(final double newRadius, boolean allowUndo)
-    {
-        final double oldSensorSize = getSensorRadius();
-        if (allowUndo){
-            AbstractUndoableEdit auEdit = new AbstractUndoableEdit(){
-               @Override
-               public void undo() throws CannotUndoException {
-                   super.undo();
-                   setSensorRadiusUI(oldSensorSize, false);
-               }
-               @Override
-               public void redo() throws CannotRedoException {
-                   super.redo();
-                   setSensorRadiusUI(newRadius, false);
-               }
-            };
-            ExplorerTopComponent.addUndoableEdit(auEdit);
-        }       
-        //motionDisplayer.setExperimentalSensorRadius(newRadius);
-        
-        refreshNode();
-    }
-
-    public double getSensorRadius()
-    {
-       if (motionDisplayer==null){
-            motionDisplayer = dMotion.getMotionDisplayer();
-       }
-        return motionDisplayer.getExperimentalSensorRadius();
-    }
-    */
 }

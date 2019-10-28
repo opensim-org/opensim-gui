@@ -102,20 +102,6 @@ public final class FileLoadDataAction extends CallableSystemAction {
                     MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
                     MotionsDB.getInstance().saveStorageFileName(amot, fileName);
             }
-            else if (fileName.toLowerCase().endsWith(".sto")){ // unused for now
-                try {
-                    // This could be a quatTable of doubles, Vec3, Quaternion or other
-                    
-                    TimeSeriesTableQuaternion quatTable= new TimeSeriesTableQuaternion(fileName);
-                    System.out.println(quatTable.getNumRows());
-                    System.out.println(quatTable.getNumColumns());
-                    System.out.println(quatTable.numComponentsPerElement());
-                    
-                    Storage storage = new Storage(fileName);
-                } catch (IOException ex) {
-                    Exceptions.printStackTrace(ex);
-                }
-            }
         }
     }
     

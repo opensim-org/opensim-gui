@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- *
- * OpenSim: MotionObjectPointForce.java                                       *
+ * OpenSim: MotionObjectOrientation.java                                       *
  * -------------------------------------------------------------------------- *
  * OpenSim is a toolkit for musculoskeletal modeling and simulation,          *
  * developed as an open source project by a worldwide community. Development  *
@@ -7,7 +7,7 @@
  * U.S. NIH and DARPA. See http://opensim.stanford.edu and the README file    *
  * for more information including specific grant numbers.                     *
  *                                                                            *
- * Copyright (c) 2005-2017 Stanford University and the Authors                *
+ * Copyright (c) 2005-2019 Stanford University and the Authors                *
  * Author(s): Ayman Habib                                                     *
  *                                                                            *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may    *
@@ -55,6 +55,8 @@ import org.opensim.view.pub.ViewDB;
 /**
  *
  * @author ayman
+ * 
+ * Class representing an IMU data model for use in the GUI/visualization
  */
 public class MotionObjectOrientation extends MotionObjectBodyPoint {
 

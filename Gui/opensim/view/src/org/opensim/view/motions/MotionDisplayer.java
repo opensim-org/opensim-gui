@@ -103,10 +103,7 @@ public class MotionDisplayer {
     // Create JSONs for geometry and material and use them for all objects of this type so that they all change together
     private JSONObject experimentalMarkerGeometryJson=null;
     private JSONObject experimentalMarkerMaterialJson=null;
-    private JSONObject experimentalSensorGeometryJson=null;
-    private JSONObject experimentalSensorMaterialJson=null;
     private Vec3 defaultExperimentalMarkerColor = new Vec3(0., 0., 1.);
-    private Vec3 defaultExperimentalSensorColor = new Vec3(.2, .3, .5);
     private ModelVisualizationJson modelVisJson=null;
     JSONObject motionObjectsRoot=null;
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
@@ -118,33 +115,6 @@ public class MotionDisplayer {
      */
     public ModelVisualizationJson getModelVisJson() {
         return modelVisJson;
-    }
-
-    public double getExperimentalSensorRadius() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    public Vec3 getDefaultExperimentalSensorColor() {
-        return defaultExperimentalSensorColor;
-    }
-
-    public void setDefaultExperimentalSensorColor(Color color) {
-        float[] colorFloat = new float[3];
-        color.getColorComponents(colorFloat);
-        Vec3 colorAsVec3 = new Vec3();
-        for (int i =0; i <3; i++) 
-            colorAsVec3.set(i, (double) colorFloat[i]);
- 
-        defaultExperimentalSensorColor = colorAsVec3;
-        Set<OpenSimObject> expermintalDataObjects = mapComponentToUUID.keySet();
-        for (OpenSimObject expObj : expermintalDataObjects){
-            // Find first ExperimentalMarker and change its Material, this will affect all of them
-            if (expObj instanceof MotionObjectOrientation){
-                UUID expObjectUUID = mapComponentToUUID.get(expObj).get(0); 
-                ViewDB.getInstance().applyColorToObjectByUUID(model, expObjectUUID, colorAsVec3);  
-            }
-        }
-
     }
 
     public enum ObjectTypesInMotionFiles{GenCoord, 
@@ -363,10 +333,8 @@ public class MotionDisplayer {
         JSONObject topJson = new JSONObject();
         JSONArray jsonGeomArray = new JSONArray();
         jsonGeomArray.add(getExperimentalMarkerGeometryJson());
-        jsonGeomArray.add(getExperimentalSensorGeometryJson());
-        JSONArray jsonMatArray = new JSONArray();
+         JSONArray jsonMatArray = new JSONArray();
         jsonMatArray.add(getExperimentalMarkerMaterialJson());
-        jsonMatArray.add(getExperimentalSensorMaterialJson());
         topJson.put("geometries", jsonGeomArray);
         topJson.put("materials", jsonMatArray);
         topJson.put("object", motionObjectsRoot);
@@ -793,37 +761,7 @@ public class MotionDisplayer {
             experimentalMarkerMaterialJson.put("color", colorString);
             JSONArray json_materials = (JSONArray) modelVisJson.get("materials");
             json_materials.add(getExperimentalMarkerMaterialJson());
-        }
-       if (getExperimentalSensorGeometryJson() == null) {
-            experimentalSensorGeometryJson = new JSONObject();
-            UUID uuidForSensorGeometry = UUID.randomUUID();
-            experimentalSensorGeometryJson.put("uuid", uuidForSensorGeometry.toString());
-            experimentalSensorGeometryJson.put("type", "BoxGeometry");
-            experimentalSensorGeometryJson.put("width", 0.01*2*ModelVisualizationJson.getVisScaleFactor());
-            experimentalSensorGeometryJson.put("height", 0.03*2*ModelVisualizationJson.getVisScaleFactor());
-            experimentalSensorGeometryJson.put("depth", 0.09*2*ModelVisualizationJson.getVisScaleFactor());
-            experimentalSensorGeometryJson.put("radialSegments", 1);
-            experimentalSensorGeometryJson.put("heightSegments", 1);            
-            experimentalSensorGeometryJson.put("name", "DefaultExperimentalSensor");
-            JSONArray json_geometries = (JSONArray) modelVisJson.get("geometries");
-            json_geometries.add(experimentalSensorGeometryJson);
-
-            experimentalSensorMaterialJson = new JSONObject();
-            UUID uuidForSensorMaterial = UUID.randomUUID();
-            experimentalSensorMaterialJson.put("uuid", uuidForSensorMaterial.toString());
-            String colorString = JSONUtilities.mapColorToRGBA(getDefaultExperimentalSensorColor());
-            experimentalSensorMaterialJson.put("type", "MeshPhongMaterial");
-            experimentalSensorMaterialJson.put("shininess", 30);
-            experimentalSensorMaterialJson.put("transparent", true);
-            experimentalSensorMaterialJson.put("emissive", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
-            experimentalSensorMaterialJson.put("specular", JSONUtilities.mapColorToRGBA(new Vec3(0., 0., 0.)));
-            experimentalSensorMaterialJson.put("side", 2);
-            experimentalSensorMaterialJson.put("wireframe", false);
-            experimentalSensorMaterialJson.put("color", colorString);
-            JSONArray json_materials = (JSONArray) modelVisJson.get("materials");
-            json_materials.add(experimentalSensorMaterialJson);
         }        
-        
     }
 
     public void addExperimentalDataObjectsToJson(AbstractList<ExperimentalDataObject> expObjects) {
@@ -922,34 +860,5 @@ public class MotionDisplayer {
             }
         }
    }
-    /**
-     * @return the experimentalSensorGeometryJson
-     */
-    public JSONObject getExperimentalSensorGeometryJson() {
-        return experimentalSensorGeometryJson;
-    }
-
-    /**
-     * @param experimentalSensorGeometryJson the experimentalSensorGeometryJson
-     * to set
-     */
-    public void setExperimentalSensorGeometryJson(JSONObject experimentalSensorGeometryJson) {
-        this.experimentalSensorGeometryJson = experimentalSensorGeometryJson;
-    }
-
-    /**
-     * @return the experimentalSensorMaterialJson
-     */
-    public JSONObject getExperimentalSensorMaterialJson() {
-        return experimentalSensorMaterialJson;
-    }
-
-    /**
-     * @param experimentalSensorMaterialJson the experimentalSensorMaterialJson
-     * to set
-     */
-    public void setExperimentalSensorMaterialJson(JSONObject experimentalSensorMaterialJson) {
-        this.experimentalSensorMaterialJson = experimentalSensorMaterialJson;
-    }
 
 }
