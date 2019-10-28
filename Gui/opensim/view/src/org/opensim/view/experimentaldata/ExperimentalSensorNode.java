@@ -74,7 +74,7 @@ public class ExperimentalSensorNode extends ExperimentalDataNode {
             // Add property for Location
             MotionObjectOrientation obj = (MotionObjectOrientation) getDataObject();
             PropertySupport.Reflection locationNodeProp;
-            locationNodeProp = new PropertySupport.Reflection(obj, String.class, "getOffsetAsString", "setOffsetFromString");
+            locationNodeProp = new PropertySupport.Reflection(obj, String.class, "getPointAsString", "setPointFromString");
             ((Node.Property) locationNodeProp).setValue("oneline", Boolean.TRUE);
             ((Node.Property) locationNodeProp).setValue("suppressCustomEditor", Boolean.TRUE);
             locationNodeProp.setName("location");

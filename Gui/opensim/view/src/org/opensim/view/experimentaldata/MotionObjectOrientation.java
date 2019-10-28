@@ -59,23 +59,22 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
     /**
      * @return the offset
      */
-    public String getOffsetAsString() {
-        Vec3 vec3 = new Vec3(offset[0], offset[1], offset[2]);
+    public String getPointAsString() {
+        Vec3 vec3 = new Vec3(point[0], point[1], point[2]);
         return vec3.toString();
     }
 
     /**
      * @param offset the offset to set
      */
-    public void setOffsetFromString(String offsetString) {
+    public void setPointFromString(String offsetString) {
          ArrayDouble d = new ArrayDouble();
          d.fromString(offsetString);
          for (int i=0; i<3; i++)
-            this.offset[i] = d.get(i);
+            point[i] = d.get(i);
          // Update visualization
     }
 
-    private double[] offset = new double[]{0, 0, 0};
     private Quaternion quaternion;
     private boolean specifyPoint;
     private Vec3 color = new Vec3();
@@ -102,7 +101,7 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         int idx = getStartIndexInFileNotIncludingTime();
         // if Point not in ground, transform into Ground since Arrow is in Ground by default
         // and we don't want to change scene graph layout for easy book-keeping
-        super.setPoint(getOffset());
+        //super.setPoint(getOffset());
         quaternion = new Quaternion(interpolatedStates.get(idx), 
                               interpolatedStates.get(idx+1), 
                               interpolatedStates.get(idx+2),
@@ -118,11 +117,10 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         JSONObject expSensor_json = new JSONObject();
         UUID imurep_uuid = UUID.randomUUID(); //3f63, acf9
         expSensor_json.put("uuid", imurep_uuid.toString());
-        expSensor_json.put("type", "Mesh");
+        expSensor_json.put("type", "Frame");
+        expSensor_json.put("size", ModelVisualizationJson.getVisScaleFactor());
         expSensor_json.put("opensimtype", "ExperimentalSensor");
         expSensor_json.put("name", getName());
-        expSensor_json.put("geometry", motionDisplayer.getExperimentalSensorGeometryJson().get("uuid"));
-        expSensor_json.put("material", motionDisplayer.getExperimentalSensorMaterialJson().get("uuid"));
         //dir -- direction from origin. Must be a unit vector. 
         //origin -- Point at which the arrow starts.
         //length -- length of the arrow. Default is 1.
@@ -133,13 +131,14 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         ArrayDouble interpolatedStates = dataAtStartTime.getData();
         int idx = getStartIndexInFileNotIncludingTime();
         JSONArray origin = new JSONArray();
-        for (int i=0; i<3; i++) origin.add(i, getOffset()[i]);
+        for (int i=0; i<3; i++) origin.add(i, getPoint()[i]);
         expSensor_json.put("origin", origin);
         expSensor_json.put("castShadow", false);
         // Allow Graphical representation to be dragged
         //expSensor_json.put("userData", "NonEditable");
         push_rotation_to_matrix(interpolatedStates, idx, expSensor_json);
         comp_uuids.add(imurep_uuid);
+        ((JSONArray)motionDisplayer.getModelVisJson().getModelGroundJson().get("children")).add(expSensor_json);
         return expSensor_json;
     }
 
@@ -153,9 +152,5 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         xform.set(rot, p);
         expSensor_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1, 1 ,1), 
                 ModelVisualizationJson.getVisScaleFactor()));
-    }
-
-    private double[] getOffset() {
-        return offset;
     }
 }

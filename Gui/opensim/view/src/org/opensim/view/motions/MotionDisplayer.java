@@ -113,6 +113,13 @@ public class MotionDisplayer {
     private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
             new HashMap<OpenSimObject, ArrayList<UUID>>();
 
+    /**
+     * @return the modelVisJson
+     */
+    public ModelVisualizationJson getModelVisJson() {
+        return modelVisJson;
+    }
+
     public double getExperimentalSensorRadius() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
