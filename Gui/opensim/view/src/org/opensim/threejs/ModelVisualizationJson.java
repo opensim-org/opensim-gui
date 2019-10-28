@@ -410,6 +410,7 @@ public class ModelVisualizationJson extends JSONObject {
     static {
         movableOpensimTypes.put("Marker", true);
         movableOpensimTypes.put("PathPoint", true);
+        movableOpensimTypes.put("ExperimentalSensor", true);
     }
     public ModelVisualizationJson(JSONObject jsonTopIn, Model model) {
         // implicit super()

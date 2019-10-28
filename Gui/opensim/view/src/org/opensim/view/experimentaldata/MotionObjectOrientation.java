@@ -136,7 +136,8 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         for (int i=0; i<3; i++) origin.add(i, getOffset()[i]);
         expSensor_json.put("origin", origin);
         expSensor_json.put("castShadow", false);
-        expSensor_json.put("userData", "NonEditable");
+        // Allow Graphical representation to be dragged
+        //expSensor_json.put("userData", "NonEditable");
         push_rotation_to_matrix(interpolatedStates, idx, expSensor_json);
         comp_uuids.add(imurep_uuid);
         return expSensor_json;
