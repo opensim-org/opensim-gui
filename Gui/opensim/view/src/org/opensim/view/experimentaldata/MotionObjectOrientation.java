@@ -27,6 +27,7 @@
 package org.opensim.view.experimentaldata;
 
 import java.util.ArrayList;
+import java.util.Formatter;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -49,6 +50,7 @@ import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.pub.OpenSimDB;
+import org.opensim.view.pub.ViewDB;
 
 /**
  *
@@ -56,12 +58,16 @@ import org.opensim.view.pub.OpenSimDB;
  */
 public class MotionObjectOrientation extends MotionObjectBodyPoint {
 
+    UUID imurep_uuid;
     /**
      * @return the offset
      */
     public String getPointAsString() {
-        Vec3 vec3 = new Vec3(point[0], point[1], point[2]);
-        return vec3.toString();
+
+        StringBuilder sbuf = new StringBuilder();
+        Formatter fmt = new Formatter(sbuf);
+        fmt.format("(%f %f %f)", point[0], point[1], point[2]);
+        return sbuf.toString();
     }
 
     /**
@@ -73,10 +79,12 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
          for (int i=0; i<3; i++)
             point[i] = d.get(i);
          // Update visualization
+         Vec3 offsetAsVec3 = new Vec3(point[0], point[1], point[2]);
+         ViewDB.getInstance().setObjectTranslationInParentByUuid(imurep_uuid, offsetAsVec3);
+         
     }
 
     private Quaternion quaternion;
-    private boolean specifyPoint;
     private Vec3 color = new Vec3();
     
     public MotionObjectOrientation(ExperimentalDataItemType objectType, String baseName, int startIndex) {
@@ -112,10 +120,9 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
     // Create JSON object to represent IMU Sensor
     @Override
     public JSONObject createDecorationJson(ArrayList<UUID> comp_uuids, MotionDisplayer motionDisplayer) {
-        
         // Create Object with proper name, add it to ground, update Map of Object to UUID
         JSONObject expSensor_json = new JSONObject();
-        UUID imurep_uuid = UUID.randomUUID(); //3f63, acf9
+        imurep_uuid = UUID.randomUUID(); 
         expSensor_json.put("uuid", imurep_uuid.toString());
         expSensor_json.put("type", "Frame");
         expSensor_json.put("size", ModelVisualizationJson.getVisScaleFactor());
