@@ -161,7 +161,7 @@ public class AnnotatedMotion extends Storage {
         patterns.add(3,  new String[]{"_px", "_py", "_pz"});
         // We place this pattern before "_1", "_2", "_3" so that quaternions are not mistakenly
         // classified as PointData (they share suffixes)
-        patterns.add(4,  new String[]{"_1", "_2", "_3", "_4"});
+        patterns.add(4,  new String[]{"_imu_1", "_imu_2", "_imu_3", "_imu_4"});
         patterns.add(5,  new String[]{"_1", "_2", "_3"});
         //patterns.add(5,  new String[]{"_x", "_y", "_z"}); removed so that Torques dont classify as points
         patterns.add(6,  new String[]{"_fx", "_fy", "_fz"});
