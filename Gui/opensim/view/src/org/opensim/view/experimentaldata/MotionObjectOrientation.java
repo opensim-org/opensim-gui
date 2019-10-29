@@ -73,7 +73,7 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
     }
 
     /**
-     * @param offset the offset to set
+     * @param offset the visual displacement to set, has the side effect of updating visualization
      */
     public void setPointFromString(String offsetString) {
          ArrayDouble d = new ArrayDouble();
