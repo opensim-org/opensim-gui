@@ -149,7 +149,7 @@ public class AnnotatedMotion extends Storage {
     }
     
     public Vector<String> getSensorNames() {
-        Vector<String> sensors= getNamesOfObjectsOfType(ExperimentalDataItemType.MarkerData);
+        Vector<String> sensors= getNamesOfObjectsOfType(ExperimentalDataItemType.OrientationData);
         sensors.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.OrientationData));
         return sensors;
     }
