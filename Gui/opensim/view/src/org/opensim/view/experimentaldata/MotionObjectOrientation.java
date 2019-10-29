@@ -83,6 +83,7 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
          // Update visualization
          Vec3 offsetAsVec3 = new Vec3(point[0], point[1], point[2]);
          ViewDB.getInstance().setObjectTranslationInParentByUuid(imurep_uuid, offsetAsVec3);
+         ViewDB.getInstance().updateModelDisplay(ViewDB.getCurrentModel());
          
     }
 
@@ -115,7 +116,7 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         quaternion = new Quaternion(interpolatedStates.get(idx), 
                               interpolatedStates.get(idx+1), 
                               interpolatedStates.get(idx+2),
-                interpolatedStates.get(idx+3));
+                              interpolatedStates.get(idx+3));
 
     }
 
