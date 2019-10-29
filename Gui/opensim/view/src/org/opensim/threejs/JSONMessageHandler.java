@@ -27,6 +27,7 @@
  */
 package org.opensim.threejs;
 
+import java.util.Formatter;
 import java.util.UUID;
 import javax.swing.SwingUtilities;
 import org.json.simple.JSONObject;
@@ -36,6 +37,7 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.Vec3;
+import org.opensim.view.experimentaldata.MotionObjectOrientation;
 import org.opensim.view.nodes.MarkerAdapter;
 import org.opensim.view.nodes.PathPointAdapter;
 import org.opensim.view.nodes.PropertyEditorAdaptor;
@@ -77,6 +79,16 @@ public class JSONMessageHandler {
                         JSONObject locationJson = (JSONObject) jsonObject.get("location");
                         Vec3 locationVec3 = convertJsonXYZToVec3(locationJson);
                         markerAdapter.setLocation(locationVec3, true);
+                        return;
+                    }
+                    if (opensimObj != null && opensimObj instanceof MotionObjectOrientation){
+                        MotionObjectOrientation morientObj = (MotionObjectOrientation) opensimObj;
+                        JSONObject locationJson = (JSONObject) jsonObject.get("location");
+                        Vec3 locationVec3 = convertJsonXYZToVec3(locationJson);
+                        StringBuilder sbuf = new StringBuilder();
+                        Formatter fmt = new Formatter(sbuf);
+                        fmt.format("(%f %f %f)", locationVec3.get(0), locationVec3.get(1), locationVec3.get(2));
+                        morientObj.setPointFromString(fmt.toString());
                         return;
                     }
                     if (opensimObj != null && opensimObj.hasProperty("location")){
