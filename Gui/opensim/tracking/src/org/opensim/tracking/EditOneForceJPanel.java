@@ -71,7 +71,7 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
         ForceNameTextField.setText(force.getName());
         initComboBoxes();
         
-        jCheckBoxForce.setSelected(externalForce.get_appliesForce());
+        jCheckBoxForce.setSelected(externalForce.appliesForce());
         jRadioButtonApplyPointForce.setSelected(externalForce.specifiesPoint());
         jCheckBoxTorque.setSelected(externalForce.appliesTorque());
            
@@ -673,8 +673,10 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
         } else {
             // Clear all
             if (!initializing) {
-                externalForce.set_appliesForce(false);
-                //externalForce.clearForceFunctions();
+                externalForce.setForceIdentifier("");
+                jComboBoxFX.setSelectedItem("");
+                jComboBoxFY.setSelectedItem("");
+                jComboBoxFZ.setSelectedItem("");
             }
         }
         // Set torquefunctions if TorqueCheckBox is on
