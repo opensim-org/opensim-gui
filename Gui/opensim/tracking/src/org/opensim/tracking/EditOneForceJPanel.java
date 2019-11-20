@@ -686,8 +686,14 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
                     (String)jComboBoxTY.getSelectedItem(), 
                     (String)jComboBoxTZ.getSelectedItem()));
             //if (!initializing) externalForce.setTorqueFunctionNames(torqueFunctionNames, forceStorage);
-        } else
-            ;//if (!initializing) externalForce.clearTorqueFunctions();
+        } else {
+            if (!initializing) {
+                externalForce.setTorqueIdentifier("");
+                jComboBoxTX.setSelectedItem("");
+                jComboBoxTY.setSelectedItem("");
+                jComboBoxTZ.setSelectedItem("");
+            }
+        }
         String selected = (String) ForceExpressedBodiesComboBox.getSelectedItem();
         if (selected !=null)
             externalForce.setForceExpressedInBodyName(selected);
