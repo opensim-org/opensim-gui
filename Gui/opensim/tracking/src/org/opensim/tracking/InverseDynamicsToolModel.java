@@ -522,5 +522,12 @@ public class InverseDynamicsToolModel extends AbstractToolModelWithExternalLoads
         return idTool.getExternalLoads();
     }
 
+    public String getOutputGenForceFileName() { return idTool.getOutputGenForceFileName(); }
+    public void setOutputGenSetForceFileName(String name) {
+      if (!getOutputGenForceFileName().equals(name)) {
+         idTool.setOutputGenForceFileName(name);
+         setModified(Operation.OutputDataChanged);
+      }
+    }
 }
 

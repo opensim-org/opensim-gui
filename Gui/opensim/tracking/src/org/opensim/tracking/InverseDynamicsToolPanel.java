@@ -58,6 +58,9 @@ import org.opensim.view.ModelEvent;
 import org.opensim.view.excitationEditor.ExcitationEditorJFrame;
 import org.opensim.view.pub.OpenSimDB;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  *
  * @author  erang
@@ -93,9 +96,11 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
       //rraPanel.setBorder(new ComponentTitledBorder(rraPanelCheckBox, rraPanel, BorderFactory.createEtchedBorder()));
 
       // File chooser settings
-      outputDirectory.setIncludeOpenButton(true);
-      outputDirectory.setDirectoriesOnly(true);
+      outputDirectory.setIncludeOpenButton(false);
+      outputDirectory.setExtensionsAndDescription(".sto", "Storage file for inverse dynamics analysis");
+      outputDirectory.setDirectoriesOnly(false);
       outputDirectory.setCheckIfFileExists(false);
+      outputDirectory.setSaveMode(true);
 
       setSettingsFileDescription("Settings file for "+modeName);
 
@@ -182,7 +187,8 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
       
       // Output
       outputName.setText(toolModel.getOutputPrefix());
-      outputDirectory.setFileName(toolModel.getResultsDirectory(),false);
+      Path p = Paths.get(toolModel.getResultsDirectory(), toolModel.getOutputGenForceFileName());
+      outputDirectory.setFileName(p.toString(),false);
       //outputPrecision.setText(numFormat.format(toolModel.getOutputPrecision()));
 
       // Actuators & external loads
@@ -389,7 +395,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
 
         outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Output"));
 
-        jLabel11.setText("Directory");
+        jLabel11.setText("Storage file");
 
         outputDirectory.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -405,7 +411,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
                 .addContainerGap()
                 .add(jLabel11)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(outputDirectory, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
+                .add(outputDirectory, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
                 .addContainerGap())
         );
         outputPanelLayout.setVerticalGroup(
@@ -608,14 +614,14 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
+                .add(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jTabbedPane1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 267, Short.MAX_VALUE)
+                .add(jTabbedPane1)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -752,7 +758,9 @@ private void reuseSelectedQuantitiesCheckBoxActionPerformed(java.awt.event.Actio
    //------------------------------------------------------------------------
 
    private void outputDirectoryStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputDirectoryStateChanged
-      toolModel.setResultsDirectory(outputDirectory.getFileName());
+      Path p = Paths.get(outputDirectory.getFileName());
+       toolModel.setResultsDirectory(p.getParent().toString());
+       toolModel.setOutputGenSetForceFileName(p.getFileName().toString());
    }//GEN-LAST:event_outputDirectoryStateChanged
 
    private void outputNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_outputNameFocusLost
