@@ -73,6 +73,14 @@ public class TimeSeriesTableSpatialVec extends DataTableSpatialVec {
     return opensimCommonJNI.TimeSeriesTableSpatialVec_getNearestRowIndexForTime__SWIG_1(swigCPtr, this, time);
   }
 
+  public long getRowIndexAfterTime(double time) {
+    return opensimCommonJNI.TimeSeriesTableSpatialVec_getRowIndexAfterTime(swigCPtr, this, time);
+  }
+
+  public long getRowIndexBeforeTime(double time) {
+    return opensimCommonJNI.TimeSeriesTableSpatialVec_getRowIndexBeforeTime(swigCPtr, this, time);
+  }
+
   public SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t getNearestRow(double time, boolean restrictToTimeRange) {
     return new SWIGTYPE_p_SimTK__RowVectorView_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimCommonJNI.TimeSeriesTableSpatialVec_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
@@ -91,6 +99,18 @@ public class TimeSeriesTableSpatialVec extends DataTableSpatialVec {
 
   public SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t averageRow(double beginTime, double endTime) {
     return new SWIGTYPE_p_SimTK__RowVector_T_SimTK__VecT_2_SimTK__Vec3_1_t_t(opensimCommonJNI.TimeSeriesTableSpatialVec_averageRow(swigCPtr, this, beginTime, endTime), true);
+  }
+
+  public void trim(double newStartTime, double newFinalTime) {
+    opensimCommonJNI.TimeSeriesTableSpatialVec_trim(swigCPtr, this, newStartTime, newFinalTime);
+  }
+
+  public void trimFrom(double newStartTime) {
+    opensimCommonJNI.TimeSeriesTableSpatialVec_trimFrom(swigCPtr, this, newStartTime);
+  }
+
+  public void trimTo(double newFinalTime) {
+    opensimCommonJNI.TimeSeriesTableSpatialVec_trimTo(swigCPtr, this, newFinalTime);
   }
 
   public TimeSeriesTableSpatialVec clone() {
