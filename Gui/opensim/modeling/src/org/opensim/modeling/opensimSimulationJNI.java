@@ -6474,8 +6474,6 @@ public class opensimSimulationJNI {
   public final static native void OpenSenseUtilities_rotateOrientationTable(long jarg1, TimeSeriesTableQuaternion jarg1_, long jarg2, Rotation jarg2_);
   public final static native long OpenSenseUtilities_convertQuaternionsToRotations(long jarg1, TimeSeriesTableQuaternion jarg1_);
   public final static native long OpenSenseUtilities_computeHeadingCorrection(long jarg1, Model jarg1_, long jarg2, TimeSeriesTableQuaternion jarg2_, String jarg3, long jarg4, CoordinateDirection jarg4_);
-  public final static native long OpenSenseUtilities_calibrateModelFromOrientations__SWIG_0(long jarg1, IMUPlacer jarg1_, boolean jarg2);
-  public final static native long OpenSenseUtilities_calibrateModelFromOrientations__SWIG_1(long jarg1, IMUPlacer jarg1_);
   public final static native long OpenSenseUtilities_createOrientationsFileFromMarkers(String jarg1);
   public final static native long OpenSenseUtilities_formTransformFromPoints(long jarg1, Vec3 jarg1_, long jarg2, Vec3 jarg2_, long jarg3, Vec3 jarg3_);
   public final static native long new_OpenSenseUtilities();

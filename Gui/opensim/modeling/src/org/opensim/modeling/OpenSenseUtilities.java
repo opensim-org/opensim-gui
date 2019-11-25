@@ -47,14 +47,6 @@ public class OpenSenseUtilities {
     return new Vec3(opensimSimulationJNI.OpenSenseUtilities_computeHeadingCorrection(Model.getCPtr(model), model, TimeSeriesTableQuaternion.getCPtr(quatTimeSeries), quatTimeSeries, baseIMU, CoordinateDirection.getCPtr(arg3), arg3), true);
   }
 
-  public static Model calibrateModelFromOrientations(IMUPlacer imuPalcer, boolean visualizeCalibratedModel) {
-    return new Model(opensimSimulationJNI.OpenSenseUtilities_calibrateModelFromOrientations__SWIG_0(IMUPlacer.getCPtr(imuPalcer), imuPalcer, visualizeCalibratedModel), true);
-  }
-
-  public static Model calibrateModelFromOrientations(IMUPlacer imuPalcer) {
-    return new Model(opensimSimulationJNI.OpenSenseUtilities_calibrateModelFromOrientations__SWIG_1(IMUPlacer.getCPtr(imuPalcer), imuPalcer), true);
-  }
-
   public static SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__Quaternion_T_SimTK__Real_t_t createOrientationsFileFromMarkers(String markersFile) {
     return new SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__Quaternion_T_SimTK__Real_t_t(opensimSimulationJNI.OpenSenseUtilities_createOrientationsFileFromMarkers(markersFile), true);
   }
