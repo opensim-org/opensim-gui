@@ -13,5 +13,9 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+    - name Choco install netbeans
+      uses:  crazy-max/ghaction-chocolatey@v1
+      with: 
+        args:  install NetBeans.8.2.20171030
     - name: Build with Ant
       run: ant -noinput -buildfile Gui/opensim/build.xml
