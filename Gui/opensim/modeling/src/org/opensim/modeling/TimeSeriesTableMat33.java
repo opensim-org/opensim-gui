@@ -73,6 +73,14 @@ public class TimeSeriesTableMat33 extends DataTableMat33 {
     return opensimCommonJNI.TimeSeriesTableMat33_getNearestRowIndexForTime__SWIG_1(swigCPtr, this, time);
   }
 
+  public long getRowIndexAfterTime(double time) {
+    return opensimCommonJNI.TimeSeriesTableMat33_getRowIndexAfterTime(swigCPtr, this, time);
+  }
+
+  public long getRowIndexBeforeTime(double time) {
+    return opensimCommonJNI.TimeSeriesTableMat33_getRowIndexBeforeTime(swigCPtr, this, time);
+  }
+
   public RowVectorViewMat33 getNearestRow(double time, boolean restrictToTimeRange) {
     return new RowVectorViewMat33(opensimCommonJNI.TimeSeriesTableMat33_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
@@ -91,6 +99,18 @@ public class TimeSeriesTableMat33 extends DataTableMat33 {
 
   public RowVectorMat33 averageRow(double beginTime, double endTime) {
     return new RowVectorMat33(opensimCommonJNI.TimeSeriesTableMat33_averageRow(swigCPtr, this, beginTime, endTime), true);
+  }
+
+  public void trim(double newStartTime, double newFinalTime) {
+    opensimCommonJNI.TimeSeriesTableMat33_trim(swigCPtr, this, newStartTime, newFinalTime);
+  }
+
+  public void trimFrom(double newStartTime) {
+    opensimCommonJNI.TimeSeriesTableMat33_trimFrom(swigCPtr, this, newStartTime);
+  }
+
+  public void trimTo(double newFinalTime) {
+    opensimCommonJNI.TimeSeriesTableMat33_trimTo(swigCPtr, this, newFinalTime);
   }
 
   public TimeSeriesTableMat33 clone() {
