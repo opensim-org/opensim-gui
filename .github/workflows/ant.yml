@@ -12,4 +12,13 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
-    
+    - name: Install Netbeans
+      # Make sure the NetBeans installer is not corrupted.
+      run: |
+        (New-Object System.Net.WebClient).DownloadFile("http://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-windows.exe", "netbeans-8.2-javase-windows.exe")
+        $expectedHash = "7b0646306a7488e617837da1517a86c08b7cf6fbe4dd9d74e8a4564b5ffde004".ToUpper()
+        $hashFromFile = Get-FileHash -Algorithm SHA256 -Path .\netbeans-8.2-javase-windows.exe
+        if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
+        .\netbeans-8.2-javase-windows.exe --silent | Out-Null # This installer is gregaroius.
+        echo "::set-env name=ANT_HOME:C:\\Program Files\\NetBeans 8.2\\extide\\ant"
+      
