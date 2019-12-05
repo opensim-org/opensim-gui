@@ -26,7 +26,7 @@ jobs:
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
       
     - name: compile gui
-      run: ant Gui/opensim/build.xml
+      run: ant opensim-gui/Gui/opensim/build.xml
       
          
         
