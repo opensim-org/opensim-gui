@@ -21,4 +21,7 @@ jobs:
         if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
         .\netbeans-8.2-javase-windows.exe --silent | Out-Null # This installer is gregaroius.
         echo "::set-env name=ANT_HOME:C:\\Program Files\\NetBeans 8.2\\extide\\ant"
+    - name: checkout submodules
+        git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+        
       
