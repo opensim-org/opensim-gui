@@ -24,6 +24,10 @@ jobs:
         
     - name: checkout submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+      
+    - name: compile gui
+      run: ant Gui/opensim/build.xml
+      
          
         
       
