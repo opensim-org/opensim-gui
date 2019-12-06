@@ -261,6 +261,9 @@
         <symlink action="single" link="${mac.dist.outer.dir}/bin/opensim-cmd"
             resource="../${mac.final.app.name}/Contents/Resources/OpenSim/bin/opensim-cmd"
             overwrite="true"/>
+        <symlink action="single" link="${mac.dist.outer.dir}/bin/opensense"
+            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/bin/opensense"
+            overwrite="true"/>
         <symlink action="single" link="${mac.dist.outer.dir}/cmake"
             resource="${mac.final.app.name}/Contents/Resources/OpenSim/cmake/"
             overwrite="true"/>
