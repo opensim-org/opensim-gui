@@ -1,11 +1,6 @@
 name: opensim-application
 
-on:
-  push:
-    branches:
-      - master
-    tags:
-      - '*'
+on: [push]
 
 jobs:
   build:
