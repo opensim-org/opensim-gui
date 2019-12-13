@@ -395,7 +395,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
 
         outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Output"));
 
-        jLabel11.setText("Storage file");
+        jLabel11.setText("Generalized forces file");
 
         outputDirectory.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -411,7 +411,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
                 .addContainerGap()
                 .add(jLabel11)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(outputDirectory, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+                .add(outputDirectory, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
                 .addContainerGap())
         );
         outputPanelLayout.setVerticalGroup(

@@ -231,7 +231,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="outputDirectory" pref="343" max="32767" attributes="3"/>
+                          <Component id="outputDirectory" pref="292" max="32767" attributes="3"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -252,7 +252,7 @@
               <SubComponents>
                 <Component class="javax.swing.JLabel" name="jLabel11">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Storage file"/>
+                    <Property name="text" type="java.lang.String" value="Generalized forces file"/>
                   </Properties>
                 </Component>
                 <Component class="org.opensim.swingui.FileTextFieldAndChooser" name="outputDirectory">
