@@ -26,7 +26,7 @@ jobs:
     - name: Install Netbeans
       # Make sure the NetBeans installer is not corrupted.
       run: |
-        (New-Object System.Net.WebClient).DownloadFile("http://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-windows.exe", "netbeans-8.2-javase-windows.exe")
+        (New-Object System.Net.WebClient).DownloadFile("https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-windows.exe", "netbeans-8.2-javase-windows.exe")
         $expectedHash = "7b0646306a7488e617837da1517a86c08b7cf6fbe4dd9d74e8a4564b5ffde004".ToUpper()
         $hashFromFile = Get-FileHash -Algorithm SHA256 -Path .\netbeans-8.2-javase-windows.exe
         if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
@@ -58,13 +58,13 @@ jobs:
       run: |
         cd Gui/opensim/dist/installer
         makensis.exe make_installer.nsi
-        mv OpenSim-${{ steps.build-gui.outputs.version }}.zip $env:GITHUB_WORKSPACE
+        mv OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe $env:GITHUB_WORKSPACE
 
     - name: Upload GUI installer
       uses: actions/upload-artifact@v1.0.0
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-win64
-        path: OpenSim-${{ steps.build-gui.outputs.version }}.zip
+        path: OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe
 
   mac:
     name: Mac
@@ -99,7 +99,9 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/harness"
+        # TODO: Do not hard-code NetBeans version.
+        # TODO: Could download from https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
+        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/Apache NetBeans 11.2.app/Contents/Resources/NetBeans/netbeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/Apache NetBeans 11.2.app/Contents/Resources/NetBeans/netbeans/harness"
         make CopyOpenSimCore
         make PrepareInstaller
         # Read the value of the cache variable storing the GUI build version.
