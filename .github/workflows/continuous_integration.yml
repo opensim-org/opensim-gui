@@ -3,7 +3,9 @@ name: opensim-application
 on: [push]
 
 jobs:
-  build:
+  windows:
+    name: Windows
+
     runs-on: windows-latest
 
     steps:
@@ -21,7 +23,6 @@ jobs:
       with:
         java-version: 1.8
 
-
     - name: Install Netbeans
       # Make sure the NetBeans installer is not corrupted.
       run: |
@@ -36,6 +37,7 @@ jobs:
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
       
     - name: Build GUI
+      id: build-gui
       run: |
         mkdir build
         cd build
@@ -56,16 +58,59 @@ jobs:
       run: |
         cd Gui/opensim/dist/installer
         makensis.exe make_installer.nsi
-        mv OpenSim-${{ steps.build-gui.outputs.version}}.zip $env:GITHUB_WORKSPACE
+        mv OpenSim-${{ steps.build-gui.outputs.version }}.zip $env:GITHUB_WORKSPACE
 
     - name: Upload GUI installer
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: OpenSim-${{ steps.build-gui.outputs.version }}-Win64
-        path: OpenSim-${{ steps.build-gui.outputs.version}}.zip
+        name: OpenSim-${{ steps.build-gui.outputs.version }}-Win
+        path: OpenSim-${{ steps.build-gui.outputs.version }}.zip
 
+  mac:
+    name: Mac
 
+    runs-on: macos-latest
 
-         
-        
-      
+    steps:
+    - name: Install opensim-core
+      run: |
+        wget https://prdownloads.sourceforge.net/myosin/github-actions/opensim-core/opensim-core-mac.zip
+        # -q: quiet
+        unzip -q opensim-core-mac.zip -d ~
+
+    - name: Checkout opensim-gui
+      uses: actions/checkout@v1
+
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v1
+      with:
+        java-version: 1.8
+
+    - name: Install Netbeans
+      run: brew cask install netbeans
+
+    - name: Update submodules
+      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+
+    - name: Build GUI
+      id: build-gui
+      run: |
+        mkdir build
+        cd build
+        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DAnt_EXECUTABLE="/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/extide/ant/bin/ant" -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/harness"
+        make CopyOpenSimCore
+        make PrepareInstaller
+        # Read the value of the cache variable storing the GUI build version.
+        VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
+        echo $VERSION
+        echo "::set-env name=VERSION:$env:VERSION"
+        echo "::set-output name=version:$env:VERSION"
+        ls Gui/opensim/dist
+        mv OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
+
+    - name: Upload GUI installer
+      uses: actions/upload-artifact@v1.0.0
+      with:
+        name: OpenSim-${{ steps.build-gui.outputs.version }}-Mac
+        path: OpenSim-${{ steps.build-gui.outputs.version }}.zip
+
