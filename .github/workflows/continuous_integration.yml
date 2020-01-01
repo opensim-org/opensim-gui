@@ -10,7 +10,7 @@ jobs:
     - name: Install opensim-core
       run: |
         (New-Object System.Net.WebClient).DownloadFile("https://prdownloads.sourceforge.net/myosin/github-actions/opensim-core/opensim-core-win.zip", "opensim-core-win.zip")
-        7z x opensim-core-win.zip -oC:\\opensim-core
+        7z x opensim-core-win.zip -oC:\\
         dir C:\\opensim-core
 
     - name: Checkout opensim-gui
