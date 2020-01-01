@@ -119,5 +119,5 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-mac
-        path: OpenSim-${{ steps.build-gui.outputs.version }}.zip
+        path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
 
