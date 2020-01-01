@@ -1,4 +1,4 @@
-name: opensim-application
+name: continuous-integration
 
 on: [push]
 
@@ -49,10 +49,10 @@ jobs:
         cmake --build . --target CopyVisualizer --config Release
         # Read the value of the cache variable storing the GUI build version.
         $env:match = cmake -L . | Select-String -Pattern OPENSIMGUI_BUILD_VERSION
-        $env:VERSION = $env:match.split('=')[1]
-        $env:VERSION
-        echo "::set-env name=VERSION:$env:VERSION"
-        echo "::set-output name=version:$env:VERSION"
+        $version = $env:match.split('=')[1]
+        echo $version
+        echo "::set-env name=VERSION::$version"
+        echo "::set-output name=version::$version"
 
     - name: Build GUI installer
       run: |
@@ -63,7 +63,7 @@ jobs:
     - name: Upload GUI installer
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: OpenSim-${{ steps.build-gui.outputs.version }}-Win
+        name: OpenSim-${{ steps.build-gui.outputs.version }}-win64
         path: OpenSim-${{ steps.build-gui.outputs.version }}.zip
 
   mac:
@@ -86,8 +86,10 @@ jobs:
       with:
         java-version: 1.8
 
-    - name: Install Netbeans
-      run: brew cask install netbeans
+    - name: Install Netbeans and Ant
+      run: |
+        brew install ant
+        brew cask install netbeans
 
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
@@ -97,20 +99,20 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DAnt_EXECUTABLE="/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/extide/ant/bin/ant" -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/harness"
+        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/harness"
         make CopyOpenSimCore
         make PrepareInstaller
         # Read the value of the cache variable storing the GUI build version.
         VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
         echo $VERSION
-        echo "::set-env name=VERSION:$env:VERSION"
-        echo "::set-output name=version:$env:VERSION"
+        echo "::set-env name=VERSION::$VERSION"
+        echo "::set-output name=version::$VERSION"
         ls Gui/opensim/dist
         mv OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
       uses: actions/upload-artifact@v1.0.0
       with:
-        name: OpenSim-${{ steps.build-gui.outputs.version }}-Mac
+        name: OpenSim-${{ steps.build-gui.outputs.version }}-mac
         path: OpenSim-${{ steps.build-gui.outputs.version }}.zip
 
