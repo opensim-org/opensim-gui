@@ -111,8 +111,9 @@ jobs:
         echo $VERSION
         echo "::set-env name=VERSION::$VERSION"
         echo "::set-output name=version::$VERSION"
+        cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
-        mv OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
+        mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
       uses: actions/upload-artifact@v1.0.0
