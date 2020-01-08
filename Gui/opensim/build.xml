@@ -252,7 +252,12 @@
             <!-- '-f': overwrite if files already exist. -->
             <arg line="-f dist/OpenSim.app '${mac.dist.outer.dir}/${mac.final.app.name}'" />
         </exec>
-
+        <!-- copy shell script to install command-line tools to top level folder -->
+        <exec executable="mv">
+            <!-- '-f': overwrite if files already exist. -->
+            <arg line="-f '${mac.dist.outer.dir}/bin/opensim-install-command-line.sh' 
+                       '${mac.dist.outer.dir}/bin/opensim-install-command-line.sh'" />
+        </exec>
         <!-- Symlinks in the outer OpenSim 4.0 folder.-->
         <symlink action="single" link="${mac.dist.outer.dir}/Geometry"
             resource="${mac.final.app.name}/Contents/Resources/OpenSim/Geometry/"
@@ -263,9 +268,6 @@
             overwrite="true"/>
         <symlink action="single" link="${mac.dist.outer.dir}/bin/opensense"
             resource="../${mac.final.app.name}/Contents/Resources/OpenSim/bin/opensense"
-            overwrite="true"/>
-        <symlink action="single" link="${mac.dist.outer.dir}/bin/opensim-install-command-line.sh"
-            resource="../${mac.final.app.name}/Contents/Resources/OpenSim/bin/opensim-install-command-line.sh"
             overwrite="true"/>
         <symlink action="single" link="${mac.dist.outer.dir}/cmake"
             resource="${mac.final.app.name}/Contents/Resources/OpenSim/cmake/"
