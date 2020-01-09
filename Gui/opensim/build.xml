@@ -255,7 +255,7 @@
         <!-- copy shell script to install command-line tools to top level folder -->
         <exec executable="mv">
             <!-- '-f': overwrite if files already exist. -->
-            <arg line="-f '${mac.dist.outer.dir}/bin/opensim-install-command-line.sh' 
+            <arg line="-f '../${mac.final.app.name}/Contents/Resources/OpenSim/bin/opensim-install-command-line.sh' 
                        '${mac.dist.outer.dir}/bin/opensim-install-command-line.sh'" />
         </exec>
         <!-- Symlinks in the outer OpenSim 4.0 folder.-->
