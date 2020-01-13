@@ -148,7 +148,7 @@ public class Installer extends ModuleInstall {
          boolean updateResources = false;
          String relaunch_check_filepath = TheApp.getUserDir()+"first_launch.text";
          boolean firstLaunch = !new File(relaunch_check_filepath).exists();
-         if (true){
+         if (firstLaunch){
             updateResources = true;
             SwingUtilities.invokeLater( new Runnable(){
                 public void run() {
