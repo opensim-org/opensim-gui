@@ -148,7 +148,7 @@ public class Installer extends ModuleInstall {
          boolean updateResources = false;
          String relaunch_check_filepath = TheApp.getUserDir()+"first_launch.text";
          boolean firstLaunch = !new File(relaunch_check_filepath).exists();
-         if (firstLaunch){
+         if (true){
             updateResources = true;
             SwingUtilities.invokeLater( new Runnable(){
                 public void run() {
@@ -172,8 +172,8 @@ public class Installer extends ModuleInstall {
          OpenSimLogger.logMessage("\nGeometrySeach path set to "+saved, OpenSimLogger.INFO);
          if (saved.isEmpty()||saved.equalsIgnoreCase("")){
              saved = defaultGeometryPath;
-             TheApp.getCurrentVersionPreferences().put("Paths: Geometry Search Path", saved);
          }
+         TheApp.getCurrentVersionPreferences().put("Paths: Geometry Search Path", saved);
          // If saved is not blank we assume user knows what s/he's doing and leave it alone. Fixes issue #1115
          // Push changes to API side
          GeometryFileLocator.updateGeometrySearchPathsFromPreferences();
