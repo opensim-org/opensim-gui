@@ -91,14 +91,14 @@ public class Installer extends ModuleInstall {
         } catch (UnsupportedLookAndFeelException ex) {
             ex.printStackTrace();
         }
-        /**
-         * @todo open explorer window, Restore default directory and Bones directories, ..
-         */
-        restorePrefs();
         // Force creation of Model-database OpenSimDB 
         // and a View-database ViewDB
         // and register View as Observer of Model
         OpenSimDB.getInstance().addObserver(ViewDB.getInstance());
+        /**
+         * @todo open explorer window, Restore default directory and Bones directories, ..
+         */
+        restorePrefs();
         
         String saved = TheApp.getCurrentVersionPreferences().get("Application: Restore Models on Startup", "Off");
         if (saved.equalsIgnoreCase("on")){ 
