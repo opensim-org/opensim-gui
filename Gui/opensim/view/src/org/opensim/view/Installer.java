@@ -37,6 +37,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 import org.openide.modules.ModuleInstall;
 import org.openide.util.Exceptions;
 import org.openide.windows.WindowManager;
+import org.opensim.logger.OpenSimLogger;
 import org.opensim.utils.ApplicationState;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
@@ -91,14 +92,14 @@ public class Installer extends ModuleInstall {
         } catch (UnsupportedLookAndFeelException ex) {
             ex.printStackTrace();
         }
-        // Force creation of Model-database OpenSimDB 
-        // and a View-database ViewDB
-        // and register View as Observer of Model
-        OpenSimDB.getInstance().addObserver(ViewDB.getInstance());
         /**
          * @todo open explorer window, Restore default directory and Bones directories, ..
          */
         restorePrefs();
+        // Force creation of Model-database OpenSimDB 
+        // and a View-database ViewDB
+        // and register View as Observer of Model
+        OpenSimDB.getInstance().addObserver(ViewDB.getInstance());
         
         String saved = TheApp.getCurrentVersionPreferences().get("Application: Restore Models on Startup", "Off");
         if (saved.equalsIgnoreCase("on")){ 
@@ -168,6 +169,7 @@ public class Installer extends ModuleInstall {
          
          String defaultGeometryPath = TheApp.getDefaultGeometrySearchPath();
          String saved=TheApp.getCurrentVersionPreferences().get("Paths: Geometry Search Path", defaultGeometryPath);
+         OpenSimLogger.logMessage("\nGeometrySeach path set to "+saved, OpenSimLogger.INFO);
          if (saved.isEmpty()||saved.equalsIgnoreCase("")){
              saved = defaultGeometryPath;
              TheApp.getCurrentVersionPreferences().put("Paths: Geometry Search Path", saved);
