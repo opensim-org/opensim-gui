@@ -677,6 +677,10 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
                 jComboBoxFX.setSelectedItem("");
                 jComboBoxFY.setSelectedItem("");
                 jComboBoxFZ.setSelectedItem("");
+                externalForce.setPointIdentifier("");
+                jComboBoxPX.setSelectedItem("");
+                jComboBoxPY.setSelectedItem("");
+                jComboBoxPZ.setSelectedItem("");
             }
         }
         // Set torquefunctions if TorqueCheckBox is on
