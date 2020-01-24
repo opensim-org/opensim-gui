@@ -169,7 +169,7 @@ public class Installer extends ModuleInstall {
          
          String defaultGeometryPath = TheApp.getDefaultGeometrySearchPath();
          String saved=TheApp.getCurrentVersionPreferences().get("Paths: Geometry Search Path", defaultGeometryPath);
-         OpenSimLogger.logMessage("\nGeometrySeach path set to "+saved, OpenSimLogger.INFO);
+         //OpenSimLogger.logMessage("\nGeometrySeach path set to "+saved, OpenSimLogger.INFO);
          if (saved.isEmpty()||saved.equalsIgnoreCase("")){
              saved = defaultGeometryPath;
          }
