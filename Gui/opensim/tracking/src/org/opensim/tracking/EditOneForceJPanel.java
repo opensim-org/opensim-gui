@@ -648,11 +648,11 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
         if (initializing) return;
         String forceName=ForceNameTextField.getText();
         if (forceName != null && forceName.length()!=0)
-            if (!initializing) externalForce.setName(forceName);
+           externalForce.setName(forceName);
         
         String forceBodyame = (String) BodiesComboBox.getSelectedItem();
         if (forceBodyame != null && forceBodyame.length()!=0)
-            if (!initializing) externalForce.setAppliedToBodyName(forceBodyame);
+           externalForce.setAppliedToBodyName(forceBodyame);
         
         // Set either forcefunctions or force and pointFunctions if ForceCheckBox is on
         if (jCheckBoxForce.isSelected()){
@@ -668,20 +668,17 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
                     (String)jComboBoxPX.getSelectedItem(),
                     (String)jComboBoxPY.getSelectedItem(), 
                     (String)jComboBoxPZ.getSelectedItem()));
-            } else
-                ;//if (!initializing) externalForce.clearPointFunctions();
+            } 
         } else {
             // Clear all
-            if (!initializing) {
-                externalForce.setForceIdentifier("");
-                jComboBoxFX.setSelectedItem("");
-                jComboBoxFY.setSelectedItem("");
-                jComboBoxFZ.setSelectedItem("");
-                externalForce.setPointIdentifier("");
-                jComboBoxPX.setSelectedItem("");
-                jComboBoxPY.setSelectedItem("");
-                jComboBoxPZ.setSelectedItem("");
-            }
+            externalForce.setForceIdentifier("");
+            jComboBoxFX.setSelectedItem("");
+            jComboBoxFY.setSelectedItem("");
+            jComboBoxFZ.setSelectedItem("");
+            externalForce.setPointIdentifier("");
+            jComboBoxPX.setSelectedItem("");
+            jComboBoxPY.setSelectedItem("");
+            jComboBoxPZ.setSelectedItem("");
         }
         // Set torquefunctions if TorqueCheckBox is on
         if (jCheckBoxTorque.isSelected()){
@@ -689,14 +686,11 @@ public class EditOneForceJPanel extends javax.swing.JPanel {
                     (String)jComboBoxTX.getSelectedItem(),
                     (String)jComboBoxTY.getSelectedItem(), 
                     (String)jComboBoxTZ.getSelectedItem()));
-            //if (!initializing) externalForce.setTorqueFunctionNames(torqueFunctionNames, forceStorage);
         } else {
-            if (!initializing) {
-                externalForce.setTorqueIdentifier("");
-                jComboBoxTX.setSelectedItem("");
-                jComboBoxTY.setSelectedItem("");
-                jComboBoxTZ.setSelectedItem("");
-            }
+            externalForce.setTorqueIdentifier("");
+            jComboBoxTX.setSelectedItem("");
+            jComboBoxTY.setSelectedItem("");
+            jComboBoxTZ.setSelectedItem("");
         }
         String selected = (String) ForceExpressedBodiesComboBox.getSelectedItem();
         if (selected !=null)

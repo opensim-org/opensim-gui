@@ -15,4 +15,5 @@ v4.1
 - Fix issue [#1141](https://github.com/opensim-org/opensim-gui/issues/1141): Handle moving path points properly when they appear first on GeometryPath for visualization purposes
 - Fix issue [#1111](https://github.com/opensim-org/opensim-gui/issues/1111): Handle muscle paths that wrap around multiple wrap objects when wrapping disengages.
 - Fix issue [#1153](https://github.com/opensim-org/opensim-gui/issues/1153): Handle "Applies Force" checkbox in External Force edit, so that the setting is persistent.
+- Fix issue [#1165](https://github.com/opensim-org/opensim-gui/issues/1165): Handle user cancel from save external-loads dialog gracefully.
 

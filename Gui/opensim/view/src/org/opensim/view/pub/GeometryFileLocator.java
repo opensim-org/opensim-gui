@@ -62,7 +62,7 @@ public class GeometryFileLocator {
    }
 
     public static void updateGeometrySearchPathsFromPreferences() {
-        String userGeometryPath=TheApp.getCurrentVersionPreferences().get("Paths: Geometry Search Path", ".");
+        String userGeometryPath=TheApp.getCurrentVersionPreferences().get("Paths: Geometry Search Path", "");
         String dirs[] = userGeometryPath.split(File.pathSeparator);
         for (int i=0; i< dirs.length; i++)
             ModelVisualizer.addDirToGeometrySearchPaths(dirs[i]);
