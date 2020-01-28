@@ -96,7 +96,7 @@ for additional information.
     [CMake](https://cmake.org/download/) >= 3.1.3
   * We do not use CMake to build any C++ code, but to copy files and run
     **Ant**.
-* **C++ compiler**: [Visual Studio 2015](https://www.visualstudio.com/)
+* **C++ compiler**: [Visual Studio 2017](https://www.visualstudio.com/)
   * Again, we won't build any C++ code; CMake needs this to do its job.
 
 You can obtain some of these dependencies using the Chocolatey package manager.
