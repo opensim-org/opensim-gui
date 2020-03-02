@@ -70,7 +70,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
                 } catch (IOException ex) {
                     NotifyDescriptor.Message dlg =
                           new NotifyDescriptor.Message("Couldn't load data and/or model for display.\n"+
-                                "Possible reasons: data file has incorrect format or resource file _openSimlab.osim missing.");
+                                "Possible reasons: data file has incorrect format or issues with file path.");
                   DialogDisplayer.getDefault().notify(dlg);   
             return;
 
