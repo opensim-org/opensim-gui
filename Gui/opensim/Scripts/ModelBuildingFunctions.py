@@ -153,12 +153,16 @@ def addMuscleToModel(model, muscleName, muscleType):
 	model.addForce(muscle)
 	return muscle
 
-""" Here is an example of copying the GUI's current model, adding components to
-    the copied model, and loading the copied model in the GUI"""
+"""Here is an example of adding a body called "ball" to a model.
+
+   The code below copies the GUI's current model, adds a body "ball"
+   to the model, attaches a Sphere as geometry for visualization,
+   and connects the new body to a parent body called "hand". Then,
+   the copied model is loaded into the GUI"""
 #   modelCopy = getCurrentModel().clone()
 #   ball = addBodyToModel(modelCopy, 'ball')
-#   sphere = modeling.Sphere(0.15)
-#   attachGeometryWithOffset(newBody, sphere)
-#   handle = connectBodyWithJoint(modelCopy, ball, 'handle', 'SliderJoint')
-#    loadModel(modelCopy)
-
+#   sphereGeometry = modeling.Sphere(0.15)
+#   attachGeometryWithOffset(ball, sphereGeometry)
+#   hand = modelCopy.get_BodySet().get('hand')
+#   handle = connectBodyWithJoint(modelCopy, hand, ball, 'handle', 'SliderJoint')
+#   loadModel(modelCopy)
