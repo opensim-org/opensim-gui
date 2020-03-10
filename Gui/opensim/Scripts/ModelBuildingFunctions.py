@@ -161,8 +161,8 @@ def addMuscleToModel(model, muscleName, muscleType):
    the copied model is loaded into the GUI"""
 #   modelCopy = getCurrentModel().clone()
 #   ball = addBodyToModel(modelCopy, 'ball')
-#   sphere = modeling.Sphere(0.15)
-#   attachGeometryWithOffset(ball, sphere)
+#   sphereGeometry = modeling.Sphere(0.15)
+#   attachGeometryWithOffset(ball, sphereGeometry)
 #   hand = modelCopy.get_BodySet().get('hand')
 #   handle = connectBodyWithJoint(modelCopy, hand, ball, 'handle', 'SliderJoint')
 #   loadModel(modelCopy)
