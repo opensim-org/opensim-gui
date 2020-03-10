@@ -1,0 +1,11 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=OpenSim
+Comment=OpenSim is an open source software for neuromusculoskeletal modeling, simulation and analysis.
+Path=/opt/opensim-gui
+# TryExec=/opt/opensim-gui/bin/OpenSim
+Exec=/opt/opensim-gui/bin/OpenSim
+Icon=/opt/opensim-gui/OpenSimLogoWhiteNoText.png
+Terminal=false
+Categories=Science;Education
