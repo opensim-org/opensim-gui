@@ -143,3 +143,24 @@ if (APPLE)
                   COMMENT "Build OpenSim.app.")
     add_dependencies(PrepareInstaller opensim-models)
 endif()
+
+if (NOT APPLE AND NOT WIN32)
+  if (OpenSim_FOUND)
+        set(PLATFORM_PRIVATE_PROPERTIES_FILE
+            "${CMAKE_CURRENT_SOURCE_DIR}/nbproject/private/platform-private.properties")
+        if (NOT EXISTS ${PLATFORM_PRIVATE_PROPERTIES_FILE})
+            file(WRITE ${PLATFORM_PRIVATE_PROPERTIES_FILE}
+                "run.args.extra=-J-Djava.library.path=${OpenSim_LIB_DIR}")
+        endif()
+    endif()
+    add_custom_target(PrepareInstaller ALL
+                  COMMAND ${Ant_EXECUTABLE} build-linux
+                  -Dapi.dir="${OpenSim_ROOT_DIR}"
+                  -Dmodels.dir="${MODELS_INSTALL_DIR}"
+                  -Dapp.version="${OPENSIMGUI_BUILD_VERSION}"
+                  ${ANT_ARGS}
+                  DEPENDS "${CMAKE_CURRENT_SOURCE_DIR}/build.xml"
+                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
+                  COMMENT "Merge GUI build and opensim-core install into one folder.")
+    add_dependencies(PrepareInstaller opensim-models)
+endif()
