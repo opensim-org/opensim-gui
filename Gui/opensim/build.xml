@@ -381,19 +381,15 @@
             file="${installer-files.dir}/opensim.desktop" />
 
         <tar destfile="${opensim.dist.dir}/../../OpenSim-${app.version}.tar.gz"
-            basedir="${opensim.dist.dir}/../"
+            basedir="${opensim.dist.dir}/.."
+            excludes="OpenSim/bin/**,**/*.log,OpenSim/*.desktop,OpenSim/sdk/Simbody/libexec/simbody/simbody-visualizer"
+            defaultexcludes="yes"
             longfile="posix"
             compression="gzip">
-            <tarfileset dir="${opensim.dist.dir}/../.." filemode="755">
-                <include name="${opensim.dist.dir}/bin/**" />
-                <include name="${opensim.dist.dir}/opensim.desktop" />
-                <include name="${opensim.dist.dir}/sdk/Simbody/libexec/**" />
-            </tarfileset>
-            <tarfileset dir="${opensim.dist.dir}/..">
-                <include name="${opensim.dist.dir}/**" />
-                <exclude name="${opensim.dist.dir}/bin/**" />
-                <exclude name="${opensim.dist.dir}/opensim.desktop" />
-                <exclude name="${opensim.dist.dir}/sdk/Simbody/libexec/**" />
+            <tarfileset dir="${opensim.dist.dir}" filemode="755" prefix="OpenSim">
+                <include name="bin/**" />
+                <include name="opensim.desktop" />
+                <include name="sdk/Simbody/libexec/simbody/simbody-visualizer" />
             </tarfileset>
         </tar>
     </target>
