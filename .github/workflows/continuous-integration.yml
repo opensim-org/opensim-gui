@@ -125,7 +125,7 @@ jobs:
       run: |
         wget https://prdownloads.sourceforge.net/myosin/opensim-core/opensim-core-latest_linux_Release.zip
         # -q: quiet
-        unzip -q opensim-core-latest_linux_Release.zip -d ~
+        unzip -q opensim-core-latest_linux_Release.zip -d $GITHUB_WORKSPACE
     - name: Checkout opensim-gui
       uses: actions/checkout@v1
 
@@ -159,7 +159,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$GITHUB_WORKSPACE/netbeans-8.2;-Dnbplatform.default.harness.dir=$GITHUB_WORKSPACE/netbeans-8.2/harness"
+        cmake ../ -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans-8.2;-Dnbplatform.default.harness.dir=$HOME/netbeans-8.2/harness"
         make CopyOpenSimCore
         make PrepareInstaller
         # Read the value of the cache variable storing the GUI build version.
