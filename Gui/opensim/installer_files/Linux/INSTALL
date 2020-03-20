@@ -1,16 +1,16 @@
 #!/bin/bash
 
-INSTALLDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 function err_unsupported_env {
-    echo "\r  [ \033[0;31mERROR:\033[0m ] Your distro/release is not officially supported\n"
-    echo "Ubuntu 18.04 LTS is currently the only Linux distribution that is officially \
-          supported, however the OpenSim GUI will likely run on other distributions and/or \
-          releases. See the opensim-gui README for more information."
+    printf "\r  [\033[0;31mERROR:\033[0m] Your distro/release is not officially supported\n"
+    printf "  Ubuntu 18.04 LTS is currently the only Linux distribution that is officially \
+supported, however the OpenSim GUI will likely run on other distributions and/or \
+releases. See the opensim-gui README for more information.\n"
     exit 1
 }
 
-if [[ ! -e /etc/os-release ]]; then
+if [[ -e /etc/os-release ]]; then
     . /etc/os-release
     OS=$NAME
     VER=$VERSION_ID
@@ -18,13 +18,16 @@ else
     err_unsupported_env
 fi
 
-if [[ $OS == Ubuntu ]] && [[ $VER == "18.04" ]]
-    sudo apt install openjdk-8-jdk liblapack libgconf2-4
+if [[ $OS == "Ubuntu" ]] && [[ $VER == "18.04" ]]; then
+    sudo apt install openjdk-8-jdk liblapack3 libgconf2-4
+    sudo mkdir -p /opt/opensim
+    sudo chown -R $USER:$USER /opt/opensim
+    sudo cp -R $SCRIPTDIR/* /opt/opensim
 
     sudo cp opensim.desktop /usr/share/applications/opensim.desktop
     sudo cp OpenSimLogoWhiteNoText.png /usr/share/pixmaps/opensim.png
-    cd $INSTALLDIR/bin
-    opensim-install-command-line.sh
+    cd $SCRIPTDIR/bin
+    ./opensim-install-command-line.sh
 else
     err_unsupported_env
 fi
