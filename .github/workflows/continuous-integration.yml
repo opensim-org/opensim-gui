@@ -123,7 +123,7 @@ jobs:
     steps:
     - name: Install opensim-core
       run: |
-        wget wget https://prdownloads.sourceforge.net/myosin/opensim-core/opensim-core-latest_linux_Release.zip
+        wget https://prdownloads.sourceforge.net/myosin/opensim-core/opensim-core-latest_linux_Release.zip
         # -q: quiet
         unzip -q opensim-core-latest_linux_Release.zip -d ~
     - name: Checkout opensim-gui
