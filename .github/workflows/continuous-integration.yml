@@ -134,11 +134,22 @@ jobs:
       with:
         java-version: 1.8
 
+    - name: Cache Netbeans
+      id: cache-netbeans
+      uses: actions/cache@v1
+      with:
+        path: netbeans
+        key: netbeans-8.2-javase-linux.sh
+
+    - name: Download Netbeans
+      if: steps.cache-netbeans.outputs.cache-hit != 'true'
+      run: |
+        wget -q -P netbeans https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-linux.sh
+
     - name: Install Netbeans
       run: |
-        wget https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-linux.sh
-        chmod 755 netbeans-8.2-javase-linux.sh
-        ./netbeans-8.2-javase-linux.sh --silent
+        chmod 755 netbeans/netbeans-8.2-javase-linux.sh
+        ./netbeans/netbeans-8.2-javase-linux.sh --silent
 
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
@@ -148,7 +159,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=~/netbeans-8.2;-Dnbplatform.default.harness.dir=~/netbeans-8.2/harness"
+        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$GITHUB_WORKSPACE/netbeans-8.2;-Dnbplatform.default.harness.dir=$GITHUB_WORKSPACE/netbeans-8.2/harness"
         make CopyOpenSimCore
         make PrepareInstaller
         # Read the value of the cache variable storing the GUI build version.
