@@ -1,0 +1,32 @@
+#!/bin/bash
+
+INSTALLDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+function err_unsupported_env {
+    echo "\r  [ \033[0;31mERROR:\033[0m ] Your distro/release is not officially supported\n"
+    echo "Ubuntu 18.04 LTS is currently the only Linux distribution that is officially \
+          supported, however the OpenSim GUI will likely run on other distributions and/or \
+          releases. See the opensim-gui README for more information."
+    exit 1
+}
+
+if [[ ! -e /etc/os-release ]]; then
+    . /etc/os-release
+    OS=$NAME
+    VER=$VERSION_ID
+else
+    err_unsupported_env
+fi
+
+if [[ $OS == Ubuntu ]] && [[ $VER == "18.04" ]]
+    sudo apt install openjdk-8-jdk liblapack libgconf2-4
+
+    sudo cp opensim.desktop /usr/share/applications/opensim.desktop
+    sudo cp OpenSimLogoWhiteNoText.png /usr/share/pixmaps/opensim.png
+    cd $INSTALLDIR/bin
+    opensim-install-command-line.sh
+else
+    err_unsupported_env
+fi
+
+
