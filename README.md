@@ -70,12 +70,14 @@ Building from the source code
 -----------------------------
 
 Currently, we only provide instructions for **Windows**. It *is* possible to
-build and run the GUI on **OSX** and **Linux**; though it is not thoroughly
-tested on these platforms. We will write instructions for OSX and Linux in the
-future; for now, you can follow the Windows instructions as a rough guide.
+build and run the GUI on **OSX**; though it is not thoroughly
+tested on these platforms. We will write instructions for OSX in the
+future; for now, you can follow the Windows and Linux instructions as a rough guide.
 
 See the [OpenSim Confluence Wiki](https://simtk-confluence.stanford.edu/display/OpenSim40/Building+OpenSim+from+Source)
 for additional information.
+
+### Building on Windows
 
 #### Get the dependencies
 
@@ -150,6 +152,43 @@ following targets (none of which actually compile C++ code):
 
 If you plan to make changes to the GUI, you can now continue to use NetBeans to
 edit the Java source code and build and run the GUI.
+
+### Building on Linux
+
+The only officially supported Linux distribution currently is Ubuntu 18.04 LTS, however, these instructions should work for other distributions with some modifications (eg package manager, package names, etc).
+
+The runtime dependencies are:
+- `openjdk-8-jdk`
+- System LAPACK/BLAS shared libraries (eg `liblapack3`)
+- `libgconf2-4`
+
+```bash
+sudo apt install build-essentials git cmake openjdk-8-jdk liblapack3 libgconf2-4
+
+wget https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-linux.sh
+chmod 755 netbeans-8.2-javase-linux.sh
+./netbeans-8.2-javase-linux.sh --silent
+
+wget https://prdownloads.sourceforge.net/myosin/opensim-core/opensim-core-latest_linux_Release.zip
+unzip -q opensim-core-latest_linux_Release.zip -d ~
+~/opensim-gui/Gui/opensim/dist/
+git clone https://github.com/opensim-org/opensim-gui.git
+
+mkdir build
+cd build
+
+cmake ../opensim-gui -DCMAKE_PREFIX_PATH=~/opensim-core \
+    -DAnt_EXECUTABLE="~/netbeans-8.2/extide/ant/bin/ant" \
+    -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=~/netbeans-8.2;-Dnbplatform.default.harness.dir=~/netbeans-8.2/harness"
+
+make CopyOpenSimCore
+make PrepareInstaller
+
+# Tarball found at ~/opensim-gui/Gui/opensim/dist/
+# Alternately:
+cd ~/opensim-gui/Gui/opensim/dist/installer/OpenSim
+./INSTALL
+```
 
 
 [buildstatus_image_travisci]: https://travis-ci.org/opensim-org/opensim-gui.svg?branch=master
