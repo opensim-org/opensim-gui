@@ -150,7 +150,9 @@ jobs:
     - name: Install Netbeans
       run: |
         chmod 755 netbeans/netbeans-8.2-javase-linux.sh
-        ./netbeans/netbeans-8.2-javase-linux.sh --verbose
+        ./netbeans/netbeans-8.2-javase-linux.sh --silent
+        ls $HOME
+        ls $HOME/netbeans-8.2
 
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
