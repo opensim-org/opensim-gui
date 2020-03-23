@@ -157,13 +157,8 @@ edit the Java source code and build and run the GUI.
 
 The only officially supported Linux distribution currently is Ubuntu 18.04 LTS, however, these instructions should work for other distributions with some modifications (eg package manager, package names, etc).
 
-The runtime dependencies are:
-- `openjdk-8-jdk`
-- System LAPACK/BLAS shared libraries (eg `liblapack3`)
-- `libgconf2-4`
-
 ```bash
-sudo apt install build-essentials git cmake openjdk-8-jdk liblapack3 libgconf2-4
+sudo apt install build-essentials git cmake openjdk-8-jdk liblapack3 libgconf-2-4
 
 wget https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-linux.sh
 chmod 755 netbeans-8.2-javase-linux.sh
@@ -189,6 +184,13 @@ make PrepareInstaller
 cd ~/opensim-gui/Gui/opensim/dist/installer/OpenSim
 ./INSTALL
 ```
+
+#### Manual installation for unsupported 'nixes
+
+Opensim-core and the GUI depend on the following shared libraries that are not installed by default and/or with Java (openjdk-8-jre) on Ubuntu 18.04:
+
+- `libgconf`
+- `liblapack`/`libblas`
 
 
 [buildstatus_image_travisci]: https://travis-ci.org/opensim-org/opensim-gui.svg?branch=master

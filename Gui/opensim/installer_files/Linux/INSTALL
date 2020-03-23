@@ -1,14 +1,86 @@
 #!/bin/bash
 
-SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-
 function err_unsupported_env {
     printf "\r  [\033[0;31mERROR:\033[0m] Your distro/release is not officially supported\n"
     printf "  Ubuntu 18.04 LTS is currently the only Linux distribution that is officially \
 supported, however the OpenSim GUI will likely run on other distributions and/or \
-releases. See the opensim-gui README for more information.\n"
+releases. See the https://github.com/opensim-org/opensim-gui for more \
+information.\n"
     exit 1
 }
+
+function usage {
+  echo -n "INSTALL [OPTIONS]...
+
+Install the OpenSim GUI. Ubuntu 18.04 LTS is the only officially supported system. Manual \
+installation on other systems may be possible; see \
+https://github.com/opensim-org/opensim-gui for more information.
+
+ Options:
+  -p, --prefix      Install prefix; defaults to /opt/opensim-gui
+  -v, --verbose     Be verbose
+  -h, --help        Display this help and exit
+"
+}
+
+# From https://stackoverflow.com/a/246128
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+## From https://stackoverflow.com/a/29754866
+# saner programming env: these switches turn some bugs into errors
+set -o errexit -o pipefail -o noclobber -o nounset
+
+# -allow a command to fail with !’s side effect on errexit
+# -use return value from ${PIPESTATUS[0]}, because ! hosed $?
+! getopt --test > /dev/null 
+if [[ ${PIPESTATUS[0]} -ne 4 ]]; then
+    echo 'I’m sorry, `getopt --test` failed in this environment.'
+    exit 1
+fi
+
+OPTIONS=hp:v
+LONGOPTS=help,prefix:,verbose
+
+# -regarding ! and PIPESTATUS see above
+# -temporarily store output to be able to check for errors
+# -activate quoting/enhanced mode (e.g. by writing out “--options”)
+# -pass arguments only via   -- "$@"   to separate them correctly
+! PARSED=$(getopt --options=$OPTIONS --longoptions=$LONGOPTS --name "$0" -- "$@")
+if [[ ${PIPESTATUS[0]} -ne 0 ]]; then
+    # e.g. return value is 1
+    #  then getopt has complained about wrong arguments to stdout
+    exit 2
+fi
+# read getopt’s output this way to handle the quoting right:
+eval set -- "$PARSED"
+
+v=0 installPrefix=/opt/opensim-gui
+# now enjoy the options in order and nicely split until we see --
+while true; do
+    case "$1" in
+        -h|--help)
+            usage
+            exit 0
+            ;;
+        -v|--verbose)
+            v=1
+            shift
+            ;;
+        -p|--prefix)
+            installPrefix="$2"
+            shift 2
+            ;;
+        --)
+            shift
+            break
+            ;;
+        *)
+            echo "Bad argument: $1 is not a valid argument"
+            exit 3
+            ;;
+    esac
+done
+## End from https://stackoverflow.com/a/29754866
 
 if [[ -e /etc/os-release ]]; then
     . /etc/os-release
@@ -19,15 +91,48 @@ else
 fi
 
 if [[ $OS == "Ubuntu" ]] && [[ $VER == "18.04" ]]; then
-    sudo apt install openjdk-8-jdk liblapack3 libgconf2-4
-    sudo mkdir -p /opt/opensim
-    sudo chown -R $USER:$USER /opt/opensim
-    sudo cp -R $SCRIPTDIR/* /opt/opensim
 
-    sudo cp opensim.desktop /usr/share/applications/opensim.desktop
+    [[ $v == 1 ]] && echo "Installing Java..."
+    sudo apt install -qqqq -y openjdk-8-jre
+
+    [[ $v == 1 ]] && echo "Testing for system LAPACK/BLAS..."
+    if ! (ldconfig -p | grep -q "libblas|liblapack"); then
+        [[ $v == 1 ]] && echo "  Installing liblapack3..."
+        sudo apt install -qqqq -y liblapack3
+    fi
+
+    [[ $v == 1 ]] && echo "Testing for libgconf..."
+    if ! (ldconfig -p | grep -q "libgconf"); then
+        [[ $v == 1 ]] && echo "  Installing libgconf..."
+        sudo apt install -qqqq -y libgconf-2-4
+    fi
+
+    [[ $v == 1 ]] && echo "Installing OpenSim GUI to $installPrefix, owned by $USER..."
+    sudo mkdir -p $installPrefix
+    sudo chown -R $USER:$USER $installPrefix
+    cp -R $SCRIPTDIR/* $installPrefix
+
+    [[ $v == 1 ]] && echo "Adding OpenSim to list of desktop applications..."
+    echo "[Desktop Entry]
+Version=1.0
+Type=Application
+Name=OpenSim
+Comment=OpenSim is an open source software for neuromusculoskeletal modeling, simulation \
+and analysis.
+Path=$installPrefix
+Exec=$installPrefix/bin/OpenSim
+Icon=opensim
+Terminal=false
+Categories=Science;Education" | sudo tee /usr/share/applications/opensim.desktop > /dev/null
     sudo cp OpenSimLogoWhiteNoText.png /usr/share/pixmaps/opensim.png
-    cd $SCRIPTDIR/bin
-    ./opensim-install-command-line.sh
+
+    [[ $v == 1 ]] && echo "Installing opensim-core commands..."
+    cd $installPrefix/bin
+    if [[ $v == 1 ]]; then
+        ./opensim-install-command-line.sh
+    else
+        ./opensim-install-command-line.sh > /dev/null
+    fi
 else
     err_unsupported_env
 fi
