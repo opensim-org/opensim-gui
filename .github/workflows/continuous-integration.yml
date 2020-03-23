@@ -139,19 +139,16 @@ jobs:
       id: cache-netbeans
       uses: actions/cache@v1
       with:
-        path: netbeans
-        key: netbeans-8.2-javase-linux.sh
+        path: ~/netbeans-8.2
+        key: netbeans-8.2
 
-    - name: Download Netbeans
+
+    - name: Download and Install Netbeans
       if: steps.cache-netbeans.outputs.cache-hit != 'true'
       run: |
-        wget -q -P netbeans https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-linux.sh
-
-    - name: Install Netbeans
-      run: |
-        chmod 755 netbeans/netbeans-8.2-javase-linux.sh
-        ./netbeans/netbeans-8.2-javase-linux.sh --silent
-        ls $HOME
+        wget -q https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-linux.sh
+        chmod 755 netbeans-8.2-javase-linux.sh
+        ./netbeans-8.2-javase-linux.sh --silent
         ls $HOME/netbeans-8.2
 
     - name: Update submodules
