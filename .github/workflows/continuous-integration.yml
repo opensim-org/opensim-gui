@@ -126,6 +126,7 @@ jobs:
         wget https://prdownloads.sourceforge.net/myosin/opensim-core/opensim-core-latest_linux_Release.zip
         # -q: quiet
         unzip -q opensim-core-latest_linux_Release.zip -d ~
+
     - name: Checkout opensim-gui
       uses: actions/checkout@v1
 
@@ -149,7 +150,7 @@ jobs:
     - name: Install Netbeans
       run: |
         chmod 755 netbeans/netbeans-8.2-javase-linux.sh
-        ./netbeans/netbeans-8.2-javase-linux.sh --silent
+        ./netbeans/netbeans-8.2-javase-linux.sh --verbose
 
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
