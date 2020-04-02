@@ -1,5 +1,6 @@
 language: java
-
+jdk:
+  - oraclejdk8
 # Use container-based infrastructure to allow caching (for ccache).
 sudo: false 
 
