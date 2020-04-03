@@ -5,7 +5,7 @@ are related to the items below. If there is no issue or pull
 request related to the change, then we may provide the commit.
 v4.2
 ====
-- 
+- Fix issue [#1182](https://github.com/opensim-org/opensim-gui/issues/1182): Scaling model with custom geometry meshes loses custom geomerty
 
 v4.1
 ====
