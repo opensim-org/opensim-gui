@@ -61,9 +61,5 @@ public class PlotterSourceMotion extends PlotterSourceStorage {
    void updateMotionName() {  // Update display name after a motion rename
      displayName = storage.getName();
    }
-
-    public String getDisplayName() {
-        return displayName+"(Deg.)";
-    }
    
 }
