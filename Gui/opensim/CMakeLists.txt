@@ -122,8 +122,7 @@ add_custom_target(CopyModels ALL
 add_dependencies(CopyModels opensim-models)
 endif()
 
-
-if (APPLE)
+if (NOT WIN32)
     if (OpenSim_FOUND)
         set(PLATFORM_PRIVATE_PROPERTIES_FILE 
             "${CMAKE_CURRENT_SOURCE_DIR}/nbproject/private/platform-private.properties")
@@ -132,6 +131,9 @@ if (APPLE)
                 "run.args.extra=-J-Djava.library.path=${OpenSim_LIB_DIR}")
         endif()
     endif()
+endif()
+
+if (APPLE)
     add_custom_target(PrepareInstaller ALL
                   COMMAND ${Ant_EXECUTABLE} build-mac-installer
                   -Dapi.dir="${OpenSim_ROOT_DIR}"
@@ -145,14 +147,6 @@ if (APPLE)
 endif()
 
 if (NOT APPLE AND NOT WIN32)
-  if (OpenSim_FOUND)
-        set(PLATFORM_PRIVATE_PROPERTIES_FILE
-            "${CMAKE_CURRENT_SOURCE_DIR}/nbproject/private/platform-private.properties")
-        if (NOT EXISTS ${PLATFORM_PRIVATE_PROPERTIES_FILE})
-            file(WRITE ${PLATFORM_PRIVATE_PROPERTIES_FILE}
-                "run.args.extra=-J-Djava.library.path=${OpenSim_LIB_DIR}")
-        endif()
-    endif()
     add_custom_target(PrepareInstaller ALL
                   COMMAND ${Ant_EXECUTABLE} build-linux
                   -Dapi.dir="${OpenSim_ROOT_DIR}"
