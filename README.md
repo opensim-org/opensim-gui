@@ -70,9 +70,10 @@ Building from the source code
 -----------------------------
 
 Currently, we only provide instructions for **Windows**. It *is* possible to
-build and run the GUI on **OSX**; though it is not thoroughly
-tested on these platforms. We will write instructions for OSX in the
-future; for now, you can follow the Windows and Linux instructions as a rough guide.
+build and run the GUI on **OSX** and **Linux**; though it is not thoroughly
+tested on these platforms. Linux builds are in beta. We will write instructions
+for OSX in the future; for now, you can follow the Windows and Linux instructions
+as a rough guide and/or refer to the Travis, Appveyor, or GitHub Actions CI configs.
 
 See the [OpenSim Confluence Wiki](https://simtk-confluence.stanford.edu/display/OpenSim40/Building+OpenSim+from+Source)
 for additional information.
@@ -153,9 +154,9 @@ following targets (none of which actually compile C++ code):
 If you plan to make changes to the GUI, you can now continue to use NetBeans to
 edit the Java source code and build and run the GUI.
 
-### Building on Linux
+### Building on Linux (beta)
 
-The only officially supported Linux distribution currently is Ubuntu 18.04 LTS, however, these instructions should work for other distributions with some modifications (eg package manager, package names, etc).
+Building on Linux is considered beta, and has only been tested with Ubuntu 18.04 LTS, however, these instructions should work for other distributions with some modifications (eg package manager, package names, etc).
 
 ```bash
 sudo apt install build-essentials git cmake openjdk-8-jdk liblapack3 libgconf-2-4
@@ -185,7 +186,7 @@ cd ~/opensim-gui/Gui/opensim/dist/installer/OpenSim
 ./INSTALL
 ```
 
-#### Manual installation for unsupported 'nixes
+#### Manual installation for untested 'nixes
 
 Opensim-core and the GUI depend on the following shared libraries that are not installed by default and/or with Java (openjdk-8-jre) on Ubuntu 18.04:
 

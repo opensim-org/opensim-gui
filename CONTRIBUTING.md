@@ -40,4 +40,5 @@ List of contributors
  - Darryl Thelen
  - Carmichael Ong
  - Sebastian Skejo
+ - Allen Hill
 
