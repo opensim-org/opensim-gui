@@ -35,6 +35,22 @@ public class RowVectorVec3 extends RowVectorBaseVec3 {
     super.delete();
   }
 
+    public static RowVectorVec3 createFromMat(double[][] data) throws Exception {
+        int numRows = data.length;
+        int numCols = 0;
+        if (numRows > 0) {
+            numCols = data[0].length;
+        }
+        if (numRows != 3) {
+            throw new Exception("Number of rows must be 3.");
+        }
+        RowVectorVec3 v = new RowVectorVec3(numCols);
+        for (int i = 0; i < numCols; ++i) {
+            v.set(i, new Vec3(data[0][i], data[1][i], data[2][i]));
+        }
+        return v;
+    }
+
   public RowVectorVec3() {
     this(opensimSimbodyJNI.new_RowVectorVec3__SWIG_0(), true);
   }

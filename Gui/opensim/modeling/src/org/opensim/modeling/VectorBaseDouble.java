@@ -35,6 +35,12 @@ public class VectorBaseDouble extends MatrixBaseDouble {
     super.delete();
   }
 
+    public double[][] getAsMat() {
+        double[][] ret = new double[size()][1];
+        for (int i = 0; i < size(); ++i) { ret[i][0] = get(i); }
+        return ret;
+    }
+
   public VectorBaseDouble(int m) {
     this(opensimSimbodyJNI.new_VectorBaseDouble__SWIG_0(m), true);
   }

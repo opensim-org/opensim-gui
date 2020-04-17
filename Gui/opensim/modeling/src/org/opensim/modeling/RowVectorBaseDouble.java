@@ -35,6 +35,13 @@ public class RowVectorBaseDouble extends MatrixBaseDouble {
     super.delete();
   }
 
+    @Override
+    public double[][] getAsMat() {
+        double[][] ret = new double[1][size()];
+        for (int i = 0; i < size(); ++i) { ret[0][i] = get(i); }
+        return ret;
+    }
+
   public RowVectorBaseDouble(int n) {
     this(opensimSimbodyJNI.new_RowVectorBaseDouble__SWIG_0(n), true);
   }

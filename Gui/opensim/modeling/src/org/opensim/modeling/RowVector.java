@@ -35,6 +35,12 @@ public class RowVector extends RowVectorBaseDouble {
     super.delete();
   }
 
+    public static RowVector createFromMat(double[] data) {
+        RowVector v = new RowVector(data.length);
+        for (int i = 0; i < data.length; ++i) { v.set(i, data[i]); }
+        return v;
+    }
+
   public RowVector() {
     this(opensimSimbodyJNI.new_RowVector__SWIG_0(), true);
   }
