@@ -57,16 +57,44 @@ public class Tool extends OpenSimObject {
     return opensimActuatorsAnalysesToolsJNI.Tool_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_results_directory(Tool source) {
+    opensimActuatorsAnalysesToolsJNI.Tool_copyProperty_results_directory(swigCPtr, this, Tool.getCPtr(source), source);
+  }
+
+  public String get_results_directory(int i) {
+    return opensimActuatorsAnalysesToolsJNI.Tool_get_results_directory__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string upd_results_directory(int i) {
+    return new SWIGTYPE_p_std__string(opensimActuatorsAnalysesToolsJNI.Tool_upd_results_directory__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_results_directory(int i, String value) {
+    opensimActuatorsAnalysesToolsJNI.Tool_set_results_directory__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_results_directory(String value) {
+    return opensimActuatorsAnalysesToolsJNI.Tool_append_results_directory(swigCPtr, this, value);
+  }
+
+  public void constructProperty_results_directory(String initValue) {
+    opensimActuatorsAnalysesToolsJNI.Tool_constructProperty_results_directory(swigCPtr, this, initValue);
+  }
+
+  public String get_results_directory() {
+    return opensimActuatorsAnalysesToolsJNI.Tool_get_results_directory__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_results_directory() {
+    return new SWIGTYPE_p_std__string(opensimActuatorsAnalysesToolsJNI.Tool_upd_results_directory__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_results_directory(String value) {
+    opensimActuatorsAnalysesToolsJNI.Tool_set_results_directory__SWIG_1(swigCPtr, this, value);
+  }
+
   public boolean run() throws java.io.IOException {
     return opensimActuatorsAnalysesToolsJNI.Tool_run(swigCPtr, this);
-  }
-
-  public String getInputsDir() {
-    return opensimActuatorsAnalysesToolsJNI.Tool_getInputsDir(swigCPtr, this);
-  }
-
-  public void setInputsDir(String aString) {
-    opensimActuatorsAnalysesToolsJNI.Tool_setInputsDir(swigCPtr, this, aString);
   }
 
   public String getResultsDir() {
@@ -75,60 +103,6 @@ public class Tool extends OpenSimObject {
 
   public void setResultsDir(String aString) {
     opensimActuatorsAnalysesToolsJNI.Tool_setResultsDir(swigCPtr, this, aString);
-  }
-
-  public Tool.VerboseLevel getVerboseLevel() {
-    return Tool.VerboseLevel.swigToEnum(opensimActuatorsAnalysesToolsJNI.Tool_getVerboseLevel(swigCPtr, this));
-  }
-
-  public void setVerboseLevel(Tool.VerboseLevel aVerboseLevel) {
-    opensimActuatorsAnalysesToolsJNI.Tool_setVerboseLevel(swigCPtr, this, aVerboseLevel.swigValue());
-  }
-
-  public final static class VerboseLevel {
-    public final static Tool.VerboseLevel Quiet = new Tool.VerboseLevel("Quiet", opensimActuatorsAnalysesToolsJNI.Tool_Quiet_get());
-    public final static Tool.VerboseLevel Progress = new Tool.VerboseLevel("Progress", opensimActuatorsAnalysesToolsJNI.Tool_Progress_get());
-    public final static Tool.VerboseLevel DetailedProgress = new Tool.VerboseLevel("DetailedProgress", opensimActuatorsAnalysesToolsJNI.Tool_DetailedProgress_get());
-    public final static Tool.VerboseLevel Debug = new Tool.VerboseLevel("Debug", opensimActuatorsAnalysesToolsJNI.Tool_Debug_get());
-
-    public final int swigValue() {
-      return swigValue;
-    }
-
-    public String toString() {
-      return swigName;
-    }
-
-    public static VerboseLevel swigToEnum(int swigValue) {
-      if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
-        return swigValues[swigValue];
-      for (int i = 0; i < swigValues.length; i++)
-        if (swigValues[i].swigValue == swigValue)
-          return swigValues[i];
-      throw new IllegalArgumentException("No enum " + VerboseLevel.class + " with value " + swigValue);
-    }
-
-    private VerboseLevel(String swigName) {
-      this.swigName = swigName;
-      this.swigValue = swigNext++;
-    }
-
-    private VerboseLevel(String swigName, int swigValue) {
-      this.swigName = swigName;
-      this.swigValue = swigValue;
-      swigNext = swigValue+1;
-    }
-
-    private VerboseLevel(String swigName, VerboseLevel swigEnum) {
-      this.swigName = swigName;
-      this.swigValue = swigEnum.swigValue;
-      swigNext = this.swigValue+1;
-    }
-
-    private static VerboseLevel[] swigValues = { Quiet, Progress, DetailedProgress, Debug };
-    private static int swigNext = 0;
-    private final int swigValue;
-    private final String swigName;
   }
 
 }

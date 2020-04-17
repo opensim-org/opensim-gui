@@ -35,6 +35,16 @@ public class Vec3 {
     }
   }
 
+    public static Vec3 createFromMat(double[] data) throws Exception {
+        if (data.length != 3) {
+            throw new Exception("data size != 3");
+        }
+        return new Vec3(data[0], data[1], data[2]);
+    }
+    public double[] getAsMat() {
+        return new double[]{get(0), get(1), get(2)};
+    }
+
   public static int size() {
     return opensimSimbodyJNI.Vec3_size();
   }
