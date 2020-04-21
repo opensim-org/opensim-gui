@@ -167,7 +167,6 @@ chmod 755 netbeans-8.2-javase-linux.sh
 
 wget https://prdownloads.sourceforge.net/myosin/opensim-core/opensim-core-latest_linux_Release.zip
 unzip -q opensim-core-latest_linux_Release.zip -d ~
-~/opensim-gui/Gui/opensim/dist/
 git clone https://github.com/opensim-org/opensim-gui.git
 
 mkdir build
