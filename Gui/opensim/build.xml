@@ -41,18 +41,10 @@
         </and>
     </condition>
     <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/threejs">
-        <os family="mac"/>
+        <os family="unix"/>
     </condition>
     <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/OpenSim/threejs">
         <os family="windows"/>
-    </condition>
-    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/threejs">
-        <and>
-            <os family="unix"/>
-            <not>
-                <os family="mac"/>
-            </not>
-        </and>
     </condition>
     <property name="app.conf" value="${installer-files.dir}/opensim.conf"/>
     <import file="nbproject/build-impl.xml"/>

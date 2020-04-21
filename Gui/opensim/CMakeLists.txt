@@ -146,7 +146,7 @@ if (APPLE)
     add_dependencies(PrepareInstaller opensim-models)
 endif()
 
-if (NOT APPLE AND NOT WIN32)
+if (UNIX AND NOT APPLE)
     add_custom_target(PrepareInstaller ALL
                   COMMAND ${Ant_EXECUTABLE} build-linux
                   -Dapi.dir="${OpenSim_ROOT_DIR}"
