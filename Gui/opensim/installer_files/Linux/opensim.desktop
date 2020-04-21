@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=OpenSim
+Comment=Neuromusculoskeletal modeling, simulation, and analysis.
+Path=/opt/opensim-gui
+Exec=/opt/opensim-gui/bin/OpenSim
+Icon=opensim
+Terminal=false
+Categories=Science;Education
