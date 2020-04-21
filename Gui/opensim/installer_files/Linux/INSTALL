@@ -1,9 +1,9 @@
 #!/bin/bash
 
 function err_unsupported_env {
-    printf "\r  [\033[0;31mERROR:\033[0m] Your distro/release is not officially supported\n"
-    printf "  Ubuntu 18.04 LTS is currently the only Linux distribution that is officially \
-supported, however the OpenSim GUI will likely run on other distributions and/or \
+    printf "\r  [\033[0;31mERROR:\033[0m] Your distro/release is not supported by this script\n"
+    printf "  Ubuntu 18.04 LTS is currently the only Linux distribution that is tested \
+against, however the OpenSim GUI will likely run on other distributions and/or \
 releases. See the https://github.com/opensim-org/opensim-gui for more \
 information.\n"
     exit 1
@@ -12,7 +12,7 @@ information.\n"
 function usage {
   echo -n "INSTALL [OPTIONS]...
 
-Install the OpenSim GUI. Ubuntu 18.04 LTS is the only officially supported system. Manual \
+Install the OpenSim GUI. Ubuntu 18.04 LTS is the only tested Linux. Manual \
 installation on other systems may be possible; see \
 https://github.com/opensim-org/opensim-gui for more information.
 
