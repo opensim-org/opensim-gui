@@ -35,6 +35,16 @@ public class RowVectorBaseVec3 extends MatrixBaseVec3 {
     super.delete();
   }
 
+    public double[][] getAsMat() {
+        double[][] ret = new double[3][size()];
+        for (int i = 0; i < size(); ++i) {
+            ret[0][i] = get(i).get(0);
+            ret[1][i] = get(i).get(1);
+            ret[2][i] = get(i).get(2);
+        }
+        return ret;
+    }
+
   public RowVectorBaseVec3(int n) {
     this(opensimSimbodyJNI.new_RowVectorBaseVec3__SWIG_0(n), true);
   }

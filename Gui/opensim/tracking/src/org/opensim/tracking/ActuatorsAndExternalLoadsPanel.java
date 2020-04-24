@@ -497,6 +497,7 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
         public void actionPerformed(ActionEvent e) {
             FileFilter ff = FileUtils.getFileFilter(".xml", "File to save External Loads");
             String fileName = FileUtils.getInstance().browseForFilenameToSave(ff, true, "", null);
+            if (fileName == null) return; // user cancelled
             String fullFilename = FileUtils.addExtensionIfNeeded(fileName, ".xml");
             dLoads.print(fullFilename);
             externalLoadsFileName.setFileName(fullFilename);

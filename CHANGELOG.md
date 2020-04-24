@@ -4,6 +4,11 @@ GitHub issues or pull requests that
 are related to the items below. If there is no issue or pull
 request related to the change, then we may provide the commit.
 
+v4.2
+====
+- Merge PR [#1181](https://github.com/opensim-org/opensim-gui/pull/1181): Add build support for Linux (beta)
+- Fix issue [#1182](https://github.com/opensim-org/opensim-gui/issues/1182): Scaling model with custom geometry meshes loses custom geomerty
+
 v4.1
 ====
 - Fix issue [#1112](https://github.com/opensim-org/opensim-gui/issues/1112): TRC file written by GUI cannot be read by TRCFileAdapter
@@ -14,3 +19,6 @@ v4.1
 - Fix issue [#1139](https://github.com/opensim-org/opensim-gui/issues/1139): Fix visualization of PathActuators and Ligaments to mimic Muscle Path visualization
 - Fix issue [#1141](https://github.com/opensim-org/opensim-gui/issues/1141): Handle moving path points properly when they appear first on GeometryPath for visualization purposes
 - Fix issue [#1111](https://github.com/opensim-org/opensim-gui/issues/1111): Handle muscle paths that wrap around multiple wrap objects when wrapping disengages.
+- Fix issue [#1153](https://github.com/opensim-org/opensim-gui/issues/1153): Handle "Applies Force" checkbox in External Force edit, so that the setting is persistent.
+- Fix issue [#1165](https://github.com/opensim-org/opensim-gui/issues/1165): Handle user cancel from save external-loads dialog gracefully.
+

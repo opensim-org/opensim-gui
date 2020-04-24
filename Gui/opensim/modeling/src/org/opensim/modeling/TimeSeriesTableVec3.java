@@ -73,6 +73,14 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
     return opensimCommonJNI.TimeSeriesTableVec3_getNearestRowIndexForTime__SWIG_1(swigCPtr, this, time);
   }
 
+  public long getRowIndexAfterTime(double time) {
+    return opensimCommonJNI.TimeSeriesTableVec3_getRowIndexAfterTime(swigCPtr, this, time);
+  }
+
+  public long getRowIndexBeforeTime(double time) {
+    return opensimCommonJNI.TimeSeriesTableVec3_getRowIndexBeforeTime(swigCPtr, this, time);
+  }
+
   public RowVectorViewVec3 getNearestRow(double time, boolean restrictToTimeRange) {
     return new RowVectorViewVec3(opensimCommonJNI.TimeSeriesTableVec3_getNearestRow__SWIG_0(swigCPtr, this, time, restrictToTimeRange), true);
   }
@@ -91,6 +99,18 @@ public class TimeSeriesTableVec3 extends DataTableVec3 {
 
   public RowVectorVec3 averageRow(double beginTime, double endTime) {
     return new RowVectorVec3(opensimCommonJNI.TimeSeriesTableVec3_averageRow(swigCPtr, this, beginTime, endTime), true);
+  }
+
+  public void trim(double newStartTime, double newFinalTime) {
+    opensimCommonJNI.TimeSeriesTableVec3_trim(swigCPtr, this, newStartTime, newFinalTime);
+  }
+
+  public void trimFrom(double newStartTime) {
+    opensimCommonJNI.TimeSeriesTableVec3_trimFrom(swigCPtr, this, newStartTime);
+  }
+
+  public void trimTo(double newFinalTime) {
+    opensimCommonJNI.TimeSeriesTableVec3_trimTo(swigCPtr, this, newFinalTime);
   }
 
   public TimeSeriesTableVec3 clone() {

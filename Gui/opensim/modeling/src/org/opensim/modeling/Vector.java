@@ -35,6 +35,12 @@ public class Vector extends VectorBaseDouble {
     super.delete();
   }
 
+    public static Vector createFromMat(double[] data) {
+        Vector v = new Vector(data.length, 0.0);
+        for (int i = 0; i < data.length; ++i) { v.set(i, data[i]); }
+        return v;
+    }
+
   public Vector() {
     this(opensimSimbodyJNI.new_Vector__SWIG_0(), true);
   }

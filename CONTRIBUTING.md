@@ -38,3 +38,7 @@ List of contributors
  - Brian Garner
  - Katherine Holzbaur
  - Darryl Thelen
+ - Carmichael Ong
+ - Sebastian Skejo
+ - Allen Hill
+
