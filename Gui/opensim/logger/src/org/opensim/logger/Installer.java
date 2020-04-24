@@ -23,6 +23,7 @@
 package org.opensim.logger;
 
 import org.openide.modules.ModuleInstall;
+import org.opensim.modeling.Logger;
 
 /**
  * Manages a module's lifecycle. Remember that an installer is optional and
@@ -30,22 +31,19 @@ import org.openide.modules.ModuleInstall;
  */
 public class Installer extends ModuleInstall {
 
-   static JavaLogCallback logCallback=null;   
+   static JavaLogSinkToMessages logCallback=null;   
    
    public void restored() {
       super.restored();
       if(logCallback == null) {
-         //System.out.println("Initializing logger callback");
-         logCallback = new JavaLogCallback();
-         logCallback.addToLogManager();
+         System.out.println("Initializing logger callback");
+         logCallback = new JavaLogSinkToMessages();
+         Logger.addSink(logCallback);
       }
    }
    
    public void close() {
-      if(logCallback != null) {
-        logCallback.removeFromLogManager();
-      }
       super.close();
-      
+      Logger.removeSink(logCallback);
    }
 }

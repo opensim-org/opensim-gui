@@ -1,5 +1,5 @@
 /* -------------------------------------------------------------------------- *
- * OpenSim: JavaLogCallback.java                                              *
+ * OpenSim: JavaLogSinkToMessages.java                                              *
  * -------------------------------------------------------------------------- *
  * OpenSim is a toolkit for musculoskeletal modeling and simulation,          *
  * developed as an open source project by a worldwide community. Development  *
@@ -24,19 +24,25 @@
 package org.opensim.logger;
 
 import javax.swing.SwingUtilities;
-import org.opensim.modeling.SimtkLogCallback;
+import org.opensim.modeling.JavaLogSink;
 
-public class JavaLogCallback extends SimtkLogCallback {
-   public void log(final String str) {
+public class JavaLogSinkToMessages extends JavaLogSink {
+
+    @Override
+    protected void flushImpl() {
+        super.flushImpl(); //To change body of generated methods, choose Tools | Templates.
+    }
+   @Override
+   public void sinkImpl(final String msg) {
       SwingUtilities.invokeLater(new Runnable(){
          public void run() {
-            LoggerTopComponent.findInstance().log(str);
+            flushImpl();
+            LoggerTopComponent.findInstance().log(msg);
          }});
    }
 
    protected void finalize()
    {
-      removeFromLogManager();
       super.finalize();
    }
 }
