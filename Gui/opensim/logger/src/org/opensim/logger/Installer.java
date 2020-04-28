@@ -31,19 +31,19 @@ import org.opensim.modeling.Logger;
  */
 public class Installer extends ModuleInstall {
 
-   static JavaLogSinkToMessages logCallback=null;   
+   static JavaLogSinkToMessages logMessages=null;   
    
    public void restored() {
       super.restored();
-      if(logCallback == null) {
-         System.out.println("Initializing logger callback");
-         logCallback = new JavaLogSinkToMessages();
-         Logger.addSink(logCallback);
+      if(logMessages == null) {
+         //System.out.println("Initializing logger");
+         logMessages = new JavaLogSinkToMessages();
+         Logger.addSink(logMessages);
       }
    }
    
    public void close() {
       super.close();
-      Logger.removeSink(logCallback);
+      Logger.removeSink(logMessages);
    }
 }

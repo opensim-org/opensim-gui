@@ -25,19 +25,20 @@ package org.opensim.logger;
 
 import javax.swing.SwingUtilities;
 import org.opensim.modeling.JavaLogSink;
+import org.opensim.modeling.LogSink;
+import org.opensim.modeling.Logger;
 
 public class JavaLogSinkToMessages extends JavaLogSink {
-
     @Override
     protected void flushImpl() {
         super.flushImpl(); //To change body of generated methods, choose Tools | Templates.
     }
    @Override
-   public void sinkImpl(final String msg) {
+   public void sinkImpl(String msg) {
+      final String msgFinal= msg;
       SwingUtilities.invokeLater(new Runnable(){
          public void run() {
-            flushImpl();
-            LoggerTopComponent.findInstance().log(msg);
+            LoggerTopComponent.findInstance().log(msgFinal);
          }});
    }
 
