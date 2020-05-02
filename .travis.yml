@@ -27,6 +27,7 @@ before_install:
   #brew tap caskroom/versions
   #brew cask search java
   #brew cask install java8
+  - brew install ant
   - brew cask install netbeans
   
   ## Install opensim-core.
