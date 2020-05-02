@@ -22,6 +22,8 @@ addons:
   ssh_known_hosts: frs.sourceforge.net
       
 before_install:
+  - brew tap adoptopenjdk/openjdk
+  - brew cask install adoptopenjdk8
   - /usr/libexec/java_home -V
   ## Install NetBeans.
   #brew tap caskroom/versions
