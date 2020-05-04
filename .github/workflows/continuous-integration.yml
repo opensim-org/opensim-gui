@@ -6,7 +6,7 @@ on:
       - '*'
   push:
     branches: 
-      - master
+      - 'action_build_core'
 
 jobs:
   windows:
@@ -21,7 +21,7 @@ jobs:
       run: choco install swig --version 3.0.12 --yes --limit-output
 
     - name: Checkout opensim-core master
-      uses: uses: actions/checkout@master
+      uses: actions/checkout@master
       with:
          name: opensim-org/opensim-core 
          ref: refs/heads/master
