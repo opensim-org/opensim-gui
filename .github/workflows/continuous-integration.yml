@@ -21,10 +21,9 @@ jobs:
       run: choco install swig --version 3.0.12 --yes --limit-output
 
     - name: Checkout opensim-core master
-      uses: actions/checkout@master
+      uses: actions/checkout@v2
       with:
-         name: opensim-org/opensim-core 
-         ref: refs/heads/master
+         name: opensim-org/opensim-core
 
     - name: Checkout opensim-gui
       uses: actions/checkout@v1
