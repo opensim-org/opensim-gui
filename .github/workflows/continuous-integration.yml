@@ -1,6 +1,6 @@
 name: opensim-application
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   windows:
@@ -9,11 +9,17 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Install opensim-core
-      run: |
-        (New-Object System.Net.WebClient).DownloadFile("https://prdownloads.sourceforge.net/myosin/github-actions/opensim-core/opensim-core-win.zip", "opensim-core-win.zip")
-        7z x opensim-core-win.zip -oC:\\
-        dir C:\\opensim-core
+    - uses: actions/checkout@v1
+
+    - name: Install SWIG
+      run: choco install swig --version 3.0.12 --yes --limit-output
+
+    - name: Checkout opensim-core master
+      uses: uses: actions/checkout@master
+      with:
+         name: opensim-org/opensim-core 
+         ref: refs/heads/master
+
     - name: Checkout opensim-gui
       uses: actions/checkout@v1
 
