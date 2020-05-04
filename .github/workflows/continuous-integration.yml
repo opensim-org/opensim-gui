@@ -1,9 +1,6 @@
 name: opensim-application
 
 on:
-  pull_request:
-    branches:
-      - '*'
   push:
     branches: 
       - 'action_build_core'
