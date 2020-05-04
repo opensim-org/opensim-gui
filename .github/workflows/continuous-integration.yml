@@ -22,6 +22,8 @@ jobs:
       with:
          name: opensim-org/opensim-core
          repository: opensim-org/opensim-core
+         path: 'opensim-core'
+      run: git checkout
 
     - name: Checkout opensim-gui
       uses: actions/checkout@v1
