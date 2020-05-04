@@ -44,7 +44,7 @@ jobs:
       mkdir $env:GITHUB_WORKSPACE\\build_core
       chdir $env:GITHUB_WORKSPACE\\build_core
       $env:CXXFLAGS = "/W0"
-      cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 -DOPENSIM_JAVA_WRAPPING=on -DOPENSIM_DEPENDENCIES_DIR="~/opensim_dependencies_install" -DOPENSIM_C3D_PARSER=ezc3d -DCMAKE_INSTALL_PREFIX="C:/opensim-core"
+      cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 
       cmake . -LAH
       cmake --build . --config Release -- /maxcpucount:4
 
