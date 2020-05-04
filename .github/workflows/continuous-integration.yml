@@ -22,7 +22,7 @@ jobs:
       with:
          name: opensim-org/opensim-core
          repository: opensim-org/opensim-core
-         path: 'opensim-core'
+         path: '~/opensim-core'
     
     - name: Build opensim-core-dependencies
       run: |
@@ -33,7 +33,7 @@ jobs:
         # default CMAKE_CXX_FLAGS.
         # https://msdn.microsoft.com/en-us/library/19z1t1wy.aspx
         $env:CXXFLAGS = "/W0"
-        cmake $env:GITHUB_WORKSPACE/opesnim-core/opensim-core/dependencies -G"Visual Studio 16 2019" -A x64 -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        cmake ~/opesnim-core/opensim-core/dependencies -G"Visual Studio 16 2019" -A x64 -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         $env:CXXFLAGS = ""
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:4 
