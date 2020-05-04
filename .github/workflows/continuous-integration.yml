@@ -41,12 +41,13 @@ jobs:
 
     - name: Build opensim-core
       run: |
-      mkdir $env:GITHUB_WORKSPACE\\build_core
-      chdir $env:GITHUB_WORKSPACE\\build_core
-      $env:CXXFLAGS = "/W0"
-      cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 
-      cmake . -LAH
-      cmake --build . --config Release -- /maxcpucount:4
+        echo $env:GITHUB_WORKSPACE\\build_core
+        mkdir $env:GITHUB_WORKSPACE\\build_core
+        chdir $env:GITHUB_WORKSPACE\\build_core
+        $env:CXXFLAGS = "/W0"
+        cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 
+        cmake . -LAH
+        cmake --build . --config Release -- /maxcpucount:4
 
     - name: Checkout opensim-gui
       uses: actions/checkout@v1
