@@ -50,6 +50,12 @@ public class LogSink {
     opensimCommonJNI.LogSink_change_ownership(this, swigCPtr, true);
   }
 
+  public void markAdopted() {
+      if (swigCPtr != 0) {
+          if (swigCMemOwn) swigCMemOwn = false;
+      }
+  }
+
   protected void sinkImpl(String msg) {
     opensimCommonJNI.LogSink_sinkImpl(swigCPtr, this, msg);
   }

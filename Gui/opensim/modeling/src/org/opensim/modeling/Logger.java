@@ -35,6 +35,11 @@ public class Logger {
     }
   }
 
+  public static void addSink(LogSink sink) {
+      sink.markAdopted();
+      private_addSink(sink);
+  }
+
   public static void setLevel(Logger.Level level) {
     opensimCommonJNI.Logger_setLevel(level.swigValue());
   }
@@ -67,16 +72,12 @@ public class Logger {
     opensimCommonJNI.Logger_removeFileSink();
   }
 
-  public static void addSink(LogSink sink) {
-    opensimCommonJNI.Logger_addSink(LogSink.getCPtr(sink), sink);
+  private static void private_addSink(LogSink sink) {
+    opensimCommonJNI.Logger_private_addSink(LogSink.getCPtr(sink), sink);
   }
 
   public static void removeSink(LogSink sink) {
     opensimCommonJNI.Logger_removeSink(LogSink.getCPtr(sink), sink);
-  }
-
-  public static SWIGTYPE_p_std__shared_ptrT_OpenSim__Logger_t getInstance() {
-    return new SWIGTYPE_p_std__shared_ptrT_OpenSim__Logger_t(opensimCommonJNI.Logger_getInstance(), true);
   }
 
   public final static class Level {

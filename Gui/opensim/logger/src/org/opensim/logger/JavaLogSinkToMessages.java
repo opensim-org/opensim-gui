@@ -28,7 +28,7 @@ import org.opensim.modeling.JavaLogSink;
 import org.opensim.modeling.LogSink;
 import org.opensim.modeling.Logger;
 
-public class JavaLogSinkToMessages extends JavaLogSink {
+public class JavaLogSinkToMessages extends LogSink {
     @Override
     protected void flushImpl() {
         super.flushImpl(); //To change body of generated methods, choose Tools | Templates.

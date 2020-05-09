@@ -2053,14 +2053,6 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native void PropertyHelper_removeItem(long jarg1, AbstractProperty jarg1_, int jarg2);
   public final static native long new_PropertyHelper();
   public final static native void delete_PropertyHelper(long jarg1);
-  public final static native void delete_SimtkLogCallback(long jarg1);
-  public final static native void SimtkLogCallback_log(long jarg1, SimtkLogCallback jarg1_, String jarg2);
-  public final static native void SimtkLogCallback_logSwigExplicitSimtkLogCallback(long jarg1, SimtkLogCallback jarg1_, String jarg2);
-  public final static native void SimtkLogCallback_addToLogManager(long jarg1, SimtkLogCallback jarg1_);
-  public final static native void SimtkLogCallback_removeFromLogManager(long jarg1, SimtkLogCallback jarg1_);
-  public final static native long new_SimtkLogCallback();
-  public final static native void SimtkLogCallback_director_connect(SimtkLogCallback obj, long cptr, boolean mem_own, boolean weak_global);
-  public final static native void SimtkLogCallback_change_ownership(SimtkLogCallback obj, long cptr, boolean take_or_release);
   public final static native long CoordinateActuator_SWIGUpcast(long jarg1);
   public final static native long ActivationCoordinateActuator_SWIGUpcast(long jarg1);
   public final static native long PointActuator_SWIGUpcast(long jarg1);
@@ -2172,9 +2164,6 @@ public class opensimActuatorsAnalysesToolsJNI {
   }
   public static int SwigDirector_AnalysisWrapper_printResults__SWIG_3(AnalysisWrapper jself, String aBaseName) {
     return jself.printResults(aBaseName);
-  }
-  public static void SwigDirector_SimtkLogCallback_log(SimtkLogCallback jself, String str) {
-    jself.log(str);
   }
 
   private final static native void swig_module_init();

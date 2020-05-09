@@ -103,9 +103,8 @@ public class opensimCommonJNI {
   public final static native void Logger_addFileSink__SWIG_0(String jarg1);
   public final static native void Logger_addFileSink__SWIG_1();
   public final static native void Logger_removeFileSink();
-  public final static native void Logger_addSink(long jarg1, LogSink jarg1_);
+  public final static native void Logger_private_addSink(long jarg1, LogSink jarg1_);
   public final static native void Logger_removeSink(long jarg1, LogSink jarg1_);
-  public final static native long Logger_getInstance();
   public final static native void delete_Logger(long jarg1);
   public final static native int Array_CAPMIN_get();
   public final static native long new_InvalidPropertyValue(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5, String jarg6);
