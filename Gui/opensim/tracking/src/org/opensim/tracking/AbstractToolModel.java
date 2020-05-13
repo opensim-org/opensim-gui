@@ -320,34 +320,6 @@ abstract class AbstractToolModelWithExternalLoads extends AbstractToolModel {
           setModified(AbstractToolModel.Operation.ExternalLoadsDataChanged);
         }
     }
-    
-    public abstract String getExternalLoadsModelKinematicsFileName();
-    protected abstract void setExternalLoadsModelKinematicsFileNameInternal(String fileName);
-    public void setExternalLoadsModelKinematicsFileName(String fileName) {
-       if(!getExternalLoadsModelKinematicsFileName().equals(fileName)) {
-          setExternalLoadsModelKinematicsFileNameInternal(fileName);
-          setModified(AbstractToolModel.Operation.ExternalLoadsDataChanged);
-       }
-    }
-
-   public abstract double getLowpassCutoffFrequencyForLoadKinematics();
-   protected abstract void setLowpassCutoffFrequencyForLoadKinematicsInternal(double cutoffFrequency);
-   
-    public void setLowpassCutoffFrequencyForLoadKinematics(double cutoffFrequency) {
-       if(getLowpassCutoffFrequencyForLoadKinematics() != cutoffFrequency) {
-          setLowpassCutoffFrequencyForLoadKinematicsInternal(cutoffFrequency);
-          setModified(AbstractToolModel.Operation.ExternalLoadsDataChanged);
-       }
-    }
-
-    public boolean getFilterLoadKinematics() { return getLowpassCutoffFrequencyForLoadKinematics() > 0; }
-    public void setFilterLoadKinematics(boolean filterLoadKinematics) {
-       if(getFilterLoadKinematics() != filterLoadKinematics) {
-          if(filterLoadKinematics) setLowpassCutoffFrequencyForLoadKinematicsInternal(6);
-          else setLowpassCutoffFrequencyForLoadKinematicsInternal(-1);
-          setModified(AbstractToolModel.Operation.ExternalLoadsDataChanged);
-       }
-    }
 
    protected void updateFromTool() {
       super.updateFromTool();
