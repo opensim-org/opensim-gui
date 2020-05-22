@@ -178,7 +178,7 @@ jobs:
       run: |
         mkdir build_deps
         cd build_deps
-        cmake opensim-core/dependencies -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        cmake ../opensim-core/dependencies -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:4 
 
