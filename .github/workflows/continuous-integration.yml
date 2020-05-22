@@ -178,9 +178,7 @@ jobs:
       run: |
         mkdir build_deps
         cd build_deps
-        $env:CXXFLAGS = "/W0"
         cmake opensim-core/dependencies -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
-        $env:CXXFLAGS = ""
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:4 
 
