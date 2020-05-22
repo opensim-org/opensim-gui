@@ -176,20 +176,18 @@ jobs:
     
     - name: Build opensim-core-dependencies
       run: |
-        echo $env:GITHUB_WORKSPACE\\build_deps
-        mkdir $env:GITHUB_WORKSPACE\\build_deps
+        mkdir build_deps
         cd build_deps
         $env:CXXFLAGS = "/W0"
-        cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        cmake opensim-core/dependencies -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         $env:CXXFLAGS = ""
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:4 
 
     - name: Build opensim-core
       run: |
-        echo $env:GITHUB_WORKSPACE\\build_core
-        mkdir $env:GITHUB_WORKSPACE\\build_core
-        chdir $env:GITHUB_WORKSPACE\\build_core
+        mkdir build_core
+        cd build_core
         $env:CXXFLAGS = "/W0"
         cmake $env:GITHUB_WORKSPACE/opensim-core -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DOPENSIM_JAVA_WRAPPING=on -DOPENSIM_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d
         cmake . -LAH
