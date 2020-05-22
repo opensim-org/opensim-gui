@@ -181,7 +181,13 @@ jobs:
         cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         cmake . -LAH
         cmake --build . --config Release
-
+        
+    - name: Install NumPy
+      run: python -m pip install numpy
+    
+    - name: Install Chocolatey packages
+      run: choco install swig --version 3.0.9 --yes --limit-output
+      
     - name: Build opensim-core
       run: |
         mkdir build_core
