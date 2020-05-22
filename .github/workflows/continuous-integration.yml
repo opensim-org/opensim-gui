@@ -4,6 +4,7 @@ on:
   push:
     branches: 
       - 'action_build_core'
+      - 'master'
 
 jobs:
   windows:
@@ -12,7 +13,7 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2
 
     - name: Install SWIG
       run: choco install swig --version 3.0.12 --yes --limit-output
@@ -177,7 +178,7 @@ jobs:
       run: |
         echo $env:GITHUB_WORKSPACE\\build_deps
         mkdir $env:GITHUB_WORKSPACE\\build_deps
-        chdir $env:GITHUB_WORKSPACE\\build_deps
+        cd build_deps
         $env:CXXFLAGS = "/W0"
         cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         $env:CXXFLAGS = ""
