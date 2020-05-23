@@ -17,7 +17,10 @@ jobs:
 
     - name: Install SWIG
       run: choco install swig --version 3.0.12 --yes --limit-output
-
+      
+    - name: Install NumPy 
+      run: python -m pip install numpy
+      
     - name: Checkout opensim-core master
       uses: actions/checkout@v2
       with:
