@@ -3,25 +3,25 @@
 function err_unsupported_env {
     printf "\r  [\033[0;31mERROR:\033[0m] Your distro/release is not supported by this script\n"
     printf "  Ubuntu 18.04 LTS is currently the only Linux distribution that is tested \
-against, however the OpenSim GUI will likely run on other distributions and/or \
-releases. See the https://github.com/opensim-org/opensim-gui for more \
-information.\n"
-    exit 1
-}
+        against, however the OpenSim GUI will likely run on other distributions and/or \
+        releases. See the https://github.com/opensim-org/opensim-gui for more \
+        information.\n"
+            exit 1
+        }
 
-function usage {
-  echo -n "INSTALL [OPTIONS]...
+    function usage {
+        echo -n "INSTALL [OPTIONS]...
 
-Install the OpenSim GUI. Ubuntu 18.04 LTS is the only tested Linux. Manual \
-installation on other systems may be possible; see \
-https://github.com/opensim-org/opensim-gui for more information.
+        Install the OpenSim GUI. Ubuntu 18.04 LTS is the only tested Linux. Manual \
+            installation on other systems may be possible; see \
+            https://github.com/opensim-org/opensim-gui for more information.
 
- Options:
-  -p, --prefix      Install prefix; defaults to /opt/opensim-gui
-  -v, --verbose     Be verbose
-  -h, --help        Display this help and exit
-"
-}
+        Options:
+        -p, --prefix      Install prefix; defaults to /opt/opensim-gui
+        -v, --verbose     Be verbose
+        -h, --help        Display this help and exit
+        "
+    }
 
 # From https://stackoverflow.com/a/246128
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
@@ -83,26 +83,31 @@ done
 ## End from https://stackoverflow.com/a/29754866
 
 if [[ -e /etc/os-release ]]; then
-    . /etc/os-release
-    OS=$NAME
-    VER=$VERSION_ID
+    . /etc/os-release 
+    OS=$ID
+    OS_NAME=$NAME
+    if ! [ -z "${VERSION_ID+x}" ]; then
+        VER=$VERSION_ID
+    fi
+    if ! [ -z "${PRETTY_NAME+x}" ]; then
+        OS_FULL=$PRETTY_NAME
+    fi
 else
     err_unsupported_env
-fi
-
-if [[ $OS == "Ubuntu" ]] && [[ $VER == "18.04" ]]; then
+fi 
+if ([[ $OS == "ubuntu" ]] && [[ $VER == "18.04" ]]) || ([[ $OS == "debian" ]] && [[ $OS_FULL =~ "bullseye" ]]); then
 
     [[ $v == 1 ]] && echo "Installing Java..."
     sudo apt install -qqqq -y openjdk-8-jre
 
     [[ $v == 1 ]] && echo "Testing for system LAPACK/BLAS..."
-    if ! (ldconfig -p | grep -q "libblas|liblapack"); then
+    if ! (sudo ldconfig -p | grep -q "libblas|liblapack"); then
         [[ $v == 1 ]] && echo "  Installing liblapack3..."
         sudo apt install -qqqq -y liblapack3
     fi
 
     [[ $v == 1 ]] && echo "Testing for libgconf..."
-    if ! (ldconfig -p | grep -q "libgconf"); then
+    if ! (sudo ldconfig -p | grep -q "libgconf"); then
         [[ $v == 1 ]] && echo "  Installing libgconf..."
         sudo apt install -qqqq -y libgconf-2-4
     fi
@@ -114,27 +119,27 @@ if [[ $OS == "Ubuntu" ]] && [[ $VER == "18.04" ]]; then
 
     [[ $v == 1 ]] && echo "Adding OpenSim to list of desktop applications..."
     echo "[Desktop Entry]
-Version=1.0
-Type=Application
-Name=OpenSim
-Comment=OpenSim is an open source software for neuromusculoskeletal modeling, simulation \
-and analysis.
-Path=$installPrefix
-Exec=$installPrefix/bin/OpenSim
-Icon=opensim
-Terminal=false
-Categories=Science;Education" | sudo tee /usr/share/applications/opensim.desktop > /dev/null
-    sudo cp OpenSimLogoWhiteNoText.png /usr/share/pixmaps/opensim.png
+    Version=1.0
+    Type=Application
+    Name=OpenSim
+    Comment=OpenSim is an open source software for neuromusculoskeletal modeling, simulation \
+        and analysis.
+            Path=$installPrefix
+            Exec=$installPrefix/bin/OpenSim
+            Icon=opensim
+            Terminal=false
+            Categories=Science;Education" | sudo tee /usr/share/applications/opensim.desktop > /dev/null
+            sudo cp OpenSimLogoWhiteNoText.png /usr/share/pixmaps/opensim.png
 
-    [[ $v == 1 ]] && echo "Installing opensim-core commands..."
-    cd $installPrefix/bin
-    if [[ $v == 1 ]]; then
-        ./opensim-install-command-line.sh
-    else
-        ./opensim-install-command-line.sh > /dev/null
-    fi
-else
-    err_unsupported_env
+            [[ $v == 1 ]] && echo "Installing opensim-core commands..."
+            cd $installPrefix/bin
+            if [[ $v == 1 ]]; then
+                ./opensim-install-command-line.sh
+            else
+                ./opensim-install-command-line.sh > /dev/null
+            fi
+        else
+            err_unsupported_env
 fi
 
 
