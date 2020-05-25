@@ -163,8 +163,8 @@ public class Rotation extends Mat33 {
     return new Vec3(opensimSimbodyJNI.Rotation_convertThreeAxesRotationToThreeAngles(swigCPtr, this, bodyOrSpace.swigValue(), CoordinateAxis.getCPtr(axis1), axis1, CoordinateAxis.getCPtr(axis2), axis2, CoordinateAxis.getCPtr(axis3), axis3), true);
   }
 
-  public SWIGTYPE_p_SimTK__Quaternion_T_SimTK__Real_t convertRotationToQuaternion() {
-    return new SWIGTYPE_p_SimTK__Quaternion_T_SimTK__Real_t(opensimSimbodyJNI.Rotation_convertRotationToQuaternion(swigCPtr, this), true);
+  public Quaternion convertRotationToQuaternion() {
+    return new Quaternion(opensimSimbodyJNI.Rotation_convertRotationToQuaternion(swigCPtr, this), true);
   }
 
   public Vec4 convertRotationToAngleAxis() {

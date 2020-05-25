@@ -35,6 +35,21 @@ public class Matrix extends MatrixBaseDouble {
     super.delete();
   }
 
+    public static Matrix createFromMat(double[][] data) {
+        int numRows = data.length;
+        int numCols = 0;
+        if (numRows > 0) {
+            numCols = data[0].length;
+        }
+        Matrix matrix = new Matrix(numRows, numCols);
+        for (int i = 0; i < numRows; ++i) {
+            for (int j = 0; j < numCols; ++j) {
+                matrix.set(i, j, data[i][j]);
+            }
+        }
+        return matrix;
+    }
+
   public Matrix() {
     this(opensimSimbodyJNI.new_Matrix__SWIG_0(), true);
   }

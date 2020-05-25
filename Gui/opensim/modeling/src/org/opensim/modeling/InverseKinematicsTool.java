@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class InverseKinematicsTool extends Tool {
+public class InverseKinematicsTool extends InverseKinematicsToolBase {
   private transient long swigCPtr;
 
   public InverseKinematicsTool(long cPtr, boolean cMemoryOwn) {
@@ -57,6 +57,150 @@ public class InverseKinematicsTool extends Tool {
     return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_IKTaskSet(InverseKinematicsTool source) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_copyProperty_IKTaskSet(swigCPtr, this, InverseKinematicsTool.getCPtr(source), source);
+  }
+
+  public IKTaskSet get_IKTaskSet(int i) {
+    return new IKTaskSet(opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_get_IKTaskSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public IKTaskSet upd_IKTaskSet(int i) {
+    return new IKTaskSet(opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_upd_IKTaskSet__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_IKTaskSet(int i, IKTaskSet value) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_set_IKTaskSet__SWIG_0(swigCPtr, this, i, IKTaskSet.getCPtr(value), value);
+  }
+
+  public int append_IKTaskSet(IKTaskSet value) {
+    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_append_IKTaskSet(swigCPtr, this, IKTaskSet.getCPtr(value), value);
+  }
+
+  public void constructProperty_IKTaskSet(IKTaskSet initValue) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_constructProperty_IKTaskSet(swigCPtr, this, IKTaskSet.getCPtr(initValue), initValue);
+  }
+
+  public IKTaskSet get_IKTaskSet() {
+    return new IKTaskSet(opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_get_IKTaskSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public IKTaskSet upd_IKTaskSet() {
+    return new IKTaskSet(opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_upd_IKTaskSet__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_IKTaskSet(IKTaskSet value) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_set_IKTaskSet__SWIG_1(swigCPtr, this, IKTaskSet.getCPtr(value), value);
+  }
+
+  public void copyProperty_marker_file(InverseKinematicsTool source) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_copyProperty_marker_file(swigCPtr, this, InverseKinematicsTool.getCPtr(source), source);
+  }
+
+  public String get_marker_file(int i) {
+    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_get_marker_file__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string upd_marker_file(int i) {
+    return new SWIGTYPE_p_std__string(opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_upd_marker_file__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_marker_file(int i, String value) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_set_marker_file__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_marker_file(String value) {
+    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_append_marker_file(swigCPtr, this, value);
+  }
+
+  public void constructProperty_marker_file(String initValue) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_constructProperty_marker_file(swigCPtr, this, initValue);
+  }
+
+  public String get_marker_file() {
+    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_get_marker_file__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_marker_file() {
+    return new SWIGTYPE_p_std__string(opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_upd_marker_file__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_marker_file(String value) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_set_marker_file__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_coordinate_file(InverseKinematicsTool source) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_copyProperty_coordinate_file(swigCPtr, this, InverseKinematicsTool.getCPtr(source), source);
+  }
+
+  public String get_coordinate_file(int i) {
+    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_get_coordinate_file__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string upd_coordinate_file(int i) {
+    return new SWIGTYPE_p_std__string(opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_upd_coordinate_file__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_coordinate_file(int i, String value) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_set_coordinate_file__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_coordinate_file(String value) {
+    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_append_coordinate_file(swigCPtr, this, value);
+  }
+
+  public void constructProperty_coordinate_file(String initValue) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_constructProperty_coordinate_file(swigCPtr, this, initValue);
+  }
+
+  public String get_coordinate_file() {
+    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_get_coordinate_file__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_coordinate_file() {
+    return new SWIGTYPE_p_std__string(opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_upd_coordinate_file__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_coordinate_file(String value) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_set_coordinate_file__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_report_marker_locations(InverseKinematicsTool source) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_copyProperty_report_marker_locations(swigCPtr, this, InverseKinematicsTool.getCPtr(source), source);
+  }
+
+  public boolean get_report_marker_locations(int i) {
+    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_get_report_marker_locations__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_bool upd_report_marker_locations(int i) {
+    return new SWIGTYPE_p_bool(opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_upd_report_marker_locations__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_report_marker_locations(int i, boolean value) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_set_report_marker_locations__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_report_marker_locations(boolean value) {
+    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_append_report_marker_locations(swigCPtr, this, value);
+  }
+
+  public void constructProperty_report_marker_locations(boolean initValue) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_constructProperty_report_marker_locations(swigCPtr, this, initValue);
+  }
+
+  public boolean get_report_marker_locations() {
+    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_get_report_marker_locations__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_bool upd_report_marker_locations() {
+    return new SWIGTYPE_p_bool(opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_upd_report_marker_locations__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_report_marker_locations(boolean value) {
+    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_set_report_marker_locations__SWIG_1(swigCPtr, this, value);
+  }
+
   public InverseKinematicsTool() {
     this(opensimActuatorsAnalysesToolsJNI.new_InverseKinematicsTool__SWIG_0(), true);
   }
@@ -69,40 +213,12 @@ public class InverseKinematicsTool extends Tool {
     this(opensimActuatorsAnalysesToolsJNI.new_InverseKinematicsTool__SWIG_2(aFileName), true);
   }
 
-  public InverseKinematicsTool(InverseKinematicsTool aObject) {
-    this(opensimActuatorsAnalysesToolsJNI.new_InverseKinematicsTool__SWIG_3(InverseKinematicsTool.getCPtr(aObject), aObject), true);
-  }
-
-  public static void registerTypes() {
-    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_registerTypes();
-  }
-
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode, int versionNumber) {
     opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_updateFromXMLNode__SWIG_0(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode), versionNumber);
   }
 
   public void updateFromXMLNode(SWIGTYPE_p_SimTK__Xml__Element aNode) {
     opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_updateFromXMLNode__SWIG_1(swigCPtr, this, SWIGTYPE_p_SimTK__Xml__Element.getCPtr(aNode));
-  }
-
-  public void setModel(Model aModel) {
-    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
-  }
-
-  public void setStartTime(double d) {
-    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_setStartTime(swigCPtr, this, d);
-  }
-
-  public double getStartTime() {
-    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_getStartTime(swigCPtr, this);
-  }
-
-  public void setEndTime(double d) {
-    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_setEndTime(swigCPtr, this, d);
-  }
-
-  public double getEndTime() {
-    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_getEndTime(swigCPtr, this);
   }
 
   public void setMarkerDataFileName(String markerDataFileName) {
@@ -119,14 +235,6 @@ public class InverseKinematicsTool extends Tool {
 
   public String getCoordinateFileName() {
     return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_getCoordinateFileName(swigCPtr, this);
-  }
-
-  public void setOutputMotionFileName(String aOutputMotionFileName) {
-    opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_setOutputMotionFileName(swigCPtr, this, aOutputMotionFileName);
-  }
-
-  public String getOutputMotionFileName() {
-    return opensimActuatorsAnalysesToolsJNI.InverseKinematicsTool_getOutputMotionFileName(swigCPtr, this);
   }
 
   public IKTaskSet getIKTaskSet() {

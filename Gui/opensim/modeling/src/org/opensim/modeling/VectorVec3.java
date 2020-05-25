@@ -35,6 +35,22 @@ public class VectorVec3 extends VectorBaseVec3 {
     super.delete();
   }
 
+    public static VectorVec3 createFromMat(double[][] data) throws Exception {
+        int numRows = data.length;
+        int numCols = 0;
+        if (numRows > 0) {
+            numCols = data[0].length;
+        }
+        if (numCols != 3) {
+            throw new Exception("Number of columns must be 3.");
+        }
+        VectorVec3 v = new VectorVec3(numRows, new Vec3(0));
+        for (int i = 0; i < numRows; ++i) {
+            v.set(i, new Vec3(data[i][0], data[i][1], data[i][2]));
+        }
+        return v;
+    }
+
   public VectorVec3() {
     this(opensimSimbodyJNI.new_VectorVec3__SWIG_0(), true);
   }

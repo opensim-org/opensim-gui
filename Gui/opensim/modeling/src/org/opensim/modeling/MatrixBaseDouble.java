@@ -35,6 +35,16 @@ public class MatrixBaseDouble {
     }
   }
 
+    public double[][] getAsMat() {
+        double[][] ret = new double[nrow()][ncol()];
+        for (int i = 0; i < nrow(); ++i) {
+            for (int j = 0; j < ncol(); ++j) {
+                ret[i][j] = getElt(i, j);
+            }
+        }
+        return ret;
+    }
+
   public int nrow() {
     return opensimSimbodyJNI.MatrixBaseDouble_nrow(swigCPtr, this);
   }

@@ -35,6 +35,16 @@ public class VectorBaseVec3 extends MatrixBaseVec3 {
     super.delete();
   }
 
+    public double[][] getAsMat() {
+        double[][] ret = new double[size()][3];
+        for (int i = 0; i < size(); ++i) {
+            ret[i][0] = get(i).get(0);
+            ret[i][1] = get(i).get(1);
+            ret[i][2] = get(i).get(2);
+        }
+        return ret;
+    }
+
   public VectorBaseVec3(int m) {
     this(opensimSimbodyJNI.new_VectorBaseVec3__SWIG_0(m), true);
   }
