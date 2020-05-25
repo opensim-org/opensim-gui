@@ -1,10 +1,14 @@
 name: opensim-application
 
 on:
+  pull_request:
+    branches:
+      - '*'
   push:
     branches: 
-      - 'action_build_core'
-      - 'master'
+      - master
+    tags:
+      - '*'
 
 jobs:
   windows:
@@ -41,7 +45,7 @@ jobs:
         cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 16 2019" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         $env:CXXFLAGS = ""
         cmake . -LAH
-        cmake --build . --config Release -- /maxcpucount:4 
+        cmake --build . --config Release -- /maxcpucount:2 
 
     - name: Build opensim-core
       run: |
@@ -51,15 +55,14 @@ jobs:
         $env:CXXFLAGS = "/W0"
         cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
         cmake . -LAH
-        cmake --build . --config Release -- /maxcpucount:8
+        cmake --build . --config Release -- /maxcpucount:2
         
     - name: install opensim-core
       run: |
-        chdir $env:GITHUB_WORKSPACE\\build_core
         cmake --install . 
 
     - name: Checkout opensim-gui
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
@@ -119,7 +122,7 @@ jobs:
         # -q: quiet
         unzip -q opensim-core-mac.zip -d ~
     - name: Checkout opensim-gui
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
@@ -167,7 +170,7 @@ jobs:
     steps:
 
     - name: Checkout opensim-gui
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
     
     - name: Checkout opensim-core master
