@@ -134,7 +134,7 @@ jobs:
       run: |
         mkdir build_deps
         cd build_deps
-        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DSWIG_EXECUTABLE=/usr/local/opt/swig@3/bin/swig -DCMAKE_BUILD_TYPE=Release
         cmake . -LAH
         cmake --build . --config Release
           
