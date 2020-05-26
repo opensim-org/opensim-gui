@@ -59,6 +59,7 @@ jobs:
         
     - name: install opensim-core
       run: |
+        chdir $env:GITHUB_WORKSPACE\\build_core
         cmake --install . 
 
     - name: Checkout opensim-gui
