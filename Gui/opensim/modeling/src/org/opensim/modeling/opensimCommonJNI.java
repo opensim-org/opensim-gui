@@ -81,6 +81,31 @@ public class opensimCommonJNI {
   public final static native void delete_IOError(long jarg1);
   public final static native long new_ComponentNotFound(String jarg1, long jarg2, String jarg3, String jarg4, String jarg5, String jarg6);
   public final static native void delete_ComponentNotFound(long jarg1);
+  public final static native void delete_LogSink(long jarg1);
+  public final static native void LogSink_sinkImpl(long jarg1, LogSink jarg1_, String jarg2);
+  public final static native void LogSink_flushImpl(long jarg1, LogSink jarg1_);
+  public final static native void LogSink_flushImplSwigExplicitLogSink(long jarg1, LogSink jarg1_);
+  public final static native long new_LogSink();
+  public final static native void LogSink_director_connect(LogSink obj, long cptr, boolean mem_own, boolean weak_global);
+  public final static native void LogSink_change_ownership(LogSink obj, long cptr, boolean take_or_release);
+  public final static native int Logger_Level_Off_get();
+  public final static native int Logger_Level_Critical_get();
+  public final static native int Logger_Level_Error_get();
+  public final static native int Logger_Level_Warn_get();
+  public final static native int Logger_Level_Info_get();
+  public final static native int Logger_Level_Debug_get();
+  public final static native int Logger_Level_Trace_get();
+  public final static native void Logger_setLevel(int jarg1);
+  public final static native int Logger_getLevel();
+  public final static native void Logger_setLevelString(String jarg1);
+  public final static native String Logger_getLevelString();
+  public final static native boolean Logger_shouldLog(int jarg1);
+  public final static native void Logger_addFileSink__SWIG_0(String jarg1);
+  public final static native void Logger_addFileSink__SWIG_1();
+  public final static native void Logger_removeFileSink();
+  public final static native void Logger_private_addSink(long jarg1, LogSink jarg1_);
+  public final static native void Logger_removeSink(long jarg1, LogSink jarg1_);
+  public final static native void delete_Logger(long jarg1);
   public final static native int Array_CAPMIN_get();
   public final static native long new_InvalidPropertyValue(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5, String jarg6);
   public final static native void delete_InvalidPropertyValue(long jarg1);
@@ -2998,4 +3023,16 @@ public class opensimCommonJNI {
   public final static native long ConsoleReporter_SWIGUpcast(long jarg1);
   public final static native long ConsoleReporterVec3_SWIGUpcast(long jarg1);
   public final static native long GCVSplineSet_SWIGUpcast(long jarg1);
+
+  public static void SwigDirector_LogSink_sinkImpl(LogSink jself, String msg) {
+    jself.sinkImpl(msg);
+  }
+  public static void SwigDirector_LogSink_flushImpl(LogSink jself) {
+    jself.flushImpl();
+  }
+
+  private final static native void swig_module_init();
+  static {
+    swig_module_init();
+  }
 }

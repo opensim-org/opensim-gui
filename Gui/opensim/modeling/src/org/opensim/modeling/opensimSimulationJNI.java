@@ -6735,6 +6735,11 @@ public class opensimSimulationJNI {
   public final static native void updatePre40KinematicsFilesFor40MotionType__SWIG_0(long jarg1, Model jarg1_, long jarg2, StdVectorString jarg2_, String jarg3);
   public final static native void updatePre40KinematicsFilesFor40MotionType__SWIG_1(long jarg1, Model jarg1_, long jarg2, StdVectorString jarg2_);
   public final static native void updateSocketConnecteesBySearch(long jarg1, Model jarg1_);
+  public final static native void VisualizerUtilities_showMotion(long jarg1, Model jarg1_, long jarg2, Storage jarg2_);
+  public final static native void VisualizerUtilities_showModel(long jarg1, Model jarg1_);
+  public final static native void VisualizerUtilities_showMarkerData(long jarg1, TimeSeriesTableVec3 jarg1_);
+  public final static native long new_VisualizerUtilities();
+  public final static native void delete_VisualizerUtilities(long jarg1);
   public final static native long new_FrameList__SWIG_0(long jarg1, Component jarg1_, long jarg2, ComponentFilter jarg2_);
   public final static native long new_FrameList__SWIG_1(long jarg1, Component jarg1_);
   public final static native void delete_FrameList(long jarg1);
