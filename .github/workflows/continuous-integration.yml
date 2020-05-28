@@ -1,6 +1,14 @@
 name: opensim-application
 
-on: [push]
+on:
+  pull_request:
+    branches:
+      - '*'
+  push:
+    branches: 
+      - master
+    tags:
+      - '*'
 
 jobs:
   windows:
@@ -9,14 +17,52 @@ jobs:
     runs-on: windows-latest
 
     steps:
-    - name: Install opensim-core
-      run: |
-        (New-Object System.Net.WebClient).DownloadFile("https://prdownloads.sourceforge.net/myosin/github-actions/opensim-core/opensim-core-win.zip", "opensim-core-win.zip")
-        7z x opensim-core-win.zip -oC:\\
-        dir C:\\opensim-core
     - name: Checkout opensim-gui
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
 
+    - name: Install SWIG
+      run: choco install swig --version 3.0.12 --yes --limit-output
+      
+    - name: Install NumPy 
+      run: python -m pip install numpy
+      
+    - name: Checkout opensim-core master
+      uses: actions/checkout@v2
+      with:
+         name: opensim-org/opensim-core
+         repository: opensim-org/opensim-core
+         path: 'opensim-core'
+    
+    - name: Build opensim-core-dependencies
+      run: |
+        echo $env:GITHUB_WORKSPACE\\build_deps
+        mkdir $env:GITHUB_WORKSPACE\\build_deps
+        chdir $env:GITHUB_WORKSPACE\\build_deps
+        # gci -r $env:GITHUB_WORKSPACE\\opensim-core
+        # /W0 disables warnings. The other flags are copied from CMake's
+        # default CMAKE_CXX_FLAGS.
+        # https://msdn.microsoft.com/en-us/library/19z1t1wy.aspx
+        $env:CXXFLAGS = "/W0"
+        cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 16 2019" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        $env:CXXFLAGS = ""
+        cmake . -LAH
+        cmake --build . --config Release -- /maxcpucount:2 
+
+    - name: Build opensim-core
+      run: |
+        echo $env:GITHUB_WORKSPACE\\build_core
+        mkdir $env:GITHUB_WORKSPACE\\build_core
+        chdir $env:GITHUB_WORKSPACE\\build_core
+        $env:CXXFLAGS = "/W0"
+        cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
+        cmake . -LAH
+        cmake --build . --config Release -- /maxcpucount:2
+        
+    - name: install opensim-core
+      run: |
+        chdir $env:GITHUB_WORKSPACE\\build_core
+        cmake --install . 
+        
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
@@ -40,7 +86,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -G"Visual Studio 16 2019" -A x64 -DCMAKE_PREFIX_PATH=C:\\opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans 8.2;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans 8.2/harness"
+        cmake ../ -G"Visual Studio 16 2019" -A x64 -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans 8.2;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans 8.2/harness"
         cmake --build . --target CopyOpenSimCore --config Release
         cmake --build . --target CopyModels --config Release
         cmake --build . --target PrepareInstaller --config Release
@@ -66,16 +112,40 @@ jobs:
   mac:
     name: Mac
 
-    runs-on: macos-latest
+    runs-on: macOS-10.14
 
     steps:
-    - name: Install opensim-core
-      run: |
-        wget https://prdownloads.sourceforge.net/myosin/github-actions/opensim-core/opensim-core-mac.zip
-        # -q: quiet
-        unzip -q opensim-core-mac.zip -d ~
     - name: Checkout opensim-gui
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
+
+    - name: Checkout opensim-core master
+      uses: actions/checkout@v2
+      with:
+         name: opensim-org/opensim-core
+         repository: opensim-org/opensim-core
+         path: 'opensim-core'
+
+    - name: Install packages
+      run: |
+         brew install doxygen swig@3
+         pip3 install numpy
+
+    - name: Build opensim-core-dependencies
+      run: |
+        mkdir build_deps
+        cd build_deps
+        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DCMAKE_BUILD_TYPE=Release
+        cmake . -LAH
+        cmake --build . --config Release
+          
+    - name: Build opensim-core
+      run: |
+        mkdir build_core
+        cd build_core
+        cmake ../opensim-core -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DSWIG_EXECUTABLE=/usr/local/opt/swig@3/bin/swig -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core-install -DOPENSIM_INSTALL_UNIX_FHS=OFF
+        cmake . -LAH
+        cmake --build . --config Release 
+        cmake --install .
 
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
@@ -98,7 +168,7 @@ jobs:
         # TODO: Do not hard-code NetBeans version.
         # TODO: Could download from https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
         # cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/Apache NetBeans 11.2.app/Contents/Resources/NetBeans/netbeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/Apache NetBeans 11.2.app/Contents/Resources/NetBeans/netbeans/harness"
-        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/harness"
+        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/NetBeans 8.2.app/Contents/Resources/NetBeans/harness"
         make CopyOpenSimCore
         make PrepareInstaller
         # Read the value of the cache variable storing the GUI build version.
@@ -121,15 +191,37 @@ jobs:
     runs-on: ubuntu-18.04
 
     steps:
-    - name: Install opensim-core
-      run: |
-        wget https://prdownloads.sourceforge.net/myosin/opensim-core/opensim-core-latest_linux_Release.zip
-        # -q: quiet
-        unzip -q opensim-core-latest_linux_Release.zip -d ~
 
     - name: Checkout opensim-gui
-      uses: actions/checkout@v1
+      uses: actions/checkout@v2
+      
+    - name: Checkout opensim-core master
+      uses: actions/checkout@v2
+      with:
+         name: opensim-org/opensim-core
+         repository: opensim-org/opensim-core
+         path: 'opensim-core'
+            
+    - name: Install packages
+      run: sudo apt-get install --yes liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen python3 python3-dev python3-numpy python3-setuptools swig
 
+    - name: Build opensim-core-dependencies
+      run: |
+        mkdir build_deps
+        cd build_deps
+        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        cmake . -LAH
+        cmake --build . --config Release
+          
+    - name: Build opensim-core
+      run: |
+        mkdir build_core
+        cd build_core
+        cmake ../opensim-core -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core-install -DOPENSIM_INSTALL_UNIX_FHS=OFF
+        cmake . -LAH
+        cmake --build . --config Release 
+        cmake --install .
+        
     - name: Set up JDK 1.8
       uses: actions/setup-java@v1
       with:
@@ -159,7 +251,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans-8.2;-Dnbplatform.default.harness.dir=$HOME/netbeans-8.2/harness"
+        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans-8.2;-Dnbplatform.default.harness.dir=$HOME/netbeans-8.2/harness"
         make CopyOpenSimCore
         make PrepareInstaller
         # Read the value of the cache variable storing the GUI build version.
