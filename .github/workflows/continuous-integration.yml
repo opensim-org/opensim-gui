@@ -138,12 +138,15 @@ jobs:
         echo $JAVA_HOME
         echo "TODO"
         /usr/libexec/java_home -V
-        export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+        export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
         echo "::set-env name=JAVA_HOME::$JAVA_HOME"
-        echo $JAVA_HOME
         echo "TODO2"
+        echo $JAVA_HOME
+        echo "TODO3"
         wget https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
         hdiutil attach netbeans-8.2-javase-macosx.dmg
+        echo "TODO4"
+        echo $JAVA_HOME
         sudo installer -pkg /Volumes/NetBeans\ 8.2/NetBeans\ 8.2.pkg -target /tmp
         
     - name: Install packages
