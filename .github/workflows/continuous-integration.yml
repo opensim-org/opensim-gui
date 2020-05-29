@@ -112,7 +112,7 @@ jobs:
   mac:
     name: Mac
 
-    runs-on: macOS-10.14
+    runs-on: macOS-latest
 
     steps:
     - name: Checkout opensim-gui
@@ -135,6 +135,13 @@ jobs:
       # so we install NetBeans ourselves.
       # Note: Cask 'netbeans' gives version 11.2, while 'netbeans-java-se' gives 8.2.
       run: |
+        echo $JAVA_HOME
+        echo "TODO"
+        /usr/libexec/java_home -V
+        export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+        echo "::set-env name=JAVA_HOME::$JAVA_HOME"
+        echo $JAVA_HOME
+        echo "TODO2"
         wget https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
         hdiutil attach netbeans-8.2-javase-macosx.dmg
         sudo installer -pkg /Volumes/NetBeans\ 8.2/NetBeans\ 8.2.pkg -target /
@@ -266,6 +273,7 @@ jobs:
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
         mv Gui/opensim/dist/OpenSim-$VERSION.tar.gz $GITHUB_WORKSPACE
+
     - name: Upload GUI installer
       uses: actions/upload-artifact@v1.0.0
       with:
