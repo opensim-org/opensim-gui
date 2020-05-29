@@ -130,11 +130,18 @@ jobs:
       with:
         java-version: 1.8
         
+    - name: Install NetBeans
+      # `brew cask install netbeans-java-se` requires sudo but brew won't allow sudo,
+      # so we install NetBeans ourselves.
+      # Note: Cask 'netbeans' gives version 11.2, while 'netbeans-java-se' gives 8.2.
+      run: |
+        wget https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
+        hdiutil attach netbeans-8.2-javase-macosx.dmg
+        sudo installer -pkg /Volumes/NetBeans\ 8.2/NetBeans\ 8.2.pkg -target /
+        
     - name: Install packages
-      # Cask 'netbeans' gives version 11.2, while 'netbeans-java-se' gives 8.2.
       run: |
         brew install doxygen swig@3 ant
-        sudo brew cask install netbeans-java-se
         pip3 install numpy
 
     - name: Build opensim-core-dependencies
