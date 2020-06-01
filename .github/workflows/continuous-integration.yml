@@ -129,6 +129,9 @@ jobs:
       uses: actions/setup-java@v1
       with:
         java-version: 1.8
+
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v2
         
     - name: Install NetBeans
       # `brew cask install netbeans-java-se` requires sudo but brew won't allow sudo,
