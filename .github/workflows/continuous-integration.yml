@@ -130,8 +130,8 @@ jobs:
       with:
         java-version: 1.8
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v2
+    # - name: Setup tmate session to debug the workflow through SSH.
+    #   uses: mxschmitt/action-tmate@v2
         
     - name: Install NetBeans
       # `brew cask install netbeans-java-se` requires sudo but brew won't allow sudo,
@@ -140,6 +140,15 @@ jobs:
       run: |
         echo $JAVA_HOME
         echo "TODO"
+        # We remove JDKs newer than 8 to force the NetBeans installer to use JDK 8.
+        # If using JDK 14, the NetBeans installer fails because it cannot find unpack200,
+        # which was removed from the JDK. See:
+        # https://netbeans.apache.org/download/nb113/nb113.html
+        # "The installers will NOT run under JDK 14 because usage is made of the Pack200 Tools and API, for packing and unpacking, which is removed in JDK 14, see JEP 367."
+        sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-14.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-13.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-12.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-11.jdk
         /usr/libexec/java_home -V
         export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
         echo "::set-env name=JAVA_HOME::$JAVA_HOME"
