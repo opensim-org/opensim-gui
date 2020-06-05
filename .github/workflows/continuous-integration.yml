@@ -44,7 +44,6 @@ jobs:
     - name: Checkout opensim-core master
       uses: actions/checkout@v2
       with:
-         name: opensim-org/opensim-core
          repository: opensim-org/opensim-core
          path: 'opensim-core'
     
@@ -105,7 +104,7 @@ jobs:
         makensis.exe make_installer.nsi
         mv OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe $env:GITHUB_WORKSPACE
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v2
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-win64
         path: OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe
@@ -122,7 +121,6 @@ jobs:
     - name: Checkout opensim-core master
       uses: actions/checkout@v2
       with:
-         name: opensim-org/opensim-core
          repository: opensim-org/opensim-core
          path: 'opensim-core'
         
@@ -201,8 +199,9 @@ jobs:
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
         mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
+
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v2
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-mac
         path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
@@ -220,7 +219,6 @@ jobs:
     - name: Checkout opensim-core master
       uses: actions/checkout@v2
       with:
-         name: opensim-org/opensim-core
          repository: opensim-org/opensim-core
          path: 'opensim-core'
             
@@ -285,7 +283,7 @@ jobs:
         mv Gui/opensim/dist/OpenSim-$VERSION.tar.gz $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v1.0.0
+      uses: actions/upload-artifact@v2
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-linux
         path: OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz
