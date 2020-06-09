@@ -58,11 +58,7 @@ public class IKMarkerTask extends IKTask {
   }
 
   public IKMarkerTask() {
-    this(opensimActuatorsAnalysesToolsJNI.new_IKMarkerTask__SWIG_0(), true);
-  }
-
-  public IKMarkerTask(IKMarkerTask aIKMarkerTask) {
-    this(opensimActuatorsAnalysesToolsJNI.new_IKMarkerTask__SWIG_1(IKMarkerTask.getCPtr(aIKMarkerTask), aIKMarkerTask), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_IKMarkerTask(), true);
   }
 
 }

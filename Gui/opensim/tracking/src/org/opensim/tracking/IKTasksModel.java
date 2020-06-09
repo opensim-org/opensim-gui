@@ -159,7 +159,7 @@ class IKMarkerTasksModel extends IKTasksModel {
       for(int i=0; i<fullTaskSet.getSize(); i++) {
          if(IKMarkerTask.safeDownCast(fullTaskSet.get(i))!=null) {
             int index = model.getMarkerSet().getIndex(fullTaskSet.get(i).getName());
-            if(index >= 0) tasks.set(index, new IKMarkerTask(IKMarkerTask.safeDownCast(fullTaskSet.get(i)))); // Java-side copy
+            if(index >= 0) tasks.set(index, IKMarkerTask.safeDownCast(fullTaskSet.get(i).clone()));
          }
       }
       setModified();

@@ -129,6 +129,42 @@ public class IMUInverseKinematicsTool extends InverseKinematicsToolBase {
     opensimActuatorsAnalysesToolsJNI.IMUInverseKinematicsTool_set_sensor_to_opensim_rotations__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
+  public void copyProperty_orientation_weights(IMUInverseKinematicsTool source) {
+    opensimActuatorsAnalysesToolsJNI.IMUInverseKinematicsTool_copyProperty_orientation_weights(swigCPtr, this, IMUInverseKinematicsTool.getCPtr(source), source);
+  }
+
+  public OrientationWeightSet get_orientation_weights(int i) {
+    return new OrientationWeightSet(opensimActuatorsAnalysesToolsJNI.IMUInverseKinematicsTool_get_orientation_weights__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public OrientationWeightSet upd_orientation_weights(int i) {
+    return new OrientationWeightSet(opensimActuatorsAnalysesToolsJNI.IMUInverseKinematicsTool_upd_orientation_weights__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_orientation_weights(int i, OrientationWeightSet value) {
+    opensimActuatorsAnalysesToolsJNI.IMUInverseKinematicsTool_set_orientation_weights__SWIG_0(swigCPtr, this, i, OrientationWeightSet.getCPtr(value), value);
+  }
+
+  public int append_orientation_weights(OrientationWeightSet value) {
+    return opensimActuatorsAnalysesToolsJNI.IMUInverseKinematicsTool_append_orientation_weights(swigCPtr, this, OrientationWeightSet.getCPtr(value), value);
+  }
+
+  public void constructProperty_orientation_weights(OrientationWeightSet initValue) {
+    opensimActuatorsAnalysesToolsJNI.IMUInverseKinematicsTool_constructProperty_orientation_weights(swigCPtr, this, OrientationWeightSet.getCPtr(initValue), initValue);
+  }
+
+  public OrientationWeightSet get_orientation_weights() {
+    return new OrientationWeightSet(opensimActuatorsAnalysesToolsJNI.IMUInverseKinematicsTool_get_orientation_weights__SWIG_1(swigCPtr, this), false);
+  }
+
+  public OrientationWeightSet upd_orientation_weights() {
+    return new OrientationWeightSet(opensimActuatorsAnalysesToolsJNI.IMUInverseKinematicsTool_upd_orientation_weights__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_orientation_weights(OrientationWeightSet value) {
+    opensimActuatorsAnalysesToolsJNI.IMUInverseKinematicsTool_set_orientation_weights__SWIG_1(swigCPtr, this, OrientationWeightSet.getCPtr(value), value);
+  }
+
   public IMUInverseKinematicsTool() {
     this(opensimActuatorsAnalysesToolsJNI.new_IMUInverseKinematicsTool__SWIG_0(), true);
   }

@@ -47,6 +47,18 @@ public class VisualizerUtilities {
     opensimSimulationJNI.VisualizerUtilities_showMarkerData(TimeSeriesTableVec3.getCPtr(arg0), arg0);
   }
 
+  public static void showOrientationData(TimeSeriesTableQuaternion arg0, String layout, Model modelForPose) {
+    opensimSimulationJNI.VisualizerUtilities_showOrientationData__SWIG_0(TimeSeriesTableQuaternion.getCPtr(arg0), arg0, layout, Model.getCPtr(modelForPose), modelForPose);
+  }
+
+  public static void showOrientationData(TimeSeriesTableQuaternion arg0, String layout) {
+    opensimSimulationJNI.VisualizerUtilities_showOrientationData__SWIG_1(TimeSeriesTableQuaternion.getCPtr(arg0), arg0, layout);
+  }
+
+  public static void showOrientationData(TimeSeriesTableQuaternion arg0) {
+    opensimSimulationJNI.VisualizerUtilities_showOrientationData__SWIG_2(TimeSeriesTableQuaternion.getCPtr(arg0), arg0);
+  }
+
   public VisualizerUtilities() {
     this(opensimSimulationJNI.new_VisualizerUtilities(), true);
   }
