@@ -81,6 +81,31 @@ public class opensimCommonJNI {
   public final static native void delete_IOError(long jarg1);
   public final static native long new_ComponentNotFound(String jarg1, long jarg2, String jarg3, String jarg4, String jarg5, String jarg6);
   public final static native void delete_ComponentNotFound(long jarg1);
+  public final static native void delete_LogSink(long jarg1);
+  public final static native void LogSink_sinkImpl(long jarg1, LogSink jarg1_, String jarg2);
+  public final static native void LogSink_flushImpl(long jarg1, LogSink jarg1_);
+  public final static native void LogSink_flushImplSwigExplicitLogSink(long jarg1, LogSink jarg1_);
+  public final static native long new_LogSink();
+  public final static native void LogSink_director_connect(LogSink obj, long cptr, boolean mem_own, boolean weak_global);
+  public final static native void LogSink_change_ownership(LogSink obj, long cptr, boolean take_or_release);
+  public final static native int Logger_Level_Off_get();
+  public final static native int Logger_Level_Critical_get();
+  public final static native int Logger_Level_Error_get();
+  public final static native int Logger_Level_Warn_get();
+  public final static native int Logger_Level_Info_get();
+  public final static native int Logger_Level_Debug_get();
+  public final static native int Logger_Level_Trace_get();
+  public final static native void Logger_setLevel(int jarg1);
+  public final static native int Logger_getLevel();
+  public final static native void Logger_setLevelString(String jarg1);
+  public final static native String Logger_getLevelString();
+  public final static native boolean Logger_shouldLog(int jarg1);
+  public final static native void Logger_addFileSink__SWIG_0(String jarg1);
+  public final static native void Logger_addFileSink__SWIG_1();
+  public final static native void Logger_removeFileSink();
+  public final static native void Logger_private_addSink(long jarg1, LogSink jarg1_);
+  public final static native void Logger_removeSink(long jarg1, LogSink jarg1_);
+  public final static native void delete_Logger(long jarg1);
   public final static native int Array_CAPMIN_get();
   public final static native long new_InvalidPropertyValue(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5, String jarg6);
   public final static native void delete_InvalidPropertyValue(long jarg1);
@@ -245,6 +270,37 @@ public class opensimCommonJNI {
   public final static native void ObjectGroup_replace(long jarg1, ObjectGroup jarg1_, long jarg2, OpenSimObject jarg2_, long jarg3, OpenSimObject jarg3_);
   public final static native void ObjectGroup_setupGroup(long jarg1, ObjectGroup jarg1_, long jarg2, ArrayPtrsObj jarg2_);
   public final static native long ObjectGroup_getMembers(long jarg1, ObjectGroup jarg1_);
+  public final static native boolean PropertyHelper_getValueBool__SWIG_0(long jarg1, AbstractProperty jarg1_, int jarg2);
+  public final static native boolean PropertyHelper_getValueBool__SWIG_1(long jarg1, AbstractProperty jarg1_);
+  public final static native void PropertyHelper_setValueBool__SWIG_0(boolean jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
+  public final static native void PropertyHelper_setValueBool__SWIG_1(boolean jarg1, long jarg2, AbstractProperty jarg2_);
+  public final static native void PropertyHelper_appendValueBool(boolean jarg1, long jarg2, AbstractProperty jarg2_);
+  public final static native int PropertyHelper_getValueInt__SWIG_0(long jarg1, AbstractProperty jarg1_, int jarg2);
+  public final static native int PropertyHelper_getValueInt__SWIG_1(long jarg1, AbstractProperty jarg1_);
+  public final static native void PropertyHelper_setValueInt__SWIG_0(int jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
+  public final static native void PropertyHelper_setValueInt__SWIG_1(int jarg1, long jarg2, AbstractProperty jarg2_);
+  public final static native void PropertyHelper_appendValueInt(int jarg1, long jarg2, AbstractProperty jarg2_);
+  public final static native double PropertyHelper_getValueDouble__SWIG_0(long jarg1, AbstractProperty jarg1_, int jarg2);
+  public final static native double PropertyHelper_getValueDouble__SWIG_1(long jarg1, AbstractProperty jarg1_);
+  public final static native void PropertyHelper_setValueDouble__SWIG_0(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
+  public final static native void PropertyHelper_setValueDouble__SWIG_1(double jarg1, long jarg2, AbstractProperty jarg2_);
+  public final static native void PropertyHelper_appendValueDouble(double jarg1, long jarg2, AbstractProperty jarg2_);
+  public final static native String PropertyHelper_getValueString__SWIG_0(long jarg1, AbstractProperty jarg1_, int jarg2);
+  public final static native String PropertyHelper_getValueString__SWIG_1(long jarg1, AbstractProperty jarg1_);
+  public final static native void PropertyHelper_setValueString__SWIG_0(String jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
+  public final static native void PropertyHelper_setValueString__SWIG_1(String jarg1, long jarg2, AbstractProperty jarg2_);
+  public final static native void PropertyHelper_appendValueString(String jarg1, long jarg2, AbstractProperty jarg2_);
+  public final static native double PropertyHelper_getValueTransform(long jarg1, AbstractProperty jarg1_, int jarg2);
+  public final static native void PropertyHelper_setValueTransform(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
+  public final static native double PropertyHelper_getValueVec3(long jarg1, AbstractProperty jarg1_, int jarg2);
+  public final static native void PropertyHelper_setValueVec3(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
+  public final static native double PropertyHelper_getValueVec6(long jarg1, AbstractProperty jarg1_, int jarg2);
+  public final static native void PropertyHelper_setValueVec6(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
+  public final static native long PropertyHelper_getValueStringArray(long jarg1, AbstractProperty jarg1_);
+  public final static native void PropertyHelper_setValueStringArray(long jarg1, AbstractProperty jarg1_, long jarg2, ArrayStr jarg2_);
+  public final static native void PropertyHelper_removeItem(long jarg1, AbstractProperty jarg1_, int jarg2);
+  public final static native long new_PropertyHelper();
+  public final static native void delete_PropertyHelper(long jarg1);
   public final static native long OpenSimObjectSet_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void OpenSimObjectSet_assign(long jarg1, OpenSimObjectSet jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String OpenSimObjectSet_getClassName();
@@ -2998,4 +3054,16 @@ public class opensimCommonJNI {
   public final static native long ConsoleReporter_SWIGUpcast(long jarg1);
   public final static native long ConsoleReporterVec3_SWIGUpcast(long jarg1);
   public final static native long GCVSplineSet_SWIGUpcast(long jarg1);
+
+  public static void SwigDirector_LogSink_sinkImpl(LogSink jself, String msg) {
+    jself.sinkImpl(msg);
+  }
+  public static void SwigDirector_LogSink_flushImpl(LogSink jself) {
+    jself.flushImpl();
+  }
+
+  private final static native void swig_module_init();
+  static {
+    swig_module_init();
+  }
 }
