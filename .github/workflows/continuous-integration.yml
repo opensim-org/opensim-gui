@@ -47,7 +47,21 @@ jobs:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
     
+    - name: Cache opensim-core-dependencies
+      id: cache-dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/opensim_dependencies_install
+        # Every time a cache is created, it's stored with this key.
+        # In subsequent runs, if the key matches the key of an existing cache,
+        # then the cache is used. We chose for this key to depend on the
+        # operating system and a hash of the hashes of all files in the
+        # dependencies directory (non-recursive).
+        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
+        key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
+
     - name: Build opensim-core-dependencies
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_deps
         mkdir $env:GITHUB_WORKSPACE\\build_deps
@@ -63,6 +77,7 @@ jobs:
         cmake --build . --config Release -- /maxcpucount:2 
 
     - name: Build opensim-core
+      if: steps.cache-opensim-core.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
@@ -73,10 +88,18 @@ jobs:
         cmake --build . --config Release -- /maxcpucount:2
         
     - name: Install opensim-core
+      if: steps.cache-opensim-core.outputs.cache-hit != 'true'
       run: |
         chdir $env:GITHUB_WORKSPACE\\build_core
         cmake --install . 
-        
+    
+    - name: Cache opensim-core-install
+      id: cache-opensim-core
+      uses: actions/cache@v1
+      with:
+        path: ~/opensim-core-install
+        key: opensim-core-master
+
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
       
