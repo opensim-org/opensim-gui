@@ -183,7 +183,21 @@ jobs:
         hdiutil attach netbeans-8.2-javase-macosx.dmg
         sudo installer -pkg /Volumes/NetBeans\ 8.2/NetBeans\ 8.2.pkg -target /
 
+    - name: Cache opensim-core-dependencies
+      id: cache-dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/opensim_dependencies_install
+        # Every time a cache is created, it's stored with this key.
+        # In subsequent runs, if the key matches the key of an existing cache,
+        # then the cache is used. We chose for this key to depend on the
+        # operating system and a hash of the hashes of all files in the
+        # dependencies directory (non-recursive).
+        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
+        key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
+        
     - name: Build opensim-core-dependencies
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         mkdir build_deps
         cd build_deps
@@ -268,7 +282,21 @@ jobs:
         ./netbeans-8.2-javase-linux.sh --silent
         ls $HOME/netbeans-8.2
 
+    - name: Cache opensim-core-dependencies
+      id: cache-dependencies
+      uses: actions/cache@v1
+      with:
+        path: ~/opensim_dependencies_install
+        # Every time a cache is created, it's stored with this key.
+        # In subsequent runs, if the key matches the key of an existing cache,
+        # then the cache is used. We chose for this key to depend on the
+        # operating system and a hash of the hashes of all files in the
+        # dependencies directory (non-recursive).
+        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
+        key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
+
     - name: Build opensim-core-dependencies
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         mkdir build_deps
         cd build_deps
