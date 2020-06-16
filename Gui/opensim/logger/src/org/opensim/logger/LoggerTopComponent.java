@@ -154,7 +154,7 @@ final class LoggerTopComponent extends TopComponent {
       //JScrollBar vbar = jScrollPane1.getVerticalScrollBar();
       //boolean autoScroll = ((vbar.getValue() + vbar.getVisibleAmount()) == vbar.getMaximum());
       //System.out.println("val="+vbar.getValue()+" vis="+vbar.getVisibleAmount()+" max="+vbar.getMaximum()+" res="+autoScroll);
-      jTextArea1.append(str);
+      jTextArea1.append(str+"\n");
       //if(autoScroll) jTextArea1.setCaretPosition(jTextArea1.getDocument().getLength());
     }
 

@@ -1113,8 +1113,7 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native String IKMarkerTask_getClassName();
   public final static native long IKMarkerTask_clone(long jarg1, IKMarkerTask jarg1_);
   public final static native String IKMarkerTask_getConcreteClassName(long jarg1, IKMarkerTask jarg1_);
-  public final static native long new_IKMarkerTask__SWIG_0();
-  public final static native long new_IKMarkerTask__SWIG_1(long jarg1, IKMarkerTask jarg1_);
+  public final static native long new_IKMarkerTask();
   public final static native void delete_IKMarkerTask(long jarg1);
   public final static native long IKCoordinateTask_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void IKCoordinateTask_assign(long jarg1, IKCoordinateTask jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -1876,6 +1875,13 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native long InverseKinematicsTool_getIKTaskSet(long jarg1, InverseKinematicsTool jarg1_);
   public final static native boolean InverseKinematicsTool_run(long jarg1, InverseKinematicsTool jarg1_) throws java.io.IOException;
   public final static native void InverseKinematicsTool_populateReferences(long jarg1, InverseKinematicsTool jarg1_, long jarg2, MarkersReference jarg2_, long jarg3, SimTKArrayCoordinateReference jarg3_);
+  public final static native long OrientationWeightSet_safeDownCast(long jarg1, OpenSimObject jarg1_);
+  public final static native void OrientationWeightSet_assign(long jarg1, OrientationWeightSet jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native String OrientationWeightSet_getClassName();
+  public final static native long OrientationWeightSet_clone(long jarg1, OrientationWeightSet jarg1_);
+  public final static native String OrientationWeightSet_getConcreteClassName(long jarg1, OrientationWeightSet jarg1_);
+  public final static native long new_OrientationWeightSet();
+  public final static native void delete_OrientationWeightSet(long jarg1);
   public final static native long IMUInverseKinematicsTool_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void IMUInverseKinematicsTool_assign(long jarg1, IMUInverseKinematicsTool jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String IMUInverseKinematicsTool_getClassName();
@@ -1899,6 +1905,15 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native long IMUInverseKinematicsTool_get_sensor_to_opensim_rotations__SWIG_1(long jarg1, IMUInverseKinematicsTool jarg1_);
   public final static native long IMUInverseKinematicsTool_upd_sensor_to_opensim_rotations__SWIG_1(long jarg1, IMUInverseKinematicsTool jarg1_);
   public final static native void IMUInverseKinematicsTool_set_sensor_to_opensim_rotations__SWIG_1(long jarg1, IMUInverseKinematicsTool jarg1_, long jarg2, Vec3 jarg2_);
+  public final static native void IMUInverseKinematicsTool_copyProperty_orientation_weights(long jarg1, IMUInverseKinematicsTool jarg1_, long jarg2, IMUInverseKinematicsTool jarg2_);
+  public final static native long IMUInverseKinematicsTool_get_orientation_weights__SWIG_0(long jarg1, IMUInverseKinematicsTool jarg1_, int jarg2);
+  public final static native long IMUInverseKinematicsTool_upd_orientation_weights__SWIG_0(long jarg1, IMUInverseKinematicsTool jarg1_, int jarg2);
+  public final static native void IMUInverseKinematicsTool_set_orientation_weights__SWIG_0(long jarg1, IMUInverseKinematicsTool jarg1_, int jarg2, long jarg3, OrientationWeightSet jarg3_);
+  public final static native int IMUInverseKinematicsTool_append_orientation_weights(long jarg1, IMUInverseKinematicsTool jarg1_, long jarg2, OrientationWeightSet jarg2_);
+  public final static native void IMUInverseKinematicsTool_constructProperty_orientation_weights(long jarg1, IMUInverseKinematicsTool jarg1_, long jarg2, OrientationWeightSet jarg2_);
+  public final static native long IMUInverseKinematicsTool_get_orientation_weights__SWIG_1(long jarg1, IMUInverseKinematicsTool jarg1_);
+  public final static native long IMUInverseKinematicsTool_upd_orientation_weights__SWIG_1(long jarg1, IMUInverseKinematicsTool jarg1_);
+  public final static native void IMUInverseKinematicsTool_set_orientation_weights__SWIG_1(long jarg1, IMUInverseKinematicsTool jarg1_, long jarg2, OrientationWeightSet jarg2_);
   public final static native void delete_IMUInverseKinematicsTool(long jarg1);
   public final static native long new_IMUInverseKinematicsTool__SWIG_0();
   public final static native long new_IMUInverseKinematicsTool__SWIG_1(String jarg1);
@@ -2022,45 +2037,6 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native void InterruptCallback_interrupt(long jarg1, InterruptCallback jarg1_);
   public final static native int InterruptCallback_step(long jarg1, InterruptCallback jarg1_, long jarg2, State jarg2_, int jarg3);
   public final static native void delete_InterruptCallback(long jarg1);
-  public final static native boolean PropertyHelper_getValueBool__SWIG_0(long jarg1, AbstractProperty jarg1_, int jarg2);
-  public final static native boolean PropertyHelper_getValueBool__SWIG_1(long jarg1, AbstractProperty jarg1_);
-  public final static native void PropertyHelper_setValueBool__SWIG_0(boolean jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
-  public final static native void PropertyHelper_setValueBool__SWIG_1(boolean jarg1, long jarg2, AbstractProperty jarg2_);
-  public final static native void PropertyHelper_appendValueBool(boolean jarg1, long jarg2, AbstractProperty jarg2_);
-  public final static native int PropertyHelper_getValueInt__SWIG_0(long jarg1, AbstractProperty jarg1_, int jarg2);
-  public final static native int PropertyHelper_getValueInt__SWIG_1(long jarg1, AbstractProperty jarg1_);
-  public final static native void PropertyHelper_setValueInt__SWIG_0(int jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
-  public final static native void PropertyHelper_setValueInt__SWIG_1(int jarg1, long jarg2, AbstractProperty jarg2_);
-  public final static native void PropertyHelper_appendValueInt(int jarg1, long jarg2, AbstractProperty jarg2_);
-  public final static native double PropertyHelper_getValueDouble__SWIG_0(long jarg1, AbstractProperty jarg1_, int jarg2);
-  public final static native double PropertyHelper_getValueDouble__SWIG_1(long jarg1, AbstractProperty jarg1_);
-  public final static native void PropertyHelper_setValueDouble__SWIG_0(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
-  public final static native void PropertyHelper_setValueDouble__SWIG_1(double jarg1, long jarg2, AbstractProperty jarg2_);
-  public final static native void PropertyHelper_appendValueDouble(double jarg1, long jarg2, AbstractProperty jarg2_);
-  public final static native String PropertyHelper_getValueString__SWIG_0(long jarg1, AbstractProperty jarg1_, int jarg2);
-  public final static native String PropertyHelper_getValueString__SWIG_1(long jarg1, AbstractProperty jarg1_);
-  public final static native void PropertyHelper_setValueString__SWIG_0(String jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
-  public final static native void PropertyHelper_setValueString__SWIG_1(String jarg1, long jarg2, AbstractProperty jarg2_);
-  public final static native void PropertyHelper_appendValueString(String jarg1, long jarg2, AbstractProperty jarg2_);
-  public final static native double PropertyHelper_getValueTransform(long jarg1, AbstractProperty jarg1_, int jarg2);
-  public final static native void PropertyHelper_setValueTransform(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
-  public final static native double PropertyHelper_getValueVec3(long jarg1, AbstractProperty jarg1_, int jarg2);
-  public final static native void PropertyHelper_setValueVec3(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
-  public final static native double PropertyHelper_getValueVec6(long jarg1, AbstractProperty jarg1_, int jarg2);
-  public final static native void PropertyHelper_setValueVec6(double jarg1, long jarg2, AbstractProperty jarg2_, int jarg3);
-  public final static native long PropertyHelper_getValueStringArray(long jarg1, AbstractProperty jarg1_);
-  public final static native void PropertyHelper_setValueStringArray(long jarg1, AbstractProperty jarg1_, long jarg2, ArrayStr jarg2_);
-  public final static native void PropertyHelper_removeItem(long jarg1, AbstractProperty jarg1_, int jarg2);
-  public final static native long new_PropertyHelper();
-  public final static native void delete_PropertyHelper(long jarg1);
-  public final static native void delete_SimtkLogCallback(long jarg1);
-  public final static native void SimtkLogCallback_log(long jarg1, SimtkLogCallback jarg1_, String jarg2);
-  public final static native void SimtkLogCallback_logSwigExplicitSimtkLogCallback(long jarg1, SimtkLogCallback jarg1_, String jarg2);
-  public final static native void SimtkLogCallback_addToLogManager(long jarg1, SimtkLogCallback jarg1_);
-  public final static native void SimtkLogCallback_removeFromLogManager(long jarg1, SimtkLogCallback jarg1_);
-  public final static native long new_SimtkLogCallback();
-  public final static native void SimtkLogCallback_director_connect(SimtkLogCallback obj, long cptr, boolean mem_own, boolean weak_global);
-  public final static native void SimtkLogCallback_change_ownership(SimtkLogCallback obj, long cptr, boolean take_or_release);
   public final static native long CoordinateActuator_SWIGUpcast(long jarg1);
   public final static native long ActivationCoordinateActuator_SWIGUpcast(long jarg1);
   public final static native long PointActuator_SWIGUpcast(long jarg1);
@@ -2172,9 +2148,6 @@ public class opensimActuatorsAnalysesToolsJNI {
   }
   public static int SwigDirector_AnalysisWrapper_printResults__SWIG_3(AnalysisWrapper jself, String aBaseName) {
     return jself.printResults(aBaseName);
-  }
-  public static void SwigDirector_SimtkLogCallback_log(SimtkLogCallback jself, String str) {
-    jself.log(str);
   }
 
   private final static native void swig_module_init();

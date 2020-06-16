@@ -29,130 +29,130 @@ public class PropertyHelper {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimActuatorsAnalysesToolsJNI.delete_PropertyHelper(swigCPtr);
+        opensimCommonJNI.delete_PropertyHelper(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public static boolean getValueBool(AbstractProperty p, int index) {
-    return opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueBool__SWIG_0(AbstractProperty.getCPtr(p), p, index);
+    return opensimCommonJNI.PropertyHelper_getValueBool__SWIG_0(AbstractProperty.getCPtr(p), p, index);
   }
 
   public static boolean getValueBool(AbstractProperty p) {
-    return opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueBool__SWIG_1(AbstractProperty.getCPtr(p), p);
+    return opensimCommonJNI.PropertyHelper_getValueBool__SWIG_1(AbstractProperty.getCPtr(p), p);
   }
 
   public static void setValueBool(boolean v, AbstractProperty p, int index) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueBool__SWIG_0(v, AbstractProperty.getCPtr(p), p, index);
+    opensimCommonJNI.PropertyHelper_setValueBool__SWIG_0(v, AbstractProperty.getCPtr(p), p, index);
   }
 
   public static void setValueBool(boolean v, AbstractProperty p) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueBool__SWIG_1(v, AbstractProperty.getCPtr(p), p);
+    opensimCommonJNI.PropertyHelper_setValueBool__SWIG_1(v, AbstractProperty.getCPtr(p), p);
   }
 
   public static void appendValueBool(boolean v, AbstractProperty p) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_appendValueBool(v, AbstractProperty.getCPtr(p), p);
+    opensimCommonJNI.PropertyHelper_appendValueBool(v, AbstractProperty.getCPtr(p), p);
   }
 
   public static int getValueInt(AbstractProperty p, int index) {
-    return opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueInt__SWIG_0(AbstractProperty.getCPtr(p), p, index);
+    return opensimCommonJNI.PropertyHelper_getValueInt__SWIG_0(AbstractProperty.getCPtr(p), p, index);
   }
 
   public static int getValueInt(AbstractProperty p) {
-    return opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueInt__SWIG_1(AbstractProperty.getCPtr(p), p);
+    return opensimCommonJNI.PropertyHelper_getValueInt__SWIG_1(AbstractProperty.getCPtr(p), p);
   }
 
   public static void setValueInt(int v, AbstractProperty p, int index) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueInt__SWIG_0(v, AbstractProperty.getCPtr(p), p, index);
+    opensimCommonJNI.PropertyHelper_setValueInt__SWIG_0(v, AbstractProperty.getCPtr(p), p, index);
   }
 
   public static void setValueInt(int v, AbstractProperty p) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueInt__SWIG_1(v, AbstractProperty.getCPtr(p), p);
+    opensimCommonJNI.PropertyHelper_setValueInt__SWIG_1(v, AbstractProperty.getCPtr(p), p);
   }
 
   public static void appendValueInt(int v, AbstractProperty p) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_appendValueInt(v, AbstractProperty.getCPtr(p), p);
+    opensimCommonJNI.PropertyHelper_appendValueInt(v, AbstractProperty.getCPtr(p), p);
   }
 
   public static double getValueDouble(AbstractProperty p, int index) {
-    return opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueDouble__SWIG_0(AbstractProperty.getCPtr(p), p, index);
+    return opensimCommonJNI.PropertyHelper_getValueDouble__SWIG_0(AbstractProperty.getCPtr(p), p, index);
   }
 
   public static double getValueDouble(AbstractProperty p) {
-    return opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueDouble__SWIG_1(AbstractProperty.getCPtr(p), p);
+    return opensimCommonJNI.PropertyHelper_getValueDouble__SWIG_1(AbstractProperty.getCPtr(p), p);
   }
 
   public static void setValueDouble(double v, AbstractProperty p, int index) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueDouble__SWIG_0(v, AbstractProperty.getCPtr(p), p, index);
+    opensimCommonJNI.PropertyHelper_setValueDouble__SWIG_0(v, AbstractProperty.getCPtr(p), p, index);
   }
 
   public static void setValueDouble(double v, AbstractProperty p) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueDouble__SWIG_1(v, AbstractProperty.getCPtr(p), p);
+    opensimCommonJNI.PropertyHelper_setValueDouble__SWIG_1(v, AbstractProperty.getCPtr(p), p);
   }
 
   public static void appendValueDouble(double v, AbstractProperty p) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_appendValueDouble(v, AbstractProperty.getCPtr(p), p);
+    opensimCommonJNI.PropertyHelper_appendValueDouble(v, AbstractProperty.getCPtr(p), p);
   }
 
   public static String getValueString(AbstractProperty p, int index) {
-    return opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueString__SWIG_0(AbstractProperty.getCPtr(p), p, index);
+    return opensimCommonJNI.PropertyHelper_getValueString__SWIG_0(AbstractProperty.getCPtr(p), p, index);
   }
 
   public static String getValueString(AbstractProperty p) {
-    return opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueString__SWIG_1(AbstractProperty.getCPtr(p), p);
+    return opensimCommonJNI.PropertyHelper_getValueString__SWIG_1(AbstractProperty.getCPtr(p), p);
   }
 
   public static void setValueString(String v, AbstractProperty p, int index) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueString__SWIG_0(v, AbstractProperty.getCPtr(p), p, index);
+    opensimCommonJNI.PropertyHelper_setValueString__SWIG_0(v, AbstractProperty.getCPtr(p), p, index);
   }
 
   public static void setValueString(String v, AbstractProperty p) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueString__SWIG_1(v, AbstractProperty.getCPtr(p), p);
+    opensimCommonJNI.PropertyHelper_setValueString__SWIG_1(v, AbstractProperty.getCPtr(p), p);
   }
 
   public static void appendValueString(String v, AbstractProperty p) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_appendValueString(v, AbstractProperty.getCPtr(p), p);
+    opensimCommonJNI.PropertyHelper_appendValueString(v, AbstractProperty.getCPtr(p), p);
   }
 
   public static double getValueTransform(AbstractProperty p, int index) {
-    return opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueTransform(AbstractProperty.getCPtr(p), p, index);
+    return opensimCommonJNI.PropertyHelper_getValueTransform(AbstractProperty.getCPtr(p), p, index);
   }
 
   public static void setValueTransform(double v, AbstractProperty p, int index) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueTransform(v, AbstractProperty.getCPtr(p), p, index);
+    opensimCommonJNI.PropertyHelper_setValueTransform(v, AbstractProperty.getCPtr(p), p, index);
   }
 
   public static double getValueVec3(AbstractProperty p, int index) {
-    return opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueVec3(AbstractProperty.getCPtr(p), p, index);
+    return opensimCommonJNI.PropertyHelper_getValueVec3(AbstractProperty.getCPtr(p), p, index);
   }
 
   public static void setValueVec3(double v, AbstractProperty p, int index) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueVec3(v, AbstractProperty.getCPtr(p), p, index);
+    opensimCommonJNI.PropertyHelper_setValueVec3(v, AbstractProperty.getCPtr(p), p, index);
   }
 
   public static double getValueVec6(AbstractProperty p, int index) {
-    return opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueVec6(AbstractProperty.getCPtr(p), p, index);
+    return opensimCommonJNI.PropertyHelper_getValueVec6(AbstractProperty.getCPtr(p), p, index);
   }
 
   public static void setValueVec6(double v, AbstractProperty p, int index) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueVec6(v, AbstractProperty.getCPtr(p), p, index);
+    opensimCommonJNI.PropertyHelper_setValueVec6(v, AbstractProperty.getCPtr(p), p, index);
   }
 
   public static ArrayStr getValueStringArray(AbstractProperty p) {
-    return new ArrayStr(opensimActuatorsAnalysesToolsJNI.PropertyHelper_getValueStringArray(AbstractProperty.getCPtr(p), p), true);
+    return new ArrayStr(opensimCommonJNI.PropertyHelper_getValueStringArray(AbstractProperty.getCPtr(p), p), true);
   }
 
   public static void setValueStringArray(AbstractProperty p, ArrayStr aStringArray) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_setValueStringArray(AbstractProperty.getCPtr(p), p, ArrayStr.getCPtr(aStringArray), aStringArray);
+    opensimCommonJNI.PropertyHelper_setValueStringArray(AbstractProperty.getCPtr(p), p, ArrayStr.getCPtr(aStringArray), aStringArray);
   }
 
   public static void removeItem(AbstractProperty p, int index) {
-    opensimActuatorsAnalysesToolsJNI.PropertyHelper_removeItem(AbstractProperty.getCPtr(p), p, index);
+    opensimCommonJNI.PropertyHelper_removeItem(AbstractProperty.getCPtr(p), p, index);
   }
 
   public PropertyHelper() {
-    this(opensimActuatorsAnalysesToolsJNI.new_PropertyHelper(), true);
+    this(opensimCommonJNI.new_PropertyHelper(), true);
   }
 
 }
