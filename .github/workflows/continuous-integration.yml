@@ -102,13 +102,6 @@ jobs:
       run: |
         chdir $env:GITHUB_WORKSPACE\\build_core
         cmake --install . 
-    
-    - name: Cache opensim-core-install
-      id: cache-core
-      uses: actions/cache@v1
-      with:
-        path: ~/opensim-core-install
-        key: opensim-core-master
 
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
