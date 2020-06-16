@@ -233,7 +233,7 @@
             <replacefilter token="@VERSION@" />
         </replace>
         <chmod file="${mac.dist.inner.dir}/etc/OpenSim.conf" perm="744"/>
-        <chmod file="$dist/OpenSim.app/Contents/Info.plist" perm="644"/>
+        <chmod file="dist/OpenSim.app/Contents/Info.plist" perm="644"/>
 
       <copy todir="dist/OpenSim.app/Contents/Resources/"
             file="installer_files/OSX/OpenSimDocument.icns" />
