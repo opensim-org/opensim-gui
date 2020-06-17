@@ -78,16 +78,16 @@ jobs:
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2 
 
-    - name: Cache opensim-core
-      id: cache-core
-      uses: actions/cache@v1
-      with:
-        path: ~/opensim-core-install
-        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
-        key: ${{ runner.os }}-${{ hashFiles('opensim-core/*') }}
-
+    #- name: Cache opensim-core
+    #  id: cache-core
+    #  uses: actions/cache@v1
+    #  with:
+    #    path: ~/opensim-core-install
+    #    # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
+    #    key: ${{ runner.os }}-${{ hashFiles('opensim-core/*') }}
+    #
     - name: Build opensim-core
-      if: steps.cache-core.outputs.cache-hit != 'true'
+      # if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
@@ -96,12 +96,7 @@ jobs:
         cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2
-        
-    - name: Install opensim-core
-      if: steps.cache-core.outputs.cache-hit != 'true'
-      run: |
-        chdir $env:GITHUB_WORKSPACE\\build_core
-        cmake --install . 
+        cmake --install .
 
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
@@ -208,15 +203,15 @@ jobs:
         cmake . -LAH
         cmake --build . --config Release
           
-    - name: Cache opensim-core
-      id: cache-core
-      uses: actions/cache@v1
-      with:
-        path: ~/opensim-core-install
-        key: ${{ runner.os }}-${{ hashFiles('opensim-core/*') }}
-
+    #- name: Cache opensim-core
+    #  id: cache-core
+    #  uses: actions/cache@v1
+    #  with:
+    #    path: ~/opensim-core-install
+    #    key: ${{ runner.os }}-${{ hashFiles('opensim-core/*') }}
+    
     - name: Build opensim-core
-      if: steps.cache-core.outputs.cache-hit != 'true'
+     # if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
@@ -315,15 +310,15 @@ jobs:
         cmake . -LAH
         cmake --build . --config Release
           
-    - name: Cache opensim-core
-      id: cache-core
-      uses: actions/cache@v1
-      with:
-        path: ~/opensim-core-install
-        key: ${{ runner.os }}-${{ hashFiles('opensim-core/*') }}
-
+    #- name: Cache opensim-core
+    #  id: cache-core
+    #  uses: actions/cache@v1
+    #  with:
+    #    path: ~/opensim-core-install
+    #    key: ${{ runner.os }}-${{ hashFiles('opensim-core/*') }}
+    #
     - name: Build opensim-core
-      if: steps.cache-core.outputs.cache-hit != 'true'
+      # if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
