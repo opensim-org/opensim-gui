@@ -203,16 +203,23 @@ jobs:
         cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DCMAKE_BUILD_TYPE=Release
         cmake . -LAH
         cmake --build . --config Release
+        
+    - name: Obtain opensim-core commit
+      run: |
+        cd opensim-core
+        git rev-parse HEAD > ../opensim-core-commit-hash.txt
+        cd ..
+        cat opensim-core-commit-hash.txt
           
-    #- name: Cache opensim-core
-    #  id: cache-core
-    #  uses: actions/cache@v1
-    #  with:
-    #    path: ~/opensim-core-install
-    #    key: ${{ runner.os }}-${{ hashFiles('opensim-core/*') }}
+    - name: Cache opensim-core
+      id: cache-core
+      uses: actions/cache@v1
+      with:
+        path: ~/opensim-core-install
+        key: ${{ runner.os }}-${{ hashFiles('opensim-core-commit-hash.txt') }}
     
     - name: Build opensim-core
-     # if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
