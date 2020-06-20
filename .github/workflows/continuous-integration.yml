@@ -77,17 +77,24 @@ jobs:
         $env:CXXFLAGS = ""
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2 
+        
+    - name: Obtain opensim-core commit
+      id: opensim-core-commit
+      run: |
+        cd opensim-core
+        opensim_core_commit=(git rev-parse HEAD)
+        echo "::set-output name=hash::$opensim_core_commit"
 
-    #- name: Cache opensim-core
-    #  id: cache-core
-    #  uses: actions/cache@v1
-    #  with:
-    #    path: ~/opensim-core-install
-    #    # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
-    #    key: ${{ runner.os }}-${{ hashFiles('opensim-core/*') }}
-    #
+    - name: Cache opensim-core
+      id: cache-core
+      uses: actions/cache@v1
+      with:
+        path: ~/opensim-core-install
+        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
+        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
+    
     - name: Build opensim-core
-      # if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
@@ -205,18 +212,18 @@ jobs:
         cmake --build . --config Release
         
     - name: Obtain opensim-core commit
+      id: opensim-core-commit
       run: |
         cd opensim-core
-        git rev-parse HEAD > ../opensim-core-commit-hash.txt
-        cd ..
-        cat opensim-core-commit-hash.txt
+        opensim_core_commit=$(git rev-parse HEAD)
+        echo "::set-output name=hash::$opensim_core_commit"
           
     - name: Cache opensim-core
       id: cache-core
       uses: actions/cache@v1
       with:
         path: ~/opensim-core-install
-        key: ${{ runner.os }}-${{ hashFiles('opensim-core-commit-hash.txt') }}
+        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
     
     - name: Build opensim-core
       if: steps.cache-core.outputs.cache-hit != 'true'
@@ -317,16 +324,23 @@ jobs:
         cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         cmake . -LAH
         cmake --build . --config Release
-          
-    #- name: Cache opensim-core
-    #  id: cache-core
-    #  uses: actions/cache@v1
-    #  with:
-    #    path: ~/opensim-core-install
-    #    key: ${{ runner.os }}-${{ hashFiles('opensim-core/*') }}
-    #
+        
+    - name: Obtain opensim-core commit
+      id: opensim-core-commit
+      run: |
+        cd opensim-core
+        opensim_core_commit=$(git rev-parse HEAD)
+        echo "::set-output name=hash::$opensim_core_commit"
+
+    - name: Cache opensim-core
+      id: cache-core
+      uses: actions/cache@v1
+      with:
+        path: ~/opensim-core-install
+        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
+    
     - name: Build opensim-core
-      # if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
