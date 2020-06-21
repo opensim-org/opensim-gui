@@ -232,7 +232,10 @@
             value="${app.version}">
             <replacefilter token="@VERSION@" />
         </replace>
-        
+        <!-- Following chmods are needed so that the application                  is recognized as such by osx and shows in launchpad,                 these match local/dev environment --> 
+        <chmod file="${mac.dist.inner.dir}/etc/OpenSim.conf" perm="744"/>
+        <chmod file="dist/OpenSim.app/Contents/Info.plist" perm="644"/>
+
       <copy todir="dist/OpenSim.app/Contents/Resources/"
             file="installer_files/OSX/OpenSimDocument.icns" />
 
