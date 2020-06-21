@@ -1,6 +1,8 @@
 name: opensim-application
 
 on:
+  schedule:
+    - cron: '0 2 * * *'
   pull_request:
     branches:
       - '*'
@@ -75,9 +77,24 @@ jobs:
         $env:CXXFLAGS = ""
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2 
+        
+    - name: Obtain opensim-core commit
+      id: opensim-core-commit
+      run: |
+        cd opensim-core
+        $opensim_core_commit=(git rev-parse HEAD)
+        echo "::set-output name=hash::$opensim_core_commit"
 
+    - name: Cache opensim-core
+      id: cache-core
+      uses: actions/cache@v1
+      with:
+        path: ~/opensim-core-install
+        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
+        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
+    
     - name: Build opensim-core
-      if: steps.cache-opensim-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
@@ -86,19 +103,7 @@ jobs:
         cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2
-        
-    - name: Install opensim-core
-      if: steps.cache-opensim-core.outputs.cache-hit != 'true'
-      run: |
-        chdir $env:GITHUB_WORKSPACE\\build_core
-        cmake --install . 
-    
-    - name: Cache opensim-core-install
-      id: cache-opensim-core
-      uses: actions/cache@v1
-      with:
-        path: ~/opensim-core-install
-        key: opensim-core-master
+        cmake --install .
 
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
@@ -182,6 +187,7 @@ jobs:
         wget https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
         hdiutil attach netbeans-8.2-javase-macosx.dmg
         sudo installer -pkg /Volumes/NetBeans\ 8.2/NetBeans\ 8.2.pkg -target /
+        sudo -k
 
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
@@ -204,8 +210,23 @@ jobs:
         cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DCMAKE_BUILD_TYPE=Release
         cmake . -LAH
         cmake --build . --config Release
+        
+    - name: Obtain opensim-core commit
+      id: opensim-core-commit
+      run: |
+        cd opensim-core
+        opensim_core_commit=$(git rev-parse HEAD)
+        echo "::set-output name=hash::$opensim_core_commit"
           
+    - name: Cache opensim-core
+      id: cache-core
+      uses: actions/cache@v1
+      with:
+        path: ~/opensim-core-install
+        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
+    
     - name: Build opensim-core
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
@@ -303,8 +324,23 @@ jobs:
         cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         cmake . -LAH
         cmake --build . --config Release
-          
+        
+    - name: Obtain opensim-core commit
+      id: opensim-core-commit
+      run: |
+        cd opensim-core
+        opensim_core_commit=$(git rev-parse HEAD)
+        echo "::set-output name=hash::$opensim_core_commit"
+
+    - name: Cache opensim-core
+      id: cache-core
+      uses: actions/cache@v1
+      with:
+        path: ~/opensim-core-install
+        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
+    
     - name: Build opensim-core
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
