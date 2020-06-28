@@ -327,6 +327,9 @@
             <file name="org-opensim-view-motions-FileLoadDataAction.instance" url="org-opensim-view-motions-FileLoadDataAction.instance">
                 <attr name="position" intvalue="2500"/>
             </file>
+            <file name="org-opensim-view-motions-FileLoadSensorDataAction.instance" url="org-opensim-view-motions-FileLoadSensorDataAction.instance">
+                <attr name="position" intvalue="2550"/>
+            </file>
             <file name="org-opensim-view-separator1.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
                 <attr name="position" intvalue="2450"/>
