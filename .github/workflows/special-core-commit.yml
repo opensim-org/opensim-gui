@@ -186,7 +186,7 @@ jobs:
         echo $JAVA_HOME
         wget https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
         hdiutil attach netbeans-8.2-javase-macosx.dmg
-        sudo installer -pkg /Volumes/NetBeans\ 8.2/NetBeans\ 8.2.pkg -target /
+        sudo installer -pkg /Volumes/NetBeans\ 8.2/NetBeans\ 8.2.pkg -target --javahome /Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/
         sudo -k
 
     - name: Cache opensim-core-dependencies
