@@ -26,8 +26,10 @@ package org.opensim.view.motions;
  *
  * @author  ayman
  */
+import java.awt.Dialog;
 import java.io.File;
 import java.io.IOException;
+import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.Exceptions;
@@ -64,12 +66,20 @@ public final class FileLoadSensorDataAction extends CallableSystemAction {
                 // 1: circle
                 // 2: coincident with current model/pose
                 // 3: coincident with current model segments
+                SensorLayoutOptions layoutModel = new SensorLayoutOptions();
+                JSensorLayoutPanel layoutPanel = new JSensorLayoutPanel(layoutModel);
+                final DialogDescriptor dlg = new DialogDescriptor(layoutPanel, "Sensor Data Options");
+                dlg.setModal(true);
+                Dialog wDlg = DialogDisplayer.getDefault().createDialog(dlg);
+                wDlg.pack();
+                wDlg.setVisible(true);
                 AnnotatedMotion amot = new AnnotatedMotion(newStorage);
 
                 amot.setName(new File(fileName).getName());
                 ModelForExperimentalData modelForDataImport = null;
                 try {
                     modelForDataImport = new ModelForExperimentalData(nextNumber++, amot);
+                    addSensorBodiesToModel(modelForDataImport, layoutModel);
                     OpenSimDB.getInstance().addModel(modelForDataImport);
                 } catch (IOException ex) {
                     ErrorDialog.displayExceptionDialog(ex);
@@ -99,5 +109,13 @@ public final class FileLoadSensorDataAction extends CallableSystemAction {
     protected boolean asynchronous() {
         return false;
     }
-    
+
+    private void addSensorBodiesToModel(ModelForExperimentalData modelForDataImport, SensorLayoutOptions layoutModel) {
+        switch(layoutModel.getLayout()){
+            case Origin:
+                break;  // Nothing to add
+            default:
+                throw new UnsupportedOperationException("Not supported yet.");
+        }
+    }    
 }
