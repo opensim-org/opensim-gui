@@ -180,6 +180,10 @@ jobs:
         sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-13.jdk
         sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-12.jdk
         sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-11.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-13.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-12.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk
         /usr/libexec/java_home -V
         export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
         echo "::set-env name=JAVA_HOME::$JAVA_HOME"
