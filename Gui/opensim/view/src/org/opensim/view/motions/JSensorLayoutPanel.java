@@ -53,8 +53,8 @@ public class JSensorLayoutPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLayoutComboBox = new javax.swing.JComboBox<>();
-        jShapeComboBox = new javax.swing.JComboBox<>();
+        jLayoutComboBox = new javax.swing.JComboBox();
+        jShapeComboBox = new javax.swing.JComboBox();
         jTransformDataPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -67,14 +67,14 @@ public class JSensorLayoutPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(JSensorLayoutPanel.class, "JSensorLayoutPanel.jLabel2.text")); // NOI18N
 
-        jLayoutComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "At Origin", "Evenly spaced along X", "Evenly spaced along Y", "Evenly spaced along Z", "Half circle in Y-Z plane", "Place at matching segments on current model", "Attach to matching segments on current model", " ", " " }));
+        jLayoutComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "At Origin", "Evenly spaced along X", "Evenly spaced along Y", "Evenly spaced along Z", "Half circle in Y-Z plane", "Place at matching segments on current model", "Attach to matching segments on current model", " ", " " }));
         jLayoutComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLayoutComboBoxActionPerformed(evt);
             }
         });
 
-        jShapeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Triad", "Large Triad", "Prism", "Ellipsoid" }));
+        jShapeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Triad", "Large Triad", "Prism", "Ellipsoid" }));
 
         jTransformDataPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 

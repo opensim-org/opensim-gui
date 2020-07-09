@@ -29,22 +29,28 @@ package org.opensim.view.motions;
 import java.awt.Dialog;
 import java.io.File;
 import java.io.IOException;
+import static java.lang.Math.PI;
+import static java.lang.Math.cos;
+import static java.lang.Math.sin;
+import java.util.Vector;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
-import org.openide.NotifyDescriptor;
-import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
-import org.opensim.modeling.DataTable;
-import org.opensim.modeling.MarkerData;
+import org.opensim.modeling.Body;
+import org.opensim.modeling.FreeJoint;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.Storage;
-import org.opensim.modeling.TimeSeriesTableQuaternion;
-import org.opensim.modeling.Units;
+import org.opensim.modeling.Vec3;
+import org.opensim.modeling.Inertia;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
+import static org.opensim.view.motions.SensorLayoutOptions.Layout.CircleYZ;
+import static org.opensim.view.motions.SensorLayoutOptions.Layout.LineX;
+import static org.opensim.view.motions.SensorLayoutOptions.Layout.LineY;
+import static org.opensim.view.motions.SensorLayoutOptions.Layout.LineZ;
 import org.opensim.view.pub.OpenSimDB;
 
 public final class FileLoadSensorDataAction extends CallableSystemAction {
@@ -79,7 +85,7 @@ public final class FileLoadSensorDataAction extends CallableSystemAction {
                 ModelForExperimentalData modelForDataImport = null;
                 try {
                     modelForDataImport = new ModelForExperimentalData(nextNumber++, amot);
-                    addSensorBodiesToModel(modelForDataImport, layoutModel);
+                    addSensorBodiesToModel(modelForDataImport, layoutModel, amot);
                     OpenSimDB.getInstance().addModel(modelForDataImport);
                 } catch (IOException ex) {
                     ErrorDialog.displayExceptionDialog(ex);
@@ -110,12 +116,58 @@ public final class FileLoadSensorDataAction extends CallableSystemAction {
         return false;
     }
 
-    private void addSensorBodiesToModel(ModelForExperimentalData modelForDataImport, SensorLayoutOptions layoutModel) {
+    private void addSensorBodiesToModel(ModelForExperimentalData modelForDataImport, 
+            SensorLayoutOptions layoutModel, AnnotatedMotion amot) {
+        // Fish out orientations
+        Vector<String> sensorNames = amot.getSensorNames();
         switch(layoutModel.getLayout()){
             case Origin:
                 break;  // Nothing to add
+            case LineX:
+            case LineY:
+            case LineZ:
+            case CircleYZ:
+                int index=0;
+                int numSensors = sensorNames.size();
+                for (String sensorName: sensorNames){
+                    // add a Body with a free Joint to model
+                    Body nextBody = new Body(sensorName, 1, new Vec3(0., 0., 0.), new Inertia(1.));
+                    modelForDataImport.addBody(nextBody);
+                    FreeJoint nextJoint = new FreeJoint(sensorName, modelForDataImport.getGround(), nextBody);
+                    modelForDataImport.addJoint(nextJoint);
+                    if (layoutModel.getLayout() == LineX || layoutModel.getLayout() == LineY || layoutModel.getLayout() == LineZ)
+                        setCoordinateValues(nextJoint, index, layoutModel.getLayout());
+                    else if (layoutModel.getLayout() == CircleYZ){
+                        nextJoint.updCoordinate(FreeJoint.Coord.TranslationY).setDefaultValue(sin((double)index / numSensors * PI));
+                        nextJoint.updCoordinate(FreeJoint.Coord.TranslationZ).setDefaultValue(cos((double)index / numSensors * PI));                       
+                    }
+                    index++;
+                }
+                break;
+            case UseCurrentModelPosition:
+            case AttachCurrentModel:
+                break;
             default:
                 throw new UnsupportedOperationException("Not supported yet.");
         }
     }    
+
+    private void setCoordinateValues(FreeJoint nextJoint, int index, SensorLayoutOptions.Layout layout) {
+        switch(layout){
+            case LineX:
+                nextJoint.updCoordinate(FreeJoint.Coord.TranslationX).setDefaultValue(0.25 * (index + 1));
+                break;
+            case LineY:
+                nextJoint.updCoordinate(FreeJoint.Coord.TranslationY).setDefaultValue(0.25 * (index + 1));
+                break;
+            case LineZ:
+                nextJoint.updCoordinate(FreeJoint.Coord.TranslationZ).setDefaultValue(0.25 * (index + 1));
+                break;
+            default:
+                break;
+                 
+        }
+        
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
