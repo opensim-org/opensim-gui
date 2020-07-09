@@ -150,7 +150,7 @@ public class AnnotatedMotion extends Storage {
     
     public Vector<String> getSensorNames() {
         Vector<String> sensors= getNamesOfObjectsOfType(ExperimentalDataItemType.OrientationData);
-        sensors.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.OrientationData));
+        //sensors.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.OrientationData));
         return sensors;
     }
 
@@ -228,7 +228,7 @@ public class AnnotatedMotion extends Storage {
                                  classified.add(new MotionObjectPointForce(columnType, baseName+prefix, i-1));
                                 break;
                             case OrientationData:
-                                classified.add(new MotionObjectOrientation(columnType, baseName+prefix, i-1));
+                                classified.add(new MotionObjectOrientation(columnType, baseName, i-1));
                                 break;
                         }                           
                             

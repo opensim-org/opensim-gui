@@ -31,25 +31,17 @@ import java.util.Formatter;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.opensim.modeling.ArrayDecorativeGeometry;
 import org.opensim.modeling.ArrayDouble;
-import org.opensim.modeling.Component;
-import org.opensim.modeling.DecorativeArrow;
-import org.opensim.modeling.Model;
-import org.opensim.modeling.ModelDisplayHints;
-import org.opensim.modeling.OpenSimContext;
-import org.opensim.modeling.PhysicalFrame;
+import org.opensim.modeling.Body;
+import org.opensim.modeling.BodySet;
 import org.opensim.modeling.Quaternion;
 import org.opensim.modeling.Rotation;
-import org.opensim.modeling.State;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Transform;
-import org.opensim.modeling.UnitVec3;
 import org.opensim.modeling.Vec3;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.view.motions.MotionDisplayer;
-import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
 
 /**
@@ -124,6 +116,13 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
     @Override
     public JSONObject createDecorationJson(ArrayList<UUID> comp_uuids, MotionDisplayer motionDisplayer) {
         // Create Object with proper name, add it to ground, update Map of Object to UUID
+        // If model contains a body with same name as sensor use it
+        JSONObject bodyJson = motionDisplayer.getModelVisJson().getModelGroundJson();
+        BodySet bodySet = motionDisplayer.getModelVisJson().getModel().getBodySet();
+        if (bodySet.contains(getName())){
+            Body body = bodySet.get(getName());
+            bodyJson = motionDisplayer.getModelVisJson().getBodyRep(body);
+        }
         JSONObject expSensor_json = new JSONObject();
         imurep_uuid = UUID.randomUUID(); 
         expSensor_json.put("uuid", imurep_uuid.toString());
@@ -148,7 +147,7 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         //expSensor_json.put("userData", "NonEditable");
         push_rotation_to_matrix(interpolatedStates, idx, expSensor_json);
         comp_uuids.add(imurep_uuid);
-        ((JSONArray)motionDisplayer.getModelVisJson().getModelGroundJson().get("children")).add(expSensor_json);
+        ((JSONArray)bodyJson.get("children")).add(expSensor_json);
         return expSensor_json;
     }
 

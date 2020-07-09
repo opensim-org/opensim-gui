@@ -38,15 +38,13 @@ import org.openide.DialogDisplayer;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
-import org.opensim.modeling.Body;
 import org.opensim.modeling.FreeJoint;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.Storage;
-import org.opensim.modeling.Vec3;
-import org.opensim.modeling.Inertia;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
+import org.opensim.view.experimentaldata.MotionObjectOrientation;
 import static org.opensim.view.motions.SensorLayoutOptions.Layout.CircleYZ;
 import static org.opensim.view.motions.SensorLayoutOptions.Layout.LineX;
 import static org.opensim.view.motions.SensorLayoutOptions.Layout.LineY;
@@ -130,44 +128,38 @@ public final class FileLoadSensorDataAction extends CallableSystemAction {
                 int index=0;
                 int numSensors = sensorNames.size();
                 for (String sensorName: sensorNames){
+                    double pointX = 0.0;
+                    double pointY = 0.0;
+                    double pointZ = 0.0;
+                    /*
                     // add a Body with a free Joint to model
                     Body nextBody = new Body(sensorName, 1, new Vec3(0., 0., 0.), new Inertia(1.));
                     modelForDataImport.addBody(nextBody);
                     FreeJoint nextJoint = new FreeJoint(sensorName, modelForDataImport.getGround(), nextBody);
                     modelForDataImport.addJoint(nextJoint);
-                    if (layoutModel.getLayout() == LineX || layoutModel.getLayout() == LineY || layoutModel.getLayout() == LineZ)
-                        setCoordinateValues(nextJoint, index, layoutModel.getLayout());
-                    else if (layoutModel.getLayout() == CircleYZ){
-                        nextJoint.updCoordinate(FreeJoint.Coord.TranslationY).setDefaultValue(sin((double)index / numSensors * PI));
-                        nextJoint.updCoordinate(FreeJoint.Coord.TranslationZ).setDefaultValue(cos((double)index / numSensors * PI));                       
+                    */
+                    if (layoutModel.getLayout() == LineX){
+                        pointX = 0.25 * (index + 1);
                     }
-                    index++;
+                    if (layoutModel.getLayout() == LineY){
+                        pointY = 0.25 * (index + 1);
+                    }
+                    if (layoutModel.getLayout() == LineZ){
+                        pointZ = 0.25 * (index + 1);
+                    }
+                    if (layoutModel.getLayout() == CircleYZ){
+                        pointY = sin((double)index / numSensors * PI);
+                        pointZ = cos((double)index / numSensors * PI);
+                    }
+                    ((MotionObjectOrientation)amot.getClassified().elementAt(index)).setPoint(new double[]{pointX, pointY, pointZ});
+                    
+                    index++; 
                 }
                 break;
             case UseCurrentModelPosition:
             case AttachCurrentModel:
-                break;
             default:
                 throw new UnsupportedOperationException("Not supported yet.");
         }
     }    
-
-    private void setCoordinateValues(FreeJoint nextJoint, int index, SensorLayoutOptions.Layout layout) {
-        switch(layout){
-            case LineX:
-                nextJoint.updCoordinate(FreeJoint.Coord.TranslationX).setDefaultValue(0.25 * (index + 1));
-                break;
-            case LineY:
-                nextJoint.updCoordinate(FreeJoint.Coord.TranslationY).setDefaultValue(0.25 * (index + 1));
-                break;
-            case LineZ:
-                nextJoint.updCoordinate(FreeJoint.Coord.TranslationZ).setDefaultValue(0.25 * (index + 1));
-                break;
-            default:
-                break;
-                 
-        }
-        
-        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 }
