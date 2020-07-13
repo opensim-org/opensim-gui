@@ -32,15 +32,23 @@ import java.io.IOException;
 import static java.lang.Math.PI;
 import static java.lang.Math.cos;
 import static java.lang.Math.sin;
-import java.util.Vector;
+import org.opensim.modeling.Vector;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
-import org.opensim.modeling.FreeJoint;
+import org.opensim.modeling.BodyOrSpaceType;
+import org.opensim.modeling.CoordinateAxis;
+import org.opensim.modeling.DataTable;
+import org.opensim.modeling.OpenSenseUtilities;
+import org.opensim.modeling.Rotation;
+import org.opensim.modeling.RowVectorView;
+import org.opensim.modeling.StateVector;
+import org.opensim.modeling.StdVectorDouble;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.TimeSeriesTableQuaternion;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
@@ -70,20 +78,44 @@ public final class FileLoadSensorDataAction extends CallableSystemAction {
                 // 1: circle
                 // 2: coincident with current model/pose
                 // 3: coincident with current model segments
-                SensorLayoutOptions layoutModel = new SensorLayoutOptions();
-                JSensorLayoutPanel layoutPanel = new JSensorLayoutPanel(layoutModel);
+                SensorLayoutOptions layoutOptions = new SensorLayoutOptions();
+                JSensorLayoutPanel layoutPanel = new JSensorLayoutPanel(layoutOptions);
                 final DialogDescriptor dlg = new DialogDescriptor(layoutPanel, "Sensor Data Options");
                 dlg.setModal(true);
                 Dialog wDlg = DialogDisplayer.getDefault().createDialog(dlg);
                 wDlg.pack();
                 wDlg.setVisible(true);
-                AnnotatedMotion amot = new AnnotatedMotion(newStorage);
+                // if no rotations are specified proceed, otherwise xform
+                // rotations are space fixed and are in degrees, convert into a Rotation Matrix to apply
+                double[] rotations = layoutOptions.getRotations();
+                Rotation sensorToOpenSim = new
+                Rotation(BodyOrSpaceType.SpaceRotationSequence,
+                    rotations[0], CoordinateAxis.getCoordinateAxis(0),
+                    rotations[1], CoordinateAxis.getCoordinateAxis(1),
+                    rotations[2], CoordinateAxis.getCoordinateAxis(2));
 
+                TimeSeriesTableQuaternion quatTable = new TimeSeriesTableQuaternion(fileName);
+                OpenSenseUtilities.rotateOrientationTable(quatTable, sensorToOpenSim);
+                DataTable flattened = quatTable.flatten();
+                // replace rows
+                StdVectorDouble times = quatTable.getIndependentColumn();
+                newStorage.purge();
+                for (int i=0; i< flattened.getNumRows(); i++){
+                    RowVectorView rowVV = flattened.getRowAtIndex(i);
+                    StateVector newRow = new StateVector();
+                    Vector newVector = new Vector();
+                    newVector.resize(rowVV.size());
+                    for (int j=0; j<rowVV.size();j++)
+                        newVector.set(j, rowVV.get(j));
+                    newRow.setStates(times.get(i), newVector);
+                    newStorage.append(newRow);
+                }
+                AnnotatedMotion amot = new AnnotatedMotion(newStorage);
                 amot.setName(new File(fileName).getName());
                 ModelForExperimentalData modelForDataImport = null;
                 try {
                     modelForDataImport = new ModelForExperimentalData(nextNumber++, amot);
-                    addSensorBodiesToModel(modelForDataImport, layoutModel, amot);
+                    setSensorDisplayPositionsInModel(modelForDataImport, layoutOptions, amot);
                     OpenSimDB.getInstance().addModel(modelForDataImport);
                 } catch (IOException ex) {
                     ErrorDialog.displayExceptionDialog(ex);
@@ -114,10 +146,10 @@ public final class FileLoadSensorDataAction extends CallableSystemAction {
         return false;
     }
 
-    private void addSensorBodiesToModel(ModelForExperimentalData modelForDataImport, 
+    private void setSensorDisplayPositionsInModel(ModelForExperimentalData modelForDataImport, 
             SensorLayoutOptions layoutModel, AnnotatedMotion amot) {
         // Fish out orientations
-        Vector<String> sensorNames = amot.getSensorNames();
+        java.util.Vector<String> sensorNames = amot.getSensorNames();
         switch(layoutModel.getLayout()){
             case Origin:
                 break;  // Nothing to add
