@@ -51,10 +51,10 @@ public class JSensorLayoutPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLayoutComboBox = new javax.swing.JComboBox();
         jShapeComboBox = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLayoutComboBox = new javax.swing.JComboBox();
         jTransformDataPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -63,9 +63,16 @@ public class JSensorLayoutPanel extends javax.swing.JPanel {
         YSpinner = new javax.swing.JSpinner();
         ZSpinner = new javax.swing.JSpinner();
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(JSensorLayoutPanel.class, "JSensorLayoutPanel.jLabel1.text")); // NOI18N
+        jShapeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Triad", "Large Triad", "Prism", "Ellipsoid" }));
+        jShapeComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jShapeComboBoxActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(JSensorLayoutPanel.class, "JSensorLayoutPanel.jLabel2.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(JSensorLayoutPanel.class, "JSensorLayoutPanel.jLabel1.text")); // NOI18N
 
         jLayoutComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "At Origin", "Evenly spaced along X", "Evenly spaced along Y", "Evenly spaced along Z", "Half circle in Y-Z plane", "Place at matching segments on current model", "Attach to matching segments on current model", " ", " " }));
         jLayoutComboBox.addActionListener(new java.awt.event.ActionListener() {
@@ -73,8 +80,6 @@ public class JSensorLayoutPanel extends javax.swing.JPanel {
                 jLayoutComboBoxActionPerformed(evt);
             }
         });
-
-        jShapeComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Triad", "Large Triad", "Prism", "Ellipsoid" }));
 
         jTransformDataPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -150,16 +155,9 @@ public class JSensorLayoutPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(6, 6, 6)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLayoutComboBox, 0, 1, Short.MAX_VALUE)
-                            .addComponent(jShapeComboBox, 0, 275, Short.MAX_VALUE)))
+                        .addComponent(jLabel1)
+                        .addGap(6, 6, 6)
+                        .addComponent(jLayoutComboBox, 0, 1, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jTransformDataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -173,11 +171,8 @@ public class JSensorLayoutPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(jLayoutComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jShapeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTransformDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jTransformDataPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -214,6 +209,10 @@ public class JSensorLayoutPanel extends javax.swing.JPanel {
         layoutOptions.setSensorLayout(index);
     }//GEN-LAST:event_jLayoutComboBoxActionPerformed
 
+    private void jShapeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jShapeComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jShapeComboBoxActionPerformed
+
     class RotationSpinnerListModel extends SpinnerNumberModel {
     private double lastValue;
 
@@ -237,7 +236,6 @@ public class JSensorLayoutPanel extends javax.swing.JPanel {
     }
     private void updateTransform(double xRot, double yRot, double zRot) {
         layoutOptions.setRotations(new double[]{xRot, yRot, zRot});
-        double degToRadians = Math.toRadians(1.0); 
     }
 
     private double getRotationAngleChange(final javax.swing.event.ChangeEvent evt) {
