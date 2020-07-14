@@ -35,20 +35,25 @@ import static java.lang.Math.sin;
 import org.opensim.modeling.Vector;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.modeling.Body;
 import org.opensim.modeling.BodyOrSpaceType;
 import org.opensim.modeling.CoordinateAxis;
 import org.opensim.modeling.DataTable;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSenseUtilities;
 import org.opensim.modeling.Rotation;
 import org.opensim.modeling.RowVectorView;
+import org.opensim.modeling.State;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.StdVectorDouble;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.TimeSeriesTableQuaternion;
+import org.opensim.modeling.Vec3;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
@@ -57,6 +62,7 @@ import static org.opensim.view.motions.SensorLayoutOptions.Layout.CircleYZ;
 import static org.opensim.view.motions.SensorLayoutOptions.Layout.LineX;
 import static org.opensim.view.motions.SensorLayoutOptions.Layout.LineY;
 import static org.opensim.view.motions.SensorLayoutOptions.Layout.LineZ;
+import static org.opensim.view.motions.SensorLayoutOptions.Layout.UseCurrentModelPosition;
 import org.opensim.view.pub.OpenSimDB;
 
 public final class FileLoadSensorDataAction extends CallableSystemAction {
@@ -85,6 +91,13 @@ public final class FileLoadSensorDataAction extends CallableSystemAction {
                 Dialog wDlg = DialogDisplayer.getDefault().createDialog(dlg);
                 wDlg.pack();
                 wDlg.setVisible(true);
+                Model currentModel = OpenSimDB.getInstance().getCurrentModel();
+                if (currentModel == null && layoutOptions.getLayout()==UseCurrentModelPosition){
+                    NotifyDescriptor.Message warnDlg =
+                          new NotifyDescriptor.Message("No current model is available, assuming Even spacing along X axis:\n", NotifyDescriptor.WARNING_MESSAGE);
+                  DialogDisplayer.getDefault().notify(dlg);
+                  layoutOptions.setLayout(LineX);
+                }
                 // if no rotations are specified proceed, otherwise xform
                 // rotations are space fixed and are in degrees, convert into a Rotation Matrix to apply
                 double[] rotations = layoutOptions.getRotations();
@@ -189,6 +202,45 @@ public final class FileLoadSensorDataAction extends CallableSystemAction {
                 }
                 break;
             case UseCurrentModelPosition:
+                int sensorIndex=0;
+                Model currentModel = OpenSimDB.getInstance().getCurrentModel();
+                State currentModelState = OpenSimDB.getInstance().getContext(currentModel).getCurrentStateRef();
+                String missingSensorsMessage = "The following sensors (names) could not be matched to model, will be displayed at Origin: ";
+                boolean missingSensors = false;
+                for (String sensorName: sensorNames){
+                    double[] point = new double[]{0.0, 0., 0.};
+                    Body sensorBody = null;
+                    // find a frame with either sensor name or sensorName - "_imu"
+                    if (currentModel.hasComponent("/bodyset/"+sensorName)){
+                        sensorBody = currentModel.getBodySet().get(sensorName);
+                    }
+                    else {
+                        if (sensorName.endsWith("_imu")){
+                            String shortName = new String(sensorName).replace("_imu", "");
+                            if (currentModel.hasComponent("/bodyset/"+shortName)){
+                                sensorBody = currentModel.getBodySet().get(shortName);
+                            }
+                        }
+                    }
+                    if (sensorBody!=null){
+                        Vec3 location = sensorBody.findStationLocationInGround(currentModelState, sensorBody.getMassCenter());
+                        for (int i=0; i<3; i++) point[i]=location.get(i);
+                        ((MotionObjectOrientation)amot.getClassified().elementAt(sensorIndex)).setPoint(point);
+
+                    }
+                    else {
+                        missingSensorsMessage.concat(sensorName+" ");
+                        missingSensors = true;
+                    }
+                    sensorIndex++;
+                }
+                if (missingSensors){
+                  NotifyDescriptor.Message warnDlg =
+                          new NotifyDescriptor.Message(missingSensorsMessage, NotifyDescriptor.WARNING_MESSAGE);
+                  DialogDisplayer.getDefault().notify(warnDlg);
+   
+                }
+                break;
             case AttachCurrentModel:
             default:
                 throw new UnsupportedOperationException("Not supported yet.");

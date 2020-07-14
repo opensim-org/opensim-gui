@@ -157,7 +157,7 @@ public class JSensorLayoutPanel extends javax.swing.JPanel {
                         .addGap(12, 12, 12)
                         .addComponent(jLabel1)
                         .addGap(6, 6, 6)
-                        .addComponent(jLayoutComboBox, 0, 1, Short.MAX_VALUE))
+                        .addComponent(jLayoutComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jTransformDataPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))

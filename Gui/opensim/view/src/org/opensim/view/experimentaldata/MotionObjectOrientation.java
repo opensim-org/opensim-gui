@@ -127,7 +127,7 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         imurep_uuid = UUID.randomUUID(); 
         expSensor_json.put("uuid", imurep_uuid.toString());
         expSensor_json.put("type", "Frame");
-        expSensor_json.put("size", ModelVisualizationJson.getVisScaleFactor());
+        expSensor_json.put("size", ModelVisualizationJson.getVisScaleFactor()*.5);
         expSensor_json.put("opensimtype", "ExperimentalSensor");
         expSensor_json.put("name", getName());
         //dir -- direction from origin. Must be a unit vector. 
