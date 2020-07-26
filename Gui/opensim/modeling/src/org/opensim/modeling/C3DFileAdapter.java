@@ -37,14 +37,6 @@ public class C3DFileAdapter extends FileAdapter {
     super.delete();
   }
 
-  public C3DFileAdapter() {
-    this(opensimCommonJNI.new_C3DFileAdapter__SWIG_0(), true);
-  }
-
-  public C3DFileAdapter(C3DFileAdapter arg0) {
-    this(opensimCommonJNI.new_C3DFileAdapter__SWIG_1(C3DFileAdapter.getCPtr(arg0), arg0), true);
-  }
-
   public DataAdapter clone() {
     long cPtr = opensimCommonJNI.C3DFileAdapter_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new C3DFileAdapter(cPtr, true);
@@ -82,6 +74,10 @@ public class C3DFileAdapter extends FileAdapter {
 
   public void setLocationForForceExpression(long wrt) {
     opensimCommonJNI.C3DFileAdapter_setLocationForForceExpression__SWIG_1(swigCPtr, this, wrt);
+  }
+
+  public C3DFileAdapter() {
+    this(opensimCommonJNI.new_C3DFileAdapter(), true);
   }
 
   public final static class ForceLocation {

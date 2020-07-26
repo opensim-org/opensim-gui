@@ -39,16 +39,12 @@ public class Units {
     this(opensimCommonJNI.new_Units__SWIG_0(), true);
   }
 
-  public Units(Units aUnits) {
-    this(opensimCommonJNI.new_Units__SWIG_1(Units.getCPtr(aUnits), aUnits), true);
-  }
-
   public Units(String aString) {
-    this(opensimCommonJNI.new_Units__SWIG_2(aString), true);
+    this(opensimCommonJNI.new_Units__SWIG_1(aString), true);
   }
 
   public Units(Units.UnitType aType) {
-    this(opensimCommonJNI.new_Units__SWIG_3(aType.swigValue()), true);
+    this(opensimCommonJNI.new_Units__SWIG_2(aType.swigValue()), true);
   }
 
   public double convertTo(Units.UnitType aType, double aValue) {

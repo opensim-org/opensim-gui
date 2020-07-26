@@ -147,6 +147,22 @@ public class IO {
     return opensimCommonJNI.IO_Uppercase(aStr);
   }
 
+  public static boolean StartsWith(String string, String start) {
+    return opensimCommonJNI.IO_StartsWith(string, start);
+  }
+
+  public static boolean EndsWith(String string, String ending) {
+    return opensimCommonJNI.IO_EndsWith(string, ending);
+  }
+
+  public static boolean StartsWithIgnoringCase(String string, String start) {
+    return opensimCommonJNI.IO_StartsWithIgnoringCase(string, start);
+  }
+
+  public static boolean EndsWithIgnoringCase(String string, String ending) {
+    return opensimCommonJNI.IO_EndsWithIgnoringCase(string, ending);
+  }
+
   public static void eraseEmptyElements(StdVectorString list) {
     opensimCommonJNI.IO_eraseEmptyElements(StdVectorString.getCPtr(list), list);
   }
