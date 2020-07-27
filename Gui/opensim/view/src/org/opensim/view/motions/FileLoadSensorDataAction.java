@@ -95,7 +95,7 @@ public final class FileLoadSensorDataAction extends CallableSystemAction {
                 if (currentModel == null && layoutOptions.getLayout()==UseCurrentModelPosition){
                     NotifyDescriptor.Message warnDlg =
                           new NotifyDescriptor.Message("No current model is available, assuming Even spacing along X axis:\n", NotifyDescriptor.WARNING_MESSAGE);
-                  DialogDisplayer.getDefault().notify(dlg);
+                  DialogDisplayer.getDefault().notify(warnDlg);
                   layoutOptions.setLayout(LineX);
                 }
                 // if no rotations are specified proceed, otherwise xform
