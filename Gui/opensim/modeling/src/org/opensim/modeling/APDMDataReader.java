@@ -45,10 +45,6 @@ public class APDMDataReader extends IMUDataReader {
     this(opensimCommonJNI.new_APDMDataReader__SWIG_1(APDMDataReaderSettings.getCPtr(settings), settings), true);
   }
 
-  public APDMDataReader(APDMDataReader arg0) {
-    this(opensimCommonJNI.new_APDMDataReader__SWIG_2(APDMDataReader.getCPtr(arg0), arg0), true);
-  }
-
   public DataAdapter clone() {
     long cPtr = opensimCommonJNI.APDMDataReader_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new APDMDataReader(cPtr, true);

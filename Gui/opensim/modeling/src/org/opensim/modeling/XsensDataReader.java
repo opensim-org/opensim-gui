@@ -45,10 +45,6 @@ public class XsensDataReader extends IMUDataReader {
     this(opensimCommonJNI.new_XsensDataReader__SWIG_1(XsensDataReaderSettings.getCPtr(settings), settings), true);
   }
 
-  public XsensDataReader(XsensDataReader arg0) {
-    this(opensimCommonJNI.new_XsensDataReader__SWIG_2(XsensDataReader.getCPtr(arg0), arg0), true);
-  }
-
   public DataAdapter clone() {
     long cPtr = opensimCommonJNI.XsensDataReader_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new XsensDataReader(cPtr, true);
