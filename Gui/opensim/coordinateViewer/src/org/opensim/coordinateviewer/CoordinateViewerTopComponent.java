@@ -359,7 +359,7 @@ final class CoordinateViewerTopComponent extends TopComponent implements Observe
          updatePosesPopup();
          return;
       }
-      else if (aModel instanceof ModelForExperimentalData){
+      else if (aModel.getNumBodies()==0){
           jModelNameLabel.setText("");
          coords = null;    // Don't keep reference to old model's coordinates to avoid memory leak'
          mapCoordinates2Sliders.clear();

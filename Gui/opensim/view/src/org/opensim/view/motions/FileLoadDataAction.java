@@ -30,12 +30,15 @@ import java.io.File;
 import java.io.IOException;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
+import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
+import org.opensim.modeling.DataTable;
 import org.opensim.modeling.MarkerData;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.TimeSeriesTableQuaternion;
 import org.opensim.modeling.Units;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
@@ -48,7 +51,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
         // TODO implement action body
         String fileName = FileUtils.getInstance().browseForFilename(".trc,.mot,.sto", "Experimental data file");
         if (fileName != null){
-            if (fileName.toLowerCase().endsWith(".trc") || fileName.toLowerCase().endsWith(".sto")){
+            if (fileName.toLowerCase().endsWith(".trc")){
                 MarkerData markerData;
                 try {
                     markerData = new MarkerData(fileName);
@@ -72,11 +75,9 @@ public final class FileLoadDataAction extends CallableSystemAction {
                           new NotifyDescriptor.Message("Couldn't load data and/or model for display.\n"+
                                 "Possible reasons: data file has incorrect format or issues with file path.");
                   DialogDisplayer.getDefault().notify(dlg);   
-            return;
-
                 }
             }
-            else if (fileName.toLowerCase().endsWith(".mot")){
+            else if (fileName.toLowerCase().endsWith(".mot")||fileName.toLowerCase().endsWith(".sto")){
                     Storage newStorage=null;
                     try {
                         newStorage = new Storage(fileName);

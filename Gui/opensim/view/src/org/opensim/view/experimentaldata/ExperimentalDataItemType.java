@@ -30,6 +30,7 @@ public enum ExperimentalDataItemType{
     MarkerData(3),         
     PointForceData(6),
     BodyForceData(3),
+    OrientationData(4),
     Unknown(1);
 
     private final int numberOfColumns;

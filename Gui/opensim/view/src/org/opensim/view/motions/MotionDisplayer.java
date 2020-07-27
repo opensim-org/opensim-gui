@@ -62,6 +62,7 @@ import org.opensim.modeling.MuscleList;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PhysicalFrame;
+import org.opensim.modeling.Rotation;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.Transform;
@@ -78,6 +79,7 @@ import org.opensim.view.experimentaldata.ExperimentalDataObject;
 import org.opensim.view.experimentaldata.ExperimentalMarker;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.experimentaldata.MotionObjectBodyPoint;
+import org.opensim.view.experimentaldata.MotionObjectOrientation;
 import org.opensim.view.experimentaldata.MotionObjectPointForce;
 import org.opensim.view.pub.OpenSimDB;
 import org.opensim.view.pub.ViewDB;
@@ -107,6 +109,13 @@ public class MotionDisplayer {
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
     private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
             new HashMap<OpenSimObject, ArrayList<UUID>>();
+
+    /**
+     * @return the modelVisJson
+     */
+    public ModelVisualizationJson getModelVisJson() {
+        return modelVisJson;
+    }
 
     public enum ObjectTypesInMotionFiles{GenCoord, 
                                          GenCoord_Velocity, 
@@ -284,6 +293,17 @@ public class MotionDisplayer {
                         JSONUtilities.createMatrixFromTransform(xform, new Vec3(1, length ,1), modelVisJson.getVisScaleFactor()));
                 transforms_json.add(motionObjectTransform);
             }
+            else if (nextObject instanceof MotionObjectOrientation) {
+                // update transform based on new orientation
+                MotionObjectOrientation orient = (MotionObjectOrientation) nextObject;
+                double[] point = orient.getPoint();
+                Vec3 p = new Vec3(point[0], point[1], point[2]);
+                xform.set(new Rotation(orient.getQuaternion()), p);
+                motionObjectTransform.put("uuid", nextObject.getDataObjectUUID().toString());
+                motionObjectTransform.put("matrix",
+                        JSONUtilities.createMatrixFromTransform(xform, unitScale, modelVisJson.getVisScaleFactor()));
+                transforms_json.add(motionObjectTransform);
+            }
         }
      }
 
@@ -313,7 +333,7 @@ public class MotionDisplayer {
         JSONObject topJson = new JSONObject();
         JSONArray jsonGeomArray = new JSONArray();
         jsonGeomArray.add(getExperimentalMarkerGeometryJson());
-        JSONArray jsonMatArray = new JSONArray();
+         JSONArray jsonMatArray = new JSONArray();
         jsonMatArray.add(getExperimentalMarkerMaterialJson());
         topJson.put("geometries", jsonGeomArray);
         topJson.put("materials", jsonMatArray);
@@ -386,12 +406,7 @@ public class MotionDisplayer {
             createMotionObjectsGroupJson();
             addExperimentalDataObjectsToJson(objects);
             for(ExperimentalDataObject nextObject:objects){
-                if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
-                    bindMarkerToVisualizerObjectKeepHandle(nextObject);
-                } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                    bindForceVisualizerObjectKeepHandle(nextObject);
-                } 
-                
+               bindExperimentalDataObjectToVisualizerObjectKeepHandle(nextObject);
             }
             // create objects and cache their uuids
             //createTrails(model);
@@ -468,11 +483,7 @@ public class MotionDisplayer {
         }
     }
 
-    private void bindForceVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
-        nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
-    }
-
-    private void bindMarkerToVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
+    private void bindExperimentalDataObjectToVisualizerObjectKeepHandle(ExperimentalDataObject nextObject) {
         nextObject.setDataObjectUUID(findUUIDForObject(nextObject).get(0));
     }
 
@@ -715,14 +726,7 @@ public class MotionDisplayer {
             Vector<ExperimentalDataObject> objects=mot.getClassified();
             mot.setMotionDisplayer(this);
             for(ExperimentalDataObject nextObject:objects){
-                if (nextObject.getObjectType()==ExperimentalDataItemType.MarkerData){
-                    bindMarkerToVisualizerObjectKeepHandle(nextObject);
-                } else if (nextObject.getObjectType()==ExperimentalDataItemType.PointForceData){
-                    bindForceVisualizerObjectKeepHandle(nextObject);
-                } else if (nextObject.getObjectType()==ExperimentalDataItemType.BodyForceData){
-                    bindForceVisualizerObjectKeepHandle(nextObject);
-                }
-                
+               bindExperimentalDataObjectToVisualizerObjectKeepHandle(nextObject);
             }
             //createTrails(model);
             return;
@@ -757,8 +761,7 @@ public class MotionDisplayer {
             experimentalMarkerMaterialJson.put("color", colorString);
             JSONArray json_materials = (JSONArray) modelVisJson.get("materials");
             json_materials.add(getExperimentalMarkerMaterialJson());
-        }
-        
+        }        
     }
 
     public void addExperimentalDataObjectsToJson(AbstractList<ExperimentalDataObject> expObjects) {
@@ -857,4 +860,5 @@ public class MotionDisplayer {
             }
         }
    }
+
 }

@@ -147,22 +147,32 @@ public class AnnotatedMotion extends Storage {
         forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.BodyForceData));
         return forces;
     }
+    
+    public Vector<String> getSensorNames() {
+        Vector<String> sensors= getNamesOfObjectsOfType(ExperimentalDataItemType.OrientationData);
+        //sensors.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.OrientationData));
+        return sensors;
+    }
 
     private void setupPatterns() {
         patterns.add(0,  new String[]{"_vx", "_vy", "_vz", "_px", "_py", "_pz"});
         patterns.add(1,  new String[]{"_vx", "_vy", "_vz"});
         patterns.add(2,  new String[]{"_tx", "_ty", "_tz"});
         patterns.add(3,  new String[]{"_px", "_py", "_pz"});
-        patterns.add(4,  new String[]{"_1", "_2", "_3"});
+        // We place this pattern before "_1", "_2", "_3" so that quaternions are not mistakenly
+        // classified as PointData (they share suffixes)
+        patterns.add(4,  new String[]{"_1", "_2", "_3", "_4"});
+        patterns.add(5,  new String[]{"_1", "_2", "_3"});
         //patterns.add(5,  new String[]{"_x", "_y", "_z"}); removed so that Torques dont classify as points
-        patterns.add(5,  new String[]{"_fx", "_fy", "_fz"});
-         classifications.add(0, ExperimentalDataItemType.PointForceData);
+        patterns.add(6,  new String[]{"_fx", "_fy", "_fz"});
+        classifications.add(0, ExperimentalDataItemType.PointForceData);
         classifications.add(1, ExperimentalDataItemType.PointData);
         classifications.add(2, ExperimentalDataItemType.PointData);
         classifications.add(3, ExperimentalDataItemType.PointData);
-        classifications.add(4, ExperimentalDataItemType.PointData);
+        classifications.add(4, ExperimentalDataItemType.OrientationData);
+        classifications.add(5, ExperimentalDataItemType.PointData);
         //classifications.add(5, ExperimentalDataItemType.PointData);
-        classifications.add(5, ExperimentalDataItemType.BodyForceData);
+        classifications.add(6, ExperimentalDataItemType.BodyForceData);
          
     }
     public Vector<ExperimentalDataObject> classifyColumns() {
@@ -216,6 +226,9 @@ public class AnnotatedMotion extends Storage {
                                 break;
                             case BodyForceData:
                                  classified.add(new MotionObjectPointForce(columnType, baseName+prefix, i-1));
+                                break;
+                            case OrientationData:
+                                classified.add(new MotionObjectOrientation(columnType, baseName, i-1));
                                 break;
                         }                           
                             
