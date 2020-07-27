@@ -65,10 +65,6 @@ public class MarkerFrame extends OpenSimObject {
     this(opensimCommonJNI.new_MarkerFrame__SWIG_1(aNumMarkers, aFrameNumber, aTime, Units.getCPtr(aUnits), aUnits), true);
   }
 
-  public MarkerFrame(MarkerFrame aFrame) {
-    this(opensimCommonJNI.new_MarkerFrame__SWIG_2(MarkerFrame.getCPtr(aFrame), aFrame), true);
-  }
-
   public void addMarker(Vec3 aCoords) {
     opensimCommonJNI.MarkerFrame_addMarker(swigCPtr, this, Vec3.getCPtr(aCoords), aCoords);
   }

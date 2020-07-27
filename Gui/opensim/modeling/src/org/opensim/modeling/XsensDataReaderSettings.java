@@ -161,8 +161,4 @@ public class XsensDataReaderSettings extends OpenSimObject {
     this(opensimCommonJNI.new_XsensDataReaderSettings__SWIG_1(xmlFile), true);
   }
 
-  public XsensDataReaderSettings(XsensDataReaderSettings arg0) {
-    this(opensimCommonJNI.new_XsensDataReaderSettings__SWIG_2(XsensDataReaderSettings.getCPtr(arg0), arg0), true);
-  }
-
 }

@@ -17,6 +17,10 @@ public class opensimSimulation {
     return new State(opensimSimulationJNI.simulate__SWIG_1(Model.getCPtr(model), model, State.getCPtr(initialState), initialState, finalTime), true);
   }
 
+  public static void updateStateLabels40(Model model, StdVectorString labels) {
+    opensimSimulationJNI.updateStateLabels40(Model.getCPtr(model), model, StdVectorString.getCPtr(labels), labels);
+  }
+
   public static void updatePre40KinematicsFilesFor40MotionType(Model model, StdVectorString filePaths, String suffix) {
     opensimSimulationJNI.updatePre40KinematicsFilesFor40MotionType__SWIG_0(Model.getCPtr(model), model, StdVectorString.getCPtr(filePaths), filePaths, suffix);
   }

@@ -35,8 +35,8 @@ public class VisualizerUtilities {
     }
   }
 
-  public static void showMotion(Model arg0, Storage arg1) {
-    opensimSimulationJNI.VisualizerUtilities_showMotion(Model.getCPtr(arg0), arg0, Storage.getCPtr(arg1), arg1);
+  public static void showMotion(Model arg0, TimeSeriesTable arg1) {
+    opensimSimulationJNI.VisualizerUtilities_showMotion(Model.getCPtr(arg0), arg0, TimeSeriesTable.getCPtr(arg1), arg1);
   }
 
   public static void showModel(Model arg0) {

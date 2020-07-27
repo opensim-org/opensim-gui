@@ -43,8 +43,8 @@ public class OpenSenseUtilities {
     return new TimeSeriesTableRotation(opensimSimulationJNI.OpenSenseUtilities_convertQuaternionsToRotations(TimeSeriesTableQuaternion.getCPtr(qauternionsTable), qauternionsTable), true);
   }
 
-  public static Vec3 computeHeadingCorrection(Model model, TimeSeriesTableQuaternion quatTimeSeries, String baseIMU, CoordinateDirection arg3) {
-    return new Vec3(opensimSimulationJNI.OpenSenseUtilities_computeHeadingCorrection(Model.getCPtr(model), model, TimeSeriesTableQuaternion.getCPtr(quatTimeSeries), quatTimeSeries, baseIMU, CoordinateDirection.getCPtr(arg3), arg3), true);
+  public static Vec3 computeHeadingCorrection(Model model, State state, TimeSeriesTableQuaternion quatTimeSeries, String baseIMU, CoordinateDirection arg4) {
+    return new Vec3(opensimSimulationJNI.OpenSenseUtilities_computeHeadingCorrection(Model.getCPtr(model), model, State.getCPtr(state), state, TimeSeriesTableQuaternion.getCPtr(quatTimeSeries), quatTimeSeries, baseIMU, CoordinateDirection.getCPtr(arg4), arg4), true);
   }
 
   public static SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__Quaternion_T_SimTK__Real_t_t createOrientationsFileFromMarkers(String markersFile) {

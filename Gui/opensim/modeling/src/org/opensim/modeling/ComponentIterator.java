@@ -197,16 +197,20 @@ public class ComponentIterator {
     opensimCommonJNI.ComponentIterator_setDiscreteVariableValue(swigCPtr, this, State.getCPtr(state), state, name, value);
   }
 
+  public SWIGTYPE_p_SimTK__CacheEntryIndex getCacheVariableIndex(String name) {
+    return new SWIGTYPE_p_SimTK__CacheEntryIndex(opensimCommonJNI.ComponentIterator_getCacheVariableIndex(swigCPtr, this, name), true);
+  }
+
+  public boolean isCacheVariableValid(State state, String name) {
+    return opensimCommonJNI.ComponentIterator_isCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
+  }
+
   public void markCacheVariableValid(State state, String name) {
     opensimCommonJNI.ComponentIterator_markCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
   public void markCacheVariableInvalid(State state, String name) {
     opensimCommonJNI.ComponentIterator_markCacheVariableInvalid(swigCPtr, this, State.getCPtr(state), state, name);
-  }
-
-  public boolean isCacheVariableValid(State state, String name) {
-    return opensimCommonJNI.ComponentIterator_isCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
   public void printSubcomponentInfo() {

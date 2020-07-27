@@ -89,8 +89,4 @@ public class APDMDataReaderSettings extends OpenSimObject {
     this(opensimCommonJNI.new_APDMDataReaderSettings__SWIG_1(xmlFile), true);
   }
 
-  public APDMDataReaderSettings(APDMDataReaderSettings arg0) {
-    this(opensimCommonJNI.new_APDMDataReaderSettings__SWIG_2(APDMDataReaderSettings.getCPtr(arg0), arg0), true);
-  }
-
 }
