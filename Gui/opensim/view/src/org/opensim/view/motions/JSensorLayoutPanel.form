@@ -86,16 +86,13 @@
     <Component class="javax.swing.JComboBox" name="jLayoutComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="9">
+          <StringArray count="6">
             <StringItem index="0" value="At Origin"/>
             <StringItem index="1" value="Evenly spaced along X"/>
             <StringItem index="2" value="Evenly spaced along Y"/>
             <StringItem index="3" value="Evenly spaced along Z"/>
             <StringItem index="4" value="Half circle in Y-Z plane"/>
             <StringItem index="5" value="Place at matching segments on current model"/>
-            <StringItem index="6" value="Attach to matching segments on current model"/>
-            <StringItem index="7" value=" "/>
-            <StringItem index="8" value=" "/>
           </StringArray>
         </Property>
       </Properties>

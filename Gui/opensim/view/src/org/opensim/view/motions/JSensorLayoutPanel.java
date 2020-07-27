@@ -74,7 +74,7 @@ public class JSensorLayoutPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(JSensorLayoutPanel.class, "JSensorLayoutPanel.jLabel1.text")); // NOI18N
 
-        jLayoutComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "At Origin", "Evenly spaced along X", "Evenly spaced along Y", "Evenly spaced along Z", "Half circle in Y-Z plane", "Place at matching segments on current model", "Attach to matching segments on current model", " ", " " }));
+        jLayoutComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "At Origin", "Evenly spaced along X", "Evenly spaced along Y", "Evenly spaced along Z", "Half circle in Y-Z plane", "Place at matching segments on current model" }));
         jLayoutComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jLayoutComboBoxActionPerformed(evt);
