@@ -34,8 +34,10 @@ import org.json.simple.JSONObject;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Body;
 import org.opensim.modeling.BodySet;
+import org.opensim.modeling.Ground;
 import org.opensim.modeling.Quaternion;
 import org.opensim.modeling.Rotation;
+import org.opensim.modeling.State;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
@@ -53,6 +55,7 @@ import org.opensim.view.pub.ViewDB;
 public class MotionObjectOrientation extends MotionObjectBodyPoint {
 
     UUID imurep_uuid;
+    Body body = null;
     /**
      * @return the offset
      */
@@ -104,6 +107,11 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         int idx = getStartIndexInFileNotIncludingTime();
         // if Point not in ground, transform into Ground since Arrow is in Ground by default
         // and we don't want to change scene graph layout for easy book-keeping
+        State state = getModel().getWorkingState();
+        if (body!=null){
+            Vec3 location = body.getPositionInGround(state);
+            setPoint(location.getAsMat());
+        }
         //super.setPoint(getOffset());
         quaternion = new Quaternion(interpolatedStates.get(idx), 
                               interpolatedStates.get(idx+1), 
@@ -119,9 +127,23 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         // If model contains a body with same name as sensor use it
         JSONObject bodyJson = motionDisplayer.getModelVisJson().getModelGroundJson();
         BodySet bodySet = motionDisplayer.getModelVisJson().getModel().getBodySet();
-        if (bodySet.contains(getName())){
-            Body body = bodySet.get(getName());
+        Ground gnd = motionDisplayer.getModelVisJson().getModel().getGround();
+        String altName = getName();
+        if (altName.endsWith("_imu"))
+            altName = altName.substring(0, altName.length()-4);
+        Vec3 location=new Vec3(0., 0., 0.);
+        if (bodySet.contains(getName())){  // torso_imu
+            body = bodySet.get(getName());
             bodyJson = motionDisplayer.getModelVisJson().getBodyRep(body);
+        }
+        else if (bodySet.contains(altName)){  // torso_imu
+            body = bodySet.get(altName);
+            bodyJson = motionDisplayer.getModelVisJson().getBodyRep(body);
+        }
+        State state = motionDisplayer.getModelVisJson().getState();
+        if (body!=null){
+            location = body.getPositionInGround(state);
+            setPoint(location.getAsMat());
         }
         JSONObject expSensor_json = new JSONObject();
         imurep_uuid = UUID.randomUUID(); 
