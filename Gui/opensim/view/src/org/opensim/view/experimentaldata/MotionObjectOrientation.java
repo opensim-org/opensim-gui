@@ -41,6 +41,7 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.Quaternion;
 import org.opensim.modeling.Rotation;
 import org.opensim.modeling.State;
+import org.opensim.modeling.BodySet;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
