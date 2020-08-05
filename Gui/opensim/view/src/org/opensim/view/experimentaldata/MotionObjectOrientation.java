@@ -155,8 +155,7 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
             location = frame.findStationLocationInAnotherFrame(state, location, baseFrame);
             setPoint(location.getAsMat());
         }
-        else
-            frame = gnd;
+
         JSONObject expSensor_json = new JSONObject();
         imurep_uuid = UUID.randomUUID(); 
         expSensor_json.put("uuid", imurep_uuid.toString());
