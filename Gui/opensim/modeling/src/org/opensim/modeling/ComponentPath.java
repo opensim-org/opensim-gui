@@ -8,11 +8,12 @@
 
 package org.opensim.modeling;
 
-public class ComponentPath extends Path {
+public class ComponentPath {
   private transient long swigCPtr;
+  protected transient boolean swigCMemOwn;
 
   public ComponentPath(long cPtr, boolean cMemoryOwn) {
-    super(opensimCommonJNI.ComponentPath_SWIGUpcast(cPtr), cMemoryOwn);
+    swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
@@ -32,7 +33,6 @@ public class ComponentPath extends Path {
       }
       swigCPtr = 0;
     }
-    super.delete();
   }
 
   public ComponentPath() {
@@ -77,6 +77,30 @@ public class ComponentPath extends Path {
 
   public String getComponentName() {
     return opensimCommonJNI.ComponentPath_getComponentName(swigCPtr, this);
+  }
+
+  public String toString() {
+    return opensimCommonJNI.ComponentPath_toString(swigCPtr, this);
+  }
+
+  public boolean isAbsolute() {
+    return opensimCommonJNI.ComponentPath_isAbsolute(swigCPtr, this);
+  }
+
+  public long getNumPathLevels() {
+    return opensimCommonJNI.ComponentPath_getNumPathLevels(swigCPtr, this);
+  }
+
+  public void pushBack(String pathElement) {
+    opensimCommonJNI.ComponentPath_pushBack(swigCPtr, this, pathElement);
+  }
+
+  public boolean isLegalPathElement(String pathElement) {
+    return opensimCommonJNI.ComponentPath_isLegalPathElement(swigCPtr, this, pathElement);
+  }
+
+  public void trimDotAndDotDotElements() {
+    opensimCommonJNI.ComponentPath_trimDotAndDotDotElements(swigCPtr, this);
   }
 
 }
