@@ -8,6 +8,7 @@ v4.2
 ====
 - Merge PR [#1181](https://github.com/opensim-org/opensim-gui/pull/1181): Add build support for Linux (beta)
 - Fix issue [#1182](https://github.com/opensim-org/opensim-gui/issues/1182): Scaling model with custom geometry meshes loses custom geomerty
+- Support new logging system utilizing spdlog introduced in opensim-core.
 
 v4.1
 ====

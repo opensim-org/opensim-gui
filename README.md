@@ -1,4 +1,4 @@
-OpenSim GUI [![Travis-CI build status][buildstatus_image_travisci]][travisci] [![Appveyor build status][buildstatus_image_appveyor]][appveyorci]
+OpenSim GUI [![Travis-CI build status][buildstatus_image_travisci]][travisci] [![Appveyor build status][buildstatus_image_appveyor]][appveyorci]![opensim-application](https://github.com/opensim-org/opensim-gui/workflows/opensim-application/badge.svg)
 ===========
 
 OpenSim is software that lets users develop models of musculoskeletal

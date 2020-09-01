@@ -8,18 +8,18 @@
 
 package org.opensim.modeling;
 
-public class SWIGTYPE_p_SimTK__Quaternion_T_SimTK__Real_t {
+public class SWIGTYPE_p_SimTK__CacheEntryIndex {
   private transient long swigCPtr;
 
-  protected SWIGTYPE_p_SimTK__Quaternion_T_SimTK__Real_t(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
+  protected SWIGTYPE_p_SimTK__CacheEntryIndex(long cPtr, @SuppressWarnings("unused") boolean futureUse) {
     swigCPtr = cPtr;
   }
 
-  protected SWIGTYPE_p_SimTK__Quaternion_T_SimTK__Real_t() {
+  protected SWIGTYPE_p_SimTK__CacheEntryIndex() {
     swigCPtr = 0;
   }
 
-  protected static long getCPtr(SWIGTYPE_p_SimTK__Quaternion_T_SimTK__Real_t obj) {
+  protected static long getCPtr(SWIGTYPE_p_SimTK__CacheEntryIndex obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 }

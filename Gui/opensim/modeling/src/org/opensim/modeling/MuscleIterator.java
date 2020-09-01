@@ -745,16 +745,20 @@ public class MuscleIterator {
     opensimSimulationJNI.MuscleIterator_setDiscreteVariableValue(swigCPtr, this, State.getCPtr(state), state, name, value);
   }
 
+  public SWIGTYPE_p_SimTK__CacheEntryIndex getCacheVariableIndex(String name) {
+    return new SWIGTYPE_p_SimTK__CacheEntryIndex(opensimSimulationJNI.MuscleIterator_getCacheVariableIndex(swigCPtr, this, name), true);
+  }
+
+  public boolean isCacheVariableValid(State state, String name) {
+    return opensimSimulationJNI.MuscleIterator_isCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
+  }
+
   public void markCacheVariableValid(State state, String name) {
     opensimSimulationJNI.MuscleIterator_markCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
   public void markCacheVariableInvalid(State state, String name) {
     opensimSimulationJNI.MuscleIterator_markCacheVariableInvalid(swigCPtr, this, State.getCPtr(state), state, name);
-  }
-
-  public boolean isCacheVariableValid(State state, String name) {
-    return opensimSimulationJNI.MuscleIterator_isCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
   public void printSubcomponentInfo() {

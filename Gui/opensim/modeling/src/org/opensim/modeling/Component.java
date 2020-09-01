@@ -234,16 +234,20 @@ public class Component extends OpenSimObject {
     opensimCommonJNI.Component_setDiscreteVariableValue(swigCPtr, this, State.getCPtr(state), state, name, value);
   }
 
+  public SWIGTYPE_p_SimTK__CacheEntryIndex getCacheVariableIndex(String name) {
+    return new SWIGTYPE_p_SimTK__CacheEntryIndex(opensimCommonJNI.Component_getCacheVariableIndex(swigCPtr, this, name), true);
+  }
+
+  public boolean isCacheVariableValid(State state, String name) {
+    return opensimCommonJNI.Component_isCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
+  }
+
   public void markCacheVariableValid(State state, String name) {
     opensimCommonJNI.Component_markCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
   public void markCacheVariableInvalid(State state, String name) {
     opensimCommonJNI.Component_markCacheVariableInvalid(swigCPtr, this, State.getCPtr(state), state, name);
-  }
-
-  public boolean isCacheVariableValid(State state, String name) {
-    return opensimCommonJNI.Component_isCacheVariableValid(swigCPtr, this, State.getCPtr(state), state, name);
   }
 
   public void printSubcomponentInfo() {
