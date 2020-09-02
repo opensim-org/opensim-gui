@@ -525,12 +525,6 @@ public class AnalyzeToolModel extends AbstractToolModelWithExternalLoads {
    public String getExternalLoadsFileName() { return analyzeTool().getExternalLoadsFileName(); }
    protected void setExternalLoadsFileNameInternal(String fileName) { analyzeTool().setExternalLoadsFileName(fileName); }
 
-   public String getExternalLoadsModelKinematicsFileName() { return analyzeTool().getExternalLoads().getExternalLoadsModelKinematicsFileName(); }
-   protected void setExternalLoadsModelKinematicsFileNameInternal(String fileName) { analyzeTool().getExternalLoads().setExternalLoadsModelKinematicsFileName(fileName); }
-
-   public double getLowpassCutoffFrequencyForLoadKinematics() { return analyzeTool().getExternalLoads().getLowpassCutoffFrequencyForLoadKinematics(); }
-   protected void setLowpassCutoffFrequencyForLoadKinematicsInternal(double cutoffFrequency) { analyzeTool().getExternalLoads().setLowpassCutoffFrequencyForLoadKinematics(cutoffFrequency); }
-
    //------------------------------------------------------------------------
    // Utilities for running/canceling tool
    //------------------------------------------------------------------------

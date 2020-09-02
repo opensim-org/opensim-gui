@@ -360,12 +360,6 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
    public String getExternalLoadsFileName() { return forwardTool().getExternalLoadsFileName(); }
    protected void setExternalLoadsFileNameInternal(String fileName) { forwardTool().setExternalLoadsFileName(fileName); }
 
-   public String getExternalLoadsModelKinematicsFileName() { return forwardTool().getExternalLoads().getExternalLoadsModelKinematicsFileName(); }
-   protected void setExternalLoadsModelKinematicsFileNameInternal(String fileName) { forwardTool().getExternalLoads().setExternalLoadsModelKinematicsFileName(fileName); }
-
-   public double getLowpassCutoffFrequencyForLoadKinematics() { return forwardTool().getExternalLoads().getLowpassCutoffFrequencyForLoadKinematics(); }
-   protected void setLowpassCutoffFrequencyForLoadKinematicsInternal(double cutoffFrequency) { forwardTool().getExternalLoads().setLowpassCutoffFrequencyForLoadKinematics(cutoffFrequency); }
-
    //------------------------------------------------------------------------
    // Utilities for running/canceling tool
    //------------------------------------------------------------------------
@@ -426,7 +420,6 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       forwardTool().setStatesFileName(FileUtils.makePathAbsolute(forwardTool().getStatesFileName(), parentDir));
 
       forwardTool().setExternalLoadsFileName(FileUtils.makePathAbsolute(forwardTool().getExternalLoadsFileName(), parentDir));
-      forwardTool().getExternalLoads().setExternalLoadsModelKinematicsFileName(FileUtils.makePathAbsolute(forwardTool().getExternalLoads().getExternalLoadsModelKinematicsFileName(), parentDir));
    }
 
    protected void AbsoluteToRelativePaths(String parentFileName) {
@@ -439,7 +432,6 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       forwardTool().setStatesFileName(FileUtils.makePathRelative(forwardTool().getStatesFileName(), parentDir));
 
       forwardTool().setExternalLoadsFileName(FileUtils.makePathRelative(forwardTool().getExternalLoadsFileName(), parentDir));
-      forwardTool().getExternalLoads().setExternalLoadsModelKinematicsFileName(FileUtils.makePathRelative(forwardTool().getExternalLoads().getExternalLoadsModelKinematicsFileName(), parentDir));
    }
 
    public boolean loadSettings(String fileName) {
