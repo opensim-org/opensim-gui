@@ -11,6 +11,7 @@ v4.2
 - Support new logging system utilizing spdlog introduced in opensim-core.
 - Removed reference to kinematics of external loads from External Loads creation/editing dialog
 - Added option to visualize sensor data (quaternions) in the application (File ->Load Sensor Data)
+- Associate motion data now handles orientation sensors as well so that orientation triads follow motions
 
 
 v4.1
