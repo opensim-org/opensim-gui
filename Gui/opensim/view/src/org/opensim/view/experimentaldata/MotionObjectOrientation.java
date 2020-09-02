@@ -60,6 +60,7 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
     UUID imurep_uuid;
     Frame frame = null; //possible imu frame if found on model
     Frame baseFrame = null;// body or ground to which imu frame is attached
+
     /**
      * @return the offset
      */

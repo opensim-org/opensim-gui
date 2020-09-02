@@ -348,12 +348,6 @@ public class InverseDynamicsToolModel extends AbstractToolModelWithExternalLoads
    public String getExternalLoadsFileName() { return idTool.getExternalLoadsFileName(); }
    protected void setExternalLoadsFileNameInternal(String fileName) {  idTool.setExternalLoadsFileName(fileName);}
 
-   public String getExternalLoadsModelKinematicsFileName() { return idTool.getExternalLoads().getExternalLoadsModelKinematicsFileName(); }
-   protected void setExternalLoadsModelKinematicsFileNameInternal(String fileName) { idTool.getExternalLoads().setExternalLoadsModelKinematicsFileName(fileName); }
-
-   public double getLowpassCutoffFrequencyForLoadKinematics() { return idTool.getExternalLoads().getLowpassCutoffFrequencyForLoadKinematics(); }
-   protected void setLowpassCutoffFrequencyForLoadKinematicsInternal(double cutoffFrequency) { idTool.getExternalLoads().setLowpassCutoffFrequencyForLoadKinematics(cutoffFrequency); }
-
    //------------------------------------------------------------------------
    // Utilities for running/canceling tool
    //------------------------------------------------------------------------
@@ -433,7 +427,6 @@ public class InverseDynamicsToolModel extends AbstractToolModelWithExternalLoads
       InverseDynamicsTool().setCoordinatesFileName(FileUtils.makePathAbsolute(InverseDynamicsTool().getCoordinatesFileName(), parentDir));
 
       InverseDynamicsTool().setExternalLoadsFileName(FileUtils.makePathAbsolute(InverseDynamicsTool().getExternalLoadsFileName(), parentDir));
-      InverseDynamicsTool().getExternalLoads().setExternalLoadsModelKinematicsFileName(FileUtils.makePathAbsolute(InverseDynamicsTool().getExternalLoads().getExternalLoadsModelKinematicsFileName(), parentDir));
    }
 
    protected void AbsoluteToRelativePaths(String parentFileName) {
@@ -445,7 +438,6 @@ public class InverseDynamicsToolModel extends AbstractToolModelWithExternalLoads
       InverseDynamicsTool().setCoordinatesFileName(FileUtils.makePathRelative(InverseDynamicsTool().getCoordinatesFileName(), parentDir));
 
       InverseDynamicsTool().setExternalLoadsFileName(FileUtils.makePathRelative(InverseDynamicsTool().getExternalLoadsFileName(), parentDir));
-      InverseDynamicsTool().getExternalLoads().setExternalLoadsModelKinematicsFileName(FileUtils.makePathRelative(InverseDynamicsTool().getExternalLoads().getExternalLoadsModelKinematicsFileName(), parentDir));
    }
    
    public boolean loadSettings(String fileName) {
