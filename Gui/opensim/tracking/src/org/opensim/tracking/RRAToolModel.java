@@ -352,12 +352,6 @@ public class RRAToolModel extends TrackingToolModel {
    public String getExternalLoadsFileName() { return rraTool().getExternalLoadsFileName(); }
    protected void setExternalLoadsFileNameInternal(String fileName) { rraTool().setExternalLoadsFileName(fileName); }
 
-   public String getExternalLoadsModelKinematicsFileName() { return rraTool().getExternalLoads().getExternalLoadsModelKinematicsFileName(); }
-   protected void setExternalLoadsModelKinematicsFileNameInternal(String fileName) { rraTool().getExternalLoads().setExternalLoadsModelKinematicsFileName(fileName); }
-
-   public double getLowpassCutoffFrequencyForLoadKinematics() { return rraTool().getExternalLoads().getLowpassCutoffFrequencyForLoadKinematics(); }
-   protected void setLowpassCutoffFrequencyForLoadKinematicsInternal(double cutoffFrequency) { rraTool().getExternalLoads().setLowpassCutoffFrequencyForLoadKinematics(cutoffFrequency); }
-
    // TODO: implement
    public double[] getAvailableTimeRange() { return null; }
 
@@ -433,7 +427,6 @@ public class RRAToolModel extends TrackingToolModel {
       rraTool().setOutputModelFileName(FileUtils.makePathAbsolute(rraTool().getOutputModelFileName(), parentDir));
 
       rraTool().setExternalLoadsFileName(FileUtils.makePathAbsolute(rraTool().getExternalLoadsFileName(), parentDir));
-      rraTool().getExternalLoads().setExternalLoadsModelKinematicsFileName(FileUtils.makePathAbsolute(rraTool().getExternalLoads().getExternalLoadsModelKinematicsFileName(), parentDir));
    }
 
    protected void AbsoluteToRelativePaths(String parentFileName) {
@@ -446,7 +439,6 @@ public class RRAToolModel extends TrackingToolModel {
       rraTool().setOutputModelFileName(FileUtils.makePathRelative(rraTool().getOutputModelFileName(), parentDir));
 
       rraTool().setExternalLoadsFileName(FileUtils.makePathRelative(rraTool().getExternalLoadsFileName(), parentDir));
-      rraTool().getExternalLoads().setExternalLoadsModelKinematicsFileName(FileUtils.makePathRelative(rraTool().getExternalLoads().getExternalLoadsModelKinematicsFileName(), parentDir));       
    }
    
    public boolean loadSettings(String fileName) {

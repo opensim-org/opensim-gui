@@ -1575,15 +1575,6 @@ public class opensimCommonJNI {
   public final static native boolean ComponentFilterAbsolutePathNameContainsString_isMatch(long jarg1, ComponentFilterAbsolutePathNameContainsString jarg1_, long jarg2, Component jarg2_);
   public final static native long ComponentFilterAbsolutePathNameContainsString_clone(long jarg1, ComponentFilterAbsolutePathNameContainsString jarg1_);
   public final static native void delete_ComponentFilterAbsolutePathNameContainsString(long jarg1);
-  public final static native void delete_Path(long jarg1);
-  public final static native String Path_toString(long jarg1, Path jarg1_);
-  public final static native boolean Path_isAbsolute(long jarg1, Path jarg1_);
-  public final static native long Path_getNumPathLevels(long jarg1, Path jarg1_);
-  public final static native void Path_pushBack(long jarg1, Path jarg1_, String jarg2);
-  public final static native char Path_getSeparator(long jarg1, Path jarg1_);
-  public final static native String Path_getInvalidChars(long jarg1, Path jarg1_);
-  public final static native boolean Path_isLegalPathElement(long jarg1, Path jarg1_, String jarg2);
-  public final static native void Path_trimDotAndDotDotElements(long jarg1, Path jarg1_);
   public final static native long new_ComponentPath__SWIG_0();
   public final static native long new_ComponentPath__SWIG_1(String jarg1);
   public final static native long new_ComponentPath__SWIG_2(long jarg1, StdVectorString jarg1_, boolean jarg2);
@@ -1595,6 +1586,12 @@ public class opensimCommonJNI {
   public final static native String ComponentPath_getParentPathString(long jarg1, ComponentPath jarg1_);
   public final static native String ComponentPath_getSubcomponentNameAtLevel(long jarg1, ComponentPath jarg1_, long jarg2);
   public final static native String ComponentPath_getComponentName(long jarg1, ComponentPath jarg1_);
+  public final static native String ComponentPath_toString(long jarg1, ComponentPath jarg1_);
+  public final static native boolean ComponentPath_isAbsolute(long jarg1, ComponentPath jarg1_);
+  public final static native long ComponentPath_getNumPathLevels(long jarg1, ComponentPath jarg1_);
+  public final static native void ComponentPath_pushBack(long jarg1, ComponentPath jarg1_, String jarg2);
+  public final static native boolean ComponentPath_isLegalPathElement(long jarg1, ComponentPath jarg1_, String jarg2);
+  public final static native void ComponentPath_trimDotAndDotDotElements(long jarg1, ComponentPath jarg1_);
   public final static native void delete_ComponentPath(long jarg1);
   public final static native long new_ComponentHasNoName(String jarg1, long jarg2, String jarg3, String jarg4);
   public final static native void delete_ComponentHasNoName(long jarg1);
@@ -2974,7 +2971,6 @@ public class opensimCommonJNI {
   public final static native long InputVec3_SWIGUpcast(long jarg1);
   public final static native long ComponentFilterMatchAll_SWIGUpcast(long jarg1);
   public final static native long ComponentFilterAbsolutePathNameContainsString_SWIGUpcast(long jarg1);
-  public final static native long ComponentPath_SWIGUpcast(long jarg1);
   public final static native long ComponentHasNoName_SWIGUpcast(long jarg1);
   public final static native long InvalidComponentName_SWIGUpcast(long jarg1);
   public final static native long ComponentNotFoundOnSpecifiedPath_SWIGUpcast(long jarg1);

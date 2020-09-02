@@ -150,15 +150,6 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
       externalLoadsPanelCheckBox.setSelected(toolModel.getExternalLoadsEnabled());
       if(!toolModel.getExternalLoadsEnabled()) setEnabled(externalLoadsPanel, false);
       externalLoadsFileName.setFileName(toolModel.getExternalLoadsFileName(),false);
-      externalLoadsModelKinematicsFileName.setFileName(toolModel.getExternalLoadsModelKinematicsFileName(),false);
-      if(!toolModel.getFilterLoadKinematics()) {
-         filterModelKinematics.setSelected(false);
-         cutoffFrequency.setText("");
-         cutoffFrequency.setEnabled(false);
-      } else {
-         filterModelKinematics.setSelected(true);
-         cutoffFrequency.setText(numFormat.format(toolModel.getLowpassCutoffFrequencyForLoadKinematics()));
-      }
       internalTrigger = false;
    }
    
@@ -447,25 +438,19 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
    }//GEN-LAST:event_externalLoadsFileNameStateChanged
 
    private void externalLoadsModelKinematicsFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_externalLoadsModelKinematicsFileNameStateChanged
-      toolModel.setExternalLoadsModelKinematicsFileName(externalLoadsModelKinematicsFileName.getFileName());
+      //toolModel.setExternalLoadsModelKinematicsFileName(externalLoadsModelKinematicsFileName.getFileName());
    }//GEN-LAST:event_externalLoadsModelKinematicsFileNameStateChanged
    
    private void filterModelKinematicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterModelKinematicsActionPerformed
-     toolModel.setFilterLoadKinematics(filterModelKinematics.isSelected());
+     //toolModel.setFilterLoadKinematics(filterModelKinematics.isSelected());
    }//GEN-LAST:event_filterModelKinematicsActionPerformed
 
    private void cutoffFrequencyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cutoffFrequencyFocusLost
-      if(!evt.isTemporary()) cutoffFrequencyActionPerformed(null);
+      //if(!evt.isTemporary()) cutoffFrequencyActionPerformed(null);
    }//GEN-LAST:event_cutoffFrequencyFocusLost
 
    private void cutoffFrequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutoffFrequencyActionPerformed
       
-       try {
-         toolModel.setLowpassCutoffFrequencyForLoadKinematics(numFormat.parse(cutoffFrequency.getText()).doubleValue());
-      } catch (ParseException ex) {
-         Toolkit.getDefaultToolkit().beep();
-         cutoffFrequency.setText(numFormat.format(toolModel.getLowpassCutoffFrequencyForLoadKinematics()));
-      }
    }//GEN-LAST:event_cutoffFrequencyActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
