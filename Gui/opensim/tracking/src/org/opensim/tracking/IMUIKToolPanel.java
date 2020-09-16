@@ -76,7 +76,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
 
       jTabbedPane.addTab("Weights", new IKTaskSetPanel(ikToolModel.getIKCommonModel()));
 
-      markerFileName.setExtensionsAndDescription(".trc", "IK trial marker data");
+      sensorQFileName.setExtensionsAndDescription(".trc", "IK trial marker data");
       coordinateFileName.setExtensionsAndDescription(".mot,.sto", "Coordinates of IK trial");
       outputMotionFilePath.setExtensionsAndDescription(".mot", "Result motion file for IK");
       outputMotionFilePath.setIncludeOpenButton(false);
@@ -91,7 +91,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
 
    private void bindPropertiesToComponents() {
       InverseKinematicsTool ikTool = ikToolModel.getIKTool();
-      ToolCommon.bindProperty(ikTool, "marker_file", markerFileName);
+      ToolCommon.bindProperty(ikTool, "marker_file", sensorQFileName);
       ToolCommon.bindProperty(ikTool, "coordinate_file", coordinateFileName);
       ToolCommon.bindProperty(ikTool, "time_range", startTime);
       ToolCommon.bindProperty(ikTool, "time_range", endTime);
@@ -136,8 +136,8 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
 
    public void updateFromModel() {
       // Static trial marker data
-      markerFileName.setFileName(ikToolModel.getIKCommonModel().getMarkerDataFileName(),false);
-      markerFileName.setFileIsValid(ikToolModel.getIKCommonModel().getMarkerDataValid());
+      sensorQFileName.setFileName(ikToolModel.getIKCommonModel().getMarkerDataFileName(),false);
+      sensorQFileName.setFileIsValid(ikToolModel.getIKCommonModel().getMarkerDataValid());
       //OpenSim23 markerDataInfoPanel.update(ikToolModel.getIKCommonModel().getMarkerData());
 
       // Coordinate data
@@ -204,9 +204,9 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
         jLabel9 = new javax.swing.JLabel();
         startTime = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
-        markerFileName = new org.opensim.swingui.FileTextFieldAndChooser();
-        jButton1 = new javax.swing.JButton();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        sensorQFileName = new org.opensim.swingui.FileTextFieldAndChooser();
+        jWeightsButton = new javax.swing.JButton();
+        jReportErrorsCheckBox = new javax.swing.JCheckBox();
         outputPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         outputMotionFilePath = new org.opensim.swingui.FileTextFieldAndChooser();
@@ -214,8 +214,15 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         XSpinner = new javax.swing.JSpinner();
-        XSpinner1 = new javax.swing.JSpinner();
-        XSpinner2 = new javax.swing.JSpinner();
+        YSpinner = new javax.swing.JSpinner();
+        ZSpinner = new javax.swing.JSpinner();
+        jPanel3 = new javax.swing.JPanel();
+        calibrationFileName = new org.opensim.swingui.FileTextFieldAndChooser();
+        jLabel3 = new javax.swing.JLabel();
+        baseIMUComboBox = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        directionComboBox = new javax.swing.JComboBox<>();
 
         genericModelDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Current Model"));
 
@@ -297,24 +304,24 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
         jLabel12.setText("Sensor data file:");
 
-        markerFileName.setMinimumSize(new java.awt.Dimension(3, 20));
-        markerFileName.addChangeListener(new javax.swing.event.ChangeListener() {
+        sensorQFileName.setMinimumSize(new java.awt.Dimension(3, 20));
+        sensorQFileName.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                markerFileNameStateChanged(evt);
+                sensorQFileNameStateChanged(evt);
             }
         });
 
-        jButton1.setText("Weights...");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jWeightsButton.setText("Weights...");
+        jWeightsButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jWeightsButtonActionPerformed(evt);
             }
         });
 
-        jCheckBox1.setText("Report orientation errors");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+        jReportErrorsCheckBox.setText("Report orientation errors");
+        jReportErrorsCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
+                jReportErrorsCheckBoxActionPerformed(evt);
             }
         });
 
@@ -331,12 +338,12 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
                             .add(jLabel12))
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(markerPlacerPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(markerFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .add(sensorQFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(markerPlacerPanelLayout.createSequentialGroup()
                                 .add(markerPlacerPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                                     .add(markerPlacerPanelLayout.createSequentialGroup()
                                         .add(0, 0, Short.MAX_VALUE)
-                                        .add(jCheckBox1))
+                                        .add(jReportErrorsCheckBox))
                                     .add(markerPlacerPanelLayout.createSequentialGroup()
                                         .add(startTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 114, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(18, 18, 18)
@@ -346,7 +353,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .add(88, 88, 88))))
                     .add(markerPlacerPanelLayout.createSequentialGroup()
-                        .add(jButton1)
+                        .add(jWeightsButton)
                         .add(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -357,12 +364,12 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
             markerPlacerPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(markerPlacerPanelLayout.createSequentialGroup()
                 .add(markerPlacerPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(markerFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(sensorQFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel12))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(markerPlacerPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jButton1)
-                    .add(jCheckBox1))
+                    .add(jWeightsButton)
+                    .add(jReportErrorsCheckBox))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(markerPlacerPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(startTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -418,21 +425,21 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
             }
         });
 
-        XSpinner1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        XSpinner1.setModel(xSpinnerModel);
-        XSpinner1.setToolTipText("Rotation angle, 90 degree increments");
-        XSpinner1.addChangeListener(new javax.swing.event.ChangeListener() {
+        YSpinner.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        YSpinner.setModel(xSpinnerModel);
+        YSpinner.setToolTipText("Rotation angle, 90 degree increments");
+        YSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                XSpinner1StateChanged(evt);
+                YSpinnerStateChanged(evt);
             }
         });
 
-        XSpinner2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        XSpinner2.setModel(xSpinnerModel);
-        XSpinner2.setToolTipText("Rotation angle, 90 degree increments");
-        XSpinner2.addChangeListener(new javax.swing.event.ChangeListener() {
+        ZSpinner.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        ZSpinner.setModel(xSpinnerModel);
+        ZSpinner.setToolTipText("Rotation angle, 90 degree increments");
+        ZSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                XSpinner2StateChanged(evt);
+                ZSpinnerStateChanged(evt);
             }
         });
 
@@ -448,10 +455,10 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(XSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(XSpinner1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(YSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(XSpinner2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .add(0, 21, Short.MAX_VALUE))
+                        .add(ZSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .add(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -463,19 +470,76 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
                     .add(jLabel2)
                     .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                         .add(XSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(XSpinner1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(XSpinner2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                        .add(YSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(ZSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+        );
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Calibration"));
+
+        calibrationFileName.setMinimumSize(new java.awt.Dimension(3, 20));
+        calibrationFileName.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                calibrationFileNameStateChanged(evt);
+            }
+        });
+
+        jLabel3.setText("Sensor data file:");
+
+        baseIMUComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pelvis_imu", "torso_imu", " " }));
+
+        jLabel4.setText("Sensor label:");
+
+        jLabel5.setText("Corresponding heading axis:");
+
+        directionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "+X", "+Y", "+Z", "-X", "-Y", "-Z" }));
+
+        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .add(jLabel3)
+                        .add(1, 1, 1)
+                        .add(calibrationFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(jPanel3Layout.createSequentialGroup()
+                        .add(jLabel4)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(baseIMUComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(18, 18, 18)
+                        .add(jLabel5)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(directionComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(jPanel3Layout.createSequentialGroup()
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(calibrationFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel3))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(baseIMUComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel4)
+                    .add(jLabel5)
+                    .add(directionComboBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .add(0, 21, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel1Layout.createSequentialGroup()
-                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(markerPlacerPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(outputPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(jPanel1Layout.createSequentialGroup()
+                .add(jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, markerPlacerPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, outputPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jPanel3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -483,7 +547,9 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
             .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(118, 118, 118)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(markerPlacerPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(outputPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -508,9 +574,9 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-   private void markerFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_markerFileNameStateChanged
-      ikToolModel.getIKCommonModel().setMarkerDataFileName(markerFileName.getFileName());
-   }//GEN-LAST:event_markerFileNameStateChanged
+   private void sensorQFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sensorQFileNameStateChanged
+      ikToolModel.getIKCommonModel().setMarkerDataFileName(sensorQFileName.getFileName());
+   }//GEN-LAST:event_sensorQFileNameStateChanged
 
    private void timeRangeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_timeRangeFocusLost
       if(!evt.isTemporary()) timeRangeActionPerformed(null);
@@ -542,47 +608,58 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
         // TODO add your handling code here:
     }//GEN-LAST:event_XSpinnerStateChanged
 
-    private void XSpinner1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_XSpinner1StateChanged
+    private void YSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_YSpinnerStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_XSpinner1StateChanged
+    }//GEN-LAST:event_YSpinnerStateChanged
 
-    private void XSpinner2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_XSpinner2StateChanged
+    private void ZSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ZSpinnerStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_XSpinner2StateChanged
+    }//GEN-LAST:event_ZSpinnerStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jWeightsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeightsButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_jWeightsButtonActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    private void jReportErrorsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReportErrorsCheckBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+    }//GEN-LAST:event_jReportErrorsCheckBoxActionPerformed
+
+    private void calibrationFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_calibrationFileNameStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_calibrationFileNameStateChanged
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner XSpinner;
-    private javax.swing.JSpinner XSpinner1;
-    private javax.swing.JSpinner XSpinner2;
+    private javax.swing.JSpinner YSpinner;
+    private javax.swing.JSpinner ZSpinner;
+    private javax.swing.JComboBox<String> baseIMUComboBox;
+    private org.opensim.swingui.FileTextFieldAndChooser calibrationFileName;
+    private javax.swing.JComboBox<String> directionComboBox;
     private javax.swing.JTextField endTime;
     private javax.swing.JPanel genericModelDataPanel;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JCheckBox jReportErrorsCheckBox;
     private javax.swing.JTabbedPane jTabbedPane;
-    private org.opensim.swingui.FileTextFieldAndChooser markerFileName;
+    private javax.swing.JButton jWeightsButton;
     private javax.swing.JPanel markerPlacerPanel;
     private javax.swing.JTextField markerSetInfoTextField;
     private javax.swing.JTextField modelNameTextField;
     private org.opensim.swingui.FileTextFieldAndChooser outputMotionFilePath;
     private javax.swing.JPanel outputPanel;
+    private org.opensim.swingui.FileTextFieldAndChooser sensorQFileName;
     private javax.swing.JTextField startTime;
     // End of variables declaration//GEN-END:variables
    
