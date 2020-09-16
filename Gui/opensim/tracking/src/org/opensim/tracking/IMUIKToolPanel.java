@@ -38,19 +38,22 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JSpinner;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
-import org.opensim.modeling.InverseKinematicsTool;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
+import org.opensim.swingui.RotationSpinnerListModel;
 import org.opensim.utils.BrowserLauncher;
-import org.opensim.utils.TheApp;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.pub.OpenSimDB;
 
 public class IMUIKToolPanel extends BaseToolPanel implements Observer {
    private IKToolModel ikToolModel = null;
    private NumberFormat numFormat = NumberFormat.getInstance();
+    RotationSpinnerListModel xSpinnerModel=new RotationSpinnerListModel(0., -270., 360., 90.);
+    RotationSpinnerListModel ySpinnerModel=new RotationSpinnerListModel(0., -270., 360., 90.);
+    RotationSpinnerListModel zSpinnerModel=new RotationSpinnerListModel(0., -270., 360., 90.);
 
    /** Creates new form IKToolPanel */
    public IMUIKToolPanel(Model model) throws IOException {
@@ -74,10 +77,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
 
       setSettingsFileDescription("IK tool settings file");
 
-      jTabbedPane.addTab("Weights", new IKTaskSetPanel(ikToolModel.getIKCommonModel()));
-
-      sensorQFileName.setExtensionsAndDescription(".trc", "IK trial marker data");
-      coordinateFileName.setExtensionsAndDescription(".mot,.sto", "Coordinates of IK trial");
+      sensorQFileName.setExtensionsAndDescription(".sto", "IK trial sensor data");
       outputMotionFilePath.setExtensionsAndDescription(".mot", "Result motion file for IK");
       outputMotionFilePath.setIncludeOpenButton(false);
       outputMotionFilePath.setDirectoriesOnly(false);
@@ -90,13 +90,14 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
    }
 
    private void bindPropertiesToComponents() {
+       /*
       InverseKinematicsTool ikTool = ikToolModel.getIKTool();
       ToolCommon.bindProperty(ikTool, "marker_file", sensorQFileName);
       ToolCommon.bindProperty(ikTool, "coordinate_file", coordinateFileName);
       ToolCommon.bindProperty(ikTool, "time_range", startTime);
       ToolCommon.bindProperty(ikTool, "time_range", endTime);
       ToolCommon.bindProperty(ikTool, "output_motion_file", outputMotionFilePath);
-      
+      */
    }
 
    public void update(Observable observable, Object obj) {
@@ -139,12 +140,6 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
       sensorQFileName.setFileName(ikToolModel.getIKCommonModel().getMarkerDataFileName(),false);
       sensorQFileName.setFileIsValid(ikToolModel.getIKCommonModel().getMarkerDataValid());
       //OpenSim23 markerDataInfoPanel.update(ikToolModel.getIKCommonModel().getMarkerData());
-
-      // Coordinate data
-      coordinateFileName.setEnabled(ikToolModel.getIKCommonModel().getCoordinateDataEnabled());
-      coordinateCheckBox.setSelected(ikToolModel.getIKCommonModel().getCoordinateDataEnabled());
-      coordinateFileName.setFileName(ikToolModel.getIKCommonModel().getCoordinateDataFileName(),false);
-      coordinateFileName.setFileIsValid(ikToolModel.getIKCommonModel().getCoordinateDataValid());
 
       
       // Time range
@@ -340,17 +335,15 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
                         .add(markerPlacerPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(sensorQFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .add(markerPlacerPanelLayout.createSequentialGroup()
+                                .add(0, 0, Short.MAX_VALUE)
                                 .add(markerPlacerPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                                    .add(markerPlacerPanelLayout.createSequentialGroup()
-                                        .add(0, 0, Short.MAX_VALUE)
-                                        .add(jReportErrorsCheckBox))
+                                    .add(jReportErrorsCheckBox)
                                     .add(markerPlacerPanelLayout.createSequentialGroup()
                                         .add(startTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 114, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                         .add(18, 18, 18)
                                         .add(jLabel9)
                                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                        .add(endTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 108, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                        .add(endTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 108, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                                 .add(88, 88, 88))))
                     .add(markerPlacerPanelLayout.createSequentialGroup()
                         .add(jWeightsButton)
@@ -466,12 +459,12 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
                 .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(jLabel1)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel2)
-                    .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(XSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(YSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(ZSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 35, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, YSpinner)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, XSpinner)
+                    .add(org.jdesktop.layout.GroupLayout.LEADING, jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(ZSpinner))
+                .add(9, 9, 9))
         );
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Calibration"));
@@ -546,13 +539,14 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jPanel2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 122, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(9, 9, 9)
                 .add(jPanel3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(markerPlacerPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(outputPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .add(outputPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(9, 9, 9))
         );
 
         jTabbedPane.addTab("Settings", jPanel1);
@@ -601,9 +595,9 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
     private void XSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_XSpinnerStateChanged
         double delta = getRotationAngleChange(evt);
         //updateTransform(delta, 0., 0.);
-        updateTransform(xSpinnerModel.getLastValue(),
+        /*updateTransform(xSpinnerModel.getLastValue(),
             ySpinnerModel.getLastValue(),
-            zSpinnerModel.getLastValue());
+            zSpinnerModel.getLastValue());*/
 
         // TODO add your handling code here:
     }//GEN-LAST:event_XSpinnerStateChanged
@@ -662,5 +656,12 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
     private org.opensim.swingui.FileTextFieldAndChooser sensorQFileName;
     private javax.swing.JTextField startTime;
     // End of variables declaration//GEN-END:variables
-   
+    private double getRotationAngleChange(final javax.swing.event.ChangeEvent evt) {
+// TODO add your handling code here:
+        RotationSpinnerListModel numberModel = (RotationSpinnerListModel)((JSpinner)evt.getSource()).getModel();
+        double newValue = numberModel.getNumber().doubleValue();
+        double delta = newValue-numberModel.getLastValue();
+        numberModel.setLastValue(newValue);
+        return delta;
+    }
 }
