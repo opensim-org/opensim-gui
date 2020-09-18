@@ -59,16 +59,20 @@ public class RowVectorVec3 extends RowVectorBaseVec3 {
     this(opensimSimbodyJNI.new_RowVectorVec3__SWIG_1(RowVectorVec3.getCPtr(src), src), true);
   }
 
+  public RowVectorVec3(RowVectorBaseVec3 src) {
+    this(opensimSimbodyJNI.new_RowVectorVec3__SWIG_2(RowVectorBaseVec3.getCPtr(src), src), true);
+  }
+
   public RowVectorVec3(int n) {
-    this(opensimSimbodyJNI.new_RowVectorVec3__SWIG_2(n), true);
+    this(opensimSimbodyJNI.new_RowVectorVec3__SWIG_3(n), true);
   }
 
   public RowVectorVec3(int n, Vec3 cppInitialValues) {
-    this(opensimSimbodyJNI.new_RowVectorVec3__SWIG_3(n, Vec3.getCPtr(cppInitialValues), cppInitialValues), true);
+    this(opensimSimbodyJNI.new_RowVectorVec3__SWIG_4(n, Vec3.getCPtr(cppInitialValues), cppInitialValues), true);
   }
 
   public RowVectorVec3(StdVectorVec3 row) {
-    this(opensimSimbodyJNI.new_RowVectorVec3__SWIG_5(StdVectorVec3.getCPtr(row), row), true);
+    this(opensimSimbodyJNI.new_RowVectorVec3__SWIG_6(StdVectorVec3.getCPtr(row), row), true);
   }
 
   public VectorVec3 transpose() {

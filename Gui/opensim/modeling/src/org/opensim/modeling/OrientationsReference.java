@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class OrientationsReference extends ReferenceRotation {
+public class OrientationsReference extends StreamableReferenceRotation {
   private transient long swigCPtr;
 
   public OrientationsReference(long cPtr, boolean cMemoryOwn) {
@@ -209,8 +209,16 @@ public class OrientationsReference extends ReferenceRotation {
     return new SimTKArrayString(opensimSimulationJNI.OrientationsReference_getNames(swigCPtr, this), false);
   }
 
-  public void getValues(State s, SimTKArrayRotation values) {
-    opensimSimulationJNI.OrientationsReference_getValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayRotation.getCPtr(values), values);
+  public void getValuesAtTime(double time, SimTKArrayRotation values) {
+    opensimSimulationJNI.OrientationsReference_getValuesAtTime(swigCPtr, this, time, SimTKArrayRotation.getCPtr(values), values);
+  }
+
+  public void getNextValuesAndTime(SWIGTYPE_p_double time, SimTKArrayRotation values) {
+    opensimSimulationJNI.OrientationsReference_getNextValuesAndTime(swigCPtr, this, SWIGTYPE_p_double.getCPtr(time), SimTKArrayRotation.getCPtr(values), values);
+  }
+
+  public boolean hasNext() {
+    return opensimSimulationJNI.OrientationsReference_hasNext(swigCPtr, this);
   }
 
   public void getWeights(State s, SimTKArrayDouble weights) {

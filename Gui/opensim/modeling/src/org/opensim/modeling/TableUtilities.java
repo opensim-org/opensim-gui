@@ -63,6 +63,10 @@ public class TableUtilities {
     opensimCommonJNI.TableUtilities_pad(TimeSeriesTable.getCPtr(table), table, numRowsToPrependAndAppend);
   }
 
+  public static TimeSeriesTableVec3 convertRotationsToEulerAngles(SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__Rotation_T_SimTK__Real_t_t rotTable) {
+    return new TimeSeriesTableVec3(opensimCommonJNI.TableUtilities_convertRotationsToEulerAngles(SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__Rotation_T_SimTK__Real_t_t.getCPtr(rotTable)), true);
+  }
+
   public TableUtilities() {
     this(opensimCommonJNI.new_TableUtilities(), true);
   }

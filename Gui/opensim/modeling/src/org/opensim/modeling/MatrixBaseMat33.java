@@ -71,8 +71,28 @@ public class MatrixBaseMat33 {
     return new MatrixBaseMat33(opensimSimbodyJNI.MatrixBaseMat33_setToZero(swigCPtr, this), false);
   }
 
+  public RowVectorViewMat33 row(int i) {
+    return new RowVectorViewMat33(opensimSimbodyJNI.MatrixBaseMat33_row(swigCPtr, this, i), true);
+  }
+
+  public RowVectorViewMat33 updRow(int i) {
+    return new RowVectorViewMat33(opensimSimbodyJNI.MatrixBaseMat33_updRow(swigCPtr, this, i), true);
+  }
+
+  public VectorViewMat33 col(int j) {
+    return new VectorViewMat33(opensimSimbodyJNI.MatrixBaseMat33_col(swigCPtr, this, j), true);
+  }
+
+  public VectorViewMat33 updCol(int j) {
+    return new VectorViewMat33(opensimSimbodyJNI.MatrixBaseMat33_updCol(swigCPtr, this, j), true);
+  }
+
   public Mat33 getElt(int i, int j) {
     return new Mat33(opensimSimbodyJNI.MatrixBaseMat33_getElt(swigCPtr, this, i, j), false);
+  }
+
+  public Mat33 updElt(int i, int j) {
+    return new Mat33(opensimSimbodyJNI.MatrixBaseMat33_updElt(swigCPtr, this, i, j), false);
   }
 
   public MatrixBaseMat33 negateInPlace() {
