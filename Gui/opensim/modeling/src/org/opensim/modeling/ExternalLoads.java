@@ -93,22 +93,6 @@ public class ExternalLoads extends ModelComponentSetExternalForces {
     opensimSimulationJNI.ExternalLoads_setDataFileName(swigCPtr, this, aNewFile);
   }
 
-  public String getExternalLoadsModelKinematicsFileName() {
-    return opensimSimulationJNI.ExternalLoads_getExternalLoadsModelKinematicsFileName(swigCPtr, this);
-  }
-
-  public void setExternalLoadsModelKinematicsFileName(String aFileName) {
-    opensimSimulationJNI.ExternalLoads_setExternalLoadsModelKinematicsFileName(swigCPtr, this, aFileName);
-  }
-
-  public double getLowpassCutoffFrequencyForLoadKinematics() {
-    return opensimSimulationJNI.ExternalLoads_getLowpassCutoffFrequencyForLoadKinematics(swigCPtr, this);
-  }
-
-  public void setLowpassCutoffFrequencyForLoadKinematics(double aLowpassCutoffFrequency) {
-    opensimSimulationJNI.ExternalLoads_setLowpassCutoffFrequencyForLoadKinematics(swigCPtr, this, aLowpassCutoffFrequency);
-  }
-
   public void transformPointsExpressedInGroundToAppliedBodies(Storage kinematics, double startTime, double endTime) {
     opensimSimulationJNI.ExternalLoads_transformPointsExpressedInGroundToAppliedBodies__SWIG_0(swigCPtr, this, Storage.getCPtr(kinematics), kinematics, startTime, endTime);
   }

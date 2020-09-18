@@ -205,8 +205,8 @@ public class MarkersReference extends ReferenceVec3 {
     return new SimTKArrayString(opensimSimulationJNI.MarkersReference_getNames(swigCPtr, this), false);
   }
 
-  public void getValues(State s, SimTKArrayVec3 values) {
-    opensimSimulationJNI.MarkersReference_getValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayVec3.getCPtr(values), values);
+  public void getValuesAtTime(double time, SimTKArrayVec3 values) {
+    opensimSimulationJNI.MarkersReference_getValuesAtTime(swigCPtr, this, time, SimTKArrayVec3.getCPtr(values), values);
   }
 
   public void getWeights(State s, SimTKArrayDouble weights) {
