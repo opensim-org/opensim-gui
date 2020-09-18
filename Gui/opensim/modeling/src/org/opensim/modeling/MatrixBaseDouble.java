@@ -81,8 +81,28 @@ public class MatrixBaseDouble {
     return new MatrixBaseDouble(opensimSimbodyJNI.MatrixBaseDouble_setToZero(swigCPtr, this), false);
   }
 
+  public RowVectorView row(int i) {
+    return new RowVectorView(opensimSimbodyJNI.MatrixBaseDouble_row(swigCPtr, this, i), true);
+  }
+
+  public RowVectorView updRow(int i) {
+    return new RowVectorView(opensimSimbodyJNI.MatrixBaseDouble_updRow(swigCPtr, this, i), true);
+  }
+
+  public VectorView col(int j) {
+    return new VectorView(opensimSimbodyJNI.MatrixBaseDouble_col(swigCPtr, this, j), true);
+  }
+
+  public VectorView updCol(int j) {
+    return new VectorView(opensimSimbodyJNI.MatrixBaseDouble_updCol(swigCPtr, this, j), true);
+  }
+
   public double getElt(int i, int j) {
     return opensimSimbodyJNI.MatrixBaseDouble_getElt(swigCPtr, this, i, j);
+  }
+
+  public SWIGTYPE_p_double updElt(int i, int j) {
+    return new SWIGTYPE_p_double(opensimSimbodyJNI.MatrixBaseDouble_updElt(swigCPtr, this, i, j), false);
   }
 
   public MatrixBaseDouble negateInPlace() {

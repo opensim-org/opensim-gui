@@ -43,12 +43,16 @@ public class RowVectorVec6 extends RowVectorBaseVec6 {
     this(opensimSimbodyJNI.new_RowVectorVec6__SWIG_1(RowVectorVec6.getCPtr(src), src), true);
   }
 
+  public RowVectorVec6(RowVectorBaseVec6 src) {
+    this(opensimSimbodyJNI.new_RowVectorVec6__SWIG_2(RowVectorBaseVec6.getCPtr(src), src), true);
+  }
+
   public RowVectorVec6(int n) {
-    this(opensimSimbodyJNI.new_RowVectorVec6__SWIG_2(n), true);
+    this(opensimSimbodyJNI.new_RowVectorVec6__SWIG_3(n), true);
   }
 
   public RowVectorVec6(int n, Vec6 cppInitialValues) {
-    this(opensimSimbodyJNI.new_RowVectorVec6__SWIG_3(n, Vec6.getCPtr(cppInitialValues), cppInitialValues), true);
+    this(opensimSimbodyJNI.new_RowVectorVec6__SWIG_4(n, Vec6.getCPtr(cppInitialValues), cppInitialValues), true);
   }
 
 }

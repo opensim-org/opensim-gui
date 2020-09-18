@@ -43,12 +43,16 @@ public class RowVectorMat33 extends RowVectorBaseMat33 {
     this(opensimSimbodyJNI.new_RowVectorMat33__SWIG_1(RowVectorMat33.getCPtr(src), src), true);
   }
 
+  public RowVectorMat33(RowVectorBaseMat33 src) {
+    this(opensimSimbodyJNI.new_RowVectorMat33__SWIG_2(RowVectorBaseMat33.getCPtr(src), src), true);
+  }
+
   public RowVectorMat33(int n) {
-    this(opensimSimbodyJNI.new_RowVectorMat33__SWIG_2(n), true);
+    this(opensimSimbodyJNI.new_RowVectorMat33__SWIG_3(n), true);
   }
 
   public RowVectorMat33(int n, Mat33 cppInitialValues) {
-    this(opensimSimbodyJNI.new_RowVectorMat33__SWIG_3(n, Mat33.getCPtr(cppInitialValues), cppInitialValues), true);
+    this(opensimSimbodyJNI.new_RowVectorMat33__SWIG_4(n, Mat33.getCPtr(cppInitialValues), cppInitialValues), true);
   }
 
 }

@@ -71,8 +71,28 @@ public class MatrixBaseRotation {
     return new MatrixBaseRotation(opensimSimbodyJNI.MatrixBaseRotation_setToZero(swigCPtr, this), false);
   }
 
+  public RowVectorViewRotation row(int i) {
+    return new RowVectorViewRotation(opensimSimbodyJNI.MatrixBaseRotation_row(swigCPtr, this, i), true);
+  }
+
+  public RowVectorViewRotation updRow(int i) {
+    return new RowVectorViewRotation(opensimSimbodyJNI.MatrixBaseRotation_updRow(swigCPtr, this, i), true);
+  }
+
+  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Rotation_T_double_t_t col(int j) {
+    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Rotation_T_double_t_t(opensimSimbodyJNI.MatrixBaseRotation_col(swigCPtr, this, j), true);
+  }
+
+  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Rotation_T_double_t_t updCol(int j) {
+    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Rotation_T_double_t_t(opensimSimbodyJNI.MatrixBaseRotation_updCol(swigCPtr, this, j), true);
+  }
+
   public Rotation getElt(int i, int j) {
     return new Rotation(opensimSimbodyJNI.MatrixBaseRotation_getElt(swigCPtr, this, i, j), false);
+  }
+
+  public Rotation updElt(int i, int j) {
+    return new Rotation(opensimSimbodyJNI.MatrixBaseRotation_updElt(swigCPtr, this, i, j), false);
   }
 
   public MatrixBaseRotation negateInPlace() {
