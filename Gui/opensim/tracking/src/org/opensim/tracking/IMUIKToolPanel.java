@@ -128,9 +128,13 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
 
    public void updateFromModel() {
       // Static trial marker data
-      //sensorQFileName.setFileName(ikToolModel.getMarkerDataFileName(),false);
+      sensorQFileName.setFileName(ikToolModel.getSensorOrientationsFileName(),false);
       //sensorQFileName.setFileIsValid(ikToolModel.getMarkerDataValid());
-
+      // Rotations
+      Vec3 rotations=ikToolModel.getRotations();
+      XSpinner.setValue(rotations.get(0));
+      YSpinner.setValue(rotations.get(1));
+      ZSpinner.setValue(rotations.get(2));
       
       // Time range
       double[] timeRange = ikToolModel.getTimeRange();

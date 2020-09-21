@@ -41,6 +41,7 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.TimeSeriesTableQuaternion;
+import org.opensim.modeling.Vec3;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.SwingWorker;
 import org.opensim.tracking.tools.SimulationDB;
@@ -60,7 +61,7 @@ public class IMUIKToolModel extends Observable implements Observer {
     }
 
     void setSensorDataFileName(String fileName) {
-        imuIkTool.set_orientations_file(fileName);
+        sensorOrientationsFileName = fileName;
     }
 
     void setTimeRange(double[] newTimeRange) {
@@ -203,7 +204,9 @@ public class IMUIKToolModel extends Observable implements Observer {
    private String trialName = "ik trial";
    private boolean cleanupAfterExecuting = false;  // Keep track if cleaning up needs to be done on execution finish vs. dialog close
    private String sensorOrientationsFileName = "";
+   private String outputFileName = "";
    private TimeSeriesTableQuaternion sensorData = null;
+   private Vec3 rotations = new Vec3(0);
    private double[] timeRange = new double[]{-1,-1};
 
    public IMUIKToolModel(Model originalModel) throws IOException {
@@ -238,8 +241,12 @@ public class IMUIKToolModel extends Observable implements Observer {
    //------------------------------------------------------------------------
 
    private void updateIKTool() {
-      //ikCommonModel.toInverseKinematicsTool(imuIkTool);
-      //OpenSim23 imuIkTool.setPrintResultFiles(false);
+       // Copy values from self to imuIkTool
+       Vec3 rotationsInRadians = new Vec3(rotations).scalarTimesEq(Math.toRadians(1.0));
+       imuIkTool.set_sensor_to_opensim_rotations(rotationsInRadians);
+       imuIkTool.set_orientations_file(sensorOrientationsFileName);
+       imuIkTool.set_time_range(0, timeRange[0]);
+       imuIkTool.set_time_range(1, timeRange[1]);
    }
 
    public void execute() {  
@@ -322,6 +329,7 @@ public class IMUIKToolModel extends Observable implements Observer {
       /*
         imuIkTool.setMarkerDataFileName(FileUtils.makePathAbsolute(imuIkTool.getMarkerDataFileName(),parentDir));
         imuIkTool.setCoordinateFileName(FileUtils.makePathAbsolute(imuIkTool.getCoordinateFileName(),parentDir)); */
+        imuIkTool.set_orientations_file(FileUtils.makePathAbsolute(sensorOrientationsFileName, parentDir));
         imuIkTool.setOutputMotionFileName(FileUtils.makePathAbsolute(imuIkTool.getOutputMotionFileName(), parentDir));
   }
 
@@ -329,7 +337,7 @@ public class IMUIKToolModel extends Observable implements Observer {
       String parentDir = (new File(parentFileName)).getParent();
       /*imuIkTool.setMarkerDataFileName(FileUtils.makePathRelative(imuIkTool.getMarkerDataFileName(),parentDir));
       imuIkTool.setCoordinateFileName(FileUtils.makePathRelative(imuIkTool.getCoordinateFileName(),parentDir));*/
-      imuIkTool.setOutputMotionFileName(FileUtils.makePathRelative(imuIkTool.getOutputMotionFileName(), parentDir));
+      imuIkTool.setOutputMotionFileName(FileUtils.makePathRelative(outputFileName, parentDir));
    }
 
    public boolean loadSettings(String fileName) {
@@ -337,10 +345,15 @@ public class IMUIKToolModel extends Observable implements Observer {
       IMUInverseKinematicsTool newIKTool = new IMUInverseKinematicsTool(fileName);
 
       imuIkTool = newIKTool;
+      if (newIKTool.get_output_motion_file().isEmpty() && imuIkTool.get_orientations_file()!=null)
+          newIKTool.setOutputMotionFileName("ik_"+imuIkTool.get_orientations_file().replace(".sto", ".mot"));
+      outputFileName = newIKTool.get_output_motion_file();
       relativeToAbsolutePaths(fileName);
-
+      setTimeRange(new double[]{imuIkTool.getStartTime(), imuIkTool.getEndTime()});
+      sensorOrientationsFileName = imuIkTool.get_orientations_file();
       //ikCommonModel.fromIKTool(imuIkTool);
-
+      for (int i=0; i<3; i++) 
+          rotations.set(i, Math.toDegrees(imuIkTool.get_sensor_to_opensim_rotations().get(i)));
       setModified(Operation.AllDataChanged);
       return true;
    }
@@ -370,4 +383,32 @@ public class IMUIKToolModel extends Observable implements Observer {
          System.gc();
       }
    }
+
+    /**
+     * @return the sensorOrientationsFileName
+     */
+    public String getSensorOrientationsFileName() {
+        return sensorOrientationsFileName;
+    }
+
+    /**
+     * @param sensorOrientationsFileName the sensorOrientationsFileName to set
+     */
+    public void setSensorOrientationsFileName(String sensorOrientationsFileName) {
+        this.sensorOrientationsFileName = sensorOrientationsFileName;
+    }
+
+    /**
+     * @return the rotations
+     */
+    public Vec3 getRotations() {
+        return rotations;
+    }
+
+    /**
+     * @param rotations the rotations to set
+     */
+    public void setRotations(Vec3 rotations) {
+        this.rotations = rotations;
+    }
 }
