@@ -127,7 +127,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
    }
 
    public void updateFromModel() {
-      // Static trial marker data
+      // sensor data
       sensorQFileName.setFileName(ikToolModel.getSensorOrientationsFileName(),false);
       //sensorQFileName.setFileIsValid(ikToolModel.getMarkerDataValid());
       // Rotations

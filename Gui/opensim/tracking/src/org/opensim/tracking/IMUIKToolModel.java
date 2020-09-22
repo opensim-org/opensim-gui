@@ -62,13 +62,13 @@ public class IMUIKToolModel extends Observable implements Observer {
 
     void setSensorDataFileName(String fileName) {
         sensorOrientationsFileName = fileName;
+        setModified(Operation.AllDataChanged);
     }
 
     void setTimeRange(double[] newTimeRange) {
       //clampTimeRangeAgainstMarkerData(newTimeRange);
       if(timeRange[0] != newTimeRange[0] || timeRange[1] != newTimeRange[1]) {
          timeRange = newTimeRange;
-         setModified(Operation.IKTrialNameChanged);
       }
     }
    //========================================================================
@@ -245,6 +245,7 @@ public class IMUIKToolModel extends Observable implements Observer {
        Vec3 rotationsInRadians = new Vec3(rotations).scalarTimesEq(Math.toRadians(1.0));
        imuIkTool.set_sensor_to_opensim_rotations(rotationsInRadians);
        imuIkTool.set_orientations_file(sensorOrientationsFileName);
+       imuIkTool.setOutputMotionFileName(outputFileName);
        imuIkTool.set_time_range(0, timeRange[0]);
        imuIkTool.set_time_range(1, timeRange[1]);
    }
@@ -329,14 +330,13 @@ public class IMUIKToolModel extends Observable implements Observer {
       /*
         imuIkTool.setMarkerDataFileName(FileUtils.makePathAbsolute(imuIkTool.getMarkerDataFileName(),parentDir));
         imuIkTool.setCoordinateFileName(FileUtils.makePathAbsolute(imuIkTool.getCoordinateFileName(),parentDir)); */
-        imuIkTool.set_orientations_file(FileUtils.makePathAbsolute(sensorOrientationsFileName, parentDir));
+        imuIkTool.set_orientations_file(FileUtils.makePathAbsolute(imuIkTool.get_orientations_file(), parentDir));
         imuIkTool.setOutputMotionFileName(FileUtils.makePathAbsolute(imuIkTool.getOutputMotionFileName(), parentDir));
   }
 
    private void AbsoluteToRelativePaths(String parentFileName) {
       String parentDir = (new File(parentFileName)).getParent();
-      /*imuIkTool.setMarkerDataFileName(FileUtils.makePathRelative(imuIkTool.getMarkerDataFileName(),parentDir));
-      imuIkTool.setCoordinateFileName(FileUtils.makePathRelative(imuIkTool.getCoordinateFileName(),parentDir));*/
+      imuIkTool.set_orientations_file(FileUtils.makePathRelative(sensorOrientationsFileName, parentDir));
       imuIkTool.setOutputMotionFileName(FileUtils.makePathRelative(outputFileName, parentDir));
    }
 
@@ -348,9 +348,11 @@ public class IMUIKToolModel extends Observable implements Observer {
       if (newIKTool.get_output_motion_file().isEmpty() && imuIkTool.get_orientations_file()!=null)
           newIKTool.setOutputMotionFileName("ik_"+imuIkTool.get_orientations_file().replace(".sto", ".mot"));
       outputFileName = newIKTool.get_output_motion_file();
-      relativeToAbsolutePaths(fileName);
-      setTimeRange(new double[]{imuIkTool.getStartTime(), imuIkTool.getEndTime()});
       sensorOrientationsFileName = imuIkTool.get_orientations_file();
+      relativeToAbsolutePaths(fileName);
+      outputFileName = newIKTool.get_output_motion_file();
+      sensorOrientationsFileName = imuIkTool.get_orientations_file();
+      setTimeRange(new double[]{imuIkTool.getStartTime(), imuIkTool.getEndTime()});      
       //ikCommonModel.fromIKTool(imuIkTool);
       for (int i=0; i<3; i++) 
           rotations.set(i, Math.toDegrees(imuIkTool.get_sensor_to_opensim_rotations().get(i)));
