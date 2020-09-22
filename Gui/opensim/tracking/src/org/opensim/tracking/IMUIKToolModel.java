@@ -71,6 +71,11 @@ public class IMUIKToolModel extends Observable implements Observer {
          timeRange = newTimeRange;
       }
     }
+
+    void setReportErrors(boolean selected) {
+        
+        setModified(Operation.AllDataChanged);
+    }
    //========================================================================
    // IMUIKToolWorker
    //========================================================================
@@ -83,6 +88,7 @@ public class IMUIKToolModel extends Observable implements Observer {
       boolean cleanup=true;
       //private Model modelCopy = null;
       final OpenSimContext context=OpenSimDB.getInstance().getContext(getOriginalModel());
+
       
       IMUIKToolWorker() throws Exception {
          // Give the thread a nudge so that we're not much slower than command line'
@@ -208,7 +214,8 @@ public class IMUIKToolModel extends Observable implements Observer {
    private TimeSeriesTableQuaternion sensorData = null;
    private Vec3 rotations = new Vec3(0);
    private double[] timeRange = new double[]{-1,-1};
-
+   boolean reportErrors = false;
+   
    public IMUIKToolModel(Model originalModel) throws IOException {
       // Store original model
       this.originalModel = originalModel;
@@ -246,8 +253,15 @@ public class IMUIKToolModel extends Observable implements Observer {
        imuIkTool.set_sensor_to_opensim_rotations(rotationsInRadians);
        imuIkTool.set_orientations_file(sensorOrientationsFileName);
        imuIkTool.setOutputMotionFileName(outputFileName);
+       if (outputFileName.isEmpty())
+            imuIkTool.setResultsDir(new File(sensorOrientationsFileName).getParent());
+       else
+            imuIkTool.setResultsDir(new File(outputFileName).getParent());
+       // Convert outputFileName to only filename
+       imuIkTool.setOutputMotionFileName(new File(outputFileName).getName());
        imuIkTool.set_time_range(0, timeRange[0]);
        imuIkTool.set_time_range(1, timeRange[1]);
+       imuIkTool.set_report_errors(reportErrors);
    }
 
    public void execute() {  
@@ -411,6 +425,6 @@ public class IMUIKToolModel extends Observable implements Observer {
      * @param rotations the rotations to set
      */
     public void setRotations(Vec3 rotations) {
-        this.rotations = rotations;
+        this.rotations = new Vec3(rotations);
     }
 }

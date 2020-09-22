@@ -527,6 +527,7 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
 
     private void jReportErrorsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReportErrorsCheckBoxActionPerformed
         // TODO add your handling code here:
+        ikToolModel.setReportErrors(jReportErrorsCheckBox.isSelected());
     }//GEN-LAST:event_jReportErrorsCheckBoxActionPerformed
 
     private void calibrationFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_calibrationFileNameStateChanged
@@ -594,5 +595,6 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
         rotationsInDegrees.set(0, vx);
         rotationsInDegrees.set(1, vy);
         rotationsInDegrees.set(2, vz);
+        ikToolModel.setRotations(rotationsInDegrees);
     }
 }
