@@ -48,7 +48,7 @@ public class SetOientationWeights extends OpenSimObject {
     return opensimSimulationJNI.SetOientationWeights_getClassName();
   }
 
-  public SetOientationWeights clone() {
+  public OpenSimObject clone() {
     long cPtr = opensimSimulationJNI.SetOientationWeights_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new SetOientationWeights(cPtr, true);
   }
@@ -89,12 +89,12 @@ public class SetOientationWeights extends OpenSimObject {
     return opensimSimulationJNI.SetOientationWeights_getSize(swigCPtr, this);
   }
 
-  public int getIndex(SWIGTYPE_p_OrientationWeight aObject, int aStartIndex) {
-    return opensimSimulationJNI.SetOientationWeights_getIndex__SWIG_0(swigCPtr, this, SWIGTYPE_p_OrientationWeight.getCPtr(aObject), aStartIndex);
+  public int getIndex(OrientationWeight aObject, int aStartIndex) {
+    return opensimSimulationJNI.SetOientationWeights_getIndex__SWIG_0(swigCPtr, this, OrientationWeight.getCPtr(aObject), aObject, aStartIndex);
   }
 
-  public int getIndex(SWIGTYPE_p_OrientationWeight aObject) {
-    return opensimSimulationJNI.SetOientationWeights_getIndex__SWIG_1(swigCPtr, this, SWIGTYPE_p_OrientationWeight.getCPtr(aObject));
+  public int getIndex(OrientationWeight aObject) {
+    return opensimSimulationJNI.SetOientationWeights_getIndex__SWIG_1(swigCPtr, this, OrientationWeight.getCPtr(aObject), aObject);
   }
 
   public int getIndex(String aName, int aStartIndex) {
@@ -109,44 +109,44 @@ public class SetOientationWeights extends OpenSimObject {
     opensimSimulationJNI.SetOientationWeights_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
-  public boolean adoptAndAppend(SWIGTYPE_p_OrientationWeight aObject) {
-    return opensimSimulationJNI.SetOientationWeights_adoptAndAppend(swigCPtr, this, SWIGTYPE_p_OrientationWeight.getCPtr(aObject));
+  public boolean adoptAndAppend(OrientationWeight aObject) {
+    return opensimSimulationJNI.SetOientationWeights_adoptAndAppend(swigCPtr, this, OrientationWeight.getCPtr(aObject), aObject);
   }
 
-  public boolean cloneAndAppend(SWIGTYPE_p_OrientationWeight aObject) {
-    return opensimSimulationJNI.SetOientationWeights_cloneAndAppend(swigCPtr, this, SWIGTYPE_p_OrientationWeight.getCPtr(aObject));
+  public boolean cloneAndAppend(OrientationWeight aObject) {
+    return opensimSimulationJNI.SetOientationWeights_cloneAndAppend(swigCPtr, this, OrientationWeight.getCPtr(aObject), aObject);
   }
 
-  public boolean insert(int aIndex, SWIGTYPE_p_OrientationWeight aObject) {
-    return opensimSimulationJNI.SetOientationWeights_insert(swigCPtr, this, aIndex, SWIGTYPE_p_OrientationWeight.getCPtr(aObject));
+  public boolean insert(int aIndex, OrientationWeight aObject) {
+    return opensimSimulationJNI.SetOientationWeights_insert(swigCPtr, this, aIndex, OrientationWeight.getCPtr(aObject), aObject);
   }
 
   public boolean remove(int aIndex) {
     return opensimSimulationJNI.SetOientationWeights_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
-  public boolean remove(SWIGTYPE_p_OrientationWeight aObject) {
-    return opensimSimulationJNI.SetOientationWeights_remove__SWIG_1(swigCPtr, this, SWIGTYPE_p_OrientationWeight.getCPtr(aObject));
+  public boolean remove(OrientationWeight aObject) {
+    return opensimSimulationJNI.SetOientationWeights_remove__SWIG_1(swigCPtr, this, OrientationWeight.getCPtr(aObject), aObject);
   }
 
   public void clearAndDestroy() {
     opensimSimulationJNI.SetOientationWeights_clearAndDestroy(swigCPtr, this);
   }
 
-  public boolean set(int aIndex, SWIGTYPE_p_OrientationWeight aObject, boolean preserveGroups) {
-    return opensimSimulationJNI.SetOientationWeights_set__SWIG_0(swigCPtr, this, aIndex, SWIGTYPE_p_OrientationWeight.getCPtr(aObject), preserveGroups);
+  public boolean set(int aIndex, OrientationWeight aObject, boolean preserveGroups) {
+    return opensimSimulationJNI.SetOientationWeights_set__SWIG_0(swigCPtr, this, aIndex, OrientationWeight.getCPtr(aObject), aObject, preserveGroups);
   }
 
-  public boolean set(int aIndex, SWIGTYPE_p_OrientationWeight aObject) {
-    return opensimSimulationJNI.SetOientationWeights_set__SWIG_1(swigCPtr, this, aIndex, SWIGTYPE_p_OrientationWeight.getCPtr(aObject));
+  public boolean set(int aIndex, OrientationWeight aObject) {
+    return opensimSimulationJNI.SetOientationWeights_set__SWIG_1(swigCPtr, this, aIndex, OrientationWeight.getCPtr(aObject), aObject);
   }
 
-  public SWIGTYPE_p_OrientationWeight get(int aIndex) {
-    return new SWIGTYPE_p_OrientationWeight(opensimSimulationJNI.SetOientationWeights_get__SWIG_0(swigCPtr, this, aIndex), false);
+  public OrientationWeight get(int aIndex) {
+    return new OrientationWeight(opensimSimulationJNI.SetOientationWeights_get__SWIG_0(swigCPtr, this, aIndex), false);
   }
 
-  public SWIGTYPE_p_OrientationWeight get(String aName) {
-    return new SWIGTYPE_p_OrientationWeight(opensimSimulationJNI.SetOientationWeights_get__SWIG_1(swigCPtr, this, aName), false);
+  public OrientationWeight get(String aName) {
+    return new OrientationWeight(opensimSimulationJNI.SetOientationWeights_get__SWIG_1(swigCPtr, this, aName), false);
   }
 
   public boolean contains(String aName) {

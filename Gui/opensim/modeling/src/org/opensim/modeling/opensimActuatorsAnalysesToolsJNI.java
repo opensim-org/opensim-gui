@@ -2091,6 +2091,7 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native long AnalyzeTool_SWIGUpcast(long jarg1);
   public final static native long InverseKinematicsToolBase_SWIGUpcast(long jarg1);
   public final static native long InverseKinematicsTool_SWIGUpcast(long jarg1);
+  public final static native long OrientationWeightSet_SWIGUpcast(long jarg1);
   public final static native long IMUInverseKinematicsTool_SWIGUpcast(long jarg1);
   public final static native long OpenSimContext_SWIGUpcast(long jarg1);
   public final static native long OpenSimJavaObject_SWIGUpcast(long jarg1);

@@ -97,36 +97,36 @@ public class OrientationsReference extends StreamableReferenceRotation {
     opensimSimulationJNI.OrientationsReference_copyProperty_orientation_weights(swigCPtr, this, OrientationsReference.getCPtr(source), source);
   }
 
-  public SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t get_orientation_weights(int i) {
-    return new SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t(opensimSimulationJNI.OrientationsReference_get_orientation_weights__SWIG_0(swigCPtr, this, i), false);
+  public SetOientationWeights get_orientation_weights(int i) {
+    return new SetOientationWeights(opensimSimulationJNI.OrientationsReference_get_orientation_weights__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t upd_orientation_weights(int i) {
-    return new SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t(opensimSimulationJNI.OrientationsReference_upd_orientation_weights__SWIG_0(swigCPtr, this, i), false);
+  public SetOientationWeights upd_orientation_weights(int i) {
+    return new SetOientationWeights(opensimSimulationJNI.OrientationsReference_upd_orientation_weights__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_orientation_weights(int i, SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t value) {
-    opensimSimulationJNI.OrientationsReference_set_orientation_weights__SWIG_0(swigCPtr, this, i, SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t.getCPtr(value));
+  public void set_orientation_weights(int i, SetOientationWeights value) {
+    opensimSimulationJNI.OrientationsReference_set_orientation_weights__SWIG_0(swigCPtr, this, i, SetOientationWeights.getCPtr(value), value);
   }
 
-  public int append_orientation_weights(SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t value) {
-    return opensimSimulationJNI.OrientationsReference_append_orientation_weights(swigCPtr, this, SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t.getCPtr(value));
+  public int append_orientation_weights(SetOientationWeights value) {
+    return opensimSimulationJNI.OrientationsReference_append_orientation_weights(swigCPtr, this, SetOientationWeights.getCPtr(value), value);
   }
 
-  public void constructProperty_orientation_weights(SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t initValue) {
-    opensimSimulationJNI.OrientationsReference_constructProperty_orientation_weights(swigCPtr, this, SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t.getCPtr(initValue));
+  public void constructProperty_orientation_weights(SetOientationWeights initValue) {
+    opensimSimulationJNI.OrientationsReference_constructProperty_orientation_weights(swigCPtr, this, SetOientationWeights.getCPtr(initValue), initValue);
   }
 
-  public SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t get_orientation_weights() {
-    return new SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t(opensimSimulationJNI.OrientationsReference_get_orientation_weights__SWIG_1(swigCPtr, this), false);
+  public SetOientationWeights get_orientation_weights() {
+    return new SetOientationWeights(opensimSimulationJNI.OrientationsReference_get_orientation_weights__SWIG_1(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t upd_orientation_weights() {
-    return new SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t(opensimSimulationJNI.OrientationsReference_upd_orientation_weights__SWIG_1(swigCPtr, this), false);
+  public SetOientationWeights upd_orientation_weights() {
+    return new SetOientationWeights(opensimSimulationJNI.OrientationsReference_upd_orientation_weights__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_orientation_weights(SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t value) {
-    opensimSimulationJNI.OrientationsReference_set_orientation_weights__SWIG_1(swigCPtr, this, SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t.getCPtr(value));
+  public void set_orientation_weights(SetOientationWeights value) {
+    opensimSimulationJNI.OrientationsReference_set_orientation_weights__SWIG_1(swigCPtr, this, SetOientationWeights.getCPtr(value), value);
   }
 
   public void copyProperty_default_weight(OrientationsReference source) {
@@ -177,8 +177,8 @@ public class OrientationsReference extends StreamableReferenceRotation {
     this(opensimSimulationJNI.new_OrientationsReference__SWIG_2(orientationFileName), true);
   }
 
-  public OrientationsReference(TimeSeriesTableRotation orientationData, SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t orientationWeightSet) {
-    this(opensimSimulationJNI.new_OrientationsReference__SWIG_3(TimeSeriesTableRotation.getCPtr(orientationData), orientationData, SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t.getCPtr(orientationWeightSet)), true);
+  public OrientationsReference(TimeSeriesTableRotation orientationData, SetOientationWeights orientationWeightSet) {
+    this(opensimSimulationJNI.new_OrientationsReference__SWIG_3(TimeSeriesTableRotation.getCPtr(orientationData), orientationData, SetOientationWeights.getCPtr(orientationWeightSet), orientationWeightSet), true);
   }
 
   public OrientationsReference(TimeSeriesTableRotation orientationData) {
@@ -229,12 +229,12 @@ public class OrientationsReference extends StreamableReferenceRotation {
     return opensimSimulationJNI.OrientationsReference_getSamplingFrequency(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t updOrientationWeightSet() {
-    return new SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t(opensimSimulationJNI.OrientationsReference_updOrientationWeightSet(swigCPtr, this), false);
+  public SetOientationWeights updOrientationWeightSet() {
+    return new SetOientationWeights(opensimSimulationJNI.OrientationsReference_updOrientationWeightSet(swigCPtr, this), false);
   }
 
-  public void setOrientationWeightSet(SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t orientationWeights) {
-    opensimSimulationJNI.OrientationsReference_setOrientationWeightSet(swigCPtr, this, SWIGTYPE_p_OpenSim__SetT_OpenSim__OrientationWeight_OpenSim__Object_t.getCPtr(orientationWeights));
+  public void setOrientationWeightSet(SetOientationWeights orientationWeights) {
+    opensimSimulationJNI.OrientationsReference_setOrientationWeightSet(swigCPtr, this, SetOientationWeights.getCPtr(orientationWeights), orientationWeights);
   }
 
   public void setDefaultWeight(double weight) {
