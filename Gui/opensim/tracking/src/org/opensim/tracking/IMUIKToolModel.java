@@ -56,6 +56,15 @@ import org.opensim.view.pub.OpenSimDB;
 // Only deals with a single (the first) IKTrial in the IKTrialSet of IKTool
 public class IMUIKToolModel extends Observable implements Observer {
 
+    /**
+     * @return the sensorData
+     */
+    public TimeSeriesTableQuaternion getSensorData() {
+        if (sensorData == null)
+            sensorData = new TimeSeriesTableQuaternion(sensorOrientationsFileName);
+        return sensorData;
+    }
+
     double[] getTimeRange() {
         return timeRange;
     }

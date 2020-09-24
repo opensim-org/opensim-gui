@@ -38,15 +38,20 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.JFrame;
 import javax.swing.JSpinner;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.opensim.modeling.IMUInverseKinematicsTool;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OrientationWeight;
+import org.opensim.modeling.OrientationWeightSet;
+import org.opensim.modeling.StdVectorString;
 import org.opensim.modeling.Vec3;
 import org.opensim.swingui.RotationSpinnerListModel;
 import org.opensim.utils.BrowserLauncher;
+import org.opensim.utils.DialogUtils;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -523,6 +528,15 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
 
     private void jWeightsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeightsButtonActionPerformed
         // TODO add your handling code here:
+        StdVectorString lbls=ikToolModel.getSensorData().getColumnLabels();
+        OrientationWeightSet defaultWeights = new OrientationWeightSet();
+        for (int i=0; i<lbls.size(); i++){
+            defaultWeights.cloneAndAppend(new OrientationWeight(lbls.get(i), 1.0));
+        }
+        OrientationWeightsJPanel weightsPanel = new OrientationWeightsJPanel(defaultWeights);
+        JFrame f= DialogUtils.createFrameForPanel(weightsPanel, "Sensor Weights");
+        f.pack();
+        f.setVisible(true);
     }//GEN-LAST:event_jWeightsButtonActionPerformed
 
     private void jReportErrorsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReportErrorsCheckBoxActionPerformed
@@ -596,5 +610,9 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
         rotationsInDegrees.set(1, vy);
         rotationsInDegrees.set(2, vz);
         ikToolModel.setRotations(rotationsInDegrees);
+    }
+    
+    private void populateOrientationWeights(){
+
     }
 }
