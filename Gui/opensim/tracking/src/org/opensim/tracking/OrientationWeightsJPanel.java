@@ -9,6 +9,7 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 import org.opensim.modeling.OrientationWeight;
 import org.opensim.modeling.OrientationWeightSet;
+import org.opensim.utils.ErrorDialog;
 
 /**
  *
@@ -52,6 +53,28 @@ public class OrientationWeightsJPanel extends javax.swing.JPanel {
         @Override
         public boolean isCellEditable(int i, int i1) {
             return i1==1; //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void fireTableRowsUpdated(int i, int i1) {
+            super.fireTableRowsUpdated(i, i1); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void fireTableDataChanged() {
+            super.fireTableDataChanged(); //To change body of generated methods, choose Tools | Templates.
+        }
+
+        @Override
+        public void setValueAt(Object o, int i, int i1) {
+            if (i1==1){
+                OrientationWeight ow = owSet.get(i);
+                double wgt = (Double)o;
+                if (wgt >=0. && wgt <= 1.0)
+                    ow.setWeight(wgt);
+                else
+                    ErrorDialog.showMessageDialog("Weights need to be between 0 and 1");
+            }
         }
         
     }
