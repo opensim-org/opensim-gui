@@ -39,7 +39,9 @@ import org.opensim.modeling.MarkerData;
 //import org.opensim.modeling.InterruptingIntegCallback;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.OrientationWeight;
 import org.opensim.modeling.OrientationWeightSet;
+import org.opensim.modeling.StdVectorString;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.TimeSeriesTableQuaternion;
 import org.opensim.modeling.Vec3;
@@ -86,6 +88,15 @@ public class IMUIKToolModel extends Observable implements Observer {
         
         setModified(Operation.AllDataChanged);
     }
+
+    private void populateOrientationWeights() {
+        StdVectorString lbls=getSensorData().getColumnLabels();
+        orientation_weightset = new OrientationWeightSet();
+        for (int i=0; i<lbls.size(); i++){
+            orientation_weightset.cloneAndAppend(new OrientationWeight(lbls.get(i), 1.0));
+        }
+    }
+    
    //========================================================================
    // IMUIKToolWorker
    //========================================================================
@@ -225,7 +236,7 @@ public class IMUIKToolModel extends Observable implements Observer {
    private Vec3 rotations = new Vec3(0);
    private double[] timeRange = new double[]{-1,-1};
    boolean reportErrors = false;
-   private OrientationWeightSet owset=null;
+   private OrientationWeightSet orientation_weightset=null;
    
    public IMUIKToolModel(Model originalModel) throws IOException {
       // Store original model
@@ -273,7 +284,7 @@ public class IMUIKToolModel extends Observable implements Observer {
        imuIkTool.set_time_range(0, timeRange[0]);
        imuIkTool.set_time_range(1, timeRange[1]);
        imuIkTool.set_report_errors(reportErrors);
-       imuIkTool.set_orientation_weights(owset);
+       imuIkTool.set_orientation_weights(orientation_weightset);
    }
 
    public void execute() {  
@@ -382,7 +393,11 @@ public class IMUIKToolModel extends Observable implements Observer {
       //ikCommonModel.fromIKTool(imuIkTool);
       for (int i=0; i<3; i++) 
           rotations.set(i, Math.toDegrees(imuIkTool.get_sensor_to_opensim_rotations().get(i)));
-      owset = imuIkTool.get_orientation_weights();
+      orientation_weightset = imuIkTool.get_orientation_weights();
+      int sz = orientation_weightset.getSize();
+      if (!sensorOrientationsFileName.isEmpty() && sz==0){
+          populateOrientationWeights();
+      }
       setModified(Operation.AllDataChanged);
       return true;
    }
@@ -439,5 +454,19 @@ public class IMUIKToolModel extends Observable implements Observer {
      */
     public void setRotations(Vec3 rotations) {
         this.rotations = new Vec3(rotations);
+    }
+
+    /**
+     * @return the orientation_weightset
+     */
+    public OrientationWeightSet getOrientation_weightset() {
+        return orientation_weightset;
+    }
+
+    /**
+     * @param orientation_weightset the orientation_weightset to set
+     */
+    public void setOrientation_weightset(OrientationWeightSet orientation_weightset) {
+        this.orientation_weightset = orientation_weightset;
     }
 }

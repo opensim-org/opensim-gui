@@ -528,28 +528,21 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
 
     private void jWeightsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeightsButtonActionPerformed
         // TODO add your handling code here:
-        StdVectorString lbls=ikToolModel.getSensorData().getColumnLabels();
-        OrientationWeightSet currentWeights = createDefaultWeightSet(lbls);
-        
+        OrientationWeightSet currentWeights = ikToolModel.getOrientation_weightset();
+        OrientationWeightSet saveWeights = OrientationWeightSet.safeDownCast(currentWeights.clone());
         OrientationWeightsJPanel weightsPanel = new OrientationWeightsJPanel(currentWeights);
         Object [] options =  {  NotifyDescriptor.OK_OPTION,
                                 NotifyDescriptor.CANCEL_OPTION};
         DialogDescriptor weightsDialog = new DialogDescriptor(weightsPanel,
                                             "Sensor Weights");
-         DialogDisplayer.getDefault().createDialog(weightsDialog).setVisible(true);
-         Object userInput = weightsDialog.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-
+        DialogDisplayer.getDefault().createDialog(weightsDialog).setVisible(true);
+        Object userInput = weightsDialog.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)!=0){
+            // Uer cancelled
+            currentWeights = OrientationWeightSet.safeDownCast(saveWeights.clone());
+            ikToolModel.setOrientation_weightset(currentWeights);
         }
     }//GEN-LAST:event_jWeightsButtonActionPerformed
-
-    private OrientationWeightSet createDefaultWeightSet(StdVectorString lbls) {
-        OrientationWeightSet defaultWeights = new OrientationWeightSet();
-        for (int i=0; i<lbls.size(); i++){
-            defaultWeights.cloneAndAppend(new OrientationWeight(lbls.get(i), 1.0));
-        }
-        return defaultWeights;
-    }
 
     private void jReportErrorsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReportErrorsCheckBoxActionPerformed
         // TODO add your handling code here:

@@ -85,6 +85,7 @@ public class OrientationWeightsJPanel extends javax.swing.JPanel {
         WeightsTableModel tableModel = new WeightsTableModel(owSet);
         initComponents();
         jWeightsTable.setModel(tableModel);
+        jWeightsTable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
     }
 
     /**
