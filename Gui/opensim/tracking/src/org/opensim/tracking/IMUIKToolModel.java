@@ -41,6 +41,7 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.OrientationWeight;
 import org.opensim.modeling.OrientationWeightSet;
+import org.opensim.modeling.StdVectorDouble;
 import org.opensim.modeling.StdVectorString;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.TimeSeriesTableQuaternion;
@@ -87,8 +88,14 @@ public class IMUIKToolModel extends Observable implements Observer {
     }
 
     void setSensorDataFileName(String fileName) {
-        sensorOrientationsFileName = fileName;
-        setModified(Operation.AllDataChanged);
+        if (fileName != sensorOrientationsFileName){
+            sensorOrientationsFileName = fileName;
+            sensorData = new TimeSeriesTableQuaternion(sensorOrientationsFileName);
+            StdVectorDouble timeColumn = sensorData.getIndependentColumn();
+            timeRange[0] = timeColumn.get(0);
+            timeRange[1] = timeColumn.get((int)timeColumn.size()-1);
+            setModified(Operation.AllDataChanged);
+        }
     }
 
     void setTimeRange(double[] newTimeRange) {
@@ -293,14 +300,16 @@ public class IMUIKToolModel extends Observable implements Observer {
             imuIkTool.setResultsDir(new File(sensorOrientationsFileName).getParent());
        }
        else{
-            imuIkTool.setResultsDir(new File(fullOutputFileName).getParent());
+            File outputFile = new File(fullOutputFileName);
+            if (outputFile.getParent()!=null)
+                imuIkTool.setResultsDir(outputFile.getParent());
             // Convert fullOutputFileName to only filename
-            imuIkTool.setOutputMotionFileName(new File(fullOutputFileName).getName());
+            imuIkTool.setOutputMotionFileName(outputFile.getName());
        }
        imuIkTool.set_time_range(0, timeRange[0]);
        imuIkTool.set_time_range(1, timeRange[1]);
        imuIkTool.set_report_errors(reportErrors);
-       imuIkTool.set_orientation_weights(orientation_weightset);
+       imuIkTool.set_orientation_weights(getOrientation_weightset());
    }
 
    public void execute() {  
@@ -392,7 +401,8 @@ public class IMUIKToolModel extends Observable implements Observer {
       String parentDir = (new File(parentFileName)).getParent();
       imuIkTool.set_orientations_file(FileUtils.makePathRelative(sensorOrientationsFileName, parentDir));
       File outFile = new File(fullOutputFileName);
-      imuIkTool.setResultsDir(FileUtils.makePathRelative(outFile.getParent(), parentDir));
+      if (outFile.getParent()!=null)
+        imuIkTool.setResultsDir(FileUtils.makePathRelative(outFile.getParent(), parentDir));
       imuIkTool.setOutputMotionFileName(outFile.getName());
    }
 
@@ -479,6 +489,9 @@ public class IMUIKToolModel extends Observable implements Observer {
      * @return the orientation_weightset
      */
     public OrientationWeightSet getOrientation_weightset() {
+        if (orientation_weightset==null){
+            populateOrientationWeights();
+        }
         return orientation_weightset;
     }
 
