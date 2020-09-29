@@ -146,7 +146,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
       startTime.setText(numFormat.format(timeRange[0]));
       endTime.setText(numFormat.format(timeRange[1]));
 
-      outputMotionFilePath.setFileName(ikToolModel.getIKTool().getOutputMotionFileName());
+      outputMotionFilePath.setFileName(ikToolModel.getFullOutputFileName());
       //---------------------------------------------------------------------
       // Dialog buttons
       //---------------------------------------------------------------------
@@ -523,7 +523,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
    }//GEN-LAST:event_timeRangeActionPerformed
 
 private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputMotionFilePathStateChanged
-      ikToolModel.getIKTool().setOutputMotionFileName(outputMotionFilePath.getFileName());
+      ikToolModel.setFullOutputFileName(outputMotionFilePath.getFileName());
 }//GEN-LAST:event_outputMotionFilePathStateChanged
 
     private void jWeightsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeightsButtonActionPerformed
@@ -617,7 +617,4 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
         ikToolModel.setRotations(rotationsInDegrees);
     }
     
-    private void populateOrientationWeights(){
-
-    }
 }

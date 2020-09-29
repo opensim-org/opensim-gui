@@ -60,6 +60,20 @@ import org.opensim.view.pub.OpenSimDB;
 public class IMUIKToolModel extends Observable implements Observer {
 
     /**
+     * @return the fullOutputFileName
+     */
+    public String getFullOutputFileName() {
+        return fullOutputFileName;
+    }
+
+    /**
+     * @param fullOutputFileName the fullOutputFileName to set
+     */
+    public void setFullOutputFileName(String fullOutputFileName) {
+        this.fullOutputFileName = fullOutputFileName;
+    }
+
+    /**
      * @return the sensorData
      */
     public TimeSeriesTableQuaternion getSensorData() {
@@ -231,7 +245,7 @@ public class IMUIKToolModel extends Observable implements Observer {
    private String trialName = "ik trial";
    private boolean cleanupAfterExecuting = false;  // Keep track if cleaning up needs to be done on execution finish vs. dialog close
    private String sensorOrientationsFileName = "";
-   private String outputFileName = "";
+   private String fullOutputFileName = "";
    private TimeSeriesTableQuaternion sensorData = null;
    private Vec3 rotations = new Vec3(0);
    private double[] timeRange = new double[]{-1,-1};
@@ -274,13 +288,15 @@ public class IMUIKToolModel extends Observable implements Observer {
        Vec3 rotationsInRadians = new Vec3(rotations).scalarTimesEq(Math.toRadians(1.0));
        imuIkTool.set_sensor_to_opensim_rotations(rotationsInRadians);
        imuIkTool.set_orientations_file(sensorOrientationsFileName);
-       imuIkTool.setOutputMotionFileName(outputFileName);
-       if (outputFileName.isEmpty())
+       imuIkTool.setOutputMotionFileName(fullOutputFileName);
+       if (fullOutputFileName.isEmpty()){
             imuIkTool.setResultsDir(new File(sensorOrientationsFileName).getParent());
-       else
-            imuIkTool.setResultsDir(new File(outputFileName).getParent());
-       // Convert outputFileName to only filename
-       imuIkTool.setOutputMotionFileName(new File(outputFileName).getName());
+       }
+       else{
+            imuIkTool.setResultsDir(new File(fullOutputFileName).getParent());
+            // Convert fullOutputFileName to only filename
+            imuIkTool.setOutputMotionFileName(new File(fullOutputFileName).getName());
+       }
        imuIkTool.set_time_range(0, timeRange[0]);
        imuIkTool.set_time_range(1, timeRange[1]);
        imuIkTool.set_report_errors(reportErrors);
@@ -368,13 +384,16 @@ public class IMUIKToolModel extends Observable implements Observer {
         imuIkTool.setMarkerDataFileName(FileUtils.makePathAbsolute(imuIkTool.getMarkerDataFileName(),parentDir));
         imuIkTool.setCoordinateFileName(FileUtils.makePathAbsolute(imuIkTool.getCoordinateFileName(),parentDir)); */
         imuIkTool.set_orientations_file(FileUtils.makePathAbsolute(imuIkTool.get_orientations_file(), parentDir));
-        imuIkTool.setOutputMotionFileName(FileUtils.makePathAbsolute(imuIkTool.getOutputMotionFileName(), parentDir));
+        String fullpath = imuIkTool.getResultsDir()+"/"+imuIkTool.getOutputMotionFileName();
+        imuIkTool.setOutputMotionFileName(FileUtils.makePathAbsolute(fullpath, parentDir));
   }
 
    private void AbsoluteToRelativePaths(String parentFileName) {
       String parentDir = (new File(parentFileName)).getParent();
       imuIkTool.set_orientations_file(FileUtils.makePathRelative(sensorOrientationsFileName, parentDir));
-      imuIkTool.setOutputMotionFileName(FileUtils.makePathRelative(outputFileName, parentDir));
+      File outFile = new File(fullOutputFileName);
+      imuIkTool.setResultsDir(FileUtils.makePathRelative(outFile.getParent(), parentDir));
+      imuIkTool.setOutputMotionFileName(outFile.getName());
    }
 
    public boolean loadSettings(String fileName) {
@@ -384,10 +403,10 @@ public class IMUIKToolModel extends Observable implements Observer {
       imuIkTool = newIKTool;
       if (newIKTool.get_output_motion_file().isEmpty() && imuIkTool.get_orientations_file()!=null)
           newIKTool.setOutputMotionFileName("ik_"+imuIkTool.get_orientations_file().replace(".sto", ".mot"));
-      outputFileName = newIKTool.get_output_motion_file();
+      fullOutputFileName = newIKTool.get_output_motion_file();
       sensorOrientationsFileName = imuIkTool.get_orientations_file();
       relativeToAbsolutePaths(fileName);
-      outputFileName = newIKTool.get_output_motion_file();
+      fullOutputFileName = newIKTool.get_output_motion_file();
       sensorOrientationsFileName = imuIkTool.get_orientations_file();
       setTimeRange(new double[]{imuIkTool.getStartTime(), imuIkTool.getEndTime()});      
       //ikCommonModel.fromIKTool(imuIkTool);
