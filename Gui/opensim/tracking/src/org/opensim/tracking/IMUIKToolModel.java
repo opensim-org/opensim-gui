@@ -112,7 +112,8 @@ public class IMUIKToolModel extends Observable implements Observer {
 
     private void populateOrientationWeights() {
         StdVectorString lbls=getSensorData().getColumnLabels();
-        orientation_weightset = new OrientationWeightSet();
+        if (orientation_weightset==null)
+            orientation_weightset = new OrientationWeightSet();
         for (int i=0; i<lbls.size(); i++){
             orientation_weightset.cloneAndAppend(new OrientationWeight(lbls.get(i), 1.0));
         }
@@ -128,7 +129,7 @@ public class IMUIKToolModel extends Observable implements Observer {
       boolean result = false;
       boolean promptToKeepPartialResult = true;
       boolean cleanup=true;
-      //private Model modelCopy = null;
+      Model modelCopy = new Model(getOriginalModel());
       final OpenSimContext context=OpenSimDB.getInstance().getContext(getOriginalModel());
 
       
@@ -136,11 +137,11 @@ public class IMUIKToolModel extends Observable implements Observer {
          // Give the thread a nudge so that we're not much slower than command line'
          setPriority(Thread.MAX_PRIORITY);
          
+         modelCopy.initSystem();
          updateIKTool();
 
          // Operate on a copy of the model -- this way if users play with parameters in the GUI it won't affect the model we're actually computing on
-         imuIkTool.setModel(getOriginalModel());
-
+         imuIkTool.setModel(modelCopy);
          // Make no motion be currently selected (so model doesn't have extraneous ground forces/experimental markers from
          // another motion show up on it)
          MotionsDB.getInstance().clearCurrent();
@@ -158,16 +159,16 @@ public class IMUIKToolModel extends Observable implements Observer {
                               });
 
          // Animation callback will update the display during IK solve
-         animationCallback = new JavaMotionDisplayerCallback(getOriginalModel(),null/* imuIkTool.getOutputStorage()*/, progressHandle, true);
-         getOriginalModel().addAnalysis(animationCallback);
+         animationCallback = new JavaMotionDisplayerCallback(modelCopy, getOriginalModel(), null, progressHandle, false);
+         modelCopy.addAnalysis(animationCallback);
          animationCallback.setStepInterval(1);
          animationCallback.startProgressUsingTime(startTime, endTime);
 
          // Do this manouver (there's gotta be a nicer way) to create the object so that C++ owns it and not Java (since 
          // removeIntegCallback in finished() will cause the C++-side callback to be deleted, and if Java owned this object
          // it would then later try to delete it yet again)
-         interruptingCallback = new InterruptCallback(getOriginalModel());
-         getOriginalModel().addAnalysis(interruptingCallback);
+         interruptingCallback = new InterruptCallback(modelCopy);
+         modelCopy.addAnalysis(interruptingCallback);
          setExecuting(true);
          SimulationDB.getInstance().fireToolStart();
 
@@ -189,7 +190,7 @@ public class IMUIKToolModel extends Observable implements Observer {
             SimulationDB.getInstance().fireToolFinish();
             worker=null;
             cleanup=false;
-            getOriginalModel().removeAnalysis(interruptingCallback, false);
+            modelCopy.removeAnalysis(interruptingCallback, false);
             
          }
          return this;
@@ -205,8 +206,8 @@ public class IMUIKToolModel extends Observable implements Observer {
             // Clean up motion displayer (this is necessary!)
             animationCallback.cleanupMotionDisplayer();
 
-            getOriginalModel().removeAnalysis(animationCallback, false);
-            getOriginalModel().removeAnalysis(interruptingCallback, false);
+            modelCopy.removeAnalysis(animationCallback, false);
+            modelCopy.removeAnalysis(interruptingCallback, false);
             interruptingCallback = null;
 
             if (result) {
@@ -233,7 +234,7 @@ public class IMUIKToolModel extends Observable implements Observer {
 
             setExecuting(false);
 
-            //modelCopy = null;
+            modelCopy = null;
             worker = null;
         }
     }
@@ -450,7 +451,7 @@ public class IMUIKToolModel extends Observable implements Observer {
          cleanupAfterExecuting = true;
       }
       else{
-         //ikCommonModel.deleteObservers();
+         deleteObservers();
          //ikCommonModel=null;
          imuIkTool = null;
          System.gc();
