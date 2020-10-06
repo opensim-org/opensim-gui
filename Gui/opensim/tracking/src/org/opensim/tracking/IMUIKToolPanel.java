@@ -382,7 +382,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
                 .add(jLabel12)
                 .add(1, 1, 1)
                 .add(sensorQFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 33, Short.MAX_VALUE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jWeightsButton)
                     .add(jReportErrorsCheckBox))
@@ -446,7 +446,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
                         .add(YSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(ZSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .add(0, 15, Short.MAX_VALUE))
+                .add(0, 0, Short.MAX_VALUE))
         );
         transformDataPanelLayout.setVerticalGroup(
             transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -503,38 +503,17 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(transformDataPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(sensorIKPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(outputPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 107, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .add(sensorIKPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(4, 4, 4)
+                .add(outputPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputMotionFilePathStateChanged
       ikToolModel.setFullOutputFileName(outputMotionFilePath.getFileName());
 }//GEN-LAST:event_outputMotionFilePathStateChanged
-
-    private void ZSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ZSpinnerStateChanged
-        // TODO add your handling code here:
-        double delta = getRotationAngleChange(evt);
-        updateTransform(xSpinnerModel.getLastValue(), ySpinnerModel.getLastValue(), delta);
-    }//GEN-LAST:event_ZSpinnerStateChanged
-
-    private void YSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_YSpinnerStateChanged
-        // TODO add your handling code here:
-        double delta = getRotationAngleChange(evt);
-        updateTransform(xSpinnerModel.getLastValue(), delta,
-            zSpinnerModel.getLastValue());
-    }//GEN-LAST:event_YSpinnerStateChanged
-
-    private void XSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_XSpinnerStateChanged
-        double delta = getRotationAngleChange(evt);
-        updateTransform(delta, ySpinnerModel.getLastValue(),
-            zSpinnerModel.getLastValue());
-
-        // TODO add your handling code here:
-    }//GEN-LAST:event_XSpinnerStateChanged
 
     private void jReportErrorsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReportErrorsCheckBoxActionPerformed
         // TODO add your handling code here:
@@ -586,6 +565,27 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
     private void calibrationFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_calibrationFileNameStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_calibrationFileNameStateChanged
+
+    private void ZSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ZSpinnerStateChanged
+        // TODO add your handling code here:
+        double delta = getRotationAngleChange(evt);
+        updateTransform(xSpinnerModel.getLastValue(), ySpinnerModel.getLastValue(), delta);
+    }//GEN-LAST:event_ZSpinnerStateChanged
+
+    private void YSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_YSpinnerStateChanged
+        // TODO add your handling code here:
+        double delta = getRotationAngleChange(evt);
+        updateTransform(xSpinnerModel.getLastValue(), delta,
+            zSpinnerModel.getLastValue());
+    }//GEN-LAST:event_YSpinnerStateChanged
+
+    private void XSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_XSpinnerStateChanged
+        double delta = getRotationAngleChange(evt);
+        updateTransform(delta, ySpinnerModel.getLastValue(),
+            zSpinnerModel.getLastValue());
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_XSpinnerStateChanged
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner XSpinner;

@@ -25,8 +25,8 @@ import org.opensim.view.pub.OpenSimDB;
 @ActionRegistration(
         displayName = "#CTL_IMUIKToolAction"
 )
-@ActionReference(path = "Menu/Tools", position = 200)
-@Messages("CTL_IMUIKToolAction=Inverse Kinematics with IMUs...")
+@ActionReference(path = "Menu/Tools", position = 200, separatorAfter = 250)
+@Messages("CTL_IMUIKToolAction=IMU Inverse Kinematics...")
 public final class IMUIKToolAction implements ActionListener {
 
     @Override

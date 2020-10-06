@@ -149,7 +149,7 @@ public class IMUIKToolModel extends Observable implements Observer {
          // Initialize progress bar, given we know the number of frames to process
          double startTime = imuIkTool.getStartTime();
          double endTime = imuIkTool.getEndTime();
-         progressHandle = ProgressHandleFactory.createHandle("Executing inverse kinematics...",
+         progressHandle = ProgressHandleFactory.createHandle("Executing IMU Model Calibration...",
                               new Cancellable() {
                                  public boolean cancel() {
                                     interrupt(true);
@@ -310,7 +310,12 @@ public class IMUIKToolModel extends Observable implements Observer {
        imuIkTool.set_time_range(0, timeRange[0]);
        imuIkTool.set_time_range(1, timeRange[1]);
        imuIkTool.set_report_errors(reportErrors);
-       imuIkTool.set_orientation_weights(getOrientation_weightset());
+       // Replace OrientationWeightSet in tool with new set.
+       OrientationWeightSet owsetRef = imuIkTool.get_orientation_weights();
+       owsetRef.setSize(0);
+       OrientationWeightSet newOwsetRef = getOrientation_weightset();
+       for (int i=0; i < newOwsetRef.getSize(); i++)
+            owsetRef.cloneAndAppend(newOwsetRef.get(i));
    }
 
    public void execute() {  
