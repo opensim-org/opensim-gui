@@ -55,7 +55,7 @@ import org.opensim.view.ModelEvent;
 import org.opensim.view.ModelPose;
 import org.opensim.view.pub.OpenSimDB;
 
-public class IMUIKToolPanel extends BaseToolPanel implements Observer {
+public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
    private IMUIKToolModel ikToolModel = null;
    private NumberFormat numFormat = NumberFormat.getInstance();
     RotationSpinnerListModel xSpinnerModel=new RotationSpinnerListModel(0., -270., 360., 90.);
@@ -64,7 +64,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
     Vec3 rotationsInDegrees= new Vec3(0);
 
    /** Creates new form IKToolPanel */
-   public IMUIKToolPanel(Model model) throws IOException {
+   public IMUCalibrationPanel(Model model) throws IOException {
       if(model==null) throw new IOException("IKToolPanel got null model");
 
       ikToolModel = new IMUIKToolModel(model);
@@ -185,6 +185,24 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        sensorIKPanel = new javax.swing.JPanel();
+        jLabel8 = new javax.swing.JLabel();
+        endTime = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        startTime = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        sensorQFileName = new org.opensim.swingui.FileTextFieldAndChooser();
+        jWeightsButton = new javax.swing.JButton();
+        jReportErrorsCheckBox = new javax.swing.JCheckBox();
+        outputPanel = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        outputMotionFilePath = new org.opensim.swingui.FileTextFieldAndChooser();
+        transformDataPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        XSpinner = new javax.swing.JSpinner();
+        YSpinner = new javax.swing.JSpinner();
+        ZSpinner = new javax.swing.JSpinner();
         calibrationPanel = new javax.swing.JPanel();
         calibrationFileName = new org.opensim.swingui.FileTextFieldAndChooser();
         jLabel6 = new javax.swing.JLabel();
@@ -195,24 +213,211 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
         jComboBox3 = new javax.swing.JComboBox<>();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
-        sensorIKPanel = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        endTime = new javax.swing.JTextField();
-        jLabel9 = new javax.swing.JLabel();
-        startTime = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        sensorQFileName = new org.opensim.swingui.FileTextFieldAndChooser();
-        jWeightsButton = new javax.swing.JButton();
-        jReportErrorsCheckBox = new javax.swing.JCheckBox();
-        transformDataPanel = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        XSpinner = new javax.swing.JSpinner();
-        YSpinner = new javax.swing.JSpinner();
-        ZSpinner = new javax.swing.JSpinner();
-        outputPanel = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        outputMotionFilePath = new org.opensim.swingui.FileTextFieldAndChooser();
+
+        sensorIKPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "IK Trial"));
+
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel8.setText("Time range:");
+
+        endTime.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        endTime.setMinimumSize(new java.awt.Dimension(1, 20));
+        endTime.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                timeRangeFocusLost(evt);
+            }
+        });
+        endTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeRangeActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("to");
+
+        startTime.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        startTime.setMinimumSize(new java.awt.Dimension(1, 20));
+        startTime.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                timeRangeFocusLost(evt);
+            }
+        });
+        startTime.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                timeRangeActionPerformed(evt);
+            }
+        });
+
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        jLabel12.setText("Sensor orientation file (quaternions):");
+
+        sensorQFileName.setMinimumSize(new java.awt.Dimension(3, 20));
+        sensorQFileName.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sensorQFileNameStateChanged(evt);
+            }
+        });
+
+        jWeightsButton.setText("Weights...");
+        jWeightsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jWeightsButtonActionPerformed(evt);
+            }
+        });
+
+        jReportErrorsCheckBox.setText("Report orientation errors");
+        jReportErrorsCheckBox.setBorder(null);
+        jReportErrorsCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jReportErrorsCheckBoxActionPerformed(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout sensorIKPanelLayout = new org.jdesktop.layout.GroupLayout(sensorIKPanel);
+        sensorIKPanel.setLayout(sensorIKPanelLayout);
+        sensorIKPanelLayout.setHorizontalGroup(
+            sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(sensorIKPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(jWeightsButton)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .add(sensorIKPanelLayout.createSequentialGroup()
+                .add(sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(jLabel12))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(sensorIKPanelLayout.createSequentialGroup()
+                        .add(sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(sensorIKPanelLayout.createSequentialGroup()
+                                .add(0, 0, Short.MAX_VALUE)
+                                .add(jReportErrorsCheckBox))
+                            .add(org.jdesktop.layout.GroupLayout.TRAILING, sensorIKPanelLayout.createSequentialGroup()
+                                .add(startTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 114, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(jLabel9)
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                                .add(endTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 108, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(0, 0, Short.MAX_VALUE)))
+                        .add(109, 109, 109))
+                    .add(sensorQFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        sensorIKPanelLayout.linkSize(new java.awt.Component[] {jLabel12, jLabel8}, org.jdesktop.layout.GroupLayout.HORIZONTAL);
+
+        sensorIKPanelLayout.setVerticalGroup(
+            sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(sensorIKPanelLayout.createSequentialGroup()
+                .add(sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(sensorQFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel12))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jWeightsButton)
+                    .add(jReportErrorsCheckBox))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(startTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel9)
+                    .add(endTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                    .add(jLabel8))
+                .addContainerGap())
+        );
+
+        outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Output"));
+
+        jLabel11.setText("Motion File:");
+
+        outputMotionFilePath.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                outputMotionFilePathStateChanged(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout outputPanelLayout = new org.jdesktop.layout.GroupLayout(outputPanel);
+        outputPanel.setLayout(outputPanelLayout);
+        outputPanelLayout.setHorizontalGroup(
+            outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(outputPanelLayout.createSequentialGroup()
+                .add(jLabel11)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(outputMotionFilePath, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        outputPanelLayout.setVerticalGroup(
+            outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(outputPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .add(outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
+                    .add(jLabel11)
+                    .add(outputMotionFilePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        transformDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Transformation"));
+
+        jLabel1.setText("Space fixed Euler angle transform from sensor space to OpenSim");
+
+        jLabel2.setText("Rotations X, Y, Z (degrees):");
+
+        XSpinner.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        XSpinner.setModel(xSpinnerModel);
+        XSpinner.setToolTipText("Rotation angle, 90 degree increments");
+        XSpinner.setAlignmentX(0.0F);
+        XSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                XSpinnerStateChanged(evt);
+            }
+        });
+
+        YSpinner.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        YSpinner.setModel(ySpinnerModel);
+        YSpinner.setToolTipText("Rotation angle, 90 degree increments");
+        YSpinner.setAlignmentX(0.0F);
+        YSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                YSpinnerStateChanged(evt);
+            }
+        });
+
+        ZSpinner.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        ZSpinner.setModel(zSpinnerModel);
+        ZSpinner.setToolTipText("Rotation angle, 90 degree increments");
+        ZSpinner.setAlignmentX(0.0F);
+        ZSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                ZSpinnerStateChanged(evt);
+            }
+        });
+
+        org.jdesktop.layout.GroupLayout transformDataPanelLayout = new org.jdesktop.layout.GroupLayout(transformDataPanel);
+        transformDataPanel.setLayout(transformDataPanelLayout);
+        transformDataPanelLayout.setHorizontalGroup(
+            transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(transformDataPanelLayout.createSequentialGroup()
+                .add(transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel1)
+                    .add(transformDataPanelLayout.createSequentialGroup()
+                        .add(jLabel2)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(XSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(YSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(ZSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                .add(0, 0, Short.MAX_VALUE))
+        );
+        transformDataPanelLayout.setVerticalGroup(
+            transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(transformDataPanelLayout.createSequentialGroup()
+                .add(9, 9, 9)
+                .add(jLabel1)
+                .add(3, 3, 3)
+                .add(transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, XSpinner)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, YSpinner)
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, ZSpinner))
+                .addContainerGap())
+        );
 
         calibrationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Model Calibration"));
 
@@ -291,223 +496,21 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
                     .add(jRadioButton2)))
         );
 
-        sensorIKPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "IK Trial"));
-
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel8.setText("Time range:");
-
-        endTime.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        endTime.setMinimumSize(new java.awt.Dimension(1, 20));
-        endTime.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                timeRangeFocusLost(evt);
-            }
-        });
-        endTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                timeRangeActionPerformed(evt);
-            }
-        });
-
-        jLabel9.setText("to");
-
-        startTime.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        startTime.setMinimumSize(new java.awt.Dimension(1, 20));
-        startTime.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                timeRangeFocusLost(evt);
-            }
-        });
-        startTime.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                timeRangeActionPerformed(evt);
-            }
-        });
-
-        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        jLabel12.setText("Sensor orientation file (quaternions):");
-
-        sensorQFileName.setMinimumSize(new java.awt.Dimension(3, 20));
-        sensorQFileName.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sensorQFileNameStateChanged(evt);
-            }
-        });
-
-        jWeightsButton.setText("Weights...");
-        jWeightsButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jWeightsButtonActionPerformed(evt);
-            }
-        });
-
-        jReportErrorsCheckBox.setText("Report orientation errors");
-        jReportErrorsCheckBox.setBorder(null);
-        jReportErrorsCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jReportErrorsCheckBoxActionPerformed(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout sensorIKPanelLayout = new org.jdesktop.layout.GroupLayout(sensorIKPanel);
-        sensorIKPanel.setLayout(sensorIKPanelLayout);
-        sensorIKPanelLayout.setHorizontalGroup(
-            sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(sensorIKPanelLayout.createSequentialGroup()
-                .add(sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel12)
-                    .add(sensorIKPanelLayout.createSequentialGroup()
-                        .add(jLabel8)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(startTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 114, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jLabel9)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(endTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 108, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .add(0, 0, Short.MAX_VALUE))
-            .add(sensorIKPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(sensorQFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(sensorIKPanelLayout.createSequentialGroup()
-                        .add(jWeightsButton)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(jReportErrorsCheckBox)
-                        .add(122, 122, 122))))
-        );
-        sensorIKPanelLayout.setVerticalGroup(
-            sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(sensorIKPanelLayout.createSequentialGroup()
-                .add(6, 6, 6)
-                .add(jLabel12)
-                .add(1, 1, 1)
-                .add(sensorQFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 33, Short.MAX_VALUE)
-                .add(sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jWeightsButton)
-                    .add(jReportErrorsCheckBox))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(sensorIKPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                    .add(jLabel8)
-                    .add(startTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jLabel9)
-                    .add(endTime, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        transformDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Transformation"));
-
-        jLabel1.setText("Space fixed Euler angle transform from sensor space to OpenSim");
-
-        jLabel2.setText("Rotations X, Y, Z (degrees):");
-
-        XSpinner.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        XSpinner.setModel(xSpinnerModel);
-        XSpinner.setToolTipText("Rotation angle, 90 degree increments");
-        XSpinner.setAlignmentX(0.0F);
-        XSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                XSpinnerStateChanged(evt);
-            }
-        });
-
-        YSpinner.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        YSpinner.setModel(ySpinnerModel);
-        YSpinner.setToolTipText("Rotation angle, 90 degree increments");
-        YSpinner.setAlignmentX(0.0F);
-        YSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                YSpinnerStateChanged(evt);
-            }
-        });
-
-        ZSpinner.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ZSpinner.setModel(zSpinnerModel);
-        ZSpinner.setToolTipText("Rotation angle, 90 degree increments");
-        ZSpinner.setAlignmentX(0.0F);
-        ZSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                ZSpinnerStateChanged(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout transformDataPanelLayout = new org.jdesktop.layout.GroupLayout(transformDataPanel);
-        transformDataPanel.setLayout(transformDataPanelLayout);
-        transformDataPanelLayout.setHorizontalGroup(
-            transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(transformDataPanelLayout.createSequentialGroup()
-                .add(transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel1)
-                    .add(transformDataPanelLayout.createSequentialGroup()
-                        .add(jLabel2)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(XSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(YSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(ZSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .add(0, 15, Short.MAX_VALUE))
-        );
-        transformDataPanelLayout.setVerticalGroup(
-            transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(transformDataPanelLayout.createSequentialGroup()
-                .add(9, 9, 9)
-                .add(jLabel1)
-                .add(3, 3, 3)
-                .add(transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, XSpinner)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, YSpinner)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, ZSpinner))
-                .addContainerGap())
-        );
-
-        outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Output"));
-
-        jLabel11.setText("Motion File:");
-
-        outputMotionFilePath.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                outputMotionFilePathStateChanged(evt);
-            }
-        });
-
-        org.jdesktop.layout.GroupLayout outputPanelLayout = new org.jdesktop.layout.GroupLayout(outputPanel);
-        outputPanel.setLayout(outputPanelLayout);
-        outputPanelLayout.setHorizontalGroup(
-            outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(outputPanelLayout.createSequentialGroup()
-                .add(jLabel11)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(outputMotionFilePath, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        outputPanelLayout.setVerticalGroup(
-            outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(outputPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .add(outputPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jLabel11)
-                    .add(outputMotionFilePath, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(transformDataPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(sensorIKPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(outputPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .add(calibrationPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
+                .add(12, 12, 12)
                 .add(transformDataPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .add(sensorIKPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(outputPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 107, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .add(calibrationPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
