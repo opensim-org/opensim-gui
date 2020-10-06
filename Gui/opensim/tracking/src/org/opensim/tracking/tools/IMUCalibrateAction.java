@@ -26,8 +26,8 @@ import org.opensim.view.pub.OpenSimDB;
 @ActionRegistration(
         displayName = "#CTL_IMUCalibrateAction"
 )
-@ActionReference(path = "Menu/Tools", position = 250, separatorBefore = 225)
-@Messages("CTL_IMUCalibrateAction=Calibrate...")
+@ActionReference(path = "Menu/Tools", position = 190, separatorBefore = 150)
+@Messages("CTL_IMUCalibrateAction=IMU Calibrate...")
 public final class IMUCalibrateAction implements ActionListener {
 
     @Override
