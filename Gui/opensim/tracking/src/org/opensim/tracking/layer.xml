@@ -60,6 +60,9 @@
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
                 <attr name="position" intvalue="900"/>
             </file>
+            <file name="org-opensim-tracking-tools-separatorAfter_1.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
+            </file>
         </folder>
         </folder>
     <folder name="Services">

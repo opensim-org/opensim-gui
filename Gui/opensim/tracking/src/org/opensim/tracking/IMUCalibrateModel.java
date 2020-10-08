@@ -33,9 +33,8 @@ import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.openide.util.Cancellable;
 import org.opensim.modeling.IMUInverseKinematicsTool;
-import org.opensim.modeling.InverseKinematicsTool;
+import org.opensim.modeling.IMUPlacer;
 import org.opensim.modeling.InterruptCallback;
-import org.opensim.modeling.MarkerData;
 //import org.opensim.modeling.InterruptingIntegCallback;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
@@ -49,7 +48,6 @@ import org.opensim.modeling.Vec3;
 import org.opensim.view.motions.MotionsDB;
 import org.opensim.swingui.SwingWorker;
 import org.opensim.tracking.tools.SimulationDB;
-import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.motions.JavaMotionDisplayerCallback;
 import org.opensim.view.pub.OpenSimDB;
@@ -61,68 +59,36 @@ import org.opensim.view.pub.OpenSimDB;
 public class IMUCalibrateModel extends Observable implements Observer {
 
     /**
-     * @return the fullOutputFileName
+     * @return the sensorDataLabels
      */
-    public String getFullOutputFileName() {
-        return fullOutputFileName;
-    }
-
-    /**
-     * @param fullOutputFileName the fullOutputFileName to set
-     */
-    public void setFullOutputFileName(String fullOutputFileName) {
-        this.fullOutputFileName = fullOutputFileName;
+    public StdVectorString getSensorDataLabels() {
+        return sensorDataLabels;
     }
 
     /**
      * @return the sensorData
      */
     public TimeSeriesTableQuaternion getSensorData() {
-        if (sensorData == null)
+        if (sensorData == null){
             sensorData = new TimeSeriesTableQuaternion(sensorOrientationsFileName);
+            sensorDataLabels = sensorData.getColumnLabels();
+        }
         return sensorData;
     }
-
-    double[] getTimeRange() {
-        return timeRange;
-    }
-
+    
     void setSensorDataFileName(String fileName) {
         if (fileName != sensorOrientationsFileName){
             sensorOrientationsFileName = fileName;
             sensorData = new TimeSeriesTableQuaternion(sensorOrientationsFileName);
-            StdVectorDouble timeColumn = sensorData.getIndependentColumn();
-            timeRange[0] = timeColumn.get(0);
-            timeRange[1] = timeColumn.get((int)timeColumn.size()-1);
+            sensorDataLabels = sensorData.getColumnLabels();
             setModified(Operation.AllDataChanged);
         }
     }
-
-    void setTimeRange(double[] newTimeRange) {
-      //clampTimeRangeAgainstMarkerData(newTimeRange);
-      if(timeRange[0] != newTimeRange[0] || timeRange[1] != newTimeRange[1]) {
-         timeRange = newTimeRange;
-      }
-    }
-
-    void setReportErrors(boolean selected) {
-        
-        setModified(Operation.AllDataChanged);
-    }
-
-    private void populateOrientationWeights() {
-        StdVectorString lbls=getSensorData().getColumnLabels();
-        if (orientation_weightset==null)
-            orientation_weightset = new OrientationWeightSet();
-        for (int i=0; i<lbls.size(); i++){
-            orientation_weightset.cloneAndAppend(new OrientationWeight(lbls.get(i), 1.0));
-        }
-    }
-    
+   
    //========================================================================
-   // IMUIKToolWorker
+   // IMUPlacerToolWorker
    //========================================================================
-   class IMUIKToolWorker extends SwingWorker {
+   class IMUPlacerToolWorker extends SwingWorker {
       private ProgressHandle progressHandle = null;
       private JavaMotionDisplayerCallback animationCallback = null;
       private InterruptCallback interruptingCallback = null;
@@ -133,23 +99,21 @@ public class IMUCalibrateModel extends Observable implements Observer {
       final OpenSimContext context=OpenSimDB.getInstance().getContext(getOriginalModel());
 
       
-      IMUIKToolWorker() throws Exception {
+      IMUPlacerToolWorker() throws Exception {
          // Give the thread a nudge so that we're not much slower than command line'
          setPriority(Thread.MAX_PRIORITY);
          
          modelCopy.initSystem();
-         updateIKTool();
+         updateIMUPlacerTool();
 
          // Operate on a copy of the model -- this way if users play with parameters in the GUI it won't affect the model we're actually computing on
-         imuIkTool.setModel(modelCopy);
+         imuPlacerTool.setModel(modelCopy);
          // Make no motion be currently selected (so model doesn't have extraneous ground forces/experimental markers from
          // another motion show up on it)
          MotionsDB.getInstance().clearCurrent();
 
-         // Initialize progress bar, given we know the number of frames to process
-         double startTime = imuIkTool.getStartTime();
-         double endTime = imuIkTool.getEndTime();
-         progressHandle = ProgressHandleFactory.createHandle("Executing inverse kinematics...",
+         // Initialize progress bar
+         progressHandle = ProgressHandleFactory.createHandle("Executing calibration...",
                               new Cancellable() {
                                  public boolean cancel() {
                                     interrupt(true);
@@ -162,7 +126,6 @@ public class IMUCalibrateModel extends Observable implements Observer {
          animationCallback = new JavaMotionDisplayerCallback(modelCopy, getOriginalModel(), null, progressHandle, false);
          modelCopy.addAnalysis(animationCallback);
          animationCallback.setStepInterval(1);
-         animationCallback.startProgressUsingTime(startTime, endTime);
 
          // Do this manouver (there's gotta be a nicer way) to create the object so that C++ owns it and not Java (since 
          // removeIntegCallback in finished() will cause the C++-side callback to be deleted, and if Java owned this object
@@ -183,7 +146,7 @@ public class IMUCalibrateModel extends Observable implements Observer {
 
       public Object construct() {
          try {
-           imuIkTool.run();
+           imuPlacerTool.run();
          }
          catch(Exception ex) {
             progressHandle.finish();
@@ -216,7 +179,7 @@ public class IMUCalibrateModel extends Observable implements Observer {
 
             boolean addMotion = true;
             if (!result) {
-                boolean havePartialResult = false;//OpenSim23 imuIkTool.getOutputStorage()!=null && imuIkTool.getOutputStorage().getSize()>0;
+                boolean havePartialResult = false;//OpenSim23 imuPlacerTool.getOutputStorage()!=null && imuPlacerTool.getOutputStorage().getSize()>0;
                 if (havePartialResult && promptToKeepPartialResult) {
                     Object answer = DialogDisplayer.getDefault().notify(new NotifyDescriptor.Confirmation("Inverse kinematics did not complete.  Keep partial result?", NotifyDescriptor.YES_NO_OPTION));
                     if (answer == NotifyDescriptor.NO_OPTION) {
@@ -238,23 +201,24 @@ public class IMUCalibrateModel extends Observable implements Observer {
             worker = null;
         }
     }
-   private IMUIKToolWorker worker = null;
+   private IMUPlacerToolWorker worker = null;
    //========================================================================
-   // END IMUIKToolWorker
+   // END IMUPlacerToolWorker
    //========================================================================
 
    public enum Operation { AllDataChanged, IKTrialNameChanged, IKTaskSetChanged, ExecutionStateChanged };
 
-   private IMUInverseKinematicsTool imuIkTool = null;
+   private IMUPlacer imuPlacerTool = null;
    private Model originalModel = null;
    private boolean modifiedSinceLastExecute = true;
    private Storage motion = null;
    private boolean executing = false;
-   private String trialName = "ik trial";
+   private String trialName = "Calibration Pose";
    private boolean cleanupAfterExecuting = false;  // Keep track if cleaning up needs to be done on execution finish vs. dialog close
    private String sensorOrientationsFileName = "";
    private String fullOutputFileName = "";
    private TimeSeriesTableQuaternion sensorData = null;
+   private StdVectorString sensorDataLabels = null;
    private Vec3 rotations = new Vec3(0);
    private double[] timeRange = new double[]{-1,-1};
    boolean reportErrors = false;
@@ -264,13 +228,13 @@ public class IMUCalibrateModel extends Observable implements Observer {
       // Store original model
       this.originalModel = originalModel;
 
-      // Create IK tool
-      imuIkTool = new IMUInverseKinematicsTool();
+      // Create IMUPlacer tool
+      imuPlacerTool = new IMUPlacer();
       //addTrialIfNecessary();
    }
 
    public Model getOriginalModel() { return originalModel; }
-   public IMUInverseKinematicsTool getIKTool() { return imuIkTool; }
+   public IMUPlacer getIMUPlacerTool() { return imuPlacerTool; }
    
    //------------------------------------------------------------------------
    // Setting the motion in the model
@@ -291,32 +255,17 @@ public class IMUCalibrateModel extends Observable implements Observer {
    // Utilities for running/canceling tool
    //------------------------------------------------------------------------
 
-   private void updateIKTool() {
-       // Copy values from self to imuIkTool
+   private void updateIMUPlacerTool() {
+       // Copy values from self to imuPlacerTool
        Vec3 rotationsInRadians = new Vec3(rotations).scalarTimesEq(Math.toRadians(1.0));
-       imuIkTool.set_sensor_to_opensim_rotations(rotationsInRadians);
-       imuIkTool.set_orientations_file(sensorOrientationsFileName);
-       imuIkTool.setOutputMotionFileName(fullOutputFileName);
-       if (fullOutputFileName.isEmpty()){
-            imuIkTool.setResultsDir(new File(sensorOrientationsFileName).getParent());
-       }
-       else{
-            File outputFile = new File(fullOutputFileName);
-            if (outputFile.getParent()!=null)
-                imuIkTool.setResultsDir(outputFile.getParent());
-            // Convert fullOutputFileName to only filename
-            imuIkTool.setOutputMotionFileName(outputFile.getName());
-       }
-       imuIkTool.set_time_range(0, timeRange[0]);
-       imuIkTool.set_time_range(1, timeRange[1]);
-       imuIkTool.set_report_errors(reportErrors);
-       imuIkTool.set_orientation_weights(getOrientation_weightset());
+       imuPlacerTool.set_sensor_to_opensim_rotations(rotationsInRadians);
+       imuPlacerTool.set_orientation_file_for_calibration(sensorOrientationsFileName);
    }
 
    public void execute() {  
       if(isModified() && worker==null) {
          try {
-            worker = new IMUIKToolWorker();
+            worker = new IMUPlacerToolWorker();
             SimulationDB.getInstance().fireToolStart();
             worker.start();
          } catch (Exception ex) {
@@ -326,7 +275,7 @@ public class IMUCalibrateModel extends Observable implements Observer {
       }
    }
 
-   // TODO: may need to use locks and such to ensure that worker doesn't get set to null (by IMUIKToolWorker.finished()) in between worker!=null check and worker.interrupt()
+   // TODO: may need to use locks and such to ensure that worker doesn't get set to null (by IMUPlacerToolWorker.finished()) in between worker!=null check and worker.interrupt()
    // But I think both will typically run on the swing thread so probably safe
    public void interrupt(boolean promptToKeepPartialResult) {
       if(worker!=null) worker.interrupt(promptToKeepPartialResult);
@@ -391,43 +340,26 @@ public class IMUCalibrateModel extends Observable implements Observer {
    private void relativeToAbsolutePaths(String parentFileName) {
       String parentDir = (new File(parentFileName)).getParent();
       /*
-        imuIkTool.setMarkerDataFileName(FileUtils.makePathAbsolute(imuIkTool.getMarkerDataFileName(),parentDir));
-        imuIkTool.setCoordinateFileName(FileUtils.makePathAbsolute(imuIkTool.getCoordinateFileName(),parentDir)); */
-        imuIkTool.set_orientations_file(FileUtils.makePathAbsolute(imuIkTool.get_orientations_file(), parentDir));
-        String fullpath = imuIkTool.getResultsDir()+"/"+imuIkTool.getOutputMotionFileName();
-        imuIkTool.setOutputMotionFileName(FileUtils.makePathAbsolute(fullpath, parentDir));
+        imuPlacerTool.setMarkerDataFileName(FileUtils.makePathAbsolute(imuPlacerTool.getMarkerDataFileName(),parentDir));
+        imuPlacerTool.setCoordinateFileName(FileUtils.makePathAbsolute(imuPlacerTool.getCoordinateFileName(),parentDir)); */
+        imuPlacerTool.set_orientation_file_for_calibration(FileUtils.makePathAbsolute(imuPlacerTool.get_orientation_file_for_calibration(), parentDir));
   }
 
    private void AbsoluteToRelativePaths(String parentFileName) {
       String parentDir = (new File(parentFileName)).getParent();
-      imuIkTool.set_orientations_file(FileUtils.makePathRelative(sensorOrientationsFileName, parentDir));
-      File outFile = new File(fullOutputFileName);
-      if (outFile.getParent()!=null)
-        imuIkTool.setResultsDir(FileUtils.makePathRelative(outFile.getParent(), parentDir));
-      imuIkTool.setOutputMotionFileName(outFile.getName());
+      imuPlacerTool.set_orientation_file_for_calibration(FileUtils.makePathRelative(sensorOrientationsFileName, parentDir));
    }
 
    public boolean loadSettings(String fileName) {
       // TODO: set current working directory before trying to read it?
-      IMUInverseKinematicsTool newIKTool = new IMUInverseKinematicsTool(fileName);
+      IMUPlacer newIMUPlacer = new IMUPlacer(fileName);
 
-      imuIkTool = newIKTool;
-      if (newIKTool.get_output_motion_file().isEmpty() && imuIkTool.get_orientations_file()!=null)
-          newIKTool.setOutputMotionFileName("ik_"+imuIkTool.get_orientations_file().replace(".sto", ".mot"));
-      fullOutputFileName = newIKTool.get_output_motion_file();
-      sensorOrientationsFileName = imuIkTool.get_orientations_file();
+      imuPlacerTool = newIMUPlacer;
+      sensorOrientationsFileName = imuPlacerTool.get_orientation_file_for_calibration();
       relativeToAbsolutePaths(fileName);
-      fullOutputFileName = newIKTool.get_output_motion_file();
-      sensorOrientationsFileName = imuIkTool.get_orientations_file();
-      setTimeRange(new double[]{imuIkTool.getStartTime(), imuIkTool.getEndTime()});      
-      //ikCommonModel.fromIKTool(imuIkTool);
+      //ikCommonModel.fromIKTool(imuPlacerTool);
       for (int i=0; i<3; i++) 
-          rotations.set(i, Math.toDegrees(imuIkTool.get_sensor_to_opensim_rotations().get(i)));
-      orientation_weightset = imuIkTool.get_orientation_weights();
-      int sz = orientation_weightset.getSize();
-      if (!sensorOrientationsFileName.isEmpty() && sz==0){
-          populateOrientationWeights();
-      }
+          rotations.set(i, Math.toDegrees(imuPlacerTool.get_sensor_to_opensim_rotations().get(i)));
       setModified(Operation.AllDataChanged);
       return true;
    }
@@ -436,12 +368,12 @@ public class IMUCalibrateModel extends Observable implements Observer {
       String fullFilename = FileUtils.addExtensionIfNeeded(fileName, ".xml");
       /*
       XMLExternalFileChooserHelper helper = new XMLExternalFileChooserHelper(fullFilename);
-      helper.addObject(imuIkTool.getIKTaskSet(), "IK Task Set");
+      helper.addObject(imuPlacerTool.getIKTaskSet(), "IK Task Set");
       if(!helper.promptUser()) return false;*/
       //imuIkTool.getIKTaskSet().setInlined(true);
-      updateIKTool();
+      updateIMUPlacerTool();
       AbsoluteToRelativePaths(fullFilename);
-      imuIkTool.print(fullFilename);
+      imuPlacerTool.print(fullFilename);
       relativeToAbsolutePaths(fullFilename);
       return true;
    }
@@ -453,7 +385,7 @@ public class IMUCalibrateModel extends Observable implements Observer {
       else{
          deleteObservers();
          //ikCommonModel=null;
-         imuIkTool = null;
+         imuPlacerTool = null;
          System.gc();
       }
    }
@@ -486,20 +418,4 @@ public class IMUCalibrateModel extends Observable implements Observer {
         this.rotations = new Vec3(rotations);
     }
 
-    /**
-     * @return the orientation_weightset
-     */
-    public OrientationWeightSet getOrientation_weightset() {
-        if (orientation_weightset==null){
-            populateOrientationWeights();
-        }
-        return orientation_weightset;
-    }
-
-    /**
-     * @param orientation_weightset the orientation_weightset to set
-     */
-    public void setOrientation_weightset(OrientationWeightSet orientation_weightset) {
-        this.orientation_weightset = orientation_weightset;
-    }
 }
