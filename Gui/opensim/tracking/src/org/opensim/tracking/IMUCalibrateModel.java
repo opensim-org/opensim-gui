@@ -84,6 +84,16 @@ public class IMUCalibrateModel extends Observable implements Observer {
             setModified(Operation.AllDataChanged);
         }
     }
+
+    void setIMULabel(String newLabel) {
+        imuLabel = newLabel;
+        setModified(Operation.AllDataChanged);
+    }
+
+    void setIMUAxis(String newAxis) {
+        imuAxis = newAxis;
+        setModified(Operation.AllDataChanged);
+    }
    
    //========================================================================
    // IMUPlacerToolWorker
@@ -220,9 +230,8 @@ public class IMUCalibrateModel extends Observable implements Observer {
    private TimeSeriesTableQuaternion sensorData = null;
    private StdVectorString sensorDataLabels = null;
    private Vec3 rotations = new Vec3(0);
-   private double[] timeRange = new double[]{-1,-1};
-   boolean reportErrors = false;
-   private OrientationWeightSet orientation_weightset=null;
+   private String imuLabel="";
+   private String imuAxis="";
    
    public IMUCalibrateModel(Model originalModel) throws IOException {
       // Store original model
@@ -260,6 +269,8 @@ public class IMUCalibrateModel extends Observable implements Observer {
        Vec3 rotationsInRadians = new Vec3(rotations).scalarTimesEq(Math.toRadians(1.0));
        imuPlacerTool.set_sensor_to_opensim_rotations(rotationsInRadians);
        imuPlacerTool.set_orientation_file_for_calibration(sensorOrientationsFileName);
+       imuPlacerTool.set_base_imu_label(imuLabel);
+       imuPlacerTool.set_base_heading_axis(imuAxis);
    }
 
    public void execute() {  
@@ -360,6 +371,8 @@ public class IMUCalibrateModel extends Observable implements Observer {
       //ikCommonModel.fromIKTool(imuPlacerTool);
       for (int i=0; i<3; i++) 
           rotations.set(i, Math.toDegrees(imuPlacerTool.get_sensor_to_opensim_rotations().get(i)));
+      imuLabel = newIMUPlacer.get_base_imu_label();
+      imuAxis = newIMUPlacer.get_base_heading_axis();
       setModified(Operation.AllDataChanged);
       return true;
    }

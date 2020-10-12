@@ -130,7 +130,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
 
    public void updateFromModel() {
       // sensor data
-      //sensorQFileName.setFileName(calibrationModel.getSensorOrientationsFileName(),false);
+      sensorQFileName.setFileName(calibrationModel.getSensorOrientationsFileName(),false);
       //sensorQFileName.setFileIsValid(calibrationModel.getMarkerDataValid());
       // Rotations
       Vec3 rotations=calibrationModel.getRotations();
@@ -176,6 +176,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         transformDataPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -189,8 +190,8 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
         jComboBoxIMUAxis = new javax.swing.JComboBox<>();
         jComboBoxIMULabel = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jRadioButtonReplace = new javax.swing.JRadioButton();
+        jRadioButtonNewModel = new javax.swing.JRadioButton();
 
         transformDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Transformation"));
 
@@ -270,22 +271,35 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
 
         jLabel6.setText("Orientation file at default pose:");
 
-        jLabel7.setText("Align sensor name, axis:");
+        jLabel7.setText("Align sensor (name, axis):");
 
         jComboBoxIMUAxis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "+X", "+Y", "+Z", " ", "-X", "-Y", "-Z" }));
-
-        jComboBoxIMULabel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pelvis", "shank_r", "calcn_r" }));
-
-        jLabel10.setText("with base segment +X heading.  ");
-
-        jRadioButton1.setText("  Replace sensors on current model");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxIMUAxis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                jComboBoxIMUAxisActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("create new model");
+        jComboBoxIMULabel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pelvis", "shank_r", "calcn_r" }));
+        jComboBoxIMULabel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxIMULabelActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("with model's forward heading.  ");
+
+        buttonGroup1.add(jRadioButtonReplace);
+        jRadioButtonReplace.setSelected(true);
+        jRadioButtonReplace.setText("  Replace sensors on current model");
+        jRadioButtonReplace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonReplaceActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButtonNewModel);
+        jRadioButtonNewModel.setText("create new model");
 
         org.jdesktop.layout.GroupLayout calibrationPanelLayout = new org.jdesktop.layout.GroupLayout(calibrationPanel);
         calibrationPanel.setLayout(calibrationPanelLayout);
@@ -301,9 +315,9 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
                         .add(calibrationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                             .add(calibrationPanelLayout.createSequentialGroup()
                                 .addContainerGap()
-                                .add(jRadioButton1)
+                                .add(jRadioButtonReplace)
                                 .add(32, 32, 32)
-                                .add(jRadioButton2))
+                                .add(jRadioButtonNewModel))
                             .add(calibrationPanelLayout.createSequentialGroup()
                                 .add(jLabel7)
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
@@ -312,7 +326,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
                                 .add(jComboBoxIMUAxis, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(27, 27, 27)
                                 .add(jLabel10)))
-                        .add(0, 2, Short.MAX_VALUE)))
+                        .add(0, 0, Short.MAX_VALUE)))
                 .add(0, 0, 0))
         );
         calibrationPanelLayout.setVerticalGroup(
@@ -330,8 +344,8 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
                     .add(jLabel7))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(calibrationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jRadioButton1)
-                    .add(jRadioButton2)))
+                    .add(jRadioButtonReplace)
+                    .add(jRadioButtonNewModel)))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
@@ -373,20 +387,31 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
         // TODO add your handling code here:
     }//GEN-LAST:event_XSpinnerStateChanged
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void jRadioButtonReplaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonReplaceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_jRadioButtonReplaceActionPerformed
 
     private void sensorQFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sensorQFileNameStateChanged
         // TODO add your handling code here:
         calibrationModel.setSensorDataFileName(sensorQFileName.getFileName());
         updateIMULabelsComboBox(calibrationModel.getSensorDataLabels());
     }//GEN-LAST:event_sensorQFileNameStateChanged
+
+    private void jComboBoxIMULabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxIMULabelActionPerformed
+        // TODO add your handling code here:
+        calibrationModel.setIMULabel((String)jComboBoxIMULabel.getSelectedItem());
+    }//GEN-LAST:event_jComboBoxIMULabelActionPerformed
+
+    private void jComboBoxIMUAxisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxIMUAxisActionPerformed
+        // TODO add your handling code here:
+        calibrationModel.setIMUAxis((String)jComboBoxIMUAxis.getSelectedItem());
+    }//GEN-LAST:event_jComboBoxIMUAxisActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner XSpinner;
     private javax.swing.JSpinner YSpinner;
     private javax.swing.JSpinner ZSpinner;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel calibrationPanel;
     private javax.swing.JComboBox<String> jComboBoxIMUAxis;
     private javax.swing.JComboBox<String> jComboBoxIMULabel;
@@ -395,8 +420,8 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
+    private javax.swing.JRadioButton jRadioButtonNewModel;
+    private javax.swing.JRadioButton jRadioButtonReplace;
     private org.opensim.swingui.FileTextFieldAndChooser sensorQFileName;
     private javax.swing.JPanel transformDataPanel;
     // End of variables declaration//GEN-END:variables
@@ -404,9 +429,8 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
 // TODO add your handling code here:
         RotationSpinnerListModel numberModel = (RotationSpinnerListModel)((JSpinner)evt.getSource()).getModel();
         double newValue = numberModel.getNumber().doubleValue();
-        double delta = newValue-numberModel.getLastValue();
         numberModel.setLastValue(newValue);
-        return delta;
+        return newValue;
     }
 
     private void updateTransform(double vx, double vy, double vz) {
