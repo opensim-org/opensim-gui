@@ -38,21 +38,17 @@ import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Vector;
 import javax.swing.JSpinner;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.opensim.modeling.IMUInverseKinematicsTool;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.OrientationWeight;
 import org.opensim.modeling.OrientationWeightSet;
-import org.opensim.modeling.StdVectorString;
 import org.opensim.modeling.Vec3;
 import org.opensim.swingui.RotationSpinnerListModel;
 import org.opensim.utils.BrowserLauncher;
 import org.opensim.view.ModelEvent;
-import org.opensim.view.ModelPose;
 import org.opensim.view.pub.OpenSimDB;
 
 public class IMUIKToolPanel extends BaseToolPanel implements Observer {
@@ -568,20 +564,20 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
 
     private void ZSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ZSpinnerStateChanged
         // TODO add your handling code here:
-        double delta = getRotationAngleChange(evt);
-        updateTransform(xSpinnerModel.getLastValue(), ySpinnerModel.getLastValue(), delta);
+        double angle = getRotationAngle(evt);
+        updateTransform(xSpinnerModel.getLastValue(), ySpinnerModel.getLastValue(), angle);
     }//GEN-LAST:event_ZSpinnerStateChanged
 
     private void YSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_YSpinnerStateChanged
         // TODO add your handling code here:
-        double delta = getRotationAngleChange(evt);
-        updateTransform(xSpinnerModel.getLastValue(), delta,
+        double angle = getRotationAngle(evt);
+        updateTransform(xSpinnerModel.getLastValue(), angle,
             zSpinnerModel.getLastValue());
     }//GEN-LAST:event_YSpinnerStateChanged
 
     private void XSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_XSpinnerStateChanged
-        double delta = getRotationAngleChange(evt);
-        updateTransform(delta, ySpinnerModel.getLastValue(),
+        double angle = getRotationAngle(evt);
+        updateTransform(angle, ySpinnerModel.getLastValue(),
             zSpinnerModel.getLastValue());
 
         // TODO add your handling code here:
@@ -617,13 +613,13 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
     private javax.swing.JTextField startTime;
     private javax.swing.JPanel transformDataPanel;
     // End of variables declaration//GEN-END:variables
-    private double getRotationAngleChange(final javax.swing.event.ChangeEvent evt) {
+    private double getRotationAngle(final javax.swing.event.ChangeEvent evt) {
 // TODO add your handling code here:
         RotationSpinnerListModel numberModel = (RotationSpinnerListModel)((JSpinner)evt.getSource()).getModel();
         double newValue = numberModel.getNumber().doubleValue();
-        double delta = newValue-numberModel.getLastValue();
+        //double angle = newValue-numberModel.getLastValue();
         numberModel.setLastValue(newValue);
-        return delta;
+        return newValue;
     }
 
     private void updateTransform(double vx, double vy, double vz) {

@@ -242,13 +242,13 @@
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="7">
-                <StringItem index="0" value="+X"/>
-                <StringItem index="1" value="+Y"/>
-                <StringItem index="2" value="+Z"/>
+                <StringItem index="0" value="x"/>
+                <StringItem index="1" value="y"/>
+                <StringItem index="2" value="z"/>
                 <StringItem index="3" value=" "/>
-                <StringItem index="4" value="-X"/>
-                <StringItem index="5" value="-Y"/>
-                <StringItem index="6" value="-Z"/>
+                <StringItem index="4" value="-x"/>
+                <StringItem index="5" value="-y"/>
+                <StringItem index="6" value="-z"/>
               </StringArray>
             </Property>
           </Properties>

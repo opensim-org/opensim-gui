@@ -29,34 +29,24 @@
 
 package org.opensim.tracking;
 
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.Observable;
 import java.util.Observer;
-import java.util.Vector;
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JSpinner;
-import javax.swing.event.ListDataListener;
-import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
-import org.opensim.modeling.IMUInverseKinematicsTool;
 import org.opensim.modeling.IMUPlacer;
 import org.opensim.modeling.Model;
-import org.opensim.modeling.OrientationWeight;
-import org.opensim.modeling.OrientationWeightSet;
 import org.opensim.modeling.StdVectorString;
 import org.opensim.modeling.Vec3;
 import org.opensim.swingui.RotationSpinnerListModel;
 import org.opensim.utils.BrowserLauncher;
 import org.opensim.view.ModelEvent;
-import org.opensim.view.ModelPose;
 import org.opensim.view.pub.OpenSimDB;
 
 public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
@@ -131,13 +121,16 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
    public void updateFromModel() {
       // sensor data
       sensorQFileName.setFileName(calibrationModel.getSensorOrientationsFileName(),false);
+      updateIMULabelsComboBox(calibrationModel.getSensorDataLabels());
+      // populate jComboBoxIMULabel based on file
       //sensorQFileName.setFileIsValid(calibrationModel.getMarkerDataValid());
       // Rotations
       Vec3 rotations=calibrationModel.getRotations();
       XSpinner.setValue(rotations.get(0));
       YSpinner.setValue(rotations.get(1));
       ZSpinner.setValue(rotations.get(2));
-
+      jComboBoxIMUAxis.setSelectedItem(calibrationModel.getImuAxis());
+      jComboBoxIMULabel.setSelectedItem(calibrationModel.getImuLabel());
       //---------------------------------------------------------------------
       // Dialog buttons
       //---------------------------------------------------------------------
@@ -273,7 +266,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
 
         jLabel7.setText("Align sensor (name, axis):");
 
-        jComboBoxIMUAxis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "+X", "+Y", "+Z", " ", "-X", "-Y", "-Z" }));
+        jComboBoxIMUAxis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "x", "y", "z", " ", "-x", "-y", "-z" }));
         jComboBoxIMUAxis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxIMUAxisActionPerformed(evt);
@@ -368,20 +361,20 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
 
     private void ZSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ZSpinnerStateChanged
         // TODO add your handling code here:
-        double delta = getRotationAngleChange(evt);
-        updateTransform(xSpinnerModel.getLastValue(), ySpinnerModel.getLastValue(), delta);
+        double angle = getRotationAngle(evt);
+        updateTransform(xSpinnerModel.getLastValue(), ySpinnerModel.getLastValue(), angle);
     }//GEN-LAST:event_ZSpinnerStateChanged
 
     private void YSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_YSpinnerStateChanged
         // TODO add your handling code here:
-        double delta = getRotationAngleChange(evt);
-        updateTransform(xSpinnerModel.getLastValue(), delta,
+        double angle = getRotationAngle(evt);
+        updateTransform(xSpinnerModel.getLastValue(), angle,
             zSpinnerModel.getLastValue());
     }//GEN-LAST:event_YSpinnerStateChanged
 
     private void XSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_XSpinnerStateChanged
-        double delta = getRotationAngleChange(evt);
-        updateTransform(delta, ySpinnerModel.getLastValue(),
+        double angle = getRotationAngle(evt);
+        updateTransform(angle, ySpinnerModel.getLastValue(),
             zSpinnerModel.getLastValue());
 
         // TODO add your handling code here:
@@ -425,7 +418,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
     private org.opensim.swingui.FileTextFieldAndChooser sensorQFileName;
     private javax.swing.JPanel transformDataPanel;
     // End of variables declaration//GEN-END:variables
-    private double getRotationAngleChange(final javax.swing.event.ChangeEvent evt) {
+    private double getRotationAngle(final javax.swing.event.ChangeEvent evt) {
 // TODO add your handling code here:
         RotationSpinnerListModel numberModel = (RotationSpinnerListModel)((JSpinner)evt.getSource()).getModel();
         double newValue = numberModel.getNumber().doubleValue();
@@ -441,6 +434,8 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
     }
 
     private void updateIMULabelsComboBox(StdVectorString labels) {
+        if (labels==null)
+            return;
         int numLabels = (int)labels.size();
         String[] colNames = new String[numLabels];
         for (int i=0; i< numLabels; i++ ){

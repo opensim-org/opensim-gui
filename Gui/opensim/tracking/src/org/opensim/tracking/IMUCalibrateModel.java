@@ -353,7 +353,7 @@ public class IMUCalibrateModel extends Observable implements Observer {
       /*
         imuPlacerTool.setMarkerDataFileName(FileUtils.makePathAbsolute(imuPlacerTool.getMarkerDataFileName(),parentDir));
         imuPlacerTool.setCoordinateFileName(FileUtils.makePathAbsolute(imuPlacerTool.getCoordinateFileName(),parentDir)); */
-        imuPlacerTool.set_orientation_file_for_calibration(FileUtils.makePathAbsolute(imuPlacerTool.get_orientation_file_for_calibration(), parentDir));
+        setSensorDataFileName(FileUtils.makePathAbsolute(imuPlacerTool.get_orientation_file_for_calibration(), parentDir));
   }
 
    private void AbsoluteToRelativePaths(String parentFileName) {
@@ -366,7 +366,7 @@ public class IMUCalibrateModel extends Observable implements Observer {
       IMUPlacer newIMUPlacer = new IMUPlacer(fileName);
 
       imuPlacerTool = newIMUPlacer;
-      sensorOrientationsFileName = imuPlacerTool.get_orientation_file_for_calibration();
+      setSensorOrientationsFileName(imuPlacerTool.get_orientation_file_for_calibration());
       relativeToAbsolutePaths(fileName);
       //ikCommonModel.fromIKTool(imuPlacerTool);
       for (int i=0; i<3; i++) 
@@ -413,8 +413,14 @@ public class IMUCalibrateModel extends Observable implements Observer {
     /**
      * @param sensorOrientationsFileName the sensorOrientationsFileName to set
      */
-    public void setSensorOrientationsFileName(String sensorOrientationsFileName) {
-        this.sensorOrientationsFileName = sensorOrientationsFileName;
+    public void setSensorOrientationsFileName(String fileName) {
+       if (fileName != sensorOrientationsFileName){
+            sensorOrientationsFileName = fileName;
+            if (new File(fileName).exists()){
+                sensorData = new TimeSeriesTableQuaternion(sensorOrientationsFileName);
+                sensorDataLabels = sensorData.getColumnLabels();
+            }
+       }
     }
 
     /**
@@ -429,6 +435,34 @@ public class IMUCalibrateModel extends Observable implements Observer {
      */
     public void setRotations(Vec3 rotations) {
         this.rotations = new Vec3(rotations);
+    }
+
+    /**
+     * @return the imuLabel
+     */
+    public String getImuLabel() {
+        return imuLabel;
+    }
+
+    /**
+     * @param imuLabel the imuLabel to set
+     */
+    public void setImuLabel(String imuLabel) {
+        this.imuLabel = imuLabel;
+    }
+
+    /**
+     * @return the imuAxis
+     */
+    public String getImuAxis() {
+        return imuAxis;
+    }
+
+    /**
+     * @param imuAxis the imuAxis to set
+     */
+    public void setImuAxis(String imuAxis) {
+        this.imuAxis = imuAxis;
     }
 
 }
