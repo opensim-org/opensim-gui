@@ -170,6 +170,8 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        jRadioButtonReplace = new javax.swing.JRadioButton();
+        jRadioButtonNewModel = new javax.swing.JRadioButton();
         transformDataPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -183,8 +185,18 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
         jComboBoxIMUAxis = new javax.swing.JComboBox<>();
         jComboBoxIMULabel = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
-        jRadioButtonReplace = new javax.swing.JRadioButton();
-        jRadioButtonNewModel = new javax.swing.JRadioButton();
+
+        buttonGroup1.add(jRadioButtonReplace);
+        jRadioButtonReplace.setSelected(true);
+        jRadioButtonReplace.setText("  Replace sensors on current model");
+        jRadioButtonReplace.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButtonReplaceActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(jRadioButtonNewModel);
+        jRadioButtonNewModel.setText("create new model");
 
         transformDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Transformation"));
 
@@ -282,18 +294,6 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
 
         jLabel10.setText("with model's forward heading.  ");
 
-        buttonGroup1.add(jRadioButtonReplace);
-        jRadioButtonReplace.setSelected(true);
-        jRadioButtonReplace.setText("  Replace sensors on current model");
-        jRadioButtonReplace.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonReplaceActionPerformed(evt);
-            }
-        });
-
-        buttonGroup1.add(jRadioButtonNewModel);
-        jRadioButtonNewModel.setText("create new model");
-
         org.jdesktop.layout.GroupLayout calibrationPanelLayout = new org.jdesktop.layout.GroupLayout(calibrationPanel);
         calibrationPanel.setLayout(calibrationPanelLayout);
         calibrationPanelLayout.setHorizontalGroup(
@@ -305,21 +305,14 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
                         .add(1, 1, 1)
                         .add(sensorQFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .add(calibrationPanelLayout.createSequentialGroup()
-                        .add(calibrationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(calibrationPanelLayout.createSequentialGroup()
-                                .addContainerGap()
-                                .add(jRadioButtonReplace)
-                                .add(32, 32, 32)
-                                .add(jRadioButtonNewModel))
-                            .add(calibrationPanelLayout.createSequentialGroup()
-                                .add(jLabel7)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                                .add(jComboBoxIMULabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jComboBoxIMUAxis, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                                .add(27, 27, 27)
-                                .add(jLabel10)))
-                        .add(0, 0, Short.MAX_VALUE)))
+                        .add(jLabel7)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(jComboBoxIMULabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jComboBoxIMUAxis, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(jLabel10)
+                        .add(0, 18, Short.MAX_VALUE)))
                 .add(0, 0, 0))
         );
         calibrationPanelLayout.setVerticalGroup(
@@ -335,10 +328,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
                     .add(jComboBoxIMULabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel10)
                     .add(jLabel7))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                .add(calibrationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jRadioButtonReplace)
-                    .add(jRadioButtonNewModel)))
+                .addContainerGap())
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
