@@ -6696,8 +6696,8 @@ public class opensimSimulationJNI {
   public final static native void delete_IMUPlacer(long jarg1);
   public final static native long new_IMUPlacer__SWIG_0();
   public final static native long new_IMUPlacer__SWIG_1(String jarg1);
-  public final static native boolean IMUPlacer_run__SWIG_0(long jarg1, IMUPlacer jarg1_, boolean jarg2);
-  public final static native boolean IMUPlacer_run__SWIG_1(long jarg1, IMUPlacer jarg1_);
+  public final static native boolean IMUPlacer_run__SWIG_0(long jarg1, IMUPlacer jarg1_, boolean jarg2) throws java.io.IOException;
+  public final static native boolean IMUPlacer_run__SWIG_1(long jarg1, IMUPlacer jarg1_) throws java.io.IOException;
   public final static native void IMUPlacer_setModel(long jarg1, IMUPlacer jarg1_, long jarg2, Model jarg2_);
   public final static native long IMUPlacer_getCalibratedModel(long jarg1, IMUPlacer jarg1_);
   public final static native void OpenSenseUtilities_rotateOrientationTable(long jarg1, TimeSeriesTableQuaternion jarg1_, long jarg2, Rotation jarg2_);

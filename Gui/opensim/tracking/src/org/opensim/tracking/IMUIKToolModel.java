@@ -188,6 +188,7 @@ public class IMUIKToolModel extends Observable implements Observer {
          catch(Exception ex) {
             progressHandle.finish();
             SimulationDB.getInstance().fireToolFinish();
+            DialogDisplayer.getDefault().notify(new NotifyDescriptor.Message("Inverse kinematics did not complete.\n"+ex.getMessage()+"\n", NotifyDescriptor.ERROR_MESSAGE));
             worker=null;
             cleanup=false;
             modelCopy.removeAnalysis(interruptingCallback, false);
