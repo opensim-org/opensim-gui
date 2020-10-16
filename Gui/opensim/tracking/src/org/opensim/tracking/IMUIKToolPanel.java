@@ -442,7 +442,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
                         .add(YSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(ZSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .add(0, 0, Short.MAX_VALUE))
+                .add(0, 79, Short.MAX_VALUE))
         );
         transformDataPanelLayout.setVerticalGroup(
             transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)

@@ -387,7 +387,7 @@ public class IMUIKToolModel extends Observable implements Observer {
    //------------------------------------------------------------------------
 
    public boolean isValid() {
-      return true;//ikCommonModel.isValid();
+      return sensorData!=null;
    }
 
    //------------------------------------------------------------------------

@@ -71,6 +71,10 @@ public class IMUCalibrateModel extends Observable implements Observer {
     }
     
     void setSensorDataFileName(String fileName) {
+        if (!new File(fileName).exists()){
+            sensorData = null;
+            return;
+        }
         if (fileName != sensorOrientationsFileName){
             sensorOrientationsFileName = fileName;
             sensorData = new TimeSeriesTableQuaternion(sensorOrientationsFileName);
@@ -302,7 +306,7 @@ public class IMUCalibrateModel extends Observable implements Observer {
    //------------------------------------------------------------------------
 
    public boolean isValid() {
-      return true;//ikCommonModel.isValid();
+      return sensorData!=null;
    }
 
    //------------------------------------------------------------------------

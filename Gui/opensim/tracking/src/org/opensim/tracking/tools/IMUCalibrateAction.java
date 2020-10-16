@@ -34,7 +34,6 @@ import org.opensim.view.pub.OpenSimDB;
 */
 public final class IMUCalibrateAction  extends CallableSystemAction {
 
-    @Override
     public void performAction() {
         // TODO implement action body      
       Model model = OpenSimDB.getInstance().getCurrentModel();
