@@ -11,7 +11,7 @@ v4.2
 - Support new logging system utilizing spdlog introduced in opensim-core.
 - Removed reference to kinematics of external loads from External Loads creation/editing dialog
 - Added option to visualize sensor data (quaternions) in the application (File ->Load Sensor Data)
-
+- When recording videos, if the user starts playing back a motion, recording is restarted to first animation frame.
 
 v4.1
 ====
