@@ -392,7 +392,10 @@ public class RRAToolModel extends TrackingToolModel {
    //------------------------------------------------------------------------
 
    public boolean isValidated() {
-      return super.isValidated() && getDesiredKinematicsValid() && getTaskSetValid() && getConstraintsValid() && isRRAValid();
+      return super.isValidated() && 
+              getDesiredKinematicsValid() && 
+              getTaskSetValid() && 
+              isRRAValid();
    }
 
    //------------------------------------------------------------------------
