@@ -30,6 +30,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
+import org.json.simple.JSONObject;
 import org.openide.ErrorManager;
 import org.openide.cookies.InstanceCookie;
 import org.openide.filesystems.FileObject;
@@ -465,5 +466,20 @@ public final class gui {
         } catch (ClassNotFoundException ex) {
             Exceptions.printStackTrace(ex);
         }
+    }
+    
+    static void sendVisulaizerMessage(JSONObject json){
+            ViewDB.getInstance().broadcastVisulaizerMessage(json);
+    }
+    //  setVisualizerOption("video_format", "png")
+    //  setVisualizerOption("frame_rate", "60")
+    static public void setVisualizerOption(String key, String value){
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "setOption");
+        JSONObject option = new JSONObject();
+        option.put("key", key);
+        option.put("value", value);
+        msg.put("data", option);
+        sendVisulaizerMessage(msg);
     }
 }
