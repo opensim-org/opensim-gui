@@ -89,8 +89,6 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
       if(!includeActuatorsPanel) actuatorsPanel.setVisible(false);
 
       externalLoadsFileName.setExtensionsAndDescription(".xml", "External forces");
-      externalLoadsModelKinematicsFileName.setExtensionsAndDescription(".mot,.sto", "Model kinematics for external loads"); 
-
       // Add checkbox titled borders to external loads panel
       externalLoadsPanelCheckBox.setForeground(new Color(0,70,213));
       externalLoadsPanel.setBorder(new ComponentTitledBorder(externalLoadsPanelCheckBox, externalLoadsPanel, BorderFactory.createEtchedBorder()));
