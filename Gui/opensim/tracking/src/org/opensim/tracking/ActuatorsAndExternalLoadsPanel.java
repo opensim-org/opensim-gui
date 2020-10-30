@@ -114,8 +114,6 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
       }
       ToolCommon.bindProperty(aTool, "force_set_files", actuatorSetFiles);
       ToolCommon.bindProperty(aTool, "external_loads_file", externalLoadsFileName);
-      //ToolCommon.bindProperty(aTool, "external_loads_model_kinematics_file", externalLoadsModelKinematicsFileName);
-      //ToolCommon.bindProperty(aTool, "lowpass_cutoff_frequency_for_load_kinematics", cutoffFrequency);
    }
 
    private void setEnabled(JPanel panel, boolean enabled) {
@@ -170,10 +168,7 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         createNewExternalForceSetButton = new javax.swing.JButton();
-        externalLoadsModelKinematicsFileName = new org.opensim.swingui.FileTextFieldAndChooser();
         jLabel4 = new javax.swing.JLabel();
-        filterModelKinematics = new javax.swing.JCheckBox();
-        cutoffFrequency = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         externalLoadsPanel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -193,35 +188,7 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
             }
         });
 
-        externalLoadsModelKinematicsFileName.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                externalLoadsModelKinematicsFileNameStateChanged(evt);
-            }
-        });
-
         jLabel4.setText("Kinematics for external loads");
-
-        filterModelKinematics.setText("Filter kinematics");
-        filterModelKinematics.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        filterModelKinematics.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        filterModelKinematics.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filterModelKinematicsActionPerformed(evt);
-            }
-        });
-
-        cutoffFrequency.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        cutoffFrequency.setText("jTextField3");
-        cutoffFrequency.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cutoffFrequencyActionPerformed(evt);
-            }
-        });
-        cutoffFrequency.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                cutoffFrequencyFocusLost(evt);
-            }
-        });
 
         jLabel9.setText("Hz");
 
@@ -436,35 +403,16 @@ public class ActuatorsAndExternalLoadsPanel extends javax.swing.JPanel {
    private void externalLoadsFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_externalLoadsFileNameStateChanged
       toolModel.setExternalLoadsFileName(externalLoadsFileName.getFileName());
    }//GEN-LAST:event_externalLoadsFileNameStateChanged
-
-   private void externalLoadsModelKinematicsFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_externalLoadsModelKinematicsFileNameStateChanged
-      //toolModel.setExternalLoadsModelKinematicsFileName(externalLoadsModelKinematicsFileName.getFileName());
-   }//GEN-LAST:event_externalLoadsModelKinematicsFileNameStateChanged
    
-   private void filterModelKinematicsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterModelKinematicsActionPerformed
-     //toolModel.setFilterLoadKinematics(filterModelKinematics.isSelected());
-   }//GEN-LAST:event_filterModelKinematicsActionPerformed
-
-   private void cutoffFrequencyFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cutoffFrequencyFocusLost
-      //if(!evt.isTemporary()) cutoffFrequencyActionPerformed(null);
-   }//GEN-LAST:event_cutoffFrequencyFocusLost
-
-   private void cutoffFrequencyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cutoffFrequencyActionPerformed
-      
-   }//GEN-LAST:event_cutoffFrequencyActionPerformed
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField actuatorSetFiles;
     private javax.swing.JPanel actuatorsPanel;
     private javax.swing.JRadioButton appendActuatorSetRadioButton;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton createNewExternalForceSetButton;
-    private javax.swing.JTextField cutoffFrequency;
     private javax.swing.JButton editActuatorSetFiles;
     private org.opensim.swingui.FileTextFieldAndChooser externalLoadsFileName;
-    private org.opensim.swingui.FileTextFieldAndChooser externalLoadsModelKinematicsFileName;
     private javax.swing.JPanel externalLoadsPanel;
-    private javax.swing.JCheckBox filterModelKinematics;
     private javax.swing.JButton jEditExternalForceSetButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
