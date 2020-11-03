@@ -100,9 +100,6 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
         forceListModel = new ForceListModel(dLoads);
         initComponents();
         ToolCommon.bindProperty(dLoads, "datafile", externalLoadsDataFileName);
-        ToolCommon.bindProperty(dLoads, "external_loads_model_kinematics_file", externalLoadsModelKinematicsFileName);
-        ToolCommon.bindProperty(dLoads, "lowpass_cutoff_frequency_for_load_kinematics", cutoffFrequency);
-        ToolCommon.bindProperty(dLoads, "lowpass_cutoff_frequency_for_load_kinematics", filterModelKinematics);
 
         externalLoadsDataFileName.setExtensionsAndDescription(".sto,.mot", "Data file for external forces");
         String dataFileName = dLoads.getDataFileName(); // Mandatory
