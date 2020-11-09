@@ -285,7 +285,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
             }
         });
 
-        jComboBoxIMULabel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "pelvis", "shank_r", "calcn_r" }));
+        jComboBoxIMULabel.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "          ", " " }));
         jComboBoxIMULabel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxIMULabelActionPerformed(evt);
@@ -312,7 +312,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
                         .add(jComboBoxIMUAxis, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jLabel10)
-                        .add(0, 18, Short.MAX_VALUE)))
+                        .add(0, 0, Short.MAX_VALUE)))
                 .add(0, 0, 0))
         );
         calibrationPanelLayout.setVerticalGroup(

@@ -196,7 +196,7 @@
                           <Component id="jComboBoxIMUAxis" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
@@ -268,10 +268,9 @@
         <Component class="javax.swing.JComboBox" name="jComboBoxIMULabel">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="pelvis"/>
-                <StringItem index="1" value="shank_r"/>
-                <StringItem index="2" value="calcn_r"/>
+              <StringArray count="2">
+                <StringItem index="0" value="          "/>
+                <StringItem index="1" value=" "/>
               </StringArray>
             </Property>
           </Properties>
