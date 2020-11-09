@@ -79,6 +79,8 @@ public class IMUCalibrateModel extends Observable implements Observer {
             sensorOrientationsFileName = fileName;
             sensorData = new TimeSeriesTableQuaternion(sensorOrientationsFileName);
             sensorDataLabels = sensorData.getColumnLabels();
+            if (sensorDataLabels.size()>0)
+                imuLabel = sensorDataLabels.get(0);
             setModified(Operation.AllDataChanged);
         }
     }
@@ -202,7 +204,7 @@ public class IMUCalibrateModel extends Observable implements Observer {
    private StdVectorString sensorDataLabels = null;
    private Vec3 rotations = new Vec3(0);
    private String imuLabel="";
-   private String imuAxis="";
+   private String imuAxis="x"; // default selection in dialog/panel
    
    public IMUCalibrateModel(Model originalModel) throws IOException {
       // Store original model
