@@ -33,9 +33,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Body;
-import org.opensim.modeling.BodySet;
+import org.opensim.modeling.Component;
+import org.opensim.modeling.Frame;
+import org.opensim.modeling.FrameList;
+import org.opensim.modeling.Ground;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.Quaternion;
 import org.opensim.modeling.Rotation;
+import org.opensim.modeling.State;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
@@ -53,6 +58,9 @@ import org.opensim.view.pub.ViewDB;
 public class MotionObjectOrientation extends MotionObjectBodyPoint {
 
     UUID imurep_uuid;
+    Frame frame = null; //possible imu frame if found on model
+    Frame baseFrame = null;// body or ground to which imu frame is attached
+
     /**
      * @return the offset
      */
@@ -104,6 +112,11 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         int idx = getStartIndexInFileNotIncludingTime();
         // if Point not in ground, transform into Ground since Arrow is in Ground by default
         // and we don't want to change scene graph layout for easy book-keeping
+        State state = getModel().getWorkingState();
+        if (frame!=null){
+            Vec3 location = frame.getPositionInGround(state);
+            setPoint(location.getAsMat());
+        }
         //super.setPoint(getOffset());
         quaternion = new Quaternion(interpolatedStates.get(idx), 
                               interpolatedStates.get(idx+1), 
@@ -116,13 +129,34 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
     @Override
     public JSONObject createDecorationJson(ArrayList<UUID> comp_uuids, MotionDisplayer motionDisplayer) {
         // Create Object with proper name, add it to ground, update Map of Object to UUID
-        // If model contains a body with same name as sensor use it
+        // If model contains a frame with same name as sensor use it
         JSONObject bodyJson = motionDisplayer.getModelVisJson().getModelGroundJson();
-        BodySet bodySet = motionDisplayer.getModelVisJson().getModel().getBodySet();
-        if (bodySet.contains(getName())){
-            Body body = bodySet.get(getName());
-            bodyJson = motionDisplayer.getModelVisJson().getBodyRep(body);
+        Model model = motionDisplayer.getModelVisJson().getModel();
+        Component cframe = model.findComponent(getName());
+        Ground gnd = motionDisplayer.getModelVisJson().getModel().getGround();
+        String altName = getName();
+        if (altName.endsWith("_imu"))
+            altName = altName.substring(0, altName.length()-4);
+        Vec3 location=new Vec3(0., 0., 0.);
+        if (cframe !=null){  // torso_imu
+            frame = Frame.safeDownCast(cframe);
+            baseFrame = frame.findBaseFrame();
+            bodyJson = motionDisplayer.getModelVisJson().getBodyRep(baseFrame);
         }
+        else {
+            cframe = model.findComponent(altName);
+            if (cframe !=null){  // torso_imu
+                frame = Frame.safeDownCast(cframe);
+                baseFrame = frame.findBaseFrame();
+                bodyJson = motionDisplayer.getModelVisJson().getBodyRep(baseFrame);
+            }
+        }
+        State state = motionDisplayer.getModelVisJson().getState();
+        if (frame!=null){
+            location = frame.findStationLocationInAnotherFrame(state, location, baseFrame);
+            setPoint(location.getAsMat());
+        }
+
         JSONObject expSensor_json = new JSONObject();
         imurep_uuid = UUID.randomUUID(); 
         expSensor_json.put("uuid", imurep_uuid.toString());
