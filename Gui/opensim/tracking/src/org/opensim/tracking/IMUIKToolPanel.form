@@ -491,6 +491,7 @@
         <Component class="org.opensim.swingui.FileTextFieldAndChooser" name="outputMotionFilePath">
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="outputMotionFilePathStateChanged"/>
+            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="outputMotionFilePathFocusLost"/>
           </Events>
         </Component>
       </SubComponents>

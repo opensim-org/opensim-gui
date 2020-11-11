@@ -303,7 +303,11 @@ public class IMUIKToolModel extends Observable implements Observer {
        }
        else{
             File outputFile = new File(fullOutputFileName);
-            if (outputFile.getParent()!=null)
+            if (outputFile.getParent()==null && sensorOrientationsFileName != null){
+                // No folder, just file namw, use folder from 
+                imuIkTool.setResultsDir(new File(sensorOrientationsFileName).getParent());
+            }    
+            else
                 imuIkTool.setResultsDir(outputFile.getParent());
             // Convert fullOutputFileName to only filename
             imuIkTool.setOutputMotionFileName(outputFile.getName());

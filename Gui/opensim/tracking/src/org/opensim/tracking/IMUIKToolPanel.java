@@ -48,6 +48,7 @@ import org.opensim.modeling.OrientationWeightSet;
 import org.opensim.modeling.Vec3;
 import org.opensim.swingui.RotationSpinnerListModel;
 import org.opensim.utils.BrowserLauncher;
+import org.opensim.utils.FileUtils;
 import org.opensim.view.ModelEvent;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -467,6 +468,11 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
                 outputMotionFilePathStateChanged(evt);
             }
         });
+        outputMotionFilePath.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                outputMotionFilePathFocusLost(evt);
+            }
+        });
 
         org.jdesktop.layout.GroupLayout outputPanelLayout = new org.jdesktop.layout.GroupLayout(outputPanel);
         outputPanel.setLayout(outputPanelLayout);
@@ -508,7 +514,12 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
     }// </editor-fold>//GEN-END:initComponents
 
 private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputMotionFilePathStateChanged
-      ikToolModel.setFullOutputFileName(outputMotionFilePath.getFileName());
+    String rawFileName = outputMotionFilePath.getFileName();
+    String fullFilename = rawFileName;
+    if (FileUtils.getExtension(fullFilename)==null)
+        fullFilename = FileUtils.addExtensionIfNeeded(rawFileName, ".mot");
+    outputMotionFilePath.setFileName(fullFilename, false);
+    ikToolModel.setFullOutputFileName(fullFilename);
 }//GEN-LAST:event_outputMotionFilePathStateChanged
 
     private void jReportErrorsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jReportErrorsCheckBoxActionPerformed
@@ -582,6 +593,11 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
 
         // TODO add your handling code here:
     }//GEN-LAST:event_XSpinnerStateChanged
+
+    private void outputMotionFilePathFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_outputMotionFilePathFocusLost
+        // TODO add your handling code here:
+        outputMotionFilePathStateChanged(null);
+    }//GEN-LAST:event_outputMotionFilePathFocusLost
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner XSpinner;
