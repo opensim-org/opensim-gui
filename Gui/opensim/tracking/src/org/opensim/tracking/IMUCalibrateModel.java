@@ -204,7 +204,7 @@ public class IMUCalibrateModel extends Observable implements Observer {
    private StdVectorString sensorDataLabels = null;
    private Vec3 rotations = new Vec3(0);
    private String imuLabel="";
-   private String imuAxis="x"; // default selection in dialog/panel
+   private String imuAxis=" "; // default selection in dialog/panel
    
    public IMUCalibrateModel(Model originalModel) throws IOException {
       // Store original model

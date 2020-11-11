@@ -278,7 +278,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
 
         jLabel7.setText("Align sensor (name, axis):");
 
-        jComboBoxIMUAxis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "x", "y", "z", " ", "-x", "-y", "-z" }));
+        jComboBoxIMUAxis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "   ", "x", "y", "z", "-x", "-y", "-z" }));
         jComboBoxIMUAxis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBoxIMUAxisActionPerformed(evt);
@@ -427,9 +427,10 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
         if (labels==null)
             return;
         int numLabels = (int)labels.size();
-        String[] colNames = new String[numLabels];
+        String[] colNames = new String[numLabels+1];
+        colNames[0] = " ";
         for (int i=0; i< numLabels; i++ ){
-            colNames[i] = labels.get(i);
+            colNames[i+1] = labels.get(i);
         }
         jComboBoxIMULabel.setModel(new DefaultComboBoxModel<String>(colNames));
     }
