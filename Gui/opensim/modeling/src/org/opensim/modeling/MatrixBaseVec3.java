@@ -71,8 +71,28 @@ public class MatrixBaseVec3 {
     return new MatrixBaseVec3(opensimSimbodyJNI.MatrixBaseVec3_setToZero(swigCPtr, this), false);
   }
 
+  public RowVectorViewVec3 row(int i) {
+    return new RowVectorViewVec3(opensimSimbodyJNI.MatrixBaseVec3_row(swigCPtr, this, i), true);
+  }
+
+  public RowVectorViewVec3 updRow(int i) {
+    return new RowVectorViewVec3(opensimSimbodyJNI.MatrixBaseVec3_updRow(swigCPtr, this, i), true);
+  }
+
+  public VectorViewVec3 col(int j) {
+    return new VectorViewVec3(opensimSimbodyJNI.MatrixBaseVec3_col(swigCPtr, this, j), true);
+  }
+
+  public VectorViewVec3 updCol(int j) {
+    return new VectorViewVec3(opensimSimbodyJNI.MatrixBaseVec3_updCol(swigCPtr, this, j), true);
+  }
+
   public Vec3 getElt(int i, int j) {
     return new Vec3(opensimSimbodyJNI.MatrixBaseVec3_getElt(swigCPtr, this, i, j), false);
+  }
+
+  public Vec3 updElt(int i, int j) {
+    return new Vec3(opensimSimbodyJNI.MatrixBaseVec3_updElt(swigCPtr, this, i, j), false);
   }
 
   public MatrixBaseVec3 negateInPlace() {

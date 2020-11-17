@@ -120,7 +120,8 @@ public final class FileUtils {
       else
           nameAndExtension = fileName;
       int index = nameAndExtension.lastIndexOf('.');
-      return (index==-1) ? null : fileName.substring(index+1);
+      // index=0 indicates leading char
+      return (index==-1 || index==0) ? null : fileName.substring(index+1);
    }
 
     /**

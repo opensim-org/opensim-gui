@@ -281,11 +281,11 @@ public class IMUPlacer extends OpenSimObject {
     this(opensimSimulationJNI.new_IMUPlacer__SWIG_1(setupFile), true);
   }
 
-  public boolean run(boolean visualizeResults) {
+  public boolean run(boolean visualizeResults) throws java.io.IOException {
     return opensimSimulationJNI.IMUPlacer_run__SWIG_0(swigCPtr, this, visualizeResults);
   }
 
-  public boolean run() {
+  public boolean run() throws java.io.IOException {
     return opensimSimulationJNI.IMUPlacer_run__SWIG_1(swigCPtr, this);
   }
 

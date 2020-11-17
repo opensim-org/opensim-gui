@@ -43,12 +43,16 @@ public class RowVectorRotation extends RowVectorBaseRotation {
     this(opensimSimbodyJNI.new_RowVectorRotation__SWIG_1(RowVectorRotation.getCPtr(src), src), true);
   }
 
+  public RowVectorRotation(RowVectorBaseRotation src) {
+    this(opensimSimbodyJNI.new_RowVectorRotation__SWIG_2(RowVectorBaseRotation.getCPtr(src), src), true);
+  }
+
   public RowVectorRotation(int n) {
-    this(opensimSimbodyJNI.new_RowVectorRotation__SWIG_2(n), true);
+    this(opensimSimbodyJNI.new_RowVectorRotation__SWIG_3(n), true);
   }
 
   public RowVectorRotation(int n, Rotation cppInitialValues) {
-    this(opensimSimbodyJNI.new_RowVectorRotation__SWIG_3(n, Rotation.getCPtr(cppInitialValues), cppInitialValues), true);
+    this(opensimSimbodyJNI.new_RowVectorRotation__SWIG_4(n, Rotation.getCPtr(cppInitialValues), cppInitialValues), true);
   }
 
 }

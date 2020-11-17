@@ -49,20 +49,24 @@ public class RowVector extends RowVectorBaseDouble {
     this(opensimSimbodyJNI.new_RowVector__SWIG_1(RowVector.getCPtr(src), src), true);
   }
 
+  public RowVector(RowVectorBaseDouble src) {
+    this(opensimSimbodyJNI.new_RowVector__SWIG_2(RowVectorBaseDouble.getCPtr(src), src), true);
+  }
+
   public RowVector(int n) {
-    this(opensimSimbodyJNI.new_RowVector__SWIG_2(n), true);
+    this(opensimSimbodyJNI.new_RowVector__SWIG_3(n), true);
   }
 
   public RowVector(int n, SWIGTYPE_p_double cppInitialValues) {
-    this(opensimSimbodyJNI.new_RowVector__SWIG_3(n, SWIGTYPE_p_double.getCPtr(cppInitialValues)), true);
+    this(opensimSimbodyJNI.new_RowVector__SWIG_4(n, SWIGTYPE_p_double.getCPtr(cppInitialValues)), true);
   }
 
   public RowVector(int n, double initialValue) {
-    this(opensimSimbodyJNI.new_RowVector__SWIG_4(n, initialValue), true);
+    this(opensimSimbodyJNI.new_RowVector__SWIG_5(n, initialValue), true);
   }
 
   public RowVector(StdVectorDouble row) {
-    this(opensimSimbodyJNI.new_RowVector__SWIG_5(StdVectorDouble.getCPtr(row), row), true);
+    this(opensimSimbodyJNI.new_RowVector__SWIG_6(StdVectorDouble.getCPtr(row), row), true);
   }
 
   public Vector transpose() {

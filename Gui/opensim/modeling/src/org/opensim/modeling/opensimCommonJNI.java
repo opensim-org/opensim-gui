@@ -1945,6 +1945,7 @@ public class opensimCommonJNI {
   public final static native void TableUtilities_filterLowpass__SWIG_0(long jarg1, TimeSeriesTable jarg1_, double jarg2, boolean jarg3);
   public final static native void TableUtilities_filterLowpass__SWIG_1(long jarg1, TimeSeriesTable jarg1_, double jarg2);
   public final static native void TableUtilities_pad(long jarg1, TimeSeriesTable jarg1_, int jarg2);
+  public final static native long TableUtilities_convertRotationsToEulerAngles(long jarg1);
   public final static native long new_TableUtilities();
   public final static native void delete_TableUtilities(long jarg1);
   public final static native long new_DataTable__SWIG_0();

@@ -71,8 +71,28 @@ public class MatrixBaseQuaternion {
     return new MatrixBaseQuaternion(opensimSimbodyJNI.MatrixBaseQuaternion_setToZero(swigCPtr, this), false);
   }
 
+  public RowVectorViewQuaternion row(int i) {
+    return new RowVectorViewQuaternion(opensimSimbodyJNI.MatrixBaseQuaternion_row(swigCPtr, this, i), true);
+  }
+
+  public RowVectorViewQuaternion updRow(int i) {
+    return new RowVectorViewQuaternion(opensimSimbodyJNI.MatrixBaseQuaternion_updRow(swigCPtr, this, i), true);
+  }
+
+  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t col(int j) {
+    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t(opensimSimbodyJNI.MatrixBaseQuaternion_col(swigCPtr, this, j), true);
+  }
+
+  public SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t updCol(int j) {
+    return new SWIGTYPE_p_SimTK__VectorView_T_SimTK__Quaternion_T_double_t_t(opensimSimbodyJNI.MatrixBaseQuaternion_updCol(swigCPtr, this, j), true);
+  }
+
   public Quaternion getElt(int i, int j) {
     return new Quaternion(opensimSimbodyJNI.MatrixBaseQuaternion_getElt(swigCPtr, this, i, j), false);
+  }
+
+  public Quaternion updElt(int i, int j) {
+    return new Quaternion(opensimSimbodyJNI.MatrixBaseQuaternion_updElt(swigCPtr, this, i, j), false);
   }
 
   public MatrixBaseQuaternion negateInPlace() {

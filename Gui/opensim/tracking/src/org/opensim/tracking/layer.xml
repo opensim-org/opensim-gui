@@ -18,6 +18,8 @@
         </folder>
         <folder name="Tools">
             <file name="org-opensim-tracking-tools-IKToolAction.instance"/>
+            <file name="org-opensim-tracking-tools-IMUCalibrateAction.instance"/>
+            <file name="org-opensim-tracking-tools-IMUIKToolAction.instance"/>
             <file name="org-opensim-tracking-tools-ScaleToolAction.instance"/>
         </folder>
     </folder>
@@ -28,9 +30,17 @@
                 <attr name="originalFile" stringvalue="Actions/Tools/org-opensim-tracking-tools-ScaleToolAction.instance"/>
                 <attr name="position" intvalue="90"/>
             </file>
+            <file name="org-opensim-tracking-tools-IMUCalibrateAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Tools/org-opensim-tracking-tools-IMUCalibrateAction.instance"/>
+                <attr name="position" intvalue="95"/>
+            </file>
             <file name="org-opensim-tracking-tools-IKToolAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Tools/org-opensim-tracking-tools-IKToolAction.instance"/>
                 <attr name="position" intvalue="100"/>
+            </file>
+            <file name="org-opensim-tracking-tools-IMUIKToolAction.shadow">
+                <attr name="originalFile" stringvalue="Actions/Tools/org-opensim-tracking-tools-IMUIKToolAction.instance"/>
+                <attr name="position" intvalue="200"/>
             </file>
             <file name="org-opensim-tracking-tools-InverseDynamicsToolAction.shadow">
                 <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-tracking-tools-InverseDynamicsToolAction.instance"/>
@@ -59,6 +69,9 @@
             <file name="org-opensim-tracking-tools-separatorAfter.instance">
                 <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
                 <attr name="position" intvalue="900"/>
+            </file>
+            <file name="org-opensim-tracking-tools-separatorAfter_1.instance">
+                <attr name="instanceClass" stringvalue="javax.swing.JSeparator"/>
             </file>
         </folder>
         </folder>

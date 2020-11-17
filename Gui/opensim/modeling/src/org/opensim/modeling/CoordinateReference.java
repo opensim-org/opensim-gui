@@ -77,8 +77,8 @@ public class CoordinateReference extends ReferenceDouble {
     return new SimTKArrayString(opensimSimulationJNI.CoordinateReference_getNames(swigCPtr, this), false);
   }
 
-  public void getValues(State s, SimTKArrayDouble values) {
-    opensimSimulationJNI.CoordinateReference_getValues(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(values), values);
+  public void getValuesAtTime(double time, SimTKArrayDouble values) {
+    opensimSimulationJNI.CoordinateReference_getValuesAtTime(swigCPtr, this, time, SimTKArrayDouble.getCPtr(values), values);
   }
 
   public void getWeights(State s, SimTKArrayDouble weights) {

@@ -69,20 +69,24 @@ public class ReferenceVec3 extends OpenSimObject {
     return new SimTKArrayString(opensimSimulationJNI.ReferenceVec3_getNames(swigCPtr, this), false);
   }
 
-  public void getValues(State s, SimTKArrayVec3 values) {
-    opensimSimulationJNI.ReferenceVec3_getValues__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SimTKArrayVec3.getCPtr(values), values);
-  }
-
   public void getWeights(State s, SimTKArrayDouble weights) {
     opensimSimulationJNI.ReferenceVec3_getWeights__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(weights), weights);
   }
 
-  public SimTKArrayVec3 getValues(State s) {
-    return new SimTKArrayVec3(opensimSimulationJNI.ReferenceVec3_getValues__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
+  public boolean hasNext() {
+    return opensimSimulationJNI.ReferenceVec3_hasNext(swigCPtr, this);
   }
 
   public SimTKArrayDouble getWeights(State s) {
     return new SimTKArrayDouble(opensimSimulationJNI.ReferenceVec3_getWeights__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  public void getValuesAtTime(double time, SimTKArrayVec3 values) {
+    opensimSimulationJNI.ReferenceVec3_getValuesAtTime(swigCPtr, this, time, SimTKArrayVec3.getCPtr(values), values);
+  }
+
+  public SimTKArrayVec3 getValues(double time) {
+    return new SimTKArrayVec3(opensimSimulationJNI.ReferenceVec3_getValues(swigCPtr, this, time), true);
   }
 
 }
