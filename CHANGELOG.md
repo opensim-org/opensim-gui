@@ -13,6 +13,7 @@ v4.2
 - Added option to visualize sensor data (quaternions) in the application (File ->Load Sensor Data)
 - Associate motion data now handles orientation sensors as well so that orientation triads follow motions
 - When recording videos, if the user starts playing back a motion, recording is restarted to first animation frame.
+- Allow users to change video format from scripting shell (support gif, jpg, png with setVisualizerOption("video_format", "png")). 
 
 v4.1
 ====
