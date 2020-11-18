@@ -41,7 +41,8 @@ jobs:
         $hashFromFile = Get-FileHash -Algorithm SHA256 -Path .\netbeans-8.2-javase-windows.exe
         if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
         .\netbeans-8.2-javase-windows.exe --silent | Out-Null # This installer is gregarious.
-        echo "::set-env name=ANT_HOME:C:\\Program Files\\NetBeans 8.2\\extide\\ant"
+        echo "ANT_HOME=C:\\Program Files\\NetBeans 8.2\\extide\\ant" >> $GITHUB_ENV
+        # echo "::set-env name=ANT_HOME:C:\\Program Files\\NetBeans 8.2\\extide\\ant"
       
     - name: Checkout opensim-core master
       uses: actions/checkout@v2
@@ -256,7 +257,7 @@ jobs:
         # Read the value of the cache variable storing the GUI build version.
         VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
         echo $VERSION
-        echo "::set-env name=VERSION::$VERSION"
+        echo "name=VERSION::$VERSION" >> $GITHUB_ENV
         echo "::set-output name=version::$VERSION"
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
@@ -367,7 +368,7 @@ jobs:
         # Read the value of the cache variable storing the GUI build version.
         VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
         echo $VERSION
-        echo "::set-env name=VERSION::$VERSION"
+        echo "name=VERSION::$VERSION" >> $GITHUB_ENV
         echo "::set-output name=version::$VERSION"
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
