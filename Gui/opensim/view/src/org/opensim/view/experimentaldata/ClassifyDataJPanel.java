@@ -32,10 +32,10 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Vector;
 import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Vec3;
+import org.opensim.swingui.RotationSpinnerListModel;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.motions.MotionControlJPanel;
@@ -347,24 +347,6 @@ public class ClassifyDataJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jTransformDataPanel;
     private javax.swing.JButton saveTransformedAsButton;
     // End of variables declaration//GEN-END:variables
-
-    class RotationSpinnerListModel extends SpinnerNumberModel {
-    private double lastValue;
-
-    public RotationSpinnerListModel(double initial, double min, double max, double step) {
-        super(initial, min, max, step);
-        setLastValue(initial);
-    }
-
-        public double getLastValue() {
-            return lastValue;
-        }
-
-        public void setLastValue(double lastValue) {
-            this.lastValue = lastValue;
-        }
-
-    } //RotationSpinnerListModel
 
     public double[] getRotations() {
         return rotations;

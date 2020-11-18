@@ -151,4 +151,8 @@ public class InverseKinematicsSolver extends AssemblySolver {
     return opensimSimulationJNI.InverseKinematicsSolver_getOrientationSensorNameForIndex(swigCPtr, this, osensorIndex);
   }
 
+  public void setAdvanceTimeFromReference(boolean newValue) {
+    opensimSimulationJNI.InverseKinematicsSolver_setAdvanceTimeFromReference(swigCPtr, this, newValue);
+  }
+
 }

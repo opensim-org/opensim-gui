@@ -43,12 +43,16 @@ public class RowVectorQuaternion extends RowVectorBaseQuaternion {
     this(opensimSimbodyJNI.new_RowVectorQuaternion__SWIG_1(RowVectorQuaternion.getCPtr(src), src), true);
   }
 
+  public RowVectorQuaternion(RowVectorBaseQuaternion src) {
+    this(opensimSimbodyJNI.new_RowVectorQuaternion__SWIG_2(RowVectorBaseQuaternion.getCPtr(src), src), true);
+  }
+
   public RowVectorQuaternion(int n) {
-    this(opensimSimbodyJNI.new_RowVectorQuaternion__SWIG_2(n), true);
+    this(opensimSimbodyJNI.new_RowVectorQuaternion__SWIG_3(n), true);
   }
 
   public RowVectorQuaternion(int n, Quaternion cppInitialValues) {
-    this(opensimSimbodyJNI.new_RowVectorQuaternion__SWIG_3(n, Quaternion.getCPtr(cppInitialValues), cppInitialValues), true);
+    this(opensimSimbodyJNI.new_RowVectorQuaternion__SWIG_4(n, Quaternion.getCPtr(cppInitialValues), cppInitialValues), true);
   }
 
 }

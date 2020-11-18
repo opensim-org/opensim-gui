@@ -69,20 +69,24 @@ public class ReferenceRotation extends OpenSimObject {
     return new SimTKArrayString(opensimSimulationJNI.ReferenceRotation_getNames(swigCPtr, this), false);
   }
 
-  public void getValues(State s, SimTKArrayRotation values) {
-    opensimSimulationJNI.ReferenceRotation_getValues__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SimTKArrayRotation.getCPtr(values), values);
-  }
-
   public void getWeights(State s, SimTKArrayDouble weights) {
     opensimSimulationJNI.ReferenceRotation_getWeights__SWIG_0(swigCPtr, this, State.getCPtr(s), s, SimTKArrayDouble.getCPtr(weights), weights);
   }
 
-  public SimTKArrayRotation getValues(State s) {
-    return new SimTKArrayRotation(opensimSimulationJNI.ReferenceRotation_getValues__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
+  public boolean hasNext() {
+    return opensimSimulationJNI.ReferenceRotation_hasNext(swigCPtr, this);
   }
 
   public SimTKArrayDouble getWeights(State s) {
     return new SimTKArrayDouble(opensimSimulationJNI.ReferenceRotation_getWeights__SWIG_1(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  public void getValuesAtTime(double time, SimTKArrayRotation values) {
+    opensimSimulationJNI.ReferenceRotation_getValuesAtTime(swigCPtr, this, time, SimTKArrayRotation.getCPtr(values), values);
+  }
+
+  public SimTKArrayRotation getValues(double time) {
+    return new SimTKArrayRotation(opensimSimulationJNI.ReferenceRotation_getValues(swigCPtr, this, time), true);
   }
 
 }

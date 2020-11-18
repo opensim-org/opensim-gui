@@ -8,12 +8,11 @@
 
 package org.opensim.modeling;
 
-public class OrientationWeightSet {
+public class OrientationWeightSet extends SetOientationWeights {
   private transient long swigCPtr;
-  protected transient boolean swigCMemOwn;
 
   public OrientationWeightSet(long cPtr, boolean cMemoryOwn) {
-    swigCMemOwn = cMemoryOwn;
+    super(opensimActuatorsAnalysesToolsJNI.OrientationWeightSet_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -33,6 +32,7 @@ public class OrientationWeightSet {
       }
       swigCPtr = 0;
     }
+    super.delete();
   }
 
   public static OrientationWeightSet safeDownCast(OpenSimObject obj) {
@@ -48,7 +48,7 @@ public class OrientationWeightSet {
     return opensimActuatorsAnalysesToolsJNI.OrientationWeightSet_getClassName();
   }
 
-  public OrientationWeightSet clone() {
+  public OpenSimObject clone() {
     long cPtr = opensimActuatorsAnalysesToolsJNI.OrientationWeightSet_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new OrientationWeightSet(cPtr, true);
   }
