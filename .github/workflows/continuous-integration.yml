@@ -123,7 +123,7 @@ jobs:
         $env:match = cmake -L . | Select-String -Pattern OPENSIMGUI_BUILD_VERSION
         $version = $env:match.split('=')[1]
         echo $version
-        echo "::set-env name=VERSION::$version"
+        echo "name=VERSION::$version" >> $GITHUB_ENV
         echo "::set-output name=version::$version"
         
     - name: Build GUI installer
@@ -186,7 +186,7 @@ jobs:
         sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk
         /usr/libexec/java_home -V
         export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
-        echo "::set-env name=JAVA_HOME::$JAVA_HOME"
+        echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
         echo $JAVA_HOME
         wget https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
         hdiutil attach netbeans-8.2-javase-macosx.dmg
