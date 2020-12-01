@@ -265,7 +265,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
                 .addContainerGap())
         );
 
-        calibrationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Model Calibration"));
+        calibrationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "IMU Placement/Heading Correction (Optional)"));
 
         sensorQFileName.setMinimumSize(new java.awt.Dimension(3, 20));
         sensorQFileName.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -274,9 +274,9 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
             }
         });
 
-        jLabel6.setText("Orientation file at default pose:");
+        jLabel6.setText("Orientation file at placement pose:");
 
-        jLabel7.setText("Align sensor (name, axis):");
+        jLabel7.setText("Align IMU (name, axis):");
 
         jComboBoxIMUAxis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "   ", "x", "y", "z", "-x", "-y", "-z" }));
         jComboBoxIMUAxis.addActionListener(new java.awt.event.ActionListener() {
