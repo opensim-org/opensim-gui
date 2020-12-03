@@ -110,7 +110,7 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Space fixed Euler angle transform from sensor space to OpenSim"/>
+            <Property name="text" type="java.lang.String" value="Space fixed Euler angles (XYZ order) from IMU space to OpenSim"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -169,7 +169,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Model Calibration">
+            <TitledBorder title="IMU Placement/Heading Correction (Optional)">
               <Border PropertyName="innerBorder" info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder/>
               </Border>
@@ -236,12 +236,12 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Orientation file at default pose:"/>
+            <Property name="text" type="java.lang.String" value="Orientation file at placement pose:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Align sensor (name, axis):"/>
+            <Property name="text" type="java.lang.String" value="Align IMU (name, axis):"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JComboBox" name="jComboBoxIMUAxis">

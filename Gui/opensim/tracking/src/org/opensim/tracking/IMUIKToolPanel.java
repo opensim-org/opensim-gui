@@ -159,7 +159,10 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
    // Overrides from BaseToolPanel
    //------------------------------------------------------------------------
 
-   public void loadSettings(String fileName) { ikToolModel.loadSettings(fileName); }
+   public void loadSettings(String fileName) { 
+       ikToolModel.loadSettings(fileName); 
+       ownerDialog.pack();
+   }
    public void saveSettings(String fileName) { ikToolModel.saveSettings(fileName); }
 
    public void pressedCancel() {
@@ -394,7 +397,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
 
         transformDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Transformation"));
 
-        jLabel1.setText("Space fixed Euler angle transform from sensor space to OpenSim");
+        jLabel1.setText("Space fixed Euler angles (XYZ order) from IMU space to OpenSim");
 
         jLabel2.setText("Rotations X, Y, Z (degrees):");
 
@@ -443,7 +446,7 @@ public class IMUIKToolPanel extends BaseToolPanel implements Observer {
                         .add(YSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(ZSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .add(0, 79, Short.MAX_VALUE))
+                .add(0, 74, Short.MAX_VALUE))
         );
         transformDataPanelLayout.setVerticalGroup(
             transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)

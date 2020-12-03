@@ -149,7 +149,7 @@ public class IMUIKToolModel extends Observable implements Observer {
          // Initialize progress bar, given we know the number of frames to process
          double startTime = imuIkTool.getStartTime();
          double endTime = imuIkTool.getEndTime();
-         progressHandle = ProgressHandleFactory.createHandle("Executing IMU Model Calibration...",
+         progressHandle = ProgressHandleFactory.createHandle("Executing Inverse Kinematics with IMU data ...",
                               new Cancellable() {
                                  public boolean cancel() {
                                     interrupt(true);

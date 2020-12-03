@@ -146,7 +146,10 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
    // Overrides from BaseToolPanel
    //------------------------------------------------------------------------
 
-   public void loadSettings(String fileName) { calibrationModel.loadSettings(fileName); }
+   public void loadSettings(String fileName) { 
+       calibrationModel.loadSettings(fileName);
+       ownerDialog.pack();
+   }
    public void saveSettings(String fileName) { calibrationModel.saveSettings(fileName); }
 
    public void pressedCancel() {
@@ -200,7 +203,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
 
         transformDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Transformation"));
 
-        jLabel1.setText("Space fixed Euler angle transform from sensor space to OpenSim");
+        jLabel1.setText("Space fixed Euler angles (XYZ order) from IMU space to OpenSim");
 
         jLabel2.setText("Rotations X, Y, Z (degrees):");
 
@@ -265,7 +268,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
                 .addContainerGap())
         );
 
-        calibrationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Model Calibration"));
+        calibrationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "IMU Placement/Heading Correction (Optional)"));
 
         sensorQFileName.setMinimumSize(new java.awt.Dimension(3, 20));
         sensorQFileName.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -274,9 +277,9 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
             }
         });
 
-        jLabel6.setText("Orientation file at default pose:");
+        jLabel6.setText("Orientation file at placement pose:");
 
-        jLabel7.setText("Align sensor (name, axis):");
+        jLabel7.setText("Align IMU (name, axis):");
 
         jComboBoxIMUAxis.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "   ", "x", "y", "z", "-x", "-y", "-z" }));
         jComboBoxIMUAxis.addActionListener(new java.awt.event.ActionListener() {

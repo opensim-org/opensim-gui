@@ -41,9 +41,9 @@ public final class IMUCalibrateAction  extends CallableSystemAction {
 
       try {
          final IMUCalibrationPanel panel = new IMUCalibrationPanel(model);
-         BaseToolPanel.openToolDialog(panel, "IMU Model Calibration Tool");
+         BaseToolPanel.openToolDialog(panel, "IMU Placer Tool");
       } catch (IOException ex) {
-         ErrorDialog.displayIOExceptionDialog("IMU Model Calibration Tool Error","Error while initializing IMUCalibrateAction",ex);
+         ErrorDialog.displayIOExceptionDialog("IMU Placer Tool Error","Error while initializing IMUCalibrateAction",ex);
       }
     }
        public String getName() {
