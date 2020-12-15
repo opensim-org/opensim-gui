@@ -181,9 +181,9 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
         XSpinner = new javax.swing.JSpinner();
         YSpinner = new javax.swing.JSpinner();
         ZSpinner = new javax.swing.JSpinner();
-        calibrationPanel = new javax.swing.JPanel();
-        sensorQFileName = new org.opensim.swingui.FileTextFieldAndChooser();
         jLabel6 = new javax.swing.JLabel();
+        sensorQFileName = new org.opensim.swingui.FileTextFieldAndChooser();
+        calibrationPanel = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jComboBoxIMUAxis = new javax.swing.JComboBox<>();
         jComboBoxIMULabel = new javax.swing.JComboBox<>();
@@ -201,7 +201,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
         buttonGroup1.add(jRadioButtonNewModel);
         jRadioButtonNewModel.setText("create new model");
 
-        transformDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Data Transformation"));
+        transformDataPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "IMU Orientation Data & Transformation"));
 
         jLabel1.setText("Space fixed Euler angles (XYZ order) from IMU space to OpenSim");
 
@@ -237,6 +237,15 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
             }
         });
 
+        jLabel6.setText("Orientation file at placement pose:");
+
+        sensorQFileName.setMinimumSize(new java.awt.Dimension(3, 20));
+        sensorQFileName.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                sensorQFileNameStateChanged(evt);
+            }
+        });
+
         org.jdesktop.layout.GroupLayout transformDataPanelLayout = new org.jdesktop.layout.GroupLayout(transformDataPanel);
         transformDataPanel.setLayout(transformDataPanelLayout);
         transformDataPanelLayout.setHorizontalGroup(
@@ -253,11 +262,19 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(ZSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 66, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                 .add(0, 0, Short.MAX_VALUE))
+            .add(transformDataPanelLayout.createSequentialGroup()
+                .add(jLabel6)
+                .add(1, 1, 1)
+                .add(sensorQFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         transformDataPanelLayout.setVerticalGroup(
             transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(transformDataPanelLayout.createSequentialGroup()
-                .add(9, 9, 9)
+                .add(6, 6, 6)
+                .add(transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(jLabel6)
+                    .add(sensorQFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jLabel1)
                 .add(3, 3, 3)
                 .add(transformDataPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -269,15 +286,6 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
         );
 
         calibrationPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "IMU Placement/Heading Correction (Optional)"));
-
-        sensorQFileName.setMinimumSize(new java.awt.Dimension(3, 20));
-        sensorQFileName.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                sensorQFileNameStateChanged(evt);
-            }
-        });
-
-        jLabel6.setText("Orientation file at placement pose:");
 
         jLabel7.setText("Align IMU (name, axis):");
 
@@ -302,36 +310,26 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
         calibrationPanelLayout.setHorizontalGroup(
             calibrationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(calibrationPanelLayout.createSequentialGroup()
-                .add(calibrationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(calibrationPanelLayout.createSequentialGroup()
-                        .add(jLabel6)
-                        .add(1, 1, 1)
-                        .add(sensorQFileName, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(calibrationPanelLayout.createSequentialGroup()
-                        .add(jLabel7)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
-                        .add(jComboBoxIMULabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jComboBoxIMUAxis, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jLabel10)
-                        .add(0, 0, Short.MAX_VALUE)))
-                .add(0, 0, 0))
+                .addContainerGap()
+                .add(jLabel7)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(jComboBoxIMULabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jComboBoxIMUAxis, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(jLabel10)
+                .addContainerGap())
         );
         calibrationPanelLayout.setVerticalGroup(
             calibrationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(calibrationPanelLayout.createSequentialGroup()
-                .add(6, 6, 6)
-                .add(calibrationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jLabel6)
-                    .add(sensorQFileName, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .add(20, 20, 20)
+                .addContainerGap()
                 .add(calibrationPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
                     .add(jComboBoxIMUAxis, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jComboBoxIMULabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(jLabel10)
                     .add(jLabel7))
-                .addContainerGap())
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(this);
@@ -346,11 +344,31 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
             .add(layout.createSequentialGroup()
                 .add(12, 12, 12)
                 .add(transformDataPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(calibrationPanel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jRadioButtonReplaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonReplaceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonReplaceActionPerformed
+
+    private void jComboBoxIMULabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxIMULabelActionPerformed
+        // TODO add your handling code here:
+        calibrationModel.setIMULabel((String)jComboBoxIMULabel.getSelectedItem());
+    }//GEN-LAST:event_jComboBoxIMULabelActionPerformed
+
+    private void jComboBoxIMUAxisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxIMUAxisActionPerformed
+        // TODO add your handling code here:
+        calibrationModel.setIMUAxis((String)jComboBoxIMUAxis.getSelectedItem());
+    }//GEN-LAST:event_jComboBoxIMUAxisActionPerformed
+
+    private void sensorQFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sensorQFileNameStateChanged
+        // TODO add your handling code here:
+        calibrationModel.setSensorDataFileName(sensorQFileName.getFileName());
+        updateIMULabelsComboBox(calibrationModel.getSensorDataLabels());
+    }//GEN-LAST:event_sensorQFileNameStateChanged
 
     private void ZSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_ZSpinnerStateChanged
         // TODO add your handling code here:
@@ -372,26 +390,6 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
 
         // TODO add your handling code here:
     }//GEN-LAST:event_XSpinnerStateChanged
-
-    private void jRadioButtonReplaceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonReplaceActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButtonReplaceActionPerformed
-
-    private void sensorQFileNameStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_sensorQFileNameStateChanged
-        // TODO add your handling code here:
-        calibrationModel.setSensorDataFileName(sensorQFileName.getFileName());
-        updateIMULabelsComboBox(calibrationModel.getSensorDataLabels());
-    }//GEN-LAST:event_sensorQFileNameStateChanged
-
-    private void jComboBoxIMULabelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxIMULabelActionPerformed
-        // TODO add your handling code here:
-        calibrationModel.setIMULabel((String)jComboBoxIMULabel.getSelectedItem());
-    }//GEN-LAST:event_jComboBoxIMULabelActionPerformed
-
-    private void jComboBoxIMUAxisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxIMUAxisActionPerformed
-        // TODO add your handling code here:
-        calibrationModel.setIMUAxis((String)jComboBoxIMUAxis.getSelectedItem());
-    }//GEN-LAST:event_jComboBoxIMUAxisActionPerformed
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner XSpinner;
