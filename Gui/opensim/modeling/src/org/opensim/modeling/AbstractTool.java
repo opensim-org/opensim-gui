@@ -125,6 +125,18 @@ public class AbstractTool extends OpenSimObject {
     return new AnalysisSet(opensimSimulationJNI.AbstractTool_getAnalysisSet(swigCPtr, this), false);
   }
 
+  public AnalysisSet updAnalysisSet() {
+    return new AnalysisSet(opensimSimulationJNI.AbstractTool_updAnalysisSet(swigCPtr, this), false);
+  }
+
+  public ControllerSet getControllerSet() {
+    return new ControllerSet(opensimSimulationJNI.AbstractTool_getControllerSet(swigCPtr, this), false);
+  }
+
+  public ControllerSet updControllerSet() {
+    return new ControllerSet(opensimSimulationJNI.AbstractTool_updControllerSet(swigCPtr, this), false);
+  }
+
   public String getResultsDir() {
     return opensimSimulationJNI.AbstractTool_getResultsDir(swigCPtr, this);
   }

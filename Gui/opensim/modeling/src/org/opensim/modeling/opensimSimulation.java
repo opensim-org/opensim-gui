@@ -33,4 +33,40 @@ public class opensimSimulation {
     opensimSimulationJNI.updateSocketConnecteesBySearch(Model.getCPtr(model), model);
   }
 
+  public static StdVectorString createStateVariableNamesInSystemOrder(Model model) {
+    return new StdVectorString(opensimSimulationJNI.createStateVariableNamesInSystemOrder(Model.getCPtr(model), model), true);
+  }
+
+  public static StdVectorString createControlNamesFromModel(Model model, StdVectorInt modelControlIndices) {
+    return new StdVectorString(opensimSimulationJNI.createControlNamesFromModel__SWIG_0(Model.getCPtr(model), model, StdVectorInt.getCPtr(modelControlIndices), modelControlIndices), true);
+  }
+
+  public static StdVectorString createControlNamesFromModel(Model model) {
+    return new StdVectorString(opensimSimulationJNI.createControlNamesFromModel__SWIG_1(Model.getCPtr(model), model), true);
+  }
+
+  public static SWIGTYPE_p_std__unordered_mapT_std__string_int_t createSystemControlIndexMap(Model model) {
+    return new SWIGTYPE_p_std__unordered_mapT_std__string_int_t(opensimSimulationJNI.createSystemControlIndexMap(Model.getCPtr(model), model), true);
+  }
+
+  public static void checkOrderSystemControls(Model model) {
+    opensimSimulationJNI.checkOrderSystemControls(Model.getCPtr(model), model);
+  }
+
+  public static void checkLabelsMatchModelStates(Model model, StdVectorString labels) {
+    opensimSimulationJNI.checkLabelsMatchModelStates(Model.getCPtr(model), model, StdVectorString.getCPtr(labels), labels);
+  }
+
+  public static TimeSeriesTable analyze(Model model, TimeSeriesTable statesTable, TimeSeriesTable controlsTable, StdVectorString outputPaths) {
+    return new TimeSeriesTable(opensimSimulationJNI.analyze(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(outputPaths), outputPaths), true);
+  }
+
+  public static TimeSeriesTableVec3 analyzeVec3(Model model, TimeSeriesTable statesTable, TimeSeriesTable controlsTable, StdVectorString outputPaths) {
+    return new TimeSeriesTableVec3(opensimSimulationJNI.analyzeVec3(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(outputPaths), outputPaths), true);
+  }
+
+  public static TimeSeriesTableSpatialVec analyzeSpatialVec(Model model, TimeSeriesTable statesTable, TimeSeriesTable controlsTable, StdVectorString outputPaths) {
+    return new TimeSeriesTableSpatialVec(opensimSimulationJNI.analyzeSpatialVec(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(outputPaths), outputPaths), true);
+  }
+
 }

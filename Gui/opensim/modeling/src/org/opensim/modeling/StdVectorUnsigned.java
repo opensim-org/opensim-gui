@@ -12,12 +12,12 @@ public class StdVectorUnsigned {
   private transient long swigCPtr;
   protected transient boolean swigCMemOwn;
 
-  public StdVectorUnsigned(long cPtr, boolean cMemoryOwn) {
+  protected StdVectorUnsigned(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(StdVectorUnsigned obj) {
+  protected static long getCPtr(StdVectorUnsigned obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -29,50 +29,50 @@ public class StdVectorUnsigned {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimSimbodyJNI.delete_StdVectorUnsigned(swigCPtr);
+        opensimMocoJNI.delete_StdVectorUnsigned(swigCPtr);
       }
       swigCPtr = 0;
     }
   }
 
   public StdVectorUnsigned() {
-    this(opensimSimbodyJNI.new_StdVectorUnsigned__SWIG_0(), true);
+    this(opensimMocoJNI.new_StdVectorUnsigned__SWIG_0(), true);
   }
 
   public StdVectorUnsigned(long n) {
-    this(opensimSimbodyJNI.new_StdVectorUnsigned__SWIG_1(n), true);
+    this(opensimMocoJNI.new_StdVectorUnsigned__SWIG_1(n), true);
   }
 
   public long size() {
-    return opensimSimbodyJNI.StdVectorUnsigned_size(swigCPtr, this);
+    return opensimMocoJNI.StdVectorUnsigned_size(swigCPtr, this);
   }
 
   public long capacity() {
-    return opensimSimbodyJNI.StdVectorUnsigned_capacity(swigCPtr, this);
+    return opensimMocoJNI.StdVectorUnsigned_capacity(swigCPtr, this);
   }
 
   public void reserve(long n) {
-    opensimSimbodyJNI.StdVectorUnsigned_reserve(swigCPtr, this, n);
+    opensimMocoJNI.StdVectorUnsigned_reserve(swigCPtr, this, n);
   }
 
   public boolean isEmpty() {
-    return opensimSimbodyJNI.StdVectorUnsigned_isEmpty(swigCPtr, this);
+    return opensimMocoJNI.StdVectorUnsigned_isEmpty(swigCPtr, this);
   }
 
   public void clear() {
-    opensimSimbodyJNI.StdVectorUnsigned_clear(swigCPtr, this);
+    opensimMocoJNI.StdVectorUnsigned_clear(swigCPtr, this);
   }
 
   public void add(long x) {
-    opensimSimbodyJNI.StdVectorUnsigned_add(swigCPtr, this, x);
+    opensimMocoJNI.StdVectorUnsigned_add(swigCPtr, this, x);
   }
 
   public long get(int i) {
-    return opensimSimbodyJNI.StdVectorUnsigned_get(swigCPtr, this, i);
+    return opensimMocoJNI.StdVectorUnsigned_get(swigCPtr, this, i);
   }
 
   public void set(int i, long val) {
-    opensimSimbodyJNI.StdVectorUnsigned_set(swigCPtr, this, i, val);
+    opensimMocoJNI.StdVectorUnsigned_set(swigCPtr, this, i, val);
   }
 
 }

@@ -37,6 +37,46 @@ public class opensimCommon {
     return opensimCommonJNI.GetCompilerVersion();
   }
 
+  public static String getFormattedDateTime(boolean appendMicroseconds, String format) {
+    return opensimCommonJNI.getFormattedDateTime__SWIG_0(appendMicroseconds, format);
+  }
+
+  public static String getFormattedDateTime(boolean appendMicroseconds) {
+    return opensimCommonJNI.getFormattedDateTime__SWIG_1(appendMicroseconds);
+  }
+
+  public static String getFormattedDateTime() {
+    return opensimCommonJNI.getFormattedDateTime__SWIG_2();
+  }
+
+  public static Vector createVectorLinspace(int length, double start, double end) {
+    return new Vector(opensimCommonJNI.createVectorLinspace(length, start, end), true);
+  }
+
+  public static Vector interpolate(Vector x, Vector y, Vector newX, boolean ignoreNaNs) {
+    return new Vector(opensimCommonJNI.interpolate__SWIG_0(Vector.getCPtr(x), x, Vector.getCPtr(y), y, Vector.getCPtr(newX), newX, ignoreNaNs), true);
+  }
+
+  public static Vector interpolate(Vector x, Vector y, Vector newX) {
+    return new Vector(opensimCommonJNI.interpolate__SWIG_1(Vector.getCPtr(x), x, Vector.getCPtr(y), y, Vector.getCPtr(newX), newX), true);
+  }
+
+  public static String convertRelativeFilePathToAbsoluteFromXMLDocument(String documentFileName, String filePathRelativeToDirectoryContainingDocument) {
+    return opensimCommonJNI.convertRelativeFilePathToAbsoluteFromXMLDocument(documentFileName, filePathRelativeToDirectoryContainingDocument);
+  }
+
+  public static double solveBisection(SWIGTYPE_p_std__functionT_double_fdouble_const_RF_t calcResidual, double left, double right, double tolerance, int maxIterations) {
+    return opensimCommonJNI.solveBisection__SWIG_0(SWIGTYPE_p_std__functionT_double_fdouble_const_RF_t.getCPtr(calcResidual), left, right, tolerance, maxIterations);
+  }
+
+  public static double solveBisection(SWIGTYPE_p_std__functionT_double_fdouble_const_RF_t calcResidual, double left, double right, double tolerance) {
+    return opensimCommonJNI.solveBisection__SWIG_1(SWIGTYPE_p_std__functionT_double_fdouble_const_RF_t.getCPtr(calcResidual), left, right, tolerance);
+  }
+
+  public static double solveBisection(SWIGTYPE_p_std__functionT_double_fdouble_const_RF_t calcResidual, double left, double right) {
+    return opensimCommonJNI.solveBisection__SWIG_2(SWIGTYPE_p_std__functionT_double_fdouble_const_RF_t.getCPtr(calcResidual), left, right);
+  }
+
   public static int getArray_CAPMIN() {
     return opensimCommonJNI.Array_CAPMIN_get();
   }
