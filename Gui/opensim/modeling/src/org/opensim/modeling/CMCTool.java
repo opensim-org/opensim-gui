@@ -153,6 +153,14 @@ public class CMCTool extends AbstractTool {
     opensimActuatorsAnalysesToolsJNI.CMCTool_setUseFastTarget(swigCPtr, this, useFastTarget);
   }
 
+  public boolean getUseVerbosePrinting() {
+    return opensimActuatorsAnalysesToolsJNI.CMCTool_getUseVerbosePrinting(swigCPtr, this);
+  }
+
+  public void setUseVerbosePrinting(boolean verbose) {
+    opensimActuatorsAnalysesToolsJNI.CMCTool_setUseVerbosePrinting(swigCPtr, this, verbose);
+  }
+
   public boolean run() throws java.io.IOException {
     return opensimActuatorsAnalysesToolsJNI.CMCTool_run(swigCPtr, this);
   }

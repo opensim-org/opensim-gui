@@ -109,6 +109,10 @@ public class GeometryPath extends ModelComponent {
     return new PathWrapSet(opensimSimulationJNI.GeometryPath_getWrapSet(swigCPtr, this), false);
   }
 
+  public PathWrapSet updWrapSet() {
+    return new PathWrapSet(opensimSimulationJNI.GeometryPath_updWrapSet(swigCPtr, this), false);
+  }
+
   public void addPathWrap(WrapObject aWrapObject) {
     opensimSimulationJNI.GeometryPath_addPathWrap(swigCPtr, this, WrapObject.getCPtr(aWrapObject), aWrapObject);
   }
