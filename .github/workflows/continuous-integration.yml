@@ -155,7 +155,7 @@ jobs:
         
     - name: Install packages
       run: |
-        brew install doxygen swig@3 ant pkgconfig gcc autoconf libtool automake wget pcre doxygen gfortran
+        brew install doxygen swig@3
         pip3 install numpy
     
     - name: Set up JDK 1.8
