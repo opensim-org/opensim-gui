@@ -212,7 +212,7 @@ jobs:
       run: |
         mkdir build_deps
         cd build_deps
-        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DCMAKE_BUILD_TYPE=Release
+        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on -DSUPERBUILD_casadi=off -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DCMAKE_BUILD_TYPE=Release
         cmake . -LAH
         cmake --build . --config Release
         
@@ -235,7 +235,7 @@ jobs:
       run: |
         mkdir build_core
         cd build_core
-        cmake ../opensim-core -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DSWIG_EXECUTABLE=/usr/local/opt/swig@3/bin/swig -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core-install -DOPENSIM_INSTALL_UNIX_FHS=OFF -DOPENSIM_DISABLE_LOG_FILE=ON
+        cmake ../opensim-core -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DSWIG_EXECUTABLE=/usr/local/opt/swig@3/bin/swig -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_WITH_CASADI=off -DOPENSIM_WITH_TROPTER=off -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core-install -DOPENSIM_INSTALL_UNIX_FHS=OFF -DOPENSIM_DISABLE_LOG_FILE=ON
         cmake . -LAH
         cmake --build . --config Release 
         cmake --install .
