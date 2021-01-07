@@ -49,6 +49,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
+         ref: 8a2d9833f4360ec39dba046db3bb2d14fa9ef19b
     
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
