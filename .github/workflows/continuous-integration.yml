@@ -153,6 +153,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
+         ref: aymanhab-patch-gfortran01
         
     - name: Install packages
       run: |
@@ -226,7 +227,7 @@ jobs:
       id: opensim-core-commit
       run: |
         cd opensim-core
-        opensim_core_commit=$(git rev-parse HEAD)
+        opensim_core_commit=$(git rev-parse aymanhab-patch-gfortran01)
         echo "::set-output name=hash::$opensim_core_commit"
           
     - name: Cache opensim-core
