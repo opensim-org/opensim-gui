@@ -49,7 +49,6 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
-         ref: aymanhab-patch-gfortran01
     
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
