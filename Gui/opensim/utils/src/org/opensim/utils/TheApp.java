@@ -111,7 +111,7 @@ public final class TheApp {
 
     public static Image getAppImage() {
         if (appImage==null)
-            appImage=ImageUtilities.loadImage("org/opensim/helputils/helpmenu/images/frame48.gif");
+            appImage=ImageUtilities.loadImage("org/opensim/helputils/helpmenu/images/logo_transparent_color.png");
         return appImage;
     }
     
