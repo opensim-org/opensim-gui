@@ -62,6 +62,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
                     amot.setName(new File(fileName).getName());
                     amot.setDataRate(markerData.getDataRate());
                     amot.setCameraRate(markerData.getCameraRate());
+                    amot.setUnits(markerData.getUnits());
                     // Add the visuals to support it
                     ModelForExperimentalData modelForDataImport = new ModelForExperimentalData(nextNumber++, amot);
                     modelForDataImport.initSystem();
