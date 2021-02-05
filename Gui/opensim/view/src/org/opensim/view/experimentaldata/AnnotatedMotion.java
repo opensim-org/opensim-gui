@@ -46,6 +46,7 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.Transform;
+import org.opensim.modeling.Units;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.motions.MotionDisplayer;
@@ -75,6 +76,7 @@ public class AnnotatedMotion extends Storage {
     private double displayForceScale = .001;
     private String displayForceShape = "arrow";
     private Model model;
+    private Units units;
     /** Creates a new instance of AnnotatedMotion 
      * This constructor is called when a trc file is read (so we know it is 
      * Marker only data already.
@@ -416,7 +418,9 @@ public class AnnotatedMotion extends Storage {
    */
         writer.write(getDataRate()+"\t"+
                 getCameraRate()+"\t"+
-                getSize()+"\t"+markerNames.size()+"\tmm\t"+
+                getSize()+"\t"+markerNames.size()+"\t"+
+                (units.getType()==Units.UnitType.Millimeters?"mm":"m")
+                        +"\t"+
                 getDataRate()+"\t"+ "1\t"+getSize());
         writer.newLine();
         writer.write("Frame#\tTime\t");
@@ -533,4 +537,8 @@ public class AnnotatedMotion extends Storage {
             }
         }
     }    
+
+    public void setUnits(Units units) {
+        this.units = units;
+    }
 }

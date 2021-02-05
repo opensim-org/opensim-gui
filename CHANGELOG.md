@@ -15,6 +15,7 @@ v4.2
 - When recording videos, if the user starts playing back a motion, recording is restarted to first animation frame.
 - Allow users to change video format from scripting shell (support gif, jpg, png with setVisualizerOption("video_format", "png")). 
 - Add Tools for Calibrating model based on IMU data and to solve Inverse Kinematics problem from IMU data.
+- Fix issue where transforming trc marker data in the application always produces a file with "m" as units in header.
 
 v4.1
 ====
