@@ -1393,7 +1393,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native String IKMarkerTask_getClassName();
   public final static native long IKMarkerTask_clone(long jarg1, IKMarkerTask jarg1_);
   public final static native String IKMarkerTask_getConcreteClassName(long jarg1, IKMarkerTask jarg1_);
-  public final static native long new_IKMarkerTask();
+  public final static native long new_IKMarkerTask__SWIG_0();
+  public final static native long new_IKMarkerTask__SWIG_1(long jarg1, IKMarkerTask jarg1_);
   public final static native void delete_IKMarkerTask(long jarg1);
   public final static native long IKCoordinateTask_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void IKCoordinateTask_assign(long jarg1, IKCoordinateTask jarg1_, long jarg2, OpenSimObject jarg2_);
