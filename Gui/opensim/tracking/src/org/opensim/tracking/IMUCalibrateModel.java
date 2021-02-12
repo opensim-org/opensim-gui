@@ -79,8 +79,8 @@ public class IMUCalibrateModel extends Observable implements Observer {
             sensorOrientationsFileName = fileName;
             sensorData = new TimeSeriesTableQuaternion(sensorOrientationsFileName);
             sensorDataLabels = sensorData.getColumnLabels();
-            if (sensorDataLabels.size()>0)
-                imuLabel = sensorDataLabels.get(0);
+            //if (sensorDataLabels.size()>0)
+            //    imuLabel = sensorDataLabels.get(0);
             setModified(Operation.AllDataChanged);
         }
     }
@@ -242,8 +242,8 @@ public class IMUCalibrateModel extends Observable implements Observer {
        Vec3 rotationsInRadians = new Vec3(rotations).scalarTimesEq(Math.toRadians(1.0));
        imuPlacerTool.set_sensor_to_opensim_rotations(rotationsInRadians);
        imuPlacerTool.set_orientation_file_for_calibration(sensorOrientationsFileName);
-       imuPlacerTool.set_base_imu_label(imuLabel);
-       imuPlacerTool.set_base_heading_axis(imuAxis);
+       imuPlacerTool.set_base_imu_label(imuLabel.trim());
+       imuPlacerTool.set_base_heading_axis(imuAxis.trim());
    }
 
    public void execute() {  
