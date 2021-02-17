@@ -2163,7 +2163,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native String OrientationWeightSet_getClassName();
   public final static native long OrientationWeightSet_clone(long jarg1, OrientationWeightSet jarg1_);
   public final static native String OrientationWeightSet_getConcreteClassName(long jarg1, OrientationWeightSet jarg1_);
-  public final static native long new_OrientationWeightSet();
+  public final static native long new_OrientationWeightSet__SWIG_0();
+  public final static native long new_OrientationWeightSet__SWIG_1(long jarg1, OrientationWeightSet jarg1_);
   public final static native void delete_OrientationWeightSet(long jarg1);
   public final static native long IMUInverseKinematicsTool_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void IMUInverseKinematicsTool_assign(long jarg1, IMUInverseKinematicsTool jarg1_, long jarg2, OpenSimObject jarg2_);

@@ -316,11 +316,7 @@ public class IMUIKToolModel extends Observable implements Observer {
        imuIkTool.set_time_range(1, timeRange[1]);
        imuIkTool.set_report_errors(reportErrors);
        // Replace OrientationWeightSet in tool with new set.
-       OrientationWeightSet owsetRef = imuIkTool.get_orientation_weights();
-       owsetRef.setSize(0);
-       OrientationWeightSet newOwsetRef = getOrientation_weightset();
-       for (int i=0; i < newOwsetRef.getSize(); i++)
-            owsetRef.cloneAndAppend(newOwsetRef.get(i));
+       imuIkTool.set_orientation_weights(getOrientation_weightset());
    }
 
    public void execute() {  
@@ -444,11 +440,6 @@ public class IMUIKToolModel extends Observable implements Observer {
 
    public boolean saveSettings(String fileName) {
       String fullFilename = FileUtils.addExtensionIfNeeded(fileName, ".xml");
-      /*
-      XMLExternalFileChooserHelper helper = new XMLExternalFileChooserHelper(fullFilename);
-      helper.addObject(imuIkTool.getIKTaskSet(), "IK Task Set");
-      if(!helper.promptUser()) return false;*/
-      //imuIkTool.getIKTaskSet().setInlined(true);
       updateIKTool();
       AbsoluteToRelativePaths(fullFilename);
       imuIkTool.print(fullFilename);
@@ -510,6 +501,6 @@ public class IMUIKToolModel extends Observable implements Observer {
      * @param orientation_weightset the orientation_weightset to set
      */
     public void setOrientation_weightset(OrientationWeightSet orientation_weightset) {
-        this.orientation_weightset = orientation_weightset;
+        this.orientation_weightset = new OrientationWeightSet(orientation_weightset);
     }
 }

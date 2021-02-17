@@ -533,7 +533,7 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
     private void jWeightsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jWeightsButtonActionPerformed
         // TODO add your handling code here:
         OrientationWeightSet currentWeights = ikToolModel.getOrientation_weightset();
-        OrientationWeightSet saveWeights = OrientationWeightSet.safeDownCast(currentWeights.clone());
+        OrientationWeightSet saveWeights = new OrientationWeightSet(currentWeights);
         OrientationWeightsJPanel weightsPanel = new OrientationWeightsJPanel(currentWeights);
         Object [] options =  {  NotifyDescriptor.OK_OPTION,
             NotifyDescriptor.CANCEL_OPTION};
@@ -543,8 +543,12 @@ private void outputMotionFilePathStateChanged(javax.swing.event.ChangeEvent evt)
         Object userInput = weightsDialog.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)!=0){
             // Uer cancelled
-            currentWeights = OrientationWeightSet.safeDownCast(saveWeights.clone());
+            currentWeights = OrientationWeightSet.safeDownCast(saveWeights);
             ikToolModel.setOrientation_weightset(currentWeights);
+        }
+        else {
+            //System.out.println(weightsPanel.getOrientationWeightSet().dump());
+            ikToolModel.setOrientation_weightset(weightsPanel.getOrientationWeightSet());
         }
     }//GEN-LAST:event_jWeightsButtonActionPerformed
 
