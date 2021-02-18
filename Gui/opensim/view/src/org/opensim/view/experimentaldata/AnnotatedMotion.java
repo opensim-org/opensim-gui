@@ -41,16 +41,15 @@ import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
-import org.opensim.modeling.Mat33;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.Quaternion;
+import org.opensim.modeling.Rotation;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Units;
 import org.opensim.modeling.Vec3;
-import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.motions.MotionDisplayer;
-import org.opensim.view.motions.MotionsDB;
 
 /**
  *
@@ -322,6 +321,10 @@ public class AnnotatedMotion extends Storage {
                     transformPointData(motionCopy, simtkTransform, startIndex);
                     transformPointData(motionCopy, simtkTransform, startIndex+3);
                 }
+                else if (dataObject.getObjectType()==ExperimentalDataItemType.OrientationData){
+                    int startIndex = dataObject.getStartIndexInFileNotIncludingTime();
+                    transformQuaternionData(motionCopy, simtkTransform, startIndex);
+                }
                 else {
                     System.out.println("bad type="+dataObject.getObjectType());
                     //throw new UnsupportedOperationException("Not yet implemented");
@@ -384,13 +387,16 @@ public class AnnotatedMotion extends Storage {
           }
       }
   }
-
+  // handle transformed quaternions
   public void saveAs(String newFile, Vec3 eulerAngles) throws FileNotFoundException, IOException {
           if (newFile.toLowerCase().endsWith(".trc"))
              saveAsTRC(newFile, eulerAngles);
           else if (newFile.toLowerCase().endsWith(".mot"))
               saveAsMot(newFile, eulerAngles);
-          else 
+          else if (newFile.toLowerCase().endsWith(".sto") && getSensorNames().size() > 0){
+              saveAsQuaternionsSto(newFile, eulerAngles);
+          }
+          else
               DialogDisplayer.getDefault().notify(
                       new NotifyDescriptor.Message("Please specify either .trc or .mot file extension"));
   }
@@ -540,5 +546,30 @@ public class AnnotatedMotion extends Storage {
 
     public void setUnits(Units units) {
         this.units = units;
+    }
+
+    private void saveAsQuaternionsSto(String newFile, Vec3 eulerAngles) {
+        Storage xformed = applyRotations(eulerAngles);
+        xformed.print(newFile);
+    }
+
+    private void transformQuaternionData(Storage motionCopy, Transform simtkTransform, int startIndex) {
+        Quaternion quat = new Quaternion();
+        for (int rowNumber=0; rowNumber<getSize(); rowNumber++){
+            StateVector row = motionCopy.getStateVector(rowNumber);
+            //if (rowNumber==0) System.out.println("Start index="+startIndex+" row size="+row.getSize());
+            for(int coord=0; coord <4; coord++) {
+                quat.set(coord, row.getData().getitem(startIndex+coord));
+            }
+            Rotation rot = new Rotation(quat);
+            Transform rotAsTransform = new Transform(rot);
+            Transform composit = simtkTransform.compose(rotAsTransform);
+            Quaternion quatO = composit.R().convertRotationToQuaternion();
+             
+            for(int coord=0; coord <4; coord++) {
+                row.getData().setitem(startIndex+coord, quatO.get(coord));
+            }
+            
+        }
     }
 }
