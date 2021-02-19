@@ -78,7 +78,7 @@ public class IMUIKToolModel extends Observable implements Observer {
      * @return the sensorData
      */
     public TimeSeriesTableQuaternion getSensorData() {
-        if (sensorData == null)
+        if (sensorData == null && sensorOrientationsFileName!="")
             sensorData = new TimeSeriesTableQuaternion(sensorOrientationsFileName);
         return sensorData;
     }
@@ -389,7 +389,7 @@ public class IMUIKToolModel extends Observable implements Observer {
    //------------------------------------------------------------------------
 
    public boolean isValid() {
-      return sensorData!=null;
+      return getSensorData()!=null;
    }
 
    //------------------------------------------------------------------------
