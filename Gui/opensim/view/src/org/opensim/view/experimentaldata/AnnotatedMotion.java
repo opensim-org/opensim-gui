@@ -42,14 +42,18 @@ import org.openide.NotifyDescriptor;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSenseUtilities;
 import org.opensim.modeling.Quaternion;
 import org.opensim.modeling.Rotation;
+import org.opensim.modeling.STOFileAdapterQuaternion;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.TimeSeriesTableQuaternion;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Units;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.motions.MotionDisplayer;
+import org.opensim.view.motions.MotionsDB;
 
 /**
  *
@@ -321,10 +325,6 @@ public class AnnotatedMotion extends Storage {
                     transformPointData(motionCopy, simtkTransform, startIndex);
                     transformPointData(motionCopy, simtkTransform, startIndex+3);
                 }
-                else if (dataObject.getObjectType()==ExperimentalDataItemType.OrientationData){
-                    int startIndex = dataObject.getStartIndexInFileNotIncludingTime();
-                    transformQuaternionData(motionCopy, simtkTransform, startIndex);
-                }
                 else {
                     System.out.println("bad type="+dataObject.getObjectType());
                     //throw new UnsupportedOperationException("Not yet implemented");
@@ -549,27 +549,14 @@ public class AnnotatedMotion extends Storage {
     }
 
     private void saveAsQuaternionsSto(String newFile, Vec3 eulerAngles) {
-        Storage xformed = applyRotations(eulerAngles);
-        xformed.print(newFile);
-    }
+        String origFile = MotionsDB.getInstance().getStorageFileName(this);
+        // Create TimeSeriesTableQuaternions from the file 
+        TimeSeriesTableQuaternion tstQ = new TimeSeriesTableQuaternion(origFile);
+        Transform simtkTransform = new Transform();
+        simtkTransform.R().setRotationToBodyFixedXYZ(eulerAngles);
 
-    private void transformQuaternionData(Storage motionCopy, Transform simtkTransform, int startIndex) {
-        Quaternion quat = new Quaternion();
-        for (int rowNumber=0; rowNumber<getSize(); rowNumber++){
-            StateVector row = motionCopy.getStateVector(rowNumber);
-            //if (rowNumber==0) System.out.println("Start index="+startIndex+" row size="+row.getSize());
-            for(int coord=0; coord <4; coord++) {
-                quat.set(coord, row.getData().getitem(startIndex+coord));
-            }
-            Rotation rot = new Rotation(quat);
-            Transform rotAsTransform = new Transform(rot);
-            Transform composit = simtkTransform.compose(rotAsTransform);
-            Quaternion quatO = composit.R().convertRotationToQuaternion();
-             
-            for(int coord=0; coord <4; coord++) {
-                row.getData().setitem(startIndex+coord, quatO.get(coord));
-            }
-            
-        }
+        OpenSenseUtilities.rotateOrientationTable(tstQ, simtkTransform.R());
+        STOFileAdapterQuaternion.write(tstQ, newFile);
+        
     }
 }
