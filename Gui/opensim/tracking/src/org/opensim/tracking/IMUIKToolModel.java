@@ -78,7 +78,7 @@ public class IMUIKToolModel extends Observable implements Observer {
      * @return the sensorData
      */
     public TimeSeriesTableQuaternion getSensorData() {
-        if (sensorData == null)
+        if (sensorData == null && sensorOrientationsFileName!="")
             sensorData = new TimeSeriesTableQuaternion(sensorOrientationsFileName);
         return sensorData;
     }
@@ -316,7 +316,9 @@ public class IMUIKToolModel extends Observable implements Observer {
        imuIkTool.set_time_range(1, timeRange[1]);
        imuIkTool.set_report_errors(reportErrors);
        // Replace OrientationWeightSet in tool with new set.
-       imuIkTool.set_orientation_weights(getOrientation_weightset());
+       imuIkTool.upd_orientation_weights().setSize(0);
+       for (int j=0; j < orientation_weightset.getSize(); j++)
+        imuIkTool.upd_orientation_weights().adoptAndAppend(orientation_weightset.get(j));
    }
 
    public void execute() {  
@@ -387,7 +389,7 @@ public class IMUIKToolModel extends Observable implements Observer {
    //------------------------------------------------------------------------
 
    public boolean isValid() {
-      return sensorData!=null;
+      return getSensorData()!=null;
    }
 
    //------------------------------------------------------------------------
