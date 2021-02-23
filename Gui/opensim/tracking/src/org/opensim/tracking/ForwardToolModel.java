@@ -330,12 +330,13 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
       if(!getInitialStatesFileName().equals(fileName)) {
          forwardTool().setStatesFileName(fileName);
          setModified(AbstractToolModel.Operation.InputDataChanged);
+         /*
          try {
             Storage s = new Storage(fileName);
             updateStatesTimeRange(s.getFirstTime(), s.getLastTime());
          } catch (IOException ex) {
              ErrorDialog.displayExceptionDialog(ex);
-         }
+         }*/
       }
    }
    public boolean getInitialStatesValid() { return true; }//(new File(getInitialStatesFileName()).exists()); }
