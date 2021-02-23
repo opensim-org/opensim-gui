@@ -16,9 +16,9 @@ import org.opensim.utils.ErrorDialog;
  * @author Ayman-NMBL
  */
 public class OrientationWeightsJPanel extends javax.swing.JPanel {
-
+    WeightsTableModel tableModel;
     class WeightsTableModel extends AbstractTableModel {
-        OrientationWeightSet owSet= null;
+        private OrientationWeightSet owSet= null;
         WeightsTableModel(OrientationWeightSet owSet){
             this.owSet = owSet;
         }
@@ -76,13 +76,20 @@ public class OrientationWeightsJPanel extends javax.swing.JPanel {
                     ErrorDialog.showMessageDialog("Weights need to be between 0 and 1");
             }
         }
+
+        /**
+         * @return the owSet
+         */
+        public OrientationWeightSet getOwSet() {
+            return owSet;
+        }
         
     }
     /**
      * Creates new form WeightsJPanel
      */
     public OrientationWeightsJPanel(OrientationWeightSet owSet) {
-        WeightsTableModel tableModel = new WeightsTableModel(owSet);
+        tableModel = new WeightsTableModel(owSet);
         initComponents();
         jWeightsTable.setModel(tableModel);
         jWeightsTable.putClientProperty("terminateEditOnFocusLost", Boolean.TRUE);
@@ -140,7 +147,9 @@ public class OrientationWeightsJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-
+    public OrientationWeightSet getOrientationWeightSet() {
+        return tableModel.getOwSet();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jWeightsTable;

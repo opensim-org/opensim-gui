@@ -58,7 +58,11 @@ public class OrientationWeightSet extends SetOientationWeights {
   }
 
   public OrientationWeightSet() {
-    this(opensimActuatorsAnalysesToolsJNI.new_OrientationWeightSet(), true);
+    this(opensimActuatorsAnalysesToolsJNI.new_OrientationWeightSet__SWIG_0(), true);
+  }
+
+  public OrientationWeightSet(OrientationWeightSet arg0) {
+    this(opensimActuatorsAnalysesToolsJNI.new_OrientationWeightSet__SWIG_1(OrientationWeightSet.getCPtr(arg0), arg0), true);
   }
 
 }
