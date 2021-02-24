@@ -41,14 +41,17 @@ import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
-import org.opensim.modeling.Mat33;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSenseUtilities;
+import org.opensim.modeling.Quaternion;
+import org.opensim.modeling.Rotation;
+import org.opensim.modeling.STOFileAdapterQuaternion;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.TimeSeriesTableQuaternion;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Units;
 import org.opensim.modeling.Vec3;
-import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.motions.MotionsDB;
 
@@ -384,13 +387,16 @@ public class AnnotatedMotion extends Storage {
           }
       }
   }
-
+  // handle transformed quaternions
   public void saveAs(String newFile, Vec3 eulerAngles) throws FileNotFoundException, IOException {
           if (newFile.toLowerCase().endsWith(".trc"))
              saveAsTRC(newFile, eulerAngles);
           else if (newFile.toLowerCase().endsWith(".mot"))
               saveAsMot(newFile, eulerAngles);
-          else 
+          else if (newFile.toLowerCase().endsWith(".sto") && getSensorNames().size() > 0){
+              saveAsQuaternionsSto(newFile, eulerAngles);
+          }
+          else
               DialogDisplayer.getDefault().notify(
                       new NotifyDescriptor.Message("Please specify either .trc or .mot file extension"));
   }
@@ -540,5 +546,17 @@ public class AnnotatedMotion extends Storage {
 
     public void setUnits(Units units) {
         this.units = units;
+    }
+
+    private void saveAsQuaternionsSto(String newFile, Vec3 eulerAngles) {
+        String origFile = MotionsDB.getInstance().getStorageFileName(this);
+        // Create TimeSeriesTableQuaternions from the file 
+        TimeSeriesTableQuaternion tstQ = new TimeSeriesTableQuaternion(origFile);
+        Transform simtkTransform = new Transform();
+        simtkTransform.R().setRotationToBodyFixedXYZ(eulerAngles);
+
+        OpenSenseUtilities.rotateOrientationTable(tstQ, simtkTransform.R());
+        STOFileAdapterQuaternion.write(tstQ, newFile);
+        
     }
 }
