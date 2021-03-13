@@ -62,6 +62,14 @@ public class ForceSet extends ModelComponentSetForces {
     return opensimSimulationJNI.ForceSet_getConcreteClassName(swigCPtr, this);
   }
 
+  public ForceSet() {
+    this(opensimSimulationJNI.new_ForceSet__SWIG_0(), true);
+  }
+
+  public ForceSet(ForceSet arg0) {
+    this(opensimSimulationJNI.new_ForceSet__SWIG_1(ForceSet.getCPtr(arg0), arg0), true);
+  }
+
   public void extendConnectToModel(Model aModel) {
     opensimSimulationJNI.ForceSet_extendConnectToModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
@@ -118,16 +126,12 @@ public class ForceSet extends ModelComponentSetForces {
     return opensimSimulationJNI.ForceSet_check(swigCPtr, this);
   }
 
-  public ForceSet() {
-    this(opensimSimulationJNI.new_ForceSet__SWIG_0(), true);
-  }
-
   public ForceSet(String file, boolean updateFromXML) throws java.io.IOException {
-    this(opensimSimulationJNI.new_ForceSet__SWIG_1(file, updateFromXML), true);
+    this(opensimSimulationJNI.new_ForceSet__SWIG_3(file, updateFromXML), true);
   }
 
   public ForceSet(String file) throws java.io.IOException {
-    this(opensimSimulationJNI.new_ForceSet__SWIG_2(file), true);
+    this(opensimSimulationJNI.new_ForceSet__SWIG_4(file), true);
   }
 
 }

@@ -77,4 +77,8 @@ public class InverseDynamicsSolver extends Solver {
     return new Vector(opensimSimulationJNI.InverseDynamicsSolver_solve__SWIG_3(swigCPtr, this, State.getCPtr(s), s, FunctionSet.getCPtr(Qs), Qs, time), true);
   }
 
+  public Vector solve(State s, FunctionSet Qs, StdVectorInt coordinatesToSpeedsIndexMap, double time) {
+    return new Vector(opensimSimulationJNI.InverseDynamicsSolver_solve__SWIG_4(swigCPtr, this, State.getCPtr(s), s, FunctionSet.getCPtr(Qs), Qs, StdVectorInt.getCPtr(coordinatesToSpeedsIndexMap), coordinatesToSpeedsIndexMap, time), true);
+  }
+
 }
