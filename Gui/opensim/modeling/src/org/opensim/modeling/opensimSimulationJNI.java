@@ -538,6 +538,7 @@ public class opensimSimulationJNI {
   public final static native long InverseDynamicsSolver_solve__SWIG_1(long jarg1, InverseDynamicsSolver jarg1_, long jarg2, State jarg2_);
   public final static native long InverseDynamicsSolver_solve__SWIG_2(long jarg1, InverseDynamicsSolver jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_, long jarg4, Vector jarg4_, long jarg5, VectorOfSpatialVec jarg5_);
   public final static native long InverseDynamicsSolver_solve__SWIG_3(long jarg1, InverseDynamicsSolver jarg1_, long jarg2, State jarg2_, long jarg3, FunctionSet jarg3_, double jarg4);
+  public final static native long InverseDynamicsSolver_solve__SWIG_4(long jarg1, InverseDynamicsSolver jarg1_, long jarg2, State jarg2_, long jarg3, FunctionSet jarg3_, long jarg4, StdVectorInt jarg4_, double jarg5);
   public final static native void delete_InverseDynamicsSolver(long jarg1);
   public final static native long MomentArmSolver_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void MomentArmSolver_assign(long jarg1, MomentArmSolver jarg1_, long jarg2, OpenSimObject jarg2_);
