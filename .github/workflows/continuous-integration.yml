@@ -36,7 +36,7 @@ jobs:
     - name: Install Netbeans
       # Make sure the NetBeans installer is not corrupted.
       run: |
-        (New-Object System.Net.WebClient).DownloadFile("https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-windows.exe", "netbeans-8.2-javase-windows.exe")
+        (New-Object System.Net.WebClient).DownloadFile("http://download.oracle.com/otn-pub/java/jdk-nb/8u111-8.2/jdk-8u111-nb-8_2-windows-x64.exe", "netbeans-8.2-javase-windows.exe")
         $expectedHash = "7b0646306a7488e617837da1517a86c08b7cf6fbe4dd9d74e8a4564b5ffde004".ToUpper()
         $hashFromFile = Get-FileHash -Algorithm SHA256 -Path .\netbeans-8.2-javase-windows.exe
         if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
@@ -194,7 +194,7 @@ jobs:
         export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
         echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
         echo $JAVA_HOME
-        wget https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
+        wget http://download.oracle.com/otn-pub/java/jdk-nb/8u111-8.2/jdk-8u111-nb-8_2-macosx-x64.dmg
         hdiutil attach netbeans-8.2-javase-macosx.dmg
         sudo installer -pkg /Volumes/NetBeans\ 8.2/NetBeans\ 8.2.pkg -target /
         sudo -k
