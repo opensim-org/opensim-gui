@@ -195,7 +195,7 @@ jobs:
         echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
         echo $JAVA_HOME
         wget https://sourceforge.net/projects/myosin/files/netbeans82/netbeans-8.2-macosx.dmg
-        # hdiutil attach netbeans-8.2-javase-macosx.dmg
+        hdiutil attach netbeans-8.2-javase-macosx.dmg
         sudo installer -pkg NetBeans\ 8.2.pkg -target /
         sudo -k
 
