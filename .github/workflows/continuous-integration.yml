@@ -36,11 +36,12 @@ jobs:
     - name: Install Netbeans
       # Make sure the NetBeans installer is not corrupted.
       run: |
-        (New-Object System.Net.WebClient).DownloadFile("http://download.oracle.com/otn-pub/java/jdk-nb/8u111-8.2/jdk-8u111-nb-8_2-windows-x64.exe", "jdk-8u111-nb-8_2-windows-x64.exe")
+        (New-Object System.Net.WebClient).
+        DownloadFile("https://sourceforge.net/projects/myosin/files/netbeans82/netbeans-8.2-windows.exe", "netbeans-8.2-windows.exe")
         # $expectedHash = "7b0646306a7488e617837da1517a86c08b7cf6fbe4dd9d74e8a4564b5ffde004".ToUpper()
         # $hashFromFile = Get-FileHash -Algorithm SHA256 -Path .\jdk-8u111-nb-8_2-windows-x64.exe
         # if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
-        .\netbeans-8.2-javase-windows.exe --silent | Out-Null # This installer is gregarious.
+        .\netbeans-8.2-windows.exe --silent | Out-Null # This installer is gregarious.
         echo "ANT_HOME=C:\\Program Files\\NetBeans 8.2\\extide\\ant" >> $GITHUB_ENV
         # echo "::set-env name=ANT_HOME:C:\\Program Files\\NetBeans 8.2\\extide\\ant"
       
@@ -194,8 +195,8 @@ jobs:
         export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
         echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
         echo $JAVA_HOME
-        wget http://download.oracle.com/otn-pub/java/jdk-nb/8u111-8.2/jdk-8u111-nb-8_2-macosx-x64.dmg
-        hdiutil attach netbeans-8.2-javase-macosx.dmg
+        wget https://sourceforge.net/projects/myosin/files/netbeans82/netbeans-8.2-macosx.dmg
+        hdiutil attach netbeans-8.2-macosx.dmg
         sudo installer -pkg /Volumes/NetBeans\ 8.2/NetBeans\ 8.2.pkg -target /
         sudo -k
 
