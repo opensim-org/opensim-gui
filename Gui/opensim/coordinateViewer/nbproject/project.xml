@@ -11,8 +11,7 @@
                     <build-prerequisite/>
                     <compile-dependency/>
                     <run-dependency>
-                        <release-version>1</release-version>
-                        <specification-version>1.3.23</specification-version>
+                        <specification-version>1.0</specification-version>
                     </run-dependency>
                 </dependency>
                 <dependency>
@@ -91,6 +90,10 @@
             <public-packages>
                 <package>org.opensim.coordinateviewer</package>
             </public-packages>
+            <class-path-extension>
+                <runtime-relative-path>ext/swing-layout-1.0.3.jar</runtime-relative-path>
+                <binary-origin>release/modules/ext/swing-layout-1.0.3.jar</binary-origin>
+            </class-path-extension>
         </data>
     </configuration>
 </project>

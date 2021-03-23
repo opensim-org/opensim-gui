@@ -25,11 +25,7 @@ package org.opensim.view.actions;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.prefs.BackingStoreException;
-import javax.help.CSH;
-import javax.help.CSH.DisplayHelpFromSource;
 import javax.swing.JButton;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
@@ -38,7 +34,6 @@ import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
 import org.opensim.utils.BrowserLauncher;
-import org.opensim.utils.TheApp;
 
 public final class EditPreferencesAction extends CallableSystemAction {
 
