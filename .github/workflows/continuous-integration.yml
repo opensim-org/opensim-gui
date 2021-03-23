@@ -36,13 +36,12 @@ jobs:
     - name: Install Netbeans
       # Make sure the NetBeans installer is not corrupted.
       run: |
-        (New-Object System.Net.WebClient).
-        DownloadFile("https://sourceforge.net/projects/myosin/files/netbeans82/netbeans-8.2-windows.exe", "netbeans-8.2-windows.exe")
-        # $expectedHash = "7b0646306a7488e617837da1517a86c08b7cf6fbe4dd9d74e8a4564b5ffde004".ToUpper()
-        # $hashFromFile = Get-FileHash -Algorithm SHA256 -Path .\jdk-8u111-nb-8_2-windows-x64.exe
-        # if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
-        .\netbeans-8.2-windows.exe --silent | Out-Null # This installer is gregarious.
-        echo "ANT_HOME=C:\\Program Files\\NetBeans 8.2\\extide\\ant" >> $GITHUB_ENV
+        (New-Object System.Net.WebClient).DownloadFile("https://www.apache.org/dyn/closer.cgi/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-windows-x64.exe", "Apache-NetBeans-12.3-bin-windows-x64.exe")
+        $expectedHash = "0695d87d9c72dcf3738672ba83eb273dda02066fa5eee80896cb6ccf79175840367a13d22ab3cb9838dffaa9a219dd1f73aee0e27c085e5310da2e3bbbc92b2c".ToUpper()
+        $hashFromFile = Get-FileHash -Algorithm SHA512 -Path .\Apache-NetBeans-12.3-bin-windows-x64.exe
+        if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
+        .\netbeans-8.2-javase-windows.exe --silent | Out-Null # This installer is gregarious.
+        echo "ANT_HOME=C:\\Program Files\\NetBeans-12.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
         # echo "::set-env name=ANT_HOME:C:\\Program Files\\NetBeans 8.2\\extide\\ant"
       
     - name: Checkout opensim-core master
@@ -195,8 +194,8 @@ jobs:
         export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
         echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
         echo $JAVA_HOME
-        wget https://sourceforge.net/projects/myosin/files/netbeans82/netbeans-8.2-macosx.dmg
-        hdiutil attach netbeans-8.2-macosx.dmg
+        wget https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
+        hdiutil attach netbeans-8.2-javase-macosx.dmg
         sudo installer -pkg /Volumes/NetBeans\ 8.2/NetBeans\ 8.2.pkg -target /
         sudo -k
 
