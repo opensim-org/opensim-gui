@@ -33,14 +33,14 @@ jobs:
       with:
         java-version: 1.8
 
-    - name: Install Netbeans
+    - name: Install Netbeans 12.3
       # Make sure the NetBeans installer is not corrupted.
       run: |
         (New-Object System.Net.WebClient).DownloadFile("https://downloads.apache.org/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-windows-x64.exe", "Apache-NetBeans-12.3-bin-windows-x64.exe")
         $expectedHash = "0695d87d9c72dcf3738672ba83eb273dda02066fa5eee80896cb6ccf79175840367a13d22ab3cb9838dffaa9a219dd1f73aee0e27c085e5310da2e3bbbc92b2c".ToUpper()
         $hashFromFile = Get-FileHash -Algorithm SHA512 -Path .\Apache-NetBeans-12.3-bin-windows-x64.exe
         if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
-        .\netbeans-8.2-javase-windows.exe --silent | Out-Null # This installer is gregarious.
+        .\Apache-NetBeans-12.3-bin-windows-x64.exe --silent | Out-Null # This installer is gregarious.
         echo "ANT_HOME=C:\\Program Files\\NetBeans-12.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
         # echo "::set-env name=ANT_HOME:C:\\Program Files\\NetBeans 8.2\\extide\\ant"
       
