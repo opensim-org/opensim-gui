@@ -196,7 +196,7 @@ jobs:
         echo $JAVA_HOME
         wget https://downloads.apache.org/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-macosx.dmg
         hdiutil attach Apache-NetBeans-12.3-bin-macosx.dmg
-        sudo installer -pkg /Volumes/NetBeans\ 12.3/NetBeans\ 12.3.pkg -target /
+        sudo installer -pkg /Volumes/Apache\ NetBeans\ 12.3/NetBeans\ 12.3.pkg -target /
         sudo -k
 
     - name: Cache opensim-core-dependencies
