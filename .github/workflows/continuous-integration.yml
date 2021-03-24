@@ -140,7 +140,7 @@ jobs:
   mac:
     name: Mac
 
-    runs-on: macOS-latest
+    runs-on: self-hosted
 
     steps:
     - name: Checkout opensim-gui
