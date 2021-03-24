@@ -16,10 +16,16 @@ INSTALL(DIRECTORY opensim/dist/opensim/opensim/etc/ DESTINATION etc)
 INSTALL(DIRECTORY opensim/Scripts/ DESTINATION Scripts/GUI_Scripting PATTERN ".svn" EXCLUDE)
 
 # remaining folders
-INSTALL(DIRECTORY opensim/dist/opensim/opensim/ide/ DESTINATION ide)
-INSTALL(DIRECTORY opensim/dist/opensim/opensim/platform/ DESTINATION platform)
-INSTALL(DIRECTORY opensim/dist/opensim/opensim/opensim/ DESTINATION opensim)
-
+if (WIN32)
+   INSTALL(DIRECTORY opensim/dist/opensim/opensim/ide/ DESTINATION ide)
+   INSTALL(DIRECTORY opensim/dist/opensim/opensim/platform/ DESTINATION platform)
+   INSTALL(DIRECTORY opensim/dist/opensim/opensim/opensim/ DESTINATION opensim)
+endif()
+if (APPLE)
+   INSTALL(DIRECTORY opensim/dist/opensim.app/Contents/Resources/opensim/ide/ DESTINATION ide)
+   INSTALL(DIRECTORY opensim/dist/opensim.app/Contents/Resources/opensim/platform/ DESTINATION platform)
+   INSTALL(DIRECTORY opensim/dist/opensim.app/Contents/Resources/opensim/opensim/ DESTINATION opensim)
+endif()
 # This to be replaced with a CMake Variable
 FILE(GLOB VTK_LIBS ${VTK_LIB_DIR}/*.dll)
 INSTALL_FILES(/bin/ FILES  ${VTK_LIBS})
