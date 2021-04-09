@@ -331,9 +331,9 @@
                 includes="**/jxbrowser-*mac*.jar"/>
             <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
                 includes="**/jxbrowser-*win*.jar"/>
-            <fileset file="${opensim.dist.dir}/bin/OpenSim.exe"/>
+            <fileset file="${opensim.dist.dir}/bin/opensim.exe"/>
             <fileset file="${opensim.dist.dir}/bin/OpenSim64.exe"/>
-            <fileset file="dist/OpenSim.zip"/>
+            <fileset file="dist/opensim.zip"/>
         </delete>
 
         <!-- Copy the OpenSim API. -->
@@ -383,7 +383,7 @@
             defaultexcludes="yes"
             longfile="posix"
             compression="gzip">
-            <tarfileset dir="${opensim.dist.dir}" filemode="755" prefix="OpenSim">
+            <tarfileset dir="${opensim.dist.dir}" filemode="755" prefix="opensim">
                 <include name="bin/**" />
                 <include name="opensim.desktop" />
                 <include name="sdk/Simbody/libexec/simbody/simbody-visualizer" />
