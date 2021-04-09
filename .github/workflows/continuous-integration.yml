@@ -366,7 +366,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans-12.3;-Dnbplatform.default.harness.dir=$HOME/netbeans-12.3/harness"
+        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans-12.3/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans-12.3/netbeans/harness"
         make CopyOpenSimCore
         make PrepareInstaller
         # Read the value of the cache variable storing the GUI build version.
