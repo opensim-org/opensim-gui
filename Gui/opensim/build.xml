@@ -319,9 +319,9 @@
         </exec>
 
     </target>
-    <target name="build-linux" depends="unzip-distro,copy-visualizer,copy-models">
+    <target name="build-linux" depends="copy-visualizer,copy-models">
         <!-- <echoproperties/> -->
-
+        <unzip src="dist/opensim.zip" dest="dist/installer" />
         <copy todir="${opensim.dist.dir}/Resources/Code/GUI">
             <fileset dir="Scripts" />
         </copy>
