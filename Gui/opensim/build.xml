@@ -32,7 +32,7 @@
     <condition property="opensim.dist.dir" value="dist/OpenSim.app/Contents/Resources/OpenSim">
         <os family="mac"/>
     </condition>
-    <condition property="opensim.dist.dir" value="dist/installer/OpenSim">
+    <condition property="opensim.dist.dir" value="dist/installer/opensim">
         <and>
             <os family="unix"/>
             <not>
@@ -319,21 +319,21 @@
         </exec>
 
     </target>
-    <target name="build-linux" depends="unzip-distro,copy-visualizer,copy-models">
+    <target name="build-linux" depends="build-zip,copy-visualizer,copy-models">
         <!-- <echoproperties/> -->
-
+        <unzip src="dist/opensim.zip" dest="dist/installer" />
         <copy todir="${opensim.dist.dir}/Resources/Code/GUI">
             <fileset dir="Scripts" />
         </copy>
 
         <delete>
-            <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
+            <fileset dir="${opensim.dist.dir}/opensim/modules/ext"
                 includes="**/jxbrowser-*mac*.jar"/>
-            <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
+            <fileset dir="${opensim.dist.dir}/opensim/modules/ext"
                 includes="**/jxbrowser-*win*.jar"/>
-            <fileset file="${opensim.dist.dir}/bin/OpenSim.exe"/>
-            <fileset file="${opensim.dist.dir}/bin/OpenSim64.exe"/>
-            <fileset file="dist/OpenSim.zip"/>
+            <fileset file="${opensim.dist.dir}/bin/opensim.exe"/>
+            <fileset file="${opensim.dist.dir}/bin/opensim64.exe"/>
+            <fileset file="dist/opensim.zip"/>
         </delete>
 
         <!-- Copy the OpenSim API. -->
@@ -354,7 +354,7 @@
         <zip basedir="${opensim.dist.dir}/Resources/" destfile="${opensim.dist.dir}/Resources.zip" />
         <delete dir="${opensim.dist.dir}/Resources"/>
 
-        <replace file="${opensim.dist.dir}/etc/OpenSim.conf" value="${app.version}">
+        <replace file="${opensim.dist.dir}/etc/opensim.conf" value="${app.version}">
             <replacefilter token="@VERSION@" />
         </replace>
 
@@ -383,7 +383,7 @@
             defaultexcludes="yes"
             longfile="posix"
             compression="gzip">
-            <tarfileset dir="${opensim.dist.dir}" filemode="755" prefix="OpenSim">
+            <tarfileset dir="${opensim.dist.dir}" filemode="755" prefix="opensim">
                 <include name="bin/**" />
                 <include name="opensim.desktop" />
                 <include name="sdk/Simbody/libexec/simbody/simbody-visualizer" />
