@@ -375,7 +375,7 @@ jobs:
       run: |
         mkdir build_core
         cd build_core
-        cmake ../opensim-core -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core-install -DOPENSIM_INSTALL_UNIX_FHS=OFF
+        cmake ../opensim-core -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core-install -DOPENSIM_INSTALL_UNIX_FHS=OFF -DSWIG_EXECUTABLE=~/swig/share/swig
         cmake . -LAH
         cmake --build . --config Release 
         cmake --install .
