@@ -4,6 +4,10 @@ GitHub issues or pull requests that
 are related to the items below. If there is no issue or pull
 request related to the change, then we may provide the commit.
 
+v4.3
+====
+- Upgrade application to be based on the latest NetBeans platorm included with Apache NetBeans 12.3, from disconinued netbeans 8.2. The upgrade supports high DPI monitors.
+
 v4.2
 ====
 - Merge PR [#1181](https://github.com/opensim-org/opensim-gui/pull/1181): Add build support for Linux (beta)
