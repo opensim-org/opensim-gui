@@ -69,8 +69,8 @@ public class OpenSenseUtilities {
    *  <br>
    * Create Orientations as a TimeSeriesTable based on passed in markerFile
    */
-  public static SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__Quaternion_T_SimTK__Real_t_t createOrientationsFileFromMarkers(String markersFile) {
-    return new SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__Quaternion_T_SimTK__Real_t_t(opensimSimulationJNI.OpenSenseUtilities_createOrientationsFileFromMarkers(markersFile), true);
+  public static TimeSeriesTableQuaternion createOrientationsFileFromMarkers(String markersFile) {
+    return new TimeSeriesTableQuaternion(opensimSimulationJNI.OpenSenseUtilities_createOrientationsFileFromMarkers(markersFile), true);
   }
 
   /**
@@ -78,6 +78,16 @@ public class OpenSenseUtilities {
    */
   public static Transform formTransformFromPoints(Vec3 op, Vec3 xp, Vec3 yp) {
     return new Transform(opensimSimulationJNI.OpenSenseUtilities_formTransformFromPoints(Vec3.getCPtr(op), op, Vec3.getCPtr(xp), xp, Vec3.getCPtr(yp), yp), true);
+  }
+
+  /**
+   *  Add IMUs to passed in model and return references to them<br>
+   *  based on paths specification. <br>
+   *  - If "paths" refer to user specified list of frames, then one new <br>
+   *      "{Frame}_imu" is added to the model and returned in result.
+   */
+  public static StdVectorIMUs addModelIMUs(Model model, StdVectorString paths) {
+    return new StdVectorIMUs(opensimSimulationJNI.OpenSenseUtilities_addModelIMUs(Model.getCPtr(model), model, StdVectorString.getCPtr(paths), paths), true);
   }
 
   public OpenSenseUtilities() {
