@@ -55,6 +55,7 @@ public class OneComponentNode extends OpenSimObjectNode {
         setShortDescription(comp.getAbsolutePathString());
     }
 
+    @Override
     public Action[] getActions(boolean b) {
         return super.getActions(b);
     }
@@ -63,7 +64,7 @@ public class OneComponentNode extends OpenSimObjectNode {
     public Sheet createSheet() {
         Sheet parentSheet =  super.createSheet(); 
         if (comp.getNumSockets()>0){
-            Sheet.Set socketsSheet = parentSheet.createExpertSet();
+            Sheet.Set socketsSheet = Sheet.createExpertSet();
             socketsSheet.setDisplayName("Sockets");
             parentSheet.put(socketsSheet);
             StdVectorString cNames = comp.getSocketNames();
