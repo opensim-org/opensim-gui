@@ -220,6 +220,30 @@ public class opensimSimulation {
   }
 
   /**
+   *  Calculate "synthetic" acceleration signals equivalent to signals recorded<br>
+   *  from inertial measurement units (IMUs). First, this utility computes the<br>
+   *  linear acceleration for each frame included in 'framePaths' using Frame's<br>
+   *  'linear_acceleration' Output. Then, to mimic acceleration signals measured<br>
+   *  from IMUs, the model's gravitational acceleration vector is subtracted from<br>
+   *  the linear accelerations and the resulting accelerations are re-expressed in<br>
+   *  the bases of the associated Frame%s.<br>
+   * <br>
+   *  Note: The linear acceleration Output%s are computed using the analyze()<br>
+   *  simulation utility, and therefore the 'statesTable' and 'controlsTable'<br>
+   *  arguments must contain the same time points and we assume that the states<br>
+   *  obey any kinematic constraints in the Model.<br>
+   * <br>
+   *  Note: The passed in model must have the correct mass and inertia properties<br>
+   *  included, since computing accelerations requires realizing to<br>
+   *  SimTK::Stage::Acceleration which depends on SimTK::Stage::Dynamics.<br>
+   * <br>
+   *  
+   */
+  public static TimeSeriesTableVec3 createSyntheticIMUAccelerationSignals(Model model, TimeSeriesTable statesTable, TimeSeriesTable controlsTable, StdVectorString framePaths) {
+    return new TimeSeriesTableVec3(opensimSimulationJNI.createSyntheticIMUAccelerationSignals(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(framePaths), framePaths), true);
+  }
+
+  /**
    *  Calculate the requested outputs using the model in the problem and the<br>
    *  provided states and controls tables<br>
    *  The controls table is used to set the model's controls vector.<br>
