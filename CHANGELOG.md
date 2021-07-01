@@ -7,6 +7,8 @@ request related to the change, then we may provide the commit.
 v4.3
 ====
 - Upgrade application to be based on the latest NetBeans platorm included with Apache NetBeans 12.3, from disconinued netbeans 8.2. The upgrade supports high DPI monitors.
+- Upgrade Java bindings to use SWIG 4.0 and carry doxygen to java files
+- Support display of Other components in the naviagtor view, including IMUs.
 
 v4.2
 ====
