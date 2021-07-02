@@ -6995,9 +6995,8 @@ public class opensimSimulationJNI {
   public final static native String IMU_getClassName();
   public final static native long IMU_clone(long jarg1, IMU jarg1_);
   public final static native String IMU_getConcreteClassName(long jarg1, IMU jarg1_);
-  public final static native long new_IMU__SWIG_0();
+  public final static native long new_IMU();
   public final static native void delete_IMU(long jarg1);
-  public final static native long new_IMU__SWIG_1(long jarg1, IMU jarg1_);
   public final static native void IMU_PropertyIndex_socket_frame_set(long jarg1, IMU jarg1_, long jarg2);
   public final static native long IMU_PropertyIndex_socket_frame_get(long jarg1, IMU jarg1_);
   public final static native void IMU_connectSocket_frame(long jarg1, IMU jarg1_, long jarg2, OpenSimObject jarg2_);

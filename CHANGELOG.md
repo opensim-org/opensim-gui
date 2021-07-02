@@ -7,6 +7,10 @@ request related to the change, then we may provide the commit.
 v4.3
 ====
 - Upgrade application to be based on the latest NetBeans platorm included with Apache NetBeans 12.3, from disconinued netbeans 8.2. The upgrade supports high DPI monitors.
+- IMUs on a model are now shown under the Other Components node in the navigator where they can be selected, shown/hidden. 
+- Tools that use Analyses (e.g. Analyze, ...) now have a new option for IMUDataReporter where Output signals are reported for IMUs on the model, or can be reported for user specified Frames.
+- Upgrade Java bindings to use SWIG 4.0.2 and carry doxygen to java files as javadoc comments
+- Support display of Other components in the naviagtor view, including IMUs.
 
 v4.2
 ====
