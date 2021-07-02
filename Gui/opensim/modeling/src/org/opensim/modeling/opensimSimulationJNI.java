@@ -6995,7 +6995,9 @@ public class opensimSimulationJNI {
   public final static native String IMU_getClassName();
   public final static native long IMU_clone(long jarg1, IMU jarg1_);
   public final static native String IMU_getConcreteClassName(long jarg1, IMU jarg1_);
-  public final static native long new_IMU();
+  public final static native long new_IMU__SWIG_0();
+  public final static native void delete_IMU(long jarg1);
+  public final static native long new_IMU__SWIG_1(long jarg1, IMU jarg1_);
   public final static native void IMU_PropertyIndex_socket_frame_set(long jarg1, IMU jarg1_, long jarg2);
   public final static native long IMU_PropertyIndex_socket_frame_get(long jarg1, IMU jarg1_);
   public final static native void IMU_connectSocket_frame(long jarg1, IMU jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -7010,7 +7012,6 @@ public class opensimSimulationJNI {
   public final static native long IMU_calcGyroscopeSignal(long jarg1, IMU jarg1_, long jarg2, State jarg2_);
   public final static native long IMU_calcAccelerometerSignal(long jarg1, IMU jarg1_, long jarg2, State jarg2_);
   public final static native void IMU_generateDecorations(long jarg1, IMU jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
-  public final static native void delete_IMU(long jarg1);
   public final static native void OpenSenseUtilities_rotateOrientationTable(long jarg1, TimeSeriesTableQuaternion jarg1_, long jarg2, Rotation jarg2_);
   public final static native long OpenSenseUtilities_convertQuaternionsToRotations(long jarg1, TimeSeriesTableQuaternion jarg1_);
   public final static native long OpenSenseUtilities_computeHeadingCorrection(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, TimeSeriesTableQuaternion jarg3_, String jarg4, long jarg5, CoordinateDirection jarg5_);

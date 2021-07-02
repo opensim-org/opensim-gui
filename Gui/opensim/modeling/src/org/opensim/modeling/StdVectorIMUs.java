@@ -127,17 +127,17 @@ public class StdVectorIMUs extends java.util.AbstractList<IMU> implements java.u
 
   private IMU doRemove(int index) {
     long cPtr = opensimSimulationJNI.StdVectorIMUs_doRemove(swigCPtr, this, index);
-    return (cPtr == 0) ? null : new IMU(cPtr, true);
+    return (cPtr == 0) ? null : new IMU(cPtr, false);
   }
 
   private IMU doGet(int index) {
     long cPtr = opensimSimulationJNI.StdVectorIMUs_doGet(swigCPtr, this, index);
-    return (cPtr == 0) ? null : new IMU(cPtr, true);
+    return (cPtr == 0) ? null : new IMU(cPtr, false);
   }
 
   private IMU doSet(int index, IMU val) {
     long cPtr = opensimSimulationJNI.StdVectorIMUs_doSet(swigCPtr, this, index, IMU.getCPtr(val), val);
-    return (cPtr == 0) ? null : new IMU(cPtr, true);
+    return (cPtr == 0) ? null : new IMU(cPtr, false);
   }
 
   private void doRemoveRange(int fromIndex, int toIndex) {
