@@ -9,7 +9,7 @@
 package org.opensim.modeling;
 
 /**
- *  A goal is term in the cost functional to be minimized, or a set of endpoint<br>
+ *  A goal is a term in the cost functional to be minimized, or a set of endpoint<br>
  * constraints that must lie within provided bounds. Goals depend on the<br>
  * phase's initial and final states and controls, and optionally on the<br>
  * integral of a quantity over the phase.<br>
@@ -43,6 +43,13 @@ package org.opensim.modeling;
  * - SimTK::Stage::Acceleration: state, initial_state, and final_state can be<br>
  *     used to compute acceleration-dependent quantities, such as body<br>
  *     accelerations and joint reactions.<br>
+ * <br>
+ * ## Scale factors<br>
+ * Goals may include an option to add scale factors to the MocoProblem using<br>
+ * `appendScaleFactor()`, which takes a MocoScaleFactor object for its argument.<br>
+ * A copy of this component is added to the Model internal to MocoProblemRep and<br>
+ * its property value is optimized via a MocoParameter. Scale factor usage is<br>
+ * specific to each MocoGoal (if used at all).<br>
  * <br>
  * <p alt="For developers"><br>
  * Every time the problem is solved, a copy of this goal is used. An individual<br>
@@ -103,7 +110,7 @@ public class MocoGoal extends OpenSimObject {
   }
 
   /**
-   *  %Set whether this goal is used in the problem.
+   *  Set whether this goal is used in the problem.
    */
   public void setEnabled(boolean enabled) {
     opensimMocoJNI.MocoGoal_setEnabled(swigCPtr, this, enabled);
@@ -219,6 +226,15 @@ public class MocoGoal extends OpenSimObject {
    */
   public void initializeOnModel(Model model) {
     opensimMocoJNI.MocoGoal_initializeOnModel(swigCPtr, this, Model.getCPtr(model), model);
+  }
+
+  /**
+   *  Get a vector of the MocoScaleFactors added to this MocoGoal.<br>
+   *  Note: the return value is constructed fresh on every call from<br>
+   *  the internal property. Avoid repeated calls to this function.
+   */
+  public SWIGTYPE_p_std__vectorT_OpenSim__MocoScaleFactor_t getScaleFactors() {
+    return new SWIGTYPE_p_std__vectorT_OpenSim__MocoScaleFactor_t(opensimMocoJNI.MocoGoal_getScaleFactors(swigCPtr, this), true);
   }
 
   /**
