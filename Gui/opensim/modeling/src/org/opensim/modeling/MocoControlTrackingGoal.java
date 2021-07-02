@@ -61,6 +61,31 @@ package org.opensim.modeling;
  * other file types for which there is a FileAdapter), or programmatically<br>
  * as a TimeSeriesTable.<br>
  * <br>
+ * ### Scale factors<br>
+ * <br>
+ * Use `addScaleFactor()` to add a MocoParameter to the MocoProblem that will<br>
+ * scale the tracking reference data associated with a control in the tracking cost.<br>
+ * Scale factors for this goal can be useful if the magnitude of the tracking<br>
+ * reference data is either unknown or unreliable (e.g., electromyography data).<br>
+ * Scale factors are applied to the tracking error calculations based on the<br>
+ * following equation:<br>
+ * <br>
+ *     error = modelValue - scaleFactor * referenceValue<br>
+ * <br>
+ * In other words, scale factors are applied when computing the tracking error for<br>
+ * each control, not to the reference data directly. Therefore, if a column in the<br>
+ * reference data is tracked by two different controls, the scale factor will only<br>
+ * scale the column for the associated control. The tracking error for the other<br>
+ * control is unaffected.<br>
+ * <br>
+ * Adding a scale factor to a MocoControlTrackingGoal.<br>
+ * {@code 
+auto* controlTrackingGoal = problem.addGoal<MocoControlTrackingGoal>();
+...
+controlTrackingGoal->addScaleFactor(
+        'soleus_scale_factor', '/forceset/soleus_r', {0.01, 1.0});
+}<br>
+ * <br>
  * ### Helpful tips<br>
  * <br>
  * Tracking problems in direct collocation perform best when tracking smooth<br>
@@ -95,6 +120,11 @@ public class MocoControlTrackingGoal extends MocoGoal {
     }
     super.delete();
   }
+
+    public void addScaleFactor(String name, String control, double[] b)
+            throws Exception {
+            addScaleFactor(name, control, MocoPhase.convertArrayToMB(b));
+    }
 
   public static MocoControlTrackingGoal safeDownCast(OpenSimObject obj) {
     long cPtr = opensimMocoJNI.MocoControlTrackingGoal_safeDownCast(OpenSimObject.getCPtr(obj), obj);
@@ -213,6 +243,23 @@ public class MocoControlTrackingGoal extends MocoGoal {
 
   public boolean getAllowUnusedReferences() {
     return opensimMocoJNI.MocoControlTrackingGoal_getAllowUnusedReferences(swigCPtr, this);
+  }
+
+  /**
+   *  Add a MocoParameter to the problem that will scale the tracking reference<br>
+   *  data associated with the specified control. Scale factors are applied<br>
+   *  to the tracking error calculations based on the following equation:<br>
+   * <br>
+   *      error = modelValue - scaleFactor * referenceValue<br>
+   * <br>
+   *  In other words, the scale factor is applied when computing the tracking<br>
+   *  error for each control, not to the reference data directly. Therefore, if<br>
+   *  a column in the reference data is tracked by two different controls, the<br>
+   *  scale factor will only scale the column for the associated control. The<br>
+   *  tracking error for the other control is unaffected.
+   */
+  public void addScaleFactor(String name, String control, MocoBounds bounds) {
+    opensimMocoJNI.MocoControlTrackingGoal_addScaleFactor(swigCPtr, this, name, control, MocoBounds.getCPtr(bounds), bounds);
   }
 
 }

@@ -66,7 +66,11 @@ public class IMU extends ModelComponent {
   }
 
   public IMU() {
-    this(opensimSimulationJNI.new_IMU(), true);
+    this(opensimSimulationJNI.new_IMU__SWIG_0(), true);
+  }
+
+  public IMU(IMU arg0) {
+    this(opensimSimulationJNI.new_IMU__SWIG_1(IMU.getCPtr(arg0), arg0), true);
   }
 
   public void setPropertyIndex_socket_frame(SWIGTYPE_p_PropertyIndex value) {

@@ -512,7 +512,8 @@ public class Coordinate extends ModelComponent {
 
   /**
    *  set the range with a double array of length 2 in order of<br>
-   *         minimum and maximum coordinate values 
+   *         minimum and maximum coordinate values (`setRange()` is not<br>
+   *         wrapped; use `setRangeMin()` and `setRangeMax()` instead) 
    */
   public void setRange(double[] aRange) {
     opensimSimulationJNI.Coordinate_setRange(swigCPtr, this, aRange);
