@@ -78,6 +78,11 @@ public class Installer extends ModuleInstall {
         super.restored();
         try {
              // Put your startup code here.
+
+            // Fix Slider value always shown on GTK
+            // https://bugs.openjdk.java.net/browse/JDK-6350767
+            UIManager.put("Slider.paintValue", false);
+
             UIManager.setLookAndFeel( UIManager.getSystemLookAndFeelClassName() );
             if (System.getProperty("os.name").toLowerCase().indexOf("win") >= 0) {
                 // The native slider on macOS looks somewhat nice.
