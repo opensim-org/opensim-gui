@@ -9,12 +9,13 @@
 package org.opensim.modeling;
 
 /**
- *  A contact group consists of the name of a single ExternalForce and a list of<br>
+ * <br>
+ * A contact group consists of the name of a single ExternalForce and a list of<br>
  * contact force component paths in the model. The MocoContactTrackingGoal<br>
  * calculates the difference between the data from the ExternalForce and the sum of<br>
  * the forces from the contact force components.<br>
  * <br>
- * ### Alternative frame paths<br>
+ * ## Alternative frame paths<br>
  * <br>
  * Contact force elements that correspond to a single ExternalForce are<br>
  * typically attached to the same single body/frame. However, it is possible<br>

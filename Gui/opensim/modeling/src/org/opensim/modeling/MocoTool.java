@@ -11,7 +11,8 @@ package org.opensim.modeling;
 /**
  *  This is a base class for solving problems that depend on an observed motion<br>
  * using Moco's optimal control methods.<br>
- * <br>
+ * MocoTool Properties<br>
+ * ===================<br>
  * Mesh interval<br>
  * -------------<br>
  * A smaller mesh interval increases the convergence time, but is necessary<br>

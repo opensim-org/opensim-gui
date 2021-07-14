@@ -9,8 +9,7 @@
 package org.opensim.modeling;
 
 /**
- * MocoTrack<br>
- * ---------<br>
+ * <br>
  * This tool constructs problems in which state and/or marker trajectory data<br>
  * are tracked while solving for model kinematics and actuator controls.<br>
  * "Tracking" refers to cost terms that minimize the error between provided<br>

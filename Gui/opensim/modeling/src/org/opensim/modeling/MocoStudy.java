@@ -16,7 +16,7 @@ package org.opensim.modeling;
  * solving the problem.<br>
  * <br>
  * Workflow<br>
- * --------<br>
+ * ========<br>
  * When building a MocoStudy programmatically (e.g., in C++), the workflow is<br>
  * as follows:<br>
  * <br>

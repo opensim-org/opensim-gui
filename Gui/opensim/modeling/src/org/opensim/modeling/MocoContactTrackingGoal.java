@@ -9,7 +9,8 @@
 package org.opensim.modeling;
 
 /**
- *  Minimize the error between compliant contact force elements in the model and<br>
+ * <br>
+ * Minimize the error between compliant contact force elements in the model and<br>
  * experimentally measured contact forces.<br>
  * <br>
  * This class handles multiple groups of contact forces and a single<br>
@@ -42,7 +43,7 @@ package org.opensim.modeling;
  * -   \vec{F}_{e,j}  the experimental contact force for group   j ,<br>
  *     expressed in ground.<br>
  * <br>
- * ### Tracking a subset of force components<br>
+ * # Tracking a subset of force components<br>
  * <br>
  * The projection is useful for selecting which components of the force to<br>
  * track. The force can be projected to be onto a vector or<br>
@@ -52,7 +53,7 @@ package org.opensim.modeling;
  * ignoring the transverse force. See the projection and projection_vector<br>
  * properties.<br>
  * <br>
- * ### Usage<br>
+ * ## Usage<br>
  * <br>
  * To use this goal, specify the following:<br>
  * - a single ExternalLoads file or object, which is a set of ExternalForces.<br>
@@ -92,6 +93,30 @@ package org.opensim.modeling;
  * ExternalLoads *only* for computing the force error, not for applying forces<br>
  * to the model.<br>
  * <br>
+ * ### Scale factors<br>
+ * <br>
+ * Add a MocoParameter to the problem that will scale the tracking reference<br>
+ * data associated with a contact force group. Scale factors are applied<br>
+ * to the tracking error calculations based on the following equation:<br>
+ * <br>
+ *      error = modelValue - scaleFactor * referenceValue<br>
+ * <br>
+ * In other words, the scale factor is applied when computing the tracking<br>
+ * error for each contact force group, not to the reference data directly.<br>
+ * You must specify both the external force name associated with the contact<br>
+ * force group and the index corresponding to the direction (i.e., X = 0,<br>
+ * Y = 1, Z = 2) of the scaled force value. The direction is applied in<br>
+ * whatever frame the reference data is expressed in based on the provided<br>
+ * ExternalLoads in each contact group.<br>
+ * <br>
+ * Adding a scale factor to a MocoContactTrackingGoal.<br>
+ * {@code 
+auto* markerTrackingGoal = problem.addGoal<MocoContactTrackingGoal>();
+...
+markerTrackingGoal->addScaleFactor(
+        'RightGRF_vertical_scale_factor', 'Right_GRF', 1, {0.5, 2.0});
+}<br>
+ * <br>
  * 
  */
 public class MocoContactTrackingGoal extends MocoGoal {
@@ -121,6 +146,12 @@ public class MocoContactTrackingGoal extends MocoGoal {
     }
     super.delete();
   }
+
+    public void addScaleFactor(String name, String externalForceName, int index,
+        double[] b) throws Exception {
+        addScaleFactor(name, externalForceName, index,
+                       MocoPhase.convertArrayToMB(b));
+    }
 
   public static MocoContactTrackingGoal safeDownCast(OpenSimObject obj) {
     long cPtr = opensimMocoJNI.MocoContactTrackingGoal_safeDownCast(OpenSimObject.getCPtr(obj), obj);
@@ -225,6 +256,25 @@ public class MocoContactTrackingGoal extends MocoGoal {
 
   public Vec3 getProjectionVector() {
     return new Vec3(opensimMocoJNI.MocoContactTrackingGoal_getProjectionVector(swigCPtr, this), true);
+  }
+
+  /**
+   *  Add a MocoParameter to the problem that will scale the tracking reference<br>
+   *  data associated with a contact force group. Scale factors are applied<br>
+   *  to the tracking error calculations based on the following equation:<br>
+   * <br>
+   *      error = modelValue - scaleFactor * referenceValue<br>
+   * <br>
+   *  In other words, the scale factor is applied when computing the tracking<br>
+   *  error for each contact force group, not to the reference data directly.<br>
+   *  You must specify both the external force name associated with the contact<br>
+   *  force group and the index corresponding to the direction (i.e., X = 0,<br>
+   *  Y = 1, Z = 2) of the scaled force value. The direction is applied in<br>
+   *  whatever frame the reference data is expressed in based on the provided<br>
+   *  ExternalLoads in each contact group.
+   */
+  public void addScaleFactor(String name, String externalForceName, int index, MocoBounds bounds) {
+    opensimMocoJNI.MocoContactTrackingGoal_addScaleFactor(swigCPtr, this, name, externalForceName, index, MocoBounds.getCPtr(bounds), bounds);
   }
 
 }

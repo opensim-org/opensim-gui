@@ -19,13 +19,14 @@ package org.opensim.modeling;
  * that track the acceleration reference data, or "tracking" frames, are specified<br>
  * using setFramePaths().<br>
  * <br>
- * ### Default usage<br>
+ * <br>
+ * <br>
  * <br>
  * By default, errors for this cost are computed assuming that the provided<br>
  * reference acceleration data is the derivative of a position vector with respect<br>
  * to the ground frame and expressed in the ground frame.<br>
  * <br>
- * ### Tracking inertial measurement unit (IMU) signals<br>
+ * <br>
  * <br>
  * If using this cost for tracking acceleration signals from an inertial measurement<br>
  * unit (IMU), you must subtract the gravity vector from the model accelerations and<br>

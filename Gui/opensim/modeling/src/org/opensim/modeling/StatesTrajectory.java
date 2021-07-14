@@ -9,7 +9,8 @@
 package org.opensim.modeling;
 
 /**
- *  This class holds a sequence of SimTK::State%s. You can obtain a<br>
+ * <br>
+ * This class holds a sequence of SimTK::State%s. You can obtain a<br>
  * StatesTrajectory during a simulation via the StatesTrajectoryReporter. You<br>
  * can also create a StatesTrajectory from a states storage (.sto) file (see<br>
  * createFromStatesStorage()). Users can modify a trajectory by appending<br>
@@ -23,7 +24,7 @@ package org.opensim.modeling;
  * Note: In a future release, we plan to support an OSTATES file format that<br>
  * allows one to write the trajectory to a file with full numerical precision.<br>
  * <br>
- * ### Guarantees<br>
+ * <br>
  * This class is designed to ensure the following:<br>
  * - The states are ordered nondecreasing in time (adjacent states *can* have<br>
  *   the same time).<br>
@@ -35,7 +36,7 @@ package org.opensim.modeling;
  * Python and MATLAB do not enforce constness and thus allow modifying the<br>
  * trajectory.<br>
  * <br>
- * ### Using with a %Model <br>
+ * <br>
  * A StatesTrajectory is not very useful on its own, since neither the<br>
  * trajectory nor the contained states know how the Component%s name the state<br>
  * variables they create. You probably want to use the trajectory with an<br>
@@ -55,7 +56,7 @@ package org.opensim.modeling;
  * To increase your confidence that a StatesTrajectory matches a given Model,<br>
  * you can perform some weak checks with isCompatibleWith().<br>
  * <br>
- * ### Usage<br>
+ * <br>
  * Here are a few basic things you can do with a StatesTrajectory, assuming you<br>
  * already have one:<br>
  * {@code 
@@ -545,7 +546,6 @@ public class StatesTrajectory {
    *      alter the trajectory and cause inconsistency between coordinate<br>
    *      values and speeds.<br>
    * <br>
-   * #### Usage<br>
    * Here is how you might use this function in python:<br>
    * {@code 
   import opensim
@@ -608,7 +608,6 @@ public class StatesTrajectory {
    *      ignored.<br>
    * <br>
    * <br>
-   * #### Usage<br>
    * Here is how you might use this function in python:<br>
    * {@code 
   import opensim
@@ -668,7 +667,6 @@ public class StatesTrajectory {
    * <br>
    * <br>
    * <br>
-   * #### Usage<br>
    * Here is how you might use this function in python:<br>
    * {@code 
   import opensim
@@ -725,7 +723,6 @@ public class StatesTrajectory {
    * <br>
    * <br>
    * <br>
-   * #### Usage<br>
    * Here is how you might use this function in python:<br>
    * {@code 
   import opensim

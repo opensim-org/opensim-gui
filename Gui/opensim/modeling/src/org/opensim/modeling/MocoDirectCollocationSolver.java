@@ -17,6 +17,8 @@ package org.opensim.modeling;
  * Betts, John T. Practical methods for optimal control and estimation using<br>
  * nonlinear programming. Vol. 19. Siam, 2010.<br>
  * <br>
+ * MocoDirectCollocationSolver<br>
+ * ===========================<br>
  * Transcription scheme<br>
  * --------------------<br>
  * The `transcription_scheme` setting allows you to choose between<br>
