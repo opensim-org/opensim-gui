@@ -99,7 +99,7 @@ jobs:
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
     
     - name: Build opensim-core
-      # if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
@@ -160,6 +160,8 @@ jobs:
     - name: Install packages
       run: |
         brew install cmake pkgconfig autoconf libtool automake wget pcre doxygen python@3.8
+        brew unlink python@3.9
+        brew link python@3.8
         brew reinstall gcc
         pip3 install numpy==1.20.2
         gfortran -v
@@ -216,7 +218,7 @@ jobs:
         key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
         
     - name: Build opensim-core-dependencies
-      # if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         mkdir build_deps
         cd build_deps
@@ -239,7 +241,7 @@ jobs:
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
         
     - name: Install SWIG
-      # if: steps.cache-swig.outputs.cache-hit != 'true'
+      if: steps.cache-swig.outputs.cache-hit != 'true'
       run: |
         mkdir ~/swig-source && cd ~/swig-source
         wget https://github.com/swig/swig/archive/refs/tags/rel-4.0.2.tar.gz
@@ -248,7 +250,7 @@ jobs:
         make && make -j4 install
 
     - name: Build opensim-core
-      if: steps.cache-core.outputs.cache-hit != 'true'
+      # if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core

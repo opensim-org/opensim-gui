@@ -18,7 +18,7 @@ package org.opensim.modeling;
  * This force does NOT use ContactGeometry objects; the description of the<br>
  * contact geometries is done through properties of this component.<br>
  * <br>
- * ### Constant contact force<br>
+ * <br>
  * <br>
  * This force applies a constant contact force even when the sphere and half-space<br>
  * are not contacting. This constant force is set with the constant_contact_force<br>

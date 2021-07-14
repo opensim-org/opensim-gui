@@ -28,7 +28,7 @@
     <string>6.0</string>
     
     <key>CFBundleIconFile</key>
-    <string>OpenSim.icns</string>
+    <string>opensim.icns</string>
 
     <key>UTExportedTypeDeclarations</key>
     <array>

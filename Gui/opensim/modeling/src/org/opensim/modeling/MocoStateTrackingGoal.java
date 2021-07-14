@@ -20,6 +20,30 @@ package org.opensim.modeling;
  * Tracking problems in direct collocation perform best when tracking smooth<br>
  * data, so it is recommended to filter the data in the reference you provide<br>
  * to the cost.<br>
+ * <br>
+ * ### Scale factors<br>
+ * <br>
+ * Use `addScaleFactor()` to add a MocoParameter to the MocoProblem that will<br>
+ * scale the tracking reference data associated with a state in the tracking cost.<br>
+ * Scale factors for this goal can be useful if the magnitude of the tracking<br>
+ * reference data is either unknown or unreliable (e.g., pelvis height).<br>
+ * Scale factors are applied to the tracking error calculations based on the<br>
+ * following equation:<br>
+ * <br>
+ *     error = modelValue - scaleFactor * referenceValue<br>
+ * <br>
+ * In other words, scale factors are applied when computing the tracking error for<br>
+ * each state, not to the reference data directly.<br>
+ * <br>
+ * Adding a scale factor to a MocoStateTrackingGoal.<br>
+ * {@code 
+auto* stateTrackingGoal = problem.addGoal<MocoStateTrackingGoal>();
+...
+stateTrackingGoal->addScaleFactor(
+        'pelvis_ty_scale_factor', '/jointset/ground_pelvis/pelvis_ty/value',
+        {0.5, 2.0});
+}<br>
+ * <br>
  * 
  */
 public class MocoStateTrackingGoal extends MocoGoal {
@@ -49,6 +73,11 @@ public class MocoStateTrackingGoal extends MocoGoal {
     }
     super.delete();
   }
+
+    public void addScaleFactor(String name, String state, double[] b)
+            throws Exception {
+            addScaleFactor(name, state, MocoPhase.convertArrayToMB(b));
+    }
 
   public static MocoStateTrackingGoal safeDownCast(OpenSimObject obj) {
     long cPtr = opensimMocoJNI.MocoStateTrackingGoal_safeDownCast(OpenSimObject.getCPtr(obj), obj);
@@ -166,6 +195,20 @@ public class MocoStateTrackingGoal extends MocoGoal {
    */
   public void setScaleWeightsWithRange(boolean tf) {
     opensimMocoJNI.MocoStateTrackingGoal_setScaleWeightsWithRange(swigCPtr, this, tf);
+  }
+
+  /**
+   *  Add a MocoParameter to the problem that will scale the tracking reference<br>
+   *  data associated with the specified state. Scale factors are applied<br>
+   *  to the tracking error calculations based on the following equation:<br>
+   * <br>
+   *      error = modelValue - scaleFactor * referenceValue<br>
+   * <br>
+   *  In other words, the scale factor is applied when computing the tracking<br>
+   *  error for each state, not to the reference data directly.
+   */
+  public void addScaleFactor(String name, String state, MocoBounds bounds) {
+    opensimMocoJNI.MocoStateTrackingGoal_addScaleFactor(swigCPtr, this, name, state, MocoBounds.getCPtr(bounds), bounds);
   }
 
 }

@@ -260,7 +260,7 @@ public class MocoPhase extends OpenSimObject {
    *  pass that single value. If you want to constrain to a range, pass<br>
    *  the lower and upper bounds to the constructor as two arguments.<br>
    * <br>
-   *  ### Default bounds<br>
+   *  Default bounds<br>
    *  1. Coordinate values: the Coordinate's range is used (regardless of<br>
    *      whether the coordinate is clamped).<br>
    *  2. Coordinate speeds: this class's default_speed_bounds property.<br>
@@ -276,7 +276,7 @@ public class MocoPhase extends OpenSimObject {
    *  For states with default bounds, if you actually want a variable to<br>
    *  be unconstrained, pass in MocoBounds::unconstrained().<br>
    * <br>
-   *  ### Examples<br>
+   *  Examples<br>
    *  Set bounds over the entire phase, but do not specify additional<br>
    *  bounds on the value at the start and end of the phase.<br>
    *  {@code 
@@ -327,7 +327,7 @@ public class MocoPhase extends OpenSimObject {
    *  pass that single value. If you want to constrain to a range, pass<br>
    *  the lower and upper bounds to the constructor as two arguments.<br>
    * <br>
-   *  ### Default bounds<br>
+   *  Default bounds<br>
    *  1. Coordinate values: the Coordinate's range is used (regardless of<br>
    *      whether the coordinate is clamped).<br>
    *  2. Coordinate speeds: this class's default_speed_bounds property.<br>
@@ -343,7 +343,7 @@ public class MocoPhase extends OpenSimObject {
    *  For states with default bounds, if you actually want a variable to<br>
    *  be unconstrained, pass in MocoBounds::unconstrained().<br>
    * <br>
-   *  ### Examples<br>
+   *  Examples<br>
    *  Set bounds over the entire phase, but do not specify additional<br>
    *  bounds on the value at the start and end of the phase.<br>
    *  {@code 
@@ -389,7 +389,7 @@ public class MocoPhase extends OpenSimObject {
    *  pass that single value. If you want to constrain to a range, pass<br>
    *  the lower and upper bounds to the constructor as two arguments.<br>
    * <br>
-   *  ### Default bounds<br>
+   *  Default bounds<br>
    *  1. Coordinate values: the Coordinate's range is used (regardless of<br>
    *      whether the coordinate is clamped).<br>
    *  2. Coordinate speeds: this class's default_speed_bounds property.<br>
@@ -405,7 +405,7 @@ public class MocoPhase extends OpenSimObject {
    *  For states with default bounds, if you actually want a variable to<br>
    *  be unconstrained, pass in MocoBounds::unconstrained().<br>
    * <br>
-   *  ### Examples<br>
+   *  Examples<br>
    *  Set bounds over the entire phase, but do not specify additional<br>
    *  bounds on the value at the start and end of the phase.<br>
    *  {@code 

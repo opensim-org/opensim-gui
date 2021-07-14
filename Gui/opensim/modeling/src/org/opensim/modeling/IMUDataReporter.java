@@ -173,6 +173,42 @@ public class IMUDataReporter extends Analysis {
     opensimActuatorsAnalysesToolsJNI.IMUDataReporter_set_report_accelerometer_signals__SWIG_1(swigCPtr, this, value);
   }
 
+  public void copyProperty_compute_accelerations_without_forces(IMUDataReporter source) {
+    opensimActuatorsAnalysesToolsJNI.IMUDataReporter_copyProperty_compute_accelerations_without_forces(swigCPtr, this, IMUDataReporter.getCPtr(source), source);
+  }
+
+  public boolean get_compute_accelerations_without_forces(int i) {
+    return opensimActuatorsAnalysesToolsJNI.IMUDataReporter_get_compute_accelerations_without_forces__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_bool upd_compute_accelerations_without_forces(int i) {
+    return new SWIGTYPE_p_bool(opensimActuatorsAnalysesToolsJNI.IMUDataReporter_upd_compute_accelerations_without_forces__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_compute_accelerations_without_forces(int i, boolean value) {
+    opensimActuatorsAnalysesToolsJNI.IMUDataReporter_set_compute_accelerations_without_forces__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_compute_accelerations_without_forces(boolean value) {
+    return opensimActuatorsAnalysesToolsJNI.IMUDataReporter_append_compute_accelerations_without_forces(swigCPtr, this, value);
+  }
+
+  public void constructProperty_compute_accelerations_without_forces(boolean initValue) {
+    opensimActuatorsAnalysesToolsJNI.IMUDataReporter_constructProperty_compute_accelerations_without_forces(swigCPtr, this, initValue);
+  }
+
+  public boolean get_compute_accelerations_without_forces() {
+    return opensimActuatorsAnalysesToolsJNI.IMUDataReporter_get_compute_accelerations_without_forces__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_bool upd_compute_accelerations_without_forces() {
+    return new SWIGTYPE_p_bool(opensimActuatorsAnalysesToolsJNI.IMUDataReporter_upd_compute_accelerations_without_forces__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_compute_accelerations_without_forces(boolean value) {
+    opensimActuatorsAnalysesToolsJNI.IMUDataReporter_set_compute_accelerations_without_forces__SWIG_1(swigCPtr, this, value);
+  }
+
   public void copyProperty_frame_paths(IMUDataReporter source) {
     opensimActuatorsAnalysesToolsJNI.IMUDataReporter_copyProperty_frame_paths(swigCPtr, this, IMUDataReporter.getCPtr(source), source);
   }
