@@ -22,7 +22,7 @@ public class PositionMotion extends ModelComponent {
   private transient long swigCPtr;
 
   public PositionMotion(long cPtr, boolean cMemoryOwn) {
-    super(opensimMocoJNI.PositionMotion_SWIGUpcast(cPtr), cMemoryOwn);
+    super(opensimSimulationJNI.PositionMotion_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
@@ -39,7 +39,7 @@ public class PositionMotion extends ModelComponent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimMocoJNI.delete_PositionMotion(swigCPtr);
+        opensimSimulationJNI.delete_PositionMotion(swigCPtr);
       }
       swigCPtr = 0;
     }
@@ -47,105 +47,105 @@ public class PositionMotion extends ModelComponent {
   }
 
   public static PositionMotion safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimMocoJNI.PositionMotion_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    long cPtr = opensimSimulationJNI.PositionMotion_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PositionMotion(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimMocoJNI.PositionMotion_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.PositionMotion_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimMocoJNI.PositionMotion_getClassName();
+    return opensimSimulationJNI.PositionMotion_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimMocoJNI.PositionMotion_clone(swigCPtr, this);
+    long cPtr = opensimSimulationJNI.PositionMotion_clone(swigCPtr, this);
     return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimMocoJNI.PositionMotion_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.PositionMotion_getConcreteClassName(swigCPtr, this);
   }
 
   public void copyProperty_default_enabled(PositionMotion source) {
-    opensimMocoJNI.PositionMotion_copyProperty_default_enabled(swigCPtr, this, PositionMotion.getCPtr(source), source);
+    opensimSimulationJNI.PositionMotion_copyProperty_default_enabled(swigCPtr, this, PositionMotion.getCPtr(source), source);
   }
 
   public boolean get_default_enabled(int i) {
-    return opensimMocoJNI.PositionMotion_get_default_enabled__SWIG_0(swigCPtr, this, i);
+    return opensimSimulationJNI.PositionMotion_get_default_enabled__SWIG_0(swigCPtr, this, i);
   }
 
   public SWIGTYPE_p_bool upd_default_enabled(int i) {
-    return new SWIGTYPE_p_bool(opensimMocoJNI.PositionMotion_upd_default_enabled__SWIG_0(swigCPtr, this, i), false);
+    return new SWIGTYPE_p_bool(opensimSimulationJNI.PositionMotion_upd_default_enabled__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_default_enabled(int i, boolean value) {
-    opensimMocoJNI.PositionMotion_set_default_enabled__SWIG_0(swigCPtr, this, i, value);
+    opensimSimulationJNI.PositionMotion_set_default_enabled__SWIG_0(swigCPtr, this, i, value);
   }
 
   public int append_default_enabled(boolean value) {
-    return opensimMocoJNI.PositionMotion_append_default_enabled(swigCPtr, this, value);
+    return opensimSimulationJNI.PositionMotion_append_default_enabled(swigCPtr, this, value);
   }
 
   public void constructProperty_default_enabled(boolean initValue) {
-    opensimMocoJNI.PositionMotion_constructProperty_default_enabled(swigCPtr, this, initValue);
+    opensimSimulationJNI.PositionMotion_constructProperty_default_enabled(swigCPtr, this, initValue);
   }
 
   public boolean get_default_enabled() {
-    return opensimMocoJNI.PositionMotion_get_default_enabled__SWIG_1(swigCPtr, this);
+    return opensimSimulationJNI.PositionMotion_get_default_enabled__SWIG_1(swigCPtr, this);
   }
 
   public SWIGTYPE_p_bool upd_default_enabled() {
-    return new SWIGTYPE_p_bool(opensimMocoJNI.PositionMotion_upd_default_enabled__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_bool(opensimSimulationJNI.PositionMotion_upd_default_enabled__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_default_enabled(boolean value) {
-    opensimMocoJNI.PositionMotion_set_default_enabled__SWIG_1(swigCPtr, this, value);
+    opensimSimulationJNI.PositionMotion_set_default_enabled__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_functions(PositionMotion source) {
-    opensimMocoJNI.PositionMotion_copyProperty_functions(swigCPtr, this, PositionMotion.getCPtr(source), source);
+    opensimSimulationJNI.PositionMotion_copyProperty_functions(swigCPtr, this, PositionMotion.getCPtr(source), source);
   }
 
   public FunctionSet get_functions(int i) {
-    return new FunctionSet(opensimMocoJNI.PositionMotion_get_functions__SWIG_0(swigCPtr, this, i), false);
+    return new FunctionSet(opensimSimulationJNI.PositionMotion_get_functions__SWIG_0(swigCPtr, this, i), false);
   }
 
   public FunctionSet upd_functions(int i) {
-    return new FunctionSet(opensimMocoJNI.PositionMotion_upd_functions__SWIG_0(swigCPtr, this, i), false);
+    return new FunctionSet(opensimSimulationJNI.PositionMotion_upd_functions__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_functions(int i, FunctionSet value) {
-    opensimMocoJNI.PositionMotion_set_functions__SWIG_0(swigCPtr, this, i, FunctionSet.getCPtr(value), value);
+    opensimSimulationJNI.PositionMotion_set_functions__SWIG_0(swigCPtr, this, i, FunctionSet.getCPtr(value), value);
   }
 
   public int append_functions(FunctionSet value) {
-    return opensimMocoJNI.PositionMotion_append_functions(swigCPtr, this, FunctionSet.getCPtr(value), value);
+    return opensimSimulationJNI.PositionMotion_append_functions(swigCPtr, this, FunctionSet.getCPtr(value), value);
   }
 
   public void constructProperty_functions(FunctionSet initValue) {
-    opensimMocoJNI.PositionMotion_constructProperty_functions(swigCPtr, this, FunctionSet.getCPtr(initValue), initValue);
+    opensimSimulationJNI.PositionMotion_constructProperty_functions(swigCPtr, this, FunctionSet.getCPtr(initValue), initValue);
   }
 
   public FunctionSet get_functions() {
-    return new FunctionSet(opensimMocoJNI.PositionMotion_get_functions__SWIG_1(swigCPtr, this), false);
+    return new FunctionSet(opensimSimulationJNI.PositionMotion_get_functions__SWIG_1(swigCPtr, this), false);
   }
 
   public FunctionSet upd_functions() {
-    return new FunctionSet(opensimMocoJNI.PositionMotion_upd_functions__SWIG_1(swigCPtr, this), false);
+    return new FunctionSet(opensimSimulationJNI.PositionMotion_upd_functions__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_functions(FunctionSet value) {
-    opensimMocoJNI.PositionMotion_set_functions__SWIG_1(swigCPtr, this, FunctionSet.getCPtr(value), value);
+    opensimSimulationJNI.PositionMotion_set_functions__SWIG_1(swigCPtr, this, FunctionSet.getCPtr(value), value);
   }
 
   public PositionMotion() {
-    this(opensimMocoJNI.new_PositionMotion__SWIG_0(), true);
+    this(opensimSimulationJNI.new_PositionMotion__SWIG_0(), true);
   }
 
   public PositionMotion(String name) {
-    this(opensimMocoJNI.new_PositionMotion__SWIG_1(name), true);
+    this(opensimSimulationJNI.new_PositionMotion__SWIG_1(name), true);
   }
 
   /**
@@ -154,7 +154,7 @@ public class PositionMotion extends ModelComponent {
    *  of the provided function.
    */
   public void setPositionForCoordinate(Coordinate coord, Function position) {
-    opensimMocoJNI.PositionMotion_setPositionForCoordinate(swigCPtr, this, Coordinate.getCPtr(coord), coord, Function.getCPtr(position), position);
+    opensimSimulationJNI.PositionMotion_setPositionForCoordinate(swigCPtr, this, Coordinate.getCPtr(coord), coord, Function.getCPtr(position), position);
   }
 
   /**
@@ -162,11 +162,11 @@ public class PositionMotion extends ModelComponent {
    *  motions are enabled or disabled.
    */
   public void setDefaultEnabled(boolean enabled) {
-    opensimMocoJNI.PositionMotion_setDefaultEnabled(swigCPtr, this, enabled);
+    opensimSimulationJNI.PositionMotion_setDefaultEnabled(swigCPtr, this, enabled);
   }
 
   public boolean getDefaultEnabled() {
-    return opensimMocoJNI.PositionMotion_getDefaultEnabled(swigCPtr, this);
+    return opensimSimulationJNI.PositionMotion_getDefaultEnabled(swigCPtr, this);
   }
 
   /**
@@ -174,11 +174,11 @@ public class PositionMotion extends ModelComponent {
    *  are enforced.
    */
   public void setEnabled(State state, boolean enabled) {
-    opensimMocoJNI.PositionMotion_setEnabled(swigCPtr, this, State.getCPtr(state), state, enabled);
+    opensimSimulationJNI.PositionMotion_setEnabled(swigCPtr, this, State.getCPtr(state), state, enabled);
   }
 
   public boolean getEnabled(State state) {
-    return opensimMocoJNI.PositionMotion_getEnabled(swigCPtr, this, State.getCPtr(state), state);
+    return opensimSimulationJNI.PositionMotion_getEnabled(swigCPtr, this, State.getCPtr(state), state);
   }
 
   /**
@@ -195,7 +195,7 @@ public class PositionMotion extends ModelComponent {
    *  Note: This fuction ignores the inDegrees header metadata.
    */
   public static PositionMotion createFromTable(Model model, TimeSeriesTable coords, boolean allowExtraColumns) {
-long cPtr = opensimMocoJNI.PositionMotion_createFromTable__SWIG_0(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(coords), coords, allowExtraColumns);
+long cPtr = opensimSimulationJNI.PositionMotion_createFromTable__SWIG_0(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(coords), coords, allowExtraColumns);
 return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
 }
 
@@ -213,7 +213,7 @@ return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
    *  Note: This fuction ignores the inDegrees header metadata.
    */
   public static PositionMotion createFromTable(Model model, TimeSeriesTable coords) {
-long cPtr = opensimMocoJNI.PositionMotion_createFromTable__SWIG_1(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(coords), coords);
+long cPtr = opensimSimulationJNI.PositionMotion_createFromTable__SWIG_1(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(coords), coords);
 return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
 }
 
@@ -226,12 +226,12 @@ return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
    *  constraints.
    */
   public static PositionMotion createFromStatesTrajectory(Model model, StatesTrajectory statesTraj) {
-long cPtr = opensimMocoJNI.PositionMotion_createFromStatesTrajectory(Model.getCPtr(model), model, StatesTrajectory.getCPtr(statesTraj), statesTraj);
+long cPtr = opensimSimulationJNI.PositionMotion_createFromStatesTrajectory(Model.getCPtr(model), model, StatesTrajectory.getCPtr(statesTraj), statesTraj);
 return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
 }
 
   public TimeSeriesTable exportToTable(StdVectorDouble time) {
-    return new TimeSeriesTable(opensimMocoJNI.PositionMotion_exportToTable(swigCPtr, this, StdVectorDouble.getCPtr(time), time), true);
+    return new TimeSeriesTable(opensimSimulationJNI.PositionMotion_exportToTable(swigCPtr, this, StdVectorDouble.getCPtr(time), time), true);
   }
 
 }

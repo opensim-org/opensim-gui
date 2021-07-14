@@ -14,6 +14,29 @@ package org.opensim.modeling;
  * experimental data location is provided, and integrated over the phase.<br>
  * The reference can be provided as a file name to a TRC file, or<br>
  * programmatically as a TimeSeriesTable.<br>
+ * <br>
+ * ### Scale factors<br>
+ * <br>
+ * Use `addScaleFactor()` to add a MocoParameter to the MocoProblem that will<br>
+ * scale the tracking reference data associated with a marker in the tracking cost.<br>
+ * Scale factors for this goal can be useful if the magnitude of the tracking<br>
+ * reference data is either unknown or unreliable (e.g., pelvis marker Y-value).<br>
+ * Scale factors are applied to the tracking error calculations based on the<br>
+ * following equation:<br>
+ * <br>
+ *     error = modelValue - scaleFactor * referenceValue<br>
+ * <br>
+ * In other words, scale factors are applied when computing the tracking error for<br>
+ * each marker, not to the reference data directly.<br>
+ * <br>
+ * Adding a scale factor to a MocoMarkerTrackingGoal.<br>
+ * {@code 
+auto* markerTrackingGoal = problem.addGoal<MocoMarkerTrackingGoal>();
+...
+markerTrackingGoal->addScaleFactor(
+        'LPSIS_y_scale_factor', 'LPSIS', 1, {0.5, 2.0});
+}<br>
+ * <br>
  * 
  */
 public class MocoMarkerTrackingGoal extends MocoGoal {
@@ -43,6 +66,11 @@ public class MocoMarkerTrackingGoal extends MocoGoal {
     }
     super.delete();
   }
+
+    public void addScaleFactor(String name, String marker, int index, double[] b)
+            throws Exception {
+            addScaleFactor(name, marker, index, MocoPhase.convertArrayToMB(b));
+    }
 
   public static MocoMarkerTrackingGoal safeDownCast(OpenSimObject obj) {
     long cPtr = opensimMocoJNI.MocoMarkerTrackingGoal_safeDownCast(OpenSimObject.getCPtr(obj), obj);
@@ -106,6 +134,22 @@ public class MocoMarkerTrackingGoal extends MocoGoal {
    */
   public void setAllowUnusedReferences(boolean tf) {
     opensimMocoJNI.MocoMarkerTrackingGoal_setAllowUnusedReferences(swigCPtr, this, tf);
+  }
+
+  /**
+   *  Add a MocoParameter to the problem that will scale the tracking reference<br>
+   *  data associated with the specified marker. Scale factors are applied<br>
+   *  to the tracking error calculations based on the following equation:<br>
+   * <br>
+   *      error = modelValue - scaleFactor * referenceValue<br>
+   * <br>
+   *  In other words, the scale factor is applied when computing the tracking<br>
+   *  error for each marker, not to the reference data directly. You must<br>
+   *  specify both the marker name and the index corresponding to the direction<br>
+   *  in ground (i.e., X = 0, Y = 1, Z = 2) of the scaled value.
+   */
+  public void addScaleFactor(String name, String marker, int index, MocoBounds bounds) {
+    opensimMocoJNI.MocoMarkerTrackingGoal_addScaleFactor(swigCPtr, this, name, marker, index, MocoBounds.getCPtr(bounds), bounds);
   }
 
 }

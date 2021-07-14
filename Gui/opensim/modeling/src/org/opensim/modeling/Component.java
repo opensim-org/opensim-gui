@@ -17,7 +17,8 @@ package org.opensim.modeling;
  * handles all of the bookkeeping of system indices and provides convenience<br>
  * access to variable values (incl. derivatives) via their names as strings.<br>
  * <br>
- * ### System and State<br>
+ * # Component's Interfaces<br>
+ * ## System and State<br>
  * <br>
  * The MultibodySystem and its State are defined by Simbody (ref ...). Briefly,<br>
  * a System represents the mathematical equations that specify the behavior<br>
@@ -43,7 +44,7 @@ package org.opensim.modeling;
  * the modeled dynamics of the component. Component provides services<br>
  * that enable developers of components to define additional ModelingOptions.<br>
  * <br>
- * ### Discrete variables<br>
+ * ## Discrete variables<br>
  * <br>
  * Often a component requires input from an outside source (precomputed data<br>
  * from a file, another program, or interaction from a user) in which case these<br>
@@ -59,7 +60,7 @@ package org.opensim.modeling;
  * provides services to enable developers of components to define and access its<br>
  * DiscreteVariables.<br>
  * <br>
- * ### Cache variables<br>
+ * ## Cache variables<br>
  * <br>
  * Fast and efficient simulations also require computationally expensive<br>
  * calculations to be performed only when necessary. Often the result of an<br>
@@ -72,7 +73,7 @@ package org.opensim.modeling;
  * variables and their validity. Component provides a simplified interface to<br>
  * define and access CacheVariables.<br>
  * <br>
- * ### Stages<br>
+ * ## Stages<br>
  * <br>
  * Many modeling and simulation codes put the onus on users and component<br>
  * creators to manage the validity of cache variables, which is likely to lead<br>
@@ -125,7 +126,7 @@ package org.opensim.modeling;
  * Component provides methods to check if the cache is valid, update its value<br>
  * and then to mark it as valid.<br>
  * <br>
- * ### The interface of this class<br>
+ * ## The interface of this class<br>
  * <br>
  * The primary responsibility of a Component is to add its computational<br>
  * representation(s) to the underlying SimTK::System by implementing<br>
@@ -136,7 +137,7 @@ package org.opensim.modeling;
  * <br>
  * Public methods enable access to component variables via their names.<br>
  * <br>
- * ### Subcomponents<br>
+ * ## Subcomponents<br>
  * <br>
  * A %Component can have any number of %Components within it; we call these<br>
  * subcomponents. Subcomponents can also contain their own subcomponents as<br>

@@ -9,8 +9,9 @@
 package org.opensim.modeling;
 
 /**
- *  The squared difference between a control variable value and a reference<br>
- * control variable value, summed over the control variables for which a<br>
+ * <br>
+ * The squared difference between a control<br>
+ * variable value and a reference control variable value, summed over the control variables for which a<br>
  * reference is provided, and integrated over the phase. This can be used to<br>
  * track actuator controls, muscle excitations, etc.<br>
  * <br>
@@ -46,7 +47,7 @@ package org.opensim.modeling;
  *             The `allow_unused_references` property does not apply in this<br>
  *             mode.<br>
  * <br>
- * ### Control variable names<br>
+ * ## Control variable names<br>
  * <br>
  * Control variable names are based on paths to actuators,<br>
  * e.g., `/forceset/soleus_r`. For non-scalar actuators, the control variable<br>
@@ -55,13 +56,13 @@ package org.opensim.modeling;
  * 'body_actuator' is the name of the actuator and `_0` specifies the<br>
  * control index.<br>
  * <br>
- * ### Reference data<br>
+ * ## Reference data<br>
  * <br>
  * The reference can be provided as a file name to a STO or CSV file (or<br>
  * other file types for which there is a FileAdapter), or programmatically<br>
  * as a TimeSeriesTable.<br>
  * <br>
- * ### Scale factors<br>
+ * ## Scale factors<br>
  * <br>
  * Use `addScaleFactor()` to add a MocoParameter to the MocoProblem that will<br>
  * scale the tracking reference data associated with a control in the tracking cost.<br>
@@ -86,7 +87,7 @@ controlTrackingGoal->addScaleFactor(
         'soleus_scale_factor', '/forceset/soleus_r', {0.01, 1.0});
 }<br>
  * <br>
- * ### Helpful tips<br>
+ * ## Helpful tips<br>
  * <br>
  * Tracking problems in direct collocation perform best when tracking smooth<br>
  * data, so it is recommended to filter the data in the reference you provide<br>

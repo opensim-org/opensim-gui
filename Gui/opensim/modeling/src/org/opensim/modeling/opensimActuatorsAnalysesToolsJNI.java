@@ -1371,6 +1371,15 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native boolean IMUDataReporter_get_report_accelerometer_signals__SWIG_1(long jarg1, IMUDataReporter jarg1_);
   public final static native long IMUDataReporter_upd_report_accelerometer_signals__SWIG_1(long jarg1, IMUDataReporter jarg1_);
   public final static native void IMUDataReporter_set_report_accelerometer_signals__SWIG_1(long jarg1, IMUDataReporter jarg1_, boolean jarg2);
+  public final static native void IMUDataReporter_copyProperty_compute_accelerations_without_forces(long jarg1, IMUDataReporter jarg1_, long jarg2, IMUDataReporter jarg2_);
+  public final static native boolean IMUDataReporter_get_compute_accelerations_without_forces__SWIG_0(long jarg1, IMUDataReporter jarg1_, int jarg2);
+  public final static native long IMUDataReporter_upd_compute_accelerations_without_forces__SWIG_0(long jarg1, IMUDataReporter jarg1_, int jarg2);
+  public final static native void IMUDataReporter_set_compute_accelerations_without_forces__SWIG_0(long jarg1, IMUDataReporter jarg1_, int jarg2, boolean jarg3);
+  public final static native int IMUDataReporter_append_compute_accelerations_without_forces(long jarg1, IMUDataReporter jarg1_, boolean jarg2);
+  public final static native void IMUDataReporter_constructProperty_compute_accelerations_without_forces(long jarg1, IMUDataReporter jarg1_, boolean jarg2);
+  public final static native boolean IMUDataReporter_get_compute_accelerations_without_forces__SWIG_1(long jarg1, IMUDataReporter jarg1_);
+  public final static native long IMUDataReporter_upd_compute_accelerations_without_forces__SWIG_1(long jarg1, IMUDataReporter jarg1_);
+  public final static native void IMUDataReporter_set_compute_accelerations_without_forces__SWIG_1(long jarg1, IMUDataReporter jarg1_, boolean jarg2);
   public final static native void IMUDataReporter_copyProperty_frame_paths(long jarg1, IMUDataReporter jarg1_, long jarg2, IMUDataReporter jarg2_);
   public final static native String IMUDataReporter_get_frame_paths(long jarg1, IMUDataReporter jarg1_, int jarg2);
   public final static native long IMUDataReporter_upd_frame_paths(long jarg1, IMUDataReporter jarg1_, int jarg2);

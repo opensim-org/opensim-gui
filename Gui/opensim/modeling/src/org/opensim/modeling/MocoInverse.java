@@ -24,8 +24,7 @@ package org.opensim.modeling;
  * The provided trajectory is altered to satisfy any enabled kinematic<br>
  * constraints in the model.<br>
  * <br>
- * Cost<br>
- * ----<br>
+ * # Cost<br>
  * By default, MocoInverse minimizes the sum of squared controls and<br>
  * constrains initial activation to be equal to initial excitation (to avoid<br>
  * initial activation spikes). To customize the cost, invoke initialize(), add<br>
@@ -33,8 +32,7 @@ package org.opensim.modeling;
  * however, that kinematic states are not included in the solution if you use<br>
  * the solver directly.<br>
  * <br>
- * Default solver settings<br>
- * -----------------------<br>
+ * # Default solver settings<br>
  * - solver: MocoCasADiSolver<br>
  * - multibody_dynamics_mode: implicit<br>
  * - interpolate_control_midpoints: false<br>
@@ -52,8 +50,7 @@ package org.opensim.modeling;
  * of squared activations. As MocoInverse becomes more mature and general, the<br>
  * costs will become more flexible.<br>
  * <br>
- * Mesh interval<br>
- * -------------<br>
+ * # Mesh interval<br>
  * A smaller mesh interval increases the convergence time, but is necessary<br>
  * for fast motions or problems with stiff differential equations (e.g.,<br>
  * stiff tendons).<br>
@@ -61,8 +58,7 @@ package org.opensim.modeling;
  * Try solving your problem with decreasing mesh intervals and choose a mesh<br>
  * interval at which the solution stops changing noticeably.<br>
  * <br>
- * Basic example<br>
- * -------------<br>
+ * # Basic example<br>
  * <br>
  * This example shows how to use MocoInverse in C++:<br>
  * <br>
