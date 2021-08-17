@@ -106,7 +106,7 @@ public class IMUIKToolModel extends Observable implements Observer {
     }
 
     void setReportErrors(boolean selected) {
-        
+        this.reportErrors=selected;
         setModified(Operation.AllDataChanged);
     }
 
