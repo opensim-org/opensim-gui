@@ -11,6 +11,7 @@ v4.3
 - Tools that use Analyses (e.g. Analyze, ...) now have a new option for IMUDataReporter where Output signals are reported for IMUs on the model, or can be reported for user specified Frames.
 - Upgrade bindings to use SWIG 4.0.2 and carry doxygen to java and python files as comments.
 - Support display of Other components in the naviagtor view, including IMUs.
+- Implement setting of "report orientation errors" checkbox from IMUInverseKinematicsTool GUI
 
 v4.2
 ====
