@@ -160,7 +160,7 @@ jobs:
     - name: Install packages
       run: |
         brew install cmake pkgconfig autoconf libtool automake wget pcre doxygen python@3.8
-        brew unlink python@3.9
+        # brew unlink python@3.9
         brew link python@3.8
         brew reinstall gcc
         pip3 install numpy==1.20.2
