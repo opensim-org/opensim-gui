@@ -100,8 +100,8 @@ public interface opensimSimbodyConstants {
   /**
    *  The natural (base e) logarithm of 2.<br>
    * <p alt="uncertainty"><br>
-   *      approximation of an exact value<br>
-   * see SimTK_E</p>
+   *      approximation of an exact value</p><br>
+   * @see SimTK_E
    */
   public final static double SimTK_LN2 = opensimSimbodyJNI.SimTK_LN2_get();
   /**

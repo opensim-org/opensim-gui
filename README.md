@@ -78,6 +78,12 @@ as a rough guide and/or refer to the Travis, Appveyor, or GitHub Actions CI conf
 See the [OpenSim Confluence Wiki](https://simtk-confluence.stanford.edu/display/OpenSim40/Building+OpenSim+from+Source)
 for additional information.
 
+Disclaimer
+----------
+Instructions are provided below for building but may get out of date occasionally, the defacto instructions are those included/used
+by the continuous integration (CI) build scripts available in this repository under 
+https://github.com/opensim-org/opensim-gui/blob/master/.github/workflows/continuous-integration.yml
+
 ### Building on Windows
 
 #### Get the dependencies
@@ -87,19 +93,19 @@ for additional information.
   https://github.com/opensim-org/opensim-core#on-windows-using-visual-studio)
   * You must build the Java Bindings (CMake variable `BUILD_JAVA_WRAPPING=ON`).
 * **Java Development Kit**: [JDK](
-  http://www.oracle.com/technetwork/java/javase/downloads/index.html) >= 1.7.
+  http://www.oracle.com/technetwork/java/javase/downloads/index.html) >= 1.8.
 * **Java Integrated Development Environment (IDE)**: [NetBeans](
-  http://www.oracle.com/technetwork/java/javase/downloads/index.html) 8.0.2.
+  https://netbeans.apache.org/download/nb123/nb123.html) 12.3.
   * At this link, you can download a version of NetBeans that comes with a JDK.
 * **Command-line build tool for Java**:
   [Ant](http://ant.apache.org/bindownload.cgi) >= 1.9.6.
   * You can use the Ant that comes with NetBeans (e.g.,
-    `C:/Program Files/NetBeans 8.0.2/extide/ant/bin/ant.exe`).
+    `C:/Program Files/NetBeans-12.0/netbeans/extide/ant.exe`).
 * **Command-line build tool for C++**:
     [CMake](https://cmake.org/download/) >= 3.1.3
   * We do not use CMake to build any C++ code, but to copy files and run
     **Ant**.
-* **C++ compiler**: [Visual Studio 2017](https://www.visualstudio.com/)
+* **C++ compiler**: [Visual Studio 2019](https://www.visualstudio.com/)
   * Again, we won't build any C++ code; CMake needs this to do its job.
 
 You can obtain some of these dependencies using the Chocolatey package manager.
@@ -117,7 +123,7 @@ and set the following CMake variables:
   * `Simbody_DIR`: The directory containing `SimbodyConfig.cmake`.
     * Might look something like `.../opensim_dependencies_install/simbody/cmake`.
   * `Ant_EXECUTABLE`: If you want to use the Ant that comes with NetBeans, specify
-    something like `C:/Program Files/NetBeans 8.0.2/extide/ant/bin/ant.exe`.
+    something like `C:/Program Files/NetBeans-12.0/netbeans/extide/bin/ant.exe`.
 
 Use the CMake GUI to *Configure* and *Generate* project files for the *Visual Studio 14 2015* generator.
 
@@ -129,8 +135,8 @@ this step is necessary to generate configuration files. The alternative is
 to run Ant with the following additional command-line flags:
 
 ```
--Dnbplatform.default.netbeans.dest.dir="C:/Program Files/NetBeans 8.0.2" 
--Dnbplatform.default.harness.dir="C:/Program Files/NetBeans 8.0.2/harness"
+-Dnbplatform.default.netbeans.dest.dir="C:/Program Files/NetBeans-12.0/netbeans" 
+-Dnbplatform.default.harness.dir="C:/Program Files/NetBeans-12.0/netbeans/harness"
 ```
 
 We use these additional flags in our automated builds in [AppVeyor][appveyorci].

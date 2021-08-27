@@ -9,8 +9,20 @@
 package org.opensim.modeling;
 
 /**
- * A class for recording the readings off an IMU placed on a model<br>
+ * A class for recording the readings off an IMU object placed on a model<br>
  * during a simulation.<br>
+ * <br>
+ * If using this reporter to compute IMU accelerometer signals based on kinematic<br>
+ * information only (i.e., a solution from the InverseKinematicsTool), then<br>
+ * set the property `compute_accelerations_without_forces` to true. This property<br>
+ * will apply forces to the model corresponding to the kinematics that you<br>
+ * provide as input so that the correct accelerations are computed. The input<br>
+ * kinematics are splined and then prescribed to the model (via the<br>
+ * PositionMotion class), and the applied forces are based on derivatives of<br>
+ * these splines; therefore, you should ensure that the input kinematics produce<br>
+ * the correct derivatives when splined. It is recommended that you don't not<br>
+ * compute any quantities near the beginning or end of the time range in your<br>
+ * data, since spline derivatives can be inaccurate in these regions.<br>
  * <br>
  * @author Ayman Habib<br>
  * @version 1.0
