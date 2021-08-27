@@ -9,13 +9,14 @@
 package org.opensim.modeling;
 
 /**
- *  The squared difference between a model marker location and an experimental<br>
- * reference marker location, summed over the markers for which an<br>
+ * <br>
+ * The squared difference between a model marker<br>
+ * location and an experimental reference marker location, summed over the markers for which an<br>
  * experimental data location is provided, and integrated over the phase.<br>
  * The reference can be provided as a file name to a TRC file, or<br>
  * programmatically as a TimeSeriesTable.<br>
  * <br>
- * ### Scale factors<br>
+ * ## Scale factors<br>
  * <br>
  * Use `addScaleFactor()` to add a MocoParameter to the MocoProblem that will<br>
  * scale the tracking reference data associated with a marker in the tracking cost.<br>
