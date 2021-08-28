@@ -153,6 +153,9 @@ jobs:
     steps:
     - name: Checkout opensim-gui
       uses: actions/checkout@v2
+      with:
+         repository: opensim-org/opensim-gui
+         ref: 4.3
 
     - name: Checkout opensim-core master
       uses: actions/checkout@v2
@@ -300,7 +303,10 @@ jobs:
 
     - name: Checkout opensim-gui
       uses: actions/checkout@v2
-      
+      with:
+         repository: opensim-org/opensim-gui
+         ref: 4.3
+
     - name: Checkout opensim-core master
       uses: actions/checkout@v2
       with:
