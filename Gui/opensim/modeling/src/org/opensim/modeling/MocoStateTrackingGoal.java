@@ -9,8 +9,9 @@
 package org.opensim.modeling;
 
 /**
- *  The squared difference between a state variable value and a reference<br>
- * state variable value, summed over the state variables for which a<br>
+ * <br>
+ * The squared difference between a state variable<br>
+ * value and a reference state variable value, summed over the state variables for which a<br>
  * reference is provided, and integrated over the phase. This can be used to<br>
  * track joint angles, activations, etc.<br>
  * The reference can be provided as a file name to a STO or CSV file (or<br>
@@ -21,7 +22,7 @@ package org.opensim.modeling;
  * data, so it is recommended to filter the data in the reference you provide<br>
  * to the cost.<br>
  * <br>
- * ### Scale factors<br>
+ * ## Scale factors<br>
  * <br>
  * Use `addScaleFactor()` to add a MocoParameter to the MocoProblem that will<br>
  * scale the tracking reference data associated with a state in the tracking cost.<br>
