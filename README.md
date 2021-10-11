@@ -73,7 +73,7 @@ Currently, we only provide instructions for **Windows**. It *is* possible to
 build and run the GUI on **OSX** and **Linux**; though it is not thoroughly
 tested on these platforms. Linux builds are in beta. We will write instructions
 for OSX in the future; for now, you can follow the Windows and Linux instructions
-as a rough guide and/or refer to the Travis, Appveyor, or GitHub Actions CI configs.
+as a rough guide and/or refer to the GitHub Actions CI configs.
 
 See the [OpenSim Confluence Wiki](https://simtk-confluence.stanford.edu/display/OpenSim40/Building+OpenSim+from+Source)
 for additional information.
