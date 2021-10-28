@@ -4,8 +4,8 @@ GitHub issues or pull requests that
 are related to the items below. If there is no issue or pull
 request related to the change, then we may provide the commit.
 
-v4.3.1
-======
+v4.4
+====
 
 v4.3
 ====
