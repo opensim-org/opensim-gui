@@ -41,6 +41,7 @@ import org.opensim.view.experimentaldata.ExperimentalDataObject;
 import org.opensim.view.experimentaldata.ExperimentalForceSetNode;
 import org.opensim.view.experimentaldata.ExperimentalMarkerSetNode;
 import org.opensim.view.experimentaldata.ExperimentalOtherDataSetNode;
+import org.opensim.view.experimentaldata.ExperimentalSensorSetNode;
 import org.opensim.view.experimentaldata.MotionEditMotionObjectsAction;
 import org.opensim.view.experimentaldata.MotionReclassifyAction;
 import org.opensim.view.nodes.*;
@@ -149,6 +150,11 @@ public class OneMotionDataNode extends OneMotionNode {
         if (names !=null && names.size()>0){ // File had forces
              getChildren().add(new Node[]{new ExperimentalForceSetNode(dMotion)});
         }
+        names = dMotion.getSensorNames();
+        if (names !=null && names.size()>0){ // File had imu data
+            getChildren().add(new Node[]{new ExperimentalSensorSetNode(dMotion)});
+        }
+        
         /*
         // Things other than markers and forces
         Vector<ExperimentalDataObject> all = dMotion.getClassified();

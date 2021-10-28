@@ -167,11 +167,13 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jLabel1 = new javax.swing.JLabel();
         jMotionNameLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createTitledBorder(""));
         setFloatable(false);
         setForeground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(32767, 50));
         setMinimumSize(new java.awt.Dimension(0, 50));
+        setOpaque(false);
         setPreferredSize(new java.awt.Dimension(645, 50));
 
         jPlaybackButtonsPanel.setToolTipText("Motion Controls");
@@ -386,7 +388,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jStartTimeTextField.setFocusable(false);
         jStartTimeTextField.setMaximumSize(new java.awt.Dimension(50, 16));
         jStartTimeTextField.setMinimumSize(new java.awt.Dimension(50, 16));
-        jStartTimeTextField.setOpaque(false);
         jStartTimeTextField.setPreferredSize(new java.awt.Dimension(50, 16));
 
         jEndTimeTextField.setEditable(false);
@@ -399,7 +400,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jEndTimeTextField.setFocusable(false);
         jEndTimeTextField.setMaximumSize(new java.awt.Dimension(50, 16));
         jEndTimeTextField.setMinimumSize(new java.awt.Dimension(50, 16));
-        jEndTimeTextField.setOpaque(false);
         jEndTimeTextField.setPreferredSize(new java.awt.Dimension(50, 16));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -435,7 +435,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                         .add(jPlaybackButtonsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jEndTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
+                    .add(jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jWrapToggleButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

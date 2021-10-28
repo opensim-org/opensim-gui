@@ -5,7 +5,7 @@
 <project name="opensim" basedir=".">
     <description>Builds the module suite opensim.</description>
     <property name="api.dir" value="C:/Dev/gui/opensim-gui/OpenSimAPI-install"/>
-    <property name="apiJava.dir" value="C:/Dev/gui/opensim-gui/OpenSimAPI-install/sdk/Java/org"/>
+    <property name="apiJava.dir" value="${api.dir}/sdk/Java/org"/>
     <property name="models.dir" value="C:/Dev/gui/opensim-models"/>
     <property name="visualizer.dir" value="/Users/aymanhabib/dev/src/unused"/>
     <property name="jre.dir" value="${java.home}"/>
@@ -32,8 +32,16 @@
     <condition property="opensim.dist.dir" value="dist/OpenSim.app/Contents/Resources/OpenSim">
         <os family="mac"/>
     </condition>
+    <condition property="opensim.dist.dir" value="dist/installer/opensim">
+        <and>
+            <os family="unix"/>
+            <not>
+                <os family="mac"/>
+            </not>
+        </and>
+    </condition>
     <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/threejs">
-        <os family="mac"/>
+        <os family="unix"/>
     </condition>
     <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/OpenSim/threejs">
         <os family="windows"/>
@@ -50,7 +58,7 @@
     </target>
     <target name="unzip-distro" depends="build-zip" 
             description="unZIP distribution of the suite, launchers, and selected modules from the platform.">
-        <unzip src="dist/opensim.zip" dest="dist/installer" />
+        <unzip src="dist/OpenSim.zip" dest="dist/installer" />
     </target>
     <target name="copy-installer-files" depends="unzip-distro" 
             description="Copy prebuilt opensim-core installation into installer folder">
@@ -117,11 +125,11 @@
         <replace file="${opensim.dist.dir}/../make_installer.nsi" value="${app.version}">
             <replacefilter token="@VERSION@" />
         </replace>
-      <replace file="${opensim.dist.dir}/etc/OpenSim.conf"
+        <replace file="${opensim.dist.dir}/etc/OpenSim.conf"
           value="${app.version}">
-        <replacefilter token="@VERSION@" />
-      </replace>
-     <!-- http://wiki.netbeans.org/DevFaqExecutableIcon -->
+            <replacefilter token="@VERSION@" />
+        </replace>
+        <!-- http://wiki.netbeans.org/DevFaqExecutableIcon -->
         <exec executable="installer_files/Windows/ReplaceVistaIcon.exe" resolveexecutable="true">
             <arg line="${opensim.dist.dir}/bin/OpenSim64.exe installer_files/Windows/OpenSimLogoWindows.ico"/>
         </exec>
@@ -224,6 +232,9 @@
             value="${app.version}">
             <replacefilter token="@VERSION@" />
         </replace>
+        <!-- Following chmods are needed so that the application                  is recognized as such by osx and shows in launchpad,                 these match local/dev environment --> 
+        <chmod file="${mac.dist.inner.dir}/etc/OpenSim.conf" perm="744"/>
+        <chmod file="dist/OpenSim.app/Contents/Info.plist" perm="644"/>
 
       <copy todir="dist/OpenSim.app/Contents/Resources/"
             file="installer_files/OSX/OpenSimDocument.icns" />
@@ -307,5 +318,77 @@
             <arg value="./OpenSim-${app.version}.pkg"/>
         </exec>
 
+    </target>
+    <target name="build-linux" depends="build-zip,copy-visualizer,copy-models">
+        <!-- <echoproperties/> -->
+        <unzip src="dist/opensim.zip" dest="dist/installer" />
+        <copy todir="${opensim.dist.dir}/Resources/Code/GUI">
+            <fileset dir="Scripts" />
+        </copy>
+
+        <delete>
+            <fileset dir="${opensim.dist.dir}/opensim/modules/ext"
+                includes="**/jxbrowser-*mac*.jar"/>
+            <fileset dir="${opensim.dist.dir}/opensim/modules/ext"
+                includes="**/jxbrowser-*win*.jar"/>
+            <fileset file="${opensim.dist.dir}/bin/opensim.exe"/>
+            <fileset file="${opensim.dist.dir}/bin/opensim64.exe"/>
+            <fileset file="dist/opensim.zip"/>
+        </delete>
+
+        <!-- Copy the OpenSim API. -->
+        <copy todir="${opensim.dist.dir}">
+            <fileset dir="${api.dir}">
+                <!-- Don't need the java source code. -->
+                <exclude name="**/sdk/Java/org/**" />
+                <!-- Developers can build developer doxygen on their own. -->
+                <exclude name="**/html_developer/**" />
+            </fileset>
+        </copy>
+
+        <chmod file="${opensim.dist.dir}/bin/**" perm="755" />
+        <chmod file="${opensim.dist.dir}/sdk/Simbody/libexec/simbody/simbody-visualizer"
+            perm="755" />
+
+        <!-- Zip up Resources and delete the original Resources folder. -->
+        <zip basedir="${opensim.dist.dir}/Resources/" destfile="${opensim.dist.dir}/Resources.zip" />
+        <delete dir="${opensim.dist.dir}/Resources"/>
+
+        <replace file="${opensim.dist.dir}/etc/opensim.conf" value="${app.version}">
+            <replacefilter token="@VERSION@" />
+        </replace>
+
+        <copy tofile="${opensim.dist.dir}/LICENSE.txt"
+            file="installer_files/license_for_binary_distribution.txt"/>
+        <copy tofile="${opensim.dist.dir}/NOTICE.txt"
+            file="installer_files/notice_for_binary_distribution.txt"/>
+        <mkdir dir="${opensim.dist.dir}/third_party_license_texts"/>
+        <copy todir="${opensim.dist.dir}/third_party_license_texts/"
+            file="jfreechart/lgpl-3.0.txt"/>
+        <copy todir="${opensim.dist.dir}/third_party_license_texts/"
+            file="jfreechart/gpl-3.0.txt"/>
+        <copy todir="${opensim.dist.dir}/third_party_license_texts/"
+            file="visualViewer/src/org/opensim/topologyEditor/cddl.txt"/>
+
+        <copy todir="${opensim.dist.dir}/"
+            file="${installer-files.dir}/OpenSimLogoWhiteNoText.png" />
+        <copy todir="${opensim.dist.dir}/"
+            file="${installer-files.dir}/opensim.desktop" />
+        <copy todir="${opensim.dist.dir}/"
+            file="${installer-files.dir}/INSTALL" />
+
+        <tar destfile="${opensim.dist.dir}/../../OpenSim-${app.version}.tar.gz"
+            basedir="${opensim.dist.dir}/.."
+            excludes="OpenSim/bin/**,**/*.log,OpenSim/*.desktop,OpenSim/sdk/Simbody/libexec/simbody/simbody-visualizer,OpenSim/INSTALL"
+            defaultexcludes="yes"
+            longfile="posix"
+            compression="gzip">
+            <tarfileset dir="${opensim.dist.dir}" filemode="755" prefix="opensim">
+                <include name="bin/**" />
+                <include name="opensim.desktop" />
+                <include name="sdk/Simbody/libexec/simbody/simbody-visualizer" />
+                <include name="INSTALL" />
+            </tarfileset>
+        </tar>
     </target>
 </project>

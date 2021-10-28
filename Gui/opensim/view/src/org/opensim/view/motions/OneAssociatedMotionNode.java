@@ -42,6 +42,7 @@ import org.opensim.modeling.Storage;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ExperimentalForceSetNode;
 import org.opensim.view.experimentaldata.ExperimentalMarkerSetNode;
+import org.opensim.view.experimentaldata.ExperimentalSensorSetNode;
 import org.opensim.view.experimentaldata.MotionEditMotionObjectsAction;
 
 /**
@@ -123,6 +124,11 @@ public class OneAssociatedMotionNode extends OneMotionNode {
         names =dMotion.getForceNames();
         if (names !=null && names.size()>0){ // File had forces
              getChildren().add(new Node[]{new ExperimentalForceSetNode(dMotion)});
+        }
+        // Sensors
+        names = dMotion.getSensorNames();
+        if (names !=null && names.size()>0){ // File had sensors
+             getChildren().add(new Node[]{new ExperimentalSensorSetNode(dMotion)});
         }
     }
 

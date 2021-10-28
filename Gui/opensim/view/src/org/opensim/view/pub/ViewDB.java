@@ -176,6 +176,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             websocketdb.broadcastMessageJson(topMsg, null);
         }
     }
+
+    public void broadcastVisulaizerMessage(JSONObject json) {
+        websocketdb.broadcastMessageJson(json, null);
+    }
   
    class AppearanceChange {
        Model model;
@@ -1457,5 +1461,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         double zValue = JSONMessageHandler.convertObjectFromJsonToDouble(zString);
         Vec3 offsetAsVec3 = new Vec3(xValue, yValue, zValue);
         return offsetAsVec3;
+    }
+    public void broadcastVisualizerMessage(JSONObject json){
+        websocketdb.broadcastMessageJson(json, null);
     }
 }

@@ -313,7 +313,8 @@ public class ScaleToolModel extends Observable implements Observer {
          // Crash here
          processedModel = new Model(unscaledModel);
          processedModel.setName(scaleTool.getName());
-         processedModel.setInputFileName("");
+         String proposedFilename = unscaledModel.getInputFileName().replace(".osim", "_scaled.osim");
+         processedModel.setInputFileName(proposedFilename);
          processedModel.setOriginalModelPathFromModel(unscaledModel); // important to keep track of the original path so bone loading works
          //processedModel.setup();
 

@@ -41,13 +41,17 @@ import org.openide.DialogDisplayer;
 import org.openide.NotifyDescriptor;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
-import org.opensim.modeling.Mat33;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSenseUtilities;
+import org.opensim.modeling.Quaternion;
+import org.opensim.modeling.Rotation;
+import org.opensim.modeling.STOFileAdapterQuaternion;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;
+import org.opensim.modeling.TimeSeriesTableQuaternion;
 import org.opensim.modeling.Transform;
+import org.opensim.modeling.Units;
 import org.opensim.modeling.Vec3;
-import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.motions.MotionsDB;
 
@@ -75,6 +79,7 @@ public class AnnotatedMotion extends Storage {
     private double displayForceScale = .001;
     private String displayForceShape = "arrow";
     private Model model;
+    private Units units;
     /** Creates a new instance of AnnotatedMotion 
      * This constructor is called when a trc file is read (so we know it is 
      * Marker only data already.
@@ -147,22 +152,32 @@ public class AnnotatedMotion extends Storage {
         forces.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.BodyForceData));
         return forces;
     }
+    
+    public Vector<String> getSensorNames() {
+        Vector<String> sensors= getNamesOfObjectsOfType(ExperimentalDataItemType.OrientationData);
+        //sensors.addAll(getNamesOfObjectsOfType(ExperimentalDataItemType.OrientationData));
+        return sensors;
+    }
 
     private void setupPatterns() {
         patterns.add(0,  new String[]{"_vx", "_vy", "_vz", "_px", "_py", "_pz"});
         patterns.add(1,  new String[]{"_vx", "_vy", "_vz"});
         patterns.add(2,  new String[]{"_tx", "_ty", "_tz"});
         patterns.add(3,  new String[]{"_px", "_py", "_pz"});
-        patterns.add(4,  new String[]{"_1", "_2", "_3"});
+        // We place this pattern before "_1", "_2", "_3" so that quaternions are not mistakenly
+        // classified as PointData (they share suffixes)
+        patterns.add(4,  new String[]{"_1", "_2", "_3", "_4"});
+        patterns.add(5,  new String[]{"_1", "_2", "_3"});
         //patterns.add(5,  new String[]{"_x", "_y", "_z"}); removed so that Torques dont classify as points
-        patterns.add(5,  new String[]{"_fx", "_fy", "_fz"});
-         classifications.add(0, ExperimentalDataItemType.PointForceData);
+        patterns.add(6,  new String[]{"_fx", "_fy", "_fz"});
+        classifications.add(0, ExperimentalDataItemType.PointForceData);
         classifications.add(1, ExperimentalDataItemType.PointData);
         classifications.add(2, ExperimentalDataItemType.PointData);
         classifications.add(3, ExperimentalDataItemType.PointData);
-        classifications.add(4, ExperimentalDataItemType.PointData);
+        classifications.add(4, ExperimentalDataItemType.OrientationData);
+        classifications.add(5, ExperimentalDataItemType.PointData);
         //classifications.add(5, ExperimentalDataItemType.PointData);
-        classifications.add(5, ExperimentalDataItemType.BodyForceData);
+        classifications.add(6, ExperimentalDataItemType.BodyForceData);
          
     }
     public Vector<ExperimentalDataObject> classifyColumns() {
@@ -216,6 +231,9 @@ public class AnnotatedMotion extends Storage {
                                 break;
                             case BodyForceData:
                                  classified.add(new MotionObjectPointForce(columnType, baseName+prefix, i-1));
+                                break;
+                            case OrientationData:
+                                classified.add(new MotionObjectOrientation(columnType, baseName, i-1));
                                 break;
                         }                           
                             
@@ -369,13 +387,16 @@ public class AnnotatedMotion extends Storage {
           }
       }
   }
-
+  // handle transformed quaternions
   public void saveAs(String newFile, Vec3 eulerAngles) throws FileNotFoundException, IOException {
           if (newFile.toLowerCase().endsWith(".trc"))
              saveAsTRC(newFile, eulerAngles);
           else if (newFile.toLowerCase().endsWith(".mot"))
               saveAsMot(newFile, eulerAngles);
-          else 
+          else if (newFile.toLowerCase().endsWith(".sto") && getSensorNames().size() > 0){
+              saveAsQuaternionsSto(newFile, eulerAngles);
+          }
+          else
               DialogDisplayer.getDefault().notify(
                       new NotifyDescriptor.Message("Please specify either .trc or .mot file extension"));
   }
@@ -403,7 +424,9 @@ public class AnnotatedMotion extends Storage {
    */
         writer.write(getDataRate()+"\t"+
                 getCameraRate()+"\t"+
-                getSize()+"\t"+markerNames.size()+"\tmm\t"+
+                getSize()+"\t"+markerNames.size()+"\t"+
+                (units.getType()==Units.UnitType.Millimeters?"mm":"m")
+                        +"\t"+
                 getDataRate()+"\t"+ "1\t"+getSize());
         writer.newLine();
         writer.write("Frame#\tTime\t");
@@ -520,4 +543,20 @@ public class AnnotatedMotion extends Storage {
             }
         }
     }    
+
+    public void setUnits(Units units) {
+        this.units = units;
+    }
+
+    private void saveAsQuaternionsSto(String newFile, Vec3 eulerAngles) {
+        String origFile = MotionsDB.getInstance().getStorageFileName(this);
+        // Create TimeSeriesTableQuaternions from the file 
+        TimeSeriesTableQuaternion tstQ = new TimeSeriesTableQuaternion(origFile);
+        Transform simtkTransform = new Transform();
+        simtkTransform.R().setRotationToBodyFixedXYZ(eulerAngles);
+
+        OpenSenseUtilities.rotateOrientationTable(tstQ, simtkTransform.R());
+        STOFileAdapterQuaternion.write(tstQ, newFile);
+        
+    }
 }

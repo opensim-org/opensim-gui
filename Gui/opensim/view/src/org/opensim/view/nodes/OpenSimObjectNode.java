@@ -331,7 +331,7 @@ public class OpenSimObjectNode extends OpenSimNode {
             return ((OpenSimObjectNode)getParentNode()).getOwnerComponent();
         }
     }
-   protected void addDisplayOption(displayOption newOption)
+   final void addDisplayOption(displayOption newOption)
    {
       if( !getValidDisplayOptions().contains(newOption) )
          getValidDisplayOptions().add(newOption);

@@ -3,9 +3,31 @@ introduced with each new version, starting with version 4.1. When possible, we p
 GitHub issues or pull requests that
 are related to the items below. If there is no issue or pull
 request related to the change, then we may provide the commit.
+
+v4.3.1
+======
+
+v4.3
+====
+- Upgrade application to be based on the latest NetBeans platorm included with Apache NetBeans 12.3, from disconinued netbeans 8.2. The upgrade supports high DPI monitors.
+- IMUs on a model are now shown under the Other Components node in the navigator where they can be selected, shown/hidden. 
+- Tools that use Analyses (e.g. Analyze, ...) now have a new option for IMUDataReporter where Output signals are reported for IMUs on the model, or can be reported for user specified Frames.
+- Upgrade bindings to use SWIG 4.0.2 and carry doxygen to java and python files as comments.
+- Support display of Other components in the naviagtor view, including IMUs.
+- Implement setting of "report orientation errors" checkbox from IMUInverseKinematicsTool GUI
+
 v4.2
 ====
-- 
+- Merge PR [#1181](https://github.com/opensim-org/opensim-gui/pull/1181): Add build support for Linux (beta)
+- Fix issue [#1182](https://github.com/opensim-org/opensim-gui/issues/1182): Scaling model with custom geometry meshes loses custom geomerty
+- Support new logging system utilizing spdlog introduced in opensim-core.
+- Removed reference to kinematics of external loads from External Loads creation/editing dialog
+- Added option to visualize sensor data (quaternions) in the application (File ->Load Sensor Data)
+- Associate motion data now handles orientation sensors as well so that orientation triads follow motions
+- When recording videos, if the user starts playing back a motion, recording is restarted to first animation frame.
+- Allow users to change video format from scripting shell (support gif, jpg, png with setVisualizerOption("video_format", "png")). 
+- Add Tools for Calibrating model based on IMU data and to solve Inverse Kinematics problem from IMU data.
+- Fix issue where transforming trc marker data in the application always produces a file with "m" as units in header.
 
 v4.1
 ====
