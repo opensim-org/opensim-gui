@@ -1586,7 +1586,27 @@ public class Millard2012EquilibriumMuscleIterator {
    *         System (i.e., if initSystem has not been called)
    */
   public double getStateVariableValue(State state, String name) {
-    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getStateVariableValue(swigCPtr, this, State.getCPtr(state), state, name);
+    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getStateVariableValue__SWIG_0(swigCPtr, this, State.getCPtr(state), state, name);
+  }
+
+  /**
+   * Get the value of a state variable allocated by this Component.<br>
+   * <br>
+   * To connect this StateVariable as an input to another component (such as<br>
+   * a Reporter), use getOutput(name); each state variable has a<br>
+   * corresponding Output:<br>
+   * <br>
+   *  {@code 
+   foo.getInput("input1").connect(bar.getOutput(name));
+   }<br>
+   * <br>
+   * @param state   the State for which to get the value<br>
+   * <br>
+   * @throws ComponentHasNoSystem if this Component has not been added to a<br>
+   *         System (i.e., if initSystem has not been called)
+   */
+  public double getStateVariableValue(State state, ComponentPath path) {
+    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getStateVariableValue__SWIG_1(swigCPtr, this, State.getCPtr(state), state, ComponentPath.getCPtr(path), path);
   }
 
   /**
