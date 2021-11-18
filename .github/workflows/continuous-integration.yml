@@ -42,7 +42,7 @@ jobs:
       # Make sure the NetBeans installer is not corrupted.
       run: |
         (New-Object System.Net.WebClient).DownloadFile("https://www.apache.org/dyn/closer.cgi/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-windows-x64.exe", "Apache-NetBeans-12.3-bin-windows-x64.exe")
-        $expectedHash = "0695d87d9c72dcf3738672ba83eb273dda02066fa5eee80896cb6ccf79175840367a13d22ab3cb9838dffaa9a219dd1f73aee0e27c085e5310da2e3bbbc92b2c".ToUpper()
+        $expectedHash = "0695d87d9c72dcf3738672ba83eb273dda02066fa5eee80896cb6ccf79175840367a13d22ab3cb9838dffaa9a219dd1f73aee0e27c085e5310da2e3bbbc92b2c"
         $hashFromFile = Get-FileHash -Algorithm SHA512 -Path .\Apache-NetBeans-12.3-bin-windows-x64.exe
         if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
         .\Apache-NetBeans-12.3-bin-windows-x64.exe --silent | Out-Null # This installer is gregarious.
