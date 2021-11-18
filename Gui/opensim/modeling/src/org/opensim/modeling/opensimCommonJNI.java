@@ -1712,7 +1712,8 @@ public class opensimCommonJNI {
   public final static native long Component_updOutput(long jarg1, Component jarg1_, String jarg2);
   public final static native int Component_getModelingOption(long jarg1, Component jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void Component_setModelingOption(long jarg1, Component jarg1_, long jarg2, State jarg2_, String jarg3, int jarg4);
-  public final static native double Component_getStateVariableValue(long jarg1, Component jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native double Component_getStateVariableValue__SWIG_0(long jarg1, Component jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native double Component_getStateVariableValue__SWIG_1(long jarg1, Component jarg1_, long jarg2, State jarg2_, long jarg3, ComponentPath jarg3_);
   public final static native void Component_setStateVariableValue(long jarg1, Component jarg1_, long jarg2, State jarg2_, String jarg3, double jarg4);
   public final static native long Component_getStateVariableValues(long jarg1, Component jarg1_, long jarg2, State jarg2_);
   public final static native void Component_setStateVariableValues(long jarg1, Component jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
@@ -1778,7 +1779,8 @@ public class opensimCommonJNI {
   public final static native long ComponentIterator_getOutput(long jarg1, ComponentIterator jarg1_, String jarg2);
   public final static native int ComponentIterator_getModelingOption(long jarg1, ComponentIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void ComponentIterator_setModelingOption(long jarg1, ComponentIterator jarg1_, long jarg2, State jarg2_, String jarg3, int jarg4);
-  public final static native double ComponentIterator_getStateVariableValue(long jarg1, ComponentIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native double ComponentIterator_getStateVariableValue__SWIG_0(long jarg1, ComponentIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native double ComponentIterator_getStateVariableValue__SWIG_1(long jarg1, ComponentIterator jarg1_, long jarg2, State jarg2_, long jarg3, ComponentPath jarg3_);
   public final static native void ComponentIterator_setStateVariableValue(long jarg1, ComponentIterator jarg1_, long jarg2, State jarg2_, String jarg3, double jarg4);
   public final static native long ComponentIterator_getStateVariableValues(long jarg1, ComponentIterator jarg1_, long jarg2, State jarg2_);
   public final static native void ComponentIterator_setStateVariableValues(long jarg1, ComponentIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);

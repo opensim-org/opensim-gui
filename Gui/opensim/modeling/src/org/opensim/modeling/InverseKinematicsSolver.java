@@ -66,20 +66,36 @@ public class InverseKinematicsSolver extends AssemblySolver {
     super.delete();
   }
 
-  public InverseKinematicsSolver(Model model, SWIGTYPE_p_std__shared_ptrT_OpenSim__MarkersReference_t markersReference, SimTKArrayCoordinateReference coordinateReferences, double constraintWeight) {
-    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_0(Model.getCPtr(model), model, SWIGTYPE_p_std__shared_ptrT_OpenSim__MarkersReference_t.getCPtr(markersReference), SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
+  public InverseKinematicsSolver(Model model, SharedMarkersReference markersReference, SimTKArrayCoordinateReference coordinateReferences, double constraintWeight) {
+    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_0(Model.getCPtr(model), model, SharedMarkersReference.getCPtr(markersReference), markersReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
   }
 
-  public InverseKinematicsSolver(Model model, SWIGTYPE_p_std__shared_ptrT_OpenSim__MarkersReference_t markersReference, SimTKArrayCoordinateReference coordinateReferences) {
-    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_1(Model.getCPtr(model), model, SWIGTYPE_p_std__shared_ptrT_OpenSim__MarkersReference_t.getCPtr(markersReference), SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
+  public InverseKinematicsSolver(Model model, SharedMarkersReference markersReference, SimTKArrayCoordinateReference coordinateReferences) {
+    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_1(Model.getCPtr(model), model, SharedMarkersReference.getCPtr(markersReference), markersReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
   }
 
-  public InverseKinematicsSolver(Model model, SWIGTYPE_p_std__shared_ptrT_OpenSim__MarkersReference_t markersReference, OrientationsReference orientationsReference, SimTKArrayCoordinateReference coordinateReferences, double constraintWeight) {
-    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_2(Model.getCPtr(model), model, SWIGTYPE_p_std__shared_ptrT_OpenSim__MarkersReference_t.getCPtr(markersReference), OrientationsReference.getCPtr(orientationsReference), orientationsReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
+  public InverseKinematicsSolver(Model model, SharedMarkersReference markersReference, OrientationsReference orientationsReference, SimTKArrayCoordinateReference coordinateReferences, double constraintWeight) {
+    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_2(Model.getCPtr(model), model, SharedMarkersReference.getCPtr(markersReference), markersReference, OrientationsReference.getCPtr(orientationsReference), orientationsReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
   }
 
-  public InverseKinematicsSolver(Model model, SWIGTYPE_p_std__shared_ptrT_OpenSim__MarkersReference_t markersReference, OrientationsReference orientationsReference, SimTKArrayCoordinateReference coordinateReferences) {
-    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_3(Model.getCPtr(model), model, SWIGTYPE_p_std__shared_ptrT_OpenSim__MarkersReference_t.getCPtr(markersReference), OrientationsReference.getCPtr(orientationsReference), orientationsReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
+  public InverseKinematicsSolver(Model model, SharedMarkersReference markersReference, OrientationsReference orientationsReference, SimTKArrayCoordinateReference coordinateReferences) {
+    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_3(Model.getCPtr(model), model, SharedMarkersReference.getCPtr(markersReference), markersReference, OrientationsReference.getCPtr(orientationsReference), orientationsReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
+  }
+
+  public InverseKinematicsSolver(Model model, MarkersReference markersReference, SimTKArrayCoordinateReference coordinateReferences, double constraintWeight) {
+    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_4(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
+  }
+
+  public InverseKinematicsSolver(Model model, MarkersReference markersReference, SimTKArrayCoordinateReference coordinateReferences) {
+    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_5(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
+  }
+
+  public InverseKinematicsSolver(Model model, MarkersReference markersReference, OrientationsReference orientationsReference, SimTKArrayCoordinateReference coordinateReferences, double constraintWeight) {
+    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_6(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, OrientationsReference.getCPtr(orientationsReference), orientationsReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences, constraintWeight), true);
+  }
+
+  public InverseKinematicsSolver(Model model, MarkersReference markersReference, OrientationsReference orientationsReference, SimTKArrayCoordinateReference coordinateReferences) {
+    this(opensimSimulationJNI.new_InverseKinematicsSolver__SWIG_7(Model.getCPtr(model), model, MarkersReference.getCPtr(markersReference), markersReference, OrientationsReference.getCPtr(orientationsReference), orientationsReference, SimTKArrayCoordinateReference.getCPtr(coordinateReferences), coordinateReferences), true);
   }
 
   /**
