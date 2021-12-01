@@ -41,8 +41,8 @@ jobs:
     - name: Install Netbeans 12.3
       # Make sure the NetBeans installer is not corrupted.
       run: |
-        (New-Object System.Net.WebClient).DownloadFile("https://downloads.apache.org/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-windows-x64.exe", "Apache-NetBeans-12.3-bin-windows-x64.exe")
-        $expectedHash = "0695d87d9c72dcf3738672ba83eb273dda02066fa5eee80896cb6ccf79175840367a13d22ab3cb9838dffaa9a219dd1f73aee0e27c085e5310da2e3bbbc92b2c".ToUpper()
+        (New-Object System.Net.WebClient).DownloadFile("https://archive.apache.org/dist/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-windows-x64.exe", "Apache-NetBeans-12.3-bin-windows-x64.exe")
+        $expectedHash = "0695d87d9c72dcf3738672ba83eb273dda02066fa5eee80896cb6ccf79175840367a13d22ab3cb9838dffaa9a219dd1f73aee0e27c085e5310da2e3bbbc92b2c"
         $hashFromFile = Get-FileHash -Algorithm SHA512 -Path .\Apache-NetBeans-12.3-bin-windows-x64.exe
         if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
         .\Apache-NetBeans-12.3-bin-windows-x64.exe --silent | Out-Null # This installer is gregarious.
@@ -199,7 +199,7 @@ jobs:
         export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
         echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
         echo $JAVA_HOME
-        wget https://downloads.apache.org/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-macosx.dmg
+        wget https://archive.apache.org/dist/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-macosx.dmg
         hdiutil attach Apache-NetBeans-12.3-bin-macosx.dmg
         sudo installer -pkg /Volumes/Apache\ NetBeans\ 12.3/Apache\ NetBeans\ 12.3.pkg -target /
         sudo -k
@@ -250,7 +250,7 @@ jobs:
         make && make -j4 install
 
     - name: Build opensim-core
-      # if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
@@ -331,7 +331,7 @@ jobs:
     - name: Download and Install Netbeans
       if: steps.cache-netbeans.outputs.cache-hit != 'true'
       run: |
-        wget -q https://downloads.apache.org/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-linux-x64.sh
+        wget -q https://archive.apache.org/dist/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-linux-x64.sh
         chmod 755 Apache-NetBeans-12.3-bin-linux-x64.sh
         ./Apache-NetBeans-12.3-bin-linux-x64.sh --silent
         ls $HOME/netbeans-12.3
