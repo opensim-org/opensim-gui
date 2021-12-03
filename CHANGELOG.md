@@ -6,7 +6,10 @@ request related to the change, then we may provide the commit.
 
 v4.4
 ====
-
+- Upgrade visualizer codebase to later threejs version 126, jxBrowser to version 6.24 which was required to make visualizer code work/show.
+- Fix issue [#1319](https://github.com/opensim-org/opensim-gui/issues/1319): Undo/redo support for show-COM, show-Axes
+- Animate transition of camera to standard views.
+- 
 v4.3
 ====
 - Upgrade application to be based on the latest NetBeans platorm included with Apache NetBeans 12.3, from disconinued netbeans 8.2. The upgrade supports high DPI monitors.
