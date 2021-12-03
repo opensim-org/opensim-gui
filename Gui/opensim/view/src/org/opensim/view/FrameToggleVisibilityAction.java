@@ -23,6 +23,9 @@
 package org.opensim.view;
 
 import java.awt.event.ActionEvent;
+import javax.swing.undo.AbstractUndoableEdit;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
 import org.openide.nodes.Node;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
@@ -33,6 +36,8 @@ import org.opensim.modeling.FrameGeometry;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.threejs.ModelVisualizationJson;
+import static org.opensim.view.nodes.BodyToggleCOMAction.ShowCMForOneBodyNode;
+import org.opensim.view.nodes.OneBodyNode;
 import org.opensim.view.nodes.OneFrameNode;
 import org.opensim.view.pub.ViewDB;
 
@@ -87,17 +92,53 @@ public final class FrameToggleVisibilityAction extends BooleanStateAction {
         //super.actionPerformed(actionEvent);
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // TODO implement action body
-        boolean newState = !(super.getBooleanState());
+        final boolean newState = !(super.getBooleanState());
         for( int i=0;  i<selected.length;  i++ ){
             Node selectedNode = selected[i];
             if( selectedNode instanceof OneFrameNode ){
-                OneFrameNode frameNode = (OneFrameNode)selectedNode;
-                Model frameModel = frameNode.getModelForNode();
-                FrameToggleVisibilityAction.setFrameVisibility(frameNode, newState);
+                final OneFrameNode frameNode = (OneFrameNode)selectedNode;
+                ToggleFrameVisisbility(frameNode, newState);
+                AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
+                    public boolean canUndo() {
+                        return true;
+                    }
+
+                    public boolean canRedo() {
+                        return true;
+                    }
+
+                    public void undo() throws CannotUndoException {
+                        super.undo();
+                        ToggleFrameVisisbility(frameNode, !newState);
+                    }
+
+                    public void redo() throws CannotRedoException {
+                        super.redo();
+                        ToggleFrameVisisbility(frameNode, newState);
+                    }
+
+                    @Override
+                    public String getRedoPresentationName() {
+                        return "Redo Axis visibility change";
+                    }
+
+                    @Override
+                    public String getUndoPresentationName() {
+                        return "Undo Axis visibility change";
+                    }
+
+                };
+                ExplorerTopComponent.addUndoableEdit(auEdit);
+
             }
         }
         super.setBooleanState( newState );
         ViewDB.ViewDBGetInstanceRenderAll();
+    }
+
+    private void ToggleFrameVisisbility(OneFrameNode frameNode, boolean newState) {
+        Model frameModel = frameNode.getModelForNode();
+        FrameToggleVisibilityAction.setFrameVisibility(frameNode, newState);
     }
     
     //----------------------------------------------------------------------------- 
