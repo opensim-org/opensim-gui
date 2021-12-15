@@ -174,7 +174,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         setMaximumSize(new java.awt.Dimension(32767, 50));
         setMinimumSize(new java.awt.Dimension(0, 50));
         setOpaque(false);
-        setPreferredSize(new java.awt.Dimension(700, 50));
+        setPreferredSize(new java.awt.Dimension(800, 50));
 
         jPlaybackButtonsPanel.setToolTipText("Motion Controls");
         jPlaybackButtonsPanel.setMaximumSize(new java.awt.Dimension(32767, 16));
@@ -311,10 +311,11 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jMotionSlider.setMinimumSize(new java.awt.Dimension(168, 22));
         jMotionSlider.setPreferredSize(new java.awt.Dimension(400, 22));
 
+        jTimeTextField.setColumns(4);
+        jTimeTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jTimeTextField.setToolTipText("Current time");
-        jTimeTextField.setMaximumSize(new java.awt.Dimension(80, 19));
+        jTimeTextField.setMaximumSize(new java.awt.Dimension(100, 19));
         jTimeTextField.setMinimumSize(new java.awt.Dimension(50, 19));
-        jTimeTextField.setPreferredSize(new java.awt.Dimension(75, 19));
         jTimeTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTimeTextFieldFocusLost(evt);
@@ -333,7 +334,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
 
         jSpeedSpinner.setModel(smodel);
         jSpeedSpinner.setToolTipText("Play speed");
-        jSpeedSpinner.setMaximumSize(new java.awt.Dimension(50, 19));
+        jSpeedSpinner.setMaximumSize(new java.awt.Dimension(100, 19));
         jSpeedSpinner.setMinimumSize(new java.awt.Dimension(50, 19));
         jSpeedSpinner.setPreferredSize(jTimeTextField.getPreferredSize());
 
@@ -372,30 +373,27 @@ public class MotionControlJPanel extends javax.swing.JToolBar
 
         jStartTimeTextField.setEditable(false);
         jStartTimeTextField.setBackground(new java.awt.Color(224, 223, 227));
+        jStartTimeTextField.setColumns(4);
+        jStartTimeTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jStartTimeTextField.setText("0");
         jStartTimeTextField.setToolTipText("Initial time");
         jStartTimeTextField.setAutoscrolls(false);
         jStartTimeTextField.setBorder(null);
         jStartTimeTextField.setFocusable(false);
-        jStartTimeTextField.setMaximumSize(new java.awt.Dimension(80, 16));
+        jStartTimeTextField.setMaximumSize(new java.awt.Dimension(100, 16));
         jStartTimeTextField.setMinimumSize(new java.awt.Dimension(50, 16));
-        jStartTimeTextField.setPreferredSize(new java.awt.Dimension(80, 16));
 
         jEndTimeTextField.setEditable(false);
         jEndTimeTextField.setBackground(new java.awt.Color(224, 223, 227));
+        jEndTimeTextField.setColumns(5);
+        jEndTimeTextField.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         jEndTimeTextField.setText("100");
         jEndTimeTextField.setToolTipText("Final time");
         jEndTimeTextField.setAutoscrolls(false);
         jEndTimeTextField.setBorder(null);
         jEndTimeTextField.setFocusable(false);
-        jEndTimeTextField.setMaximumSize(new java.awt.Dimension(80, 16));
+        jEndTimeTextField.setMaximumSize(new java.awt.Dimension(100, 16));
         jEndTimeTextField.setMinimumSize(new java.awt.Dimension(50, 16));
-        jEndTimeTextField.setPreferredSize(new java.awt.Dimension(80, 16));
-        jEndTimeTextField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jEndTimeTextFieldActionPerformed(evt);
-            }
-        });
 
         jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD));
         jLabel1.setText("   Motion: ");
@@ -426,11 +424,11 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(layout.createSequentialGroup()
-                        .add(jStartTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(jStartTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                         .add(jPlaybackButtonsPanel, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jEndTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(jEndTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(jWrapToggleButton, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -444,13 +442,13 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
                             .add(org.jdesktop.layout.GroupLayout.LEADING, jWrapToggleButton, 0, 0, Short.MAX_VALUE)
                             .add(org.jdesktop.layout.GroupLayout.LEADING, layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                                .add(jTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                                .add(jTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                                 .add(jLabelForTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                             .add(org.jdesktop.layout.GroupLayout.LEADING, jMotionSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .add(0, 0, 0)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(jStartTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jEndTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                            .add(jStartTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jEndTimeTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .add(layout.createSequentialGroup()
                         .addContainerGap()
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
@@ -459,7 +457,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                     .add(layout.createSequentialGroup()
                         .add(22, 22, 22)
                         .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(jSpeedSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(jSpeedSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                             .add(jLabelForSpeedSpinner, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
                     .add(layout.createSequentialGroup()
                         .add(22, 22, 22)
@@ -578,10 +576,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           jPlayButton.setSelected(true);
       }
     }//GEN-LAST:event_jPlayButtonActionPerformed
-
-    private void jEndTimeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEndTimeTextFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jEndTimeTextFieldActionPerformed
     
     
     public void stateChanged(ChangeEvent e) 
