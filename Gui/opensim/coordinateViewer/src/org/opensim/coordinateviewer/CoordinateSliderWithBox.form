@@ -22,7 +22,7 @@
           <Group type="102" alignment="0" attributes="0">
               <Component id="jCoordinateNameLabel" min="-2" pref="100" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jFormattedTextField" min="-2" pref="80" max="-2" attributes="0"/>
+              <Component id="jFormattedTextField" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
               <Component id="jLockedCheckBox" min="-2" pref="20" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
@@ -51,6 +51,7 @@
   <SubComponents>
     <Component class="javax.swing.JFormattedTextField" name="jFormattedTextField">
       <Properties>
+        <Property name="columns" type="int" value="4"/>
         <Property name="horizontalAlignment" type="int" value="11"/>
         <Property name="text" type="java.lang.String" value="-123.456"/>
         <Property name="toolTipText" type="java.lang.String" value="Current value"/>
