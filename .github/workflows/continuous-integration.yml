@@ -145,7 +145,7 @@ jobs:
   mac:
     name: Mac
 
-    runs-on: macos-latest
+    runs-on: macos-10.15
 
     steps:
     - name: Checkout opensim-gui
@@ -250,7 +250,7 @@ jobs:
         make && make -j4 install
 
     - name: Build opensim-core
-      if: steps.cache-core.outputs.cache-hit != 'true'
+      # if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
