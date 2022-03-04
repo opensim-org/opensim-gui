@@ -9,8 +9,11 @@
 package org.opensim.modeling;
 
 /**
- *  This goal allows you to use any (double, or scalar) Output in the model<br>
- * as the integrand of a goal.<br>
+ *  This goal allows you to use model Outputs of type double, SimTK::Vec3, and<br>
+ * SimTK::SpatialVec in the integrand of a goal. By default, when using vector<br>
+ * type Outputs, the norm of the vector is minimized, but you can also minimize<br>
+ * a specific element of a vector Output via `setOutputIndex()`. You can also<br>
+ * specify the exponent of the value in the integrand via `setExponent()`.<br>
  * 
  */
 public class MocoOutputGoal extends MocoGoal {
@@ -108,6 +111,34 @@ public class MocoOutputGoal extends MocoGoal {
 
   public boolean getDivideByMass() {
     return opensimMocoJNI.MocoOutputGoal_getDivideByMass(swigCPtr, this);
+  }
+
+  /**
+   *  Set the exponent applied to the output value in the integrand. This<br>
+   *     exponent is applied when minimizing the norm of a vector type output. 
+   */
+  public void setExponent(int exponent) {
+    opensimMocoJNI.MocoOutputGoal_setExponent(swigCPtr, this, exponent);
+  }
+
+  public int getExponent() {
+    return opensimMocoJNI.MocoOutputGoal_getExponent(swigCPtr, this);
+  }
+
+  /**
+   *  Set the index to the value to be minimized when a vector type<br>
+   *     Output is specified. For SpatialVec Outputs, indices 0, 1, and 2<br>
+   *     refer to the rotational components and indices 3, 4, and 5 refer<br>
+   *     to the translational components. A value of -1 indicates to<br>
+   *     minimize the vector norm. If an index for a type double Output<br>
+   *     is provided, an exception is thrown. 
+   */
+  public void setOutputIndex(int index) {
+    opensimMocoJNI.MocoOutputGoal_setOutputIndex(swigCPtr, this, index);
+  }
+
+  public int getOutputIndex() {
+    return opensimMocoJNI.MocoOutputGoal_getOutputIndex(swigCPtr, this);
   }
 
 }
