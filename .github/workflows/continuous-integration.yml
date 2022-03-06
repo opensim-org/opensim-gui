@@ -159,9 +159,7 @@ jobs:
         
     - name: Install packages
       run: |
-        brew install cmake pkgconfig autoconf libtool automake wget pcre doxygen python@3.8
-        # brew unlink python@3.9
-        brew link --overwrite python@3.8
+        brew install cmake pkgconfig autoconf libtool automake wget pcre doxygen
         brew reinstall gcc
         pip3 install numpy==1.20.2
         gfortran -v
