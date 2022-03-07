@@ -1082,4 +1082,15 @@ public class DeGrooteFregly2016Muscle extends Muscle {
     opensimActuatorsAnalysesToolsJNI.DeGrooteFregly2016Muscle_replaceMuscles__SWIG_1(Model.getCPtr(model), model);
   }
 
+  /**
+   *  <br>
+   *  <br>
+   *  Adjust the properties of the muscle after the model has been scaled. The<br>
+   *  optimal fiber length and tendon slack length are each multiplied by the<br>
+   *  ratio of the current path length and the path length before scaling.
+   */
+  public void extendPostScale(State s, ScaleSet scaleSet) {
+    opensimActuatorsAnalysesToolsJNI.DeGrooteFregly2016Muscle_extendPostScale(swigCPtr, this, State.getCPtr(s), s, ScaleSet.getCPtr(scaleSet), scaleSet);
+  }
+
 }

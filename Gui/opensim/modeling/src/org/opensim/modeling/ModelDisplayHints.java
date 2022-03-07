@@ -464,4 +464,18 @@ public class ModelDisplayHints extends OpenSimObject {
     this(opensimCommonJNI.new_ModelDisplayHints(), true);
   }
 
+  /**
+   *  Turn off visualization completely, only use for API/modeling.<br>
+   *     Meshes will not be loaded, path-wrapping intermediate points will<br>
+   *     not be computed, MomentArm computations are not affected however.<br>
+   *     Intentionally there's no reverse API to turn on visualization downstream.
+   */
+  public void disableVisualization() {
+    opensimCommonJNI.ModelDisplayHints_disableVisualization(swigCPtr, this);
+  }
+
+  public boolean isVisualizationEnabled() {
+    return opensimCommonJNI.ModelDisplayHints_isVisualizationEnabled(swigCPtr, this);
+  }
+
 }
