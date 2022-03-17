@@ -291,8 +291,11 @@ public class ModelVisualizationJson extends JSONObject {
                 UUID cppUuid = retrieveUuidFromJson(bpptInBodyJson);
                 addComponentToUUIDMap(cpp, cppUuid);
                 //pathpoint_jsonArr.add(cppUuid.toString());
-                firstIndex = secondIndex;
-                firstPoint = secondPoint;            
+                int tempIndex = ppointSetIndex;
+                while (!pathPointSetNoWrap.get(tempIndex).isActive(state))
+                    tempIndex--;
+                secondPoint = pathPointSetNoWrap.get(tempIndex);
+                secondIndex = tempIndex;        
             }
             else { // Wrapping encountered
                 
@@ -1173,10 +1176,32 @@ public class ModelVisualizationJson extends JSONObject {
     }
 
     private Vec3 computePointLocationFromNeighbors(AbstractPathPoint prePoint, final PhysicalFrame parentFrame, AbstractPathPoint postPoint, double ratio) {
-        Vec3 localLocation = prePoint.getLocation(state);
-        Vec3 preLocation = prePoint.getBody().findStationLocationInAnotherFrame(state, localLocation, parentFrame);
-        localLocation = postPoint.getLocation(state);
-        Vec3 postLocation = postPoint.getBody().findStationLocationInAnotherFrame(state, localLocation, parentFrame);
+        AbstractPathPoint activePrePoint = prePoint;
+        AbstractPathPoint activePostPoint = postPoint;
+        GeometryPath gp=null;
+        if(!activePrePoint.isActive(state)){
+            // traversebackward to first active point
+            gp = GeometryPath.safeDownCast(activePrePoint.getOwner());
+            PathPointSet pathPts = gp.getPathPointSet();
+            int idx = pathPts.getIndex(activePrePoint);
+            while (idx >=0 && !pathPts.get(idx).isActive(state))
+                idx--;
+            activePrePoint = pathPts.get(idx);
+        }
+        Vec3 localLocation = activePrePoint.getLocation(state);
+        Vec3 preLocation = activePrePoint.getBody().findStationLocationInAnotherFrame(state, localLocation, parentFrame);
+        if (!activePostPoint.isActive(state)){
+            if (gp==null)
+                gp = GeometryPath.safeDownCast(activePostPoint.getOwner());
+            PathPointSet pathPts = gp.getPathPointSet();
+            int idx = pathPts.getIndex(activePostPoint);
+            while (idx <= pathPts.getSize()-1 && !pathPts.get(idx).isActive(state))
+                idx++;
+            activePostPoint = pathPts.get(idx);
+            
+        }
+        localLocation = activePostPoint.getLocation(state);
+        Vec3 postLocation = activePostPoint.getBody().findStationLocationInAnotherFrame(state, localLocation, parentFrame);
         Vec3 retVec3 = new Vec3();
         for (int i =0; i < 3; i++){
             retVec3.set(i, (preLocation.get(i)*(1-ratio)+postLocation.get(i)*ratio));
@@ -1192,6 +1217,7 @@ public class ModelVisualizationJson extends JSONObject {
      */
     private void createComputedPathPoints(int count, AbstractPathPoint lastPathPoint, AbstractPathPoint currentPathPoint, 
             JSONArray points, JSONArray activeState) {
+        //System.out.println("Creating computed pathpoints between:"+lastPathPoint.getName()+" and "+currentPathPoint.getName());
         GeometryPath gp = GeometryPath.safeDownCast(lastPathPoint.getOwner());
         UUID matuuid = mapGeometryPathToPathPointMaterialUUID.get(gp);
         JSONObject bodyJson = mapBodyIndicesToJson.get(0); // These points live in Ground
@@ -1472,6 +1498,12 @@ public class ModelVisualizationJson extends JSONObject {
                 // if intermediate points aren't computed, mark as such
              }
             else if (secondIndex == -1){ // Conditional Path point that's inactive
+                ConditionalPathPoint cpp = ConditionalPathPoint.safeDownCast(secondPoint);
+                int tempIndex = ppointSetIndex;
+                while (!pathPointSetNoWrap.get(tempIndex).isActive(state))
+                    tempIndex--;
+                secondPoint = pathPointSetNoWrap.get(tempIndex);
+                secondIndex = tempIndex;
             }
             else {
                 // Reset all intermediate points to computed position in case wrap was disengaged, they will be updated below
@@ -1681,7 +1713,11 @@ public class ModelVisualizationJson extends JSONObject {
             }
             else if (secondIndex == -1){ // Conditional Path point that's inactive
                 ConditionalPathPoint cpp = ConditionalPathPoint.safeDownCast(secondPoint);
-                //System.out.println("Not found in path, ppt:"+secondPoint.getName());
+                //System.out.println("Not found in path, ppt:"+secondPoint.getName()+" assume Conditional inactive");
+                if (numWrapObjects > 0){
+                    // instead of secondPoint move dow to first Active poit
+                    createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr, pathpointActive_jsonArr);
+                }
                 pathpoint_uuid = addComputedPathPointObjectToParent(ppointSetIndex, pathPointSetNoWrap, pathpt_mat_uuid.toString(), 
                         visible);
                 pointAdded = true;
@@ -1691,8 +1727,13 @@ public class ModelVisualizationJson extends JSONObject {
                 mapUUIDToComponent.put(pathpoint_uuid, cpp);                
                 pathpointActive_jsonArr.add(false);
                 pathpoint_jsonArr.add(pathpoint_uuid.toString());
-                firstIndex = secondIndex;
-                firstPoint = secondPoint;            
+                // traverse backward to an active point
+                int tempIndex = ppointSetIndex;
+                while (!pathPointSetNoWrap.get(tempIndex).isActive(state))
+                    tempIndex--;
+                secondPoint = pathPointSetNoWrap.get(tempIndex);
+                secondIndex = tempIndex;
+
             }
             else { // Wrapping encountered
                 for (int wrappointIndex = firstIndex + 1; wrappointIndex < secondIndex; wrappointIndex++) {
