@@ -239,7 +239,7 @@ public class ModelVisualizationJson extends JSONObject {
     private JSONObject createPathVisualization(GeometryPath path, UUID uuidToReuse, JSONArray pathpoint_jsonArr) {
         
         UUID pathpointmat_uuid =mapGeometryPathToPathPointMaterialUUID.get(path);
-        UUID pathmat_uuid = pathMaterials.get(path);
+        UUID pathmat_uuid = pathToVisualizationInfoMap.get(path).getMaterialID();
         boolean pointsVisible = true;//pathDisplayStatus.get(path);
         // Create plain Geometry with vertices at PathPoints it will have 0 vertices
         // but will be populated live in the visualizer from the Pathppoints
@@ -253,22 +253,22 @@ public class ModelVisualizationJson extends JSONObject {
         int numWrapObjects = path.getWrapSet().getSize();
         if (numWrapObjects > 1)
             pathWrapCurrent.put(path, new ArrayList<PathWrapPoint>()); // Keep track of # current Wraps
-        final PathPointSet pathPointSetNoWrap = path.getPathPointSet();
+        final PathPointSet pathPointSetFromProperty = path.getPathPointSet();
         // Create viz for currentPoint
         int i=0;
-        AbstractPathPoint firstPoint = pathPointSetNoWrap.get(i);
+        AbstractPathPoint firstPoint = pathPointSetFromProperty.get(i);
         JSONObject pointJson = createPathPointObjectJson(firstPoint, firstPoint.getName(), true, null, pathpointmat_uuid.toString(), pointsVisible);
         addParentUuid(firstPoint, pointJson);
         pathpoint_jsonArr.add(pointJson);
-        // create visuals for pathPointSetNoWrap
+        // create visuals for pathPointSetFromProperty
          int firstIndex = 0; // by construction
        
         boolean hasWrapping = (numWrapObjects > 0);
         ArrayPathPoint actualPath = path.getCurrentPath(state);
         int numIntermediatePoints = NUM_PATHPOINTS_PER_WRAP_OBJECT * numWrapObjects;
-        for (int ppointSetIndex=1; ppointSetIndex < pathPointSetNoWrap.getSize(); ppointSetIndex++) {
-            // Consider the segment between pathPointSetNoWrap[ppointSetIndex], ppointSetIndex+1
-            AbstractPathPoint secondPoint = pathPointSetNoWrap.get(ppointSetIndex);
+        for (int ppointSetIndex=1; ppointSetIndex < pathPointSetFromProperty.getSize(); ppointSetIndex++) {
+            // Consider the segment between pathPointSetFromProperty[ppointSetIndex], ppointSetIndex+1
+            AbstractPathPoint secondPoint = pathPointSetFromProperty.get(ppointSetIndex);
             // Find points in actual path
              int secondIndex = actualPath.findIndex(secondPoint);
              boolean pointAdded = false;
@@ -282,7 +282,7 @@ public class ModelVisualizationJson extends JSONObject {
             else if (secondIndex == -1){ // Conditional Path point that's inactive
                 ConditionalPathPoint cpp = ConditionalPathPoint.safeDownCast(secondPoint);
                 //System.out.println("Not found in path, ppt:"+secondPoint.getName());
-                Vec3 computedLocation = computePathPointLocation(secondIndex, pathPointSetNoWrap);
+                Vec3 computedLocation = computePathPointLocation(secondIndex, pathPointSetFromProperty);
                 JSONObject bpptInBodyJson = createPathPointObjectJson(cpp, "", false, computedLocation, 
                         pathpointmat_uuid.toString(), pointsVisible);
                 addParentUuid(cpp, bpptInBodyJson);
@@ -292,9 +292,9 @@ public class ModelVisualizationJson extends JSONObject {
                 addComponentToUUIDMap(cpp, cppUuid);
                 //pathpoint_jsonArr.add(cppUuid.toString());
                 int tempIndex = ppointSetIndex;
-                while (!pathPointSetNoWrap.get(tempIndex).isActive(state))
+                while (!pathPointSetFromProperty.get(tempIndex).isActive(state))
                     tempIndex--;
-                secondPoint = pathPointSetNoWrap.get(tempIndex);
+                secondPoint = pathPointSetFromProperty.get(tempIndex);
                 secondIndex = tempIndex;        
             }
             else { // Wrapping encountered
@@ -1427,7 +1427,7 @@ public class ModelVisualizationJson extends JSONObject {
     ///// PATH MANAGEMENT HERE DOWN, pending move to a different class
     ///////////////////////////////////////////////////////////////////////////
     // List of paths used for generating visualizer frames
-    private final HashMap<GeometryPath, UUID> pathMaterials = new HashMap<GeometryPath, UUID>();
+    private final HashMap<GeometryPath, PathVisualizationInfo> pathToVisualizationInfoMap = new HashMap<GeometryPath, PathVisualizationInfo>();
     private final HashMap<GeometryPath, UUID> pathList = new HashMap<GeometryPath, UUID>();
     private final HashMap<GeometryPath, ArrayList<PathWrapPoint>> pathWrapCurrent = new HashMap<GeometryPath, ArrayList<PathWrapPoint>>();
     // List of all Components that need special treatment as in not statically attached:
@@ -1483,14 +1483,14 @@ public class ModelVisualizationJson extends JSONObject {
         }
         JSONArray pathpointJsonArray = pathsWithWrapping.get(path);
         int numWrapObjects = path.getWrapSet().getSize();
-        PathPointSet pathPointSetNoWrap = path.getPathPointSet();
+        PathPointSet pathPointSetFromProperty = path.getPathPointSet();
 
         int firstIndex = 0; // by construction
-        AbstractPathPoint firstPoint = pathPointSetNoWrap.get(firstIndex);
+        AbstractPathPoint firstPoint = pathPointSetFromProperty.get(firstIndex);
         int numIntermediatePoints = NUM_PATHPOINTS_PER_WRAP_OBJECT * numWrapObjects;
-        for (int ppointSetIndex=1; ppointSetIndex < pathPointSetNoWrap.getSize(); ppointSetIndex++) {
-            // Consider the segment between pathPointSetNoWrap[ppointSetIndex], ppointSetIndex+1
-            AbstractPathPoint secondPoint = pathPointSetNoWrap.get(ppointSetIndex);
+        for (int ppointSetIndex=1; ppointSetIndex < pathPointSetFromProperty.getSize(); ppointSetIndex++) {
+            // Consider the segment between pathPointSetFromProperty[ppointSetIndex], ppointSetIndex+1
+            AbstractPathPoint secondPoint = pathPointSetFromProperty.get(ppointSetIndex);
             // Find points in actual path
              int secondIndex = actualPath.findIndex(secondPoint);
             //different scenarios depending on whether and where we find 
@@ -1500,9 +1500,9 @@ public class ModelVisualizationJson extends JSONObject {
             else if (secondIndex == -1){ // Conditional Path point that's inactive
                 ConditionalPathPoint cpp = ConditionalPathPoint.safeDownCast(secondPoint);
                 int tempIndex = ppointSetIndex;
-                while (!pathPointSetNoWrap.get(tempIndex).isActive(state))
+                while (!pathPointSetFromProperty.get(tempIndex).isActive(state))
                     tempIndex--;
-                secondPoint = pathPointSetNoWrap.get(tempIndex);
+                secondPoint = pathPointSetFromProperty.get(tempIndex);
                 secondIndex = tempIndex;
             }
             else {
@@ -1651,7 +1651,10 @@ public class ModelVisualizationJson extends JSONObject {
         mat_json.put("name", path.getAbsolutePathString()+"Mat");
         mat_json.put("skinning", true);
         json_materials.add(mat_json);
-        pathMaterials.put(path, mat_uuid);
+        // create PathVisualiztionInfo object for the Path for book-keeping
+        PathVisualizationInfo pathVisInfo = new PathVisualizationInfo(path);
+        pathVisInfo.setMaterialID(mat_uuid);
+        pathToVisualizationInfoMap.put(path, pathVisInfo);
         // Repeat for pathpointMaterial
         Map<String, Object> pathpt_mat_json = new LinkedHashMap<String, Object>();
         UUID pathpt_mat_uuid = UUID.randomUUID();
@@ -1672,7 +1675,7 @@ public class ModelVisualizationJson extends JSONObject {
         if (numWrapObjects > 1)
             pathWrapCurrent.put(path, new ArrayList<PathWrapPoint>()); // Keep track of current Wraps
 
-        final PathPointSet pathPointSetNoWrap = path.getPathPointSet();
+        final PathPointSet pathPointSetFromProperty = path.getPathPointSet();
         
         json_geometries.add(pathGeomJson);
         JSONArray pathpoint_jsonArr = new JSONArray();
@@ -1682,25 +1685,24 @@ public class ModelVisualizationJson extends JSONObject {
         mapGeometryPathToPathPointMaterialUUID.put(path, pathpt_mat_uuid);
         // Create viz for currentPoint
         int i=0;
-        AbstractPathPoint firstPoint = pathPointSetNoWrap.get(i);
+        AbstractPathPoint firstPoint = pathPointSetFromProperty.get(i);
         UUID pathpoint_uuid = addPathPointObjectToParent(firstPoint, pathpt_mat_uuid.toString(), visible);
         // Fix issue #2569 where moving pathpoint is not handled properly if first in path
         if (MovingPathPoint.safeDownCast(firstPoint) != null) {
                 movingComponents.put(firstPoint, pathpoint_uuid);
-                //System.out.println("Process Moving Path point "+pathPoint.getName());
         }
         pathpointActive_jsonArr.add(true);
         addComponentToUUIDMap(firstPoint, pathpoint_uuid);
         pathpoint_jsonArr.add(pathpoint_uuid.toString());
-        // create visuals for pathPointSetNoWrap
+        // create visuals for pathPointSetFromProperty
          int firstIndex = 0; // by construction
        
-        boolean hasWrapping = (numWrapObjects > 0);
+        boolean hasWrapping = pathVisInfo.isWrapping();
         ArrayPathPoint actualPath = path.getCurrentPath(state);
         int numIntermediatePoints = NUM_PATHPOINTS_PER_WRAP_OBJECT * numWrapObjects;
-        for (int ppointSetIndex=1; ppointSetIndex < pathPointSetNoWrap.getSize(); ppointSetIndex++) {
-            // Consider the segment between pathPointSetNoWrap[ppointSetIndex], ppointSetIndex+1
-            AbstractPathPoint secondPoint = pathPointSetNoWrap.get(ppointSetIndex);
+        for (int ppointSetIndex=1; ppointSetIndex < pathPointSetFromProperty.getSize(); ppointSetIndex++) {
+            // Consider the segment between pathPointSetFromProperty[ppointSetIndex], ppointSetIndex+1
+            AbstractPathPoint secondPoint = pathPointSetFromProperty.get(ppointSetIndex);
             // Find points in actual path
              int secondIndex = actualPath.findIndex(secondPoint);
              boolean pointAdded = false;
@@ -1718,7 +1720,7 @@ public class ModelVisualizationJson extends JSONObject {
                     // instead of secondPoint move dow to first Active poit
                     createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr, pathpointActive_jsonArr);
                 }
-                pathpoint_uuid = addComputedPathPointObjectToParent(ppointSetIndex, pathPointSetNoWrap, pathpt_mat_uuid.toString(), 
+                pathpoint_uuid = addComputedPathPointObjectToParent(ppointSetIndex, pathPointSetFromProperty, pathpt_mat_uuid.toString(), 
                         visible);
                 pointAdded = true;
                 ArrayList<UUID> comp_uuids = new ArrayList<UUID>();
@@ -1729,9 +1731,9 @@ public class ModelVisualizationJson extends JSONObject {
                 pathpoint_jsonArr.add(pathpoint_uuid.toString());
                 // traverse backward to an active point
                 int tempIndex = ppointSetIndex;
-                while (!pathPointSetNoWrap.get(tempIndex).isActive(state))
+                while (!pathPointSetFromProperty.get(tempIndex).isActive(state))
                     tempIndex--;
-                secondPoint = pathPointSetNoWrap.get(tempIndex);
+                secondPoint = pathPointSetFromProperty.get(tempIndex);
                 secondIndex = tempIndex;
 
             }
