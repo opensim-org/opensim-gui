@@ -6,6 +6,7 @@
 package org.opensim.threejs;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 import java.util.Vector;
@@ -21,7 +22,8 @@ import org.opensim.modeling.WrapObject;
  */
 public class PathVisualizationInfo {
 
-    ArrayList<Vector<WrapObject>> pathSegmentWrapping = new ArrayList<Vector<WrapObject>>();
+    private ArrayList<Vector<WrapObject>> pathSegmentWrapping = new ArrayList<Vector<WrapObject>>();
+    private final HashMap<Integer, Integer> mapSegmentNumberToVisualizerPointIndex = new HashMap<Integer, Integer>();
     private boolean wrapping=false;
     private UUID material_uuid;
     public PathVisualizationInfo(GeometryPath path) {
@@ -39,7 +41,7 @@ public class PathVisualizationInfo {
             // -1 means unspecified, assume all segments can wrap
             if (start==-1 && end ==-1){
                 start = 1;
-                end = pathPointSet.getSize()-1;
+                end = pathPointSet.getSize();
             }
                 
             // Segments start to end-1 can wrap around pathWrap.WrapObject
@@ -65,5 +67,11 @@ public class PathVisualizationInfo {
     }
     int getNumWrapObjectsForSegment(int segIndex){
         return pathSegmentWrapping.get(segIndex).size();
+    }
+    void setStartVisualizerPointIndexForSegment(int segment, int index){
+        mapSegmentNumberToVisualizerPointIndex.put(segment, index);
+    }
+    int getStartVisualizerPointIndexForSegment(int segment){
+        return mapSegmentNumberToVisualizerPointIndex.get(segment);
     }
 }
