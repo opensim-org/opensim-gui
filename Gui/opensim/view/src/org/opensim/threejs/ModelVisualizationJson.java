@@ -1830,7 +1830,7 @@ public class ModelVisualizationJson extends JSONObject {
         int used=0;
         int lastIndex =0;
         for (int idx =0; idx < pointCount.size(); idx++){
-            int n = pointCount.get(idx) / totalCount*numIntermediatePoints;
+            int n = pointCount.get(idx) *numIntermediatePoints / totalCount;
             visPointCount.add(n);
             used += n;
             if (n > 0)
