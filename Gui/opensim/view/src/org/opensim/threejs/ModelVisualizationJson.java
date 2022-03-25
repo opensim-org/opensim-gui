@@ -309,7 +309,6 @@ public class ModelVisualizationJson extends JSONObject {
                             double step = 1.0/(indicesToUse.length+1.0);
                             JSONObject bodyJson = mapBodyIndicesToJson.get(0); // These points live in Ground
                             //JSONArray children = (JSONArray) bodyJson.get("children");
-                            ArrayList<UUID> wrapPointUUIDs = new ArrayList<UUID>();
                             for (int j = 0; j < indicesToUse.length; j++) {
                                 Vec3 globalLocation = wrapPtsFrame.findStationLocationInAnotherFrame(state, pathwrap.get(indicesToUse[j]), mapBodyIndicesToFrames.get(0));
                                 JSONObject bpptInBodyJson = createPathPointObjectJson(null, "", false, globalLocation, pathpointmat_uuid.toString(), false);
@@ -318,13 +317,11 @@ public class ModelVisualizationJson extends JSONObject {
                                 //children.add(bpptInBodyJson);
                                 //pathpoint_jsonArr.add(ppt_uuid.toString());
                                 pathpoint_jsonArr.add(bpptInBodyJson);
-                                wrapPointUUIDs.add(ppt_uuid);
                                 
                                 // Also create a computed ppt for use when wrapping is inactive
                                 computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(firstPoint, secondPoint, NEAR_END));
                                 
                             }
-                            wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
                             // Add new pathWrapPoint to pathWrapCurrent
                             ArrayList<PathWrapPoint> currentWrap = pathWrapCurrent.get(path);
                             if (currentWrap!= null){
@@ -1748,7 +1745,6 @@ public class ModelVisualizationJson extends JSONObject {
                             double step = 1.0/(indicesToUse.length+1.0);
                             JSONObject bodyJson = mapBodyIndicesToJson.get(0); // These points live in Ground
                             JSONArray children = (JSONArray) bodyJson.get("children");
-                            ArrayList<UUID> wrapPointUUIDs = new ArrayList<UUID>();
                             for (int j = 0; j < indicesToUse.length; j++) {
                                 Vec3 globalLocation = wrapPtsFrame.findStationLocationInAnotherFrame(state, pathwrap.get(indicesToUse[j]), mapBodyIndicesToFrames.get(0));
                                 JSONObject bpptInBodyJson = createPathPointObjectJson(null, "", false, globalLocation, pathpt_mat_uuid.toString(), false);
@@ -1756,12 +1752,10 @@ public class ModelVisualizationJson extends JSONObject {
                                 children.add(bpptInBodyJson);
                                 pathpoint_jsonArr.add(ppt_uuid.toString());
                                 pathpointActive_jsonArr.add(false);
-                                wrapPointUUIDs.add(ppt_uuid);
                                 // Also create a computed ppt for use when wrapping is inactive
                                 computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(firstPoint, secondPoint, NEAR_END));
                                 
                             }
-                            wrapPathPoints.put(pathWrapPoint, wrapPointUUIDs);
                             ArrayList<PathWrapPoint> currentWrap = pathWrapCurrent.get(path);
                             if (currentWrap!= null){ // only in case multiple wrap objects this would be non-null
                                 currentWrap.add(pathWrapPoint);
