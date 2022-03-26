@@ -1815,7 +1815,7 @@ public class ModelVisualizationJson extends JSONObject {
             PathWrapPoint pathWrapPoint = PathWrapPoint.safeDownCast(actualPath.get(wrappointIndex));
             pointCount.add(relIndex, 0);
             if ((pathWrapPoint != null)){
-                int nextCount = pathWrapPoint.getWrapPath().getSize();
+                int nextCount = pathWrapPoint.getWrapPath(state).getSize();
                 pointCount.set(relIndex, nextCount);
                 totalCount += nextCount;
             }
