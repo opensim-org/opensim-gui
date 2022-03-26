@@ -1417,6 +1417,8 @@ public class opensimCommonJNI {
   public final static native long ModelDisplayHints_upd_show_debug_geometry__SWIG_1(long jarg1, ModelDisplayHints jarg1_);
   public final static native void ModelDisplayHints_set_show_debug_geometry__SWIG_1(long jarg1, ModelDisplayHints jarg1_, boolean jarg2);
   public final static native long new_ModelDisplayHints();
+  public final static native void ModelDisplayHints_disableVisualization(long jarg1, ModelDisplayHints jarg1_);
+  public final static native boolean ModelDisplayHints_isVisualizationEnabled(long jarg1, ModelDisplayHints jarg1_);
   public final static native void delete_ModelDisplayHints(long jarg1);
   public final static native void delete_AbstractChannel(long jarg1);
   public final static native String AbstractChannel_getChannelName(long jarg1, AbstractChannel jarg1_);
