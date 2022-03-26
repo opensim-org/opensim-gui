@@ -298,7 +298,7 @@ public class ModelVisualizationJson extends JSONObject {
                     if (pathWrapPoint != null) {
                         // Count how many wrap points in sequence and distribute 2 * numWrapObjects among them 
                         // for now we'll assume only one
-                        ArrayVec3 pathwrap = pathWrapPoint.getWrapPath();
+                        ArrayVec3 pathwrap = pathWrapPoint.getWrapPath(state);
                         PhysicalFrame wrapPtsFrame = pathWrapPoint.getParentFrame();
                         int size = pathwrap.size();
                         if (size >= 1) {
@@ -1512,7 +1512,7 @@ public class ModelVisualizationJson extends JSONObject {
                     if (pathWrapPoint != null) {
                         // Count how many wrap points in sequence and distribute 2 * numWrapObjects among them 
                         // for now we'll assume only one
-                        ArrayVec3 pathwrap = pathWrapPoint.getWrapPath();
+                        ArrayVec3 pathwrap = pathWrapPoint.getWrapPath(state);
                         PhysicalFrame wrapPtsFrame = pathWrapPoint.getParentFrame();
                         int size = pathwrap.size();
                         if (size >= 1) { 
@@ -1733,7 +1733,7 @@ public class ModelVisualizationJson extends JSONObject {
                     if (pathWrapPoint != null) {
                         // Count how many wrap points in sequence and distribute 2 * numWrapObjects among them 
                         // for now we'll assume only one
-                        ArrayVec3 pathwrap = pathWrapPoint.getWrapPath();
+                        ArrayVec3 pathwrap = pathWrapPoint.getWrapPath(state);
                         PhysicalFrame wrapPtsFrame = pathWrapPoint.getParentFrame();
                         int size = pathwrap.size();
                         if (size >= 1) {
