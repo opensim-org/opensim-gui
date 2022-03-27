@@ -146,7 +146,7 @@ public class ModelVisualizationJson extends JSONObject {
     private double prefMuscleDisplayRadius=0.005;
     private int NUM_PATHPOINTS_PER_WRAP_OBJECT=8;
     private double PATHPOINT_SCALEUP=1.05;
-    
+    private boolean debug_path=false;
     public Boolean getFrameVisibility(Frame b) {
         return visualizerFrames.get(b).visible;
     }
@@ -504,7 +504,8 @@ public class ModelVisualizationJson extends JSONObject {
         GeometryPath gPath = GeometryPath.safeDownCast(comp);
         boolean isGeometryPath = (gPath!=null);
         if (isGeometryPath){
-            System.out.println("Creating Json for GeometryPath of "+gPath.getOwner().getName());
+            if (debug_path)
+                System.out.println("Creating Json for GeometryPath of "+gPath.getOwner().getName());
             UUID pathUUID = createJsonForGeometryPath(gPath, mdh, json_geometries, json_materials, visibleStatus);
             pathList.put(gPath, pathUUID);
             // Add to the ID map so that PathOwner translates to GeometryPath
@@ -746,7 +747,8 @@ public class ModelVisualizationJson extends JSONObject {
                 }
             };
             for (AbstractPathPoint app: proxyPathPoints.keySet()){
-                //System.out.println("Process Conditional Path point "+app.getName());
+                if (debug_path)
+                    System.out.println("Process Conditional Path point "+app.getName());
                 if (!app.isActive(state)){
                     ComputedPathPointInfo proxyPointInfo = proxyPathPoints.get(app);
                     //System.out.println("Use proxy "+proxyPoint.getName());
@@ -759,7 +761,8 @@ public class ModelVisualizationJson extends JSONObject {
                     bodyTransforms_json.add(pathpointXform_json);
                 }
                 else {
-                    //System.out.println("Pathpoint " + app.getName() + " active");
+                    if (debug_path)
+                        System.out.println("Pathpoint " + app.getName() + " active");
                     Transform localTransform = new Transform();
                     Vec3 location = app.getLocation(state);
                     localTransform.setP(location);
@@ -1210,7 +1213,8 @@ public class ModelVisualizationJson extends JSONObject {
             JSONArray points, JSONArray activeState) {
         
         if (count ==0) return;
-        System.out.println("Creating "+count+" computed pathpoints between:"+lastPathPoint.getName()+" and "+currentPathPoint.getName());
+        if (debug_path)
+            System.out.println("Creating "+count+" computed pathpoints between:"+lastPathPoint.getName()+" and "+currentPathPoint.getName());
         GeometryPath gp = GeometryPath.safeDownCast(lastPathPoint.getOwner());
         UUID matuuid = mapGeometryPathToPathPointMaterialUUID.get(gp);
         JSONObject bodyJson = mapBodyIndicesToJson.get(0); // These points live in Ground
@@ -1443,37 +1447,6 @@ public class ModelVisualizationJson extends JSONObject {
     
     private void updatePathWithWrapping(GeometryPath path, JSONArray bodyTransforms) {
         ArrayPathPoint actualPath =path.getCurrentPath(state);
-        /*
-        if (previousWrap != null){ // There was oldWrap and Path has multiple wrap objects
-            int oldCount = previousWrap.size();
-            //System.out.println("oldCount = "+oldCount);
-            PhysicalFrame ground = mapBodyIndicesToFrames.get(0);
-            for (int i=0; i <oldCount; i++){
-                boolean firstWrapPoint = (i==0);
-                int foundIndex = actualPath.findIndex(previousWrap.get(i));
-                //System.out.println("foundIndex = "+foundIndex);
-                if (foundIndex==-1 && !firstWrapPoint){ // Wrap was disengaged
-                    // Move corresponding "computed" path points to next non-wrap point
-                    //System.out.println("Move computed wrap points for "+previousWrap.get(i).getName());
-                    // get UUIDs for this pathpoint
-                    ArrayList<UUID> wrapPointUUIDs = wrapPathPoints.get(previousWrap.get(i));
-                    for (UUID computedPointUUID: wrapPointUUIDs){
-                        ComputedPathPointInfo computedPointInfo = computedPathPoints.get(computedPointUUID);
-                        computedPointInfo.ratio = 1 - computedPointInfo.ratio;
-                        Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, computedPointInfo.ratio);
-                        // May need to update the map for next frame as well
-                        Transform localTransform = new Transform();
-                        localTransform.setP(loc);
-                        JSONObject pathpointXform_json = new JSONObject();
-                        pathpointXform_json.put("uuid", computedPointUUID.toString());
-                        pathpointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(localTransform, new Vec3(1., 1., 1.), visScaleFactor));
-                        bodyTransforms.add(pathpointXform_json);
-                    }
-
-                }
-            }
-        }
-        */
         JSONArray pathpointJsonArray = pathsWithWrapping.get(path);
         int numWrapObjects = path.getWrapSet().getSize();
         PathPointSet pathPointSetFromProperty = path.getPathPointSet();
@@ -1501,6 +1474,9 @@ public class ModelVisualizationJson extends JSONObject {
             }
             else { //updatePathWithWrapping
                 int numWrapPoints = secondIndex - firstIndex -1;
+                if (debug_path && numWrapPoints>2)
+                        System.out.println("Mutliple contacts same segment");
+
                 ArrayList<Integer> pointCount = new  ArrayList<Integer>(numWrapPoints);
                 ArrayList<Integer> visPointCount = new  ArrayList<Integer>(numWrapPoints);
                 calculateWrapPointsToVisualzerPointsMapping(firstIndex, secondIndex, actualPath, pointCount, numIntermediatePoints, visPointCount);
@@ -1515,10 +1491,10 @@ public class ModelVisualizationJson extends JSONObject {
                         ArrayVec3 pathwrap = pathWrapPoint.getWrapPath(state);
                         PhysicalFrame wrapPtsFrame = pathWrapPoint.getParentFrame();
                         int size = pathwrap.size();
-                        if (size >= 1) { 
+                        int numVisPoints = visPointCount.get(wrappointIndex-firstIndex-1);
+                        if (size >= 1 && numVisPoints > 0) { 
                             // Off the actual points computed by API, will compute indices
                             // of points to be used as "intermediate on-the-fly wrap points
-                            int numVisPoints = visPointCount.get(wrappointIndex-firstIndex-1);
                             int[] indicesToUse = new int[numVisPoints];
                             for (int ndx = 0; ndx < numVisPoints-1; ndx++)
                                 indicesToUse[ndx] = ndx*(size-1)/(numVisPoints);
@@ -1534,6 +1510,7 @@ public class ModelVisualizationJson extends JSONObject {
                                 oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), visScaleFactor));
                                 bodyTransforms.add(oneBodyXform_json);
                             }
+                            startVisualizerPointIndex += numVisPoints;
                         }
                     }
                 }
@@ -1722,6 +1699,10 @@ public class ModelVisualizationJson extends JSONObject {
             }
             else { // Wrapping encountered in createJsonForGeometryPath
                 int numWrapPoints = secondIndex - firstIndex -1;
+                if (numWrapPoints > 2){
+                    if (debug_path)
+                        System.out.println("Mutliple contacts same segment");
+                }
                 ArrayList<Integer> pointCount = new  ArrayList<Integer>(numWrapPoints);
                 ArrayList<Integer> visPointCount = new  ArrayList<Integer>(numWrapPoints);
                 calculateWrapPointsToVisualzerPointsMapping(firstIndex, secondIndex, actualPath, pointCount, numIntermediatePoints, visPointCount);
@@ -1736,8 +1717,8 @@ public class ModelVisualizationJson extends JSONObject {
                         ArrayVec3 pathwrap = pathWrapPoint.getWrapPath(state);
                         PhysicalFrame wrapPtsFrame = pathWrapPoint.getParentFrame();
                         int size = pathwrap.size();
-                        if (size >= 1) {
-                            int numVisPoints = visPointCount.get(wrappointIndex-firstIndex-1);
+                        int numVisPoints = visPointCount.get(wrappointIndex-firstIndex-1);
+                        if (size >= 1 && numVisPoints >0) {
                             int[] indicesToUse = new int[numVisPoints];
                             for (int ndx = 0; ndx < numVisPoints-1; ndx++)
                                 indicesToUse[ndx] = ndx*(size-1)/(numVisPoints);
