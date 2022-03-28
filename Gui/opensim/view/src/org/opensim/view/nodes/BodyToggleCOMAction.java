@@ -23,6 +23,9 @@
 package org.opensim.view.nodes;
 
 import java.awt.event.ActionEvent;
+import javax.swing.undo.AbstractUndoableEdit;
+import javax.swing.undo.CannotRedoException;
+import javax.swing.undo.CannotUndoException;
 import org.json.simple.JSONObject;
 import org.openide.nodes.Node;
 import org.openide.util.*;
@@ -45,22 +48,91 @@ public final class BodyToggleCOMAction extends BooleanStateAction {
         // TODO implement action body
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // TODO implement action body
-        boolean newState = !super.getBooleanState();
+        final boolean newState = !super.getBooleanState();
         for( int i=0; i<selected.length; i++ ){
-            Node selectedNode = selected[i];
-            if( selectedNode instanceof OneBodyNode )
+            final Node selectedNode = selected[i];
+            if( selectedNode instanceof OneBodyNode ){
                 this.ShowCMForOneBodyNode( (OneBodyNode)selectedNode, newState, false );
+                AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
+                    public boolean canUndo() {
+                        return true;
+                    }
+
+                    public boolean canRedo() {
+                        return true;
+                    }
+
+                    public void undo() throws CannotUndoException {
+                        super.undo();
+                        ShowCMForOneBodyNode( (OneBodyNode)selectedNode, !newState, false );
+                    }
+
+                    public void redo() throws CannotRedoException {
+                        super.redo();
+                        ShowCMForOneBodyNode( (OneBodyNode)selectedNode, newState, false );
+                    }
+
+                    @Override
+                    public String getRedoPresentationName() {
+                        return "Redo COM change";
+                    }
+
+                    @Override
+                    public String getUndoPresentationName() {
+                        return "Undo COM change";
+                    }
+
+                };
+                ExplorerTopComponent.addUndoableEdit(auEdit);
+            }
             else if( selectedNode instanceof BodiesNode ){
-                Model model=((BodiesNode)selectedNode).getModelForNode();
-                ModelVisualizationJson modelVis = ViewDB.getInstance().getModelVisualizationJson(model);
-                modelVis.setShowCom(newState);
-                JSONObject command = modelVis.createSetVisibilityCommandForUUID(newState, modelVis.getComObjectUUID());
-                ViewDB.getInstance().sendVisualizerCommand(command);
+                final Model model=((BodiesNode)selectedNode).getModelForNode();
+                toggleCOMVisibility(model, newState);
+                // undo support
+                AbstractUndoableEdit auEdit = new AbstractUndoableEdit() {
+                    public boolean canUndo() {
+                        return true;
+                    }
+
+                    public boolean canRedo() {
+                        return true;
+                    }
+
+                    public void undo() throws CannotUndoException {
+                        super.undo();
+                        toggleCOMVisibility(model, !newState);
+                    }
+
+                    public void redo() throws CannotRedoException {
+                        super.redo();
+                        toggleCOMVisibility(model, newState);
+                    }
+
+                    @Override
+                    public String getRedoPresentationName() {
+                        return "Redo COM change";
+                    }
+
+                    @Override
+                    public String getUndoPresentationName() {
+                        return "Undo COM change";
+                    }
+
+                };
+                ExplorerTopComponent.addUndoableEdit(auEdit);
+
             }
         }
         super.setBooleanState( newState );
         ViewDB.renderAll();
    }
+
+    private void toggleCOMVisibility(Model model, boolean newState) {
+        ModelVisualizationJson modelVis = ViewDB.getInstance().getModelVisualizationJson(model);
+        modelVis.setShowCom(newState);
+        JSONObject command = modelVis.createSetVisibilityCommandForUUID(newState, modelVis.getComObjectUUID());
+        ViewDB.getInstance().sendVisualizerCommand(command);
+    }
     
    //-------------------------------------------------------------------------
    public static boolean  IsShowCMForBody( OpenSimObject openSimObjectAssociatedWithBody )
