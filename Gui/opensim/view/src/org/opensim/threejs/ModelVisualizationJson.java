@@ -1153,12 +1153,14 @@ public class ModelVisualizationJson extends JSONObject {
         // find closest Active points before and after
         int numPre = 1;
         int numPost = 1;
+        /*
         while (!pathpointsArray.get(index - numPre).isActive(state)) {
             numPre++;
         }
         while (!pathpointsArray.get(index + numPost).isActive(state)) {
             numPost++;
         }
+        */
         double ratio = NEAR_END;//Where to "park" intermediate Points used to visualize wrapping when wrapping is not engaged.
         AbstractPathPoint curPoint = pathpointsArray.get(index);
         AbstractPathPoint prePoint = pathpointsArray.get(index - numPre);
@@ -1434,9 +1436,6 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<AbstractPathPoint, ComputedPathPointInfo> proxyPathPoints = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
     // Points that are generated but stay dormant pending Condition (ConditionalPathPoint) or Wrapping
     private final HashMap<UUID, ComputedPathPointInfo> computedPathPoints = new HashMap<UUID, ComputedPathPointInfo>();
-    private final HashMap<PathWrapPoint, ArrayList<UUID>> wrapPathPoints = new HashMap<PathWrapPoint, ArrayList<UUID>>();
-    // Keep track of which paths have wrapping since they need special handling
-    // When wrapping comes in/out
     private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
     // Keep track if PathPoints are displayed/enlarged to sync. UI and to keep across edits
     private final HashMap<GeometryPath, Boolean> pathDisplayStatus = new HashMap<GeometryPath, Boolean>();
@@ -1465,7 +1464,6 @@ public class ModelVisualizationJson extends JSONObject {
                 // if intermediate points aren't computed, mark as such
              }
             else if (secondIndex == -1){ // Conditional Path point that's inactive
-                ConditionalPathPoint cpp = ConditionalPathPoint.safeDownCast(secondPoint);
                 int tempIndex = ppointSetIndex;
                 while (!pathPointSetFromProperty.get(tempIndex).isActive(state))
                     tempIndex--;
