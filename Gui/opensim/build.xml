@@ -168,6 +168,9 @@
         <copy todir="${opensim.threejs.dir}/examples/js">
             <fileset dir="threejs/examples/js" />
         </copy>
+        <copy todir="${opensim.threejs.dir}/examples/jsm">
+            <fileset dir="threejs/examples/jsm" />
+        </copy>
     </target>
     <target name="build-mac-installer" depends="build-mac,copy-visualizer,copy-models">
         <property name="lib.dir" value="/Users/aymanhabib/dev/install/opensim-core-install/lib"/>

@@ -11,15 +11,27 @@ package org.opensim.modeling;
 /**
  * A class for representing a StepFunction.<br>
  * <br>
- *          {   start_value,    t &lt;= start_time <br>
- * f(t) =   {   S-polynomial(t), start_time &lt; t &lt; end_time<br>
- *          {   end_value,      t &gt;= end_time<br>
- * <br>
- * This class inherits from Function and so can be used as input to<br>
- * any class requiring a Function as input.<br>
- * <br>
- * @author Ajay Seth<br>
- * @version 1.0
+ * Defines a piecewise function (f: ), with a<br>
+ * smooth "S"-shaped quintic polynomial (t)  from
+(\c startTime, \c startValue) to (\c endTime, \c endValue).
+The function is defined as follows:
+\f[f(t) =
+\begin{cases}
+startValue, & t\leq startTime\\
+S(t), & startTime < t \leq endTime\\
+endValue, & endTime < t
+\end{cases}
+
+The function has the following shape:
+
+html fig_StepFunction.png
+
+This class inherits from Function and so can be used as input to
+any class requiring a Function as input.
+
+Ajay Seth
+1.0
+
  */
 public class StepFunction extends Function {
   private transient long swigCPtr;

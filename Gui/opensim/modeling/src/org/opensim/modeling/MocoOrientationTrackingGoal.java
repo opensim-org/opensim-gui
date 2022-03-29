@@ -13,12 +13,12 @@ package org.opensim.modeling;
  * orientation value, summed over the frames for which a reference is provided,<br>
  * and integrated over the phase. This can be used to track orientation<br>
  * quantities in the model that don't correspond to model degrees of freedom.<br>
- * The reference can be provided as a trajectory of SimTK::Rotation%s<br>
+ * The reference can be provided as a trajectory of SimTK::Quaternion%s<br>
  * representing the orientation reference data, or as a states trajectory from<br>
  * which the tracked rotation reference is computed. Both rotation and states<br>
  * references can be provided as a file name to a STO or CSV file (or other<br>
  * file types for which there is a FileAdapter), or programmatically as a<br>
- * TimeSeriesTable_&lt;SimTK::Rotation&gt; (for the rotation reference) or as a<br>
+ * TimeSeriesTable_&lt;SimTK::Quaternion&gt; (for the rotation reference) or as a<br>
  * scalar TimeSeriesTable (for the states reference).<br>
  * <br>
  * This cost requires realization to SimTK::Stage::Position. The cost is<br>
@@ -114,8 +114,15 @@ public class MocoOrientationTrackingGoal extends MocoGoal {
    *     `states_reference_file` and `rotation_reference_file` properties or the<br>
    *     table provided via setStatesReference(), if any. 
    */
-  public void setRotationReference(SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__Rotation_T_SimTK__Real_t_t ref) {
-    opensimMocoJNI.MocoOrientationTrackingGoal_setRotationReference(swigCPtr, this, SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__Rotation_T_SimTK__Real_t_t.getCPtr(ref));
+  public void setRotationReference(TimeSeriesTableRotation ref) {
+    opensimMocoJNI.MocoOrientationTrackingGoal_setRotationReference__SWIG_0(swigCPtr, this, TimeSeriesTableRotation.getCPtr(ref), ref);
+  }
+
+  /**
+   *   TimeSeriesTable_&lt;SimTK::Rotation&gt;&amp; ref) 
+   */
+  public void setRotationReference(TimeSeriesTableQuaternion ref) {
+    opensimMocoJNI.MocoOrientationTrackingGoal_setRotationReference__SWIG_1(swigCPtr, this, TimeSeriesTableQuaternion.getCPtr(ref), ref);
   }
 
   /**

@@ -389,8 +389,8 @@ public class FrameIterator {
   /**
    *  Accessor for Rotation matrix of the Frame in Ground. 
    */
-  public SWIGTYPE_p_SimTK__Rotation_T_SimTK__Real_t getRotationInGround(State state) {
-    return new SWIGTYPE_p_SimTK__Rotation_T_SimTK__Real_t(opensimSimulationJNI.FrameIterator_getRotationInGround(swigCPtr, this, State.getCPtr(state), state), true);
+  public Rotation getRotationInGround(State state) {
+    return new Rotation(opensimSimulationJNI.FrameIterator_getRotationInGround(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
   /**

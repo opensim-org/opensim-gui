@@ -906,6 +906,7 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native void DeGrooteFregly2016Muscle_printCurvesToSTOFiles__SWIG_1(long jarg1, DeGrooteFregly2016Muscle jarg1_);
   public final static native void DeGrooteFregly2016Muscle_replaceMuscles__SWIG_0(long jarg1, Model jarg1_, boolean jarg2);
   public final static native void DeGrooteFregly2016Muscle_replaceMuscles__SWIG_1(long jarg1, Model jarg1_);
+  public final static native void DeGrooteFregly2016Muscle_extendPostScale(long jarg1, DeGrooteFregly2016Muscle jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void delete_DeGrooteFregly2016Muscle(long jarg1);
   public final static native long ModelFactory_createNLinkPendulum(int jarg1);
   public final static native long ModelFactory_createPendulum();
