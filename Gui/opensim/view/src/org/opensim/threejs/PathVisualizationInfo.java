@@ -39,11 +39,12 @@ public class PathVisualizationInfo {
             int start = pathWrap.get_range(0);
             int end = pathWrap.get_range(1);
             // -1 means unspecified, assume all segments can wrap
-            if (start==-1 && end ==-1){
+            if (start==-1){
                 start = 1;
-                end = pathPointSet.getSize();
             }
-                
+            if (end ==-1){
+                end = pathPointSet.getSize();                
+            }
             // Segments start to end-1 can wrap around pathWrap.WrapObject
             for (int j=start-1; j< end-1; j++){
                 pathSegmentWrapping.get(j).add(pathWrap.getWrapObject());
