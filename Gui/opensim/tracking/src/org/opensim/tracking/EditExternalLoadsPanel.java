@@ -486,6 +486,7 @@ public class EditExternalLoadsPanel extends javax.swing.JPanel
            forceListModel.remove(sels[i-1]);
            dLoads.remove(sels[i-1]);
         }
+        dLoads.finalizeFromProperties();
  // TODO add your handling code here:
         
     }//GEN-LAST:event_jButtonDeleteActionPerformed1
