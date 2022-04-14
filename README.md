@@ -65,6 +65,10 @@ If you use plugins, models, or other components contributed by your fellow
 researchers, you must acknowledge their work as described in the license that
 accompanies each of these files. 
 
+How to get the latest nightly build
+-----------------------------------
+See [OpenSim GUI Wiki](https://github.com/opensim-org/opensim-gui/wiki)
+
 
 Building from the source code
 -----------------------------
