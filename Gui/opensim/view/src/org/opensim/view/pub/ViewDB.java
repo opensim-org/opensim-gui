@@ -112,12 +112,11 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
     }
     /*
-     * Update Decorations downstream from passed in Component.
+     * Update Decorations with full model refresh. Issue #1340
     */
-    public void updateDecorations(Model model, Component comp) {
+    public void updateDecorations(Model model) {
         if (websocketdb!=null){
-            ModelVisualizationJson modelJson = getModelVisualizationJson(model);
-             websocketdb.broadcastMessageJson(currentJson.createUpdateDecorationsMessageJson(comp), null);
+             websocketdb.broadcastMessageJson(currentJson.createUpdateDecorationsMessageJson(model), null);
         }
     }
 

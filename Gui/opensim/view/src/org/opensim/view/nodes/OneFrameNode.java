@@ -186,8 +186,7 @@ public class OneFrameNode extends OneModelComponentNode {
             Exceptions.printStackTrace(ex);
         }
         Model model = getModelForNode();
-        Frame frame = Frame.safeDownCast(comp);
-        ViewDB.getInstance().updateDecorations(model, frame);
+        ViewDB.getInstance().updateDecorations(model);
         ViewDB.getInstance().updateModelDisplay(model);
         
     }
