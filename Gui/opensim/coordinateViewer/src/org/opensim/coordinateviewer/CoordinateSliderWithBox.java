@@ -210,6 +210,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
 
         setAlignmentY(0.0F);
 
+        jFormattedTextField.setColumns(4);
         jFormattedTextField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         jFormattedTextField.setText("-123.456");
         jFormattedTextField.setToolTipText("Current value");
@@ -223,7 +224,6 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
         jClampedCheckBox.setToolTipText("Toggle clamp to bounds");
         jClampedCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jClampedCheckBox.setIcon(unclampedIcon);
-        jClampedCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jClampedCheckBox.setMaximumSize(new java.awt.Dimension(20, 20));
         jClampedCheckBox.setMinimumSize(new java.awt.Dimension(20, 20));
         jClampedCheckBox.setPreferredSize(new java.awt.Dimension(20, 20));
@@ -239,7 +239,6 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
         jLockedCheckBox.setToolTipText("Toggle lock value");
         jLockedCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         jLockedCheckBox.setIcon(unlockedIcon);
-        jLockedCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
         jLockedCheckBox.setMaximumSize(new java.awt.Dimension(20, 20));
         jLockedCheckBox.setMinimumSize(new java.awt.Dimension(20, 20));
         jLockedCheckBox.setPreferredSize(new java.awt.Dimension(20, 20));
@@ -278,6 +277,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
         jXSlider.setMinorTickSpacing(10);
         jXSlider.setToolTipText("Seek");
         jXSlider.setAlignmentX(0.0F);
+        jXSlider.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jXSlider.setMinimumSize(new java.awt.Dimension(50, 25));
         jXSlider.setPreferredSize(new java.awt.Dimension(50, 25));
 
@@ -305,9 +305,9 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
             jPanel1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(jPanel1Layout.createSequentialGroup()
                 .add(jMinimumLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(0, 0, 0)
                 .add(jXSlider, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .add(0, 0, 0)
                 .add(jMaximumLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -327,7 +327,7 @@ public class CoordinateSliderWithBox extends javax.swing.JPanel implements Chang
             .add(layout.createSequentialGroup()
                 .add(jCoordinateNameLabel, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 100, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jFormattedTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 55, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(jFormattedTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(0, 0, 0)
                 .add(jLockedCheckBox, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(0, 0, 0)
