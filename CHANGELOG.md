@@ -10,6 +10,7 @@ v4.4
 - Upgrade jxBrowser to version 6.24 which was required to make visualizer code work/show.
 - Fix issue [#1319](https://github.com/opensim-org/opensim-gui/issues/1319): Undo/redo support for show-COM, show-Axes
 - Animate transition of camera to standard views.
+- Fix issue [#1298] look & feel on linux 
 
 v4.3
 ====
