@@ -76,7 +76,7 @@ public class AnnotatedMotion extends Storage {
     private double cameraRate=0.;
     private double dataRate=0.;
     private MotionDisplayer motionDisplayer;
-    private double displayForceScale = .001;
+    private double displayForceScale = 1.0;
     private String displayForceShape = "arrow";
     private Model model;
     private Units units;
