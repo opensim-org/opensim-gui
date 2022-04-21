@@ -50,6 +50,7 @@ import org.opensim.modeling.MeasurementSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelScaler;
 import org.opensim.modeling.OpenSimContext;
+import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Scale;
 import org.opensim.modeling.ScaleSet;
 import org.opensim.modeling.ScaleTool;
@@ -994,6 +995,9 @@ public class ScaleToolModel extends Observable implements Observer {
       scaleTool.getMarkerPlacer().getIKTaskSet().setInlined(true);
       updateScaleTool();
       AbsoluteToRelativePaths(fullFilename);
+      scaleTool.getPropertyByName("GenericModelMaker").setValueIsDefault(false);
+      scaleTool.getPropertyByName("ModelScaler").setValueIsDefault(false);
+      scaleTool.getPropertyByName("MarkerPlacer").setValueIsDefault(false);
       scaleTool.print(fullFilename);
       relativeToAbsolutePaths(fullFilename);
       return true;
