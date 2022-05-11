@@ -6871,6 +6871,8 @@ public class opensimSimulationJNI {
   public final static native void SetOientationWeights_getGroupNames(long jarg1, SetOientationWeights jarg1_, long jarg2, ArrayStr jarg2_);
   public final static native long SetOientationWeights_getGroup__SWIG_0(long jarg1, SetOientationWeights jarg1_, String jarg2);
   public final static native long SetOientationWeights_getGroup__SWIG_1(long jarg1, SetOientationWeights jarg1_, int jarg2);
+  public final static native long new_SharedOrientationsReference();
+  public final static native void delete_SharedOrientationsReference(long jarg1);
   public final static native long BufferedOrientationsReference_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void BufferedOrientationsReference_assign(long jarg1, BufferedOrientationsReference jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String BufferedOrientationsReference_getClassName();
@@ -6904,8 +6906,8 @@ public class opensimSimulationJNI {
   public final static native void delete_InverseKinematicsSolver(long jarg1);
   public final static native long new_InverseKinematicsSolver__SWIG_0(long jarg1, Model jarg1_, long jarg2, SharedMarkersReference jarg2_, long jarg3, SimTKArrayCoordinateReference jarg3_, double jarg4);
   public final static native long new_InverseKinematicsSolver__SWIG_1(long jarg1, Model jarg1_, long jarg2, SharedMarkersReference jarg2_, long jarg3, SimTKArrayCoordinateReference jarg3_);
-  public final static native long new_InverseKinematicsSolver__SWIG_2(long jarg1, Model jarg1_, long jarg2, SharedMarkersReference jarg2_, long jarg3, OrientationsReference jarg3_, long jarg4, SimTKArrayCoordinateReference jarg4_, double jarg5);
-  public final static native long new_InverseKinematicsSolver__SWIG_3(long jarg1, Model jarg1_, long jarg2, SharedMarkersReference jarg2_, long jarg3, OrientationsReference jarg3_, long jarg4, SimTKArrayCoordinateReference jarg4_);
+  public final static native long new_InverseKinematicsSolver__SWIG_2(long jarg1, Model jarg1_, long jarg2, SharedMarkersReference jarg2_, long jarg3, SharedOrientationsReference jarg3_, long jarg4, SimTKArrayCoordinateReference jarg4_, double jarg5);
+  public final static native long new_InverseKinematicsSolver__SWIG_3(long jarg1, Model jarg1_, long jarg2, SharedMarkersReference jarg2_, long jarg3, SharedOrientationsReference jarg3_, long jarg4, SimTKArrayCoordinateReference jarg4_);
   public final static native long new_InverseKinematicsSolver__SWIG_4(long jarg1, Model jarg1_, long jarg2, MarkersReference jarg2_, long jarg3, SimTKArrayCoordinateReference jarg3_, double jarg4);
   public final static native long new_InverseKinematicsSolver__SWIG_5(long jarg1, Model jarg1_, long jarg2, MarkersReference jarg2_, long jarg3, SimTKArrayCoordinateReference jarg3_);
   public final static native long new_InverseKinematicsSolver__SWIG_6(long jarg1, Model jarg1_, long jarg2, MarkersReference jarg2_, long jarg3, OrientationsReference jarg3_, long jarg4, SimTKArrayCoordinateReference jarg4_, double jarg5);
@@ -7142,9 +7144,12 @@ public class opensimSimulationJNI {
   public final static native void checkOrderSystemControls(long jarg1, Model jarg1_);
   public final static native void checkLabelsMatchModelStates(long jarg1, Model jarg1_, long jarg2, StdVectorString jarg2_);
   public final static native long createSyntheticIMUAccelerationSignals(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_);
-  public final static native long analyze(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_);
-  public final static native long analyzeVec3(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_);
-  public final static native long analyzeSpatialVec(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_);
+  public final static native long analyze__SWIG_2(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_, long jarg5, TimeSeriesTable jarg5_);
+  public final static native long analyze__SWIG_3(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_);
+  public final static native long analyzeVec3__SWIG_0(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_, long jarg5, TimeSeriesTable jarg5_);
+  public final static native long analyzeVec3__SWIG_1(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_);
+  public final static native long analyzeSpatialVec__SWIG_0(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_, long jarg5, TimeSeriesTable jarg5_);
+  public final static native long analyzeSpatialVec__SWIG_1(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_);
   public final static native void VisualizerUtilities_showMotion(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_);
   public final static native void VisualizerUtilities_showModel(long jarg1, Model jarg1_);
   public final static native void VisualizerUtilities_showMarkerData(long jarg1, TimeSeriesTableVec3 jarg1_);
