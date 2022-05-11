@@ -68,7 +68,16 @@ trajectory.getStatesTrajectoryMat()
  * the trajectory will be sealed (MocoTrajectory::isSealed()), which means<br>
  * that you cannot do anything with the trajectory (read, edit, or write) until you<br>
  * call MocoTrajectory::unseal(). The sealing forces you to acknowledge that the<br>
- * solver failed.</p>
+ * solver failed.</p><br>
+ * <br>
+ * <p alt="Convenience accessors"><br>
+ * The accessors getValuesTrajectory() and getSpeedsTrajectory() (and related<br>
+ * methods (e.g., getValueNames()) are available to obtain only the coordinate<br>
+ * values or coordinate speeds, which are part of the states trajectory. Note that<br>
+ * these accessors create fresh data structures from the existing member variables,<br>
+ * so repeated calls should be avoided. Similarly, the accessors<br>
+ * getAccelerationsTrajectory() and getDerivativesWithoutAccelerationsTrajectory()<br>
+ * are available to access subcomponents of the derivatives trajectory.</p>
  */
 public class MocoTrajectory {
   private transient long swigCPtr;
@@ -586,6 +595,22 @@ public class MocoTrajectory {
     return opensimMocoJNI.MocoTrajectory_getNumDerivatives(swigCPtr, this);
   }
 
+  public int getNumValues() {
+    return opensimMocoJNI.MocoTrajectory_getNumValues(swigCPtr, this);
+  }
+
+  public int getNumSpeeds() {
+    return opensimMocoJNI.MocoTrajectory_getNumSpeeds(swigCPtr, this);
+  }
+
+  public int getNumAccelerations() {
+    return opensimMocoJNI.MocoTrajectory_getNumAccelerations(swigCPtr, this);
+  }
+
+  public int getNumDerivativesWithoutAccelerations() {
+    return opensimMocoJNI.MocoTrajectory_getNumDerivativesWithoutAccelerations(swigCPtr, this);
+  }
+
   public int getNumParameters() {
     return opensimMocoJNI.MocoTrajectory_getNumParameters(swigCPtr, this);
   }
@@ -604,6 +629,22 @@ public class MocoTrajectory {
 
   public StdVectorString getDerivativeNames() {
     return new StdVectorString(opensimMocoJNI.MocoTrajectory_getDerivativeNames(swigCPtr, this), false);
+  }
+
+  public StdVectorString getValueNames() {
+    return new StdVectorString(opensimMocoJNI.MocoTrajectory_getValueNames(swigCPtr, this), true);
+  }
+
+  public StdVectorString getSpeedNames() {
+    return new StdVectorString(opensimMocoJNI.MocoTrajectory_getSpeedNames(swigCPtr, this), true);
+  }
+
+  public StdVectorString getAccelerationNames() {
+    return new StdVectorString(opensimMocoJNI.MocoTrajectory_getAccelerationNames(swigCPtr, this), true);
+  }
+
+  public StdVectorString getDerivativeNamesWithoutAccelerations() {
+    return new StdVectorString(opensimMocoJNI.MocoTrajectory_getDerivativeNamesWithoutAccelerations(swigCPtr, this), true);
   }
 
   public StdVectorString getParameterNames() {
@@ -644,6 +685,22 @@ public class MocoTrajectory {
 
   public Matrix getDerivativesTrajectory() {
     return new Matrix(opensimMocoJNI.MocoTrajectory_getDerivativesTrajectory(swigCPtr, this), false);
+  }
+
+  public Matrix getValuesTrajectory() {
+    return new Matrix(opensimMocoJNI.MocoTrajectory_getValuesTrajectory(swigCPtr, this), true);
+  }
+
+  public Matrix getSpeedsTrajectory() {
+    return new Matrix(opensimMocoJNI.MocoTrajectory_getSpeedsTrajectory(swigCPtr, this), true);
+  }
+
+  public Matrix getAccelerationsTrajectory() {
+    return new Matrix(opensimMocoJNI.MocoTrajectory_getAccelerationsTrajectory(swigCPtr, this), true);
+  }
+
+  public Matrix getDerivativesWithoutAccelerationsTrajectory() {
+    return new Matrix(opensimMocoJNI.MocoTrajectory_getDerivativesWithoutAccelerationsTrajectory(swigCPtr, this), true);
   }
 
   public RowVector getParameters() {
@@ -888,6 +945,52 @@ public class MocoTrajectory {
    */
   public TimeSeriesTable exportToControlsTable() {
     return new TimeSeriesTable(opensimMocoJNI.MocoTrajectory_exportToControlsTable(swigCPtr, this), true);
+  }
+
+  /**
+   *  Export the multipliers trajectory to a TimeSeriesTable.
+   */
+  public TimeSeriesTable exportToMultipliersTable() {
+    return new TimeSeriesTable(opensimMocoJNI.MocoTrajectory_exportToMultipliersTable(swigCPtr, this), true);
+  }
+
+  /**
+   *  Export the derivatives trajectory to a TimeSeriesTable.
+   */
+  public TimeSeriesTable exportToDerivativesTable() {
+    return new TimeSeriesTable(opensimMocoJNI.MocoTrajectory_exportToDerivativesTable(swigCPtr, this), true);
+  }
+
+  /**
+   *  Export the coordinate values from the states trajectory to a<br>
+   *  TimeSeriesTable.
+   */
+  public TimeSeriesTable exportToValuesTable() {
+    return new TimeSeriesTable(opensimMocoJNI.MocoTrajectory_exportToValuesTable(swigCPtr, this), true);
+  }
+
+  /**
+   *  Export the coordinate speeds from the states trajectory to a<br>
+   *  TimeSeriesTable.
+   */
+  public TimeSeriesTable exportToSpeedsTable() {
+    return new TimeSeriesTable(opensimMocoJNI.MocoTrajectory_exportToSpeedsTable(swigCPtr, this), true);
+  }
+
+  /**
+   *  Export the coordinate accelerations from the derivatives trajectory to a<br>
+   *  TimeSeriesTable.
+   */
+  public TimeSeriesTable exportToAccelerationsTable() {
+    return new TimeSeriesTable(opensimMocoJNI.MocoTrajectory_exportToAccelerationsTable(swigCPtr, this), true);
+  }
+
+  /**
+   *  Export the derivatives trajectory without coordinate accelerations to a<br>
+   *  TimeSeriesTable.
+   */
+  public TimeSeriesTable exportToDerivativesWithoutAccelerationsTable() {
+    return new TimeSeriesTable(opensimMocoJNI.MocoTrajectory_exportToDerivativesWithoutAccelerationsTable(swigCPtr, this), true);
   }
 
   /**
