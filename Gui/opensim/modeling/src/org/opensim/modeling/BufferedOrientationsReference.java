@@ -97,8 +97,8 @@ public class BufferedOrientationsReference extends OrientationsReference {
     opensimSimulationJNI.BufferedOrientationsReference_putValues(swigCPtr, this, time, SWIGTYPE_p_SimTK__RowVector_T_SimTK__Rotation_T_SimTK__Real_t_t.getCPtr(dataRow));
   }
 
-  public void getNextValuesAndTime(SWIGTYPE_p_double time, SimTKArrayRotation values) {
-    opensimSimulationJNI.BufferedOrientationsReference_getNextValuesAndTime(swigCPtr, this, SWIGTYPE_p_double.getCPtr(time), SimTKArrayRotation.getCPtr(values), values);
+  public double getNextValuesAndTime(SimTKArrayRotation values) {
+    return opensimSimulationJNI.BufferedOrientationsReference_getNextValuesAndTime(swigCPtr, this, SimTKArrayRotation.getCPtr(values), values);
   }
 
   public boolean hasNext() {

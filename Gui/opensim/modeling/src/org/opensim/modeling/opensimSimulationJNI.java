@@ -6594,7 +6594,7 @@ public class opensimSimulationJNI {
   public final static native String StreamableReferenceRotation_getClassName();
   public final static native long StreamableReferenceRotation_clone(long jarg1, StreamableReferenceRotation jarg1_);
   public final static native String StreamableReferenceRotation_getConcreteClassName(long jarg1, StreamableReferenceRotation jarg1_);
-  public final static native void StreamableReferenceRotation_getNextValuesAndTime(long jarg1, StreamableReferenceRotation jarg1_, long jarg2, long jarg3, SimTKArrayRotation jarg3_);
+  public final static native double StreamableReferenceRotation_getNextValuesAndTime(long jarg1, StreamableReferenceRotation jarg1_, long jarg2, SimTKArrayRotation jarg2_);
   public final static native boolean StreamableReferenceRotation_hasNext(long jarg1, StreamableReferenceRotation jarg1_);
   public final static native void delete_StreamableReferenceRotation(long jarg1);
   public final static native long new_SimTKArrayCoordinateReference__SWIG_0();
@@ -6825,7 +6825,7 @@ public class opensimSimulationJNI {
   public final static native long OrientationsReference_getTimes(long jarg1, OrientationsReference jarg1_);
   public final static native long OrientationsReference_getNames(long jarg1, OrientationsReference jarg1_);
   public final static native void OrientationsReference_getValuesAtTime(long jarg1, OrientationsReference jarg1_, double jarg2, long jarg3, SimTKArrayRotation jarg3_);
-  public final static native void OrientationsReference_getNextValuesAndTime(long jarg1, OrientationsReference jarg1_, long jarg2, long jarg3, SimTKArrayRotation jarg3_);
+  public final static native double OrientationsReference_getNextValuesAndTime(long jarg1, OrientationsReference jarg1_, long jarg2, SimTKArrayRotation jarg2_);
   public final static native boolean OrientationsReference_hasNext(long jarg1, OrientationsReference jarg1_);
   public final static native void OrientationsReference_getWeights(long jarg1, OrientationsReference jarg1_, long jarg2, State jarg2_, long jarg3, SimTKArrayDouble jarg3_);
   public final static native double OrientationsReference_getSamplingFrequency(long jarg1, OrientationsReference jarg1_);
@@ -6884,7 +6884,7 @@ public class opensimSimulationJNI {
   public final static native long BufferedOrientationsReference_getValidTimeRange(long jarg1, BufferedOrientationsReference jarg1_);
   public final static native void BufferedOrientationsReference_getValuesAtTime(long jarg1, BufferedOrientationsReference jarg1_, double jarg2, long jarg3, SimTKArrayRotation jarg3_);
   public final static native void BufferedOrientationsReference_putValues(long jarg1, BufferedOrientationsReference jarg1_, double jarg2, long jarg3);
-  public final static native void BufferedOrientationsReference_getNextValuesAndTime(long jarg1, BufferedOrientationsReference jarg1_, long jarg2, long jarg3, SimTKArrayRotation jarg3_);
+  public final static native double BufferedOrientationsReference_getNextValuesAndTime(long jarg1, BufferedOrientationsReference jarg1_, long jarg2, SimTKArrayRotation jarg2_);
   public final static native boolean BufferedOrientationsReference_hasNext(long jarg1, BufferedOrientationsReference jarg1_);
   public final static native void BufferedOrientationsReference_setFinished(long jarg1, BufferedOrientationsReference jarg1_, boolean jarg2);
   public final static native long AssemblySolver_safeDownCast(long jarg1, OpenSimObject jarg1_);
