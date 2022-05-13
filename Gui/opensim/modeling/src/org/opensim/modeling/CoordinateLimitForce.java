@@ -23,6 +23,9 @@ package org.opensim.modeling;
  * <br>
  * The potential energy stored in the spring component of the force is<br>
  * accessible as well as the power (nd optionally energy) dissipated.<br>
+ * The function has the following shape:<br>
+ * <br>
+ * <img src=coordinate_limit_force.png/><br>
  * <br>
  * @author Ajay Seth
  */

@@ -58,8 +58,8 @@ public class StreamableReferenceRotation extends ReferenceRotation {
     return opensimSimulationJNI.StreamableReferenceRotation_getConcreteClassName(swigCPtr, this);
   }
 
-  public void getNextValuesAndTime(SWIGTYPE_p_double time, SimTKArrayRotation values) {
-    opensimSimulationJNI.StreamableReferenceRotation_getNextValuesAndTime(swigCPtr, this, SWIGTYPE_p_double.getCPtr(time), SimTKArrayRotation.getCPtr(values), values);
+  public double getNextValuesAndTime(SimTKArrayRotation values) {
+    return opensimSimulationJNI.StreamableReferenceRotation_getNextValuesAndTime(swigCPtr, this, SimTKArrayRotation.getCPtr(values), values);
   }
 
   public boolean hasNext() {

@@ -268,8 +268,8 @@ public class OrientationsReference extends StreamableReferenceRotation {
   /**
    *  Default implementation does not support streaming 
    */
-  public void getNextValuesAndTime(SWIGTYPE_p_double time, SimTKArrayRotation values) {
-    opensimSimulationJNI.OrientationsReference_getNextValuesAndTime(swigCPtr, this, SWIGTYPE_p_double.getCPtr(time), SimTKArrayRotation.getCPtr(values), values);
+  public double getNextValuesAndTime(SimTKArrayRotation values) {
+    return opensimSimulationJNI.OrientationsReference_getNextValuesAndTime(swigCPtr, this, SimTKArrayRotation.getCPtr(values), values);
   }
 
   public boolean hasNext() {
