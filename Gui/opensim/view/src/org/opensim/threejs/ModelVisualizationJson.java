@@ -1689,11 +1689,12 @@ public class ModelVisualizationJson extends JSONObject {
                 pathpointActive_jsonArr.add(false);
                 pathpoint_jsonArr.add(pathpoint_uuid.toString());
                 // traverse backward to an active point
+                /*
                 int tempIndex = ppointSetIndex;
                 while (!pathPointSetFromProperty.get(tempIndex).isActive(state))
                     tempIndex--;
                 secondPoint = pathPointSetFromProperty.get(tempIndex);
-                secondIndex = tempIndex;
+                secondIndex = tempIndex;*/
             }
             else { // Wrapping encountered in createJsonForGeometryPath
                 int numWrapPoints = secondIndex - firstIndex -1;
