@@ -216,7 +216,7 @@ jobs:
         key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
         
     - name: Build opensim-core-dependencies
-      # if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         mkdir build_deps
         cd build_deps
@@ -248,7 +248,7 @@ jobs:
         make && make -j4 install
 
     - name: Build opensim-core
-      # if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
