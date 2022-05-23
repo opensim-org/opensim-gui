@@ -317,7 +317,8 @@ public class IMUIKToolModel extends Observable implements Observer {
        imuIkTool.set_report_errors(reportErrors);
        // Replace OrientationWeightSet in tool with new set.
        imuIkTool.upd_orientation_weights().setSize(0);
-       for (int j=0; j < orientation_weightset.getSize(); j++)
+       orientation_weightset = getOrientation_weightset(); // Guard against orientation_weightset being null
+       for (int j=0; j < orientation_weightset.getSize(); j++) 
         imuIkTool.upd_orientation_weights().adoptAndAppend(orientation_weightset.get(j));
    }
 
