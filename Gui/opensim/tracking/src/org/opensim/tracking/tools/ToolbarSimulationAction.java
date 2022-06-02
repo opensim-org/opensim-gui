@@ -82,7 +82,7 @@ public final class ToolbarSimulationAction extends CallableSystemAction {
       //tb.addSeparator(new Dimension(10,40));
         try {
             JLabel jLabel1 = new JLabel("Simulate");
-            jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11));
+            jLabel1.setFont(jLabel1.getFont().deriveFont(jLabel1.getFont().getStyle() | java.awt.Font.BOLD));
             tb.add(jLabel1);
             ImageIcon icon = new ImageIcon(getClass().getResource("/org/opensim/tracking/tools/run.png"));
             JButton dropdownButton = DropDownButtonFactory.createDropDownButton(icon, popup);

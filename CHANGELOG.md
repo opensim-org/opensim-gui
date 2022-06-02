@@ -10,7 +10,11 @@ v4.4
 - Upgrade jxBrowser to version 6.24 which was required to make visualizer code work/show.
 - Fix issue [#1319](https://github.com/opensim-org/opensim-gui/issues/1319): Undo/redo support for show-COM, show-Axes
 - Animate transition of camera to standard views.
+- Fix issue [#1298] look & feel on linux 
 - Fix visualization of muscle paths in the presense of ConditionalPathPoints, multiple wrap objects or mixes of them. Fix issues [#1330][#1331].
+- Fix crash deleting external-force in ExternalLoads editing dialog [#1280]
+- Propagate frame changes to all components in the model either owned or connected by sockets to the frame, fix issue [#1340]
+
 
 v4.3
 ====

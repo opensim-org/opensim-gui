@@ -126,4 +126,11 @@ public class MocoPathConstraint extends OpenSimObject {
     opensimMocoJNI.MocoPathConstraint_initializeOnModel(swigCPtr, this, Model.getCPtr(model), model, SWIGTYPE_p_OpenSim__MocoProblemInfo.getCPtr(arg1), pathConstraintIndex);
   }
 
+  /**
+   *  Print the description for this path constraint.
+   */
+  public void printDescription() {
+    opensimMocoJNI.MocoPathConstraint_printDescription(swigCPtr, this);
+  }
+
 }

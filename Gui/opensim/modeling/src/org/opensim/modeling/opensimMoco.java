@@ -324,7 +324,7 @@ public class opensimMoco {
 
   /**
    *  Calculate the requested outputs using the model in the problem and the<br>
-   *  provided states and controls tables<br>
+   *  provided states and controls tables.<br>
    *  The controls table is used to set the model's controls vector.<br>
    *  We assume the states and controls tables contain the same time points.<br>
    *  The output paths can be regular expressions. For example,<br>
@@ -334,6 +334,45 @@ public class opensimMoco {
    *  the template argument, otherwise they are not included in the report.<br>
    * <br>
    *  Controls missing from the controls table are given a value of 0.<br>
+   * <br>
+   *  If you analysis depends on the values of discrete variables in the state,<br>
+   *  you may provide those values via the optional argument<br>
+   *  "discreteVariablesTable". This table should contain column labels with the<br>
+   *  following format: &lt;path_to_component&gt;/&lt;discrete_var_name&gt;. For example,<br>
+   *  "/forceset/muscle/implicitderiv_normalized_tendon_force".<br>
+   * <br>
+   *  Note: The provided trajectory is not modified to satisfy kinematic<br>
+   *  constraints, but SimTK::Motions in the Model (e.g., PositionMotion) are<br>
+   *  applied. Therefore, this function expects that you've provided a trajectory<br>
+   *  that already satisfies kinematic constraints. If your provided trajectory<br>
+   *  does not satisfy kinematic constraints, many outputs will be incorrect.<br>
+   *  For example, in a model with a patella whose location is determined by a<br>
+   *  CoordinateCouplerConstraint, the length of a muscle that crosses the patella<br>
+   *  will be incorrect.<br>
+   *  
+   */
+  public static TimeSeriesTable analyzeMocoTrajectory(Model model, TimeSeriesTable statesTable, TimeSeriesTable controlsTable, StdVectorString outputPaths, TimeSeriesTable discreteVariablesTable) {
+    return new TimeSeriesTable(opensimMocoJNI.analyzeMocoTrajectory__SWIG_1(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(outputPaths), outputPaths, TimeSeriesTable.getCPtr(discreteVariablesTable), discreteVariablesTable), true);
+  }
+
+  /**
+   *  Calculate the requested outputs using the model in the problem and the<br>
+   *  provided states and controls tables.<br>
+   *  The controls table is used to set the model's controls vector.<br>
+   *  We assume the states and controls tables contain the same time points.<br>
+   *  The output paths can be regular expressions. For example,<br>
+   *  ".*activation" gives the activation of all muscles.<br>
+   * <br>
+   *  The output paths must correspond to outputs that match the type provided in<br>
+   *  the template argument, otherwise they are not included in the report.<br>
+   * <br>
+   *  Controls missing from the controls table are given a value of 0.<br>
+   * <br>
+   *  If you analysis depends on the values of discrete variables in the state,<br>
+   *  you may provide those values via the optional argument<br>
+   *  "discreteVariablesTable". This table should contain column labels with the<br>
+   *  following format: &lt;path_to_component&gt;/&lt;discrete_var_name&gt;. For example,<br>
+   *  "/forceset/muscle/implicitderiv_normalized_tendon_force".<br>
    * <br>
    *  Note: The provided trajectory is not modified to satisfy kinematic<br>
    *  constraints, but SimTK::Motions in the Model (e.g., PositionMotion) are<br>
@@ -346,12 +385,12 @@ public class opensimMoco {
    *  
    */
   public static TimeSeriesTable analyzeMocoTrajectory(Model model, TimeSeriesTable statesTable, TimeSeriesTable controlsTable, StdVectorString outputPaths) {
-    return new TimeSeriesTable(opensimMocoJNI.analyzeMocoTrajectory(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(outputPaths), outputPaths), true);
+    return new TimeSeriesTable(opensimMocoJNI.analyzeMocoTrajectory__SWIG_2(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(outputPaths), outputPaths), true);
   }
 
   /**
    *  Calculate the requested outputs using the model in the problem and the<br>
-   *  provided states and controls tables<br>
+   *  provided states and controls tables.<br>
    *  The controls table is used to set the model's controls vector.<br>
    *  We assume the states and controls tables contain the same time points.<br>
    *  The output paths can be regular expressions. For example,<br>
@@ -361,6 +400,45 @@ public class opensimMoco {
    *  the template argument, otherwise they are not included in the report.<br>
    * <br>
    *  Controls missing from the controls table are given a value of 0.<br>
+   * <br>
+   *  If you analysis depends on the values of discrete variables in the state,<br>
+   *  you may provide those values via the optional argument<br>
+   *  "discreteVariablesTable". This table should contain column labels with the<br>
+   *  following format: &lt;path_to_component&gt;/&lt;discrete_var_name&gt;. For example,<br>
+   *  "/forceset/muscle/implicitderiv_normalized_tendon_force".<br>
+   * <br>
+   *  Note: The provided trajectory is not modified to satisfy kinematic<br>
+   *  constraints, but SimTK::Motions in the Model (e.g., PositionMotion) are<br>
+   *  applied. Therefore, this function expects that you've provided a trajectory<br>
+   *  that already satisfies kinematic constraints. If your provided trajectory<br>
+   *  does not satisfy kinematic constraints, many outputs will be incorrect.<br>
+   *  For example, in a model with a patella whose location is determined by a<br>
+   *  CoordinateCouplerConstraint, the length of a muscle that crosses the patella<br>
+   *  will be incorrect.<br>
+   *  
+   */
+  public static TimeSeriesTableVec3 analyzeMocoTrajectoryVec3(Model model, TimeSeriesTable statesTable, TimeSeriesTable controlsTable, StdVectorString outputPaths, TimeSeriesTable discreteVariablesTable) {
+    return new TimeSeriesTableVec3(opensimMocoJNI.analyzeMocoTrajectoryVec3__SWIG_0(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(outputPaths), outputPaths, TimeSeriesTable.getCPtr(discreteVariablesTable), discreteVariablesTable), true);
+  }
+
+  /**
+   *  Calculate the requested outputs using the model in the problem and the<br>
+   *  provided states and controls tables.<br>
+   *  The controls table is used to set the model's controls vector.<br>
+   *  We assume the states and controls tables contain the same time points.<br>
+   *  The output paths can be regular expressions. For example,<br>
+   *  ".*activation" gives the activation of all muscles.<br>
+   * <br>
+   *  The output paths must correspond to outputs that match the type provided in<br>
+   *  the template argument, otherwise they are not included in the report.<br>
+   * <br>
+   *  Controls missing from the controls table are given a value of 0.<br>
+   * <br>
+   *  If you analysis depends on the values of discrete variables in the state,<br>
+   *  you may provide those values via the optional argument<br>
+   *  "discreteVariablesTable". This table should contain column labels with the<br>
+   *  following format: &lt;path_to_component&gt;/&lt;discrete_var_name&gt;. For example,<br>
+   *  "/forceset/muscle/implicitderiv_normalized_tendon_force".<br>
    * <br>
    *  Note: The provided trajectory is not modified to satisfy kinematic<br>
    *  constraints, but SimTK::Motions in the Model (e.g., PositionMotion) are<br>
@@ -373,12 +451,12 @@ public class opensimMoco {
    *  
    */
   public static TimeSeriesTableVec3 analyzeMocoTrajectoryVec3(Model model, TimeSeriesTable statesTable, TimeSeriesTable controlsTable, StdVectorString outputPaths) {
-    return new TimeSeriesTableVec3(opensimMocoJNI.analyzeMocoTrajectoryVec3(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(outputPaths), outputPaths), true);
+    return new TimeSeriesTableVec3(opensimMocoJNI.analyzeMocoTrajectoryVec3__SWIG_1(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(outputPaths), outputPaths), true);
   }
 
   /**
    *  Calculate the requested outputs using the model in the problem and the<br>
-   *  provided states and controls tables<br>
+   *  provided states and controls tables.<br>
    *  The controls table is used to set the model's controls vector.<br>
    *  We assume the states and controls tables contain the same time points.<br>
    *  The output paths can be regular expressions. For example,<br>
@@ -388,6 +466,45 @@ public class opensimMoco {
    *  the template argument, otherwise they are not included in the report.<br>
    * <br>
    *  Controls missing from the controls table are given a value of 0.<br>
+   * <br>
+   *  If you analysis depends on the values of discrete variables in the state,<br>
+   *  you may provide those values via the optional argument<br>
+   *  "discreteVariablesTable". This table should contain column labels with the<br>
+   *  following format: &lt;path_to_component&gt;/&lt;discrete_var_name&gt;. For example,<br>
+   *  "/forceset/muscle/implicitderiv_normalized_tendon_force".<br>
+   * <br>
+   *  Note: The provided trajectory is not modified to satisfy kinematic<br>
+   *  constraints, but SimTK::Motions in the Model (e.g., PositionMotion) are<br>
+   *  applied. Therefore, this function expects that you've provided a trajectory<br>
+   *  that already satisfies kinematic constraints. If your provided trajectory<br>
+   *  does not satisfy kinematic constraints, many outputs will be incorrect.<br>
+   *  For example, in a model with a patella whose location is determined by a<br>
+   *  CoordinateCouplerConstraint, the length of a muscle that crosses the patella<br>
+   *  will be incorrect.<br>
+   *  
+   */
+  public static TimeSeriesTableSpatialVec analyzeMocoTrajectorySpatialVec(Model model, TimeSeriesTable statesTable, TimeSeriesTable controlsTable, StdVectorString outputPaths, TimeSeriesTable discreteVariablesTable) {
+    return new TimeSeriesTableSpatialVec(opensimMocoJNI.analyzeMocoTrajectorySpatialVec__SWIG_0(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(outputPaths), outputPaths, TimeSeriesTable.getCPtr(discreteVariablesTable), discreteVariablesTable), true);
+  }
+
+  /**
+   *  Calculate the requested outputs using the model in the problem and the<br>
+   *  provided states and controls tables.<br>
+   *  The controls table is used to set the model's controls vector.<br>
+   *  We assume the states and controls tables contain the same time points.<br>
+   *  The output paths can be regular expressions. For example,<br>
+   *  ".*activation" gives the activation of all muscles.<br>
+   * <br>
+   *  The output paths must correspond to outputs that match the type provided in<br>
+   *  the template argument, otherwise they are not included in the report.<br>
+   * <br>
+   *  Controls missing from the controls table are given a value of 0.<br>
+   * <br>
+   *  If you analysis depends on the values of discrete variables in the state,<br>
+   *  you may provide those values via the optional argument<br>
+   *  "discreteVariablesTable". This table should contain column labels with the<br>
+   *  following format: &lt;path_to_component&gt;/&lt;discrete_var_name&gt;. For example,<br>
+   *  "/forceset/muscle/implicitderiv_normalized_tendon_force".<br>
    * <br>
    *  Note: The provided trajectory is not modified to satisfy kinematic<br>
    *  constraints, but SimTK::Motions in the Model (e.g., PositionMotion) are<br>
@@ -400,7 +517,7 @@ public class opensimMoco {
    *  
    */
   public static TimeSeriesTableSpatialVec analyzeMocoTrajectorySpatialVec(Model model, TimeSeriesTable statesTable, TimeSeriesTable controlsTable, StdVectorString outputPaths) {
-    return new TimeSeriesTableSpatialVec(opensimMocoJNI.analyzeMocoTrajectorySpatialVec(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(outputPaths), outputPaths), true);
+    return new TimeSeriesTableSpatialVec(opensimMocoJNI.analyzeMocoTrajectorySpatialVec__SWIG_1(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(statesTable), statesTable, TimeSeriesTable.getCPtr(controlsTable), controlsTable, StdVectorString.getCPtr(outputPaths), outputPaths), true);
   }
 
 }
