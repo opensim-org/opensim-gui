@@ -673,10 +673,8 @@ public class MocoTrack extends MocoTool {
 
   /**
    *  Set the markers reference directly from a TRC file. By default, the<br>
-   *  marker data is lowpass filtered with a 6 Hz cutoff frequency, but you<br>
-   *  may set any frequency using the optional argument. If the markers data<br>
-   *  is in millimeters (detected via the 'Units' metadata tag), then it is<br>
-   *  converted to meters.<br>
+   *  marker data is low-pass filtered with a 6 Hz cutoff frequency, but you<br>
+   *  may set any frequency using the optional argument.<br>
    *  Note: Overrides any existing TableProcessor for 'markers_reference'.
    */
   public void setMarkersReferenceFromTRC(String filename, double lowpassFilterFreq) {
@@ -685,10 +683,8 @@ public class MocoTrack extends MocoTool {
 
   /**
    *  Set the markers reference directly from a TRC file. By default, the<br>
-   *  marker data is lowpass filtered with a 6 Hz cutoff frequency, but you<br>
-   *  may set any frequency using the optional argument. If the markers data<br>
-   *  is in millimeters (detected via the 'Units' metadata tag), then it is<br>
-   *  converted to meters.<br>
+   *  marker data is low-pass filtered with a 6 Hz cutoff frequency, but you<br>
+   *  may set any frequency using the optional argument.<br>
    *  Note: Overrides any existing TableProcessor for 'markers_reference'.
    */
   public void setMarkersReferenceFromTRC(String filename) {
