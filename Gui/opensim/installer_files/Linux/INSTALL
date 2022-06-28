@@ -120,10 +120,10 @@ Name=OpenSim
 Comment=OpenSim is an open source software for neuromusculoskeletal modeling, simulation \
 and analysis.
 Path=$installPrefix
-Exec=$installPrefix/bin/OpenSim
+Exec=bash $installPrefix/bin/opensim
 Icon=opensim
 Terminal=false
-Categories=Science;Education" | sudo tee /usr/share/applications/opensim.desktop > /dev/null
+Categories=Science;Education;" | sudo tee /usr/share/applications/opensim.desktop > /dev/null
     sudo cp OpenSimLogoWhiteNoText.png /usr/share/pixmaps/opensim.png
 
     [[ $v == 1 ]] && echo "Installing opensim-core commands..."
