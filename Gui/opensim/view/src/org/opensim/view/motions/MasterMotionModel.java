@@ -33,6 +33,7 @@ import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
+import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.pub.ViewDB;
 
 // End of variables declaration                   
@@ -173,8 +174,10 @@ public class MasterMotionModel {
 
    void clear() {
      // unload previously loaded motion of the same model
-     for(int i=0; i<displayers.size(); i++)
-        displayers.get(i).cleanupDisplay();
+     for(int i=0; i<displayers.size(); i++){
+        if (!(displayers.get(i).getModel() instanceof ModelForExperimentalData))
+            displayers.get(i).cleanupDisplay();
+     }
      displayers.clear();
      superMotionTimes.clear();  
      setTime(0);
