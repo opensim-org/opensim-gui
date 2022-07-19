@@ -228,9 +228,10 @@ public class ModelVisualizationJson extends JSONObject {
      * Create visuals for passed in path and return them in pathpoint_jsonArr
      * @param path
      * @param pathpoint_jsonArr 
+     * PathEditPathway#1
      */
-    private JSONObject createPathVisualization(GeometryPath path, UUID uuidToReuse, JSONArray pathpoint_jsonArr) {
-        
+    private JSONObject createPathVisualization(GeometryPath path, UUID uuidToReuse) {
+        JSONArray pathpoint_jsonArr = new JSONArray();
         UUID pathpointmat_uuid =mapGeometryPathToPathPointMaterialUUID.get(path);
         UUID pathmat_uuid = pathToVisualizationInfoMap.get(path).getMaterialID();
         boolean pointsVisible = true;//pathDisplayStatus.get(path);
@@ -244,7 +245,7 @@ public class ModelVisualizationJson extends JSONObject {
         pathGeomJson.put("name", path.getAbsolutePathString()+"Control");
         // This includes inactive ConditionalPoints but no Wrapping
         int numWrapObjects = path.getWrapSet().getSize();
-        if (numWrapObjects > 1)
+        if (numWrapObjects >= 1)
             pathWrapCurrent.put(path, new ArrayList<PathWrapPoint>()); // Keep track of # current Wraps
         final PathPointSet pathPointSetFromProperty = path.getPathPointSet();
         // Create viz for currentPoint
@@ -1595,6 +1596,7 @@ public class ModelVisualizationJson extends JSONObject {
     }
     /* Create visuals for GeometryPath, including pathpoints, caps, visible represents user intention for
     * the muscle body and endcaps only, everything else is controlled separately
+    * PathEditPathway#2
     */
     //// CREATE #1
     private UUID createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, JSONArray json_geometries, 
@@ -1628,7 +1630,7 @@ public class ModelVisualizationJson extends JSONObject {
         pathGeomJson.put("name", path.getAbsolutePathString()+"Control");
         // This includes inactive ConditionalPoints but no Wrapping
         int numWrapObjects = path.getWrapSet().getSize();
-        if (numWrapObjects > 1)
+        if (numWrapObjects >= 1)
             pathWrapCurrent.put(path, new ArrayList<PathWrapPoint>()); // Keep track of current Wraps
 
         final PathPointSet pathPointSetFromProperty = path.getPathPointSet();
@@ -1896,8 +1898,10 @@ public class ModelVisualizationJson extends JSONObject {
             // results are collected in JSONArray that's sent separately to visualizer 
             // rathen than built into the scenegraph as done on construction
             topJson.put("SubOperation", "recreate");
-            JSONArray pathpoint_jsonArr = new JSONArray();
-            JSONObject pathVis = createPathVisualization(path, pathUuid, pathpoint_jsonArr);
+            PathVisualizationInfo pathVisInfo = new PathVisualizationInfo(path);
+            pathVisInfo.setMaterialID(pathToVisualizationInfoMap.get(path).getMaterialID());
+            pathToVisualizationInfoMap.put(path, pathVisInfo);
+            JSONObject pathVis = createPathVisualization(path, pathUuid);
             topJson.put("pathSpec", pathVis);
             
         }
