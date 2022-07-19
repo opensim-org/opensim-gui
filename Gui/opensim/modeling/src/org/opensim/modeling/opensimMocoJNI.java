@@ -1775,12 +1775,9 @@ public class opensimMocoJNI {
   public final static native void FileDeletionThrower_throwIfDeleted(long jarg1, FileDeletionThrower jarg1_);
   public final static native long createExternalLoadsTableForGait__SWIG_0(long jarg1, Model jarg1_, long jarg2, StatesTrajectory jarg2_, long jarg3, StdVectorString jarg3_, long jarg4, StdVectorString jarg4_);
   public final static native long createExternalLoadsTableForGait__SWIG_1(long jarg1, Model jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_, long jarg4, StdVectorString jarg4_);
-  public final static native long analyzeMocoTrajectory__SWIG_1(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_, long jarg5, TimeSeriesTable jarg5_);
-  public final static native long analyzeMocoTrajectory__SWIG_2(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_);
-  public final static native long analyzeMocoTrajectoryVec3__SWIG_0(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_, long jarg5, TimeSeriesTable jarg5_);
-  public final static native long analyzeMocoTrajectoryVec3__SWIG_1(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_);
-  public final static native long analyzeMocoTrajectorySpatialVec__SWIG_0(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_, long jarg5, TimeSeriesTable jarg5_);
-  public final static native long analyzeMocoTrajectorySpatialVec__SWIG_1(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_);
+  public final static native long analyzeMocoTrajectory(long jarg1, Model jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_);
+  public final static native long analyzeMocoTrajectoryVec3(long jarg1, Model jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_);
+  public final static native long analyzeMocoTrajectorySpatialVec(long jarg1, Model jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_);
   public final static native long ModOpReplaceMusclesWithDeGrooteFregly2016_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void ModOpReplaceMusclesWithDeGrooteFregly2016_assign(long jarg1, ModOpReplaceMusclesWithDeGrooteFregly2016 jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String ModOpReplaceMusclesWithDeGrooteFregly2016_getClassName();
