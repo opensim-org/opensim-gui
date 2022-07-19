@@ -507,7 +507,7 @@ public class ModelVisualizationJson extends JSONObject {
         if (isGeometryPath){
             if (debug_path)
                 System.out.println("Creating Json for GeometryPath of "+gPath.getOwner().getName());
-            UUID pathUUID = createJsonForGeometryPath(gPath, mdh, json_geometries, json_materials, visibleStatus);
+            UUID pathUUID = createJsonForGeometryPath(gPath, json_geometries, json_materials, visibleStatus);
             pathList.put(gPath, pathUUID);
             // Add to the ID map so that PathOwner translates to GeometryPath
             Component parentComp = gPath.getOwner();
@@ -1599,7 +1599,7 @@ public class ModelVisualizationJson extends JSONObject {
     * PathEditPathway#2
     */
     //// CREATE #1
-    private UUID createJsonForGeometryPath(GeometryPath path, ModelDisplayHints mdh, JSONArray json_geometries, 
+    private UUID createJsonForGeometryPath(GeometryPath path, JSONArray json_geometries, 
                                             JSONArray json_materials, boolean visible) {
         // Create material for path
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
@@ -1628,6 +1628,8 @@ public class ModelVisualizationJson extends JSONObject {
         pathGeomJson.put("type", "PathGeometry");
         pathGeomJson.put("radius", actualMuscleDisplayRadius);
         pathGeomJson.put("name", path.getAbsolutePathString()+"Control");
+        json_geometries.add(pathGeomJson);
+
         // This includes inactive ConditionalPoints but no Wrapping
         int numWrapObjects = path.getWrapSet().getSize();
         if (numWrapObjects >= 1)
@@ -1635,7 +1637,6 @@ public class ModelVisualizationJson extends JSONObject {
 
         final PathPointSet pathPointSetFromProperty = path.getPathPointSet();
         
-        json_geometries.add(pathGeomJson);
         JSONArray pathpoint_jsonArr = new JSONArray();
         JSONArray pathpointActive_jsonArr = new JSONArray();
         // Keep track of First path point so that when changing color we can propagate to all path points, since they share material
