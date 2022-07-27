@@ -4,6 +4,10 @@ GitHub issues or pull requests that
 are related to the items below. If there is no issue or pull
 request related to the change, then we may provide the commit.
 
+v4.4.1
+======
+
+
 v4.4
 ====
 - Upgrade visualizer codebase to later threejs version 126.
