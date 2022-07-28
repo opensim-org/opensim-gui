@@ -166,33 +166,63 @@ edit the Java source code and build and run the GUI.
 
 ### Building on Linux (beta)
 
-Building on Linux is considered beta, and has only been tested with Ubuntu 18.04 LTS, however, these instructions should work for other distributions with some modifications (eg package manager, package names, etc).
+Building on Linux is considered beta, and has only been tested with Ubuntu 18.04 LTS. However, these instructions should work for other distributions with some modifications (e.g., package manager, package names, etc).
 
 ```bash
-sudo apt install build-essentials git cmake openjdk-8-jdk liblapack3 libgconf-2-4
+# Install dependencies from package manager.
+sudo apt-get update && sudo apt-get install --yes build-essential autotools-dev autoconf pkg-config automake libopenblas-dev liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen python3 python3-dev python3-numpy python3-setuptools openjdk-8-jdk libpcre3 libpcre3-dev byacc git gfortran libtool
 
-wget https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-linux.sh
-chmod 755 netbeans-8.2-javase-linux.sh
-./netbeans-8.2-javase-linux.sh --silent
+# Install cmake 3.15+
+mkdir -p ~/opensim-workspace/cmake && cd ~/opensim-workspace/cmake
+wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | sudo apt-key add -
+sudo apt-add-repository 'deb https://apt.kitware.com/ubuntu/ bionic main'
+sudo apt-get update
+sudo apt install --yes cmake cmake-curses-gui
 
-wget https://prdownloads.sourceforge.net/myosin/opensim-core/opensim-core-latest_linux_Release.zip
-unzip -q opensim-core-latest_linux_Release.zip -d ~
-git clone https://github.com/opensim-org/opensim-gui.git
+# Download and install SWIG.
+mkdir -p ~/opensim-workspace/swig-source && cd ~/opensim-workspace/swig-source
+wget https://github.com/swig/swig/archive/refs/tags/rel-4.0.2.tar.gz
+tar xzf rel-4.0.2.tar.gz && cd swig-rel-4.0.2
+sh autogen.sh && ./configure --prefix=$HOME/swig --disable-ccache
+make && make -j4 install  
 
-mkdir build
-cd build
+# Download and install NetBeans 12.3.
+mkdir -p ~/opensim-workspace/Netbeans12.3 && cd ~/opensim-workspace/Netbeans12.3
+wget -q https://archive.apache.org/dist/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-linux-x64.sh
+chmod 755 Apache-NetBeans-12.3-bin-linux-x64.sh
+./Apache-NetBeans-12.3-bin-linux-x64.sh --silent
 
-cmake ../opensim-gui -DCMAKE_PREFIX_PATH=~/opensim-core \
-    -DAnt_EXECUTABLE="~/netbeans-8.2/extide/ant/bin/ant" \
-    -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=~/netbeans-8.2;-Dnbplatform.default.harness.dir=~/netbeans-8.2/harness"
+# Get opensim-core.
+git clone https://github.com/opensim-org/opensim-core.git ~/opensim-workspace/opensim-core-source
 
+# Build opensim-core dependencies.
+mkdir -p ~/opensim-workspace/opensim-core-source/dependencies/build
+cd ~/opensim-workspace/opensim-core-source/dependencies/build
+cmake ~/opensim-workspace/opensim-core-source/dependencies -DCMAKE_INSTALL_PREFIX='~/opensim-workspace/opensim-core-dependencies/' -DCMAKE_BUILD_TYPE='Release' -DSUPERBUILD_simbody=ON -DSUPERBUILD_spdlog=ON -DSUPERBUILD_ezc3d=ON -DSUPERBUILD_docopt=ON -DSUPERBUILD_BTK=OFF -DOPENSIM_WITH_CASADI=ON -DOPENSIM_WITH_TROPTER=ON
+make -j8
+
+# Build opensim-core.
+mkdir -p ~/opensim-workspace/opensim-core-source/build
+cd ~/opensim-workspace/opensim-core-source/build
+cmake ../ -DCMAKE_INSTALL_PREFIX='~/opensim-core' -DCMAKE_BUILD_TYPE='RelWithDebInfo' -DOPENSIM_DEPENDENCIES_DIR='~/opensim-workspace/opensim-core-dependencies/' -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_PYTHON_WRAPPING=ON -DBUILD_JAVA_WRAPPING=ON -DWITH_BTK=OFF -DWITH_EZC3D=ON -DBUILD_TESTING=OFF -DOPENSIM_INSTALL_UNIX_FHS=OFF -DOPENSIM_COPY_DEPENDENCIES=ON -DSWIG_DIR=~/swig/share/swig -DSWIG_EXECUTABLE=~/swig/bin/swig/ -DOPENSIM_COPY_DEPENDENCIES=ON -DCMAKE_BUILD_TYPE='Release'  -DOPENSIM_WITH_CASADI=ON -DOPENSIM_WITH_TROPTER=ON
+make -j2
+make install
+
+# Get opensim-gui.
+git clone https://github.com/opensim-org/opensim-gui.git ~/opensim-workspace/opensim-gui-source
+cd ~/opensim-workspace/opensim-gui-source
+git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+
+# Build opensim-gui.
+mkdir -p ~/opensim-workspace/opensim-gui-source/build
+cd ~/opensim-workspace/opensim-gui-source/build
+cmake ../ -DCMAKE_PREFIX_PATH="~/opensim-core" -DAnt_EXECUTABLE="~/netbeans-12.3/netbeans/extide/ant/bin/ant" -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans-12.3/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans-12.3/netbeans/harness"
 make CopyOpenSimCore
 make PrepareInstaller
 
-# Tarball found at ~/opensim-gui/Gui/opensim/dist/
-# Alternately:
-cd ~/opensim-gui/Gui/opensim/dist/installer/OpenSim
-./INSTALL
+# Install opensim-gui.
+cd ~/opensim-workspace/opensim-gui-source/Gui/opensim/dist/installer/opensim
+bash INSTALL
 ```
 
 #### Manual installation for untested 'nixes
