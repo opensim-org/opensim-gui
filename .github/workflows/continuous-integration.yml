@@ -8,9 +8,9 @@ on:
       - '*'
   push:
     branches: 
-      - master
+      - branch_4.4
     tags:
-      - '*'
+      - '4.4'
 
 jobs:
   windows:
