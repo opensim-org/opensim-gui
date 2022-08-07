@@ -5,6 +5,7 @@
  */
 package org.opensim.rcnl;
 
+import java.util.Vector;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
@@ -19,7 +20,7 @@ public class JointPersonalizationToolModel {
     private String resultsDir = ".";
     private String inputDir = ".";
     private String outputModelFile = "";
-    private OpenSimObject jointPersonalizationTaskListAsObject;
+    private OpenSimObject jointPersonalizationTaskListAsVector;
     private double accuracy=1e-5;
     private double diff_min_change= 1e-5;
     private double optimalityTolerance = 1e-10;
@@ -59,11 +60,16 @@ public class JointPersonalizationToolModel {
         this.toolAsObject = toolAsObject;
     }
     
-    public OpenSimObject getJointTaskListAsObject() {
+    public Vector<OpenSimObject> getJointTaskListAsVector() {
         System.out.println(toolAsObject.dump());
-        AbstractProperty ap = toolAsObject.getPropertyByName("JointPersonalizationTaskList");
-        System.out.println(ap.getTypeName());
-        return ap.getValueAsObject();
+        Vector<OpenSimObject> tasks = new Vector<OpenSimObject>();
+        AbstractProperty ap = toolAsObject.getPropertyByName("JMPTaskList");
+        for (int i=0; i< ap.size(); i++){
+            System.out.println(ap.getTypeName());
+            OpenSimObject ithTask = ap.getValueAsObject(i);
+            tasks.add(ithTask);
+        }
+        return tasks;
     }
     
 }

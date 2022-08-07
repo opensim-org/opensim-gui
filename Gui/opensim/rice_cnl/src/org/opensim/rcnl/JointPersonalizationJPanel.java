@@ -9,6 +9,7 @@ import java.awt.Dialog;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Vector;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.opensim.modeling.Model;
@@ -21,14 +22,14 @@ import org.opensim.utils.FileUtils;
  */
 public class JointPersonalizationJPanel extends BaseToolPanel  implements Observer {
     private JointPersonalizationToolModel jointPersonalizationToolModel = null;
-    private OpenSimObject jointPersonalizationTaskListAsObject;
+    private Vector<OpenSimObject> jointPersonalizationTaskListAsVector = null;
     /**
      * Creates new form JointPersonalizationJPanel
      */
     public JointPersonalizationJPanel(Model model)  throws IOException  {
        if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
        jointPersonalizationToolModel = new JointPersonalizationToolModel(model);
-       //jointPersonalizationTaskListAsObject = jointPersonalizationToolModel.getJointTaskListAsObject();
+       jointPersonalizationTaskListAsVector = jointPersonalizationToolModel.getJointTaskListAsVector();
        initComponents();
        currentModelNameTextField.setText(jointPersonalizationToolModel.getModelName());
        outputModelFilePath.setFileName(jointPersonalizationToolModel.getOutputModelFile());
@@ -119,11 +120,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
 
         tasksPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(JointPersonalizationJPanel.class, "JointPersonalizationJPanel.tasksPanel.border.title"))); // NOI18N
 
-        jJointPersonalizationList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "JointTask1", "Joint Task 2" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
+        jJointPersonalizationList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jJointPersonalizationList);
 
         org.openide.awt.Mnemonics.setLocalizedText(addJointTaskButton, org.openide.util.NbBundle.getMessage(JointPersonalizationJPanel.class, "JointPersonalizationJPanel.addJointTaskButton.text")); // NOI18N
