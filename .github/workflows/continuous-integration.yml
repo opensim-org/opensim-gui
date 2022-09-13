@@ -159,6 +159,11 @@ jobs:
          path: 'opensim-core'
          ref: 'branch_4.4'
          
+    - name: Install Python packages
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.8'
+        
     - name: Install packages
       run: |
         brew install cmake pkgconfig autoconf libtool automake wget pcre doxygen
