@@ -215,7 +215,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
 
     private void addJointTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJointTaskButtonActionPerformed
         // TODO add your handling code here:
-        EditJointTaskJPanel ejtPanel = new EditJointTaskJPanel();
+        EditJointTaskJPanel ejtPanel = new EditJointTaskJPanel(jointPersonalizationTaskListAsVector, -1);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
@@ -224,7 +224,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
 
     private void editJointTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJointTaskButtonActionPerformed
         // TODO add your handling code here:
-        EditJointTaskJPanel ejtPanel = new EditJointTaskJPanel();
+        EditJointTaskJPanel ejtPanel = new EditJointTaskJPanel(jointPersonalizationTaskListAsVector, 0);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);

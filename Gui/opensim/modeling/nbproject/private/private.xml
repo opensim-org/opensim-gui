@@ -4,22 +4,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/C3DFileAdapter.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/SetBodies.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/BodyList.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/opensimSimulationJNI.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/SetModelComponents.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/MarkersReference.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/BodySet.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/OpenSimObject.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/ModelComponentSetModelComponent.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/opensimSimbodyJNI.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/opensimExampleComponentsJNI.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/ModelComponentSetBodies.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/ComponentSet.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/MarkerSet.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/opensimCommonJNI.java</file>
-            <file>file:/E:/src/opensim-gui/Gui/opensim/modeling/src/org/opensim/modeling/opensimActuatorsAnalysesToolsJNI.java</file>
+            <file>file:/D:/src/rice/opensim-gui-rcnl/Gui/opensim/modeling/src/org/opensim/modeling/OpenSimObject.java</file>
+            <file>file:/D:/src/rice/opensim-gui-rcnl/Gui/opensim/modeling/src/org/opensim/modeling/JointList.java</file>
+            <file>file:/D:/src/rice/opensim-gui-rcnl/Gui/opensim/modeling/src/org/opensim/modeling/JointIterator.java</file>
         </group>
     </open-files>
 </project-private>

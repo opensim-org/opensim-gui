@@ -5,17 +5,27 @@
  */
 package org.opensim.rcnl;
 
+import javax.swing.ComboBoxModel;
+import org.opensim.modeling.Joint;
+import org.opensim.modeling.OpenSimObject;
+import org.opensim.view.pub.OpenSimDB;
+
 /**
  *
  * @author Ayman-NMBL
  */
 public class AddEditJointPanel extends javax.swing.JPanel {
 
+    OpenSimObject jmpTask;
+    ComboBoxModel<String> cbm;
     /**
      * Creates new form AddEditJointPanel
      */
-    public AddEditJointPanel() {
+    public AddEditJointPanel(OpenSimObject jmpTask) {
+        this.jmpTask = jmpTask;
+        cbm = new JointListModel(OpenSimDB.getInstance().getCurrentModel());
         initComponents();
+        jComboBox1.setModel(cbm);
     }
 
     /**
@@ -60,7 +70,7 @@ public class AddEditJointPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jLabel1.text")); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "hip_r", "knee_r", "hip_l", "knee_l" }));
 
         jParentFramePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jParentFramePanel.border.title"))); // NOI18N
 
@@ -104,15 +114,14 @@ public class AddEditJointPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox6)
-                        .addGap(63, 63, 63))
+                        .addComponent(jCheckBox6))
                     .addGroup(jParentFramePanelLayout.createSequentialGroup()
                         .addComponent(jCheckBox1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jCheckBox3)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jParentFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jLabel3))
@@ -189,15 +198,14 @@ public class AddEditJointPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jCheckBox11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox12)
-                        .addGap(63, 63, 63))
+                        .addComponent(jCheckBox12))
                     .addGroup(jChildFramePanelLayout.createSequentialGroup()
                         .addComponent(jCheckBox7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jCheckBox9)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
                     .addComponent(jLabel7))

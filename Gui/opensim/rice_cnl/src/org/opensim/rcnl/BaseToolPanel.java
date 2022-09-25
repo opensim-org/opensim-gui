@@ -94,7 +94,9 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
    //------------------------------------------------------------------------
    // Override in derived classes
    //------------------------------------------------------------------------
-   public void loadSettings(String fileName) {}
+   public void loadSettings(String fileName) {
+   
+   }
    public void saveSettings(String fileName) {}
    public void pressedCancel() {}
    public void pressedClose() {}

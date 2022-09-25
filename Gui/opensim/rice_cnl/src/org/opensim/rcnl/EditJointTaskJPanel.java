@@ -6,8 +6,10 @@
 package org.opensim.rcnl;
 
 import java.awt.Dialog;
+import java.util.Vector;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.opensim.modeling.OpenSimObject;
 
 /**
  *
@@ -15,10 +17,21 @@ import org.openide.DialogDisplayer;
  */
 public class EditJointTaskJPanel extends javax.swing.JPanel {
 
+    private Vector<OpenSimObject> existingTasks = new Vector<OpenSimObject>();
+    private OpenSimObject taskToEdit;
     /**
      * Creates new form EditJointTaskJPanel
      */
     public EditJointTaskJPanel() {
+        initComponents();
+    }
+
+    EditJointTaskJPanel(Vector<OpenSimObject> jointPersonalizationTaskListAsVector, int toEdit) {
+        existingTasks = jointPersonalizationTaskListAsVector;
+        if (toEdit ==-1){
+            OpenSimObject jmpTask = OpenSimObject.newInstanceOfType("JMPTask");
+            taskToEdit = jmpTask;
+        }
         initComponents();
     }
 
@@ -32,7 +45,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTaskNameTextField = new javax.swing.JTextField();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -49,10 +62,10 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jLabel1.text")); // NOI18N
 
-        jTextField1.setText(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jTextField1.text")); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTaskNameTextField.setText(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jTaskNameTextField.text")); // NOI18N
+        jTaskNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTaskNameTextFieldActionPerformed(evt);
             }
         });
 
@@ -142,7 +155,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jTaskNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel3)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -163,7 +176,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTaskNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jCheckBox1)
@@ -183,9 +196,10 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTaskNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTaskNameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        jTaskNameTextField.setText(taskToEdit.getName());
+    }//GEN-LAST:event_jTaskNameTextFieldActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
@@ -197,7 +211,8 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
 
     private void editJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJointButtonActionPerformed
         // TODO add your handling code here:
-        AddEditJointPanel ejtPanel = new AddEditJointPanel();
+        OpenSimObject selectedJointTask  = OpenSimObject.newInstanceOfType("JMPJoint");
+        AddEditJointPanel ejtPanel = new AddEditJointPanel(selectedJointTask);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
@@ -205,10 +220,13 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
 
     private void addJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJointButtonActionPerformed
         // TODO add your handling code here:
-        AddEditJointPanel ejtPanel = new AddEditJointPanel();
+        OpenSimObject newJointTask  = OpenSimObject.newInstanceOfType("JMPJoint");
+        AddEditJointPanel ejtPanel = new AddEditJointPanel(newJointTask);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
+        System.out.println(taskToEdit.dump());
+        
     }//GEN-LAST:event_addJointButtonActionPerformed
 
 
@@ -224,9 +242,16 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTaskNameTextField;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private org.opensim.swingui.FileTextFieldAndChooser triallFilePath;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the taskToEdit
+     */
+    public OpenSimObject getTaskToEdit() {
+        return taskToEdit;
+    }
 }
