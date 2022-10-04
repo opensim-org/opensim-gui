@@ -431,7 +431,7 @@ jobs:
     - name: Upload GUI installer
       uses: actions/upload-artifact@v2
       with:
-        name: OpenSim-${{ steps.build-gui.outputs.version }}-mac11
+        name: OpenSim-${{ steps.build-gui.outputs.version }}
         path: OpenSim-${{ steps.build-gui.outputs.version }}-mac11.pkg
 
   ubuntu:
