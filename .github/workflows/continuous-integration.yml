@@ -280,11 +280,11 @@ jobs:
         ls Gui/opensim/dist
         mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
 
-    - name: Upload GUI installer
-      uses: actions/upload-artifact@v2
-      with:
-        name: OpenSim-${{ steps.build-gui.outputs.version }}-mac
-        path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
+#    - name: Upload GUI installer
+#      uses: actions/upload-artifact@v2
+#      with:
+#        name: OpenSim-${{ steps.build-gui.outputs.version }}-mac
+#        path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
 
   mac11:
     name: Mac11
@@ -432,7 +432,7 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}
-        path: OpenSim-${{ steps.build-gui.outputs.version }}-mac11.pkg
+        path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
 
   ubuntu:
     name: Ubuntu
