@@ -2,7 +2,7 @@
 
 function err_unsupported_env {
     printf "\r  [\033[0;31mERROR:\033[0m] Your distro/release is not supported by this script\n"
-    printf "  Ubuntu 18.04 LTS is currently the only Linux distribution that is tested \
+    printf "  Ubuntu >=18.04 LTS is currently the only Linux distribution that is tested \
 against, however the OpenSim GUI will likely run on other distributions and/or \
 releases. See the https://github.com/opensim-org/opensim-gui for more \
 information.\n"
@@ -12,7 +12,7 @@ information.\n"
 function usage {
   echo -n "INSTALL [OPTIONS]...
 
-Install the OpenSim GUI. Ubuntu 18.04 LTS is the only tested Linux. Manual \
+Install the OpenSim GUI. Ubuntu >=18.04 LTS is the only tested Linux. Manual \
 installation on other systems may be possible; see \
 https://github.com/opensim-org/opensim-gui for more information.
 
@@ -90,7 +90,9 @@ else
     err_unsupported_env
 fi
 
-if [[ $OS == "Ubuntu" ]] && [[ $VER == "18.04" ]]; then
+MIN_VER="18.04"
+
+if [[ $OS == "Ubuntu" ]] && [[ $(echo $VER'>='$MIN_VER | bc -l) ]]; then
 
     [[ $v == 1 ]] && echo "Installing Java..."
     sudo apt install -qqqq -y openjdk-8-jre
