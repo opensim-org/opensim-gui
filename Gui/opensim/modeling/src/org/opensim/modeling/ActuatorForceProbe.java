@@ -190,8 +190,8 @@ public class ActuatorForceProbe extends Probe {
   /**
    *  Returns the name(s) of the Actuator forces being probed. 
    */
-  public PropertyString getActuatorNames() {
-    return new PropertyString(opensimSimulationJNI.ActuatorForceProbe_getActuatorNames(swigCPtr, this), false);
+  public PropertyStringList getActuatorNames() {
+    return new PropertyStringList(opensimSimulationJNI.ActuatorForceProbe_getActuatorNames(swigCPtr, this), false);
   }
 
   /**
