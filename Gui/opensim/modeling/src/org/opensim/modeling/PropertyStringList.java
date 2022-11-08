@@ -286,15 +286,15 @@ Assumes type T can be written to a stream with operator<<.
  * <br>
  * @see OpenSim#Object, OpenSim::AbstractProperty @author Michael Sherman
  */
-public class PropertyString extends AbstractProperty {
+public class PropertyStringList extends AbstractProperty {
   private transient long swigCPtr;
 
-  public PropertyString(long cPtr, boolean cMemoryOwn) {
-    super(opensimCommonJNI.PropertyString_SWIGUpcast(cPtr), cMemoryOwn);
+  public PropertyStringList(long cPtr, boolean cMemoryOwn) {
+    super(opensimCommonJNI.PropertyStringList_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(PropertyString obj) {
+  public static long getCPtr(PropertyStringList obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
@@ -315,15 +315,15 @@ public class PropertyString extends AbstractProperty {
    *     done with it. *
    */
   public AbstractProperty clone() {
-    long cPtr = opensimCommonJNI.PropertyString_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new PropertyString(cPtr, true);
+    long cPtr = opensimCommonJNI.PropertyStringList_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new PropertyStringList(cPtr, true);
   }
 
   /**
    *  Use TypeHelper's getTypeName() to satisfy this pure virtual. *
    */
   public String getTypeName() {
-    return opensimCommonJNI.PropertyString_getTypeName(swigCPtr, this);
+    return opensimCommonJNI.PropertyStringList_getTypeName(swigCPtr, this);
   }
 
   /**
@@ -342,7 +342,7 @@ public class PropertyString extends AbstractProperty {
    *     setValue(i). *
    */
   public void setValue(int i, String value) {
-    opensimCommonJNI.PropertyString_setValue__SWIG_0(swigCPtr, this, i, value);
+    opensimCommonJNI.PropertyStringList_setValue__SWIG_0(swigCPtr, this, i, value);
   }
 
   /**
@@ -351,7 +351,7 @@ public class PropertyString extends AbstractProperty {
    *     afterwards. An exception is thrown if this is a list property. *
    */
   public void setValue(String value) {
-    opensimCommonJNI.PropertyString_setValue__SWIG_1(swigCPtr, this, value);
+    opensimCommonJNI.PropertyStringList_setValue__SWIG_1(swigCPtr, this, value);
   }
 
   /**
@@ -361,7 +361,7 @@ public class PropertyString extends AbstractProperty {
    *     the square bracket operator property[index] instead. *
    */
   public String getValue(int index) {
-    return opensimCommonJNI.PropertyString_getValue__SWIG_0(swigCPtr, this, index);
+    return opensimCommonJNI.PropertyStringList_getValue__SWIG_0(swigCPtr, this, index);
   }
 
   /**
@@ -371,7 +371,7 @@ public class PropertyString extends AbstractProperty {
    *     the square bracket operator property[index] instead. *
    */
   public String getValue() {
-    return opensimCommonJNI.PropertyString_getValue__SWIG_1(swigCPtr, this);
+    return opensimCommonJNI.PropertyStringList_getValue__SWIG_1(swigCPtr, this);
   }
 
   /**
@@ -381,7 +381,7 @@ public class PropertyString extends AbstractProperty {
    *     the square bracket operator property[index] instead. *
    */
   public SWIGTYPE_p_std__string updValue(int index) {
-    return new SWIGTYPE_p_std__string(opensimCommonJNI.PropertyString_updValue__SWIG_0(swigCPtr, this, index), false);
+    return new SWIGTYPE_p_std__string(opensimCommonJNI.PropertyStringList_updValue__SWIG_0(swigCPtr, this, index), false);
   }
 
   /**
@@ -391,7 +391,7 @@ public class PropertyString extends AbstractProperty {
    *     the square bracket operator property[index] instead. *
    */
   public SWIGTYPE_p_std__string updValue() {
-    return new SWIGTYPE_p_std__string(opensimCommonJNI.PropertyString_updValue__SWIG_1(swigCPtr, this), false);
+    return new SWIGTYPE_p_std__string(opensimCommonJNI.PropertyStringList_updValue__SWIG_1(swigCPtr, this), false);
   }
 
   /**
@@ -400,7 +400,7 @@ public class PropertyString extends AbstractProperty {
    *     values. The index assigned to this value is returned. *
    */
   public int appendValue(String value) {
-    return opensimCommonJNI.PropertyString_appendValue(swigCPtr, this, value);
+    return opensimCommonJNI.PropertyStringList_appendValue(swigCPtr, this, value);
   }
 
   /**
@@ -410,7 +410,7 @@ public class PropertyString extends AbstractProperty {
    *     to this value is returned. *
    */
   public int adoptAndAppendValue(SWIGTYPE_p_std__string value) {
-    return opensimCommonJNI.PropertyString_adoptAndAppendValue(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(value));
+    return opensimCommonJNI.PropertyStringList_adoptAndAppendValue(swigCPtr, this, SWIGTYPE_p_std__string.getCPtr(value));
   }
 
   /**
@@ -420,7 +420,7 @@ public class PropertyString extends AbstractProperty {
    *     take time proportional to the length of the value list. *
    */
   public int findIndex(String value) {
-    return opensimCommonJNI.PropertyString_findIndex(swigCPtr, this, value);
+    return opensimCommonJNI.PropertyStringList_findIndex(swigCPtr, this, value);
   }
 
   /**
@@ -430,7 +430,7 @@ public class PropertyString extends AbstractProperty {
    *     since these are not named. When a search is performed, it's a linear search. 
    */
   public int findIndexForName(SWIGTYPE_p_SimTK__String name) {
-    return opensimCommonJNI.PropertyString_findIndexForName(swigCPtr, this, SWIGTYPE_p_SimTK__String.getCPtr(name));
+    return opensimCommonJNI.PropertyStringList_findIndexForName(swigCPtr, this, SWIGTYPE_p_SimTK__String.getCPtr(name));
   }
 
   /**
@@ -441,7 +441,7 @@ public class PropertyString extends AbstractProperty {
    *     which the actual type was derived. *
    */
   public static boolean isA(AbstractProperty prop) {
-    return opensimCommonJNI.PropertyString_isA(AbstractProperty.getCPtr(prop), prop);
+    return opensimCommonJNI.PropertyStringList_isA(AbstractProperty.getCPtr(prop), prop);
   }
 
   /**
@@ -450,8 +450,8 @@ public class PropertyString extends AbstractProperty {
    *     this is not the right type only in DEBUG mode; see isA() if you need to <br>
    *     check first. *
    */
-  public static PropertyString getAs(AbstractProperty prop) {
-    return new PropertyString(opensimCommonJNI.PropertyString_getAs(AbstractProperty.getCPtr(prop), prop), false);
+  public static PropertyStringList getAs(AbstractProperty prop) {
+    return new PropertyStringList(opensimCommonJNI.PropertyStringList_getAs(AbstractProperty.getCPtr(prop), prop), false);
   }
 
   /**
@@ -460,8 +460,8 @@ public class PropertyString extends AbstractProperty {
    *     this is not the right type only in DEBUG mode; see isA() if you need to <br>
    *     check first. *
    */
-  public static PropertyString updAs(AbstractProperty prop) {
-    return new PropertyString(opensimCommonJNI.PropertyString_updAs(AbstractProperty.getCPtr(prop), prop), false);
+  public static PropertyStringList updAs(AbstractProperty prop) {
+    return new PropertyStringList(opensimCommonJNI.PropertyStringList_updAs(AbstractProperty.getCPtr(prop), prop), false);
   }
 
 }

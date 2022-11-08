@@ -205,8 +205,8 @@ public class TransformAxis extends OpenSimObject {
    *     the list of coordinate names.<br>
    *     @see get_coordinates() *
    */
-  public PropertyString getCoordinateNames() {
-    return new PropertyString(opensimSimulationJNI.TransformAxis_getCoordinateNames(swigCPtr, this), false);
+  public PropertyStringList getCoordinateNames() {
+    return new PropertyStringList(opensimSimulationJNI.TransformAxis_getCoordinateNames(swigCPtr, this), false);
   }
 
   /**

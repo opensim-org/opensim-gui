@@ -108,8 +108,8 @@ public class MuscleActiveFiberPowerProbe extends Probe {
   /**
    *  Returns the names of the Actuators being probed. 
    */
-  public PropertyString getMuscleNames() {
-    return new PropertyString(opensimSimulationJNI.MuscleActiveFiberPowerProbe_getMuscleNames(swigCPtr, this), false);
+  public PropertyStringList getMuscleNames() {
+    return new PropertyStringList(opensimSimulationJNI.MuscleActiveFiberPowerProbe_getMuscleNames(swigCPtr, this), false);
   }
 
   /**

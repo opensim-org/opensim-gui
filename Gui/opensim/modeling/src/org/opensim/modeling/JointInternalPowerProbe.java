@@ -193,8 +193,8 @@ public class JointInternalPowerProbe extends Probe {
   /**
    *  Returns the names of the Joints being probed. 
    */
-  public PropertyString getJointNames() {
-    return new PropertyString(opensimSimulationJNI.JointInternalPowerProbe_getJointNames(swigCPtr, this), false);
+  public PropertyStringList getJointNames() {
+    return new PropertyStringList(opensimSimulationJNI.JointInternalPowerProbe_getJointNames(swigCPtr, this), false);
   }
 
   /**
