@@ -90,9 +90,10 @@ else
     err_unsupported_env
 fi
 
-MIN_VER="18.04"
+MIN_UBUNTU_VER="18.04"
+MIN_DEBIAN_VER="10"
 
-if [[ $OS == "Ubuntu" ]] && [[ $(echo $VER'>='$MIN_VER | bc -l) ]]; then
+if [[ $OS == *"Ubuntu"* ]] && [[ $(echo $VER'>='$MIN_UBUNTU_VER | bc -l) ]]; then
 
     [[ $v == 1 ]] && echo "Installing Java..."
     sudo apt install -qqqq -y openjdk-8-jre
@@ -135,8 +136,48 @@ Categories=Science;Education;" | sudo tee /usr/share/applications/opensim.deskto
     else
         ./opensim-install-command-line.sh > /dev/null
     fi
+
+elif [[ $OS == *"Debian"* ]] && [[ $(echo $VER'>='$MIN_DEBIAN_VER | bc -l) ]]; then
+
+    [[ $v == 1 ]] && echo "Testing for system LAPACK/BLAS..."
+    if ! (sudo ldconfig -p | grep -q "libblas|liblapack"); then
+        [[ $v == 1 ]] && echo "  Installing liblapack3..."
+        sudo apt install -qqqq -y liblapack3
+    fi
+
+    [[ $v == 1 ]] && echo "Testing for libgconf..."
+    if ! (sudo ldconfig -p | grep -q "libgconf"); then
+        [[ $v == 1 ]] && echo "  Installing libgconf..."
+        sudo apt install -qqqq -y libgconf-2-4
+    fi
+
+    [[ $v == 1 ]] && echo "Installing OpenSim GUI to $installPrefix, owned by $USER..."
+    sudo mkdir -p $installPrefix
+    sudo chown -R $USER:$USER $installPrefix
+    cp -R $SCRIPTDIR/* $installPrefix
+
+    [[ $v == 1 ]] && echo "Adding OpenSim to list of desktop applications..."
+    echo "[Desktop Entry]
+Version=1.0
+Type=Application
+Name=OpenSim
+Comment=OpenSim is an open source software for neuromusculoskeletal modeling, simulation \
+and analysis.
+Path=$installPrefix
+Exec=bash $installPrefix/bin/opensim --jdkhome /usr/lib/jvm/temurin-8-jdk-amd64/
+Icon=opensim
+Terminal=false
+Categories=Science;Education;" | sudo tee /usr/share/applications/opensim.desktop > /dev/null
+    sudo cp OpenSimLogoWhiteNoText.png /usr/share/pixmaps/opensim.png
+
+    [[ $v == 1 ]] && echo "Installing opensim-core commands..."
+    cd $installPrefix/bin
+    if [[ $v == 1 ]]; then
+        ./opensim-install-command-line.sh
+    else
+        ./opensim-install-command-line.sh > /dev/null
+    fi
 else
     err_unsupported_env
 fi
-
 
