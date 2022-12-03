@@ -1447,6 +1447,19 @@ public class Millard2012EquilibriumMuscleIterator {
   }
 
   /**
+   *  Collect and return the names of the sockets in this component. You<br>
+   * can use this to iterate through the sockets:<br>
+   * {@code 
+  for (std::string name : comp.getSocketNames()) {
+      const AbstractSocket& socket = getSocket(name);
+  }
+  } 
+   */
+  public StdVectorString getSocketNames() {
+    return new StdVectorString(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getSocketNames(swigCPtr, this), true);
+  }
+
+  /**
    *  Get the connectee as an Object. This means you will not have<br>
    * access to the methods on the concrete connectee. This is the method you<br>
    * must use in MATLAB to access the connectee.<br>

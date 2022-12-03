@@ -2,7 +2,7 @@
 
 function err_unsupported_env {
     printf "\r  [\033[0;31mERROR:\033[0m] Your distro/release is not supported by this script\n"
-    printf "  Ubuntu 18.04 LTS is currently the only Linux distribution that is tested \
+    printf "  Ubuntu >=18.04 LTS is currently the only Linux distribution that is tested \
 against, however the OpenSim GUI will likely run on other distributions and/or \
 releases. See the https://github.com/opensim-org/opensim-gui for more \
 information.\n"
@@ -12,7 +12,7 @@ information.\n"
 function usage {
   echo -n "INSTALL [OPTIONS]...
 
-Install the OpenSim GUI. Ubuntu 18.04 LTS is the only tested Linux. Manual \
+Install the OpenSim GUI. Ubuntu >=18.04 LTS is the only tested Linux. Manual \
 installation on other systems may be possible; see \
 https://github.com/opensim-org/opensim-gui for more information.
 
@@ -90,7 +90,10 @@ else
     err_unsupported_env
 fi
 
-if [[ $OS == "Ubuntu" ]] && [[ $VER == "18.04" ]]; then
+MIN_UBUNTU_VER="18.04"
+MIN_DEBIAN_VER="10"
+
+if [[ $OS == *"Ubuntu"* ]] && [[ $(echo $VER'>='$MIN_UBUNTU_VER | bc -l) ]]; then
 
     [[ $v == 1 ]] && echo "Installing Java..."
     sudo apt install -qqqq -y openjdk-8-jre
@@ -120,10 +123,51 @@ Name=OpenSim
 Comment=OpenSim is an open source software for neuromusculoskeletal modeling, simulation \
 and analysis.
 Path=$installPrefix
-Exec=$installPrefix/bin/OpenSim
+Exec=bash $installPrefix/bin/opensim
 Icon=opensim
 Terminal=false
-Categories=Science;Education" | sudo tee /usr/share/applications/opensim.desktop > /dev/null
+Categories=Science;Education;" | sudo tee /usr/share/applications/opensim.desktop > /dev/null
+    sudo cp OpenSimLogoWhiteNoText.png /usr/share/pixmaps/opensim.png
+
+    [[ $v == 1 ]] && echo "Installing opensim-core commands..."
+    cd $installPrefix/bin
+    if [[ $v == 1 ]]; then
+        ./opensim-install-command-line.sh
+    else
+        ./opensim-install-command-line.sh > /dev/null
+    fi
+
+elif [[ $OS == *"Debian"* ]] && [[ $(echo $VER'>='$MIN_DEBIAN_VER | bc -l) ]]; then
+
+    [[ $v == 1 ]] && echo "Testing for system LAPACK/BLAS..."
+    if ! (sudo ldconfig -p | grep -q "libblas|liblapack"); then
+        [[ $v == 1 ]] && echo "  Installing liblapack3..."
+        sudo apt install -qqqq -y liblapack3
+    fi
+
+    [[ $v == 1 ]] && echo "Testing for libgconf..."
+    if ! (sudo ldconfig -p | grep -q "libgconf"); then
+        [[ $v == 1 ]] && echo "  Installing libgconf..."
+        sudo apt install -qqqq -y libgconf-2-4
+    fi
+
+    [[ $v == 1 ]] && echo "Installing OpenSim GUI to $installPrefix, owned by $USER..."
+    sudo mkdir -p $installPrefix
+    sudo chown -R $USER:$USER $installPrefix
+    cp -R $SCRIPTDIR/* $installPrefix
+
+    [[ $v == 1 ]] && echo "Adding OpenSim to list of desktop applications..."
+    echo "[Desktop Entry]
+Version=1.0
+Type=Application
+Name=OpenSim
+Comment=OpenSim is an open source software for neuromusculoskeletal modeling, simulation \
+and analysis.
+Path=$installPrefix
+Exec=bash $installPrefix/bin/opensim --jdkhome /usr/lib/jvm/temurin-8-jdk-amd64/
+Icon=opensim
+Terminal=false
+Categories=Science;Education;" | sudo tee /usr/share/applications/opensim.desktop > /dev/null
     sudo cp OpenSimLogoWhiteNoText.png /usr/share/pixmaps/opensim.png
 
     [[ $v == 1 ]] && echo "Installing opensim-core commands..."
@@ -136,5 +180,4 @@ Categories=Science;Education" | sudo tee /usr/share/applications/opensim.desktop
 else
     err_unsupported_env
 fi
-
 

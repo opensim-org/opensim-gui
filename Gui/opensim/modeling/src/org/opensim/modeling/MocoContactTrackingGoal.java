@@ -111,9 +111,9 @@ package org.opensim.modeling;
  * <br>
  * Adding a scale factor to a MocoContactTrackingGoal.<br>
  * {@code 
-auto* markerTrackingGoal = problem.addGoal<MocoContactTrackingGoal>();
+auto* contactTrackingGoal = problem.addGoal<MocoContactTrackingGoal>();
 ...
-markerTrackingGoal->addScaleFactor(
+contactTrackingGoal->addScaleFactor(
         'RightGRF_vertical_scale_factor', 'Right_GRF', 1, {0.5, 2.0});
 }<br>
  * <br>

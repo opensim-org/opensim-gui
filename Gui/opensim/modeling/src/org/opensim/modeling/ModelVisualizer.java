@@ -22,8 +22,6 @@ package org.opensim.modeling;
  * The Simbody visualizer binary needs to be found at runtime to create a<br>
  * visualizer. The search proceeds in the following order:<br>
  * Directory of the currently running executable/binary.<br>
- * Directory referred to by the environment variable OPENSIM_HOME/bin<br>
- *   if it exists.<br>
  * Directories referred to by the environment variable PATH.<br>
  * Possible locations for simbody installations:<br>
  *   -- SIMBODY_HOME/bin if the environment variable SIMBODY_HOME exists.<br>
@@ -159,9 +157,7 @@ public class ModelVisualizer {
    *       - Otherwise, try the search paths added through <br>
    *         addDirToGeometrySearchPaths(). The paths are searched in <br>
    *         reverse-chronological order -- the latest path added is searched first.<br>
-   *       - Finally, try installDir/geoFile where installDir is taken from<br>
-   *         the OPENSIM_HOME environment variable if it exists, otherwise<br>
-   *         a default installation directory. <br>
+   *       - Otherwise a default installation directory. <br>
    * <br>
    *     No attempt is made to validate the contents of the file or whether it<br>
    *     has a supported extension; we're just looking for a file of the given<br>
