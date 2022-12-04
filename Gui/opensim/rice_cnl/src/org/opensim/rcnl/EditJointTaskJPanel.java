@@ -6,10 +6,17 @@
 package org.opensim.rcnl;
 
 import java.awt.Dialog;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Vector;
+import javax.swing.filechooser.FileFilter;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.util.Exceptions;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyDoubleList;
+import org.opensim.modeling.PropertyHelper;
 
 /**
  *
@@ -17,8 +24,9 @@ import org.opensim.modeling.OpenSimObject;
  */
 public class EditJointTaskJPanel extends javax.swing.JPanel {
 
-    private Vector<OpenSimObject> existingTasks = new Vector<OpenSimObject>();
     private OpenSimObject taskToEdit;
+    private NumberFormat numFormat = NumberFormat.getInstance();
+    private Vector<OpenSimObject> savedJointTasks = new Vector<OpenSimObject>();
     /**
      * Creates new form EditJointTaskJPanel
      */
@@ -26,13 +34,22 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    EditJointTaskJPanel(Vector<OpenSimObject> jointPersonalizationTaskListAsVector, int toEdit) {
-        existingTasks = jointPersonalizationTaskListAsVector;
-        if (toEdit ==-1){
-            OpenSimObject jmpTask = OpenSimObject.newInstanceOfType("JMPTask");
-            taskToEdit = jmpTask;
-        }
+    EditJointTaskJPanel(OpenSimObject jointPersonalizationTask) {
+        taskToEdit = jointPersonalizationTask;
         initComponents();
+        triallFilePath.setExtensionsAndDescription(".trc", "Measurement trial marker data");
+        // Populate name, enabled, time-range and markers-file
+        jTaskNameTextField.setText(jointPersonalizationTask.getName());
+        AbstractProperty enabledProp = taskToEdit.getPropertyByName("is_enabled");
+        jEnabledCheckBox.setSelected(PropertyHelper.getValueBool(enabledProp));
+        AbstractProperty trcfileProp = taskToEdit.getPropertyByName("marker_file_name");
+        String filepath = PropertyHelper.getValueString(trcfileProp);
+        triallFilePath.setFileName(filepath);
+        AbstractProperty timeRangeProp = taskToEdit.getPropertyByName("time_range");
+        PropertyDoubleList pDoubleList = PropertyDoubleList.updAs(timeRangeProp);
+        jTextField3.setText(String.valueOf(pDoubleList.getValue(0)));
+        jTextField4.setText(String.valueOf(pDoubleList.getValue(1)));
+        
     }
 
     /**
@@ -46,7 +63,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
 
         jLabel1 = new javax.swing.JLabel();
         jTaskNameTextField = new javax.swing.JTextField();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jEnabledCheckBox = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
@@ -63,19 +80,39 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jLabel1.text")); // NOI18N
 
         jTaskNameTextField.setText(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jTaskNameTextField.text")); // NOI18N
+        jTaskNameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTaskNameTextFieldFocusLost(evt);
+            }
+        });
         jTaskNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTaskNameTextFieldActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox1, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jCheckBox1.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jEnabledCheckBox, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jEnabledCheckBox.text")); // NOI18N
+        jEnabledCheckBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jEnabledCheckBoxItemStateChanged(evt);
+            }
+        });
+        jEnabledCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jEnabledCheckBoxActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jLabel3.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jLabel4.text")); // NOI18N
 
         jTextField3.setText(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jTextField3.text")); // NOI18N
+        jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField3FocusLost(evt);
+            }
+        });
         jTextField3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField3ActionPerformed(evt);
@@ -83,6 +120,16 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         });
 
         jTextField4.setText(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jTextField4.text")); // NOI18N
+        jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField4FocusLost(evt);
+            }
+        });
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jPanel1.border.title"))); // NOI18N
 
@@ -149,7 +196,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
+                            .addComponent(jEnabledCheckBox)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -179,7 +226,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
                     .addComponent(jTaskNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
+                .addComponent(jEnabledCheckBox)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel11)
@@ -198,15 +245,28 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
 
     private void jTaskNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTaskNameTextFieldActionPerformed
         // TODO add your handling code here:
-        jTaskNameTextField.setText(taskToEdit.getName());
+        taskToEdit.setName(jTaskNameTextField.getText());
     }//GEN-LAST:event_jTaskNameTextFieldActionPerformed
 
     private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
         // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            AbstractProperty timeRangeProp = taskToEdit.getPropertyByName("time_range");
+            PropertyDoubleList pDoubleList = PropertyDoubleList.updAs(timeRangeProp);
+            double startTime =pDoubleList.getValue(0);
+            if (jTextField3.getText().trim().length()>0)
+                startTime = numFormat.parse(jTextField3.getText().trim()).doubleValue();
+            pDoubleList.setValue(0, startTime);
+        } catch (ParseException ex) {
+            Exceptions.printStackTrace(ex);
+        }
     }//GEN-LAST:event_jTextField3ActionPerformed
 
     private void triallFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_triallFilePathStateChanged
         //ikToolModel.getIKTool().setOutputMotionFileName(outputModelFilePath.getFileName());
+        AbstractProperty trcfileProp = taskToEdit.getPropertyByName("marker_file_name");
+        PropertyHelper.setValueString(triallFilePath.getFileName(), trcfileProp);
     }//GEN-LAST:event_triallFilePathStateChanged
 
     private void editJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJointButtonActionPerformed
@@ -221,6 +281,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
     private void addJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJointButtonActionPerformed
         // TODO add your handling code here:
         OpenSimObject newJointTask  = OpenSimObject.newInstanceOfType("JMPJoint");
+        savedJointTasks.add(newJointTask);
         AddEditJointPanel ejtPanel = new AddEditJointPanel(newJointTask);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
@@ -229,12 +290,51 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         
     }//GEN-LAST:event_addJointButtonActionPerformed
 
+    private void jEnabledCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jEnabledCheckBoxItemStateChanged
+        // TODO add your handling code here:
+        AbstractProperty enabledProp = taskToEdit.getPropertyByName("is_enabled");
+        PropertyHelper.setValueBool(evt.getStateChange()==1, enabledProp);
+    }//GEN-LAST:event_jEnabledCheckBoxItemStateChanged
+
+    private void jTaskNameTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTaskNameTextFieldFocusLost
+        // TODO add your handling code here:
+         taskToEdit.setName(jTaskNameTextField.getText());
+    }//GEN-LAST:event_jTaskNameTextFieldFocusLost
+
+    private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
+        jTextField3ActionPerformed(null);
+    }//GEN-LAST:event_jTextField3FocusLost
+
+    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:();
+            AbstractProperty timeRangeProp = taskToEdit.getPropertyByName("time_range");
+            PropertyDoubleList pDoubleList = PropertyDoubleList.updAs(timeRangeProp);
+            double endTime=pDoubleList.getValue(1);
+            if (jTextField4.getText().trim().length()>0)
+                endTime = numFormat.parse(jTextField4.getText().trim()).doubleValue();
+            pDoubleList.setValue(1, endTime);
+        } catch (ParseException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+    }//GEN-LAST:event_jTextField4ActionPerformed
+
+    private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
+        // TODO add your handling code here:
+        jTextField4ActionPerformed(null);
+    }//GEN-LAST:event_jTextField4FocusLost
+
+    private void jEnabledCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnabledCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jEnabledCheckBoxActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addJointButton;
     private javax.swing.JButton deleteJointButton;
     private javax.swing.JButton editJointButton;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jEnabledCheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
@@ -248,10 +348,4 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
     private org.opensim.swingui.FileTextFieldAndChooser triallFilePath;
     // End of variables declaration//GEN-END:variables
 
-    /**
-     * @return the taskToEdit
-     */
-    public OpenSimObject getTaskToEdit() {
-        return taskToEdit;
-    }
 }

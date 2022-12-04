@@ -9,6 +9,7 @@ import java.util.Vector;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyObjectList;
 
 /**
  *
@@ -64,9 +65,10 @@ public class JointPersonalizationToolModel {
         System.out.println(toolAsObject.dump());
         Vector<OpenSimObject> tasks = new Vector<OpenSimObject>();
         AbstractProperty ap = toolAsObject.getPropertyByName("JMPTaskList");
-        for (int i=0; i< ap.size(); i++){
+        PropertyObjectList olist = PropertyObjectList.getAs(ap);
+        for (int i=0; i< olist.size(); i++){
             System.out.println(ap.getTypeName());
-            OpenSimObject ithTask = ap.getValueAsObject(i);
+            OpenSimObject ithTask = olist.getValue(i);
             tasks.add(ithTask);
         }
         return tasks;

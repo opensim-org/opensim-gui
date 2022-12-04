@@ -41,20 +41,20 @@ import org.opensim.modeling.OpenSimObject;
  *
  * @author ayman
  */
-public class JMPTaskListModel extends DefaultListModel {
-    Vector<OpenSimObject>  jMPTaskListAsVector = new Vector<OpenSimObject>();
+public class JMPJointListModel extends DefaultListModel {
+    Vector<OpenSimObject>  jMPJointListAsVector = new Vector<OpenSimObject>();
     /** Creates a new instance of ForceListModel */
-    public JMPTaskListModel(Vector<OpenSimObject> taskVector) {
+    public JMPJointListModel(Vector<OpenSimObject> taskVector) {
         super();
-        this.jMPTaskListAsVector = taskVector;
+        this.jMPJointListAsVector = taskVector;
         initModel();
     }
 
     private void initModel() {
         clear();
         
-        for (int i=0; i<jMPTaskListAsVector.size(); i++){
-            add(i, this.jMPTaskListAsVector.get(i));
+        for (int i=0; i<jMPJointListAsVector.size(); i++){
+            add(i, this.jMPJointListAsVector.get(i));
         }
     }
     

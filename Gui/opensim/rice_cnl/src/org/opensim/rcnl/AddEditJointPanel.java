@@ -5,9 +5,16 @@
  */
 package org.opensim.rcnl;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import javax.swing.ComboBoxModel;
+import org.openide.util.Exceptions;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Joint;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyDoubleList;
+import org.opensim.modeling.PropertyHelper;
+import org.opensim.modeling.PropertyObjectList;
 import org.opensim.view.pub.OpenSimDB;
 
 /**
@@ -18,6 +25,10 @@ public class AddEditJointPanel extends javax.swing.JPanel {
 
     OpenSimObject jmpTask;
     ComboBoxModel<String> cbm;
+    OpenSimObject frameTransformationParent;
+    OpenSimObject frameTransformationChild;
+    PropertyDoubleList pTrBounds, pOrientBounds, chTrBounds, chOrientBounds;
+    private NumberFormat numFormat = NumberFormat.getInstance();
     /**
      * Creates new form AddEditJointPanel
      */
@@ -25,7 +36,22 @@ public class AddEditJointPanel extends javax.swing.JPanel {
         this.jmpTask = jmpTask;
         cbm = new JointListModel(OpenSimDB.getInstance().getCurrentModel());
         initComponents();
-        jComboBox1.setModel(cbm);
+        jComboBoxJoints.setModel(cbm);
+
+        AbstractProperty parentXform = jmpTask.getPropertyByName("parent_frame_transformation");
+        frameTransformationParent = PropertyObjectList.getAs(parentXform).getValue();
+        AbstractProperty parentTransBoundsProp = frameTransformationParent.getPropertyByName("translation_bounds");
+        pTrBounds = PropertyDoubleList.getAs(parentTransBoundsProp);
+        AbstractProperty parentOrientBoundsProp = frameTransformationParent.getPropertyByName("orientation_bounds");
+        pOrientBounds = PropertyDoubleList.getAs(parentOrientBoundsProp);
+        
+        AbstractProperty childXform = jmpTask.getPropertyByName("child_frame_transformation");
+        frameTransformationChild = PropertyObjectList.getAs(childXform).getValue();
+        AbstractProperty chTransBoundsProp = frameTransformationChild.getPropertyByName("translation_bounds");
+        chTrBounds = PropertyDoubleList.getAs(chTransBoundsProp);
+        AbstractProperty childOrientBoundsProp = frameTransformationChild.getPropertyByName("orientation_bounds");
+        chOrientBounds = PropertyDoubleList.getAs(childOrientBoundsProp);
+
     }
 
     /**
@@ -38,65 +64,120 @@ public class AddEditJointPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBoxJoints = new javax.swing.JComboBox<>();
         jParentFramePanel = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBoxTx = new javax.swing.JCheckBox();
+        jCheckBoxTy = new javax.swing.JCheckBox();
+        jCheckBoxTz = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldTBoundsParent = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jCheckBox4 = new javax.swing.JCheckBox();
-        jCheckBox5 = new javax.swing.JCheckBox();
-        jCheckBox6 = new javax.swing.JCheckBox();
+        jCheckBoxRx = new javax.swing.JCheckBox();
+        jCheckBoxRy = new javax.swing.JCheckBox();
+        jCheckBoxRz = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextFieldRBoundsParent = new javax.swing.JTextField();
         jChildFramePanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jCheckBox7 = new javax.swing.JCheckBox();
         jCheckBox8 = new javax.swing.JCheckBox();
         jCheckBox9 = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        jTextFieldTBoundsChild = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jCheckBox10 = new javax.swing.JCheckBox();
         jCheckBox11 = new javax.swing.JCheckBox();
         jCheckBox12 = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        jTextFieldRBoundsChild = new javax.swing.JTextField();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.border.title"), javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION)); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jLabel1.text")); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "hip_r", "knee_r", "hip_l", "knee_l" }));
+        jComboBoxJoints.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "hip_r", "knee_r", "hip_l", "knee_l" }));
+        jComboBoxJoints.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxJointsActionPerformed(evt);
+            }
+        });
 
         jParentFramePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jParentFramePanel.border.title"))); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jLabel2.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox1, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox1.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxTx, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBoxTx.text")); // NOI18N
+        jCheckBoxTx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxTxActionPerformed(evt);
+            }
+        });
+        jCheckBoxTx.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jCheckBoxTxPropertyChange(evt);
+            }
+        });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox2, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox2.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxTy, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBoxTy.text")); // NOI18N
+        jCheckBoxTy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxTyActionPerformed(evt);
+            }
+        });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox3, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox3.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxTz, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBoxTz.text")); // NOI18N
+        jCheckBoxTz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxTzActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jLabel3.text")); // NOI18N
 
-        jTextField1.setText(org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jTextField1.text")); // NOI18N
+        jTextFieldTBoundsParent.setText(org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jTextFieldTBoundsParent.text")); // NOI18N
+        jTextFieldTBoundsParent.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextFieldTBoundsParentFocusLost(evt);
+            }
+        });
+        jTextFieldTBoundsParent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTBoundsParentActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jLabel4.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox4, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox4.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxRx, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBoxRx.text")); // NOI18N
+        jCheckBoxRx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxRxActionPerformed(evt);
+            }
+        });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox5, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox5.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxRy, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBoxRy.text")); // NOI18N
+        jCheckBoxRy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxRyActionPerformed(evt);
+            }
+        });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox6, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox6.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxRz, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBoxRz.text")); // NOI18N
+        jCheckBoxRz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxRzActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel5, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jLabel5.text")); // NOI18N
 
-        jTextField2.setText(org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jTextField2.text")); // NOI18N
+        jTextFieldRBoundsParent.setText(org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jTextFieldRBoundsParent.text")); // NOI18N
+        jTextFieldRBoundsParent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldRBoundsParentActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jParentFramePanelLayout = new javax.swing.GroupLayout(jParentFramePanel);
         jParentFramePanel.setLayout(jParentFramePanelLayout);
@@ -110,25 +191,25 @@ public class AddEditJointPanel extends javax.swing.JPanel {
             .addGroup(jParentFramePanelLayout.createSequentialGroup()
                 .addGroup(jParentFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jParentFramePanelLayout.createSequentialGroup()
-                        .addComponent(jCheckBox4)
+                        .addComponent(jCheckBoxRx)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox5)
+                        .addComponent(jCheckBoxRy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox6))
+                        .addComponent(jCheckBoxRz))
                     .addGroup(jParentFramePanelLayout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
+                        .addComponent(jCheckBoxTx)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox2)
+                        .addComponent(jCheckBoxTy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox3)))
+                        .addComponent(jCheckBoxTz)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jParentFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jParentFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jTextFieldRBoundsParent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTBoundsParent, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jParentFramePanelLayout.setVerticalGroup(
             jParentFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,23 +217,23 @@ public class AddEditJointPanel extends javax.swing.JPanel {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jParentFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jCheckBox3)
+                    .addComponent(jCheckBoxTx)
+                    .addComponent(jCheckBoxTy)
+                    .addComponent(jCheckBoxTz)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldTBoundsParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addGroup(jParentFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jParentFramePanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jCheckBox4))
+                        .addComponent(jCheckBoxRx))
                     .addGroup(jParentFramePanelLayout.createSequentialGroup()
                         .addGroup(jParentFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox5)
-                            .addComponent(jCheckBox6)
+                            .addComponent(jCheckBoxRy)
+                            .addComponent(jCheckBoxRz)
                             .addComponent(jLabel5)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldRBoundsParent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -161,26 +242,66 @@ public class AddEditJointPanel extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel6, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jLabel6.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBox7, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox7.text")); // NOI18N
+        jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox7ActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBox8, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox8.text")); // NOI18N
+        jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox8ActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBox9, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox9.text")); // NOI18N
+        jCheckBox9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox9ActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel7, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jLabel7.text")); // NOI18N
 
-        jTextField3.setText(org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jTextField3.text")); // NOI18N
+        jTextFieldTBoundsChild.setText(org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jTextFieldTBoundsChild.text")); // NOI18N
+        jTextFieldTBoundsChild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldTBoundsChildActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel8, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jLabel8.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBox10, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox10.text")); // NOI18N
+        jCheckBox10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox10ActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBox11, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox11.text")); // NOI18N
+        jCheckBox11.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox11ActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBox12, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox12.text")); // NOI18N
+        jCheckBox12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox12ActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel9, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jLabel9.text")); // NOI18N
 
-        jTextField4.setText(org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jTextField4.text")); // NOI18N
+        jTextFieldRBoundsChild.setText(org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jTextFieldRBoundsChild.text")); // NOI18N
+        jTextFieldRBoundsChild.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldRBoundsChildActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jChildFramePanelLayout = new javax.swing.GroupLayout(jChildFramePanel);
         jChildFramePanel.setLayout(jChildFramePanelLayout);
@@ -211,8 +332,8 @@ public class AddEditJointPanel extends javax.swing.JPanel {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jTextFieldRBoundsChild, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldTBoundsChild, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         jChildFramePanelLayout.setVerticalGroup(
             jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,7 +345,7 @@ public class AddEditJointPanel extends javax.swing.JPanel {
                     .addComponent(jCheckBox8)
                     .addComponent(jCheckBox9)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldTBoundsChild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel8)
                 .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -236,7 +357,7 @@ public class AddEditJointPanel extends javax.swing.JPanel {
                             .addComponent(jCheckBox11)
                             .addComponent(jCheckBox12)
                             .addComponent(jLabel9)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTextFieldRBoundsChild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
@@ -247,7 +368,7 @@ public class AddEditJointPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBoxJoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addComponent(jParentFramePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jChildFramePanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -257,7 +378,7 @@ public class AddEditJointPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxJoints, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jParentFramePanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -265,22 +386,116 @@ public class AddEditJointPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jComboBoxJointsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxJointsActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jComboBoxJointsActionPerformed
+
+    private void jCheckBoxTxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCheckBoxTxPropertyChange
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxTxPropertyChange
+
+    private void jCheckBoxTyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTyActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxTyActionPerformed
+
+    private void jCheckBoxTzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTzActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxTzActionPerformed
+
+    private void jTextFieldTBoundsParentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTBoundsParentActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jTextFieldTBoundsParentActionPerformed
+
+    private void jCheckBoxRxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRxActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxRxActionPerformed
+
+    private void jCheckBoxRyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRyActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxRyActionPerformed
+
+    private void jCheckBoxRzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRzActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxRzActionPerformed
+
+    private void jTextFieldRBoundsParentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRBoundsParentActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jTextFieldRBoundsParentActionPerformed
+
+    private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox7ActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBox7ActionPerformed
+
+    private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox8ActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBox8ActionPerformed
+
+    private void jCheckBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox9ActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBox9ActionPerformed
+
+    private void jTextFieldTBoundsChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTBoundsChildActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jTextFieldTBoundsChildActionPerformed
+
+    private void jCheckBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox10ActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBox10ActionPerformed
+
+    private void jCheckBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox11ActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBox11ActionPerformed
+
+    private void jCheckBox12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox12ActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBox12ActionPerformed
+
+    private void jTextFieldRBoundsChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRBoundsChildActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jTextFieldRBoundsChildActionPerformed
+
+    private void jCheckBoxTxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTxActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxTxActionPerformed
+
+    private void jTextFieldTBoundsParentFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTBoundsParentFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTBoundsParentFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox10;
     private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox12;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JCheckBox jCheckBox5;
-    private javax.swing.JCheckBox jCheckBox6;
     private javax.swing.JCheckBox jCheckBox7;
     private javax.swing.JCheckBox jCheckBox8;
     private javax.swing.JCheckBox jCheckBox9;
+    private javax.swing.JCheckBox jCheckBoxRx;
+    private javax.swing.JCheckBox jCheckBoxRy;
+    private javax.swing.JCheckBox jCheckBoxRz;
+    private javax.swing.JCheckBox jCheckBoxTx;
+    private javax.swing.JCheckBox jCheckBoxTy;
+    private javax.swing.JCheckBox jCheckBoxTz;
     private javax.swing.JPanel jChildFramePanel;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBoxJoints;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -291,9 +506,24 @@ public class AddEditJointPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jParentFramePanel;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextFieldRBoundsChild;
+    private javax.swing.JTextField jTextFieldRBoundsParent;
+    private javax.swing.JTextField jTextFieldTBoundsChild;
+    private javax.swing.JTextField jTextFieldTBoundsParent;
     // End of variables declaration//GEN-END:variables
+
+    private void updateTask() {
+        try {
+            jmpTask.setName(((Joint) jComboBoxJoints.getSelectedItem()).getName());
+            if(jTextFieldTBoundsParent.getText().trim().length()>0) pTrBounds.setValue(0, numFormat.parse(jTextFieldTBoundsParent.getText().trim()).doubleValue());
+            if(jTextFieldRBoundsParent.getText().trim().length()>0) pOrientBounds.setValue(0, numFormat.parse(jTextFieldRBoundsParent.getText().trim()).doubleValue());
+            if(jTextFieldTBoundsChild.getText().trim().length()>0) chTrBounds.setValue(0, numFormat.parse(jTextFieldTBoundsChild.getText().trim()).doubleValue());
+            if(jTextFieldRBoundsChild.getText().trim().length()>0) chOrientBounds.setValue(0, numFormat.parse(jTextFieldRBoundsChild.getText().trim()).doubleValue());
+            System.out.println(jmpTask.dump());
+            //PropertyHelper.setValueBool(jCheckBoxTx.isSelected(),jmpTask.getPropertyByName(TOOL_TIP_TEXT_KEY));
+        } catch (ParseException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+        
+    }
 }

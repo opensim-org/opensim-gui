@@ -12,8 +12,10 @@ import java.util.Observer;
 import java.util.Vector;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyObjectList;
 import org.opensim.utils.FileUtils;
 
 /**
@@ -22,15 +24,16 @@ import org.opensim.utils.FileUtils;
  */
 public class JointPersonalizationJPanel extends BaseToolPanel  implements Observer {
     private JointPersonalizationToolModel jointPersonalizationToolModel = null;
-    private Vector<OpenSimObject> jointPersonalizationTaskListAsVector = null;
+    private JMPTaskListModel jointPersonalizationTaskListModel = null;
     /**
      * Creates new form JointPersonalizationJPanel
      */
     public JointPersonalizationJPanel(Model model)  throws IOException  {
        if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
        jointPersonalizationToolModel = new JointPersonalizationToolModel(model);
-       jointPersonalizationTaskListAsVector = jointPersonalizationToolModel.getJointTaskListAsVector();
+       jointPersonalizationTaskListModel = new JMPTaskListModel(jointPersonalizationToolModel.getJointTaskListAsVector());
        initComponents();
+       jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
        currentModelNameTextField.setText(jointPersonalizationToolModel.getModelName());
        outputModelFilePath.setFileName(jointPersonalizationToolModel.getOutputModelFile());
        setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
@@ -215,16 +218,30 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
 
     private void addJointTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJointTaskButtonActionPerformed
         // TODO add your handling code here:
-        EditJointTaskJPanel ejtPanel = new EditJointTaskJPanel(jointPersonalizationTaskListAsVector, -1);
+        OpenSimObject jmpTask = OpenSimObject.newInstanceOfType("JMPTask");
+        EditJointTaskJPanel ejtPanel = new EditJointTaskJPanel(jmpTask);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
         Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            System.out.println(jmpTask.dump());
+            jointPersonalizationTaskListModel.addElement(jmpTask);
+            AbstractProperty ap = jointPersonalizationToolModel.getToolAsObject().getPropertyByName("JMPTaskList");
+            System.out.println(ap.getTypeName()+" "+ap.isListProperty()+" ");
+            PropertyObjectList.updAs(ap).adoptAndAppendValue(jmpTask);
+            
+            //OpenSimObject obj = ap.getValueAsObject();
+           
+        }
     }//GEN-LAST:event_addJointTaskButtonActionPerformed
 
     private void editJointTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJointTaskButtonActionPerformed
         // TODO add your handling code here:
-        EditJointTaskJPanel ejtPanel = new EditJointTaskJPanel(jointPersonalizationTaskListAsVector, 0);
+        int[] sels = jJointPersonalizationList.getSelectedIndices();
+        OpenSimObject currentTask = (OpenSimObject)jointPersonalizationTaskListModel.get(sels[0]);
+        System.out.println(currentTask.dump());
+        EditJointTaskJPanel ejtPanel = new EditJointTaskJPanel(currentTask);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
