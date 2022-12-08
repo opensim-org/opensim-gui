@@ -2,7 +2,7 @@
 <!DOCTYPE filesystem PUBLIC "-//NetBeans//DTD Filesystem 1.1//EN" "http://www.netbeans.org/dtds/filesystem-1_1.dtd">
 <filesystem>
     <folder name="Actions">
-        <folder name="Edit">
+        <folder name="UndoRedo">
             <file name="org-opensim-tracking-tools-AnalyzeToolAction.instance"/>
             <file name="org-opensim-tracking-tools-RRAToolAction.instance"/>
             <file name="org-opensim-tracking-tools-CMCToolAction.instance"/>
@@ -81,12 +81,5 @@
         <file name="O-R.shadow"> 
         <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-tracking-tools-ToolbarRunForwardAction.instance"/> 
         </file> 
-    </folder>
-    <folder name="Toolbars">
-        <folder name="Edit">
-            <file name="org-opensim-tracking-tools-ToolbarSimulationAction.instance">
-                <attr name="position" intvalue="300"/>
-            </file>
-        </folder>
     </folder>
 </filesystem>
