@@ -43,7 +43,7 @@ public class FileTextFieldAndChooser extends javax.swing.JPanel implements Actio
 
    private FileFilter filter = null;
    private boolean directoriesOnly = false;
-
+   private String title;
    private String lastFileName; // keep track of previous value to avoid firing change events when name stays the same
    private boolean fileIsValid = true;
    private boolean treatUnassignedAsEmptyString = true;
@@ -83,6 +83,10 @@ public class FileTextFieldAndChooser extends javax.swing.JPanel implements Actio
 
    public void setFileFilter(FileFilter filter) {
       this.filter = filter;
+   }
+	
+   public void setDialogTitle(String title) {
+	  this.title = title;   
    }
 
    public void setIncludeOpenButton(boolean includeOpenButton) {
@@ -219,12 +223,12 @@ public class FileTextFieldAndChooser extends javax.swing.JPanel implements Actio
       String result =null;
      if (isSaveMode()){
          result = directoriesOnly ?
-                      FileUtils.getInstance().browseForFolder(ownerFrame, "", true) :
+                      FileUtils.getInstance().browseForFolder(ownerFrame, this.title, true) :
                       FileUtils.getInstance().browseForFilenameToSave(filter, true, "", ownerFrame);
      }
      else
          result = directoriesOnly ?
-                      FileUtils.getInstance().browseForFolder(ownerFrame, "", false) :
+                      FileUtils.getInstance().browseForFolder(ownerFrame, this.title, false) :
                       FileUtils.getInstance().browseForFilename(filter, ownerFrame);
       if(result != null) setFileName(result);
    }//GEN-LAST:event_browseButtonActionPerformed

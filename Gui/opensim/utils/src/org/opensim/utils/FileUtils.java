@@ -262,6 +262,8 @@ public final class FileUtils {
         dlog.setCurrentDirectory(new File(defaultDir));
         dlog.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         
+	dlog.resetChoosableFileFilters();
+		
         if(!description.equals("")) {
             dlog.setDialogTitle(description);
         }
