@@ -17,6 +17,7 @@ import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyDoubleList;
 import org.opensim.modeling.PropertyHelper;
+import org.opensim.modeling.PropertyObjectList;
 
 /**
  *
@@ -27,6 +28,8 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
     private OpenSimObject taskToEdit;
     private NumberFormat numFormat = NumberFormat.getInstance();
     private Vector<OpenSimObject> savedJointTasks = new Vector<OpenSimObject>();
+    private JMPJointListModel jmpJointListModel = null;
+    private PropertyObjectList poList;
     /**
      * Creates new form EditJointTaskJPanel
      */
@@ -36,7 +39,11 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
 
     EditJointTaskJPanel(OpenSimObject jointPersonalizationTask) {
         taskToEdit = jointPersonalizationTask;
+        AbstractProperty ap = jointPersonalizationTask.getPropertyByName("JMPJointList");
+        poList = PropertyObjectList.updAs(ap);
+        jmpJointListModel= new JMPJointListModel(poList);
         initComponents();
+        jList1.setModel(jmpJointListModel);
         triallFilePath.setExtensionsAndDescription(".trc", "Measurement trial marker data");
         // Populate name, enabled, time-range and markers-file
         jTaskNameTextField.setText(jointPersonalizationTask.getName());
@@ -276,6 +283,10 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            
+        }
     }//GEN-LAST:event_editJointButtonActionPerformed
 
     private void addJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJointButtonActionPerformed
@@ -286,7 +297,11 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
-        System.out.println(taskToEdit.dump());
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            jmpJointListModel.addElement(newJointTask);
+            poList.adoptAndAppendValue(newJointTask);
+        }
         
     }//GEN-LAST:event_addJointButtonActionPerformed
 

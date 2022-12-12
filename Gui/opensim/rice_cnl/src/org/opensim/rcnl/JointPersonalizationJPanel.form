@@ -245,7 +245,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addJointTaskButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addJMPTaskButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="editJointTaskButton">
@@ -255,7 +255,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editJointTaskButtonActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editJMPTaskButtonActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="deleteJointTaskButton">

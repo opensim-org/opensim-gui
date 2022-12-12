@@ -36,25 +36,26 @@ import javax.swing.DefaultListModel;
 import org.opensim.modeling.ExternalLoads;
 import org.opensim.modeling.Force;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyObjectList;
 
 /**
  *
  * @author ayman
  */
 public class JMPTaskListModel extends DefaultListModel {
-    Vector<OpenSimObject>  jMPTaskListAsVector = new Vector<OpenSimObject>();
     /** Creates a new instance of ForceListModel */
-    public JMPTaskListModel(Vector<OpenSimObject> taskVector) {
+    PropertyObjectList taskList;
+    public JMPTaskListModel(PropertyObjectList taskVector) {
         super();
-        this.jMPTaskListAsVector = taskVector;
+        taskList = taskVector;
         initModel();
     }
 
     private void initModel() {
         clear();
         
-        for (int i=0; i<jMPTaskListAsVector.size(); i++){
-            add(i, this.jMPTaskListAsVector.get(i));
+        for (int i=0; i<taskList.size(); i++){
+            add(i, this.taskList.getValue(i));
         }
     }
     

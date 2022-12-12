@@ -35,6 +35,12 @@ public class JointPersonalizationToolModel {
         this.model = model;
         modelName = model.getName();
     }
+    public JointPersonalizationToolModel(Model model, String fileXml) {
+        // TODO in case plugin is not preloaded, guard against null return or exception thown
+        toolAsObject = OpenSimObject.makeObjectFromFile(fileXml);
+        this.model = model;
+        modelName = model.getName();
+    }
 
 
     /**
@@ -61,17 +67,15 @@ public class JointPersonalizationToolModel {
         this.toolAsObject = toolAsObject;
     }
     
-    public Vector<OpenSimObject> getJointTaskListAsVector() {
-        System.out.println(toolAsObject.dump());
+    public PropertyObjectList getJointTaskListAsObjectList() {
         Vector<OpenSimObject> tasks = new Vector<OpenSimObject>();
         AbstractProperty ap = toolAsObject.getPropertyByName("JMPTaskList");
         PropertyObjectList olist = PropertyObjectList.getAs(ap);
         for (int i=0; i< olist.size(); i++){
-            System.out.println(ap.getTypeName());
             OpenSimObject ithTask = olist.getValue(i);
             tasks.add(ithTask);
         }
-        return tasks;
+        return olist;
     }
     
 }

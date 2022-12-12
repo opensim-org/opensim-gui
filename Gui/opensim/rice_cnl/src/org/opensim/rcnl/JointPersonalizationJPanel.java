@@ -17,6 +17,7 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyObjectList;
 import org.opensim.utils.FileUtils;
+import org.opensim.view.pub.OpenSimDB;
 
 /**
  *
@@ -31,7 +32,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
     public JointPersonalizationJPanel(Model model)  throws IOException  {
        if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
        jointPersonalizationToolModel = new JointPersonalizationToolModel(model);
-       jointPersonalizationTaskListModel = new JMPTaskListModel(jointPersonalizationToolModel.getJointTaskListAsVector());
+       jointPersonalizationTaskListModel = new JMPTaskListModel(jointPersonalizationToolModel.getJointTaskListAsObjectList());
        initComponents();
        jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
        currentModelNameTextField.setText(jointPersonalizationToolModel.getModelName());
@@ -129,14 +130,14 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
         org.openide.awt.Mnemonics.setLocalizedText(addJointTaskButton, org.openide.util.NbBundle.getMessage(JointPersonalizationJPanel.class, "JointPersonalizationJPanel.addJointTaskButton.text")); // NOI18N
         addJointTaskButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addJointTaskButtonActionPerformed(evt);
+                addJMPTaskButtonActionPerformed(evt);
             }
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(editJointTaskButton, org.openide.util.NbBundle.getMessage(JointPersonalizationJPanel.class, "JointPersonalizationJPanel.editJointTaskButton.text")); // NOI18N
         editJointTaskButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editJointTaskButtonActionPerformed(evt);
+                editJMPTaskButtonActionPerformed(evt);
             }
         });
 
@@ -216,37 +217,39 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
         //ikToolModel.getIKTool().setOutputMotionFileName(outputModelFilePath.getFileName());
     }//GEN-LAST:event_outputModelFilePathStateChanged
 
-    private void addJointTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJointTaskButtonActionPerformed
+    private void addJMPTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJMPTaskButtonActionPerformed
         // TODO add your handling code here:
         OpenSimObject jmpTask = OpenSimObject.newInstanceOfType("JMPTask");
         EditJointTaskJPanel ejtPanel = new EditJointTaskJPanel(jmpTask);
-        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
+        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One JMP Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            System.out.println(jmpTask.dump());
             jointPersonalizationTaskListModel.addElement(jmpTask);
             AbstractProperty ap = jointPersonalizationToolModel.getToolAsObject().getPropertyByName("JMPTaskList");
-            System.out.println(ap.getTypeName()+" "+ap.isListProperty()+" ");
+            //System.out.println(ap.getTypeName()+" "+ap.isListProperty()+" ");
             PropertyObjectList.updAs(ap).adoptAndAppendValue(jmpTask);
             
             //OpenSimObject obj = ap.getValueAsObject();
            
         }
-    }//GEN-LAST:event_addJointTaskButtonActionPerformed
+    }//GEN-LAST:event_addJMPTaskButtonActionPerformed
 
-    private void editJointTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJointTaskButtonActionPerformed
+    private void editJMPTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJMPTaskButtonActionPerformed
         // TODO add your handling code here:
         int[] sels = jJointPersonalizationList.getSelectedIndices();
         OpenSimObject currentTask = (OpenSimObject)jointPersonalizationTaskListModel.get(sels[0]);
-        System.out.println(currentTask.dump());
+        //System.out.println(currentTask.dump());
         EditJointTaskJPanel ejtPanel = new EditJointTaskJPanel(currentTask);
-        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
+        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One JMP Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
         Object userInput = dlg.getValue();
-    }//GEN-LAST:event_editJointTaskButtonActionPerformed
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+
+        }
+    }//GEN-LAST:event_editJMPTaskButtonActionPerformed
 
     private void deleteJointTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJointTaskButtonActionPerformed
         // TODO add your handling code here:
@@ -270,7 +273,14 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
 
     @Override
     public void loadSettings(String fileName) {
-        super.loadSettings(fileName); //To change body of generated methods, choose Tools | Templates.
+        Model model = OpenSimDB.getInstance().getCurrentModel();
+       //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
+       jointPersonalizationToolModel = new JointPersonalizationToolModel(model, fileName);
+       jointPersonalizationTaskListModel = new JMPTaskListModel(jointPersonalizationToolModel.getJointTaskListAsObjectList());
+       initComponents();
+       jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
+       currentModelNameTextField.setText(jointPersonalizationToolModel.getModelName());
+       outputModelFilePath.setFileName(jointPersonalizationToolModel.getOutputModelFile());
     }
 
     @Override
