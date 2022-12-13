@@ -37,7 +37,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         distribution: 'temurin'
-        java-version: 1.8
+        java-version: 8
 
     - name: Install Netbeans 12.3
       # Make sure the NetBeans installer is not corrupted.
@@ -176,7 +176,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         distribution: 'temurin'
-        java-version: 1.8
+        java-version: 8
 
     # - name: Setup tmate session to debug the workflow through SSH.
     #   uses: mxschmitt/action-tmate@v2
@@ -325,7 +325,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         distribution: 'temurin'
-        java-version: 1.8
+        java-version: 8
 
     # - name: Setup tmate session to debug the workflow through SSH.
     #   uses: mxschmitt/action-tmate@v2
@@ -474,7 +474,7 @@ jobs:
       uses: actions/setup-java@v2
       with:
         distribution: 'temurin'
-        java-version: 1.8
+        java-version: 8
 
     - name: Cache Netbeans
       id: cache-netbeans
