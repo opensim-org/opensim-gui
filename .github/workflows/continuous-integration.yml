@@ -20,13 +20,13 @@ jobs:
 
     steps:
     - name: Checkout opensim-gui
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install SWIG
       run: choco install swig --version 4.0.2 --yes --limit-output --allow-downgrade
       
     - name: Install Python packages
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.8'
         
@@ -34,8 +34,9 @@ jobs:
       run: pip3.8 install numpy==1.20.2
 
     - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v2
       with:
+        distribution: 'temurin'
         java-version: 1.8
 
     - name: Install Netbeans 12.3
@@ -49,14 +50,14 @@ jobs:
         echo "ANT_HOME=C:\\Program Files\\NetBeans-12.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
       
     - name: Checkout opensim-core master
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
     
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim_dependencies_install
         # Every time a cache is created, it's stored with this key.
@@ -92,7 +93,7 @@ jobs:
 
     - name: Cache opensim-core
       id: cache-core
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim-core-install
         # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
@@ -137,7 +138,7 @@ jobs:
         makensis.exe make_installer.nsi
         mv OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe $env:GITHUB_WORKSPACE
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-win64
         path: OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe
@@ -149,10 +150,10 @@ jobs:
 
     steps:
     - name: Checkout opensim-gui
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Checkout opensim-core master
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
@@ -172,8 +173,9 @@ jobs:
         gfortran -v &> gfortran_version/gfortran_version.txt
     
     - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v2
       with:
+        distribution: 'temurin'
         java-version: 1.8
 
     # - name: Setup tmate session to debug the workflow through SSH.
@@ -209,7 +211,7 @@ jobs:
 
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim_dependencies_install
         # Every time a cache is created, it's stored with this key.
@@ -238,7 +240,7 @@ jobs:
           
     - name: Cache opensim-core
       id: cache-core
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim-core-install
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
@@ -286,7 +288,7 @@ jobs:
         mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
 
 #    - name: Upload GUI installer
-#      uses: actions/upload-artifact@v2
+#      uses: actions/upload-artifact@v3
 #      with:
 #        name: OpenSim-${{ steps.build-gui.outputs.version }}-mac
 #        path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
@@ -298,10 +300,10 @@ jobs:
 
     steps:
     - name: Checkout opensim-gui
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Checkout opensim-core master
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
@@ -320,8 +322,9 @@ jobs:
         gfortran -v &> gfortran_version/gfortran_version.txt
     
     - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v2
       with:
+        distribution: 'temurin'
         java-version: 1.8
 
     # - name: Setup tmate session to debug the workflow through SSH.
@@ -357,7 +360,7 @@ jobs:
 
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim_dependencies_install
         # Every time a cache is created, it's stored with this key.
@@ -386,7 +389,7 @@ jobs:
           
     - name: Cache opensim-core
       id: cache-core
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim-core-install
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
@@ -434,7 +437,7 @@ jobs:
         mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}
         path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
@@ -447,10 +450,10 @@ jobs:
     steps:
 
     - name: Checkout opensim-gui
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       
     - name: Checkout opensim-core master
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
@@ -468,13 +471,14 @@ jobs:
         make && make -j4 install  
         
     - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v2
       with:
+        distribution: 'temurin'
         java-version: 1.8
 
     - name: Cache Netbeans
       id: cache-netbeans
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/netbeans-12.3
         key: netbeans-12.3
@@ -489,7 +493,7 @@ jobs:
 
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim_dependencies_install
         # Every time a cache is created, it's stored with this key.
@@ -518,7 +522,7 @@ jobs:
 
     - name: Cache opensim-core
       id: cache-core
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim-core-install
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
@@ -554,7 +558,7 @@ jobs:
         mv Gui/opensim/dist/OpenSim-$VERSION.tar.gz $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-linux
         path: OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz
