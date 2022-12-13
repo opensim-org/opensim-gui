@@ -88,7 +88,7 @@ jobs:
       run: |
         cd opensim-core
         $opensim_core_commit=(git rev-parse HEAD)
-        echo "::set-output name=hash::$opensim_core_commit"
+        echo "name=hash::$opensim_core_commit" >> $GITHUB_OUTPUT
 
     - name: Cache opensim-core
       id: cache-core
@@ -129,7 +129,7 @@ jobs:
         $version = $env:match.split('=')[1]
         echo $version
         echo "name=VERSION::$version" >> $GITHUB_ENV
-        echo "::set-output name=version::$version"
+        echo "name=version::$version" >> $GITHUB_OUTPUT
         
     - name: Build GUI installer
       run: |
@@ -234,7 +234,7 @@ jobs:
       run: |
         cd opensim-core
         opensim_core_commit=$(git rev-parse HEAD)
-        echo "::set-output name=hash::$opensim_core_commit"
+        echo "name=hash::$opensim_core_commit" >> $GITHUB_OUTPUT
           
     - name: Cache opensim-core
       id: cache-core
@@ -280,7 +280,7 @@ jobs:
         VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
         echo $VERSION
         echo "name=VERSION::$VERSION" >> $GITHUB_ENV
-        echo "::set-output name=version::$VERSION"
+        echo "name=version::$VERSION" >> $GITHUB_OUTPUT
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
         mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
@@ -382,7 +382,7 @@ jobs:
       run: |
         cd opensim-core
         opensim_core_commit=$(git rev-parse HEAD)
-        echo "::set-output name=hash::$opensim_core_commit"
+        echo "name=hash::$opensim_core_commit" >> $GITHUB_OUTPUT
           
     - name: Cache opensim-core
       id: cache-core
@@ -428,7 +428,7 @@ jobs:
         VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
         echo $VERSION
         echo "name=VERSION::$VERSION" >> $GITHUB_ENV
-        echo "::set-output name=version::$VERSION"
+        echo "name=version::$VERSION" >> $GITHUB_OUTPUT
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
         mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
@@ -514,7 +514,7 @@ jobs:
       run: |
         cd opensim-core
         opensim_core_commit=$(git rev-parse HEAD)
-        echo "::set-output name=hash::$opensim_core_commit"
+        echo "name=hash::$opensim_core_commit" >> $GITHUB_OUTPUT
 
     - name: Cache opensim-core
       id: cache-core
@@ -548,7 +548,7 @@ jobs:
         VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
         echo $VERSION
         echo "name=VERSION::$VERSION" >> $GITHUB_ENV
-        echo "::set-output name=version::$VERSION"
+        echo "name=version::$VERSION" >> $GITHUB_OUTPUT
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
         mv Gui/opensim/dist/OpenSim-$VERSION.tar.gz $GITHUB_WORKSPACE
