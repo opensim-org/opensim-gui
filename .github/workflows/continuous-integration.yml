@@ -130,7 +130,7 @@ jobs:
         $version = $env:match.split('=')[1]
         echo $version
         echo "name=VERSION::$version" >> $GITHUB_ENV
-        echo "version=$version" >> $GITHUB_OUTPUT
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
         
     - name: Build GUI installer
       run: |
