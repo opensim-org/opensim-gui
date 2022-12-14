@@ -127,9 +127,9 @@ jobs:
         cmake --build . --target CopyVisualizer --config Release
         # Read the value of the cache variable storing the GUI build version.
         $env:match = cmake -L . | Select-String -Pattern OPENSIMGUI_BUILD_VERSION
-        $version = $env:match.split('=')[1]
-        echo $version
-        echo "name=VERSION::$version" >> $GITHUB_ENV
+        $VERSION = $env:match.split('=')[1]
+        echo $VERSION
+        echo "name=VERSION::$VERSION" >> $GITHUB_ENV
         echo "version=$VERSION" >> $GITHUB_OUTPUT
         
     - name: Build GUI installer
