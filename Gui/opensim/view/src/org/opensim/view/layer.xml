@@ -713,7 +713,7 @@
         <file name="Debug_hidden">
             <attr name="position" intvalue="500"/>
         </file>
-        <folder name="Edit_hidden">
+        <folder name="Edit">
             <attr name="position" intvalue="2200"/>
             <file name="org-openide-actions-CopyAction.instance_hidden">
                 <attr name="position" intvalue="100"/>
@@ -726,12 +726,6 @@
             </file>
             <file name="org-openide-actions-PasteAction.instance_hidden">
                 <attr name="position" intvalue="500"/>
-            </file>
-        </folder>
-        <folder name="UndoRedo">
-            <attr name="position" intvalue="300"/>
-            <file name="org-opensim-tracking-tools-ToolbarSimulationAction.instance">
-                <attr name="position" intvalue="2200"/>
             </file>
             <file name="org-opensim-view-motions-ShowMotionSliderAction.instance" url="org-opensim-view-motions-ShowMotionSliderAction.instance">
                 <attr name="position" intvalue="2400"/>

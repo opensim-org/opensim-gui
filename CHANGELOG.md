@@ -20,7 +20,6 @@ v4.4
 - Fix visualization of muscle paths in the presense of ConditionalPathPoints, multiple wrap objects or mixes of them. Fix issues [#1330][#1331].
 - Fix crash deleting external-force in ExternalLoads editing dialog [#1280]
 - Propagate frame changes to all components in the model either owned or connected by sockets to the frame, fix issue [#1340]
-- Fix issue [#1357] Toolbar displaced and non visible after resizing window
 
 
 v4.3
