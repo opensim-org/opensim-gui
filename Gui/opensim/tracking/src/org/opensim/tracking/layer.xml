@@ -43,27 +43,27 @@
                 <attr name="position" intvalue="200"/>
             </file>
             <file name="org-opensim-tracking-tools-InverseDynamicsToolAction.shadow">
-                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-tracking-tools-InverseDynamicsToolAction.instance"/>
+                <attr name="originalFile" stringvalue="Actions/UndoRedo/org-opensim-tracking-tools-InverseDynamicsToolAction.instance"/>
                 <attr name="position" intvalue="300"/>
             </file>
             <file name="org-opensim-tracking-tools-StaticOptimizationAction.shadow">
-                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-tracking-tools-StaticOptimizationAction.instance"/>
+                <attr name="originalFile" stringvalue="Actions/UndoRedo/org-opensim-tracking-tools-StaticOptimizationAction.instance"/>
                 <attr name="position" intvalue="400"/>
             </file>
             <file name="org-opensim-tracking-tools-ForwardToolAction.shadow">
-                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-tracking-tools-ForwardToolAction.instance"/>
+                <attr name="originalFile" stringvalue="Actions/UndoRedo/org-opensim-tracking-tools-ForwardToolAction.instance"/>
                 <attr name="position" intvalue="700"/>
             </file>
             <file name="org-opensim-tracking-tools-RRAToolAction.shadow">
-                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-tracking-tools-RRAToolAction.instance"/>
+                <attr name="originalFile" stringvalue="Actions/UndoRedo/org-opensim-tracking-tools-RRAToolAction.instance"/>
                 <attr name="position" intvalue="500"/>
             </file>
             <file name="org-opensim-tracking-tools-CMCToolAction.shadow">
-                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-tracking-tools-CMCToolAction.instance"/>
+                <attr name="originalFile" stringvalue="Actions/UndoRedo/org-opensim-tracking-tools-CMCToolAction.instance"/>
                 <attr name="position" intvalue="600"/>
             </file>
             <file name="org-opensim-tracking-tools-AnalyzeToolAction.shadow">
-                <attr name="originalFile" stringvalue="Actions/Edit/org-opensim-tracking-tools-AnalyzeToolAction.instance"/>
+                <attr name="originalFile" stringvalue="Actions/UndoRedo/org-opensim-tracking-tools-AnalyzeToolAction.instance"/>
                 <attr name="position" intvalue="800"/>
             </file>
             <file name="org-opensim-tracking-tools-separatorAfter.instance">
