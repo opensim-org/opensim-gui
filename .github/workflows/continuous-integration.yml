@@ -439,7 +439,7 @@ jobs:
     - name: Upload GUI installer
       uses: actions/upload-artifact@v3
       with:
-        name: OpenSim-${{ steps.build-gui.outputs.version }}
+        name: OpenSim-${{ steps.build-gui.outputs.version }}-mac
         path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
 
   ubuntu:
