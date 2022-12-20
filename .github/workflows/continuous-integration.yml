@@ -563,7 +563,7 @@ jobs:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-linux
         path: OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz
 
-ubuntu20:
+  ubuntu20:
     name: Ubuntu2004
 
     runs-on: ubuntu-20.04
