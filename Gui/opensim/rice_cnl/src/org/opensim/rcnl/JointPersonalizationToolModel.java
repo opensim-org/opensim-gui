@@ -10,6 +10,7 @@ import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyObjectList;
+import org.opensim.modeling.PropertyStringList;
 
 /**
  *
@@ -29,17 +30,31 @@ public class JointPersonalizationToolModel {
     private int maxFunctionEvaluations = 100;
     private String modelName;
     private Model model;
+    private  PropertyStringList propString;
+    
     public JointPersonalizationToolModel(Model model) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
         toolAsObject = OpenSimObject.newInstanceOfType("JointModelPersonalizationTool");
         this.model = model;
         modelName = model.getName();
+        AbstractProperty prop = toolAsObject.updPropertyByName("output_model_file");
+        propString = PropertyStringList.getAs(prop);
+        if (propString.size()==0 || propString.getValue(0).isEmpty()){
+             String proposedName = model.getInputFileName().replace(".osim", "_perjoint.osim");
+             propString.setValue(0, proposedName);
+        }
     }
     public JointPersonalizationToolModel(Model model, String fileXml) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
         toolAsObject = OpenSimObject.makeObjectFromFile(fileXml);
         this.model = model;
         modelName = model.getName();
+        AbstractProperty prop = toolAsObject.updPropertyByName("output_model_file");
+        propString = PropertyStringList.getAs(prop);
+        if (propString.size()==0|| propString.getValue(0).isEmpty()){
+             String proposedName = model.getInputFileName().replace(".osim", "_perjoint.osim");
+             propString.setValue(0, proposedName);
+        }
     }
 
 
@@ -50,7 +65,7 @@ public class JointPersonalizationToolModel {
         return modelName;
     }
     String getOutputModelFile() {
-        return model.getInputFileName().replace(".osim", "_perjoint.osim");
+        return propString.getValue(0);
     }
 
     /**
