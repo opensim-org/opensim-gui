@@ -7,11 +7,15 @@ package org.opensim.rcnl;
 
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.util.Vector;
 import javax.swing.ComboBoxModel;
 import org.openide.util.Exceptions;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Joint;
+import org.opensim.modeling.JointList;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyBoolList;
 import org.opensim.modeling.PropertyDoubleList;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.PropertyObjectList;
@@ -28,7 +32,9 @@ public class AddEditJointPanel extends javax.swing.JPanel {
     OpenSimObject frameTransformationParent;
     OpenSimObject frameTransformationChild;
     PropertyDoubleList pTrBounds, pOrientBounds, chTrBounds, chOrientBounds;
+    PropertyBoolList pTrFlags, pOrFlags, chTrFlags, chOrFlags;
     private NumberFormat numFormat = NumberFormat.getInstance();
+    private Vector<OpenSimObject> savedTasks = new Vector<OpenSimObject>();
     /**
      * Creates new form AddEditJointPanel
      */
@@ -45,12 +51,23 @@ public class AddEditJointPanel extends javax.swing.JPanel {
         AbstractProperty parentOrientBoundsProp = frameTransformationParent.getPropertyByName("orientation_bounds");
         pOrientBounds = PropertyDoubleList.getAs(parentOrientBoundsProp);
         
+        AbstractProperty parentTransFlagsProp = frameTransformationParent.getPropertyByName("translation");
+        pTrFlags = PropertyBoolList.getAs(parentTransFlagsProp);
+        AbstractProperty parentOrientFlagsProp = frameTransformationParent.getPropertyByName("orientation");
+        pOrFlags = PropertyBoolList.getAs(parentOrientFlagsProp);
+        
         AbstractProperty childXform = jmpTask.getPropertyByName("child_frame_transformation");
         frameTransformationChild = PropertyObjectList.getAs(childXform).getValue();
         AbstractProperty chTransBoundsProp = frameTransformationChild.getPropertyByName("translation_bounds");
         chTrBounds = PropertyDoubleList.getAs(chTransBoundsProp);
         AbstractProperty childOrientBoundsProp = frameTransformationChild.getPropertyByName("orientation_bounds");
         chOrientBounds = PropertyDoubleList.getAs(childOrientBoundsProp);
+        
+        AbstractProperty childTransFlagsProp = frameTransformationChild.getPropertyByName("translation");
+        chTrFlags = PropertyBoolList.getAs(childTransFlagsProp);
+        AbstractProperty childOrientFlagsProp = frameTransformationChild.getPropertyByName("orientation");
+        chOrFlags = PropertyBoolList.getAs(childOrientFlagsProp);
+        populateUiFromObject();
 
     }
 
@@ -80,15 +97,15 @@ public class AddEditJointPanel extends javax.swing.JPanel {
         jTextFieldRBoundsParent = new javax.swing.JTextField();
         jChildFramePanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jCheckBox7 = new javax.swing.JCheckBox();
-        jCheckBox8 = new javax.swing.JCheckBox();
-        jCheckBox9 = new javax.swing.JCheckBox();
+        jCheckBoxChTx = new javax.swing.JCheckBox();
+        jCheckBoxChTy = new javax.swing.JCheckBox();
+        jCheckBoxChTz = new javax.swing.JCheckBox();
         jLabel7 = new javax.swing.JLabel();
         jTextFieldTBoundsChild = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jCheckBox10 = new javax.swing.JCheckBox();
-        jCheckBox11 = new javax.swing.JCheckBox();
-        jCheckBox12 = new javax.swing.JCheckBox();
+        jCheckBoxChRx = new javax.swing.JCheckBox();
+        jCheckBoxChRy = new javax.swing.JCheckBox();
+        jCheckBoxChRz = new javax.swing.JCheckBox();
         jLabel9 = new javax.swing.JLabel();
         jTextFieldRBoundsChild = new javax.swing.JTextField();
 
@@ -241,24 +258,24 @@ public class AddEditJointPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel6, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jLabel6.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox7, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox7.text")); // NOI18N
-        jCheckBox7.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxChTx, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBoxChTx.text")); // NOI18N
+        jCheckBoxChTx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox7ActionPerformed(evt);
+                jCheckBoxChTxActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox8, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox8.text")); // NOI18N
-        jCheckBox8.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxChTy, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBoxChTy.text")); // NOI18N
+        jCheckBoxChTy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox8ActionPerformed(evt);
+                jCheckBoxChTyActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox9, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox9.text")); // NOI18N
-        jCheckBox9.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxChTz, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBoxChTz.text")); // NOI18N
+        jCheckBoxChTz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox9ActionPerformed(evt);
+                jCheckBoxChTzActionPerformed(evt);
             }
         });
 
@@ -273,24 +290,24 @@ public class AddEditJointPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel8, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jLabel8.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox10, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox10.text")); // NOI18N
-        jCheckBox10.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxChRx, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBoxChRx.text")); // NOI18N
+        jCheckBoxChRx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox10ActionPerformed(evt);
+                jCheckBoxChRxActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox11, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox11.text")); // NOI18N
-        jCheckBox11.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxChRy, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBoxChRy.text")); // NOI18N
+        jCheckBoxChRy.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox11ActionPerformed(evt);
+                jCheckBoxChRyActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox12, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBox12.text")); // NOI18N
-        jCheckBox12.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxChRz, org.openide.util.NbBundle.getMessage(AddEditJointPanel.class, "AddEditJointPanel.jCheckBoxChRz.text")); // NOI18N
+        jCheckBoxChRz.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox12ActionPerformed(evt);
+                jCheckBoxChRzActionPerformed(evt);
             }
         });
 
@@ -315,17 +332,17 @@ public class AddEditJointPanel extends javax.swing.JPanel {
             .addGroup(jChildFramePanelLayout.createSequentialGroup()
                 .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jChildFramePanelLayout.createSequentialGroup()
-                        .addComponent(jCheckBox10)
+                        .addComponent(jCheckBoxChRx)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBox11)
+                        .addComponent(jCheckBoxChRy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox12))
+                        .addComponent(jCheckBoxChRz))
                     .addGroup(jChildFramePanelLayout.createSequentialGroup()
-                        .addComponent(jCheckBox7)
+                        .addComponent(jCheckBoxChTx)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox8)
+                        .addComponent(jCheckBoxChTy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBox9)))
+                        .addComponent(jCheckBoxChTz)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel9)
@@ -341,9 +358,9 @@ public class AddEditJointPanel extends javax.swing.JPanel {
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox7)
-                    .addComponent(jCheckBox8)
-                    .addComponent(jCheckBox9)
+                    .addComponent(jCheckBoxChTx)
+                    .addComponent(jCheckBoxChTy)
+                    .addComponent(jCheckBoxChTz)
                     .addComponent(jLabel7)
                     .addComponent(jTextFieldTBoundsChild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -351,11 +368,11 @@ public class AddEditJointPanel extends javax.swing.JPanel {
                 .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jChildFramePanelLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jCheckBox10))
+                        .addComponent(jCheckBoxChRx))
                     .addGroup(jChildFramePanelLayout.createSequentialGroup()
                         .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jCheckBox11)
-                            .addComponent(jCheckBox12)
+                            .addComponent(jCheckBoxChRy)
+                            .addComponent(jCheckBoxChRz)
                             .addComponent(jLabel9)
                             .addComponent(jTextFieldRBoundsChild, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))))
@@ -431,40 +448,40 @@ public class AddEditJointPanel extends javax.swing.JPanel {
         updateTask();
     }//GEN-LAST:event_jTextFieldRBoundsParentActionPerformed
 
-    private void jCheckBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox7ActionPerformed
+    private void jCheckBoxChTxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChTxActionPerformed
         // TODO add your handling code here:
         updateTask();
-    }//GEN-LAST:event_jCheckBox7ActionPerformed
+    }//GEN-LAST:event_jCheckBoxChTxActionPerformed
 
-    private void jCheckBox8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox8ActionPerformed
+    private void jCheckBoxChTyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChTyActionPerformed
         // TODO add your handling code here:
         updateTask();
-    }//GEN-LAST:event_jCheckBox8ActionPerformed
+    }//GEN-LAST:event_jCheckBoxChTyActionPerformed
 
-    private void jCheckBox9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox9ActionPerformed
+    private void jCheckBoxChTzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChTzActionPerformed
         // TODO add your handling code here:
         updateTask();
-    }//GEN-LAST:event_jCheckBox9ActionPerformed
+    }//GEN-LAST:event_jCheckBoxChTzActionPerformed
 
     private void jTextFieldTBoundsChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTBoundsChildActionPerformed
         // TODO add your handling code here:
         updateTask();
     }//GEN-LAST:event_jTextFieldTBoundsChildActionPerformed
 
-    private void jCheckBox10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox10ActionPerformed
+    private void jCheckBoxChRxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChRxActionPerformed
         // TODO add your handling code here:
         updateTask();
-    }//GEN-LAST:event_jCheckBox10ActionPerformed
+    }//GEN-LAST:event_jCheckBoxChRxActionPerformed
 
-    private void jCheckBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox11ActionPerformed
+    private void jCheckBoxChRyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChRyActionPerformed
         // TODO add your handling code here:
         updateTask();
-    }//GEN-LAST:event_jCheckBox11ActionPerformed
+    }//GEN-LAST:event_jCheckBoxChRyActionPerformed
 
-    private void jCheckBox12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox12ActionPerformed
+    private void jCheckBoxChRzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChRzActionPerformed
         // TODO add your handling code here:
         updateTask();
-    }//GEN-LAST:event_jCheckBox12ActionPerformed
+    }//GEN-LAST:event_jCheckBoxChRzActionPerformed
 
     private void jTextFieldRBoundsChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRBoundsChildActionPerformed
         // TODO add your handling code here:
@@ -482,12 +499,12 @@ public class AddEditJointPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox10;
-    private javax.swing.JCheckBox jCheckBox11;
-    private javax.swing.JCheckBox jCheckBox12;
-    private javax.swing.JCheckBox jCheckBox7;
-    private javax.swing.JCheckBox jCheckBox8;
-    private javax.swing.JCheckBox jCheckBox9;
+    private javax.swing.JCheckBox jCheckBoxChRx;
+    private javax.swing.JCheckBox jCheckBoxChRy;
+    private javax.swing.JCheckBox jCheckBoxChRz;
+    private javax.swing.JCheckBox jCheckBoxChTx;
+    private javax.swing.JCheckBox jCheckBoxChTy;
+    private javax.swing.JCheckBox jCheckBoxChTz;
     private javax.swing.JCheckBox jCheckBoxRx;
     private javax.swing.JCheckBox jCheckBoxRy;
     private javax.swing.JCheckBox jCheckBoxRz;
@@ -519,11 +536,66 @@ public class AddEditJointPanel extends javax.swing.JPanel {
             if(jTextFieldRBoundsParent.getText().trim().length()>0) pOrientBounds.setValue(0, numFormat.parse(jTextFieldRBoundsParent.getText().trim()).doubleValue());
             if(jTextFieldTBoundsChild.getText().trim().length()>0) chTrBounds.setValue(0, numFormat.parse(jTextFieldTBoundsChild.getText().trim()).doubleValue());
             if(jTextFieldRBoundsChild.getText().trim().length()>0) chOrientBounds.setValue(0, numFormat.parse(jTextFieldRBoundsChild.getText().trim()).doubleValue());
+            boolean txp = jCheckBoxTx.isSelected();
+            boolean typ = jCheckBoxTy.isSelected();
+            boolean tzp = jCheckBoxTz.isSelected();
+            boolean rxp = jCheckBoxRx.isSelected();
+            boolean ryp = jCheckBoxRy.isSelected();
+            boolean rzp = jCheckBoxRz.isSelected();
+            pTrFlags.setValue(0, txp);
+            pTrFlags.setValue(1, typ);
+            pTrFlags.setValue(2, tzp);
+            pTrFlags.setValueIsDefault(false);
+            pOrFlags.setValue(0, rxp);
+            pOrFlags.setValue(1, ryp);
+            pOrFlags.setValue(2, rzp);
+            pOrFlags.setValueIsDefault(false);
+            txp = jCheckBoxChTx.isSelected();
+            typ = jCheckBoxChTy.isSelected();
+            tzp = jCheckBoxChTz.isSelected();
+            rxp = jCheckBoxChRx.isSelected();
+            ryp = jCheckBoxChRy.isSelected();
+            rzp = jCheckBoxChRz.isSelected();
+            chTrFlags.setValue(0, txp);
+            chTrFlags.setValue(1, typ);
+            chTrFlags.setValue(2, tzp);
+            chOrFlags.setValue(0, rxp);
+            chOrFlags.setValue(1, ryp);
+            chOrFlags.setValue(2, rzp);
+            chTrFlags.setValueIsDefault(false);
+            chOrFlags.setValueIsDefault(false);
             System.out.println(jmpTask.dump());
-            //PropertyHelper.setValueBool(jCheckBoxTx.isSelected(),jmpTask.getPropertyByName(TOOL_TIP_TEXT_KEY));
         } catch (ParseException ex) {
             Exceptions.printStackTrace(ex);
         }
+        
+    }
+
+    private void populateUiFromObject() {
+        Model model = OpenSimDB.getInstance().getCurrentModel();
+        int jlistIndex = model.getJointSet().getIndex(jmpTask.getName());
+        if (jlistIndex==-1){ // default, pick first joint
+            cbm.setSelectedItem(model.getJointSet().get(0));
+        }
+        else
+            cbm.setSelectedItem(model.getJointSet().get(jmpTask.getName()));
+        jTextFieldTBoundsParent.setText(String.valueOf(pTrBounds.getValue(0)));
+        jTextFieldRBoundsParent.setText(String.valueOf(pOrientBounds.getValue(0)));
+        jTextFieldTBoundsChild.setText(String.valueOf(chTrBounds.getValue(0)));
+        jTextFieldRBoundsChild.setText(String.valueOf(chOrientBounds.getValue(0)));
+        jCheckBoxTx.setSelected(pTrFlags.getValue(0));
+        jCheckBoxTy.setSelected(pTrFlags.getValue(1));
+        jCheckBoxTz.setSelected(pTrFlags.getValue(2));
+        jCheckBoxRx.setSelected(pOrFlags.getValue(0));
+        jCheckBoxRy.setSelected(pOrFlags.getValue(1));
+        jCheckBoxRz.setSelected(pOrFlags.getValue(2));
+        //
+        jCheckBoxChTx.setSelected(chTrFlags.getValue(0));
+        jCheckBoxChTy.setSelected(chTrFlags.getValue(1));
+        jCheckBoxChTz.setSelected(chTrFlags.getValue(2));
+        jCheckBoxChRx.setSelected(chOrFlags.getValue(0));
+        jCheckBoxChRy.setSelected(chOrFlags.getValue(1));
+        jCheckBoxChRz.setSelected(chOrFlags.getValue(2));
         
     }
 }

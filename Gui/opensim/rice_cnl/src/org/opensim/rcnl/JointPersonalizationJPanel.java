@@ -268,6 +268,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
     @Override
     public void saveSettings(String fileName) {
          String fullFilename = FileUtils.addExtensionIfNeeded(fileName, ".xml");
+         OpenSimObject.setSerializeAllDefaults(true);
         jointPersonalizationToolModel.getToolAsObject().print(fullFilename);
     }
 

@@ -278,7 +278,9 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
 
     private void editJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJointButtonActionPerformed
         // TODO add your handling code here:
-        OpenSimObject selectedJointTask  = OpenSimObject.newInstanceOfType("JMPJoint");
+        int[] sels = jList1.getSelectedIndices();
+        OpenSimObject selectedJointTask = (OpenSimObject)jmpJointListModel.get(sels[0]);
+        System.out.println(selectedJointTask.dump());
         AddEditJointPanel ejtPanel = new AddEditJointPanel(selectedJointTask);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
@@ -292,6 +294,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
     private void addJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJointButtonActionPerformed
         // TODO add your handling code here:
         OpenSimObject newJointTask  = OpenSimObject.newInstanceOfType("JMPJoint");
+        // set name to first valid joint in model
         savedJointTasks.add(newJointTask);
         AddEditJointPanel ejtPanel = new AddEditJointPanel(newJointTask);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
@@ -299,6 +302,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         d.setVisible(true);
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            System.out.println(newJointTask.dump());
             jmpJointListModel.addElement(newJointTask);
             poList.adoptAndAppendValue(newJointTask);
         }
