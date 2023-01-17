@@ -9,7 +9,6 @@ v4.4.1
 - Fix issue [#1378](https://github.com/opensim-org/opensim-gui/issues/1378): In Static Optimization Tool, dialog box has wrong title for "Directory" in output section.
 - Fix issue [#1395](https://github.com/opensim-org/opensim-gui/issues/1395): Where visual selection and properties windows are not in sync.
 - Fix issue [#1357](https://github.com/opensim-org/opensim-gui/issues/1357): Toolbar displaced and non visible after resizing window
-- Fix issue [#1412](https://github.com/opensim-org/opensim-gui/issues/1412): Missing Tools in Tools Menu.
 
 v4.4
 ====
