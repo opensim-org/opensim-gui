@@ -106,6 +106,16 @@ if ( [[ $OS == *"Ubuntu"* ]] && (( $MIN_UBUNTU_VER <= $VER_MAJOR )) ) || ( [[ $O
     if [[ $OS == *"Ubuntu"* ]]; then
         [[ $v == 1 ]] && echo "Installing Java..."
         sudo apt install -qqqq -y openjdk-8-jre
+    else
+        [[ $v == 1 ]] && echo "Installing Java..."
+        sudo apt-get install -y wget apt-transport-https
+        sudo mkdir -p /etc/apt/keyrings || true
+        wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo tee /etc/apt/keyrings/adoptium.asc
+        echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
+        sudo apt update # update if you haven't already
+        sudo apt install --yes temurin-8-jdk
+        # Export JAVA_HOME variable.
+        export JAVA_HOME=$(dirname $(dirname $(readlink -f /usr/bin/java)))
     fi
     
     [[ $v == 1 ]] && echo "Testing for system LAPACK/BLAS..."
