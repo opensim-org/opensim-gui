@@ -1099,7 +1099,7 @@ public class opensimSimulationJNI {
   public final static native boolean TransformAxis_hasFunction(long jarg1, TransformAxis jarg1_);
   public final static native long TransformAxis_getFunction(long jarg1, TransformAxis jarg1_);
   public final static native long TransformAxis_updFunction(long jarg1, TransformAxis jarg1_);
-  public final static native void TransformAxis_setFunction__SWIG_0(long jarg1, TransformAxis jarg1_, long jarg2, Function jarg2_);
+  public final static native void TransformAxis_private_setFunction__SWIG_0(long jarg1, TransformAxis jarg1_, long jarg2, Function jarg2_);
   public final static native long TransformAxis_getJoint(long jarg1, TransformAxis jarg1_);
   public final static native double TransformAxis_getValue(long jarg1, TransformAxis jarg1_, long jarg2, State jarg2_);
   public final static native void TransformAxis_connectToJoint(long jarg1, TransformAxis jarg1_, long jarg2, Joint jarg2_);
@@ -7296,6 +7296,7 @@ public class opensimSimulationJNI {
   public final static native int FrameIterator_getNumStateVariables(long jarg1, FrameIterator jarg1_);
   public final static native long FrameIterator_getStateVariableNames(long jarg1, FrameIterator jarg1_);
   public final static native int FrameIterator_getNumSockets(long jarg1, FrameIterator jarg1_);
+  public final static native long FrameIterator_getSocketNames(long jarg1, FrameIterator jarg1_);
   public final static native long FrameIterator_getConnectee(long jarg1, FrameIterator jarg1_, String jarg2);
   public final static native long FrameIterator_getSocket(long jarg1, FrameIterator jarg1_, String jarg2);
   public final static native int FrameIterator_getNumInputs(long jarg1, FrameIterator jarg1_);
@@ -7428,6 +7429,7 @@ public class opensimSimulationJNI {
   public final static native int BodyIterator_getNumStateVariables(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_getStateVariableNames(long jarg1, BodyIterator jarg1_);
   public final static native int BodyIterator_getNumSockets(long jarg1, BodyIterator jarg1_);
+  public final static native long BodyIterator_getSocketNames(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_getConnectee(long jarg1, BodyIterator jarg1_, String jarg2);
   public final static native long BodyIterator_getSocket(long jarg1, BodyIterator jarg1_, String jarg2);
   public final static native int BodyIterator_getNumInputs(long jarg1, BodyIterator jarg1_);
@@ -7649,6 +7651,7 @@ public class opensimSimulationJNI {
   public final static native int MuscleIterator_getNumStateVariables(long jarg1, MuscleIterator jarg1_);
   public final static native long MuscleIterator_getStateVariableNames(long jarg1, MuscleIterator jarg1_);
   public final static native int MuscleIterator_getNumSockets(long jarg1, MuscleIterator jarg1_);
+  public final static native long MuscleIterator_getSocketNames(long jarg1, MuscleIterator jarg1_);
   public final static native long MuscleIterator_getConnectee(long jarg1, MuscleIterator jarg1_, String jarg2);
   public final static native long MuscleIterator_getSocket(long jarg1, MuscleIterator jarg1_, String jarg2);
   public final static native int MuscleIterator_getNumInputs(long jarg1, MuscleIterator jarg1_);
@@ -7735,6 +7738,7 @@ public class opensimSimulationJNI {
   public final static native int ModelComponentIterator_getNumStateVariables(long jarg1, ModelComponentIterator jarg1_);
   public final static native long ModelComponentIterator_getStateVariableNames(long jarg1, ModelComponentIterator jarg1_);
   public final static native int ModelComponentIterator_getNumSockets(long jarg1, ModelComponentIterator jarg1_);
+  public final static native long ModelComponentIterator_getSocketNames(long jarg1, ModelComponentIterator jarg1_);
   public final static native long ModelComponentIterator_getConnectee(long jarg1, ModelComponentIterator jarg1_, String jarg2);
   public final static native long ModelComponentIterator_getSocket(long jarg1, ModelComponentIterator jarg1_, String jarg2);
   public final static native int ModelComponentIterator_getNumInputs(long jarg1, ModelComponentIterator jarg1_);
@@ -7837,6 +7841,7 @@ public class opensimSimulationJNI {
   public final static native int JointIterator_getNumStateVariables(long jarg1, JointIterator jarg1_);
   public final static native long JointIterator_getStateVariableNames(long jarg1, JointIterator jarg1_);
   public final static native int JointIterator_getNumSockets(long jarg1, JointIterator jarg1_);
+  public final static native long JointIterator_getSocketNames(long jarg1, JointIterator jarg1_);
   public final static native long JointIterator_getConnectee(long jarg1, JointIterator jarg1_, String jarg2);
   public final static native long JointIterator_getSocket(long jarg1, JointIterator jarg1_, String jarg2);
   public final static native int JointIterator_getNumInputs(long jarg1, JointIterator jarg1_);
@@ -7938,6 +7943,7 @@ public class opensimSimulationJNI {
   public final static native int ActuatorIterator_getNumStateVariables(long jarg1, ActuatorIterator jarg1_);
   public final static native long ActuatorIterator_getStateVariableNames(long jarg1, ActuatorIterator jarg1_);
   public final static native int ActuatorIterator_getNumSockets(long jarg1, ActuatorIterator jarg1_);
+  public final static native long ActuatorIterator_getSocketNames(long jarg1, ActuatorIterator jarg1_);
   public final static native long ActuatorIterator_getConnectee(long jarg1, ActuatorIterator jarg1_, String jarg2);
   public final static native long ActuatorIterator_getSocket(long jarg1, ActuatorIterator jarg1_, String jarg2);
   public final static native int ActuatorIterator_getNumInputs(long jarg1, ActuatorIterator jarg1_);
@@ -8199,6 +8205,7 @@ public class opensimSimulationJNI {
   public final static native int Thelen2003MuscleIterator_getNumStateVariables(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native long Thelen2003MuscleIterator_getStateVariableNames(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native int Thelen2003MuscleIterator_getNumSockets(long jarg1, Thelen2003MuscleIterator jarg1_);
+  public final static native long Thelen2003MuscleIterator_getSocketNames(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native long Thelen2003MuscleIterator_getConnectee(long jarg1, Thelen2003MuscleIterator jarg1_, String jarg2);
   public final static native long Thelen2003MuscleIterator_getSocket(long jarg1, Thelen2003MuscleIterator jarg1_, String jarg2);
   public final static native int Thelen2003MuscleIterator_getNumInputs(long jarg1, Thelen2003MuscleIterator jarg1_);
@@ -8473,6 +8480,7 @@ public class opensimSimulationJNI {
   public final static native int Millard2012EquilibriumMuscleIterator_getNumStateVariables(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native long Millard2012EquilibriumMuscleIterator_getStateVariableNames(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native int Millard2012EquilibriumMuscleIterator_getNumSockets(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
+  public final static native long Millard2012EquilibriumMuscleIterator_getSocketNames(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native long Millard2012EquilibriumMuscleIterator_getConnectee(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, String jarg2);
   public final static native long Millard2012EquilibriumMuscleIterator_getSocket(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, String jarg2);
   public final static native int Millard2012EquilibriumMuscleIterator_getNumInputs(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);

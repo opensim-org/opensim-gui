@@ -299,15 +299,42 @@ public class opensimMoco {
    *  Obtain the ground reaction forces, centers of pressure, and torques<br>
    *  resulting from Force elements (e.g., SmoothSphereHalfSpaceForce), using a<br>
    *  model and states trajectory. Forces and torques are expressed in the ground<br>
-   *  frame with respect to the ground origin. Hence, the centers of pressure are<br>
-   *  at the origin. Paths to Force elements should be provided separately for<br>
-   *  elements of the right and left feet. The output is a table formatted for use<br>
-   *  with OpenSim tools; the labels of the columns distinguish between right<br>
-   *  ("<>_r") and left ("<>_l") forces, centers of pressure, and torques. The<br>
-   *  forces and torques used are taken from the first six outputs of<br>
-   *  getRecordValues(); this order is of use for, for example, the<br>
-   *  SmoothSphereHalfSpaceForce contact model but might have a different meaning<br>
-   *  for different contact models.<br>
+   *  frame with respect to the ground origin. Paths to Force elements should be<br>
+   *  provided separately for elements of the right and left feet. The output is a<br>
+   *  table formatted for use with OpenSim tools; the labels of the columns<br>
+   *  distinguish between right ("<>_r") and left ("<>_l") forces, centers of<br>
+   *  pressure, and torques. Centers of pressure are computed assuming the<br>
+   *  that the contact plane's normal is in the y-direction, which is the OpenSim<br>
+   *  convention.<br>
+   * <br>
+   *  The forces and torques are computed from the first six outputs of<br>
+   *  getRecordValues(), while the centers of pressure are computed from the second<br>
+   *  six outputs. The first six outputs should correspond to the contact force<br>
+   *  components applied to the foot bodies (e.g., the "sphere" forces in<br>
+   *  SmoothSphereHalfSpaceForce), and the second six outputs should correspond to<br>
+   *  the contact force components applied to the contact place (e.g., the<br>
+   *  "half-space" forces in SmoothSphereHalfSpaceForce). The contact plane is<br>
+   *  often attached to ground for foot-ground contact models, but it need not be,<br>
+   *  as long as the contact plane normal is in the y-direction.<br>
+   * <br>
+   *  In general, this utility needs getRecordValues() to report the<br>
+   *  following force and torque information at the specified indices:<br>
+   * <br>
+   *  index - component (body)<br>
+   *  ------------------------<br>
+   *      0 - force-x (foot)<br>
+   *      1 - force-y (foot)<br>
+   *      2 - force-z (foot)<br>
+   *      3 - torque-x (foot)<br>
+   *      4 - torque-y (foot)<br>
+   *      5 - torque-z (foot)<br>
+   *      6 - force-x (contact plane)<br>
+   *      7 - force-y (contact plane)<br>
+   *      8 - force-z (contact plane)<br>
+   *      9 - torque-x (contact plane)<br>
+   *     10 - torque-y (contact plane)<br>
+   *     11 - torque-z (contact plane)<br>
+   * <br>
    *  
    */
   public static TimeSeriesTable createExternalLoadsTableForGait(Model model, StatesTrajectory trajectory, StdVectorString forcePathsRightFoot, StdVectorString forcePathsLeftFoot) {

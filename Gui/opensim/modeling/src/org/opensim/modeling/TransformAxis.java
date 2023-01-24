@@ -45,6 +45,11 @@ public class TransformAxis extends OpenSimObject {
     super.delete();
   }
 
+  public void setFunction(Function func) {
+      func.markAdopted();
+      private_setFunction(func);
+  }
+
   public static TransformAxis safeDownCast(OpenSimObject obj) {
     long cPtr = opensimSimulationJNI.TransformAxis_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new TransformAxis(cPtr, false);
@@ -205,8 +210,8 @@ public class TransformAxis extends OpenSimObject {
    *     the list of coordinate names.<br>
    *     @see get_coordinates() *
    */
-  public PropertyString getCoordinateNames() {
-    return new PropertyString(opensimSimulationJNI.TransformAxis_getCoordinateNames(swigCPtr, this), false);
+  public PropertyStringList getCoordinateNames() {
+    return new PropertyStringList(opensimSimulationJNI.TransformAxis_getCoordinateNames(swigCPtr, this), false);
   }
 
   /**
@@ -276,8 +281,8 @@ public class TransformAxis extends OpenSimObject {
    *     adopts ownership of the Function object, don't delete it yourself! It will<br>
    *     be deleted when this %TransformAxis object is deleted. *
    */
-  public void setFunction(Function function) {
-    opensimSimulationJNI.TransformAxis_setFunction__SWIG_0(swigCPtr, this, Function.getCPtr(function), function);
+  private void private_setFunction(Function function) {
+    opensimSimulationJNI.TransformAxis_private_setFunction__SWIG_0(swigCPtr, this, Function.getCPtr(function), function);
   }
 
   /**

@@ -111,9 +111,9 @@ package org.opensim.modeling;
  * <br>
  * Adding a scale factor to a MocoContactTrackingGoal.<br>
  * {@code 
-auto* markerTrackingGoal = problem.addGoal<MocoContactTrackingGoal>();
+auto* contactTrackingGoal = problem.addGoal<MocoContactTrackingGoal>();
 ...
-markerTrackingGoal->addScaleFactor(
+contactTrackingGoal->addScaleFactor(
         'RightGRF_vertical_scale_factor', 'Right_GRF', 1, {0.5, 2.0});
 }<br>
  * <br>
@@ -275,6 +275,19 @@ public class MocoContactTrackingGoal extends MocoGoal {
    */
   public void addScaleFactor(String name, String externalForceName, int index, MocoBounds bounds) {
     opensimMocoJNI.MocoContactTrackingGoal_addScaleFactor(swigCPtr, this, name, externalForceName, index, MocoBounds.getCPtr(bounds), bounds);
+  }
+
+  /**
+   *  Normalize each component of the 3-D tracking error by the peak value of <br>
+   *  each contact force component in the tracking data. No normalization is <br>
+   *  applied when tracking data is close to zero (default: false).
+   */
+  public void setNormalizeTrackingError(boolean tf) {
+    opensimMocoJNI.MocoContactTrackingGoal_setNormalizeTrackingError(swigCPtr, this, tf);
+  }
+
+  public boolean getNormalizeTrackingError() {
+    return opensimMocoJNI.MocoContactTrackingGoal_getNormalizeTrackingError(swigCPtr, this);
   }
 
 }

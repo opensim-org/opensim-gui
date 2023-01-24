@@ -42,6 +42,11 @@ public class PathPointSet extends SetOfPathPoints {
     super.delete();
   }
 
+    public boolean insert(int aIndex, AbstractPathPoint aObject) {
+       aObject.markAdopted();
+       return super.insert(aIndex, aObject);
+   }
+
   public static PathPointSet safeDownCast(OpenSimObject obj) {
     long cPtr = opensimSimulationJNI.PathPointSet_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new PathPointSet(cPtr, false);
