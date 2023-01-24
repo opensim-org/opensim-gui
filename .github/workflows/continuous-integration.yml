@@ -20,13 +20,13 @@ jobs:
 
     steps:
     - name: Checkout opensim-gui
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Install SWIG
       run: choco install swig --version 4.0.2 --yes --limit-output --allow-downgrade
       
     - name: Install Python packages
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
         python-version: '3.8'
         
@@ -34,9 +34,10 @@ jobs:
       run: pip3.8 install numpy==1.20.2
 
     - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v3
       with:
-        java-version: 1.8
+        distribution: 'temurin'
+        java-version: 8
 
     - name: Install Netbeans 12.3
       # Make sure the NetBeans installer is not corrupted.
@@ -49,14 +50,14 @@ jobs:
         echo "ANT_HOME=C:\\Program Files\\NetBeans-12.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
       
     - name: Checkout opensim-core master
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
     
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim_dependencies_install
         # Every time a cache is created, it's stored with this key.
@@ -88,11 +89,11 @@ jobs:
       run: |
         cd opensim-core
         $opensim_core_commit=(git rev-parse HEAD)
-        echo "::set-output name=hash::$opensim_core_commit"
+        echo "hash=$opensim_core_commit" >> $GITHUB_OUTPUT
 
     - name: Cache opensim-core
       id: cache-core
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim-core-install
         # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
@@ -126,10 +127,10 @@ jobs:
         cmake --build . --target CopyVisualizer --config Release
         # Read the value of the cache variable storing the GUI build version.
         $env:match = cmake -L . | Select-String -Pattern OPENSIMGUI_BUILD_VERSION
-        $version = $env:match.split('=')[1]
-        echo $version
-        echo "name=VERSION::$version" >> $GITHUB_ENV
-        echo "::set-output name=version::$version"
+        $VERSION = $env:match.split('=')[1]
+        echo $VERSION
+        echo "name=VERSION::$VERSION" >> $GITHUB_ENV
+        echo "version=$VERSION" >> $env:GITHUB_OUTPUT
         
     - name: Build GUI installer
       run: |
@@ -137,22 +138,22 @@ jobs:
         makensis.exe make_installer.nsi
         mv OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe $env:GITHUB_WORKSPACE
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-win64
         path: OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe
 
   mac:
-    name: Mac
+    name: Mac10.15
 
     runs-on: macos-10.15
 
     steps:
     - name: Checkout opensim-gui
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Checkout opensim-core master
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
@@ -172,9 +173,10 @@ jobs:
         gfortran -v &> gfortran_version/gfortran_version.txt
     
     - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v3
       with:
-        java-version: 1.8
+        distribution: 'temurin'
+        java-version: 8
 
     # - name: Setup tmate session to debug the workflow through SSH.
     #   uses: mxschmitt/action-tmate@v2
@@ -209,7 +211,7 @@ jobs:
 
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim_dependencies_install
         # Every time a cache is created, it's stored with this key.
@@ -234,11 +236,11 @@ jobs:
       run: |
         cd opensim-core
         opensim_core_commit=$(git rev-parse HEAD)
-        echo "::set-output name=hash::$opensim_core_commit"
+        echo "hash=$opensim_core_commit" >> $GITHUB_OUTPUT
           
     - name: Cache opensim-core
       id: cache-core
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim-core-install
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
@@ -280,13 +282,162 @@ jobs:
         VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
         echo $VERSION
         echo "name=VERSION::$VERSION" >> $GITHUB_ENV
-        echo "::set-output name=version::$VERSION"
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        cd $GITHUB_WORKSPACE
+        ls Gui/opensim/dist
+        mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
+
+#    - name: Upload GUI installer
+#      uses: actions/upload-artifact@v3
+#      with:
+#        name: OpenSim-${{ steps.build-gui.outputs.version }}-mac
+#        path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
+
+  mac11:
+    name: Mac11
+
+    runs-on: macos-11
+
+    steps:
+    - name: Checkout opensim-gui
+      uses: actions/checkout@v3
+
+    - name: Checkout opensim-core master
+      uses: actions/checkout@v3
+      with:
+         repository: opensim-org/opensim-core
+         path: 'opensim-core'
+         
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.8' 
+        
+    - name: Install packages
+      run: |
+        brew install cmake pkgconfig autoconf libtool automake wget pcre doxygen llvm
+        brew reinstall gcc
+        pip3 install numpy==1.20.2
+        gfortran -v
+        mkdir gfortran_version
+        gfortran -v &> gfortran_version/gfortran_version.txt
+    
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: 8
+
+    # - name: Setup tmate session to debug the workflow through SSH.
+    #   uses: mxschmitt/action-tmate@v2
+        
+    - name: Install NetBeans 12.3
+      # `brew cask install netbeans-java-se` requires sudo but brew won't allow sudo,
+      # so we install NetBeans ourselves.
+      # Note: Cask 'netbeans' gives version 11.2, while 'netbeans-java-se' gives 8.2.
+      run: |
+        # We remove JDKs newer than 8 to force the NetBeans installer to use JDK 8.
+        # If using JDK 14, the NetBeans installer fails because it cannot find unpack200,
+        # which was removed from the JDK. See:
+        # https://netbeans.apache.org/download/nb113/nb113.html
+        # "The installers will NOT run under JDK 14 because usage is made of the Pack200 
+        # Tools and API, for packing and unpacking, which is removed in JDK 14, see JEP 367."
+        sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-14.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-13.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-12.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-11.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-13.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-12.jdk
+        sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk
+        /usr/libexec/java_home -V
+        export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+        echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
+        echo $JAVA_HOME
+        wget https://archive.apache.org/dist/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-macosx.dmg
+        hdiutil attach Apache-NetBeans-12.3-bin-macosx.dmg
+        sudo installer -pkg /Volumes/Apache\ NetBeans\ 12.3/Apache\ NetBeans\ 12.3.pkg -target /
+        sudo -k
+
+    - name: Cache opensim-core-dependencies
+      id: cache-dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/opensim_dependencies_install
+        # Every time a cache is created, it's stored with this key.
+        # In subsequent runs, if the key matches the key of an existing cache,
+        # then the cache is used. We chose for this key to depend on the
+        # operating system and a hash of the hashes of all files in the
+        # dependencies directory (non-recursive).
+        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
+        key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
+        
+    - name: Build opensim-core-dependencies
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      run: |
+        mkdir build_deps
+        cd build_deps
+        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on  -DOPENSIM_WITH_CASADI:BOOL=on -DOPENSIM_WITH_TROPTER:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DCMAKE_BUILD_TYPE=Release
+        cmake . -LAH
+        cmake --build . --config Release
+        
+    - name: Obtain opensim-core commit
+      id: opensim-core-commit
+      run: |
+        cd opensim-core
+        opensim_core_commit=$(git rev-parse HEAD)
+        echo "hash=$opensim_core_commit" >> $GITHUB_OUTPUT
+          
+    - name: Cache opensim-core
+      id: cache-core
+      uses: actions/cache@v3
+      with:
+        path: ~/opensim-core-install
+        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
+        
+    - name: Install SWIG
+      # if: steps.cache-swig.outputs.cache-hit != 'true'
+      run: |
+        mkdir ~/swig-source && cd ~/swig-source
+        wget https://github.com/swig/swig/archive/refs/tags/rel-4.0.2.tar.gz
+        tar xzf rel-4.0.2.tar.gz && cd swig-rel-4.0.2
+        sh autogen.sh && ./configure --prefix=$HOME/swig --disable-ccache
+        make && make -j4 install
+
+    - name: Build opensim-core
+      if: steps.cache-core.outputs.cache-hit != 'true'
+      run: |
+        mkdir build_core
+        cd build_core
+        cmake ../opensim-core -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DSWIG_EXECUTABLE=~/swig/bin/swig -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core-install -DOPENSIM_INSTALL_UNIX_FHS=OFF -DOPENSIM_DISABLE_LOG_FILE=ON
+        cmake . -LAH
+        cmake --build . --config Release 
+        cmake --install .
+
+    - name: Update submodules
+      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+
+    - name: Build GUI
+      id: build-gui
+      run: |
+        mkdir build
+        cd build
+        # TODO: Do not hard-code NetBeans version.
+        # TODO: Could download from https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
+        # cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/Apache NetBeans 12.3.app/Contents/Resources/NetBeans/netbeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/Apache NetBeans 12.3.app/Contents/Resources/NetBeans/netbeans/harness"
+        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/Apache NetBeans 12.3.app/Contents/Resources/NetBeans/netbeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/Apache NetBeans 12.3.app/Contents/Resources/NetBeans/netbeans/harness"
+        make CopyOpenSimCore
+        make PrepareInstaller
+        # Read the value of the cache variable storing the GUI build version.
+        VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
+        echo $VERSION
+        echo "name=VERSION::$VERSION" >> $GITHUB_ENV
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
         mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-mac
         path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
@@ -299,10 +450,10 @@ jobs:
     steps:
 
     - name: Checkout opensim-gui
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       
     - name: Checkout opensim-core master
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
@@ -320,13 +471,14 @@ jobs:
         make && make -j4 install  
         
     - name: Set up JDK 1.8
-      uses: actions/setup-java@v1
+      uses: actions/setup-java@v3
       with:
-        java-version: 1.8
+        distribution: 'temurin'
+        java-version: 8
 
     - name: Cache Netbeans
       id: cache-netbeans
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/netbeans-12.3
         key: netbeans-12.3
@@ -341,7 +493,7 @@ jobs:
 
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim_dependencies_install
         # Every time a cache is created, it's stored with this key.
@@ -366,11 +518,11 @@ jobs:
       run: |
         cd opensim-core
         opensim_core_commit=$(git rev-parse HEAD)
-        echo "::set-output name=hash::$opensim_core_commit"
+        echo "hash=$opensim_core_commit" >> $GITHUB_OUTPUT
 
     - name: Cache opensim-core
       id: cache-core
-      uses: actions/cache@v1
+      uses: actions/cache@v3
       with:
         path: ~/opensim-core-install
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
@@ -400,13 +552,134 @@ jobs:
         VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
         echo $VERSION
         echo "name=VERSION::$VERSION" >> $GITHUB_ENV
-        echo "::set-output name=version::$VERSION"
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
         mv Gui/opensim/dist/OpenSim-$VERSION.tar.gz $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-linux
+        path: OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz
+
+  ubuntu20:
+    name: Ubuntu2004
+
+    runs-on: ubuntu-20.04
+
+    steps:
+
+    - name: Checkout opensim-gui
+      uses: actions/checkout@v3
+      
+    - name: Checkout opensim-core master
+      uses: actions/checkout@v3
+      with:
+         repository: opensim-org/opensim-core
+         path: 'opensim-core'
+         
+    - name: Install packages
+      run: sudo apt-get update && sudo apt-get install --yes liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen python3 python3-dev python3-numpy python3-setuptools gfortran-7
+     
+    - name: Install SWIG
+      # if: steps.cache-swig.outputs.cache-hit != 'true'
+      run: |
+        mkdir ~/swig-source && cd ~/swig-source
+        wget https://github.com/swig/swig/archive/refs/tags/rel-4.0.2.tar.gz
+        tar xzf rel-4.0.2.tar.gz && cd swig-rel-4.0.2
+        sh autogen.sh && ./configure --prefix=$HOME/swig --disable-ccache
+        make && make -j4 install  
+        
+    - name: Set up JDK 1.8
+      uses: actions/setup-java@v3
+      with:
+        distribution: 'temurin'
+        java-version: 8
+
+    - name: Cache Netbeans
+      id: cache-netbeans
+      uses: actions/cache@v3
+      with:
+        path: ~/netbeans-12.3
+        key: netbeans-12.3
+
+    - name: Download and Install Netbeans
+      if: steps.cache-netbeans.outputs.cache-hit != 'true'
+      run: |
+        wget -q https://archive.apache.org/dist/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-linux-x64.sh
+        chmod 755 Apache-NetBeans-12.3-bin-linux-x64.sh
+        ./Apache-NetBeans-12.3-bin-linux-x64.sh --silent
+        ls $HOME/netbeans-12.3
+
+    - name: Cache opensim-core-dependencies
+      id: cache-dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/opensim_dependencies_install
+        # Every time a cache is created, it's stored with this key.
+        # In subsequent runs, if the key matches the key of an existing cache,
+        # then the cache is used. We chose for this key to depend on the
+        # operating system and a hash of the hashes of all files in the
+        # dependencies directory (non-recursive).
+        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
+        key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
+
+    - name: Build opensim-core-dependencies
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      run: |
+        mkdir build_deps
+        cd build_deps
+        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on  -DOPENSIM_WITH_CASADI:BOOL=on -DOPENSIM_WITH_TROPTER:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        cmake . -LAH
+        cmake --build . --config Release
+        
+    - name: Obtain opensim-core commit
+      id: opensim-core-commit
+      run: |
+        cd opensim-core
+        opensim_core_commit=$(git rev-parse HEAD)
+        echo "hash=$opensim_core_commit" >> $GITHUB_OUTPUT
+
+    - name: Cache opensim-core
+      id: cache-core
+      uses: actions/cache@v3
+      with:
+        path: ~/opensim-core-install
+        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
+    
+    - name: Build opensim-core
+      if: steps.cache-core.outputs.cache-hit != 'true'
+      run: |
+        mkdir build_core
+        cd build_core
+        cmake ../opensim-core -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core-install -DOPENSIM_INSTALL_UNIX_FHS=OFF -DSWIG_DIR=~/swig/share/swig -DSWIG_EXECUTABLE=~/swig/bin/swig
+        cmake . -LAH
+        cmake --build . --config Release 
+        cmake --install .
+
+    - name: Update submodules
+      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+
+    - name: Build GUI
+      id: build-gui
+      run: |
+        mkdir build
+        cd build
+        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans-12.3/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans-12.3/netbeans/harness"
+        make CopyOpenSimCore
+        make PrepareInstaller
+        # Read the value of the cache variable storing the GUI build version.
+        VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
+        echo $VERSION
+        echo "name=VERSION::$VERSION" >> $GITHUB_ENV
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+        cd $GITHUB_WORKSPACE
+        ls Gui/opensim/dist
+        mv Gui/opensim/dist/OpenSim-$VERSION.tar.gz $GITHUB_WORKSPACE
+
+    - name: Upload GUI installer
+      uses: actions/upload-artifact@v3
+      with:
+        name: OpenSim-${{ steps.build-gui.outputs.version }}-ub20-linux
         path: OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz
