@@ -96,7 +96,12 @@ public class MocoOutputBase extends MocoGoal {
 
   /**
    *  Set the exponent applied to the output value in the integrand. This<br>
-   *     exponent is applied when minimizing the norm of a vector type output. 
+   *     exponent is applied when minimizing the norm of a vector type output. The<br>
+   *     default exponent is set to 1, meaning that the output can take on negative<br>
+   *     values in the integrand. When the exponent is set to a value greater than<br>
+   *     1, the absolute value function is applied to the output (before the<br>
+   *     exponent is applied), meaning that odd numbered exponents (greater than 1)<br>
+   *     do not take on negative values. 
    */
   public void setExponent(int exponent) {
     opensimMocoJNI.MocoOutputBase_setExponent(swigCPtr, this, exponent);

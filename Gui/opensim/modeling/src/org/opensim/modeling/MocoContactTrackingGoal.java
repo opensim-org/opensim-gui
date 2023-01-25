@@ -277,4 +277,17 @@ public class MocoContactTrackingGoal extends MocoGoal {
     opensimMocoJNI.MocoContactTrackingGoal_addScaleFactor(swigCPtr, this, name, externalForceName, index, MocoBounds.getCPtr(bounds), bounds);
   }
 
+  /**
+   *  Normalize each component of the 3-D tracking error by the peak value of <br>
+   *  each contact force component in the tracking data. No normalization is <br>
+   *  applied when tracking data is close to zero (default: false).
+   */
+  public void setNormalizeTrackingError(boolean tf) {
+    opensimMocoJNI.MocoContactTrackingGoal_setNormalizeTrackingError(swigCPtr, this, tf);
+  }
+
+  public boolean getNormalizeTrackingError() {
+    return opensimMocoJNI.MocoContactTrackingGoal_getNormalizeTrackingError(swigCPtr, this);
+  }
+
 }

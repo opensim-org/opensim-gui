@@ -1099,7 +1099,7 @@ public class opensimSimulationJNI {
   public final static native boolean TransformAxis_hasFunction(long jarg1, TransformAxis jarg1_);
   public final static native long TransformAxis_getFunction(long jarg1, TransformAxis jarg1_);
   public final static native long TransformAxis_updFunction(long jarg1, TransformAxis jarg1_);
-  public final static native void TransformAxis_setFunction__SWIG_0(long jarg1, TransformAxis jarg1_, long jarg2, Function jarg2_);
+  public final static native void TransformAxis_private_setFunction__SWIG_0(long jarg1, TransformAxis jarg1_, long jarg2, Function jarg2_);
   public final static native long TransformAxis_getJoint(long jarg1, TransformAxis jarg1_);
   public final static native double TransformAxis_getValue(long jarg1, TransformAxis jarg1_, long jarg2, State jarg2_);
   public final static native void TransformAxis_connectToJoint(long jarg1, TransformAxis jarg1_, long jarg2, Joint jarg2_);
