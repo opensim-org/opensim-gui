@@ -100,7 +100,7 @@ jobs:
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
     
     - name: Build opensim-core
-      if: steps.cache-core.outputs.cache-hit != 'true'
+      # if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
