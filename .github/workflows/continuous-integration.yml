@@ -8,7 +8,7 @@ on:
       - '*'
   push:
     branches: 
-      - master
+      - main
     tags:
       - '*'
 
@@ -49,7 +49,7 @@ jobs:
         .\Apache-NetBeans-12.3-bin-windows-x64.exe --silent | Out-Null # This installer is gregarious.
         echo "ANT_HOME=C:\\Program Files\\NetBeans-12.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
       
-    - name: Checkout opensim-core master
+    - name: Checkout opensim-core main
       uses: actions/checkout@v3
       with:
          repository: opensim-org/opensim-core
@@ -152,7 +152,7 @@ jobs:
     - name: Checkout opensim-gui
       uses: actions/checkout@v3
 
-    - name: Checkout opensim-core master
+    - name: Checkout opensim-core main
       uses: actions/checkout@v3
       with:
          repository: opensim-org/opensim-core
@@ -302,7 +302,7 @@ jobs:
     - name: Checkout opensim-gui
       uses: actions/checkout@v3
 
-    - name: Checkout opensim-core master
+    - name: Checkout opensim-core main
       uses: actions/checkout@v3
       with:
          repository: opensim-org/opensim-core
@@ -452,7 +452,7 @@ jobs:
     - name: Checkout opensim-gui
       uses: actions/checkout@v3
       
-    - name: Checkout opensim-core master
+    - name: Checkout opensim-core main
       uses: actions/checkout@v3
       with:
          repository: opensim-org/opensim-core
@@ -573,7 +573,7 @@ jobs:
     - name: Checkout opensim-gui
       uses: actions/checkout@v3
       
-    - name: Checkout opensim-core master
+    - name: Checkout opensim-core main
       uses: actions/checkout@v3
       with:
          repository: opensim-org/opensim-core
