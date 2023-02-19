@@ -256,6 +256,21 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
 
     private void deleteJointTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJointTaskButtonActionPerformed
         // TODO add your handling code here:
+        int[] sels = jJointPersonalizationList.getSelectedIndices();
+        PropertyObjectList poList = jointPersonalizationToolModel.getJointTaskListAsObjectList();
+        Vector<Integer> tasksToDelete = new Vector<Integer>();
+        for (int i=0; i<sels.length; i++){
+            //OpenSimObject selectedJointTask = (OpenSimObject)jJointPersonalizationList.get(sels[i]);
+            tasksToDelete.add(sels[i]);
+        }
+        // Delete items from jmpJointListModel in reverse order
+        for (int r=tasksToDelete.size(); r >0; r-- ){
+            jJointPersonalizationList.remove(tasksToDelete.get(r-1));
+            poList.removeValueAtIndex(tasksToDelete.get(r-1));
+        }
+        // Recreate list model to cleanup
+        jointPersonalizationTaskListModel = new JMPTaskListModel(poList);
+        jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
     }//GEN-LAST:event_deleteJointTaskButtonActionPerformed
 
     @Override
