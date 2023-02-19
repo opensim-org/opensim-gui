@@ -35,6 +35,7 @@ public class AddEditJointPanel extends javax.swing.JPanel {
     PropertyBoolList pTrFlags, pOrFlags, chTrFlags, chOrFlags;
     private NumberFormat numFormat = NumberFormat.getInstance();
     private Vector<OpenSimObject> savedTasks = new Vector<OpenSimObject>();
+    private boolean initializing = true;
     /**
      * Creates new form AddEditJointPanel
      */
@@ -68,6 +69,7 @@ public class AddEditJointPanel extends javax.swing.JPanel {
         AbstractProperty childOrientFlagsProp = frameTransformationChild.getPropertyByName("orientation");
         chOrFlags = PropertyBoolList.getAs(childOrientFlagsProp);
         populateUiFromObject();
+        initializing = false;
 
     }
 
@@ -219,16 +221,17 @@ public class AddEditJointPanel extends javax.swing.JPanel {
                         .addComponent(jCheckBoxTy)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBoxTz)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addGroup(jParentFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jParentFramePanelLayout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldRBoundsParent, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldRBoundsParent))
                     .addGroup(jParentFramePanelLayout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTextFieldTBoundsParent, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jTextFieldTBoundsParent)))
+                .addGap(6, 6, 6))
         );
         jParentFramePanelLayout.setVerticalGroup(
             jParentFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,32 +332,32 @@ public class AddEditJointPanel extends javax.swing.JPanel {
             .addGroup(jChildFramePanelLayout.createSequentialGroup()
                 .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel8))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jChildFramePanelLayout.createSequentialGroup()
-                .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
                     .addGroup(jChildFramePanelLayout.createSequentialGroup()
-                        .addComponent(jCheckBoxChRx)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCheckBoxChRy)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBoxChRz))
-                    .addGroup(jChildFramePanelLayout.createSequentialGroup()
-                        .addComponent(jCheckBoxChTx)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBoxChTy)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jCheckBoxChTz)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jChildFramePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldRBoundsChild, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jChildFramePanelLayout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextFieldTBoundsChild, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jChildFramePanelLayout.createSequentialGroup()
+                                .addComponent(jCheckBoxChRx)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCheckBoxChRy)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBoxChRz))
+                            .addGroup(jChildFramePanelLayout.createSequentialGroup()
+                                .addComponent(jCheckBoxChTx)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBoxChTy)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jCheckBoxChTz)))
+                        .addGap(38, 38, 38)
+                        .addGroup(jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jChildFramePanelLayout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldRBoundsChild))
+                            .addGroup(jChildFramePanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jTextFieldTBoundsChild)))))
+                .addGap(0, 0, 0))
         );
         jChildFramePanelLayout.setVerticalGroup(
             jChildFramePanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,94 +415,94 @@ public class AddEditJointPanel extends javax.swing.JPanel {
         updateTask();
     }//GEN-LAST:event_jComboBoxJointsActionPerformed
 
-    private void jCheckBoxTxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCheckBoxTxPropertyChange
+    private void jTextFieldRBoundsChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRBoundsChildActionPerformed
         // TODO add your handling code here:
         updateTask();
-    }//GEN-LAST:event_jCheckBoxTxPropertyChange
-
-    private void jCheckBoxTyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTyActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jCheckBoxTyActionPerformed
-
-    private void jCheckBoxTzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTzActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jCheckBoxTzActionPerformed
-
-    private void jTextFieldTBoundsParentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTBoundsParentActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jTextFieldTBoundsParentActionPerformed
-
-    private void jCheckBoxRxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRxActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jCheckBoxRxActionPerformed
-
-    private void jCheckBoxRyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRyActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jCheckBoxRyActionPerformed
-
-    private void jCheckBoxRzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRzActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jCheckBoxRzActionPerformed
-
-    private void jTextFieldRBoundsParentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRBoundsParentActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jTextFieldRBoundsParentActionPerformed
-
-    private void jCheckBoxChTxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChTxActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jCheckBoxChTxActionPerformed
-
-    private void jCheckBoxChTyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChTyActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jCheckBoxChTyActionPerformed
-
-    private void jCheckBoxChTzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChTzActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jCheckBoxChTzActionPerformed
-
-    private void jTextFieldTBoundsChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTBoundsChildActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jTextFieldTBoundsChildActionPerformed
-
-    private void jCheckBoxChRxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChRxActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jCheckBoxChRxActionPerformed
-
-    private void jCheckBoxChRyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChRyActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jCheckBoxChRyActionPerformed
+    }//GEN-LAST:event_jTextFieldRBoundsChildActionPerformed
 
     private void jCheckBoxChRzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChRzActionPerformed
         // TODO add your handling code here:
         updateTask();
     }//GEN-LAST:event_jCheckBoxChRzActionPerformed
 
-    private void jTextFieldRBoundsChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRBoundsChildActionPerformed
+    private void jCheckBoxChRyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChRyActionPerformed
         // TODO add your handling code here:
         updateTask();
-    }//GEN-LAST:event_jTextFieldRBoundsChildActionPerformed
+    }//GEN-LAST:event_jCheckBoxChRyActionPerformed
+
+    private void jCheckBoxChRxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChRxActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxChRxActionPerformed
+
+    private void jTextFieldTBoundsChildActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTBoundsChildActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jTextFieldTBoundsChildActionPerformed
+
+    private void jCheckBoxChTzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChTzActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxChTzActionPerformed
+
+    private void jCheckBoxChTyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChTyActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxChTyActionPerformed
+
+    private void jCheckBoxChTxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxChTxActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxChTxActionPerformed
+
+    private void jTextFieldRBoundsParentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldRBoundsParentActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jTextFieldRBoundsParentActionPerformed
+
+    private void jCheckBoxRzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRzActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxRzActionPerformed
+
+    private void jCheckBoxRyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRyActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxRyActionPerformed
+
+    private void jCheckBoxRxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxRxActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxRxActionPerformed
+
+    private void jTextFieldTBoundsParentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldTBoundsParentActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jTextFieldTBoundsParentActionPerformed
+
+    private void jTextFieldTBoundsParentFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTBoundsParentFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextFieldTBoundsParentFocusLost
+
+    private void jCheckBoxTzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTzActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxTzActionPerformed
+
+    private void jCheckBoxTyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTyActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxTyActionPerformed
+
+    private void jCheckBoxTxPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCheckBoxTxPropertyChange
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxTxPropertyChange
 
     private void jCheckBoxTxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxTxActionPerformed
         // TODO add your handling code here:
         updateTask();
     }//GEN-LAST:event_jCheckBoxTxActionPerformed
-
-    private void jTextFieldTBoundsParentFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextFieldTBoundsParentFocusLost
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldTBoundsParentFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -534,6 +537,9 @@ public class AddEditJointPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void updateTask() {
+        if (initializing) // Avoid side effect of setting UI in the middle of populating Ui
+            return;
+        
         try {
             jmpTask.setName(((Joint) jComboBoxJoints.getSelectedItem()).getName());
             if(jTextFieldTBoundsParent.getText().trim().length()>0) pTrBounds.setValue(0, numFormat.parse(jTextFieldTBoundsParent.getText().trim()).doubleValue());

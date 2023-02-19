@@ -40,7 +40,7 @@ public class JointPersonalizationToolModel {
         AbstractProperty prop = toolAsObject.updPropertyByName("output_model_file");
         propString = PropertyStringList.getAs(prop);
         if (propString.size()==0 || propString.getValue(0).isEmpty()){
-             String proposedName = model.getInputFileName().replace(".osim", "_perjoint.osim");
+             String proposedName = model.getInputFileName().replace(".osim", "_JMP.osim");
              propString.setValue(0, proposedName);
         }
     }

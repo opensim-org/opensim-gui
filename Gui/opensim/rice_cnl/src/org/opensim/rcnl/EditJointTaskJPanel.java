@@ -158,6 +158,11 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(deleteJointButton, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.deleteJointButton.text")); // NOI18N
+        deleteJointButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteJointButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -280,7 +285,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int[] sels = jList1.getSelectedIndices();
         OpenSimObject selectedJointTask = (OpenSimObject)jmpJointListModel.get(sels[0]);
-        System.out.println(selectedJointTask.dump());
+        //System.out.println(selectedJointTask.dump());
         AddEditJointPanel ejtPanel = new AddEditJointPanel(selectedJointTask);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
@@ -302,8 +307,9 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         d.setVisible(true);
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            System.out.println(newJointTask.dump());
+            //System.out.println(newJointTask.dump());
             jmpJointListModel.addElement(newJointTask);
+            newJointTask.markAdopted(); //indicate ownership will be transferred so that object is not deleted by gc
             poList.adoptAndAppendValue(newJointTask);
         }
         
@@ -347,6 +353,21 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
     private void jEnabledCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnabledCheckBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jEnabledCheckBoxActionPerformed
+
+    private void deleteJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJointButtonActionPerformed
+        // TODO add your handling code here:
+        int[] sels = jList1.getSelectedIndices();
+        Vector<Integer> tasksToDelete = new Vector<Integer>();
+        for (int i=0; i<sels.length; i++){
+            OpenSimObject selectedJointTask = (OpenSimObject)jmpJointListModel.get(sels[i]);
+            tasksToDelete.add(sels[i]);
+        }
+        // Delete items from jmpJointListModel in reverse order
+        for (int r=tasksToDelete.size(); r >0; r-- ){
+            jmpJointListModel.remove(tasksToDelete.get(r-1));
+            poList.removeValueAtIndex(r-1);
+        }
+    }//GEN-LAST:event_deleteJointButtonActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
