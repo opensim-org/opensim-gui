@@ -296,10 +296,11 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
        //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
        jointPersonalizationToolModel = new JointPersonalizationToolModel(model, fileName);
        jointPersonalizationTaskListModel = new JMPTaskListModel(jointPersonalizationToolModel.getJointTaskListAsObjectList());
-       initComponents();
+       //initComponents(); Panel already constructed, no need to re-initComponents
        jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
        currentModelNameTextField.setText(jointPersonalizationToolModel.getModelName());
        outputModelFilePath.setFileName(jointPersonalizationToolModel.getOutputModelFile());
+       setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
     }
 
     @Override
