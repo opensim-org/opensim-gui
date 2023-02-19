@@ -250,7 +250,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
         d.setVisible(true);
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-
+            jointPersonalizationTaskListModel.set(sels[0], currentTask);    // Force refresh on name change
         }
     }//GEN-LAST:event_editJMPTaskButtonActionPerformed
 

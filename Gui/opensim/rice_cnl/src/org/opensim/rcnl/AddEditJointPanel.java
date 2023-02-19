@@ -574,7 +574,7 @@ public class AddEditJointPanel extends javax.swing.JPanel {
             chOrFlags.setValue(2, rzp);
             chTrFlags.setValueIsDefault(false);
             chOrFlags.setValueIsDefault(false);
-            System.out.println(jmpTask.dump());
+            //System.out.println(jmpTask.dump());
         } catch (ParseException ex) {
             Exceptions.printStackTrace(ex);
         }

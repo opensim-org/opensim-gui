@@ -362,8 +362,11 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         // Delete items from jmpJointListModel in reverse order
         for (int r=tasksToDelete.size(); r >0; r-- ){
             jmpJointListModel.remove(tasksToDelete.get(r-1));
-            poList.removeValueAtIndex(r-1);
+            poList.removeValueAtIndex(tasksToDelete.get(r-1));
         }
+        // Recreate list model to cleanup
+        jmpJointListModel= new JMPJointListModel(poList);
+        jList1.setModel(jmpJointListModel);
     }//GEN-LAST:event_deleteJointButtonActionPerformed
 
 
