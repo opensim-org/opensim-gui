@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Vector;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.opensim.modeling.AbstractProperty;
@@ -26,6 +29,7 @@ import org.opensim.view.pub.OpenSimDB;
 public class JointPersonalizationJPanel extends BaseToolPanel  implements Observer {
     private JointPersonalizationToolModel jointPersonalizationToolModel = null;
     private JMPTaskListModel jointPersonalizationTaskListModel = null;
+    private ListSelectionModel listSelectionModel;
     /**
      * Creates new form JointPersonalizationJPanel
      */
@@ -35,6 +39,9 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
        jointPersonalizationTaskListModel = new JMPTaskListModel(jointPersonalizationToolModel.getJointTaskListAsObjectList());
        initComponents();
        jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
+       listSelectionModel = jJointPersonalizationList.getSelectionModel();
+       listSelectionModel.addListSelectionListener(
+                            new ListSelectionHandler());
        currentModelNameTextField.setText(jointPersonalizationToolModel.getModelName());
        outputModelFilePath.setFileName(jointPersonalizationToolModel.getOutputModelFile());
        setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
@@ -135,6 +142,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(editJointTaskButton, org.openide.util.NbBundle.getMessage(JointPersonalizationJPanel.class, "JointPersonalizationJPanel.editJointTaskButton.text")); // NOI18N
+        editJointTaskButton.setEnabled(false);
         editJointTaskButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editJMPTaskButtonActionPerformed(evt);
@@ -142,6 +150,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(deleteJointTaskButton, org.openide.util.NbBundle.getMessage(JointPersonalizationJPanel.class, "JointPersonalizationJPanel.deleteJointTaskButton.text")); // NOI18N
+        deleteJointTaskButton.setEnabled(false);
         deleteJointTaskButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteJointTaskButtonActionPerformed(evt);
@@ -296,6 +305,8 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
        //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
        jointPersonalizationToolModel = new JointPersonalizationToolModel(model, fileName);
        jointPersonalizationTaskListModel = new JMPTaskListModel(jointPersonalizationToolModel.getJointTaskListAsObjectList());
+       listSelectionModel = jJointPersonalizationList.getSelectionModel();
+       listSelectionModel.addListSelectionListener( new ListSelectionHandler());
        //initComponents(); Panel already constructed, no need to re-initComponents
        jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
        currentModelNameTextField.setText(jointPersonalizationToolModel.getModelName());
@@ -324,4 +335,20 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
     private javax.swing.JPanel outputPanel;
     private javax.swing.JPanel tasksPanel;
     // End of variables declaration//GEN-END:variables
+
+    private class ListSelectionHandler implements ListSelectionListener {
+
+        public ListSelectionHandler() {
+        }
+
+        @Override
+        public void valueChanged(ListSelectionEvent lse) {
+            // Disable delete if nothing is selected
+            // Enable edit if single selection
+            int[] sels = jJointPersonalizationList.getSelectedIndices();
+            editJointTaskButton.setEnabled(sels.length==1);
+            deleteJointTaskButton.setEnabled(sels.length>=1);
+            
+        }
+    }
 }

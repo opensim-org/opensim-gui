@@ -9,6 +9,9 @@ import java.awt.Dialog;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Vector;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.filechooser.FileFilter;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
@@ -30,6 +33,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
     private Vector<OpenSimObject> savedJointTasks = new Vector<OpenSimObject>();
     private JMPJointListModel jmpJointListModel = null;
     private PropertyObjectList poList;
+    private ListSelectionModel listSelectionModel;
     /**
      * Creates new form EditJointTaskJPanel
      */
@@ -44,6 +48,8 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         jmpJointListModel= new JMPJointListModel(poList);
         initComponents();
         jList1.setModel(jmpJointListModel);
+        listSelectionModel = jList1.getSelectionModel();
+        listSelectionModel.addListSelectionListener(new ListSelectionHandler());
         triallFilePath.setExtensionsAndDescription(".trc", "Measurement trial marker data");
         // Populate name, enabled, time-range and markers-file
         jTaskNameTextField.setText(jointPersonalizationTask.getName());
@@ -151,6 +157,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(editJointButton, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.editJointButton.text")); // NOI18N
+        editJointButton.setEnabled(false);
         editJointButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editJointButtonActionPerformed(evt);
@@ -158,6 +165,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(deleteJointButton, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.deleteJointButton.text")); // NOI18N
+        deleteJointButton.setEnabled(false);
         deleteJointButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 deleteJointButtonActionPerformed(evt);
@@ -387,5 +395,19 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField4;
     private org.opensim.swingui.FileTextFieldAndChooser triallFilePath;
     // End of variables declaration//GEN-END:variables
+    private class ListSelectionHandler implements ListSelectionListener {
 
+        public ListSelectionHandler() {
+        }
+
+        @Override
+        public void valueChanged(ListSelectionEvent lse) {
+            // Disable delete if nothing is selected
+            // Enable edit if single selection
+            int[] sels = jList1.getSelectedIndices();
+            editJointButton.setEnabled(sels.length==1);
+            deleteJointButton.setEnabled(sels.length>=1);
+            
+        }
+    }
 }
