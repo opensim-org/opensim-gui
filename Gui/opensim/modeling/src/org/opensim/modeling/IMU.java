@@ -9,10 +9,14 @@
 package org.opensim.modeling;
 
 /**
- * IMU is a Model Component that represents an IMU along with its Geometry<br>
- * for visualization.<br>
- * TODO: add noise model, limits/saturation, as needed.<br>
+ * IMU is a Model Component that represents a virtual IMU along with its Geometry<br>
+ * for visualization. This component reports angular velocity and linear<br>
+ * acceleration (with gravitational acceleration subtracted) vectors expressed in<br>
+ * the IMU frame to mimic the behavior of real-world IMUs. It also reports<br>
+ * orientations between the IMU and ground frame as Quaternions, expressed in the<br>
+ * ground frame.<br>
  * <br>
+ * TODO: add noise model, limits/saturation, as needed.<br>
  * <br>
  * @author Ayman Habib
  */
@@ -111,30 +115,35 @@ public class IMU extends ModelComponent {
   }
 
   /**
-   *  Report the Transform of this IMU in Ground frame
+   *  Report the Transform of this IMU in the Ground frame.<br>
+   *  Note: Requires realizing the State to SimTK::Stage::Position.
    */
   public Transform calcTransformInGround(State s) {
     return new Transform(opensimSimulationJNI.IMU_calcTransformInGround(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   /**
-   *  Report the orientation of this IMU in ground frame expressed as Quaternion
+   *  Report the orientation of this IMU in ground frame expressed as a<br>
+   *  Quaternion.<br>
+   *  Note: Requires realizing the State to SimTK::Stage::Position.
    */
   public SWIGTYPE_p_SimTK__Quaternion_T_SimTK__Real_t calcOrientationAsQuaternion(State s) {
     return new SWIGTYPE_p_SimTK__Quaternion_T_SimTK__Real_t(opensimSimulationJNI.IMU_calcOrientationAsQuaternion(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   /**
-   *  Report the angular velocity of the frame to which this IMU is attached<br>
-   *  in ground frame
+   *  Report the angular velocity of this IMU in the frame it is attached to.<br>
+   *  Note: Requires realizing the State to SimTK::Stage::Velocity.
    */
   public Vec3 calcGyroscopeSignal(State s) {
     return new Vec3(opensimSimulationJNI.IMU_calcGyroscopeSignal(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   /**
-   *  Report the linear acceleration of the frame to which this IMU is attached in Ground.<br>
-   *  Gravity is subtracted and result expressed in the frame to which the IMU is attached.
+   *  Report the linear acceleration of the frame to which this IMU is<br>
+   *  attached in the Ground grame. Gravity is subtracted and result expressed<br>
+   *  in the frame to which the IMU is attached.<br>
+   *  Note: Requires realizing the State to SimTK::Stage::Acceleration.
    */
   public Vec3 calcAccelerometerSignal(State s) {
     return new Vec3(opensimSimulationJNI.IMU_calcAccelerometerSignal(swigCPtr, this, State.getCPtr(s), s), true);

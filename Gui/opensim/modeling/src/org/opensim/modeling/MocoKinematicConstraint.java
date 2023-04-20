@@ -42,12 +42,12 @@ public class MocoKinematicConstraint {
     }
   }
 
-  public SWIGTYPE_p_MocoConstraintInfo getConstraintInfo() {
-    return new SWIGTYPE_p_MocoConstraintInfo(opensimMocoJNI.MocoKinematicConstraint_getConstraintInfo(swigCPtr, this), false);
+  public MocoConstraintInfo getConstraintInfo() {
+    return new MocoConstraintInfo(opensimMocoJNI.MocoKinematicConstraint_getConstraintInfo(swigCPtr, this), false);
   }
 
-  public void setConstraintInfo(SWIGTYPE_p_MocoConstraintInfo cInfo) {
-    opensimMocoJNI.MocoKinematicConstraint_setConstraintInfo(swigCPtr, this, SWIGTYPE_p_MocoConstraintInfo.getCPtr(cInfo));
+  public void setConstraintInfo(MocoConstraintInfo cInfo) {
+    opensimMocoJNI.MocoKinematicConstraint_setConstraintInfo(swigCPtr, this, MocoConstraintInfo.getCPtr(cInfo), cInfo);
   }
 
   /**

@@ -70,16 +70,16 @@ public class MocoPathConstraint extends OpenSimObject {
     return opensimMocoJNI.MocoPathConstraint_getConcreteClassName(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_MocoConstraintInfo getConstraintInfo() {
-    return new SWIGTYPE_p_MocoConstraintInfo(opensimMocoJNI.MocoPathConstraint_getConstraintInfo(swigCPtr, this), false);
+  public MocoConstraintInfo getConstraintInfo() {
+    return new MocoConstraintInfo(opensimMocoJNI.MocoPathConstraint_getConstraintInfo(swigCPtr, this), false);
   }
 
-  public SWIGTYPE_p_MocoConstraintInfo updConstraintInfo() {
-    return new SWIGTYPE_p_MocoConstraintInfo(opensimMocoJNI.MocoPathConstraint_updConstraintInfo(swigCPtr, this), false);
+  public MocoConstraintInfo updConstraintInfo() {
+    return new MocoConstraintInfo(opensimMocoJNI.MocoPathConstraint_updConstraintInfo(swigCPtr, this), false);
   }
 
-  public void setConstraintInfo(SWIGTYPE_p_MocoConstraintInfo cInfo) {
-    opensimMocoJNI.MocoPathConstraint_setConstraintInfo(swigCPtr, this, SWIGTYPE_p_MocoConstraintInfo.getCPtr(cInfo));
+  public void setConstraintInfo(MocoConstraintInfo cInfo) {
+    opensimMocoJNI.MocoPathConstraint_setConstraintInfo(swigCPtr, this, MocoConstraintInfo.getCPtr(cInfo), cInfo);
   }
 
   /**

@@ -1253,6 +1253,10 @@ public class opensimSimulationJNI {
   public final static native boolean Coordinate__has_output_speed_get(long jarg1, Coordinate jarg1_);
   public final static native void Coordinate__has_output_acceleration_set(long jarg1, Coordinate jarg1_, boolean jarg2);
   public final static native boolean Coordinate__has_output_acceleration_get(long jarg1, Coordinate jarg1_);
+  public final static native int Coordinate_Undefined_get();
+  public final static native int Coordinate_Rotational_get();
+  public final static native int Coordinate_Translational_get();
+  public final static native int Coordinate_Coupled_get();
   public final static native long Coordinate_getJoint(long jarg1, Coordinate jarg1_);
   public final static native int Coordinate_getMotionType(long jarg1, Coordinate jarg1_);
   public final static native double Coordinate_getValue(long jarg1, Coordinate jarg1_, long jarg2, State jarg2_);
@@ -2201,6 +2205,7 @@ public class opensimSimulationJNI {
   public final static native void Controller_set_actuator_list(long jarg1, Controller jarg1_, int jarg2, String jarg3);
   public final static native int Controller_append_actuator_list(long jarg1, Controller jarg1_, String jarg2);
   public final static native void Controller_constructProperty_actuator_list(long jarg1, Controller jarg1_);
+  public final static native void delete_Controller(long jarg1);
   public final static native boolean Controller_isEnabled(long jarg1, Controller jarg1_);
   public final static native void Controller_setEnabled(long jarg1, Controller jarg1_, boolean jarg2);
   public final static native void Controller_setActuators(long jarg1, Controller jarg1_, long jarg2, SetActuators jarg2_);
@@ -2209,7 +2214,6 @@ public class opensimSimulationJNI {
   public final static native long Controller_updActuators(long jarg1, Controller jarg1_);
   public final static native void Controller_computeControls(long jarg1, Controller jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native int Controller_getNumControls(long jarg1, Controller jarg1_);
-  public final static native void delete_Controller(long jarg1);
   public final static native long SetControllers_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetControllers_assign(long jarg1, SetControllers jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String SetControllers_getClassName();
@@ -2843,10 +2847,16 @@ public class opensimSimulationJNI {
   public final static native void SmoothSphereHalfSpaceForce_PropertyIndex_socket_half_space_set(long jarg1, SmoothSphereHalfSpaceForce jarg1_, long jarg2);
   public final static native long SmoothSphereHalfSpaceForce_PropertyIndex_socket_half_space_get(long jarg1, SmoothSphereHalfSpaceForce jarg1_);
   public final static native void SmoothSphereHalfSpaceForce_connectSocket_half_space(long jarg1, SmoothSphereHalfSpaceForce jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native void SmoothSphereHalfSpaceForce__has_output_sphere_force_set(long jarg1, SmoothSphereHalfSpaceForce jarg1_, boolean jarg2);
+  public final static native boolean SmoothSphereHalfSpaceForce__has_output_sphere_force_get(long jarg1, SmoothSphereHalfSpaceForce jarg1_);
+  public final static native void SmoothSphereHalfSpaceForce__has_output_half_space_force_set(long jarg1, SmoothSphereHalfSpaceForce jarg1_, boolean jarg2);
+  public final static native boolean SmoothSphereHalfSpaceForce__has_output_half_space_force_get(long jarg1, SmoothSphereHalfSpaceForce jarg1_);
   public final static native long new_SmoothSphereHalfSpaceForce__SWIG_0();
   public final static native long new_SmoothSphereHalfSpaceForce__SWIG_1(String jarg1, long jarg2, ContactSphere jarg2_, long jarg3, ContactHalfSpace jarg3_);
   public final static native long SmoothSphereHalfSpaceForce_getRecordLabels(long jarg1, SmoothSphereHalfSpaceForce jarg1_);
   public final static native long SmoothSphereHalfSpaceForce_getRecordValues(long jarg1, SmoothSphereHalfSpaceForce jarg1_, long jarg2, State jarg2_);
+  public final static native long SmoothSphereHalfSpaceForce_getSphereForce(long jarg1, SmoothSphereHalfSpaceForce jarg1_, long jarg2, State jarg2_);
+  public final static native long SmoothSphereHalfSpaceForce_getHalfSpaceForce(long jarg1, SmoothSphereHalfSpaceForce jarg1_, long jarg2, State jarg2_);
   public final static native void delete_SmoothSphereHalfSpaceForce(long jarg1);
   public final static native long Actuator_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Actuator_assign(long jarg1, Actuator jarg1_, long jarg2, OpenSimObject jarg2_);

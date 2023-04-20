@@ -552,6 +552,14 @@ public class MocoTrajectory {
   }
 
   /**
+   *  Trim the trajectory to include the rows starting at newStartIndex and<br>
+   *  and ending at newFinalIndex.
+   */
+  public void trimToIndices(int newStartIndex, int newFinalIndex) {
+    opensimMocoJNI.MocoTrajectory_trimToIndices(swigCPtr, this, newStartIndex, newFinalIndex);
+  }
+
+  /**
    *  <br>
    *  
    */

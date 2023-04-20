@@ -523,6 +523,22 @@ public class SmoothSphereHalfSpaceForce extends Force {
     opensimSimulationJNI.SmoothSphereHalfSpaceForce_connectSocket_half_space(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
+  public void set_has_output_sphere_force(boolean value) {
+    opensimSimulationJNI.SmoothSphereHalfSpaceForce__has_output_sphere_force_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_sphere_force() {
+    return opensimSimulationJNI.SmoothSphereHalfSpaceForce__has_output_sphere_force_get(swigCPtr, this);
+  }
+
+  public void set_has_output_half_space_force(boolean value) {
+    opensimSimulationJNI.SmoothSphereHalfSpaceForce__has_output_half_space_force_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_half_space_force() {
+    return opensimSimulationJNI.SmoothSphereHalfSpaceForce__has_output_half_space_force_get(swigCPtr, this);
+  }
+
   public SmoothSphereHalfSpaceForce() {
     this(opensimSimulationJNI.new_SmoothSphereHalfSpaceForce__SWIG_0(), true);
   }
@@ -548,6 +564,22 @@ public class SmoothSphereHalfSpaceForce extends Force {
    */
   public ArrayDouble getRecordValues(State state) {
     return new ArrayDouble(opensimSimulationJNI.SmoothSphereHalfSpaceForce_getRecordValues(swigCPtr, this, State.getCPtr(state), state), true);
+  }
+
+  /**
+   *  Get a SimTK::SpatialVec containing the forces and torques applied to<br>
+   *  the contact sphere.
+   */
+  public SpatialVec getSphereForce(State s) {
+    return new SpatialVec(opensimSimulationJNI.SmoothSphereHalfSpaceForce_getSphereForce(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  /**
+   *  Get a SimTK::SpatialVec containing the forces and torques applied to<br>
+   *  the contact half space.
+   */
+  public SpatialVec getHalfSpaceForce(State s) {
+    return new SpatialVec(opensimSimulationJNI.SmoothSphereHalfSpaceForce_getHalfSpaceForce(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
 }

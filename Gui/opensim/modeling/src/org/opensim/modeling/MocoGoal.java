@@ -192,6 +192,25 @@ public class MocoGoal extends OpenSimObject {
   }
 
   /**
+   *  Set the vector of endpoint constraint bounds for this MocoGoal. This<br>
+   *  vector must have length equal to the number of outputs for this goal,<br>
+   *  otherwise an exception is thrown.<br>
+   *  This info is ignored if getSupportsEndpointConstraint() is false.
+   */
+  public void setEndpointConstraintBounds(StdVectorMocoBounds bounds) {
+    opensimMocoJNI.MocoGoal_setEndpointConstraintBounds(swigCPtr, this, StdVectorMocoBounds.getCPtr(bounds), bounds);
+  }
+
+  /**
+   *  Get the vector of the endpoint constraint bounds for this MocoGoal.<br>
+   *  Note: the return value is constructed fresh on every call from<br>
+   *  the internal property. Avoid repeated calls to this function.
+   */
+  public StdVectorMocoBounds getEndpointConstraintBounds() {
+    return new StdVectorMocoBounds(opensimMocoJNI.MocoGoal_getEndpointConstraintBounds(swigCPtr, this), true);
+  }
+
+  /**
    *  Get the length of the return value of calcGoal().
    */
   public int getNumOutputs() {

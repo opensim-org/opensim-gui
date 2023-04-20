@@ -643,10 +643,22 @@ public class Coordinate extends ModelComponent {
    *         it is flagged as Coupled. 
    */
   public final static class MotionType {
-    public final static Coordinate.MotionType Undefined = new Coordinate.MotionType("Undefined");
-    public final static Coordinate.MotionType Rotational = new Coordinate.MotionType("Rotational");
-    public final static Coordinate.MotionType Translational = new Coordinate.MotionType("Translational");
-    public final static Coordinate.MotionType Coupled = new Coordinate.MotionType("Coupled");
+    /**
+     *  0
+     */
+    public final static Coordinate.MotionType Undefined = new Coordinate.MotionType("Undefined", opensimSimulationJNI.Coordinate_Undefined_get());
+    /**
+     *  1
+     */
+    public final static Coordinate.MotionType Rotational = new Coordinate.MotionType("Rotational", opensimSimulationJNI.Coordinate_Rotational_get());
+    /**
+     *  2
+     */
+    public final static Coordinate.MotionType Translational = new Coordinate.MotionType("Translational", opensimSimulationJNI.Coordinate_Translational_get());
+    /**
+     *  3
+     */
+    public final static Coordinate.MotionType Coupled = new Coordinate.MotionType("Coupled", opensimSimulationJNI.Coordinate_Coupled_get());
 
     public final int swigValue() {
       return swigValue;
