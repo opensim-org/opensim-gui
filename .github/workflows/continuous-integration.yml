@@ -54,6 +54,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
+         ref: tkuchida-hideEllipsoidDecorations
     
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
@@ -157,6 +158,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
+         ref: tkuchida-hideEllipsoidDecorations
          
     - name: Install Python packages
       uses: actions/setup-python@v4
