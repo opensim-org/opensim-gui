@@ -31,9 +31,12 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
     private OpenSimObject taskToEdit;
     private NumberFormat numFormat = NumberFormat.getInstance();
     private Vector<OpenSimObject> savedJointTasks = new Vector<OpenSimObject>();
+    private Vector<OpenSimObject> savedBodyTasks = new Vector<OpenSimObject>();
     private JMPJointListModel jmpJointListModel = null;
-    private PropertyObjectList poList;
-    private ListSelectionModel listSelectionModel;
+    private JMPBodyListModel jmpBodyListModel = null;
+    private PropertyObjectList poJointList;
+    private PropertyObjectList poBodyList;
+    private ListSelectionModel listSelectionModel, list2SelectionModel;
     /**
      * Creates new form EditJointTaskJPanel
      */
@@ -44,12 +47,16 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
     EditJointTaskJPanel(OpenSimObject jointPersonalizationTask) {
         taskToEdit = jointPersonalizationTask;
         AbstractProperty ap = jointPersonalizationTask.getPropertyByName("JMPJointList");
-        poList = PropertyObjectList.updAs(ap);
-        jmpJointListModel= new JMPJointListModel(poList);
+        poJointList = PropertyObjectList.updAs(ap);
+        jmpJointListModel= new JMPJointListModel(poJointList);
+        poBodyList = PropertyObjectList.updAs(jointPersonalizationTask.getPropertyByName("JMPBodyList"));
+        jmpBodyListModel = new JMPBodyListModel(poBodyList);
         initComponents();
         jList1.setModel(jmpJointListModel);
+        jList2.setModel(jmpBodyListModel);
         listSelectionModel = jList1.getSelectionModel();
         listSelectionModel.addListSelectionListener(new ListSelectionHandler());
+        jList2.getSelectionModel().addListSelectionListener(new List2SelectionHandler() );
         triallFilePath.setExtensionsAndDescription(".trc", "Measurement trial marker data");
         // Populate name, enabled, time-range and markers-file
         jTaskNameTextField.setText(jointPersonalizationTask.getName());
@@ -81,7 +88,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
+        jJointsPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         addJointButton = new javax.swing.JButton();
@@ -89,6 +96,12 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         deleteJointButton = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         triallFilePath = new org.opensim.swingui.FileTextFieldAndChooser();
+        jBodiesPanel = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        addBodyButton = new javax.swing.JButton();
+        editBodyButton = new javax.swing.JButton();
+        deleteBodyButton = new javax.swing.JButton();
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jLabel1.text")); // NOI18N
 
@@ -120,6 +133,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jLabel4.text")); // NOI18N
 
+        jTextField3.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         jTextField3.setText(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jTextField3.text")); // NOI18N
         jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -132,6 +146,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             }
         });
 
+        jTextField4.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         jTextField4.setText(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jTextField4.text")); // NOI18N
         jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -144,7 +159,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jPanel1.border.title"))); // NOI18N
+        jJointsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jJointsPanel.border.title"))); // NOI18N
 
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
@@ -172,31 +187,27 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout jJointsPanelLayout = new javax.swing.GroupLayout(jJointsPanel);
+        jJointsPanel.setLayout(jJointsPanelLayout);
+        jJointsPanelLayout.setHorizontalGroup(
+            jJointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jJointsPanelLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jJointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(deleteJointButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(addJointButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(editJointButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+        jJointsPanelLayout.setVerticalGroup(
+            jJointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jJointsPanelLayout.createSequentialGroup()
                 .addComponent(addJointButton)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(editJointButton)
-                .addGap(26, 26, 26)
-                .addComponent(deleteJointButton)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addGap(14, 14, 14)
+                .addComponent(deleteJointButton))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel11, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jLabel11.text")); // NOI18N
@@ -207,6 +218,57 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             }
         });
 
+        jBodiesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jBodiesPanel.border.title"))); // NOI18N
+
+        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane2.setViewportView(jList2);
+
+        org.openide.awt.Mnemonics.setLocalizedText(addBodyButton, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.addBodyButton.text")); // NOI18N
+        addBodyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addBodyButtonActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(editBodyButton, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.editBodyButton.text")); // NOI18N
+        editBodyButton.setEnabled(false);
+        editBodyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editBodyButtonActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(deleteBodyButton, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.deleteBodyButton.text")); // NOI18N
+        deleteBodyButton.setEnabled(false);
+        deleteBodyButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteBodyButtonActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jBodiesPanelLayout = new javax.swing.GroupLayout(jBodiesPanel);
+        jBodiesPanel.setLayout(jBodiesPanelLayout);
+        jBodiesPanelLayout.setHorizontalGroup(
+            jBodiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jBodiesPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jBodiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(deleteBodyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addBodyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(editBodyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jBodiesPanelLayout.setVerticalGroup(
+            jBodiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jBodiesPanelLayout.createSequentialGroup()
+                .addComponent(addBodyButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(editBodyButton)
+                .addGap(14, 14, 14)
+                .addComponent(deleteBodyButton))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,7 +277,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jEnabledCheckBox)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jJointsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -223,15 +285,16 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(triallFilePath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(triallFilePath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBodiesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -254,7 +317,9 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel4)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jJointsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jBodiesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -284,41 +349,6 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         AbstractProperty trcfileProp = taskToEdit.getPropertyByName("marker_file_name");
         PropertyHelper.setValueString(triallFilePath.getFileName(), trcfileProp);
     }//GEN-LAST:event_triallFilePathStateChanged
-
-    private void editJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJointButtonActionPerformed
-        // TODO add your handling code here:
-        int[] sels = jList1.getSelectedIndices();
-        OpenSimObject selectedJointTask = (OpenSimObject)jmpJointListModel.get(sels[0]);
-        //System.out.println(selectedJointTask.dump());
-        AddEditJointPanel ejtPanel = new AddEditJointPanel(selectedJointTask);
-        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
-        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
-        d.setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            // Fire model changed event to update list in case name change
-            jmpJointListModel.set(sels[0], selectedJointTask);
-        }
-    }//GEN-LAST:event_editJointButtonActionPerformed
-
-    private void addJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJointButtonActionPerformed
-        // TODO add your handling code here:
-        OpenSimObject newJointTask  = OpenSimObject.newInstanceOfType("JMPJoint");
-        // set name to first valid joint in model
-        savedJointTasks.add(newJointTask);
-        AddEditJointPanel ejtPanel = new AddEditJointPanel(newJointTask);
-        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
-        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
-        d.setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            //System.out.println(newJointTask.dump());
-            jmpJointListModel.addElement(newJointTask);
-            newJointTask.markAdopted(); //indicate ownership will be transferred so that object is not deleted by gc
-            poList.adoptAndAppendValue(newJointTask);
-        }
-        
-    }//GEN-LAST:event_addJointButtonActionPerformed
 
     private void jEnabledCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jEnabledCheckBoxItemStateChanged
         // TODO add your handling code here:
@@ -370,26 +400,81 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         // Delete items from jmpJointListModel in reverse order
         for (int r=tasksToDelete.size(); r >0; r-- ){
             jmpJointListModel.remove(tasksToDelete.get(r-1));
-            poList.removeValueAtIndex(tasksToDelete.get(r-1));
+            poJointList.removeValueAtIndex(tasksToDelete.get(r-1));
         }
         // Recreate list model to cleanup
-        jmpJointListModel= new JMPJointListModel(poList);
+        jmpJointListModel= new JMPJointListModel(poJointList);
         jList1.setModel(jmpJointListModel);
     }//GEN-LAST:event_deleteJointButtonActionPerformed
 
+    private void editJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJointButtonActionPerformed
+        // TODO add your handling code here:
+        int[] sels = jList1.getSelectedIndices();
+        OpenSimObject selectedJointTask = (OpenSimObject)jmpJointListModel.get(sels[0]);
+        //System.out.println(selectedJointTask.dump());
+        AddEditJointPanel ejtPanel = new AddEditJointPanel(selectedJointTask);
+        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
+        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
+        d.setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            // Fire model changed event to update list in case name change
+            jmpJointListModel.set(sels[0], selectedJointTask);
+        }
+    }//GEN-LAST:event_editJointButtonActionPerformed
+
+    private void addJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJointButtonActionPerformed
+        // TODO add your handling code here:
+        OpenSimObject newJointTask  = OpenSimObject.newInstanceOfType("JMPJoint");
+        // set name to first valid joint in model
+        savedJointTasks.add(newJointTask);
+        AddEditJointPanel ejtPanel = new AddEditJointPanel(newJointTask);
+        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
+        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
+        d.setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            //System.out.println(newJointTask.dump());
+            jmpJointListModel.addElement(newJointTask);
+            newJointTask.markAdopted(); //indicate ownership will be transferred so that object is not deleted by gc
+            poJointList.adoptAndAppendValue(newJointTask);
+        }
+
+    }//GEN-LAST:event_addJointButtonActionPerformed
+
+    private void addBodyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBodyButtonActionPerformed
+        // TODO add your handling code here:
+        OpenSimObject newBodyTask  = OpenSimObject.newInstanceOfType("JMPBody");
+    }//GEN-LAST:event_addBodyButtonActionPerformed
+
+    private void editBodyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBodyButtonActionPerformed
+        // TODO add your handling code here:
+        int[] sels = jList1.getSelectedIndices();
+    }//GEN-LAST:event_editBodyButtonActionPerformed
+
+    private void deleteBodyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBodyButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_deleteBodyButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addBodyButton;
     private javax.swing.JButton addJointButton;
+    private javax.swing.JButton deleteBodyButton;
     private javax.swing.JButton deleteJointButton;
+    private javax.swing.JButton editBodyButton;
     private javax.swing.JButton editJointButton;
+    private javax.swing.JPanel jBodiesPanel;
     private javax.swing.JCheckBox jEnabledCheckBox;
+    private javax.swing.JPanel jJointsPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTaskNameTextField;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
@@ -410,4 +495,21 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             
         }
     }
+    
+       private class List2SelectionHandler implements ListSelectionListener {
+
+        public List2SelectionHandler() {
+        }
+
+        @Override
+        public void valueChanged(ListSelectionEvent lse) {
+            // Disable delete if nothing is selected
+            // Enable edit if single selection
+            int[] sels = jList2.getSelectedIndices();
+            editBodyButton.setEnabled(sels.length==1);
+            deleteBodyButton.setEnabled(sels.length>=1);
+            
+        }
+    }
+
 }
