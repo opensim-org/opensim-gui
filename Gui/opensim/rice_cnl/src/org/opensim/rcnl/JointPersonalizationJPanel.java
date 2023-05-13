@@ -232,7 +232,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
     private void addJMPTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJMPTaskButtonActionPerformed
         // TODO add your handling code here:
         OpenSimObject jmpTask = OpenSimObject.newInstanceOfType("JMPTask");
-        EditJointTaskJPanel ejtPanel = new EditJointTaskJPanel(jmpTask);
+        EditJMPTaskJPanel ejtPanel = new EditJMPTaskJPanel(jmpTask);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One JMP Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
@@ -253,7 +253,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
         int[] sels = jJointPersonalizationList.getSelectedIndices();
         OpenSimObject currentTask = (OpenSimObject)jointPersonalizationTaskListModel.get(sels[0]);
         //System.out.println(currentTask.dump());
-        EditJointTaskJPanel ejtPanel = new EditJointTaskJPanel(currentTask);
+        EditJMPTaskJPanel ejtPanel = new EditJMPTaskJPanel(currentTask);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One JMP Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);

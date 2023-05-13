@@ -26,7 +26,7 @@ import org.opensim.modeling.PropertyObjectList;
  *
  * @author Ayman-NMBL
  */
-public class EditJointTaskJPanel extends javax.swing.JPanel {
+public class EditJMPTaskJPanel extends javax.swing.JPanel {
 
     private OpenSimObject taskToEdit;
     private NumberFormat numFormat = NumberFormat.getInstance();
@@ -40,11 +40,11 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
     /**
      * Creates new form EditJointTaskJPanel
      */
-    public EditJointTaskJPanel() {
+    public EditJMPTaskJPanel() {
         initComponents();
     }
 
-    EditJointTaskJPanel(OpenSimObject jointPersonalizationTask) {
+    EditJMPTaskJPanel(OpenSimObject jointPersonalizationTask) {
         taskToEdit = jointPersonalizationTask;
         AbstractProperty ap = jointPersonalizationTask.getPropertyByName("JMPJointList");
         poJointList = PropertyObjectList.updAs(ap);
@@ -103,9 +103,9 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         editBodyButton = new javax.swing.JButton();
         deleteBodyButton = new javax.swing.JButton();
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jLabel1.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jLabel1.text")); // NOI18N
 
-        jTaskNameTextField.setText(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jTaskNameTextField.text")); // NOI18N
+        jTaskNameTextField.setText(org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jTaskNameTextField.text")); // NOI18N
         jTaskNameTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTaskNameTextFieldFocusLost(evt);
@@ -117,7 +117,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jEnabledCheckBox, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jEnabledCheckBox.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jEnabledCheckBox, org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jEnabledCheckBox.text")); // NOI18N
         jEnabledCheckBox.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jEnabledCheckBoxItemStateChanged(evt);
@@ -129,12 +129,12 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jLabel3.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jLabel3.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jLabel4.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jLabel4.text")); // NOI18N
 
         jTextField3.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jTextField3.setText(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jTextField3.text")); // NOI18N
+        jTextField3.setText(org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jTextField3.text")); // NOI18N
         jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField3FocusLost(evt);
@@ -147,7 +147,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         });
 
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jTextField4.setText(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jTextField4.text")); // NOI18N
+        jTextField4.setText(org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jTextField4.text")); // NOI18N
         jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField4FocusLost(evt);
@@ -159,19 +159,19 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             }
         });
 
-        jJointsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jJointsPanel.border.title"))); // NOI18N
+        jJointsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jJointsPanel.border.title"))); // NOI18N
 
         jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jList1);
 
-        org.openide.awt.Mnemonics.setLocalizedText(addJointButton, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.addJointButton.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(addJointButton, org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.addJointButton.text")); // NOI18N
         addJointButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addJointButtonActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(editJointButton, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.editJointButton.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(editJointButton, org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.editJointButton.text")); // NOI18N
         editJointButton.setEnabled(false);
         editJointButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,7 +179,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(deleteJointButton, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.deleteJointButton.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(deleteJointButton, org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.deleteJointButton.text")); // NOI18N
         deleteJointButton.setEnabled(false);
         deleteJointButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -210,7 +210,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel11, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jLabel11.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel11, org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jLabel11.text")); // NOI18N
 
         triallFilePath.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
@@ -218,19 +218,19 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             }
         });
 
-        jBodiesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.jBodiesPanel.border.title"))); // NOI18N
+        jBodiesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jBodiesPanel.border.title"))); // NOI18N
 
         jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(jList2);
 
-        org.openide.awt.Mnemonics.setLocalizedText(addBodyButton, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.addBodyButton.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(addBodyButton, org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.addBodyButton.text")); // NOI18N
         addBodyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addBodyButtonActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(editBodyButton, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.editBodyButton.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(editBodyButton, org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.editBodyButton.text")); // NOI18N
         editBodyButton.setEnabled(false);
         editBodyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -238,7 +238,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(deleteBodyButton, org.openide.util.NbBundle.getMessage(EditJointTaskJPanel.class, "EditJointTaskJPanel.deleteBodyButton.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(deleteBodyButton, org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.deleteBodyButton.text")); // NOI18N
         deleteBodyButton.setEnabled(false);
         deleteBodyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -411,7 +411,7 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int[] sels = jList1.getSelectedIndices();
         OpenSimObject selectedJointTask = (OpenSimObject)jmpJointListModel.get(sels[0]);
-        //System.out.println(selectedJointTask.dump());
+        //System.out.println(selectedBodyTask.dump());
         AddEditJointPanel ejtPanel = new AddEditJointPanel(selectedJointTask);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
@@ -425,31 +425,53 @@ public class EditJointTaskJPanel extends javax.swing.JPanel {
 
     private void addJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJointButtonActionPerformed
         // TODO add your handling code here:
-        OpenSimObject newJointTask  = OpenSimObject.newInstanceOfType("JMPJoint");
+        OpenSimObject newJMPJointTask  = OpenSimObject.newInstanceOfType("JMPJoint");
         // set name to first valid joint in model
-        savedJointTasks.add(newJointTask);
-        AddEditJointPanel ejtPanel = new AddEditJointPanel(newJointTask);
+        savedJointTasks.add(newJMPJointTask);
+        AddEditJointPanel ejtPanel = new AddEditJointPanel(newJMPJointTask);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            //System.out.println(newJointTask.dump());
-            jmpJointListModel.addElement(newJointTask);
-            newJointTask.markAdopted(); //indicate ownership will be transferred so that object is not deleted by gc
-            poJointList.adoptAndAppendValue(newJointTask);
+            //System.out.println(newJMPJointTask.dump());
+            jmpJointListModel.addElement(newJMPJointTask);
+            newJMPJointTask.markAdopted(); //indicate ownership will be transferred so that object is not deleted by gc
+            poJointList.adoptAndAppendValue(newJMPJointTask);
         }
 
     }//GEN-LAST:event_addJointButtonActionPerformed
 
     private void addBodyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBodyButtonActionPerformed
         // TODO add your handling code here:
-        OpenSimObject newBodyTask  = OpenSimObject.newInstanceOfType("JMPBody");
+        OpenSimObject newJMPBodyTask  = OpenSimObject.newInstanceOfType("JMPBody");
+        AddEditJMPBodyPanel ebPanel = new AddEditJMPBodyPanel(newJMPBodyTask);
+        DialogDescriptor dlg = new DialogDescriptor(ebPanel, "Edit Body Task ");
+        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
+        d.setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+        //System.out.println(newJMPJointTask.dump());
+            jmpBodyListModel.addElement(newJMPBodyTask);
+            newJMPBodyTask.markAdopted(); //indicate ownership will be transferred so that object is not deleted by gc
+            poBodyList.adoptAndAppendValue(newJMPBodyTask);
+        }
     }//GEN-LAST:event_addBodyButtonActionPerformed
 
     private void editBodyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBodyButtonActionPerformed
         // TODO add your handling code here:
-        int[] sels = jList1.getSelectedIndices();
+        int[] sels = jList2.getSelectedIndices();
+        OpenSimObject selectedBodyTask = (OpenSimObject)jmpBodyListModel.get(sels[0]);
+        //System.out.println(selectedBodyTask.dump());
+        AddEditJMPBodyPanel ebPanel = new AddEditJMPBodyPanel(selectedBodyTask);
+        DialogDescriptor dlg = new DialogDescriptor(ebPanel, "Edit Body Task ");
+        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
+        d.setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            // Fire model changed event to update list in case name change
+            jmpBodyListModel.set(sels[0], selectedBodyTask);
+        }
     }//GEN-LAST:event_editBodyButtonActionPerformed
 
     private void deleteBodyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBodyButtonActionPerformed
