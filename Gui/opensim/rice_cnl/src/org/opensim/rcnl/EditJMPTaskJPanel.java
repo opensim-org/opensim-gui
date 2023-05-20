@@ -409,16 +409,19 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
     private void editJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJointButtonActionPerformed
         // TODO add your handling code here:
         int[] sels = jList1.getSelectedIndices();
-        OpenSimObject selectedJointTask = (OpenSimObject)jmpJointListModel.get(sels[0]);
-        //System.out.println(selectedBodyTask.dump());
-        AddEditJointPanel ejtPanel = new AddEditJointPanel(selectedJointTask);
+        int idx = sels[0];
+        OpenSimObject selectedJointTask = (OpenSimObject)jmpJointListModel.get(idx);
+        OpenSimObject taskCopyToEdit = selectedJointTask.clone();
+        AddEditJointPanel ejtPanel = new AddEditJointPanel(taskCopyToEdit);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
             // Fire model changed event to update list in case name change
-            jmpJointListModel.set(sels[0], selectedJointTask);
+            poJointList.setValue(idx, taskCopyToEdit);
+            jmpJointListModel.set(idx, taskCopyToEdit);
+            
         }
     }//GEN-LAST:event_editJointButtonActionPerformed
 
@@ -460,16 +463,19 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
     private void editBodyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBodyButtonActionPerformed
         // TODO add your handling code here:
         int[] sels = jList2.getSelectedIndices();
+        int idx = sels[0];
         OpenSimObject selectedBodyTask = (OpenSimObject)jmpBodyListModel.get(sels[0]);
+        OpenSimObject taskCopyToEdit = selectedBodyTask.clone();
         //System.out.println(selectedBodyTask.dump());
-        AddEditJMPBodyPanel ebPanel = new AddEditJMPBodyPanel(selectedBodyTask);
+        AddEditJMPBodyPanel ebPanel = new AddEditJMPBodyPanel(taskCopyToEdit);
         DialogDescriptor dlg = new DialogDescriptor(ebPanel, "Edit Body Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
             // Fire model changed event to update list in case name change
-            jmpBodyListModel.set(sels[0], selectedBodyTask);
+            poBodyList.setValue(idx, taskCopyToEdit);
+            jmpBodyListModel.set(idx, taskCopyToEdit);
         }
     }//GEN-LAST:event_editBodyButtonActionPerformed
 
