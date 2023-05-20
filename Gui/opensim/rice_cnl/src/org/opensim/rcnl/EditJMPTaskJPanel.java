@@ -394,7 +394,6 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
         int[] sels = jList1.getSelectedIndices();
         Vector<Integer> tasksToDelete = new Vector<Integer>();
         for (int i=0; i<sels.length; i++){
-            OpenSimObject selectedJointTask = (OpenSimObject)jmpJointListModel.get(sels[i]);
             tasksToDelete.add(sels[i]);
         }
         // Delete items from jmpJointListModel in reverse order

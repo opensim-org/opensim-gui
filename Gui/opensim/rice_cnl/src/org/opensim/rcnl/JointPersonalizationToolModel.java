@@ -85,12 +85,10 @@ public class JointPersonalizationToolModel {
     }
     
     public PropertyObjectList getJointTaskListAsObjectList() {
-        Vector<OpenSimObject> tasks = new Vector<OpenSimObject>();
         AbstractProperty ap = toolAsObject.getPropertyByName("JMPTaskList");
         PropertyObjectList olist = PropertyObjectList.getAs(ap);
         for (int i=0; i< olist.size(); i++){
             OpenSimObject ithTask = olist.getValue(i);
-            tasks.add(ithTask);
         }
         return olist;
     }
