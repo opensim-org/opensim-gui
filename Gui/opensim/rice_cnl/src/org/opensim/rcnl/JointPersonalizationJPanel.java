@@ -226,7 +226,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
     }// </editor-fold>//GEN-END:initComponents
 
     private void outputModelFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputModelFilePathStateChanged
-        //ikToolModel.getIKTool().setOutputMotionFileName(outputModelFilePath.getFileName());
+        jointPersonalizationToolModel.setOutputModelFile(outputModelFilePath.getFileName());
     }//GEN-LAST:event_outputModelFilePathStateChanged
 
     private void addJMPTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJMPTaskButtonActionPerformed
