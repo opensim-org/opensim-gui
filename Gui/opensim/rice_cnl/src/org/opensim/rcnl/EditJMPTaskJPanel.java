@@ -476,6 +476,19 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
 
     private void deleteBodyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBodyButtonActionPerformed
         // TODO add your handling code here:
+        int[] sels = jList2.getSelectedIndices();
+        Vector<Integer> tasksToDelete = new Vector<Integer>();
+        for (int i=0; i<sels.length; i++){
+            tasksToDelete.add(sels[i]);
+        }
+        // Delete items from jmpJointListModel in reverse order
+        for (int r=tasksToDelete.size(); r >0; r-- ){
+            jmpBodyListModel.remove(tasksToDelete.get(r-1));
+            poBodyList.removeValueAtIndex(tasksToDelete.get(r-1));
+        }
+        // Recreate list model to cleanup
+        jmpBodyListModel= new JMPBodyListModel(poBodyList);
+        jList2.setModel(jmpBodyListModel);
     }//GEN-LAST:event_deleteBodyButtonActionPerformed
 
 
