@@ -252,15 +252,18 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
     private void editJMPTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJMPTaskButtonActionPerformed
         // TODO add your handling code here:
         int[] sels = jJointPersonalizationList.getSelectedIndices();
-        OpenSimObject currentTask = (OpenSimObject)jointPersonalizationTaskListModel.get(sels[0]);
+        int idx = sels[0];
+        OpenSimObject currentTask = (OpenSimObject)jointPersonalizationTaskListModel.get(idx);
+        OpenSimObject taskCopyToEdit = currentTask.clone();
         //System.out.println(currentTask.dump());
-        EditJMPTaskJPanel ejtPanel = new EditJMPTaskJPanel(currentTask);
+        EditJMPTaskJPanel ejtPanel = new EditJMPTaskJPanel(taskCopyToEdit);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One JMP Task ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            jointPersonalizationTaskListModel.set(sels[0], currentTask);    // Force refresh on name change
+            jointPersonalizationTaskListModel.set(idx, taskCopyToEdit); 
+            jointPersonalizationToolModel.getJointTaskListAsObjectList().setValue(idx, taskCopyToEdit);
         }
     }//GEN-LAST:event_editJMPTaskButtonActionPerformed
 
