@@ -242,8 +242,9 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
             AbstractProperty ap = jointPersonalizationToolModel.getToolAsObject().getPropertyByName("JMPTaskList");
             //System.out.println(ap.getTypeName()+" "+ap.isListProperty()+" ");
             PropertyObjectList.updAs(ap).adoptAndAppendValue(jmpTask);
-            
-            //OpenSimObject obj = ap.getValueAsObject();
+            PropertyObjectList poList = jointPersonalizationToolModel.getJointTaskListAsObjectList();
+            jointPersonalizationTaskListModel = new JMPTaskListModel(poList);
+            jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
            
         }
     }//GEN-LAST:event_addJMPTaskButtonActionPerformed
@@ -272,9 +273,10 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
             //OpenSimObject selectedJointTask = (OpenSimObject)jJointPersonalizationList.get(sels[i]);
             tasksToDelete.add(sels[i]);
         }
+        //jJointPersonalizationList
         // Delete items from jmpJointListModel in reverse order
         for (int r=tasksToDelete.size(); r >0; r-- ){
-            jJointPersonalizationList.remove(tasksToDelete.get(r-1));
+            jointPersonalizationTaskListModel.remove(tasksToDelete.get(r-1));
             poList.removeValueAtIndex(tasksToDelete.get(r-1));
         }
         // Recreate list model to cleanup
