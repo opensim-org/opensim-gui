@@ -98,6 +98,9 @@
           <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="AddEditJMPBodyPanel.jCheckBoxScale.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxScaleActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JCheckBox" name="jCheckBoxMoveMarkers">
       <Properties>

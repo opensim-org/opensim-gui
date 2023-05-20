@@ -94,6 +94,11 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxScale, org.openide.util.NbBundle.getMessage(AddEditJMPBodyPanel.class, "AddEditJMPBodyPanel.jCheckBoxScale.text")); // NOI18N
+        jCheckBoxScale.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxScaleActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxMoveMarkers, org.openide.util.NbBundle.getMessage(AddEditJMPBodyPanel.class, "AddEditJMPBodyPanel.jCheckBoxMoveMarkers.text")); // NOI18N
         jCheckBoxMoveMarkers.addActionListener(new java.awt.event.ActionListener() {
@@ -162,6 +167,11 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         updateTask();
     }//GEN-LAST:event_jComboBoxAxisActionPerformed
+
+    private void jCheckBoxScaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxScaleActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxScaleActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
