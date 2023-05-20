@@ -60,9 +60,9 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
         primayAxisProp = jmpBodyTask.getPropertyByName("primary_body_axis");
         primary_body_axis = PropertyStringList.getAs(primayAxisProp).getValue(0);
         
-        
         populateUiFromObject();
         initializing = false;
+        updateTask();
 
     }
 
