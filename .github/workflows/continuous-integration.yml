@@ -33,6 +33,9 @@ jobs:
     - name: Install NumPy 
       run: pip3.8 install numpy==1.20.2
 
+    - name: Install SWIG
+      run: choco install swig --version 4.0.2 --yes --limit-output --allow-downgrade
+
     - name: Set up JDK 1.8
       uses: actions/setup-java@v3
       with:
@@ -79,7 +82,7 @@ jobs:
         # default CMAKE_CXX_FLAGS.
         # https://msdn.microsoft.com/en-us/library/19z1t1wy.aspx
         $env:CXXFLAGS = "/W0"
-        cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 16 2019" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DOPENSIM_WITH_TROPTER:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 16 2019" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DOPENSIM_WITH_TROPTER:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DPython3_ROOT_DIR=C:\hostedtoolcache\windows\Python\3.8.10\x64
         $env:CXXFLAGS = ""
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2 
