@@ -31,7 +31,7 @@ jobs:
         python-version: '3.8'
         
     - name: Install NumPy 
-      run: pip3.8 install numpy==1.20.2
+      run: python3 -m pip install numpy==1.20.2
 
     - name: Install SWIG
       run: choco install swig --version 4.0.2 --yes --limit-output --allow-downgrade
@@ -72,7 +72,7 @@ jobs:
         key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
 
     - name: Build opensim-core-dependencies
-      # if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_deps
         mkdir $env:GITHUB_WORKSPACE\\build_deps
@@ -108,8 +108,7 @@ jobs:
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
         chdir $env:GITHUB_WORKSPACE\\build_core
-        $env:CXXFLAGS = "/W0"
-        cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DPython3_ROOT_DIR=C:\hostedtoolcache\windows\Python\3.8.10\x64 -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
+        cmake -E env CXXFLAGS= "/WX" $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DPython3_ROOT_DIR=C:\hostedtoolcache\windows\Python\3.8.10\x64 -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2
         cmake --install .
