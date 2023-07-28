@@ -320,7 +320,7 @@ jobs:
         wget https://github.com/swig/swig/archive/refs/tags/v4.1.1.tar.gz
         tar xzf v4.1.1.tar.gz && cd swig-4.1.1
         sh autogen.sh && ./configure --prefix=$HOME/swig --disable-ccache
-        make && make -j4 install  &&  rmdir ~/swig-source
+        make && make -j4 install  &&  rmdir -rf ~/swig-source
         
     - name: Set up JDK 1.8
       uses: actions/setup-java@v3
