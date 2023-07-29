@@ -320,7 +320,7 @@ jobs:
         wget https://github.com/swig/swig/archive/refs/tags/v4.1.1.tar.gz
         tar xzf v4.1.1.tar.gz && cd swig-4.1.1
         sh autogen.sh && ./configure --prefix=$HOME/swig --disable-ccache
-        make && make -j4 install  &&  rm -r ~/swig-source
+        make && make -j4 install  &&  rm -rf ~/swig-source
         
     - name: Set up JDK 1.8
       uses: actions/setup-java@v3
@@ -388,7 +388,7 @@ jobs:
         cmake . -LAH
         cmake --build . --config Release 
         cmake --install . 
-        rm -r ../opensim-core
+        rm -rf ../opensim-core
 
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
