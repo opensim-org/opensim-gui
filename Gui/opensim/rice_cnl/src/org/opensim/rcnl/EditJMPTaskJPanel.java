@@ -46,10 +46,10 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
 
     EditJMPTaskJPanel(OpenSimObject jointPersonalizationTask) {
         taskToEdit = jointPersonalizationTask;
-        AbstractProperty ap = jointPersonalizationTask.getPropertyByName("JMPJointList");
+        AbstractProperty ap = jointPersonalizationTask.getPropertyByName("JMPJointSet");
         poJointList = PropertyObjectList.updAs(ap);
         jmpJointListModel= new JMPJointListModel(poJointList);
-        poBodyList = PropertyObjectList.updAs(jointPersonalizationTask.getPropertyByName("JMPBodyList"));
+        poBodyList = PropertyObjectList.updAs(jointPersonalizationTask.getPropertyByName("JMPBodySet"));
         jmpBodyListModel = new JMPBodyListModel(poBodyList);
         initComponents();
         jList1.setModel(jmpJointListModel);
