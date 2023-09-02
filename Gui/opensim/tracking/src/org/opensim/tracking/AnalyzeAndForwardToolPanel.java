@@ -152,7 +152,9 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
       // File chooser settings
       outputDirectory.setIncludeOpenButton(true);
       outputDirectory.setDirectoriesOnly(true);
+      outputDirectory.setSaveMode(true);
       outputDirectory.setCheckIfFileExists(false);
+      outputDirectory.setDialogTitle("Choose Output Directory");
 
       setSettingsFileDescription("Settings file for "+modeName);
 

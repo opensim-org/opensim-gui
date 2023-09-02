@@ -2,7 +2,7 @@
 
 function err_unsupported_env {
     printf "\r  [\033[0;31mERROR:\033[0m] Your distro/release is not supported by this script\n"
-    printf "  Ubuntu 18.04 LTS is currently the only Linux distribution that is tested \
+    printf "  Ubuntu >=18.04 LTS is currently the only Linux distribution that is tested \
 against, however the OpenSim GUI will likely run on other distributions and/or \
 releases. See the https://github.com/opensim-org/opensim-gui for more \
 information.\n"
@@ -12,7 +12,7 @@ information.\n"
 function usage {
   echo -n "INSTALL [OPTIONS]...
 
-Install the OpenSim GUI. Ubuntu 18.04 LTS is the only tested Linux. Manual \
+Install the OpenSim GUI. Ubuntu >=18.04 LTS is the only tested Linux. Manual \
 installation on other systems may be possible; see \
 https://github.com/opensim-org/opensim-gui for more information.
 
@@ -90,27 +90,47 @@ else
     err_unsupported_env
 fi
 
-if [[ $OS == "Ubuntu" ]] && [[ $VER == "18.04" ]]; then
+MIN_UBUNTU_VER="18"
+MIN_DEBIAN_VER="10"
 
-    [[ $v == 1 ]] && echo "Installing Java..."
-    sudo apt install -qqqq -y openjdk-8-jre
+# Retrieve group of current user.
+GROUP=$(id -gn)
 
+VER_SPLIT=(${VER//./ })
+VER_MAJOR=${VER_SPLIT[0]}
+
+# Check if OS is Ubuntu or Debian with given minimum versions.
+if ( [[ $OS == *"Ubuntu"* ]] && (( $MIN_UBUNTU_VER <= $VER_MAJOR )) ) || ( [[ $OS == *"Debian"* ]] && (( $MIN_DEBIAN_VER <= $VER_MAJOR )) ); then    
+
+    # Specific to Ubuntu. Install openjdk-8-jre. In Debian, we installed it with temurin8.
+    if [[ $OS == *"Ubuntu"* ]]; then
+        [[ $v == 1 ]] && echo "Installing Java..."
+        sudo apt install -qqqq -y openjdk-8-jre
+    fi
+    
     [[ $v == 1 ]] && echo "Testing for system LAPACK/BLAS..."
-    if ! (ldconfig -p | grep -q "libblas|liblapack"); then
+    if ! (sudo ldconfig -p | grep -q "libblas|liblapack"); then
         [[ $v == 1 ]] && echo "  Installing liblapack3..."
         sudo apt install -qqqq -y liblapack3
     fi
 
     [[ $v == 1 ]] && echo "Testing for libgconf..."
-    if ! (ldconfig -p | grep -q "libgconf"); then
+    if ! (sudo ldconfig -p | grep -q "libgconf"); then
         [[ $v == 1 ]] && echo "  Installing libgconf..."
         sudo apt install -qqqq -y libgconf-2-4
     fi
 
-    [[ $v == 1 ]] && echo "Installing OpenSim GUI to $installPrefix, owned by $USER..."
+    [[ $v == 1 ]] && echo "Installing OpenSim GUI to $installPrefix, owned by $USER, belonging to $GROUP..."
     sudo mkdir -p $installPrefix
-    sudo chown -R $USER:$USER $installPrefix
+    sudo chown -R $USER:$GROUP $installPrefix
     cp -R $SCRIPTDIR/* $installPrefix
+
+    # JDK home is extracted by getting java home from JDK properties.
+    JDK_HOME=$(java -XshowSettings:properties -version 2>&1 > /dev/null | grep 'java.home')
+    # Then, we extract the value from the resulting string (java.home = VALUE).
+    JDK_HOME="${JDK_HOME##* }"
+    # Since this gives the path to the jre, we need to do dirname to get the previous path, which is the path to the jdk.
+    JDK_HOME=$(dirname $JDK_HOME)
 
     [[ $v == 1 ]] && echo "Adding OpenSim to list of desktop applications..."
     echo "[Desktop Entry]
@@ -120,10 +140,10 @@ Name=OpenSim
 Comment=OpenSim is an open source software for neuromusculoskeletal modeling, simulation \
 and analysis.
 Path=$installPrefix
-Exec=$installPrefix/bin/OpenSim
+Exec=bash $installPrefix/bin/opensim --jdkhome $JDK_HOME
 Icon=opensim
 Terminal=false
-Categories=Science;Education" | sudo tee /usr/share/applications/opensim.desktop > /dev/null
+Categories=Science;Education;" | sudo tee /usr/share/applications/opensim.desktop > /dev/null
     sudo cp OpenSimLogoWhiteNoText.png /usr/share/pixmaps/opensim.png
 
     [[ $v == 1 ]] && echo "Installing opensim-core commands..."
@@ -136,5 +156,3 @@ Categories=Science;Education" | sudo tee /usr/share/applications/opensim.desktop
 else
     err_unsupported_env
 fi
-
-

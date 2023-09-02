@@ -211,7 +211,7 @@ final public class ExplorerTopComponent extends TopComponent
             if (arg instanceof ObjectSelectedEvent) {
                 ObjectSelectedEvent ev = (ObjectSelectedEvent)arg;
                 Node selectedObjectNode = null;
-                selectNodeForSelectedObject(ev.getSelectedObject());
+                //selectNodeForSelectedObject(ev.getSelectedObject());
             }
             return;
          }
