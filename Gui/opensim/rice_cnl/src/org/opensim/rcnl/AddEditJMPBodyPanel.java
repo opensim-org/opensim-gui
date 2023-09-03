@@ -39,7 +39,9 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
     AbstractProperty moveMarkersProp;
     AbstractProperty primayAxisProp;
     boolean scale_bod = false;
-    boolean move_markers = false;
+    boolean move_markers_x = false;
+    boolean move_markers_y = false;
+    boolean move_markers_z = false;
     String primary_body_axis = " ";
     String[] axisNames = new String[] { "None", "x", "y", "z" };
     /**
@@ -55,10 +57,9 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
         scale_bod = PropertyBoolList.getAs(toScaleProp).getValue(0);
         
         moveMarkersProp = jmpBodyTask.getPropertyByName("move_markers");
-        move_markers = PropertyBoolList.getAs(moveMarkersProp).getValue(0);
-        
-        primayAxisProp = jmpBodyTask.getPropertyByName("primary_body_axis");
-        primary_body_axis = PropertyStringList.getAs(primayAxisProp).getValue(0);
+        move_markers_x = PropertyBoolList.getAs(moveMarkersProp).getValue(0);
+        move_markers_y = PropertyBoolList.getAs(moveMarkersProp).getValue(1);
+        move_markers_z = PropertyBoolList.getAs(moveMarkersProp).getValue(2);
         
         populateUiFromObject();
         initializing = false;
@@ -78,9 +79,10 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jComboBoxBodies = new javax.swing.JComboBox<>();
         jCheckBoxScale = new javax.swing.JCheckBox();
-        jCheckBoxMoveMarkers = new javax.swing.JCheckBox();
-        jLabel10 = new javax.swing.JLabel();
-        jComboBoxAxis = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jCheckBoxXDir1 = new javax.swing.JCheckBox();
+        jCheckBoxXDir2 = new javax.swing.JCheckBox();
+        jCheckBoxXDir3 = new javax.swing.JCheckBox();
 
         setBorder(javax.swing.BorderFactory.createTitledBorder(null, org.openide.util.NbBundle.getMessage(AddEditJMPBodyPanel.class, "AddEditJMPBodyPanel.border.title"), javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION)); // NOI18N
 
@@ -100,19 +102,26 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxMoveMarkers, org.openide.util.NbBundle.getMessage(AddEditJMPBodyPanel.class, "AddEditJMPBodyPanel.jCheckBoxMoveMarkers.text")); // NOI18N
-        jCheckBoxMoveMarkers.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(AddEditJMPBodyPanel.class, "AddEditJMPBodyPanel.jLabel2.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxXDir1, org.openide.util.NbBundle.getMessage(AddEditJMPBodyPanel.class, "AddEditJMPBodyPanel.jCheckBoxXDir1.text")); // NOI18N
+        jCheckBoxXDir1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxMoveMarkersActionPerformed(evt);
+                jCheckBoxXDir1ActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel10, org.openide.util.NbBundle.getMessage(AddEditJMPBodyPanel.class, "AddEditJMPBodyPanel.jLabel10.text")); // NOI18N
-
-        jComboBoxAxis.setModel(new DefaultComboBoxModel(axisNames));
-        jComboBoxAxis.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxXDir2, org.openide.util.NbBundle.getMessage(AddEditJMPBodyPanel.class, "AddEditJMPBodyPanel.jCheckBoxXDir2.text")); // NOI18N
+        jCheckBoxXDir2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxAxisActionPerformed(evt);
+                jCheckBoxXDir2ActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxXDir3, org.openide.util.NbBundle.getMessage(AddEditJMPBodyPanel.class, "AddEditJMPBodyPanel.jCheckBoxXDir3.text")); // NOI18N
+        jCheckBoxXDir3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxXDir3ActionPerformed(evt);
             }
         });
 
@@ -127,12 +136,18 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxBodies, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jCheckBoxScale)
-                    .addComponent(jCheckBoxMoveMarkers)
+                    .addComponent(jLabel2)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBoxAxis, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(80, 80, 80))
+                        .addGap(80, 80, 80)
+                        .addComponent(jCheckBoxXDir1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBoxXDir3)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(10, 10, 10)
+                    .addComponent(jCheckBoxXDir2)
+                    .addContainerGap(406, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,13 +158,18 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
                     .addComponent(jComboBoxBodies, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jCheckBoxScale)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jCheckBoxMoveMarkers)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(jComboBoxAxis, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxXDir1)
+                    .addComponent(jCheckBoxXDir3))
+                .addGap(17, 17, 17))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(150, Short.MAX_VALUE)
+                    .addComponent(jCheckBoxXDir2)
+                    .addGap(18, 18, 18)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -158,29 +178,34 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
         updateTask();
     }//GEN-LAST:event_jComboBoxBodiesActionPerformed
 
-    private void jCheckBoxMoveMarkersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMoveMarkersActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jCheckBoxMoveMarkersActionPerformed
-
-    private void jComboBoxAxisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxAxisActionPerformed
-        // TODO add your handling code here:
-        updateTask();
-    }//GEN-LAST:event_jComboBoxAxisActionPerformed
-
     private void jCheckBoxScaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxScaleActionPerformed
         // TODO add your handling code here:
         updateTask();
     }//GEN-LAST:event_jCheckBoxScaleActionPerformed
 
+    private void jCheckBoxXDir2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxXDir2ActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxXDir2ActionPerformed
+
+    private void jCheckBoxXDir1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxXDir1ActionPerformed
+        // TODO add your handling code here:
+        updateTask();
+    }//GEN-LAST:event_jCheckBoxXDir1ActionPerformed
+
+    private void jCheckBoxXDir3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxXDir3ActionPerformed
+        updateTask();        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxXDir3ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBoxMoveMarkers;
     private javax.swing.JCheckBox jCheckBoxScale;
-    private javax.swing.JComboBox<String> jComboBoxAxis;
+    private javax.swing.JCheckBox jCheckBoxXDir1;
+    private javax.swing.JCheckBox jCheckBoxXDir2;
+    private javax.swing.JCheckBox jCheckBoxXDir3;
     private javax.swing.JComboBox<String> jComboBoxBodies;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 
     private void updateTask() {
@@ -189,11 +214,10 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
         
         jmpTask.setName(((Body) jComboBoxBodies.getSelectedItem()).getName());
         PropertyBoolList.getAs(toScaleProp).setValue(0, jCheckBoxScale.isSelected());
-        PropertyBoolList.getAs(moveMarkersProp).setValue(0, jCheckBoxMoveMarkers.isSelected());
-        String axisSelection = (String) jComboBoxAxis.getSelectedItem();
-        if (axisSelection.equalsIgnoreCase("None"))
-            axisSelection = " ";
-        PropertyStringList.getAs(primayAxisProp).setValue(0, axisSelection);
+        PropertyBoolList.getAs(moveMarkersProp).setValue(0, jCheckBoxXDir1.isSelected());
+        PropertyBoolList.getAs(moveMarkersProp).setValue(1, jCheckBoxXDir2.isSelected());
+        PropertyBoolList.getAs(moveMarkersProp).setValue(2, jCheckBoxXDir3.isSelected());
+
         //System.out.println(jmpTask.dump());
     }
 
@@ -207,12 +231,9 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
             cbm.setSelectedItem(model.getBodySet().get(jmpTask.getName()));
         
         jCheckBoxScale.setSelected(scale_bod);
-        jCheckBoxMoveMarkers.setSelected(move_markers);
-        String selAxis = PropertyStringList.getAs(primayAxisProp).getValue();
-        int indexInModel =((DefaultComboBoxModel)jComboBoxAxis.getModel()).getIndexOf(selAxis);
-        if (indexInModel<=3 && indexInModel >= 0)
-            jComboBoxAxis.setSelectedIndex(indexInModel);
-        else
-            jComboBoxAxis.setSelectedIndex(0); // None if not found
+        jCheckBoxXDir1.setSelected(move_markers_x);
+        jCheckBoxXDir2.setSelected(move_markers_y);
+        jCheckBoxXDir3.setSelected(move_markers_z);
+
     }
 }

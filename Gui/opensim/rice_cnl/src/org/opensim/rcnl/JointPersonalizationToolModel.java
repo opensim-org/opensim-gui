@@ -30,18 +30,25 @@ public class JointPersonalizationToolModel {
     private int maxFunctionEvaluations = 100;
     private String modelName;
     private Model model;
-    private  PropertyStringList propModelFileString;
+    private  PropertyStringList propOutputModelFileString;
+    private PropertyStringList propInputModelFileString;
     
     public JointPersonalizationToolModel(Model model) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
         toolAsObject = OpenSimObject.newInstanceOfType("JointModelPersonalizationTool");
         this.model = model;
         modelName = model.getName();
-        AbstractProperty propModelFile = toolAsObject.updPropertyByName("output_model_file");
-        propModelFileString = PropertyStringList.getAs(propModelFile);
-        if (propModelFileString.size()==0 || propModelFileString.getValue(0).isEmpty()){
+        AbstractProperty propOutputModelFile = toolAsObject.updPropertyByName("output_model_file");
+        propOutputModelFileString = PropertyStringList.getAs(propOutputModelFile);
+        if (propOutputModelFileString.size()==0 || propOutputModelFileString.getValue(0).isEmpty()){
              String proposedName = model.getInputFileName().replace(".osim", "_JMP.osim");
-             propModelFileString.setValue(0, proposedName);
+             propOutputModelFileString.setValue(0, proposedName);
+        }
+        AbstractProperty propInputModelFile = toolAsObject.updPropertyByName("input_model_file");
+        propInputModelFileString = PropertyStringList.getAs(propInputModelFile);
+        if (propInputModelFileString.size()==0 || propInputModelFileString.getValue(0).isEmpty()){
+             String proposedName = model.getInputFileName();
+             propInputModelFileString.setValue(0, proposedName);
         }
     }
     public JointPersonalizationToolModel(Model model, String fileXml) {
@@ -50,10 +57,14 @@ public class JointPersonalizationToolModel {
         this.model = model;
         modelName = model.getName();
         AbstractProperty prop = toolAsObject.updPropertyByName("output_model_file");
-        propModelFileString = PropertyStringList.getAs(prop);
-        if (propModelFileString.size()==0|| propModelFileString.getValue(0).isEmpty()){
+        propOutputModelFileString = PropertyStringList.getAs(prop);
+        if (propOutputModelFileString.size()==0|| propOutputModelFileString.getValue(0).isEmpty()){
              String proposedName = model.getInputFileName().replace(".osim", "_perjoint.osim");
-             propModelFileString.setValue(0, proposedName);
+             propOutputModelFileString.setValue(0, proposedName);
+        }
+        if (propInputModelFileString.size()==0 || propInputModelFileString.getValue(0).isEmpty()){
+             String proposedName = model.getInputFileName();
+             propInputModelFileString.setValue(0, proposedName);
         }
     }
 
@@ -65,10 +76,10 @@ public class JointPersonalizationToolModel {
         return modelName;
     }
     String getOutputModelFile() {
-        return propModelFileString.getValue(0);
+        return propOutputModelFileString.getValue(0);
     }
     void setOutputModelFile(String newFileName) {
-        propModelFileString.setValue(newFileName);
+        propOutputModelFileString.setValue(newFileName);
     }
     /**
      * @return the toolAsObject

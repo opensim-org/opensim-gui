@@ -42,7 +42,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
        listSelectionModel = jJointPersonalizationList.getSelectionModel();
        listSelectionModel.addListSelectionListener(
                             new ListSelectionHandler());
-       currentModelNameTextField.setText(jointPersonalizationToolModel.getModelName());
+       currentModelFileTextField.setText(model.getInputFileName());
        outputModelFilePath.setFileName(jointPersonalizationToolModel.getOutputModelFile());
        setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
     }
@@ -58,7 +58,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
 
         inputModelPanel = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        currentModelNameTextField = new javax.swing.JTextField();
+        currentModelFileTextField = new javax.swing.JTextField();
         outputPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         outputModelFilePath = new org.opensim.swingui.FileTextFieldAndChooser();
@@ -74,9 +74,9 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel13, org.openide.util.NbBundle.getMessage(JointPersonalizationJPanel.class, "JointPersonalizationJPanel.jLabel13.text")); // NOI18N
 
-        currentModelNameTextField.setEditable(false);
-        currentModelNameTextField.setToolTipText(org.openide.util.NbBundle.getMessage(JointPersonalizationJPanel.class, "JointPersonalizationJPanel.currentModelNameTextField.toolTipText")); // NOI18N
-        currentModelNameTextField.setMinimumSize(new java.awt.Dimension(3, 20));
+        currentModelFileTextField.setEditable(false);
+        currentModelFileTextField.setToolTipText(org.openide.util.NbBundle.getMessage(JointPersonalizationJPanel.class, "JointPersonalizationJPanel.currentModelFileTextField.toolTipText")); // NOI18N
+        currentModelFileTextField.setMinimumSize(new java.awt.Dimension(3, 20));
 
         javax.swing.GroupLayout inputModelPanelLayout = new javax.swing.GroupLayout(inputModelPanel);
         inputModelPanel.setLayout(inputModelPanelLayout);
@@ -85,8 +85,8 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
             .addGroup(inputModelPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel13)
-                .addGap(38, 38, 38)
-                .addComponent(currentModelNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(currentModelFileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         inputModelPanelLayout.setVerticalGroup(
@@ -94,7 +94,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
             .addGroup(inputModelPanelLayout.createSequentialGroup()
                 .addGroup(inputModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(currentModelNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(currentModelFileTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -314,7 +314,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
        listSelectionModel.addListSelectionListener( new ListSelectionHandler());
        //initComponents(); Panel already constructed, no need to re-initComponents
        jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
-       currentModelNameTextField.setText(jointPersonalizationToolModel.getModelName());
+       currentModelFileTextField.setText(jointPersonalizationToolModel.getModelName());
        outputModelFilePath.setFileName(jointPersonalizationToolModel.getOutputModelFile());
        setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
     }
@@ -327,7 +327,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addJointTaskButton;
-    private javax.swing.JTextField currentModelNameTextField;
+    private javax.swing.JTextField currentModelFileTextField;
     private javax.swing.JButton deleteJointTaskButton;
     private javax.swing.JButton editJointTaskButton;
     private javax.swing.JPanel inputModelPanel;
