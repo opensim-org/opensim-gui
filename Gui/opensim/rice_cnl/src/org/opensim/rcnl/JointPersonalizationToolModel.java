@@ -62,6 +62,8 @@ public class JointPersonalizationToolModel {
              String proposedName = model.getInputFileName().replace(".osim", "_perjoint.osim");
              propOutputModelFileString.setValue(0, proposedName);
         }
+        prop = toolAsObject.updPropertyByName("input_model_file");
+        propInputModelFileString = PropertyStringList.getAs(prop);
         if (propInputModelFileString.size()==0 || propInputModelFileString.getValue(0).isEmpty()){
              String proposedName = model.getInputFileName();
              propInputModelFileString.setValue(0, proposedName);
@@ -74,6 +76,9 @@ public class JointPersonalizationToolModel {
      */
     public String getModelName() {
         return modelName;
+    }
+    public String getInputModelFile() {
+        return propInputModelFileString.getValue(0);
     }
     String getOutputModelFile() {
         return propOutputModelFileString.getValue(0);

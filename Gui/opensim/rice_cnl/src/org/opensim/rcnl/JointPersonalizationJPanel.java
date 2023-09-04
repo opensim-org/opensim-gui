@@ -314,7 +314,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
        listSelectionModel.addListSelectionListener( new ListSelectionHandler());
        //initComponents(); Panel already constructed, no need to re-initComponents
        jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
-       currentModelFileTextField.setText(jointPersonalizationToolModel.getModelName());
+       currentModelFileTextField.setText(jointPersonalizationToolModel.getInputModelFile());
        outputModelFilePath.setFileName(jointPersonalizationToolModel.getOutputModelFile());
        setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
     }
