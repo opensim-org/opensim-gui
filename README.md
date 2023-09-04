@@ -111,6 +111,14 @@ Past funding includes the following grants and contracts:
  - United States National Institutes of Health (NIH)
     - Simulation of Biological Structures (Simbios; U54 GM072970)
     - Simulation in Rehabilitation Research (NCSRR; R24 HD065690, P2C HD065690)
-    - Mobilize Center (U54 EB020405)
+    - Mobilize Center (U54 EB020405)opensim64 --reload "C:/OpenSim 4.5-2023-08-23-fc5ce25/update/downloads/org-opensim-rcnl.jar"
  - United States Defense Advanced Research Projects Agency (DARPA)
     - Warrior Web (W911QX-12-C-0018)
+  
+## Rice RCNL Plugin installation into generic OpenSim distribtion
+- Package the netbeans module as a jar file (Rught mouse click on rice_rcnl module in netbeans and choose Properties to see where the jar file will be created, it will have the name org-opensim-rcnl.jar)
+- In the opensim installation folder type:
+- "opensim64 --reload {full_path_to_jar_file}"
+- The previous step will install the GUI/menus/dialogs into the OpenSim application.
+- Install the C++ plugin into the plugins/ folder and load it.
+- Now you're ready to use the Model Personalization pipeline.
