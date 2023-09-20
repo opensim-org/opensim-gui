@@ -10,13 +10,13 @@ package org.opensim.modeling;
 
 /**
  * A class implementing a PathSpring. The path of the PathSpring is<br>
- * determined by a GeometryPath object. A PathSpring is a massless Force<br>
- * element which applies tension along a path connected to bodies and can wrap<br>
- * over surfaces.  The tension is proportional to its stretch beyond its<br>
- * resting length and the amount of dissipation scales with amount of stretch,<br>
- * such that tension = (K*s)*(1+D*ldot) where stretch, s = l-lo for l &gt; lo, and <br>
- * 0 otherwise. l is the path length of the spring and lo is its rest length.<br>
- * K is the linear stiffness and D is the dissipation factor.<br>
+ * determined by an object derived from AbstractPath. A PathSpring is a<br>
+ * massless Force element which applies tension along a path connected to bodies<br>
+ * and can wrap over surfaces.  The tension is proportional to its stretch<br>
+ * beyond its resting length and the amount of dissipation scales with amount of<br>
+ * stretch, such that tension = (K*s)*(1+D*ldot) where stretch, s = l-lo for<br>
+ * l &gt; lo, and 0 otherwise. l is the path length of the spring and lo is its<br>
+ * rest length. K is the linear stiffness and D is the dissipation factor.<br>
  * When l &lt; lo the spring applies no tension to the bodies and considered<br>
  * to be slack.<br>
  * <br>
@@ -192,40 +192,40 @@ public class PathSpring extends Force {
     opensimSimulationJNI.PathSpring_set_dissipation__SWIG_1(swigCPtr, this, value);
   }
 
-  public void copyProperty_GeometryPath(PathSpring source) {
-    opensimSimulationJNI.PathSpring_copyProperty_GeometryPath(swigCPtr, this, PathSpring.getCPtr(source), source);
+  public void copyProperty_path(PathSpring source) {
+    opensimSimulationJNI.PathSpring_copyProperty_path(swigCPtr, this, PathSpring.getCPtr(source), source);
   }
 
-  public GeometryPath get_GeometryPath(int i) {
-    return new GeometryPath(opensimSimulationJNI.PathSpring_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+  public AbstractPath get_path(int i) {
+    return new AbstractPath(opensimSimulationJNI.PathSpring_get_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public GeometryPath upd_GeometryPath(int i) {
-    return new GeometryPath(opensimSimulationJNI.PathSpring_upd_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+  public AbstractPath upd_path(int i) {
+    return new AbstractPath(opensimSimulationJNI.PathSpring_upd_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_GeometryPath(int i, GeometryPath value) {
-    opensimSimulationJNI.PathSpring_set_GeometryPath__SWIG_0(swigCPtr, this, i, GeometryPath.getCPtr(value), value);
+  public void set_path(int i, AbstractPath value) {
+    opensimSimulationJNI.PathSpring_set_path__SWIG_0(swigCPtr, this, i, AbstractPath.getCPtr(value), value);
   }
 
-  public int append_GeometryPath(GeometryPath value) {
-    return opensimSimulationJNI.PathSpring_append_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(value), value);
+  public int append_path(AbstractPath value) {
+    return opensimSimulationJNI.PathSpring_append_path(swigCPtr, this, AbstractPath.getCPtr(value), value);
   }
 
-  public void constructProperty_GeometryPath(GeometryPath initValue) {
-    opensimSimulationJNI.PathSpring_constructProperty_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(initValue), initValue);
+  public void constructProperty_path(AbstractPath initValue) {
+    opensimSimulationJNI.PathSpring_constructProperty_path(swigCPtr, this, AbstractPath.getCPtr(initValue), initValue);
   }
 
-  public GeometryPath get_GeometryPath() {
-    return new GeometryPath(opensimSimulationJNI.PathSpring_get_GeometryPath__SWIG_1(swigCPtr, this), false);
+  public AbstractPath get_path() {
+    return new AbstractPath(opensimSimulationJNI.PathSpring_get_path__SWIG_1(swigCPtr, this), false);
   }
 
-  public GeometryPath upd_GeometryPath() {
-    return new GeometryPath(opensimSimulationJNI.PathSpring_upd_GeometryPath__SWIG_1(swigCPtr, this), false);
+  public AbstractPath upd_path() {
+    return new AbstractPath(opensimSimulationJNI.PathSpring_upd_path__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_GeometryPath(GeometryPath value) {
-    opensimSimulationJNI.PathSpring_set_GeometryPath__SWIG_1(swigCPtr, this, GeometryPath.getCPtr(value), value);
+  public void set_path(AbstractPath value) {
+    opensimSimulationJNI.PathSpring_set_path__SWIG_1(swigCPtr, this, AbstractPath.getCPtr(value), value);
   }
 
   public void set_has_output_length(boolean value) {
@@ -314,15 +314,26 @@ public class PathSpring extends Force {
   }
 
   /**
-   *  Access the GeometryPath to update connection points and<br>
-   *         specify wrap objects the path can interact with. 
+   *  get/set the path object 
    */
-  public GeometryPath getGeometryPath() {
-    return new GeometryPath(opensimSimulationJNI.PathSpring_getGeometryPath(swigCPtr, this), false);
+  public AbstractPath updPath() {
+    return new AbstractPath(opensimSimulationJNI.PathSpring_updPath(swigCPtr, this), false);
+  }
+
+  public AbstractPath getPath() {
+    return new AbstractPath(opensimSimulationJNI.PathSpring_getPath(swigCPtr, this), false);
   }
 
   public GeometryPath updGeometryPath() {
     return new GeometryPath(opensimSimulationJNI.PathSpring_updGeometryPath(swigCPtr, this), false);
+  }
+
+  public GeometryPath getGeometryPath() {
+    return new GeometryPath(opensimSimulationJNI.PathSpring_getGeometryPath(swigCPtr, this), false);
+  }
+
+  public boolean hasVisualPath() {
+    return opensimSimulationJNI.PathSpring_hasVisualPath(swigCPtr, this);
   }
 
   /**

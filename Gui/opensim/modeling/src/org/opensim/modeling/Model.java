@@ -808,6 +808,30 @@ public class Model extends ModelComponent {
     return opensimSimulationJNI.Model__has_output_potential_energy_get(swigCPtr, this);
   }
 
+  public void set_has_output_momentum(boolean value) {
+    opensimSimulationJNI.Model__has_output_momentum_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_momentum() {
+    return opensimSimulationJNI.Model__has_output_momentum_get(swigCPtr, this);
+  }
+
+  public void set_has_output_angular_momentum(boolean value) {
+    opensimSimulationJNI.Model__has_output_angular_momentum_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_angular_momentum() {
+    return opensimSimulationJNI.Model__has_output_angular_momentum_get(swigCPtr, this);
+  }
+
+  public void set_has_output_linear_momentum(boolean value) {
+    opensimSimulationJNI.Model__has_output_linear_momentum_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_linear_momentum() {
+    return opensimSimulationJNI.Model__has_output_linear_momentum_get(swigCPtr, this);
+  }
+
   /**
    *  Default constructor creates a %Model containing only the Ground frame<br>
    *     and a set of default properties. 
@@ -1637,39 +1661,86 @@ public class Model extends ModelComponent {
     return new SimbodyEngine(opensimSimulationJNI.Model_updSimbodyEngine(swigCPtr, this), false);
   }
 
+  /**
+   * Compute the derivatives of the generalized coordinates and speeds.
+   */
   public void computeStateVariableDerivatives(State s) {
     opensimSimulationJNI.Model_computeStateVariableDerivatives(swigCPtr, this, State.getCPtr(s), s);
   }
 
+  /**
+   * Get the total mass of the model.<br>
+   * <br>
+   * @return the mass of the model.
+   */
   public double getTotalMass(State s) {
     return opensimSimulationJNI.Model_getTotalMass(swigCPtr, this, State.getCPtr(s), s);
   }
 
+  /**
+   * Get the whole-body inertia of the model about the center of mass,<br>
+   * expressed in the Ground frame.
+   */
   public Inertia getInertiaAboutMassCenter(State s) {
     return new Inertia(opensimSimulationJNI.Model_getInertiaAboutMassCenter(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
+  /**
+   * Return the position vector of the system mass center, measured from the<br>
+   * Ground origin, and expressed in Ground.
+   */
   public Vec3 calcMassCenterPosition(State s) {
     return new Vec3(opensimSimulationJNI.Model_calcMassCenterPosition(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
+  /**
+   * Return the velocity vector of the system mass center, measured from the<br>
+   * Ground origin, and expressed in Ground.
+   */
   public Vec3 calcMassCenterVelocity(State s) {
     return new Vec3(opensimSimulationJNI.Model_calcMassCenterVelocity(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
+  /**
+   * Return the acceleration vector of the system mass center, measured from<br>
+   * the Ground origin, and expressed in Ground.
+   */
   public Vec3 calcMassCenterAcceleration(State s) {
     return new Vec3(opensimSimulationJNI.Model_calcMassCenterAcceleration(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   /**
-   *  return the total Kinetic Energy for the underlying system.
+   * Return the spatial momentum about the system mass center expressed in<br>
+   * Ground.
+   */
+  public SpatialVec calcMomentum(State s) {
+    return new SpatialVec(opensimSimulationJNI.Model_calcMomentum(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  /**
+   * Return the angular momentum about the system mass center expressed in<br>
+   * Ground.
+   */
+  public Vec3 calcAngularMomentum(State s) {
+    return new Vec3(opensimSimulationJNI.Model_calcAngularMomentum(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  /**
+   * Return the linear momentum expressed in Ground.
+   */
+  public Vec3 calcLinearMomentum(State s) {
+    return new Vec3(opensimSimulationJNI.Model_calcLinearMomentum(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  /**
+   *  Return the total Kinetic Energy for the underlying system.
    */
   public double calcKineticEnergy(State s) {
     return opensimSimulationJNI.Model_calcKineticEnergy(swigCPtr, this, State.getCPtr(s), s);
   }
 
   /**
-   *  return the total Potential Energy for the underlying system.
+   *  Return the total Potential Energy for the underlying system.
    */
   public double calcPotentialEnergy(State s) {
     return opensimSimulationJNI.Model_calcPotentialEnergy(swigCPtr, this, State.getCPtr(s), s);

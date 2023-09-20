@@ -213,6 +213,7 @@ public class opensimCommonJNI {
   public final static native long PropertyStringList_updValue__SWIG_1(long jarg1, PropertyStringList jarg1_);
   public final static native int PropertyStringList_appendValue(long jarg1, PropertyStringList jarg1_, String jarg2);
   public final static native int PropertyStringList_adoptAndAppendValue(long jarg1, PropertyStringList jarg1_, long jarg2);
+  public final static native void PropertyStringList_removeValueAtIndex(long jarg1, PropertyStringList jarg1_, int jarg2);
   public final static native int PropertyStringList_findIndex(long jarg1, PropertyStringList jarg1_, String jarg2);
   public final static native int PropertyStringList_findIndexForName(long jarg1, PropertyStringList jarg1_, long jarg2);
   public final static native boolean PropertyStringList_isA(long jarg1, AbstractProperty jarg1_);
@@ -228,6 +229,7 @@ public class opensimCommonJNI {
   public final static native long PropertyObjectList_updValue__SWIG_1(long jarg1, PropertyObjectList jarg1_);
   public final static native int PropertyObjectList_appendValue__SWIG_0(long jarg1, PropertyObjectList jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native int PropertyObjectList_adoptAndAppendValue(long jarg1, PropertyObjectList jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native void PropertyObjectList_removeValueAtIndex(long jarg1, PropertyObjectList jarg1_, int jarg2);
   public final static native int PropertyObjectList_findIndex(long jarg1, PropertyObjectList jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native int PropertyObjectList_findIndexForName(long jarg1, PropertyObjectList jarg1_, long jarg2);
   public final static native boolean PropertyObjectList_isA(long jarg1, AbstractProperty jarg1_);
@@ -244,6 +246,7 @@ public class opensimCommonJNI {
   public final static native int PropertyIntList_appendValue__SWIG_0(long jarg1, PropertyIntList jarg1_, int jarg2);
   public final static native int PropertyIntList_appendValue__SWIG_1(long jarg1, PropertyIntList jarg1_, long jarg2);
   public final static native int PropertyIntList_adoptAndAppendValue(long jarg1, PropertyIntList jarg1_, long jarg2);
+  public final static native void PropertyIntList_removeValueAtIndex(long jarg1, PropertyIntList jarg1_, int jarg2);
   public final static native int PropertyIntList_findIndex(long jarg1, PropertyIntList jarg1_, int jarg2);
   public final static native int PropertyIntList_findIndexForName(long jarg1, PropertyIntList jarg1_, long jarg2);
   public final static native boolean PropertyIntList_isA(long jarg1, AbstractProperty jarg1_);
@@ -260,6 +263,7 @@ public class opensimCommonJNI {
   public final static native int PropertyDoubleList_appendValue__SWIG_0(long jarg1, PropertyDoubleList jarg1_, double jarg2);
   public final static native int PropertyDoubleList_appendValue__SWIG_1(long jarg1, PropertyDoubleList jarg1_, long jarg2);
   public final static native int PropertyDoubleList_adoptAndAppendValue(long jarg1, PropertyDoubleList jarg1_, long jarg2);
+  public final static native void PropertyDoubleList_removeValueAtIndex(long jarg1, PropertyDoubleList jarg1_, int jarg2);
   public final static native int PropertyDoubleList_findIndex(long jarg1, PropertyDoubleList jarg1_, double jarg2);
   public final static native int PropertyDoubleList_findIndexForName(long jarg1, PropertyDoubleList jarg1_, long jarg2);
   public final static native boolean PropertyDoubleList_isA(long jarg1, AbstractProperty jarg1_);
@@ -276,6 +280,7 @@ public class opensimCommonJNI {
   public final static native int PropertyBoolList_appendValue__SWIG_0(long jarg1, PropertyBoolList jarg1_, boolean jarg2);
   public final static native int PropertyBoolList_appendValue__SWIG_1(long jarg1, PropertyBoolList jarg1_, long jarg2);
   public final static native int PropertyBoolList_adoptAndAppendValue(long jarg1, PropertyBoolList jarg1_, long jarg2);
+  public final static native void PropertyBoolList_removeValueAtIndex(long jarg1, PropertyBoolList jarg1_, int jarg2);
   public final static native int PropertyBoolList_findIndex(long jarg1, PropertyBoolList jarg1_, boolean jarg2);
   public final static native int PropertyBoolList_findIndexForName(long jarg1, PropertyBoolList jarg1_, long jarg2);
   public final static native boolean PropertyBoolList_isA(long jarg1, AbstractProperty jarg1_);

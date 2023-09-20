@@ -168,12 +168,12 @@ public class Force extends ModelComponent {
   }
 
   /**
-   *  Return a flag indicating whether the Force is applied along a Path. If<br>
-   *     you override this method to return true for a specific subclass, it must<br>
-   *     also implement the getGeometryPath() method. *
+   *  Return a flag indicating whether the Force is applied along a path that<br>
+   * can be visualized. If you override this method to return true for a <br>
+   * specific subclass, it must also implement the getPath() method. 
    */
-  public boolean hasGeometryPath() {
-    return opensimSimulationJNI.Force_hasGeometryPath(swigCPtr, this);
+  public boolean hasVisualPath() {
+    return opensimSimulationJNI.Force_hasVisualPath(swigCPtr, this);
   }
 
 }

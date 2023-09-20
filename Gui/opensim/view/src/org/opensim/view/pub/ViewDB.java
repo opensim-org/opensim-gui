@@ -214,7 +214,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 JSONObject msg = modelJson.createAppearanceMessage(appChange.mc, appChange.prop);
                 commands.add(msg.get("command"));
                 Force mcAsForce = Force.safeDownCast(appChange.mc);
-                if (mcAsForce!= null && mcAsForce.hasGeometryPath()){
+                if (mcAsForce!= null && mcAsForce.hasVisualPath()){
                     // create commands to handle PathPoints and add here as well
                     modelJson.propagateGeometryPathCommandsToPathPoints(mcAsForce, appChange.prop, commands);
                 }

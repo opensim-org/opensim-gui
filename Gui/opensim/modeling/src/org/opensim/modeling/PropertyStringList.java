@@ -426,6 +426,13 @@ public class PropertyStringList extends AbstractProperty {
   }
 
   /**
+   *  Remove specific entry of the list at index *
+   */
+  public void removeValueAtIndex(int index) {
+    opensimCommonJNI.PropertyStringList_removeValueAtIndex(swigCPtr, this, index);
+  }
+
+  /**
    *  Search the value list for an element that has the given <i>value</i> and<br>
    *     return its index if found, otherwise -1. This requires only that the <br>
    *     template type T supports operator==(). This is a linear search so will <br>

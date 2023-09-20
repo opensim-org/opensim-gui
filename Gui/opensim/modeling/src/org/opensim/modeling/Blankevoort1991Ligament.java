@@ -84,7 +84,7 @@ setLinearStiffnessForcePerLength() and getLinearStiffnessForcePerLength().
 
 When scaling a model (using the ScaleTool) that contains a 
 Blankevoort1991Ligament, the slack_length property is scaled by the ratio of 
-the entire GeometryPath length in the default model pose before and after 
+the entire path length in the default model pose before and after
 scaling the bone geometries. This ensures that the strain in the ligament in 
 the default pose is equivilent before and after scaling. Thus, it is important 
 to consider the order of scaling the model and setting the slack_length 
@@ -209,40 +209,40 @@ public class Blankevoort1991Ligament extends Force {
     return opensimSimulationJNI.Blankevoort1991Ligament_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_GeometryPath(Blankevoort1991Ligament source) {
-    opensimSimulationJNI.Blankevoort1991Ligament_copyProperty_GeometryPath(swigCPtr, this, Blankevoort1991Ligament.getCPtr(source), source);
+  public void copyProperty_path(Blankevoort1991Ligament source) {
+    opensimSimulationJNI.Blankevoort1991Ligament_copyProperty_path(swigCPtr, this, Blankevoort1991Ligament.getCPtr(source), source);
   }
 
-  public GeometryPath get_GeometryPath(int i) {
-    return new GeometryPath(opensimSimulationJNI.Blankevoort1991Ligament_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+  public AbstractPath get_path(int i) {
+    return new AbstractPath(opensimSimulationJNI.Blankevoort1991Ligament_get_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public GeometryPath upd_GeometryPath(int i) {
-    return new GeometryPath(opensimSimulationJNI.Blankevoort1991Ligament_upd_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+  public AbstractPath upd_path(int i) {
+    return new AbstractPath(opensimSimulationJNI.Blankevoort1991Ligament_upd_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_GeometryPath(int i, GeometryPath value) {
-    opensimSimulationJNI.Blankevoort1991Ligament_set_GeometryPath__SWIG_0(swigCPtr, this, i, GeometryPath.getCPtr(value), value);
+  public void set_path(int i, AbstractPath value) {
+    opensimSimulationJNI.Blankevoort1991Ligament_set_path__SWIG_0(swigCPtr, this, i, AbstractPath.getCPtr(value), value);
   }
 
-  public int append_GeometryPath(GeometryPath value) {
-    return opensimSimulationJNI.Blankevoort1991Ligament_append_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(value), value);
+  public int append_path(AbstractPath value) {
+    return opensimSimulationJNI.Blankevoort1991Ligament_append_path(swigCPtr, this, AbstractPath.getCPtr(value), value);
   }
 
-  public void constructProperty_GeometryPath(GeometryPath initValue) {
-    opensimSimulationJNI.Blankevoort1991Ligament_constructProperty_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(initValue), initValue);
+  public void constructProperty_path(AbstractPath initValue) {
+    opensimSimulationJNI.Blankevoort1991Ligament_constructProperty_path(swigCPtr, this, AbstractPath.getCPtr(initValue), initValue);
   }
 
-  public GeometryPath get_GeometryPath() {
-    return new GeometryPath(opensimSimulationJNI.Blankevoort1991Ligament_get_GeometryPath__SWIG_1(swigCPtr, this), false);
+  public AbstractPath get_path() {
+    return new AbstractPath(opensimSimulationJNI.Blankevoort1991Ligament_get_path__SWIG_1(swigCPtr, this), false);
   }
 
-  public GeometryPath upd_GeometryPath() {
-    return new GeometryPath(opensimSimulationJNI.Blankevoort1991Ligament_upd_GeometryPath__SWIG_1(swigCPtr, this), false);
+  public AbstractPath upd_path() {
+    return new AbstractPath(opensimSimulationJNI.Blankevoort1991Ligament_upd_path__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_GeometryPath(GeometryPath value) {
-    opensimSimulationJNI.Blankevoort1991Ligament_set_GeometryPath__SWIG_1(swigCPtr, this, GeometryPath.getCPtr(value), value);
+  public void set_path(AbstractPath value) {
+    opensimSimulationJNI.Blankevoort1991Ligament_set_path__SWIG_1(swigCPtr, this, AbstractPath.getCPtr(value), value);
   }
 
   public void copyProperty_linear_stiffness(Blankevoort1991Ligament source) {
@@ -459,6 +459,26 @@ public class Blankevoort1991Ligament extends Force {
 
   public Blankevoort1991Ligament(String name, double linear_stiffness, double slack_length) {
     this(opensimSimulationJNI.new_Blankevoort1991Ligament__SWIG_3(name, linear_stiffness, slack_length), true);
+  }
+
+  public AbstractPath updPath() {
+    return new AbstractPath(opensimSimulationJNI.Blankevoort1991Ligament_updPath(swigCPtr, this), false);
+  }
+
+  public AbstractPath getPath() {
+    return new AbstractPath(opensimSimulationJNI.Blankevoort1991Ligament_getPath(swigCPtr, this), false);
+  }
+
+  public GeometryPath updGeometryPath() {
+    return new GeometryPath(opensimSimulationJNI.Blankevoort1991Ligament_updGeometryPath(swigCPtr, this), false);
+  }
+
+  public GeometryPath getGeometryPath() {
+    return new GeometryPath(opensimSimulationJNI.Blankevoort1991Ligament_getGeometryPath(swigCPtr, this), false);
+  }
+
+  public boolean hasVisualPath() {
+    return opensimSimulationJNI.Blankevoort1991Ligament_hasVisualPath(swigCPtr, this);
   }
 
   /**

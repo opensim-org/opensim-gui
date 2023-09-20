@@ -10,8 +10,8 @@ package org.opensim.modeling;
 
 /**
  * This is the base class for actuators that apply controllable tension along <br>
- * a geometry path. %PathActuator has no states; the control is simply the <br>
- * tension to be applied along a geometry path (i.e. tensionable rope).<br>
+ * a path. %PathActuator has no states; the control is simply the tension to be<br>
+ * applied along a path (i.e. tensionable rope).<br>
  * <br>
  * @author Ajay Seth
  */
@@ -77,40 +77,40 @@ public class PathActuator extends ScalarActuator {
     return opensimSimulationJNI.PathActuator_getConcreteClassName(swigCPtr, this);
   }
 
-  public void copyProperty_GeometryPath(PathActuator source) {
-    opensimSimulationJNI.PathActuator_copyProperty_GeometryPath(swigCPtr, this, PathActuator.getCPtr(source), source);
+  public void copyProperty_path(PathActuator source) {
+    opensimSimulationJNI.PathActuator_copyProperty_path(swigCPtr, this, PathActuator.getCPtr(source), source);
   }
 
-  public GeometryPath get_GeometryPath(int i) {
-    return new GeometryPath(opensimSimulationJNI.PathActuator_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+  public AbstractPath get_path(int i) {
+    return new AbstractPath(opensimSimulationJNI.PathActuator_get_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public GeometryPath upd_GeometryPath(int i) {
-    return new GeometryPath(opensimSimulationJNI.PathActuator_upd_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+  public AbstractPath upd_path(int i) {
+    return new AbstractPath(opensimSimulationJNI.PathActuator_upd_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_GeometryPath(int i, GeometryPath value) {
-    opensimSimulationJNI.PathActuator_set_GeometryPath__SWIG_0(swigCPtr, this, i, GeometryPath.getCPtr(value), value);
+  public void set_path(int i, AbstractPath value) {
+    opensimSimulationJNI.PathActuator_set_path__SWIG_0(swigCPtr, this, i, AbstractPath.getCPtr(value), value);
   }
 
-  public int append_GeometryPath(GeometryPath value) {
-    return opensimSimulationJNI.PathActuator_append_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(value), value);
+  public int append_path(AbstractPath value) {
+    return opensimSimulationJNI.PathActuator_append_path(swigCPtr, this, AbstractPath.getCPtr(value), value);
   }
 
-  public void constructProperty_GeometryPath(GeometryPath initValue) {
-    opensimSimulationJNI.PathActuator_constructProperty_GeometryPath(swigCPtr, this, GeometryPath.getCPtr(initValue), initValue);
+  public void constructProperty_path(AbstractPath initValue) {
+    opensimSimulationJNI.PathActuator_constructProperty_path(swigCPtr, this, AbstractPath.getCPtr(initValue), initValue);
   }
 
-  public GeometryPath get_GeometryPath() {
-    return new GeometryPath(opensimSimulationJNI.PathActuator_get_GeometryPath__SWIG_1(swigCPtr, this), false);
+  public AbstractPath get_path() {
+    return new AbstractPath(opensimSimulationJNI.PathActuator_get_path__SWIG_1(swigCPtr, this), false);
   }
 
-  public GeometryPath upd_GeometryPath() {
-    return new GeometryPath(opensimSimulationJNI.PathActuator_upd_GeometryPath__SWIG_1(swigCPtr, this), false);
+  public AbstractPath upd_path() {
+    return new AbstractPath(opensimSimulationJNI.PathActuator_upd_path__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_GeometryPath(GeometryPath value) {
-    opensimSimulationJNI.PathActuator_set_GeometryPath__SWIG_1(swigCPtr, this, GeometryPath.getCPtr(value), value);
+  public void set_path(AbstractPath value) {
+    opensimSimulationJNI.PathActuator_set_path__SWIG_1(swigCPtr, this, AbstractPath.getCPtr(value), value);
   }
 
   public void copyProperty_optimal_force(PathActuator source) {
@@ -161,6 +161,14 @@ public class PathActuator extends ScalarActuator {
     this(opensimSimulationJNI.new_PathActuator(), true);
   }
 
+  public AbstractPath updPath() {
+    return new AbstractPath(opensimSimulationJNI.PathActuator_updPath(swigCPtr, this), false);
+  }
+
+  public AbstractPath getPath() {
+    return new AbstractPath(opensimSimulationJNI.PathActuator_getPath(swigCPtr, this), false);
+  }
+
   public GeometryPath updGeometryPath() {
     return new GeometryPath(opensimSimulationJNI.PathActuator_updGeometryPath(swigCPtr, this), false);
   }
@@ -169,8 +177,8 @@ public class PathActuator extends ScalarActuator {
     return new GeometryPath(opensimSimulationJNI.PathActuator_getGeometryPath(swigCPtr, this), false);
   }
 
-  public boolean hasGeometryPath() {
-    return opensimSimulationJNI.PathActuator_hasGeometryPath(swigCPtr, this);
+  public boolean hasVisualPath() {
+    return opensimSimulationJNI.PathActuator_hasVisualPath(swigCPtr, this);
   }
 
   public void setOptimalForce(double aOptimalForce) {
@@ -198,8 +206,10 @@ public class PathActuator extends ScalarActuator {
   }
 
   /**
-   *  Note that this function does not maintain the State and so should be used only<br>
-   *         before a valid State is created 
+   *  Note: This function does not maintain the State and so should be used<br>
+   * only before a valid State is created.<br>
+   * Note: Only valid if the `path` owned by this PathActuator supports<br>
+   * PathPoint%s (e.g., GeometryPath). 
    */
   public void addNewPathPoint(String proposedName, PhysicalFrame aBody, Vec3 aPositionOnBody) {
     opensimSimulationJNI.PathActuator_addNewPathPoint(swigCPtr, this, proposedName, PhysicalFrame.getCPtr(aBody), aBody, Vec3.getCPtr(aPositionOnBody), aPositionOnBody);

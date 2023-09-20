@@ -10,7 +10,7 @@ package org.opensim.modeling;
 
 /**
  *  A multivariate polynomial function.<br>
- * This implementation assumes a maximum of four input dimensions and allows<br>
+ * This implementation assumes a maximum of six input dimensions and allows<br>
  * computation of first-order derivatives only.<br>
  * Note: The order of coefficients for this class is the *opposite** from the order<br>
  * used in the univariate PolynomialFunction.<br>
