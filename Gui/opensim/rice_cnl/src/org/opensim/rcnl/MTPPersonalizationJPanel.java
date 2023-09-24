@@ -35,15 +35,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
      */
     public MTPPersonalizationJPanel(Model model)  throws IOException  {
        if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
-       jointPersonalizationToolModel = new JointPersonalizationToolModel(model);
-       jointPersonalizationTaskListModel = new JMPTaskListModel(jointPersonalizationToolModel.getJointTaskListAsObjectList());
        initComponents();
-       jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
-       listSelectionModel = jJointPersonalizationList.getSelectionModel();
-       listSelectionModel.addListSelectionListener(
-                            new ListSelectionHandler());
-       currentModelFileTextField.setText(model.getInputFileName());
-       passiveDataInputDir.setFileName(jointPersonalizationToolModel.getOutputModelFile());
        setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
     }
 
@@ -431,7 +423,6 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     }//GEN-LAST:event_outputResultPathStateChanged
 
     private void passiveDataInputDirStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_passiveDataInputDirStateChanged
-        jointPersonalizationToolModel.setOutputModelFile(passiveDataInputDir.getFileName());
     }//GEN-LAST:event_passiveDataInputDirStateChanged
 
     @Override
@@ -455,14 +446,6 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     public void loadSettings(String fileName) {
         Model model = OpenSimDB.getInstance().getCurrentModel();
        //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
-       jointPersonalizationToolModel = new JointPersonalizationToolModel(model, fileName);
-       jointPersonalizationTaskListModel = new JMPTaskListModel(jointPersonalizationToolModel.getJointTaskListAsObjectList());
-       listSelectionModel = jJointPersonalizationList.getSelectionModel();
-       listSelectionModel.addListSelectionListener( new ListSelectionHandler());
-       //initComponents(); Panel already constructed, no need to re-initComponents
-       jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
-       currentModelFileTextField.setText(jointPersonalizationToolModel.getInputModelFile());
-       passiveDataInputDir.setFileName(jointPersonalizationToolModel.getOutputModelFile());
        setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
     }
 
@@ -510,19 +493,4 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private javax.swing.JPanel settingsPanel;
     // End of variables declaration//GEN-END:variables
 
-    private class ListSelectionHandler implements ListSelectionListener {
-
-        public ListSelectionHandler() {
-        }
-
-        @Override
-        public void valueChanged(ListSelectionEvent lse) {
-            // Disable delete if nothing is selected
-            // Enable edit if single selection
-            int[] sels = jJointPersonalizationList.getSelectedIndices();
-            editJointTaskButton.setEnabled(sels.length==1);
-            deleteJointTaskButton.setEnabled(sels.length>=1);
-            
-        }
-    }
 }

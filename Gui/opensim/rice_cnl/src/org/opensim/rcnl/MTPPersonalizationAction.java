@@ -39,7 +39,7 @@ public final class MTPPersonalizationAction implements ActionListener {
       }
 
       try {
-         final JointPersonalizationJPanel jpPanel = new JointPersonalizationJPanel(model);
+         final MTPPersonalizationJPanel jpPanel = new MTPPersonalizationJPanel(model);
          BaseToolPanel.openToolDialog(jpPanel, "Muscle Tendon Personalization Tool");
       } catch (IOException ex) {
          ErrorDialog.displayIOExceptionDialog("Muscle Tendon Personalization Error",
