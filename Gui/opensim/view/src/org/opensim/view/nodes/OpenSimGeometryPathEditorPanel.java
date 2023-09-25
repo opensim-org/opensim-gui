@@ -1617,7 +1617,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
     
     void RestoreButtonActionPerformed(ActionEvent evt)
     {
-        OpenSimObject pathObject =  objectWithPath.getPropertyByName("GeometryPath").getValueAsObject();
+        OpenSimObject pathObject =  ViewDB.obtainPathPropertyAsObject(objectWithPath);
         GeometryPath gp = GeometryPath.safeDownCast(pathObject);
         // remove visualization before restore then recreate after to avoid complicated book-keeping
         ViewDB.getInstance().removePathDisplay(gp);

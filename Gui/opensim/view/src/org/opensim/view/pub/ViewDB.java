@@ -580,7 +580,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    public void removeObjectsBelongingToMuscleFromSelection(OpenSimObject objectWithPath)
    {
       boolean modified = false;
-      OpenSimObject pathObject =  objectWithPath.getPropertyByName("GeometryPath").getValueAsObject();
+      OpenSimObject pathObject = obtainPathPropertyAsObject(objectWithPath);
       GeometryPath gp = GeometryPath.safeDownCast(pathObject);
       for (int i=selectedObjects.size()-1; i>=0; i--) {
          // First see if the selected object is a objectWithPath.
@@ -607,6 +607,15 @@ public final class ViewDB extends Observable implements Observer, LookupListener
          repaintAll();
       }
    }
+   /**
+    * With the change in Property name for Path in 09/23, we'll use this as a place to convert path Property
+    * to what used to be an unnamed GeometryPath Property, to be called from safe context where we know we have a GeometryPath at hand
+    * @param objectWithPath
+    * @return 
+    */
+    static public OpenSimObject obtainPathPropertyAsObject(OpenSimObject objectWithPath) {
+        return objectWithPath.getPropertyByName("path").getValueAsObject();
+    }
 
    /**
     * Mark an object as selected (on/off).

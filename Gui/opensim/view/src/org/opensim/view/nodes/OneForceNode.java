@@ -36,10 +36,12 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import org.openide.nodes.Children;
 import org.openide.util.NbBundle;
+import org.opensim.modeling.Force;
 import org.opensim.modeling.GeometryPath;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.ColorableInterface;
+import org.opensim.view.pub.ViewDB;
 
 /**
  *
@@ -55,9 +57,10 @@ public class OneForceNode extends DisablablModelComponentNode implements Colorab
      */
     public OneForceNode(OpenSimObject force) {
         super(force);
-        hasPath = force.hasProperty("GeometryPath");
+        Force typedForce = Force.safeDownCast(force);
+        hasPath = typedForce.hasProperty("path") && typedForce.hasVisualPath();
         if (hasPath){
-            pathObject =  GeometryPath.safeDownCast(force.getPropertyByName("GeometryPath").getValueAsObject());
+            pathObject =  GeometryPath.safeDownCast(ViewDB.obtainPathPropertyAsObject(force));
          }
 
         setChildren(Children.LEAF);
