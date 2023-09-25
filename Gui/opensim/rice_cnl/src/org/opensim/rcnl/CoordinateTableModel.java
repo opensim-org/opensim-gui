@@ -65,5 +65,7 @@ public class CoordinateTableModel  extends AbstractTableModel{
    * then the last column would contain text ("true"/"false"),
    * rather than a check box.
    */
-
+    public Class getColumnClass(int column) {
+        return (column==0)? String.class: Boolean.class;
+    }
 }
