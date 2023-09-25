@@ -28,13 +28,16 @@ import org.opensim.view.pub.OpenSimDB;
  */
 public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer {
     private MTPPersonalizationToolModel mtpPersonalizationToolModel = null;
+    private Model model;
     /**
      * Creates new form JointPersonalizationJPanel
      */
     public MTPPersonalizationJPanel(Model model)  throws IOException  {
        if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
+       this.model = model;
+       mtpPersonalizationToolModel = new MTPPersonalizationToolModel(model);
        initComponents();
-       setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
+       setSettingsFileDescription("Save Muscle Tendon Personalization Settings file (xml)");
     }
 
     /**
@@ -431,6 +434,12 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private void jButtonEditCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCoordinateListActionPerformed
         // TODO add your handling code here:
         // Create Panel for selecting from existing model coordinates
+        CoordinateTableModel ctm = new CoordinateTableModel(mtpPersonalizationToolModel.getPropCoordinateListString(), model);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
+        dlg.setModal(true);
+        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+        Object userInput = dlg.getValue();
     }//GEN-LAST:event_jButtonEditCoordinateListActionPerformed
 
     @Override
