@@ -27,9 +27,7 @@ import org.opensim.view.pub.OpenSimDB;
  * @author Ayman-NMBL
  */
 public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer {
-    private JointPersonalizationToolModel jointPersonalizationToolModel = null;
-    private JMPTaskListModel jointPersonalizationTaskListModel = null;
-    private ListSelectionModel listSelectionModel;
+    private MTPPersonalizationToolModel mtpPersonalizationToolModel = null;
     /**
      * Creates new form JointPersonalizationJPanel
      */
@@ -58,7 +56,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jCoordinatesListPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        jButtonEditCoordinateList = new javax.swing.JButton();
         jActivationMGPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jCoordinateListTextArea = new javax.swing.JTextArea();
@@ -150,7 +148,12 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jButton1.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jButtonEditCoordinateList, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jButtonEditCoordinateList.text")); // NOI18N
+        jButtonEditCoordinateList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditCoordinateListActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jCoordinatesListPanelLayout = new javax.swing.GroupLayout(jCoordinatesListPanel);
         jCoordinatesListPanel.setLayout(jCoordinatesListPanelLayout);
@@ -159,7 +162,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
             .addGroup(jCoordinatesListPanelLayout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonEditCoordinateList)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jCoordinatesListPanelLayout.setVerticalGroup(
@@ -169,7 +172,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jCoordinatesListPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jButtonEditCoordinateList)
                 .addContainerGap())
         );
 
@@ -425,6 +428,11 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private void passiveDataInputDirStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_passiveDataInputDirStateChanged
     }//GEN-LAST:event_passiveDataInputDirStateChanged
 
+    private void jButtonEditCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCoordinateListActionPerformed
+        // TODO add your handling code here:
+        // Create Panel for selecting from existing model coordinates
+    }//GEN-LAST:event_jButtonEditCoordinateListActionPerformed
+
     @Override
     public void update(Observable o, Object o1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -439,14 +447,14 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     public void saveSettings(String fileName) {
          String fullFilename = FileUtils.addExtensionIfNeeded(fileName, ".xml");
          OpenSimObject.setSerializeAllDefaults(true);
-        jointPersonalizationToolModel.getToolAsObject().print(fullFilename);
+         mtpPersonalizationToolModel.getToolAsObject().print(fullFilename);
     }
 
     @Override
     public void loadSettings(String fileName) {
         Model model = OpenSimDB.getInstance().getCurrentModel();
        //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
-       setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
+       setSettingsFileDescription("Save Muscle Tendon Personalization Settings file (xml)");
     }
 
     @Override
@@ -459,8 +467,8 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private javax.swing.JTextField currentModelFileTextField;
     private javax.swing.JPanel inputModelPanel;
     private javax.swing.JPanel jActivationMGPanel;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonEditCollectedEMG;
+    private javax.swing.JButton jButtonEditCoordinateList;
     private javax.swing.JButton jButtonEditCoordinates;
     private javax.swing.JButton jButtonEditMissingEMG;
     private javax.swing.JButton jButtonEditNormalizedFLMG;
