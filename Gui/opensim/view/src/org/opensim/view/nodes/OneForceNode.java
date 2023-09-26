@@ -58,7 +58,7 @@ public class OneForceNode extends DisablablModelComponentNode implements Colorab
     public OneForceNode(OpenSimObject force) {
         super(force);
         Force typedForce = Force.safeDownCast(force);
-        hasPath = typedForce.hasProperty("path") && typedForce.hasVisualPath();
+        hasPath = typedForce.hasVisualPath();
         if (hasPath){
             pathObject =  GeometryPath.safeDownCast(ViewDB.obtainPathPropertyAsObject(force));
          }
