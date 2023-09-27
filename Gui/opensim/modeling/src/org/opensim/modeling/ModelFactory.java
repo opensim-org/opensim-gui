@@ -104,7 +104,7 @@ public class ModelFactory {
   /**
    *  <br>
    *  <br>
-   *  Replace muscles in a model with a PathActuator of the same GeometryPath,<br>
+   *  Replace muscles in a model with a PathActuator of the same path,<br>
    *  optimal force, and min/max control defaults.<br>
    *  Note: This only replaces muscles within the model's ForceSet.
    */

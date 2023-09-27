@@ -954,7 +954,7 @@ public class ModelVisualizationJson extends JSONObject {
             guiJson.put("command", commandJson);
             String commandName = (String) commandJson.get("name");
             Force mcAsForce = Force.safeDownCast(mc);
-            if (mcAsForce!=null && mcAsForce.hasGeometryPath() && commandName.equalsIgnoreCase("SetVisible"))
+            if (mcAsForce!=null && mcAsForce.hasVisualPath() && commandName.equalsIgnoreCase("SetVisible"))
                commandJson.put("type", "SetValueCommandMuscle");
         }
         return guiJson;
@@ -1406,7 +1406,7 @@ public class ModelVisualizationJson extends JSONObject {
         }
         else {
             JSONObject pathpointCommand = (JSONObject) lastCommand.clone();
-            if (force.hasGeometryPath()){
+            if (force.hasVisualPath()){
                 GeometryPath gPath = GeometryPath.safeDownCast(force.getPropertyByName("GeometryPath").getValueAsObject());
 
                 pathpointCommand.put("objectUuid", getFirstPathPointUUID4GeometryPath(gPath).toString());

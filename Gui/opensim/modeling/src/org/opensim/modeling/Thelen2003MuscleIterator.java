@@ -855,12 +855,12 @@ public class Thelen2003MuscleIterator {
     opensimSimulationJNI.Thelen2003MuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public GeometryPath get_GeometryPath(int i) {
-    return new GeometryPath(opensimSimulationJNI.Thelen2003MuscleIterator_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+  public AbstractPath get_path(int i) {
+    return new AbstractPath(opensimSimulationJNI.Thelen2003MuscleIterator_get_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public GeometryPath get_GeometryPath() {
-    return new GeometryPath(opensimSimulationJNI.Thelen2003MuscleIterator_get_GeometryPath__SWIG_1(swigCPtr, this), false);
+  public AbstractPath get_path() {
+    return new AbstractPath(opensimSimulationJNI.Thelen2003MuscleIterator_get_path__SWIG_1(swigCPtr, this), false);
   }
 
   public double get_optimal_force(int i) {
@@ -875,12 +875,16 @@ public class Thelen2003MuscleIterator {
     return opensimSimulationJNI.Thelen2003MuscleIterator__has_output_tension_get(swigCPtr, this);
   }
 
+  public AbstractPath getPath() {
+    return new AbstractPath(opensimSimulationJNI.Thelen2003MuscleIterator_getPath(swigCPtr, this), false);
+  }
+
   public GeometryPath getGeometryPath() {
     return new GeometryPath(opensimSimulationJNI.Thelen2003MuscleIterator_getGeometryPath(swigCPtr, this), false);
   }
 
-  public boolean hasGeometryPath() {
-    return opensimSimulationJNI.Thelen2003MuscleIterator_hasGeometryPath(swigCPtr, this);
+  public boolean hasVisualPath() {
+    return opensimSimulationJNI.Thelen2003MuscleIterator_hasVisualPath(swigCPtr, this);
   }
 
   public double getOptimalForce() {
