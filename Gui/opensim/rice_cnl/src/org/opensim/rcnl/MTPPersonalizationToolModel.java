@@ -19,6 +19,34 @@ import org.opensim.modeling.PropertyStringList;
 public class MTPPersonalizationToolModel {
 
     /**
+     * @return the propActivationMGListString
+     */
+    public PropertyStringList getPropActivationMGListString() {
+        return propActivationMGListString;
+    }
+
+    /**
+     * @return the propNormalizedFLMGListString
+     */
+    public PropertyStringList getPropNormalizedFLMGListString() {
+        return propNormalizedFLMGListString;
+    }
+
+    /**
+     * @return the propMissingEMGMGListString
+     */
+    public PropertyStringList getPropMissingEMGMGListString() {
+        return propMissingEMGMGListString;
+    }
+
+    /**
+     * @return the propCollectedEMGMGListString
+     */
+    public PropertyStringList getPropCollectedEMGMGListString() {
+        return propCollectedEMGMGListString;
+    }
+
+    /**
      * @return the propCoordinateListString
      */
     public PropertyStringList getPropCoordinateListString() {
@@ -35,6 +63,11 @@ public class MTPPersonalizationToolModel {
     private  PropertyStringList propOutputModelFileString;
     private PropertyStringList propInputModelFileString;
     private PropertyStringList propCoordinateListString;
+    // Muscle groups
+    private PropertyStringList propActivationMGListString;
+    private PropertyStringList propNormalizedFLMGListString;
+    private PropertyStringList propMissingEMGMGListString;
+    private PropertyStringList propCollectedEMGMGListString;
     
     public MTPPersonalizationToolModel(Model model) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
@@ -55,6 +88,16 @@ public class MTPPersonalizationToolModel {
         }
         AbstractProperty coordListProp = toolAsObject.updPropertyByName("coordinate_list");
         propCoordinateListString = PropertyStringList.updAs(coordListProp);
+        
+        AbstractProperty activationMGListProp = toolAsObject.updPropertyByName("activation_muscle_groups");
+        propActivationMGListString = PropertyStringList.updAs(activationMGListProp);
+        AbstractProperty normalizedFLMGListProp = toolAsObject.updPropertyByName("normalized_fiber_length_muscle_groups");
+        propNormalizedFLMGListString = PropertyStringList.updAs(normalizedFLMGListProp);
+        AbstractProperty missingEMGMGListProp = toolAsObject.updPropertyByName("missing_emg_channel_muscle_groups");
+        propMissingEMGMGListString = PropertyStringList.updAs(missingEMGMGListProp);
+        AbstractProperty collectedEMGMGListProp = toolAsObject.updPropertyByName("collected_emg_channel_muscle_groups");
+        propCollectedEMGMGListString = PropertyStringList.updAs(collectedEMGMGListProp);
+        
     }
     public MTPPersonalizationToolModel(Model model, String fileXml) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown

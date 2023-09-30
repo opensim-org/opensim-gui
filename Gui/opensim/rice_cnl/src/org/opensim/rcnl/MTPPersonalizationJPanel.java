@@ -64,7 +64,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jActivationMGPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jActivationMGTextArea = new javax.swing.JTextArea();
-        jButtonEditCoordinates = new javax.swing.JButton();
+        jButtonEditActivationMG = new javax.swing.JButton();
         jNormalizedFLMGPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jNormalizedFLMGTextArea = new javax.swing.JTextArea();
@@ -194,7 +194,12 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jActivationMGTextArea.setFocusable(false);
         jScrollPane2.setViewportView(jActivationMGTextArea);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jButtonEditCoordinates, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jButtonEditCoordinates.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jButtonEditActivationMG, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jButtonEditActivationMG.text")); // NOI18N
+        jButtonEditActivationMG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditActivationMGActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jActivationMGPanelLayout = new javax.swing.GroupLayout(jActivationMGPanel);
         jActivationMGPanel.setLayout(jActivationMGPanelLayout);
@@ -203,7 +208,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
             .addGroup(jActivationMGPanelLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 621, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonEditCoordinates)
+                .addComponent(jButtonEditActivationMG)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jActivationMGPanelLayout.setVerticalGroup(
@@ -213,7 +218,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jActivationMGPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jButtonEditCoordinates)
+                .addComponent(jButtonEditActivationMG)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -228,6 +233,11 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jScrollPane3.setViewportView(jNormalizedFLMGTextArea);
 
         org.openide.awt.Mnemonics.setLocalizedText(jButtonEditNormalizedFLMG, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jButtonEditNormalizedFLMG.text")); // NOI18N
+        jButtonEditNormalizedFLMG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditNormalizedFLMGActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jNormalizedFLMGPanelLayout = new javax.swing.GroupLayout(jNormalizedFLMGPanel);
         jNormalizedFLMGPanel.setLayout(jNormalizedFLMGPanelLayout);
@@ -261,6 +271,11 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jScrollPane5.setViewportView(jMissingEMGTextArea);
 
         org.openide.awt.Mnemonics.setLocalizedText(jButtonEditMissingEMG, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jButtonEditMissingEMG.text")); // NOI18N
+        jButtonEditMissingEMG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditMissingEMGActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jMissingEMGPanelLayout = new javax.swing.GroupLayout(jMissingEMGPanel);
         jMissingEMGPanel.setLayout(jMissingEMGPanelLayout);
@@ -294,6 +309,11 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jScrollPane4.setViewportView(jCollectedEMGTextArea);
 
         org.openide.awt.Mnemonics.setLocalizedText(jButtonEditCollectedEMG, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jButtonEditCollectedEMG.text")); // NOI18N
+        jButtonEditCollectedEMG.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditCollectedEMGActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jCollectedEMGPanelLayout = new javax.swing.GroupLayout(jCollectedEMGPanel);
         jCollectedEMGPanel.setLayout(jCollectedEMGPanelLayout);
@@ -467,6 +487,61 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         }
     }//GEN-LAST:event_jButtonEditCoordinateListActionPerformed
 
+    private void jButtonEditActivationMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActivationMGActionPerformed
+        // TODO add your handling code here:
+        MuscleGroupTableModel ctm = new MuscleGroupTableModel(mtpPersonalizationToolModel.getPropActivationMGListString(), model);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
+        dlg.setModal(true);
+        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            ctm.populateMuscleGroupProperty();
+            jActivationMGTextArea.setText(mtpPersonalizationToolModel.getPropActivationMGListString().toString());
+        }
+    }//GEN-LAST:event_jButtonEditActivationMGActionPerformed
+
+    private void jButtonEditNormalizedFLMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditNormalizedFLMGActionPerformed
+        MuscleGroupTableModel ctm = new MuscleGroupTableModel(mtpPersonalizationToolModel.getPropNormalizedFLMGListString(), model);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
+        dlg.setModal(true);
+        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            ctm.populateMuscleGroupProperty();
+            jNormalizedFLMGTextArea.setText(mtpPersonalizationToolModel.getPropNormalizedFLMGListString().toString());
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEditNormalizedFLMGActionPerformed
+
+    private void jButtonEditMissingEMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditMissingEMGActionPerformed
+        // TODO add your handling code here:
+        MuscleGroupTableModel ctm = new MuscleGroupTableModel(mtpPersonalizationToolModel.getPropMissingEMGMGListString(), model);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
+        dlg.setModal(true);
+        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            ctm.populateMuscleGroupProperty();
+            jMissingEMGTextArea.setText(mtpPersonalizationToolModel.getPropMissingEMGMGListString().toString());
+        }
+    }//GEN-LAST:event_jButtonEditMissingEMGActionPerformed
+
+    private void jButtonEditCollectedEMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCollectedEMGActionPerformed
+        // TODO add your handling code here:
+        MuscleGroupTableModel ctm = new MuscleGroupTableModel(mtpPersonalizationToolModel.getPropCollectedEMGMGListString(), model);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
+        dlg.setModal(true);
+        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            ctm.populateMuscleGroupProperty();
+            jCollectedEMGTextArea.setText(mtpPersonalizationToolModel.getPropCollectedEMGMGListString().toString());
+        }
+    }//GEN-LAST:event_jButtonEditCollectedEMGActionPerformed
+
     @Override
     public void update(Observable o, Object o1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -502,9 +577,9 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private javax.swing.JPanel inputModelPanel;
     private javax.swing.JPanel jActivationMGPanel;
     private javax.swing.JTextArea jActivationMGTextArea;
+    private javax.swing.JButton jButtonEditActivationMG;
     private javax.swing.JButton jButtonEditCollectedEMG;
     private javax.swing.JButton jButtonEditCoordinateList;
-    private javax.swing.JButton jButtonEditCoordinates;
     private javax.swing.JButton jButtonEditMissingEMG;
     private javax.swing.JButton jButtonEditNormalizedFLMG;
     private javax.swing.JCheckBox jCheckBoxMTPInitialization;

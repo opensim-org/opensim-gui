@@ -294,7 +294,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jScrollPane2" min="-2" pref="621" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jButtonEditCoordinates" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonEditActivationMG" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -307,7 +307,7 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="jButtonEditCoordinates" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonEditActivationMG" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -335,12 +335,15 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JButton" name="jButtonEditCoordinates">
+            <Component class="javax.swing.JButton" name="jButtonEditActivationMG">
               <Properties>
                 <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                  <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="MTPPersonalizationJPanel.jButtonEditCoordinates.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                  <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="MTPPersonalizationJPanel.jButtonEditActivationMG.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditActivationMGActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -409,6 +412,9 @@
                   <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="MTPPersonalizationJPanel.jButtonEditNormalizedFLMG.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditNormalizedFLMGActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -476,6 +482,9 @@
                   <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="MTPPersonalizationJPanel.jButtonEditMissingEMG.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditMissingEMGActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -539,6 +548,9 @@
                   <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="MTPPersonalizationJPanel.jButtonEditCollectedEMG.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditCollectedEMGActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
