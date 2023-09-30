@@ -37,7 +37,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
        this.model = model;
        mtpPersonalizationToolModel = new MTPPersonalizationToolModel(model);
        initComponents();
-       jCoordinateListTextArea.setText("Coordinates");
+       //jCoordinateListTextArea.setText("Coordinates");
        setSettingsFileDescription("Save Muscle Tendon Personalization Settings file (xml)");
     }
 
@@ -563,6 +563,12 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     public void loadSettings(String fileName) {
         Model model = OpenSimDB.getInstance().getCurrentModel();
        //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
+       mtpPersonalizationToolModel = new MTPPersonalizationToolModel(model, fileName);
+       jCoordinateListTextArea.setText(mtpPersonalizationToolModel.getPropCoordinateListString().toString());
+       jActivationMGTextArea.setText(mtpPersonalizationToolModel.getPropActivationMGListString().toString());
+       jNormalizedFLMGTextArea.setText(mtpPersonalizationToolModel.getPropNormalizedFLMGListString().toString());
+       jMissingEMGTextArea.setText(mtpPersonalizationToolModel.getPropMissingEMGMGListString().toString());
+       jCollectedEMGTextArea.setText(mtpPersonalizationToolModel.getPropCollectedEMGMGListString().toString());
        setSettingsFileDescription("Save Muscle Tendon Personalization Settings file (xml)");
     }
 

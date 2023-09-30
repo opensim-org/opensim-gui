@@ -116,6 +116,17 @@ public class MTPPersonalizationToolModel {
              String proposedName = model.getInputFileName();
              propInputModelFileString.setValue(0, proposedName);
         }
+        AbstractProperty coordListProp = toolAsObject.updPropertyByName("coordinate_list");
+        propCoordinateListString = PropertyStringList.updAs(coordListProp);
+        
+        AbstractProperty activationMGListProp = toolAsObject.updPropertyByName("activation_muscle_groups");
+        propActivationMGListString = PropertyStringList.updAs(activationMGListProp);
+        AbstractProperty normalizedFLMGListProp = toolAsObject.updPropertyByName("normalized_fiber_length_muscle_groups");
+        propNormalizedFLMGListString = PropertyStringList.updAs(normalizedFLMGListProp);
+        AbstractProperty missingEMGMGListProp = toolAsObject.updPropertyByName("missing_emg_channel_muscle_groups");
+        propMissingEMGMGListString = PropertyStringList.updAs(missingEMGMGListProp);
+        AbstractProperty collectedEMGMGListProp = toolAsObject.updPropertyByName("collected_emg_channel_muscle_groups");
+        propCollectedEMGMGListString = PropertyStringList.updAs(collectedEMGMGListProp);
     }
 
 
