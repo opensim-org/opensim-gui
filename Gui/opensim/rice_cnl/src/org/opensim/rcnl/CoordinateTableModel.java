@@ -32,6 +32,11 @@ public class CoordinateTableModel  extends AbstractTableModel{
             setValueAt(Boolean.FALSE, i, 0);
             selected.append(Boolean.FALSE);
         }
+        // Now select entries based on passed in coordinateListProperty
+        for (int p=0; p < coordinateListProperty.size(); p++){
+            int cIndex = model.getCoordinateSet().getIndex(coordinateListProperty.getValue(p));
+            setValueAt(Boolean.TRUE, cIndex, 1);
+        }
         
     }
     @Override
@@ -56,6 +61,13 @@ public class CoordinateTableModel  extends AbstractTableModel{
       return tableColumnNames[col];
    }
    
+    public void setValueAt(Object aValue, int row, int col) {
+        if (col ==1) {
+            selected.set(row, (Boolean)aValue);
+            fireTableCellUpdated(row, col);
+        }
+    }
+
    public boolean isCellEditable(int rowIndex, int columnIndex) {
        return (columnIndex==1);
    }
@@ -67,5 +79,14 @@ public class CoordinateTableModel  extends AbstractTableModel{
    */
     public Class getColumnClass(int column) {
         return (column==0)? String.class: Boolean.class;
+    }
+    // Translate checkboxes in selected array into coordinateListProperty
+    public void populateCoordinateListProperty() {
+        coordinateListProperty.clear();
+        // Now select entries based on passed in coordinateListProperty
+        for (int p=0; p < selected.getSize(); p++){
+            if (selected.get(p))
+               coordinateListProperty.appendValue(coordinateNames.get(p));
+        }
     }
 }

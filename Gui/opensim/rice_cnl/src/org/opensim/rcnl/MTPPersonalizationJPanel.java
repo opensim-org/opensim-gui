@@ -37,6 +37,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
        this.model = model;
        mtpPersonalizationToolModel = new MTPPersonalizationToolModel(model);
        initComponents();
+       jCoordinateListTextArea.setText("Coordinates");
        setSettingsFileDescription("Save Muscle Tendon Personalization Settings file (xml)");
     }
 
@@ -58,11 +59,11 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         settingsPanel = new javax.swing.JPanel();
         jCoordinatesListPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jCoordinateListTextArea = new javax.swing.JTextArea();
         jButtonEditCoordinateList = new javax.swing.JButton();
         jActivationMGPanel = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jCoordinateListTextArea = new javax.swing.JTextArea();
+        jActivationMGTextArea = new javax.swing.JTextArea();
         jButtonEditCoordinates = new javax.swing.JButton();
         jNormalizedFLMGPanel = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -147,9 +148,13 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
 
         jCoordinatesListPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jCoordinatesListPanel.border.title"))); // NOI18N
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        jCoordinateListTextArea.setEditable(false);
+        jCoordinateListTextArea.setBackground(new java.awt.Color(240, 240, 240));
+        jCoordinateListTextArea.setColumns(20);
+        jCoordinateListTextArea.setRows(5);
+        jCoordinateListTextArea.setEnabled(false);
+        jCoordinateListTextArea.setFocusable(false);
+        jScrollPane1.setViewportView(jCoordinateListTextArea);
 
         org.openide.awt.Mnemonics.setLocalizedText(jButtonEditCoordinateList, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jButtonEditCoordinateList.text")); // NOI18N
         jButtonEditCoordinateList.addActionListener(new java.awt.event.ActionListener() {
@@ -181,9 +186,13 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
 
         jActivationMGPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jActivationMGPanel.border.title"))); // NOI18N
 
-        jCoordinateListTextArea.setColumns(20);
-        jCoordinateListTextArea.setRows(5);
-        jScrollPane2.setViewportView(jCoordinateListTextArea);
+        jActivationMGTextArea.setEditable(false);
+        jActivationMGTextArea.setBackground(new java.awt.Color(240, 240, 240));
+        jActivationMGTextArea.setColumns(20);
+        jActivationMGTextArea.setRows(5);
+        jActivationMGTextArea.setEnabled(false);
+        jActivationMGTextArea.setFocusable(false);
+        jScrollPane2.setViewportView(jActivationMGTextArea);
 
         org.openide.awt.Mnemonics.setLocalizedText(jButtonEditCoordinates, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jButtonEditCoordinates.text")); // NOI18N
 
@@ -210,8 +219,12 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
 
         jNormalizedFLMGPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jNormalizedFLMGPanel.border.title"))); // NOI18N
 
+        jNormalizedFLMGTextArea.setEditable(false);
+        jNormalizedFLMGTextArea.setBackground(new java.awt.Color(240, 240, 240));
         jNormalizedFLMGTextArea.setColumns(20);
         jNormalizedFLMGTextArea.setRows(5);
+        jNormalizedFLMGTextArea.setEnabled(false);
+        jNormalizedFLMGTextArea.setFocusable(false);
         jScrollPane3.setViewportView(jNormalizedFLMGTextArea);
 
         org.openide.awt.Mnemonics.setLocalizedText(jButtonEditNormalizedFLMG, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jButtonEditNormalizedFLMG.text")); // NOI18N
@@ -239,8 +252,12 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
 
         jMissingEMGPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jMissingEMGPanel.border.title"))); // NOI18N
 
+        jMissingEMGTextArea.setEditable(false);
+        jMissingEMGTextArea.setBackground(new java.awt.Color(240, 240, 240));
         jMissingEMGTextArea.setColumns(20);
         jMissingEMGTextArea.setRows(5);
+        jMissingEMGTextArea.setEnabled(false);
+        jMissingEMGTextArea.setFocusable(false);
         jScrollPane5.setViewportView(jMissingEMGTextArea);
 
         org.openide.awt.Mnemonics.setLocalizedText(jButtonEditMissingEMG, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jButtonEditMissingEMG.text")); // NOI18N
@@ -268,8 +285,12 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
 
         jCollectedEMGPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jCollectedEMGPanel.border.title"))); // NOI18N
 
+        jCollectedEMGTextArea.setEditable(false);
+        jCollectedEMGTextArea.setBackground(new java.awt.Color(240, 240, 240));
         jCollectedEMGTextArea.setColumns(20);
         jCollectedEMGTextArea.setRows(5);
+        jCollectedEMGTextArea.setEnabled(false);
+        jCollectedEMGTextArea.setFocusable(false);
         jScrollPane4.setViewportView(jCollectedEMGTextArea);
 
         org.openide.awt.Mnemonics.setLocalizedText(jButtonEditCollectedEMG, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jButtonEditCollectedEMG.text")); // NOI18N
@@ -440,6 +461,10 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         dlg.setModal(true);
         DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
         Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            ctm.populateCoordinateListProperty();
+            jCoordinateListTextArea.setText(mtpPersonalizationToolModel.getPropCoordinateListString().toString());
+        }
     }//GEN-LAST:event_jButtonEditCoordinateListActionPerformed
 
     @Override
@@ -476,6 +501,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private javax.swing.JTextField currentModelFileTextField;
     private javax.swing.JPanel inputModelPanel;
     private javax.swing.JPanel jActivationMGPanel;
+    private javax.swing.JTextArea jActivationMGTextArea;
     private javax.swing.JButton jButtonEditCollectedEMG;
     private javax.swing.JButton jButtonEditCoordinateList;
     private javax.swing.JButton jButtonEditCoordinates;
@@ -503,7 +529,6 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSpinner jSpinnerSunergyCount;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JPanel outputPanel;
     private org.opensim.swingui.FileTextFieldAndChooser outputResultPath;
     private org.opensim.swingui.FileTextFieldAndChooser passiveDataInputDir;
