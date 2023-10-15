@@ -37,6 +37,18 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
        this.model = model;
        mtpPersonalizationToolModel = new MTPPersonalizationToolModel(model);
        initComponents();
+       outputResultPath.setDialogTitle("Select output directory");
+       outputResultPath.setDirectoriesOnly(true);
+       outputResultPath.setCheckIfFileExists(false);
+       osimxFilePath.setDialogTitle("Select osimx file");
+       osimxFilePath.setDirectoriesOnly(false);
+       osimxFilePath.setExtensionsAndDescription(".osimx", "File to contain pipeline specific entities");
+       dataDirPath.setDialogTitle("Select input data directory");
+       dataDirPath.setDirectoriesOnly(true);
+       dataDirPath.setCheckIfFileExists(true);
+       passiveDataInputDir.setDialogTitle("Select passive data directory");
+       passiveDataInputDir.setDirectoriesOnly(true);
+       passiveDataInputDir.setCheckIfFileExists(false);
        //jCoordinateListTextArea.setText("Coordinates");
        setSettingsFileDescription("Save Muscle Tendon Personalization Settings file (xml)");
     }
@@ -53,6 +65,10 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         inputModelPanel = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         currentModelFileTextField = new javax.swing.JTextField();
+        osimxFilePath = new org.opensim.swingui.FileTextFieldAndChooser();
+        jLabel3 = new javax.swing.JLabel();
+        dataDirPath = new org.opensim.swingui.FileTextFieldAndChooser();
+        jLabel4 = new javax.swing.JLabel();
         outputPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         outputResultPath = new org.opensim.swingui.FileTextFieldAndChooser();
@@ -94,16 +110,38 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         currentModelFileTextField.setToolTipText(org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.currentModelFileTextField.toolTipText")); // NOI18N
         currentModelFileTextField.setMinimumSize(new java.awt.Dimension(3, 20));
 
+        osimxFilePath.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                osimxFilePathStateChanged(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jLabel3.text")); // NOI18N
+
+        dataDirPath.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                dataDirPathStateChanged(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jLabel4.text")); // NOI18N
+
         javax.swing.GroupLayout inputModelPanelLayout = new javax.swing.GroupLayout(inputModelPanel);
         inputModelPanel.setLayout(inputModelPanelLayout);
         inputModelPanelLayout.setHorizontalGroup(
             inputModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(inputModelPanelLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel13)
+                .addGroup(inputModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(currentModelFileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(inputModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(osimxFilePath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(currentModelFileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(dataDirPath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         inputModelPanelLayout.setVerticalGroup(
             inputModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,6 +149,14 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
                 .addGroup(inputModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
                     .addComponent(currentModelFileTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(inputModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(osimxFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(inputModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(dataDirPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -133,7 +179,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(outputResultPath, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         outputPanelLayout.setVerticalGroup(
             outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -375,30 +421,23 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(passiveDataInputDir, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel6Layout.createSequentialGroup()
-                    .addGap(20, 20, 20)
-                    .addComponent(jCheckBoxMTPInitialization)
-                    .addContainerGap(634, Short.MAX_VALUE)))
+                .addComponent(passiveDataInputDir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jCheckBoxMTPInitialization)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(7, 7, 7)
+                .addComponent(jCheckBoxMTPInitialization)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(passiveDataInputDir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel6Layout.createSequentialGroup()
-                    .addGap(17, 17, 17)
-                    .addComponent(jCheckBoxMTPInitialization)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jPanel8.border.title"))); // NOI18N
@@ -412,23 +451,25 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jCheckBoxSynergyExrapolate)
-                .addGap(108, 108, 108)
-                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
                 .addComponent(jSpinnerSunergyCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel2)
-                        .addComponent(jSpinnerSunergyCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jCheckBoxSynergyExrapolate))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jSpinnerSunergyCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jCheckBoxSynergyExrapolate)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -436,19 +477,14 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(settingsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addComponent(inputModelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(outputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inputModelPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(outputPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(settingsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -542,6 +578,14 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         }
     }//GEN-LAST:event_jButtonEditCollectedEMGActionPerformed
 
+    private void osimxFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_osimxFilePathStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_osimxFilePathStateChanged
+
+    private void dataDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_dataDirPathStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dataDirPathStateChanged
+
     @Override
     public void update(Observable o, Object o1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -564,6 +608,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         Model model = OpenSimDB.getInstance().getCurrentModel();
        //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
        mtpPersonalizationToolModel = new MTPPersonalizationToolModel(model, fileName);
+       osimxFilePath.setFileName(mtpPersonalizationToolModel.getInputOsimxFile());
        jCoordinateListTextArea.setText(mtpPersonalizationToolModel.getPropCoordinateListString().toString());
        jActivationMGTextArea.setText(mtpPersonalizationToolModel.getPropActivationMGListString().toString());
        jNormalizedFLMGTextArea.setText(mtpPersonalizationToolModel.getPropNormalizedFLMGListString().toString());
@@ -580,6 +625,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField currentModelFileTextField;
+    private org.opensim.swingui.FileTextFieldAndChooser dataDirPath;
     private javax.swing.JPanel inputModelPanel;
     private javax.swing.JPanel jActivationMGPanel;
     private javax.swing.JTextArea jActivationMGTextArea;
@@ -598,6 +644,8 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jMissingEMGPanel;
     private javax.swing.JTextArea jMissingEMGTextArea;
     private javax.swing.JPanel jNormalizedFLMGPanel;
@@ -610,6 +658,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JSpinner jSpinnerSunergyCount;
+    private org.opensim.swingui.FileTextFieldAndChooser osimxFilePath;
     private javax.swing.JPanel outputPanel;
     private org.opensim.swingui.FileTextFieldAndChooser outputResultPath;
     private org.opensim.swingui.FileTextFieldAndChooser passiveDataInputDir;

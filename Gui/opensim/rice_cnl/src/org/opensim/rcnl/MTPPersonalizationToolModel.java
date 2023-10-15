@@ -62,12 +62,18 @@ public class MTPPersonalizationToolModel {
     private Model model;
     private  PropertyStringList propOutputModelFileString;
     private PropertyStringList propInputModelFileString;
+    private PropertyStringList propInputOsimxFileString;
+    private PropertyStringList propInputDataDirString;
+    
     private PropertyStringList propCoordinateListString;
     // Muscle groups
     private PropertyStringList propActivationMGListString;
     private PropertyStringList propNormalizedFLMGListString;
     private PropertyStringList propMissingEMGMGListString;
     private PropertyStringList propCollectedEMGMGListString;
+    
+    private PropertyStringList propPassiveDataDirString;
+
     
     public MTPPersonalizationToolModel(Model model) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
@@ -86,6 +92,9 @@ public class MTPPersonalizationToolModel {
              String proposedName = model.getInputFileName();
              propInputModelFileString.setValue(0, proposedName);
         }
+        AbstractProperty propInputOsimxFile = toolAsObject.updPropertyByName("input_osimx_file");
+        propInputOsimxFileString = PropertyStringList.getAs(propInputOsimxFile);
+        
         AbstractProperty coordListProp = toolAsObject.updPropertyByName("coordinate_list");
         propCoordinateListString = PropertyStringList.updAs(coordListProp);
         
@@ -116,6 +125,8 @@ public class MTPPersonalizationToolModel {
              String proposedName = model.getInputFileName();
              propInputModelFileString.setValue(0, proposedName);
         }
+        AbstractProperty propInputOsimxFile = toolAsObject.updPropertyByName("input_osimx_file");
+        propInputOsimxFileString = PropertyStringList.getAs(propInputOsimxFile);
         AbstractProperty coordListProp = toolAsObject.updPropertyByName("coordinate_list");
         propCoordinateListString = PropertyStringList.updAs(coordListProp);
         
@@ -151,7 +162,14 @@ public class MTPPersonalizationToolModel {
     public OpenSimObject getToolAsObject() {
         return toolAsObject;
     }
-
+    String getInputOsimxFile() {
+        if (propInputOsimxFileString.size()==1)
+            return propInputOsimxFileString.getValue(0);
+        return "";
+    }
+    void setInputOsimxFile(String newFileName) {
+        propInputOsimxFileString.setValue(newFileName);
+    }
     /**
      * @param toolAsObject the toolAsObject to set
      */
