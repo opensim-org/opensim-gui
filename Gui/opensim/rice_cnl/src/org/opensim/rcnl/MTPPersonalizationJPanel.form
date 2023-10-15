@@ -167,7 +167,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="outputResultPath" min="-2" pref="604" max="-2" attributes="3"/>
+                  <Component id="outputResultDirPath" min="-2" pref="604" max="-2" attributes="3"/>
                   <EmptySpace pref="32" max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -178,7 +178,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                      <Component id="outputResultPath" min="-2" max="-2" attributes="0"/>
+                      <Component id="outputResultDirPath" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -192,9 +192,9 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="org.opensim.swingui.FileTextFieldAndChooser" name="outputResultPath">
+        <Component class="org.opensim.swingui.FileTextFieldAndChooser" name="outputResultDirPath">
           <Events>
-            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="outputResultPathStateChanged"/>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="outputResultDirPathStateChanged"/>
           </Events>
         </Component>
       </SubComponents>
@@ -649,6 +649,9 @@
               <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="MTPPersonalizationJPanel.jCheckBoxMTPInitialization.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxMTPInitializationActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
@@ -668,9 +671,9 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jCheckBoxSynergyExrapolate" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="143" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jSpinnerSunergyCount" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -679,20 +682,13 @@
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jSpinnerSunergyCount" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jCheckBoxSynergyExrapolate" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jCheckBoxSynergyExrapolate" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jSpinnerSunergyCount" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="22" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -704,6 +700,9 @@
               <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="MTPPersonalizationJPanel.jCheckBoxSynergyExrapolate.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCheckBoxSynergyExrapolateActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -713,6 +712,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="jSpinnerSunergyCount">
+          <Events>
+            <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerSunergyCountStateChanged"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

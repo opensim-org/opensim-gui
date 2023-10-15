@@ -37,9 +37,9 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
        this.model = model;
        mtpPersonalizationToolModel = new MTPPersonalizationToolModel(model);
        initComponents();
-       outputResultPath.setDialogTitle("Select output directory");
-       outputResultPath.setDirectoriesOnly(true);
-       outputResultPath.setCheckIfFileExists(false);
+       outputResultDirPath.setDialogTitle("Select output directory");
+       outputResultDirPath.setDirectoriesOnly(true);
+       outputResultDirPath.setCheckIfFileExists(false);
        osimxFilePath.setDialogTitle("Select osimx file");
        osimxFilePath.setDirectoriesOnly(false);
        osimxFilePath.setExtensionsAndDescription(".osimx", "File to contain pipeline specific entities");
@@ -71,7 +71,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jLabel4 = new javax.swing.JLabel();
         outputPanel = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
-        outputResultPath = new org.opensim.swingui.FileTextFieldAndChooser();
+        outputResultDirPath = new org.opensim.swingui.FileTextFieldAndChooser();
         settingsPanel = new javax.swing.JPanel();
         jCoordinatesListPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -164,9 +164,9 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel11, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jLabel11.text")); // NOI18N
 
-        outputResultPath.addChangeListener(new javax.swing.event.ChangeListener() {
+        outputResultDirPath.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                outputResultPathStateChanged(evt);
+                outputResultDirPathStateChanged(evt);
             }
         });
 
@@ -178,7 +178,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
                 .addContainerGap()
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(outputResultPath, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(outputResultDirPath, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         outputPanelLayout.setVerticalGroup(
@@ -187,7 +187,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addComponent(outputResultPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(outputResultDirPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         settingsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.settingsPanel.border.title"))); // NOI18N
@@ -415,6 +415,11 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jLabel1.text")); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxMTPInitialization, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jCheckBoxMTPInitialization.text")); // NOI18N
+        jCheckBoxMTPInitialization.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxMTPInitializationActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -443,8 +448,19 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jPanel8.border.title"))); // NOI18N
 
         org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxSynergyExrapolate, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jCheckBoxSynergyExrapolate.text")); // NOI18N
+        jCheckBoxSynergyExrapolate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxSynergyExrapolateActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(MTPPersonalizationJPanel.class, "MTPPersonalizationJPanel.jLabel2.text")); // NOI18N
+
+        jSpinnerSunergyCount.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerSunergyCountStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -452,25 +468,21 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(jCheckBoxSynergyExrapolate)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(143, 143, 143)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSpinnerSunergyCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jSpinnerSunergyCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jCheckBoxSynergyExrapolate)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jCheckBoxSynergyExrapolate)
+                    .addComponent(jLabel2)
+                    .addComponent(jSpinnerSunergyCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -501,11 +513,13 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void outputResultPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputResultPathStateChanged
+    private void outputResultDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputResultDirPathStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_outputResultPathStateChanged
+         mtpPersonalizationToolModel.setOutputResultDir(outputResultDirPath.getFileName());
+    }//GEN-LAST:event_outputResultDirPathStateChanged
 
     private void passiveDataInputDirStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_passiveDataInputDirStateChanged
+        mtpPersonalizationToolModel.setPassiveDataDir(passiveDataInputDir.getFileName());
     }//GEN-LAST:event_passiveDataInputDirStateChanged
 
     private void jButtonEditCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCoordinateListActionPerformed
@@ -580,11 +594,28 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
 
     private void osimxFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_osimxFilePathStateChanged
         // TODO add your handling code here:
+        mtpPersonalizationToolModel.setInputOsimxFile(osimxFilePath.getFileName());
     }//GEN-LAST:event_osimxFilePathStateChanged
 
     private void dataDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_dataDirPathStateChanged
         // TODO add your handling code here:
+        mtpPersonalizationToolModel.setDataDir(dataDirPath.getFileName());
     }//GEN-LAST:event_dataDirPathStateChanged
+
+    private void jCheckBoxMTPInitializationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMTPInitializationActionPerformed
+        // TODO add your handling code here:
+        mtpPersonalizationToolModel.setEnableInitialization(jCheckBoxMTPInitialization.isSelected());
+    }//GEN-LAST:event_jCheckBoxMTPInitializationActionPerformed
+
+    private void jCheckBoxSynergyExrapolateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxSynergyExrapolateActionPerformed
+        // TODO add your handling code here:
+        mtpPersonalizationToolModel.setEnableSynergies(jCheckBoxSynergyExrapolate.isSelected());
+    }//GEN-LAST:event_jCheckBoxSynergyExrapolateActionPerformed
+
+    private void jSpinnerSunergyCountStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerSunergyCountStateChanged
+        // TODO add your handling code here:
+        mtpPersonalizationToolModel.setNumSynergies((Integer)jSpinnerSunergyCount.getValue());
+    }//GEN-LAST:event_jSpinnerSunergyCountStateChanged
 
     @Override
     public void update(Observable o, Object o1) {
@@ -609,12 +640,18 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
        //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
        mtpPersonalizationToolModel = new MTPPersonalizationToolModel(model, fileName);
        osimxFilePath.setFileName(mtpPersonalizationToolModel.getInputOsimxFile());
+       dataDirPath.setFileName(mtpPersonalizationToolModel.getDataDir());
+       outputResultDirPath.setFileName(mtpPersonalizationToolModel.getOutputResultDir());
        jCoordinateListTextArea.setText(mtpPersonalizationToolModel.getPropCoordinateListString().toString());
        jActivationMGTextArea.setText(mtpPersonalizationToolModel.getPropActivationMGListString().toString());
        jNormalizedFLMGTextArea.setText(mtpPersonalizationToolModel.getPropNormalizedFLMGListString().toString());
        jMissingEMGTextArea.setText(mtpPersonalizationToolModel.getPropMissingEMGMGListString().toString());
        jCollectedEMGTextArea.setText(mtpPersonalizationToolModel.getPropCollectedEMGMGListString().toString());
+       passiveDataInputDir.setFileName(mtpPersonalizationToolModel.getPassiveDataDir());
        setSettingsFileDescription("Save Muscle Tendon Personalization Settings file (xml)");
+       jCheckBoxMTPInitialization.setSelected(mtpPersonalizationToolModel.getEnableInitialization());
+       jCheckBoxSynergyExrapolate.setSelected(mtpPersonalizationToolModel.getEnableSynergies());
+       jSpinnerSunergyCount.setValue(mtpPersonalizationToolModel.getNumSynergies());
     }
 
     @Override
@@ -660,7 +697,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private javax.swing.JSpinner jSpinnerSunergyCount;
     private org.opensim.swingui.FileTextFieldAndChooser osimxFilePath;
     private javax.swing.JPanel outputPanel;
-    private org.opensim.swingui.FileTextFieldAndChooser outputResultPath;
+    private org.opensim.swingui.FileTextFieldAndChooser outputResultDirPath;
     private org.opensim.swingui.FileTextFieldAndChooser passiveDataInputDir;
     private javax.swing.JPanel settingsPanel;
     // End of variables declaration//GEN-END:variables
