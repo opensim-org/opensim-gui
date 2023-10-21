@@ -37,6 +37,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
        this.model = model;
        mtpPersonalizationToolModel = new MTPPersonalizationToolModel(model);
        initComponents();
+       currentModelFileTextField.setText(mtpPersonalizationToolModel.getInputModelFile());
        outputResultDirPath.setDialogTitle("Select output directory");
        outputResultDirPath.setDirectoriesOnly(true);
        outputResultDirPath.setCheckIfFileExists(false);

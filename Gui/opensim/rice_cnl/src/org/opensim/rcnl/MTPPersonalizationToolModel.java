@@ -58,11 +58,9 @@ public class MTPPersonalizationToolModel {
     private OpenSimObject toolAsObject;
     private String resultsDir = ".";
     private String inputDir = ".";
-    private String outputModelFile = "";
     private double accuracy=1e-5;
     private String modelName;
     private Model model;
-    private PropertyStringList propOutputModelFileString;
     private PropertyStringList propInputModelFileString;
     private PropertyStringList propInputOsimxFileString;
     private PropertyStringList propInputDataDirString;
@@ -87,12 +85,6 @@ public class MTPPersonalizationToolModel {
         toolAsObject = OpenSimObject.newInstanceOfType("MuscleTendonPersonalizationTool");
         this.model = model;
         modelName = model.getName();
-        AbstractProperty propOutputModelFile = toolAsObject.updPropertyByName("output_model_file");
-        propOutputModelFileString = PropertyStringList.getAs(propOutputModelFile);
-        if (propOutputModelFileString.size()==0 || propOutputModelFileString.getValue(0).isEmpty()){
-             String proposedName = model.getInputFileName().replace(".osim", "_MTP.osim");
-             propOutputModelFileString.setValue(0, proposedName);
-        }
         AbstractProperty propInputModelFile = toolAsObject.updPropertyByName("input_model_file");
         propInputModelFileString = PropertyStringList.getAs(propInputModelFile);
         if (propInputModelFileString.size()==0 || propInputModelFileString.getValue(0).isEmpty()){
@@ -137,12 +129,6 @@ public class MTPPersonalizationToolModel {
         toolAsObject = OpenSimObject.makeObjectFromFile(fileXml);
         this.model = model;
         modelName = model.getName();
-        AbstractProperty prop = toolAsObject.updPropertyByName("output_model_file");
-        propOutputModelFileString = PropertyStringList.getAs(prop);
-        if (propOutputModelFileString.size()==0|| propOutputModelFileString.getValue(0).isEmpty()){
-             String proposedName = model.getInputFileName().replace(".osim", "_perjoint.osim");
-             propOutputModelFileString.setValue(0, proposedName);
-        }
         connectPropertiesToClassMembers();
     }
 
@@ -156,12 +142,7 @@ public class MTPPersonalizationToolModel {
     public String getInputModelFile() {
         return propInputModelFileString.getValue(0);
     }
-    String getOutputModelFile() {
-        return propOutputModelFileString.getValue(0);
-    }
-    void setOutputModelFile(String newFileName) {
-        propOutputModelFileString.setValue(newFileName);
-    }
+
     /**
      * @return the toolAsObject
      */
