@@ -72,6 +72,10 @@ public final class ModelPersonalizationAction extends CallableSystemAction {
             javax.swing.JMenuItem mTPMenuItem = new JMenuItem("Muscle Tendon Optimization...");
             mTPMenuItem.addActionListener(new MTPPersonalizationAction());
             this.add(mTPMenuItem);
+            javax.swing.JMenuItem nCPMenuItem = new JMenuItem("Neural Control Optimization...");
+            nCPMenuItem.addActionListener(new NeuralControlPersonalizationAction());
+            this.add(nCPMenuItem);
+            
         }
     }
 }
