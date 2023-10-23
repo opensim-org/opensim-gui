@@ -39,11 +39,11 @@ public final class NeuralControlPersonalizationAction implements ActionListener 
       }
 
       try {
-         final MTPPersonalizationJPanel jpPanel = new MTPPersonalizationJPanel(model);
-         BaseToolPanel.openToolDialog(jpPanel, "Muscle Tendon Personalization Tool");
+         final NCPPersonalizationJPanel jpPanel = new NCPPersonalizationJPanel(model);
+         BaseToolPanel.openToolDialog(jpPanel, "Neural Control Personalization Tool");
       } catch (IOException ex) {
-         ErrorDialog.displayIOExceptionDialog("Muscle Tendon Personalization Error",
-                    "Error while initializing Muscle Tendon Personalization tool",ex);
+         ErrorDialog.displayIOExceptionDialog("Neural Control Personalization Error",
+                    "Error while initializing Neural Control Personalization tool",ex);
       }
 
         ;

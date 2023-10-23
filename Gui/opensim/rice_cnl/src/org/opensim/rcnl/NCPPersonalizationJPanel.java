@@ -27,17 +27,17 @@ import org.opensim.view.pub.OpenSimDB;
  * @author Ayman-NMBL
  */
 public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer {
-    private MTPPersonalizationToolModel mtpPersonalizationToolModel = null;
+    private NCPPersonalizationToolModel ncpPersonalizationToolModel = null;
     private Model model;
     /**
      * Creates new form JointPersonalizationJPanel
      */
     public NCPPersonalizationJPanel(Model model)  throws IOException  {
-       if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
+       if(model==null) throw new IOException("NCPPersonalizationJPanel got null model");
        this.model = model;
-       mtpPersonalizationToolModel = new MTPPersonalizationToolModel(model);
+       ncpPersonalizationToolModel = new NCPPersonalizationToolModel(model);
        initComponents();
-       currentModelFileTextField.setText(mtpPersonalizationToolModel.getInputModelFile());
+       currentModelFileTextField.setText(ncpPersonalizationToolModel.getInputModelFile());
        outputResultDirPath.setDialogTitle("Select output directory");
        outputResultDirPath.setDirectoriesOnly(true);
        outputResultDirPath.setCheckIfFileExists(false);
@@ -51,7 +51,7 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
        passiveDataInputDir.setDirectoriesOnly(true);
        passiveDataInputDir.setCheckIfFileExists(false);
        //jCoordinateListTextArea.setText("Coordinates");
-       setSettingsFileDescription("Save Muscle Tendon Personalization Settings file (xml)");
+       setSettingsFileDescription("Save Neural Control Personalization Settings file (xml)");
     }
 
     /**
@@ -86,22 +86,17 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jScrollPane3 = new javax.swing.JScrollPane();
         jNormalizedFLMGTextArea = new javax.swing.JTextArea();
         jButtonEditNormalizedFLMG = new javax.swing.JButton();
-        jMissingEMGPanel = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jMissingEMGTextArea = new javax.swing.JTextArea();
-        jButtonEditMissingEMG = new javax.swing.JButton();
-        jCollectedEMGPanel = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jCollectedEMGTextArea = new javax.swing.JTextArea();
-        jButtonEditCollectedEMG = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         passiveDataInputDir = new org.opensim.swingui.FileTextFieldAndChooser();
         jLabel1 = new javax.swing.JLabel();
         jCheckBoxMTPInitialization = new javax.swing.JCheckBox();
-        jPanel8 = new javax.swing.JPanel();
-        jCheckBoxSynergyExrapolate = new javax.swing.JCheckBox();
-        jLabel2 = new javax.swing.JLabel();
-        jSpinnerSunergyCount = new javax.swing.JSpinner();
+        previousStageOutputPanel = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        mTPResultDirPath = new org.opensim.swingui.FileTextFieldAndChooser();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jSynergySetTextArea = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
 
         inputModelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.inputModelPanel.border.title"))); // NOI18N
 
@@ -180,7 +175,7 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
                 .addComponent(jLabel11)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(outputResultDirPath, javax.swing.GroupLayout.PREFERRED_SIZE, 604, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         outputPanelLayout.setVerticalGroup(
             outputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,79 +302,6 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
                 .addGap(0, 0, 0))
         );
 
-        jMissingEMGPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.jMissingEMGPanel.border.title"))); // NOI18N
-
-        jMissingEMGTextArea.setEditable(false);
-        jMissingEMGTextArea.setBackground(new java.awt.Color(240, 240, 240));
-        jMissingEMGTextArea.setColumns(20);
-        jMissingEMGTextArea.setRows(5);
-        jMissingEMGTextArea.setEnabled(false);
-        jMissingEMGTextArea.setFocusable(false);
-        jScrollPane5.setViewportView(jMissingEMGTextArea);
-
-        org.openide.awt.Mnemonics.setLocalizedText(jButtonEditMissingEMG, org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.jButtonEditMissingEMG.text")); // NOI18N
-        jButtonEditMissingEMG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditMissingEMGActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jMissingEMGPanelLayout = new javax.swing.GroupLayout(jMissingEMGPanel);
-        jMissingEMGPanel.setLayout(jMissingEMGPanelLayout);
-        jMissingEMGPanelLayout.setHorizontalGroup(
-            jMissingEMGPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jMissingEMGPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 622, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonEditMissingEMG)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jMissingEMGPanelLayout.setVerticalGroup(
-            jMissingEMGPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jMissingEMGPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jMissingEMGPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jButtonEditMissingEMG)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        jCollectedEMGPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.jCollectedEMGPanel.border.title"))); // NOI18N
-
-        jCollectedEMGTextArea.setEditable(false);
-        jCollectedEMGTextArea.setBackground(new java.awt.Color(240, 240, 240));
-        jCollectedEMGTextArea.setColumns(20);
-        jCollectedEMGTextArea.setRows(5);
-        jCollectedEMGTextArea.setEnabled(false);
-        jCollectedEMGTextArea.setFocusable(false);
-        jScrollPane4.setViewportView(jCollectedEMGTextArea);
-
-        org.openide.awt.Mnemonics.setLocalizedText(jButtonEditCollectedEMG, org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.jButtonEditCollectedEMG.text")); // NOI18N
-        jButtonEditCollectedEMG.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditCollectedEMGActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jCollectedEMGPanelLayout = new javax.swing.GroupLayout(jCollectedEMGPanel);
-        jCollectedEMGPanel.setLayout(jCollectedEMGPanelLayout);
-        jCollectedEMGPanelLayout.setHorizontalGroup(
-            jCollectedEMGPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jCollectedEMGPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 627, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonEditCollectedEMG)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jCollectedEMGPanelLayout.setVerticalGroup(
-            jCollectedEMGPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(jCollectedEMGPanelLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jButtonEditCollectedEMG))
-        );
-
         javax.swing.GroupLayout settingsPanelLayout = new javax.swing.GroupLayout(settingsPanel);
         settingsPanel.setLayout(settingsPanelLayout);
         settingsPanelLayout.setHorizontalGroup(
@@ -387,8 +309,6 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
             .addComponent(jCoordinatesListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jActivationMGPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jNormalizedFLMGPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jMissingEMGPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jCollectedEMGPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         settingsPanelLayout.setVerticalGroup(
             settingsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,10 +318,6 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
                 .addComponent(jActivationMGPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jNormalizedFLMGPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jMissingEMGPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCollectedEMGPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -446,58 +362,88 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.jPanel8.border.title"))); // NOI18N
+        previousStageOutputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.previousStageOutputPanel.border.title"))); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBoxSynergyExrapolate, org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.jCheckBoxSynergyExrapolate.text")); // NOI18N
-        jCheckBoxSynergyExrapolate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBoxSynergyExrapolateActionPerformed(evt);
-            }
-        });
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel12, org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.jLabel12.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.jLabel2.text")); // NOI18N
-
-        jSpinnerSunergyCount.addChangeListener(new javax.swing.event.ChangeListener() {
+        mTPResultDirPath.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jSpinnerSunergyCountStateChanged(evt);
+                mTPResultDirPathStateChanged(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addComponent(jCheckBoxSynergyExrapolate)
-                .addGap(143, 143, 143)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSpinnerSunergyCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout previousStageOutputPanelLayout = new javax.swing.GroupLayout(previousStageOutputPanel);
+        previousStageOutputPanel.setLayout(previousStageOutputPanelLayout);
+        previousStageOutputPanelLayout.setHorizontalGroup(
+            previousStageOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(previousStageOutputPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(mTPResultDirPath, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBoxSynergyExrapolate)
-                    .addComponent(jLabel2)
-                    .addComponent(jSpinnerSunergyCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+        previousStageOutputPanelLayout.setVerticalGroup(
+            previousStageOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(previousStageOutputPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(previousStageOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel12)
+                    .addComponent(mTPResultDirPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.jPanel1.border.title"))); // NOI18N
+
+        jSynergySetTextArea.setEditable(false);
+        jSynergySetTextArea.setBackground(new java.awt.Color(240, 240, 240));
+        jSynergySetTextArea.setColumns(20);
+        jSynergySetTextArea.setRows(5);
+        jSynergySetTextArea.setEnabled(false);
+        jSynergySetTextArea.setFocusable(false);
+        jScrollPane4.setViewportView(jSynergySetTextArea);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.jButton1.text")); // NOI18N
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jButton1))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 93, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addComponent(jButton1)
+                .addContainerGap(34, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 78, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(inputModelPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(outputPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(settingsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(inputModelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(outputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(settingsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(previousStageOutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -505,28 +451,31 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
                 .addComponent(inputModelPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(outputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(settingsPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(previousStageOutputPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void outputResultDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputResultDirPathStateChanged
         // TODO add your handling code here:
-         mtpPersonalizationToolModel.setOutputResultDir(outputResultDirPath.getFileName());
+         ncpPersonalizationToolModel.setOutputResultDir(outputResultDirPath.getFileName());
     }//GEN-LAST:event_outputResultDirPathStateChanged
 
     private void passiveDataInputDirStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_passiveDataInputDirStateChanged
-        mtpPersonalizationToolModel.setPassiveDataDir(passiveDataInputDir.getFileName());
+        ncpPersonalizationToolModel.setPassiveDataDir(passiveDataInputDir.getFileName());
     }//GEN-LAST:event_passiveDataInputDirStateChanged
 
     private void jButtonEditCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCoordinateListActionPerformed
         // TODO add your handling code here:
         // Create Panel for selecting from existing model coordinates
-        CoordinateTableModel ctm = new CoordinateTableModel(mtpPersonalizationToolModel.getPropCoordinateListString(), model);
+        CoordinateTableModel ctm = new CoordinateTableModel(ncpPersonalizationToolModel.getPropCoordinateListString(), model);
         SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
         dlg.setModal(true);
@@ -534,13 +483,13 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
             ctm.populateCoordinateListProperty();
-            jCoordinateListTextArea.setText(mtpPersonalizationToolModel.getPropCoordinateListString().toString());
+            jCoordinateListTextArea.setText(ncpPersonalizationToolModel.getPropCoordinateListString().toString());
         }
     }//GEN-LAST:event_jButtonEditCoordinateListActionPerformed
 
     private void jButtonEditActivationMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActivationMGActionPerformed
         // TODO add your handling code here:
-        MuscleGroupTableModel ctm = new MuscleGroupTableModel(mtpPersonalizationToolModel.getPropActivationMGListString(), model);
+        MuscleGroupTableModel ctm = new MuscleGroupTableModel(ncpPersonalizationToolModel.getPropActivationMGListString(), model);
         SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
         dlg.setModal(true);
@@ -548,12 +497,12 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
             ctm.populateMuscleGroupProperty();
-            jActivationMGTextArea.setText(mtpPersonalizationToolModel.getPropActivationMGListString().toString());
+            jActivationMGTextArea.setText(ncpPersonalizationToolModel.getPropActivationMGListString().toString());
         }
     }//GEN-LAST:event_jButtonEditActivationMGActionPerformed
 
     private void jButtonEditNormalizedFLMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditNormalizedFLMGActionPerformed
-        MuscleGroupTableModel ctm = new MuscleGroupTableModel(mtpPersonalizationToolModel.getPropNormalizedFLMGListString(), model);
+        MuscleGroupTableModel ctm = new MuscleGroupTableModel(ncpPersonalizationToolModel.getPropNormalizedFLMGListString(), model);
         SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
         dlg.setModal(true);
@@ -561,62 +510,28 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
             ctm.populateMuscleGroupProperty();
-            jNormalizedFLMGTextArea.setText(mtpPersonalizationToolModel.getPropNormalizedFLMGListString().toString());
+            jNormalizedFLMGTextArea.setText(ncpPersonalizationToolModel.getPropNormalizedFLMGListString().toString());
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEditNormalizedFLMGActionPerformed
 
-    private void jButtonEditMissingEMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditMissingEMGActionPerformed
-        // TODO add your handling code here:
-        MuscleGroupTableModel ctm = new MuscleGroupTableModel(mtpPersonalizationToolModel.getPropMissingEMGMGListString(), model);
-        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
-        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
-        dlg.setModal(true);
-        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            ctm.populateMuscleGroupProperty();
-            jMissingEMGTextArea.setText(mtpPersonalizationToolModel.getPropMissingEMGMGListString().toString());
-        }
-    }//GEN-LAST:event_jButtonEditMissingEMGActionPerformed
-
-    private void jButtonEditCollectedEMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCollectedEMGActionPerformed
-        // TODO add your handling code here:
-        MuscleGroupTableModel ctm = new MuscleGroupTableModel(mtpPersonalizationToolModel.getPropCollectedEMGMGListString(), model);
-        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
-        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
-        dlg.setModal(true);
-        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            ctm.populateMuscleGroupProperty();
-            jCollectedEMGTextArea.setText(mtpPersonalizationToolModel.getPropCollectedEMGMGListString().toString());
-        }
-    }//GEN-LAST:event_jButtonEditCollectedEMGActionPerformed
-
     private void osimxFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_osimxFilePathStateChanged
         // TODO add your handling code here:
-        mtpPersonalizationToolModel.setInputOsimxFile(osimxFilePath.getFileName());
+        ncpPersonalizationToolModel.setInputOsimxFile(osimxFilePath.getFileName());
     }//GEN-LAST:event_osimxFilePathStateChanged
 
     private void dataDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_dataDirPathStateChanged
         // TODO add your handling code here:
-        mtpPersonalizationToolModel.setDataDir(dataDirPath.getFileName());
+        ncpPersonalizationToolModel.setDataDir(dataDirPath.getFileName());
     }//GEN-LAST:event_dataDirPathStateChanged
 
     private void jCheckBoxMTPInitializationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxMTPInitializationActionPerformed
         // TODO add your handling code here:
-        mtpPersonalizationToolModel.setEnableInitialization(jCheckBoxMTPInitialization.isSelected());
+        ncpPersonalizationToolModel.setEnableInitialization(jCheckBoxMTPInitialization.isSelected());
     }//GEN-LAST:event_jCheckBoxMTPInitializationActionPerformed
 
-    private void jCheckBoxSynergyExrapolateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxSynergyExrapolateActionPerformed
+    private void mTPResultDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mTPResultDirPathStateChanged
         // TODO add your handling code here:
-        mtpPersonalizationToolModel.setEnableSynergies(jCheckBoxSynergyExrapolate.isSelected());
-    }//GEN-LAST:event_jCheckBoxSynergyExrapolateActionPerformed
-
-    private void jSpinnerSunergyCountStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerSunergyCountStateChanged
-        // TODO add your handling code here:
-        mtpPersonalizationToolModel.setNumSynergies((Integer)jSpinnerSunergyCount.getValue());
-    }//GEN-LAST:event_jSpinnerSunergyCountStateChanged
+    }//GEN-LAST:event_mTPResultDirPathStateChanged
 
     @Override
     public void update(Observable o, Object o1) {
@@ -632,27 +547,23 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
     public void saveSettings(String fileName) {
          String fullFilename = FileUtils.addExtensionIfNeeded(fileName, ".xml");
          OpenSimObject.setSerializeAllDefaults(true);
-         mtpPersonalizationToolModel.getToolAsObject().print(fullFilename);
+         ncpPersonalizationToolModel.getToolAsObject().print(fullFilename);
     }
 
     @Override
     public void loadSettings(String fileName) {
         Model model = OpenSimDB.getInstance().getCurrentModel();
        //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
-       mtpPersonalizationToolModel = new MTPPersonalizationToolModel(model, fileName);
-       osimxFilePath.setFileName(mtpPersonalizationToolModel.getInputOsimxFile());
-       dataDirPath.setFileName(mtpPersonalizationToolModel.getDataDir());
-       outputResultDirPath.setFileName(mtpPersonalizationToolModel.getOutputResultDir());
-       jCoordinateListTextArea.setText(mtpPersonalizationToolModel.getPropCoordinateListString().toString());
-       jActivationMGTextArea.setText(mtpPersonalizationToolModel.getPropActivationMGListString().toString());
-       jNormalizedFLMGTextArea.setText(mtpPersonalizationToolModel.getPropNormalizedFLMGListString().toString());
-       jMissingEMGTextArea.setText(mtpPersonalizationToolModel.getPropMissingEMGMGListString().toString());
-       jCollectedEMGTextArea.setText(mtpPersonalizationToolModel.getPropCollectedEMGMGListString().toString());
-       passiveDataInputDir.setFileName(mtpPersonalizationToolModel.getPassiveDataDir());
-       setSettingsFileDescription("Save Muscle Tendon Personalization Settings file (xml)");
-       jCheckBoxMTPInitialization.setSelected(mtpPersonalizationToolModel.getEnableInitialization());
-       jCheckBoxSynergyExrapolate.setSelected(mtpPersonalizationToolModel.getEnableSynergies());
-       jSpinnerSunergyCount.setValue(mtpPersonalizationToolModel.getNumSynergies());
+       ncpPersonalizationToolModel = new NCPPersonalizationToolModel(model, fileName);
+       osimxFilePath.setFileName(ncpPersonalizationToolModel.getInputOsimxFile());
+       dataDirPath.setFileName(ncpPersonalizationToolModel.getDataDir());
+       outputResultDirPath.setFileName(ncpPersonalizationToolModel.getOutputResultDir());
+       jCoordinateListTextArea.setText(ncpPersonalizationToolModel.getPropCoordinateListString().toString());
+       jActivationMGTextArea.setText(ncpPersonalizationToolModel.getPropActivationMGListString().toString());
+       jNormalizedFLMGTextArea.setText(ncpPersonalizationToolModel.getPropNormalizedFLMGListString().toString());
+       passiveDataInputDir.setFileName(ncpPersonalizationToolModel.getPassiveDataDir());
+       setSettingsFileDescription("Save Neural Control Personalization Settings file (xml)");
+       jCheckBoxMTPInitialization.setSelected(ncpPersonalizationToolModel.getEnableInitialization());
     }
 
     @Override
@@ -667,39 +578,34 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private javax.swing.JPanel inputModelPanel;
     private javax.swing.JPanel jActivationMGPanel;
     private javax.swing.JTextArea jActivationMGTextArea;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonEditActivationMG;
-    private javax.swing.JButton jButtonEditCollectedEMG;
     private javax.swing.JButton jButtonEditCoordinateList;
-    private javax.swing.JButton jButtonEditMissingEMG;
     private javax.swing.JButton jButtonEditNormalizedFLMG;
     private javax.swing.JCheckBox jCheckBoxMTPInitialization;
-    private javax.swing.JCheckBox jCheckBoxSynergyExrapolate;
-    private javax.swing.JPanel jCollectedEMGPanel;
-    private javax.swing.JTextArea jCollectedEMGTextArea;
     private javax.swing.JTextArea jCoordinateListTextArea;
     private javax.swing.JPanel jCoordinatesListPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jMissingEMGPanel;
-    private javax.swing.JTextArea jMissingEMGTextArea;
     private javax.swing.JPanel jNormalizedFLMGPanel;
     private javax.swing.JTextArea jNormalizedFLMGTextArea;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JSpinner jSpinnerSunergyCount;
+    private javax.swing.JTextArea jSynergySetTextArea;
+    private org.opensim.swingui.FileTextFieldAndChooser mTPResultDirPath;
     private org.opensim.swingui.FileTextFieldAndChooser osimxFilePath;
     private javax.swing.JPanel outputPanel;
     private org.opensim.swingui.FileTextFieldAndChooser outputResultDirPath;
     private org.opensim.swingui.FileTextFieldAndChooser passiveDataInputDir;
+    private javax.swing.JPanel previousStageOutputPanel;
     private javax.swing.JPanel settingsPanel;
     // End of variables declaration//GEN-END:variables
 
