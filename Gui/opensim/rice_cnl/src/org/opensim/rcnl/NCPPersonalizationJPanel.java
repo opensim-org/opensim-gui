@@ -99,7 +99,7 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jPanel1 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         jSynergySetTextArea = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
+        jButtonEditSynergySet = new javax.swing.JButton();
 
         inputModelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.inputModelPanel.border.title"))); // NOI18N
 
@@ -405,7 +405,12 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
         jSynergySetTextArea.setFocusable(false);
         jScrollPane4.setViewportView(jSynergySetTextArea);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jButton1, org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.jButton1.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jButtonEditSynergySet, org.openide.util.NbBundle.getMessage(NCPPersonalizationJPanel.class, "NCPPersonalizationJPanel.jButtonEditSynergySet.text")); // NOI18N
+        jButtonEditSynergySet.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditSynergySetActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -413,7 +418,7 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1))
+                .addComponent(jButtonEditSynergySet))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 623, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -423,7 +428,7 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(31, 31, 31)
-                .addComponent(jButton1)
+                .addComponent(jButtonEditSynergySet)
                 .addContainerGap(34, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
@@ -537,6 +542,19 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
         ncpPersonalizationToolModel.setMTPDir(mTPResultDirPath.getFileName());
     }//GEN-LAST:event_mTPResultDirPathStateChanged
 
+    private void jButtonEditSynergySetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSynergySetActionPerformed
+        MuscleGroupSynergiesTableModel ctm = new MuscleGroupSynergiesTableModel(ncpPersonalizationToolModel.getPropActivationMGListString(), model);
+        SelectGroupsNSynergiesFromListJPanel selectionPanel = new SelectGroupsNSynergiesFromListJPanel(ctm);
+        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups and Synergies");
+        dlg.setModal(true);
+        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            //ctm.populateMuscleGroupProperty();
+            //jActivationMGTextArea.setText(mtpPersonalizationToolModel.getPropActivationMGListString().toString());
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEditSynergySetActionPerformed
+
     @Override
     public void update(Observable o, Object o1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -583,10 +601,10 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private javax.swing.JPanel inputModelPanel;
     private javax.swing.JPanel jActivationMGPanel;
     private javax.swing.JTextArea jActivationMGTextArea;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonEditActivationMG;
     private javax.swing.JButton jButtonEditCoordinateList;
     private javax.swing.JButton jButtonEditNormalizedFLMG;
+    private javax.swing.JButton jButtonEditSynergySet;
     private javax.swing.JCheckBox jCheckBoxMTPInitialization;
     private javax.swing.JTextArea jCoordinateListTextArea;
     private javax.swing.JPanel jCoordinatesListPanel;
