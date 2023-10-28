@@ -60,6 +60,7 @@ public class NCPPersonalizationToolModel {
     private PropertyStringList propPassiveDataDirString;
     private OpenSimObject muscleTendonLengthInitializationAsObject;
     private PropertyBoolList propInitializationEnabled;
+    private PropertyStringList propMTPDirString;
 
     
     public NCPPersonalizationToolModel(Model model) {
@@ -97,6 +98,8 @@ public class NCPPersonalizationToolModel {
         muscleTendonLengthInitializationAsObject = toolAsObject.updPropertyByName("MuscleTendonLengthInitialization").getValueAsObject();
         propPassiveDataDirString = PropertyStringList.updAs(muscleTendonLengthInitializationAsObject.updPropertyByName("passive_data_input_directory"));
         propInitializationEnabled = PropertyBoolList.updAs(muscleTendonLengthInitializationAsObject.updPropertyByName("is_enabled"));
+        
+        propMTPDirString = PropertyStringList.getAs(toolAsObject.updPropertyByName("mtp_results_directory"));
         
     }
     public NCPPersonalizationToolModel(Model model, String fileXml) {
@@ -173,6 +176,15 @@ public class NCPPersonalizationToolModel {
     }
     boolean getEnableInitialization() {
         return propInitializationEnabled.getValue();
+    }
+
+    void setMTPDir(String fileName) {
+        propMTPDirString.setValue(fileName);
+    }
+    String getMTPDir() {
+        if (propMTPDirString.size()==1)
+            return propMTPDirString.getValue();
+        return "";
     }
 
 }

@@ -50,6 +50,9 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
        passiveDataInputDir.setDialogTitle("Select passive data directory");
        passiveDataInputDir.setDirectoriesOnly(true);
        passiveDataInputDir.setCheckIfFileExists(false);
+       mTPResultDirPath.setDirectoriesOnly(true);
+       mTPResultDirPath.setDialogTitle("Select directory containing MTP Results");
+       mTPResultDirPath.setCheckIfFileExists(true);
        //jCoordinateListTextArea.setText("Coordinates");
        setSettingsFileDescription("Save Neural Control Personalization Settings file (xml)");
     }
@@ -531,6 +534,7 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
 
     private void mTPResultDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_mTPResultDirPathStateChanged
         // TODO add your handling code here:
+        ncpPersonalizationToolModel.setMTPDir(mTPResultDirPath.getFileName());
     }//GEN-LAST:event_mTPResultDirPathStateChanged
 
     @Override
@@ -564,6 +568,7 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
        passiveDataInputDir.setFileName(ncpPersonalizationToolModel.getPassiveDataDir());
        setSettingsFileDescription("Save Neural Control Personalization Settings file (xml)");
        jCheckBoxMTPInitialization.setSelected(ncpPersonalizationToolModel.getEnableInitialization());
+       mTPResultDirPath.setFileName(ncpPersonalizationToolModel.getMTPDir());
     }
 
     @Override
