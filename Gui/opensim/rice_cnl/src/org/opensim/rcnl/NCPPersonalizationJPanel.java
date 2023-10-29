@@ -543,15 +543,15 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
     }//GEN-LAST:event_mTPResultDirPathStateChanged
 
     private void jButtonEditSynergySetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSynergySetActionPerformed
-        MuscleGroupSynergiesTableModel ctm = new MuscleGroupSynergiesTableModel(ncpPersonalizationToolModel.getPropActivationMGListString(), model);
+        MuscleGroupSynergiesTableModel ctm = new MuscleGroupSynergiesTableModel(ncpPersonalizationToolModel.getSynergyList(), model);
         SelectGroupsNSynergiesFromListJPanel selectionPanel = new SelectGroupsNSynergiesFromListJPanel(ctm);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups and Synergies");
         dlg.setModal(true);
         DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            //ctm.populateMuscleGroupProperty();
-            //jActivationMGTextArea.setText(mtpPersonalizationToolModel.getPropActivationMGListString().toString());
+            ctm.populateMuscleGroupSynergiesProperty();
+            jSynergySetTextArea.setText(ncpPersonalizationToolModel.getSynergiesAsString());
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEditSynergySetActionPerformed
 

@@ -10,6 +10,9 @@ import org.opensim.modeling.ArrayBool;
 import org.opensim.modeling.ArrayInt;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyIntList;
+import org.opensim.modeling.PropertyObjectList;
 import org.opensim.modeling.PropertyStringList;
 
 /**
@@ -18,15 +21,15 @@ import org.opensim.modeling.PropertyStringList;
  */
 public class MuscleGroupSynergiesTableModel  extends AbstractTableModel{
 
-    PropertyStringList muscleGroupProperty;
+    PropertyObjectList muscleGroupSynergyListProperty;
     Model model;
     String[] tableColumnNames= {"Groups", "Synergies", "Selected"};
     ArrayStr groupNames = new ArrayStr();
     ArrayInt synergyCount = new ArrayInt();
     ArrayBool selected = new ArrayBool();
     
-    public MuscleGroupSynergiesTableModel(PropertyStringList muscleGroupProperty, Model model){
-        this.muscleGroupProperty = muscleGroupProperty;
+    public MuscleGroupSynergiesTableModel(PropertyObjectList muscleGroupSynergyListProperty, Model model){
+        this.muscleGroupSynergyListProperty = muscleGroupSynergyListProperty;
         this.model = model;
         model.getForceSet().getGroupNames(groupNames);
         for (int i=0; i < groupNames.getSize(); i++){
@@ -37,9 +40,15 @@ public class MuscleGroupSynergiesTableModel  extends AbstractTableModel{
             selected.append(Boolean.FALSE);
         }
         // Now select entries based on passed in coordinateListProperty
-        for (int p=0; p < muscleGroupProperty.size(); p++){
-            int cIndex = groupNames.findIndex(muscleGroupProperty.getValue(p));
-            setValueAt(Boolean.TRUE, cIndex, 2);
+        for (int p=0; p < muscleGroupSynergyListProperty.size(); p++){
+            OpenSimObject oneGroupSynergy = muscleGroupSynergyListProperty.getValue(p);
+            PropertyStringList groupName = PropertyStringList.getAs(oneGroupSynergy.getPropertyByName("muscle_group_name"));
+            String gName = groupName.getValue(0);
+            PropertyIntList synergyCount = PropertyIntList.getAs(oneGroupSynergy.getPropertyByName("num_synergies"));
+            int gIndex = groupNames.findIndex(gName);
+            setValueAt(synergyCount.getValue(0), gIndex, 1);
+            setValueAt(Boolean.TRUE, gIndex, 2);
+            
         }
         
     }
@@ -95,12 +104,19 @@ public class MuscleGroupSynergiesTableModel  extends AbstractTableModel{
             return Boolean.class;
     }
     
-    public void populateMuscleGroupProperty() {
-        muscleGroupProperty.clear();
+    public void populateMuscleGroupSynergiesProperty() {
+        muscleGroupSynergyListProperty.clear();
         // Now select entries based on passed in coordinateListProperty
         for (int p=0; p < selected.getSize(); p++){
-            if (selected.get(p))
-               muscleGroupProperty.appendValue(groupNames.get(p));
+            if (selected.get(p)){
+               // Create object of type RCNLSynergy, populate then append
+               OpenSimObject newSynergy = OpenSimObject.newInstanceOfType("RCNLSynergy");
+               PropertyStringList muscleGroups = PropertyStringList.getAs(newSynergy.getPropertyByName("muscle_group_name"));
+               muscleGroups.setValue(0, groupNames.get(p));
+               PropertyIntList synergies = PropertyIntList.getAs(newSynergy.getPropertyByName("num_synergies"));
+               synergies.setValue(0, synergyCount.get(p));
+               muscleGroupSynergyListProperty.appendValue(newSynergy);
+            }
         }
     }
 }

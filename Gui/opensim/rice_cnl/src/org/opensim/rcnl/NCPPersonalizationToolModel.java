@@ -61,7 +61,7 @@ public class NCPPersonalizationToolModel {
     private OpenSimObject muscleTendonLengthInitializationAsObject;
     private PropertyBoolList propInitializationEnabled;
     private PropertyStringList propMTPDirString;
-
+    private PropertyObjectList propSynergyList;
     
     public NCPPersonalizationToolModel(Model model) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
@@ -100,6 +100,8 @@ public class NCPPersonalizationToolModel {
         propInitializationEnabled = PropertyBoolList.updAs(muscleTendonLengthInitializationAsObject.updPropertyByName("is_enabled"));
         
         propMTPDirString = PropertyStringList.getAs(toolAsObject.updPropertyByName("mtp_results_directory"));
+        
+        propSynergyList = PropertyObjectList.getAs(toolAsObject.updPropertyByName("RCNLSynergySet"));
         
     }
     public NCPPersonalizationToolModel(Model model, String fileXml) {
@@ -186,5 +188,15 @@ public class NCPPersonalizationToolModel {
             return propMTPDirString.getValue();
         return "";
     }
-
+    PropertyObjectList getSynergyList() {
+       return propSynergyList;
+    }
+    String getSynergiesAsString() {
+        String result = "";
+        for (int i=0; i< propSynergyList.size(); i++){
+            OpenSimObject nextSynergy = propSynergyList.getValue(i);
+            result = result.concat(nextSynergy.dump());
+        }
+        return result;
+    }
 }
