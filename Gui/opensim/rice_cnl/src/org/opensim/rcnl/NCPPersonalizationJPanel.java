@@ -587,6 +587,7 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
        setSettingsFileDescription("Save Neural Control Personalization Settings file (xml)");
        jCheckBoxMTPInitialization.setSelected(ncpPersonalizationToolModel.getEnableInitialization());
        mTPResultDirPath.setFileName(ncpPersonalizationToolModel.getMTPDir());
+       jSynergySetTextArea.setText(ncpPersonalizationToolModel.getSynergiesAsString());
     }
 
     @Override

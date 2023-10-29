@@ -195,7 +195,9 @@ public class NCPPersonalizationToolModel {
         String result = "";
         for (int i=0; i< propSynergyList.size(); i++){
             OpenSimObject nextSynergy = propSynergyList.getValue(i);
-            result = result.concat(nextSynergy.dump());
+               PropertyStringList muscleGroups = PropertyStringList.getAs(nextSynergy.getPropertyByName("muscle_group_name"));
+               PropertyIntList synergies = PropertyIntList.getAs(nextSynergy.getPropertyByName("num_synergies"));
+            result = result.concat("("+muscleGroups.getValue(0)+","+synergies.getValue(0)+") ");
         }
         return result;
     }
