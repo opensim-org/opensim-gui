@@ -59,4 +59,8 @@ public class VectorView extends VectorBaseDouble {
     this(opensimSimbodyJNI.new_VectorView(VectorView.getCPtr(v), v), true);
   }
 
+  public VectorView multiplyAssign(double t) {
+    return new VectorView(opensimSimbodyJNI.VectorView_multiplyAssign(swigCPtr, this, t), true);
+  }
+
 }

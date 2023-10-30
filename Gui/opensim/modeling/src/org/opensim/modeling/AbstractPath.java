@@ -138,37 +138,6 @@ public class AbstractPath extends ModelComponent {
   }
 
   /**
-   * Get the current color of the path.<br>
-   * <br>
-   * This is the runtime, potentially state-dependent, color of the path. It<br>
-   * is the color used to display the path in that state (e.g., for UI<br>
-   * rendering).<br>
-   * <br>
-   * This color value is typically initialized with the default color (see:<br>
-   * `getDefaultColor`), but the color can change between simulation states<br>
-   * because downstream code (e.g. muscles) might call `setColor` to implement<br>
-   * state-dependent path coloring.
-   */
-  public Vec3 getColor(State s) {
-    return new Vec3(opensimSimulationJNI.AbstractPath_getColor(swigCPtr, this, State.getCPtr(s), s), true);
-  }
-
-  /**
-   * Set the current color of the path.<br>
-   * <br>
-   * Internally, sets the current color value of the path for the provided<br>
-   * state (e.g. using cache variables).<br>
-   * <br>
-   * The value of this variable is used as the color when the path is drawn,<br>
-   * which occurs with the state realized to Stage::Dynamics. Therefore, you<br>
-   * must call this method during realizeDynamics() or earlier in order for it<br>
-   * to have any effect.
-   */
-  public void setColor(State s, Vec3 color) {
-    opensimSimulationJNI.AbstractPath_setColor(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(color), color);
-  }
-
-  /**
    * Get the current length of the path.<br>
    * <br>
    * Internally, this may use a variety of methods to figure out how long the<br>
@@ -249,6 +218,42 @@ public class AbstractPath extends ModelComponent {
    */
   public void setDefaultColor(Vec3 color) {
     opensimSimulationJNI.AbstractPath_setDefaultColor(swigCPtr, this, Vec3.getCPtr(color), color);
+  }
+
+  /**
+   * Get the current color of the path.<br>
+   * <br>
+   * This is the runtime, potentially state-dependent, color of the path. It<br>
+   * is the color used to display the path in that state (e.g., for UI<br>
+   * rendering).<br>
+   * <br>
+   * This color value is typically initialized with the default color (see:<br>
+   * `getDefaultColor`), but the color can change between simulation states<br>
+   * because downstream code (e.g. muscles) might call `setColor` to implement<br>
+   * state-dependent path coloring.<br>
+   * <br>
+   * If not overridden in concrete implementations, this method returns the<br>
+   * default color.
+   */
+  public Vec3 getColor(State s) {
+    return new Vec3(opensimSimulationJNI.AbstractPath_getColor(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  /**
+   * Set the current color of the path.<br>
+   * <br>
+   * Internally, sets the current color value of the path for the provided<br>
+   * state (e.g. using cache variables).<br>
+   * <br>
+   * The value of this variable is used as the color when the path is drawn,<br>
+   * which occurs with the state realized to Stage::Dynamics. Therefore, you<br>
+   * must call this method during realizeDynamics() or earlier in order for it<br>
+   * to have any effect.<br>
+   * <br>
+   * If not overridden in concrete implementations, this method does nothing.
+   */
+  public void setColor(State s, Vec3 color) {
+    opensimSimulationJNI.AbstractPath_setColor(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(color), color);
   }
 
   /**

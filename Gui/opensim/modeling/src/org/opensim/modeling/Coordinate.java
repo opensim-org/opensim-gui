@@ -457,6 +457,14 @@ public class Coordinate extends ModelComponent {
   }
 
   /**
+   *  get the derivative of Coordinate's value from the state. This value is<br>
+   * not* necessarily equal to the value returned by getSpeedValue(). 
+   */
+  public double getQDotValue(State s) {
+    return opensimSimulationJNI.Coordinate_getQDotValue(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  /**
    *  get the default value for this coordinate. This is the value <br>
    *         used if no value has been set prior to a simulation. 
    */

@@ -442,6 +442,7 @@ public class opensimSimbodyJNI {
   public final static native void VectorBaseDouble___setitem__(long jarg1, VectorBaseDouble jarg1_, int jarg2, double jarg3);
   public final static native void delete_VectorBaseDouble(long jarg1);
   public final static native long new_VectorView(long jarg1, VectorView jarg1_);
+  public final static native long VectorView_multiplyAssign(long jarg1, VectorView jarg1_, double jarg2);
   public final static native void delete_VectorView(long jarg1);
   public final static native long new_Vector__SWIG_0();
   public final static native long new_Vector__SWIG_1(long jarg1, Vector jarg1_);
@@ -534,6 +535,7 @@ public class opensimSimbodyJNI {
   public final static native void VectorBaseVec3___setitem__(long jarg1, VectorBaseVec3 jarg1_, int jarg2, long jarg3, Vec3 jarg3_);
   public final static native void delete_VectorBaseVec3(long jarg1);
   public final static native long new_VectorViewVec3(long jarg1, VectorViewVec3 jarg1_);
+  public final static native long VectorViewVec3_multiplyAssign(long jarg1, VectorViewVec3 jarg1_, double jarg2);
   public final static native void delete_VectorViewVec3(long jarg1);
   public final static native long new_VectorVec3__SWIG_0();
   public final static native long new_VectorVec3__SWIG_1(long jarg1, VectorVec3 jarg1_);

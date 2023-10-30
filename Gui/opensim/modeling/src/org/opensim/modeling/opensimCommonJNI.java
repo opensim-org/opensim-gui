@@ -96,6 +96,8 @@ public class opensimCommonJNI {
   public final static native double solveBisection__SWIG_0(long jarg1, double jarg2, double jarg3, double jarg4, int jarg5);
   public final static native double solveBisection__SWIG_1(long jarg1, double jarg2, double jarg3, double jarg4);
   public final static native double solveBisection__SWIG_2(long jarg1, double jarg2, double jarg3);
+  public final static native long computeKNearestNeighbors__SWIG_0(long jarg1, Matrix jarg1_, long jarg2, Matrix jarg2_, int jarg3);
+  public final static native long computeKNearestNeighbors__SWIG_1(long jarg1, Matrix jarg1_, long jarg2, Matrix jarg2_);
   public final static native void delete_LogSink(long jarg1);
   public final static native void LogSink_sinkImpl(long jarg1, LogSink jarg1_, String jarg2);
   public final static native void LogSink_flushImpl(long jarg1, LogSink jarg1_);
