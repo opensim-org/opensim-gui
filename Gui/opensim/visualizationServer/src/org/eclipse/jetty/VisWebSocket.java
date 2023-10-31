@@ -28,10 +28,14 @@
 package org.eclipse.jetty;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.eclipse.jetty.websocket.api.Session;
@@ -52,6 +56,7 @@ import org.json.simple.parser.ParseException;
 @WebSocket(maxTextMessageSize = 64 * 4096, maxIdleTime=10000000)
 public class VisWebSocket extends Observable { // Socket to handle incoming traffic from Browser
     private static final Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
+    private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
     
     public VisWebSocket(){
         // Register socket with WebSocketDB so it can be called back
@@ -66,7 +71,17 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
             this.setChanged();
             this.notifyObservers();
         }
-        
+        executorService.scheduleAtFixedRate(() -> {
+                    try {
+                        String data = "Ping";
+                        ByteBuffer payload = ByteBuffer.wrap(data.getBytes());
+                        peer.getRemote().sendPing(payload);
+                        System.out.println("Sending ping to peer.");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                },
+                1, 1, TimeUnit.MINUTES);        
         
     }
     
