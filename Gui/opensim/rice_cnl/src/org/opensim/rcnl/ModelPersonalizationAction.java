@@ -75,6 +75,10 @@ public final class ModelPersonalizationAction extends CallableSystemAction {
             javax.swing.JMenuItem nCPMenuItem = new JMenuItem("Neural Control Optimization...");
             nCPMenuItem.addActionListener(new NeuralControlPersonalizationAction());
             this.add(nCPMenuItem);
+            javax.swing.JMenuItem gCPMenuItem = new JMenuItem("Ground Contact Optimization...");
+            gCPMenuItem.addActionListener(new GroundContactPersonalizationAction());
+            this.add(gCPMenuItem);
+            
             
         }
     }
