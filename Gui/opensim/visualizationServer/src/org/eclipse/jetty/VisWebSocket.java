@@ -76,7 +76,7 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
                         String data = "Ping";
                         ByteBuffer payload = ByteBuffer.wrap(data.getBytes());
                         peer.getRemote().sendPing(payload);
-                        System.out.println("Sending ping to peer.");
+                        //System.out.println("Sending ping to peer.");
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
