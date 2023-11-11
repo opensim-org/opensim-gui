@@ -244,6 +244,56 @@ public class opensimSimulation {
   }
 
   /**
+   *  Compute the values of coordinates defined by `CoordinateCouplerConstraint`s<br>
+   *  in the model and append them to the provided `TimeSeriesTable`. The table<br>
+   *  should contain columns with values for all the independent coordinates that<br>
+   *  define the coupled coordinate. The column labels must be the full path to<br>
+   *  the coordinate values (e.g., `/jointset/ground_pelvis/pelvis_tx/value`).<br>
+   *  
+   */
+  public static void appendCoupledCoordinateValues(TimeSeriesTable table, Model model, boolean overwriteExistingColumns) {
+    opensimSimulationJNI.appendCoupledCoordinateValues__SWIG_0(TimeSeriesTable.getCPtr(table), table, Model.getCPtr(model), model, overwriteExistingColumns);
+  }
+
+  /**
+   *  Compute the values of coordinates defined by `CoordinateCouplerConstraint`s<br>
+   *  in the model and append them to the provided `TimeSeriesTable`. The table<br>
+   *  should contain columns with values for all the independent coordinates that<br>
+   *  define the coupled coordinate. The column labels must be the full path to<br>
+   *  the coordinate values (e.g., `/jointset/ground_pelvis/pelvis_tx/value`).<br>
+   *  
+   */
+  public static void appendCoupledCoordinateValues(TimeSeriesTable table, Model model) {
+    opensimSimulationJNI.appendCoupledCoordinateValues__SWIG_1(TimeSeriesTable.getCPtr(table), table, Model.getCPtr(model), model);
+  }
+
+  /**
+   *  Compute and append the coordinate speeds in the model by taking the first<br>
+   *  derivative of the coordinate values in the provided `TimeSeriesTable`. The<br>
+   *  table should contain columns with values for valid coordinates in the model.<br>
+   *  Columns that do not match a coordinate in the model are ignored. The column<br>
+   *  labels must be the full path to the coordinate values (e.g.,<br>
+   *  `/jointset/ground_pelvis/pelvis_tx/value`).<br>
+   *  
+   */
+  public static void appendCoordinateValueDerivativesAsSpeeds(TimeSeriesTable table, Model model, boolean overwriteExistingColumns) {
+    opensimSimulationJNI.appendCoordinateValueDerivativesAsSpeeds__SWIG_0(TimeSeriesTable.getCPtr(table), table, Model.getCPtr(model), model, overwriteExistingColumns);
+  }
+
+  /**
+   *  Compute and append the coordinate speeds in the model by taking the first<br>
+   *  derivative of the coordinate values in the provided `TimeSeriesTable`. The<br>
+   *  table should contain columns with values for valid coordinates in the model.<br>
+   *  Columns that do not match a coordinate in the model are ignored. The column<br>
+   *  labels must be the full path to the coordinate values (e.g.,<br>
+   *  `/jointset/ground_pelvis/pelvis_tx/value`).<br>
+   *  
+   */
+  public static void appendCoordinateValueDerivativesAsSpeeds(TimeSeriesTable table, Model model) {
+    opensimSimulationJNI.appendCoordinateValueDerivativesAsSpeeds__SWIG_1(TimeSeriesTable.getCPtr(table), table, Model.getCPtr(model), model);
+  }
+
+  /**
    *  Calculate the requested outputs using the model in the problem and the<br>
    *  provided states and controls tables.<br>
    *  The controls table is used to set the model's controls vector.<br>

@@ -187,8 +187,8 @@ public class ModelFactory {
    *  in the model. The Force objects in the model must have a property named<br>
    *  'path' that stores an object derived from AbstractGeometryPath.
    */
-  public static void replacePathsWithFunctionBasedPaths(Model model, SWIGTYPE_p_OpenSim__SetT_OpenSim__FunctionBasedPath_OpenSim__Object_t functionBasedPaths) {
-    opensimActuatorsAnalysesToolsJNI.ModelFactory_replacePathsWithFunctionBasedPaths(Model.getCPtr(model), model, SWIGTYPE_p_OpenSim__SetT_OpenSim__FunctionBasedPath_OpenSim__Object_t.getCPtr(functionBasedPaths));
+  public static void replacePathsWithFunctionBasedPaths(Model model, SetFunctionBasedPath functionBasedPaths) {
+    opensimActuatorsAnalysesToolsJNI.ModelFactory_replacePathsWithFunctionBasedPaths(Model.getCPtr(model), model, SetFunctionBasedPath.getCPtr(functionBasedPaths), functionBasedPaths);
   }
 
   public ModelFactory() {
