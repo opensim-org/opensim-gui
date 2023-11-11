@@ -333,7 +333,7 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private void addGCPSurfaceButtonaddJMPTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGCPSurfaceButtonaddJMPTaskButtonActionPerformed
         // TODO add your handling code here:
         OpenSimObject gcpContactSurface = OpenSimObject.newInstanceOfType("GCPContactSurface");
-        EditJMPTaskJPanel ejtPanel = new EditJMPTaskJPanel(gcpContactSurface);
+        EditGCPSurfaceJPanel ejtPanel = new EditGCPSurfaceJPanel(gcpContactSurface);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One GCPContactSurface ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
