@@ -87,6 +87,8 @@ public class GCPPersonalizationToolModel {
         
         propOutputResultDirString = PropertyStringList.getAs(toolAsObject.updPropertyByName("results_directory"));
         
+        propInputDirString = PropertyStringList.getAs(toolAsObject.updPropertyByName("input_directory"));
+        
         propInputMotionFileString = PropertyStringList.getAs(toolAsObject.updPropertyByName("input_motion_file"));
         
         propInputGRFFileString  = PropertyStringList.getAs(toolAsObject.updPropertyByName("input_grf_file"));

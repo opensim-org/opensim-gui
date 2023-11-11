@@ -45,30 +45,7 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
     }
 
     EditGCPSurfaceJPanel(OpenSimObject jointPersonalizationTask) {
-        taskToEdit = jointPersonalizationTask;
-        AbstractProperty ap = jointPersonalizationTask.getPropertyByName("JMPJointSet");
-        poJointList = PropertyObjectList.updAs(ap);
-        jmpJointListModel= new JMPJointListModel(poJointList);
-        poBodyList = PropertyObjectList.updAs(jointPersonalizationTask.getPropertyByName("JMPBodySet"));
-        jmpBodyListModel = new JMPBodyListModel(poBodyList);
         initComponents();
-        jList1.setModel(jmpJointListModel);
-        jList2.setModel(jmpBodyListModel);
-        listSelectionModel = jList1.getSelectionModel();
-        listSelectionModel.addListSelectionListener(new ListSelectionHandler());
-        jList2.getSelectionModel().addListSelectionListener(new List2SelectionHandler() );
-        triallFilePath.setExtensionsAndDescription(".trc", "Measurement trial marker data");
-        // Populate name, enabled, time-range and markers-file
-        jTaskNameTextField.setText(jointPersonalizationTask.getName());
-        AbstractProperty enabledProp = taskToEdit.getPropertyByName("is_enabled");
-        jEnabledCheckBox.setSelected(PropertyHelper.getValueBool(enabledProp));
-        AbstractProperty trcfileProp = taskToEdit.getPropertyByName("marker_file_name");
-        String filepath = PropertyHelper.getValueString(trcfileProp);
-        triallFilePath.setFileName(filepath);
-        AbstractProperty timeRangeProp = taskToEdit.getPropertyByName("time_range");
-        PropertyDoubleList pDoubleList = PropertyDoubleList.updAs(timeRangeProp);
-        jTextField3.setText(String.valueOf(pDoubleList.getValue(0)));
-        jTextField4.setText(String.valueOf(pDoubleList.getValue(1)));
         
     }
 
@@ -88,20 +65,33 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
-        jJointsPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
-        addJointButton = new javax.swing.JButton();
-        editJointButton = new javax.swing.JButton();
-        deleteJointButton = new javax.swing.JButton();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel2 = new javax.swing.JLabel();
+        jTextField5 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jComboBoxFX3 = new javax.swing.JComboBox();
+        jComboBoxFY = new javax.swing.JComboBox();
+        jComboBoxFZ = new javax.swing.JComboBox();
+        jLabel6 = new javax.swing.JLabel();
+        jComboBoxFX4 = new javax.swing.JComboBox();
+        jComboBoxFY1 = new javax.swing.JComboBox();
+        jComboBoxFZ1 = new javax.swing.JComboBox();
+        jLabel7 = new javax.swing.JLabel();
+        jComboBoxFX5 = new javax.swing.JComboBox();
+        jComboBoxFY2 = new javax.swing.JComboBox();
+        jComboBoxFZ2 = new javax.swing.JComboBox();
+        BodiesComboBox = new javax.swing.JComboBox();
+        jLabel8 = new javax.swing.JLabel();
+        MarkersComboBox = new javax.swing.JComboBox();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        MarkersComboBox1 = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
-        triallFilePath = new org.opensim.swingui.FileTextFieldAndChooser();
-        jBodiesPanel = new javax.swing.JPanel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
-        addBodyButton = new javax.swing.JButton();
-        editBodyButton = new javax.swing.JButton();
-        deleteBodyButton = new javax.swing.JButton();
+        MarkersComboBox2 = new javax.swing.JComboBox();
+        jLabel12 = new javax.swing.JLabel();
+        MarkersComboBox3 = new javax.swing.JComboBox();
+        jLabel13 = new javax.swing.JLabel();
+        MarkersComboBox4 = new javax.swing.JComboBox();
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel1.text")); // NOI18N
 
@@ -159,143 +149,254 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
             }
         });
 
-        jJointsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jJointsPanel.border.title"))); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox1, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jCheckBox1.text")); // NOI18N
 
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jList1);
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel2.text")); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(addJointButton, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.addJointButton.text")); // NOI18N
-        addJointButton.addActionListener(new java.awt.event.ActionListener() {
+        jTextField5.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        jTextField5.setText(org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jTextField5.text")); // NOI18N
+        jTextField5.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jTextField5FocusLost(evt);
+            }
+        });
+        jTextField5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addJointButtonActionPerformed(evt);
+                jTextField5ActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(editJointButton, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.editJointButton.text")); // NOI18N
-        editJointButton.setEnabled(false);
-        editJointButton.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel5.text")); // NOI18N
+
+        jComboBoxFX3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_px", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFX3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editJointButtonActionPerformed(evt);
+                jComboBoxFX3ActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(deleteJointButton, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.deleteJointButton.text")); // NOI18N
-        deleteJointButton.setEnabled(false);
-        deleteJointButton.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxFY.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_py", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFY.setEnabled(false);
+        jComboBoxFY.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteJointButtonActionPerformed(evt);
+                jComboBoxFYupdateForceFromPanel(evt);
             }
         });
 
-        javax.swing.GroupLayout jJointsPanelLayout = new javax.swing.GroupLayout(jJointsPanel);
-        jJointsPanel.setLayout(jJointsPanelLayout);
-        jJointsPanelLayout.setHorizontalGroup(
-            jJointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jJointsPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jJointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(deleteJointButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addJointButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editJointButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        jJointsPanelLayout.setVerticalGroup(
-            jJointsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jJointsPanelLayout.createSequentialGroup()
-                .addComponent(addJointButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(editJointButton)
-                .addGap(14, 14, 14)
-                .addComponent(deleteJointButton))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        jComboBoxFZ.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_pz", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFZ.setEnabled(false);
+        jComboBoxFZ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFZupdateForceFromPanel(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel6.text")); // NOI18N
+
+        jComboBoxFX4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_px", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFX4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFX4ActionPerformed(evt);
+            }
+        });
+
+        jComboBoxFY1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_py", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFY1.setEnabled(false);
+        jComboBoxFY1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFY1updateForceFromPanel(evt);
+            }
+        });
+
+        jComboBoxFZ1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_pz", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFZ1.setEnabled(false);
+        jComboBoxFZ1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFZ1updateForceFromPanel(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel7, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel7.text")); // NOI18N
+
+        jComboBoxFX5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_px", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFX5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFX5ActionPerformed(evt);
+            }
+        });
+
+        jComboBoxFY2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_py", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFY2.setEnabled(false);
+        jComboBoxFY2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFY2updateForceFromPanel(evt);
+            }
+        });
+
+        jComboBoxFZ2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_pz", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFZ2.setEnabled(false);
+        jComboBoxFZ2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBoxFZ2updateForceFromPanel(evt);
+            }
+        });
+
+        BodiesComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        BodiesComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                BodiesComboBoxFocusLost(evt);
+            }
+        });
+        BodiesComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BodiesComboBoxActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel8, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel8.text")); // NOI18N
+
+        MarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        MarkersComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                MarkersComboBoxFocusLost(evt);
+            }
+        });
+        MarkersComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MarkersComboBoxActionPerformed(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel9, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel9.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel10, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel10.text")); // NOI18N
+
+        MarkersComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        MarkersComboBox1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                MarkersComboBox1FocusLost(evt);
+            }
+        });
+        MarkersComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MarkersComboBox1ActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel11, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel11.text")); // NOI18N
 
-        triallFilePath.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                triallFilePathStateChanged(evt);
+        MarkersComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        MarkersComboBox2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                MarkersComboBox2FocusLost(evt);
             }
         });
-
-        jBodiesPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jBodiesPanel.border.title"))); // NOI18N
-
-        jList2.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(jList2);
-
-        org.openide.awt.Mnemonics.setLocalizedText(addBodyButton, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.addBodyButton.text")); // NOI18N
-        addBodyButton.addActionListener(new java.awt.event.ActionListener() {
+        MarkersComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addBodyButtonActionPerformed(evt);
+                MarkersComboBox2ActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(editBodyButton, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.editBodyButton.text")); // NOI18N
-        editBodyButton.setEnabled(false);
-        editBodyButton.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel12, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel12.text")); // NOI18N
+
+        MarkersComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        MarkersComboBox3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                MarkersComboBox3FocusLost(evt);
+            }
+        });
+        MarkersComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editBodyButtonActionPerformed(evt);
+                MarkersComboBox3ActionPerformed(evt);
             }
         });
 
-        org.openide.awt.Mnemonics.setLocalizedText(deleteBodyButton, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.deleteBodyButton.text")); // NOI18N
-        deleteBodyButton.setEnabled(false);
-        deleteBodyButton.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel13, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel13.text")); // NOI18N
+
+        MarkersComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        MarkersComboBox4.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                MarkersComboBox4FocusLost(evt);
+            }
+        });
+        MarkersComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                deleteBodyButtonActionPerformed(evt);
+                MarkersComboBox4ActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout jBodiesPanelLayout = new javax.swing.GroupLayout(jBodiesPanel);
-        jBodiesPanel.setLayout(jBodiesPanelLayout);
-        jBodiesPanelLayout.setHorizontalGroup(
-            jBodiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jBodiesPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 497, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jBodiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(deleteBodyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addBodyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(editBodyButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
-        jBodiesPanelLayout.setVerticalGroup(
-            jBodiesPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jBodiesPanelLayout.createSequentialGroup()
-                .addComponent(addBodyButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(editBodyButton)
-                .addGap(14, 14, 14)
-                .addComponent(deleteBodyButton))
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jEnabledCheckBox)
-                    .addComponent(jJointsPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTaskNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4)
+                        .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(triallFilePath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jBodiesPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addComponent(jComboBoxFX5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxFY2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBoxFZ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jCheckBox1)
+                        .addComponent(jEnabledCheckBox)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTaskNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel4)
+                            .addGap(18, 18, 18)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel2)
+                            .addGap(18, 18, 18)
+                            .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGap(35, 35, 35)
+                            .addComponent(jComboBoxFX3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jComboBoxFY, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jComboBoxFZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel6)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jComboBoxFX4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jComboBoxFY1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jComboBoxFZ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addGap(40, 40, 40)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(MarkersComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(MarkersComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(MarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(BodiesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel11)
+                                    .addGap(102, 102, 102)
+                                    .addComponent(MarkersComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel13)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(MarkersComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,21 +407,59 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jEnabledCheckBox)
+                .addGap(9, 9, 9)
+                .addComponent(jCheckBox1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel11)
-                    .addComponent(triallFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jJointsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(21, 21, 21)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel5)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxFX3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel6)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxFX4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFZ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFY1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBoxFX5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxFZ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7)
+                    .addComponent(jComboBoxFY2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBodiesPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BodiesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MarkersComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(MarkersComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(MarkersComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12)
+                    .addComponent(MarkersComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -343,12 +482,6 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
             Exceptions.printStackTrace(ex);
         }
     }//GEN-LAST:event_jTextField3ActionPerformed
-
-    private void triallFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_triallFilePathStateChanged
-        //ikToolModel.getIKTool().setOutputMotionFileName(outputModelFilePath.getFileName());
-        AbstractProperty trcfileProp = taskToEdit.getPropertyByName("marker_file_name");
-        PropertyHelper.setValueString(triallFilePath.getFileName(), trcfileProp);
-    }//GEN-LAST:event_triallFilePathStateChanged
 
     private void jEnabledCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jEnabledCheckBoxItemStateChanged
         // TODO add your handling code here:
@@ -389,136 +522,142 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jEnabledCheckBoxActionPerformed
 
-    private void deleteJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteJointButtonActionPerformed
+    private void jTextField5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusLost
         // TODO add your handling code here:
-        int[] sels = jList1.getSelectedIndices();
-        Vector<Integer> tasksToDelete = new Vector<Integer>();
-        for (int i=0; i<sels.length; i++){
-            tasksToDelete.add(sels[i]);
-        }
-        // Delete items from jmpJointListModel in reverse order
-        for (int r=tasksToDelete.size(); r >0; r-- ){
-            jmpJointListModel.remove(tasksToDelete.get(r-1));
-            poJointList.removeValueAtIndex(tasksToDelete.get(r-1));
-        }
-        // Recreate list model to cleanup
-        jmpJointListModel= new JMPJointListModel(poJointList);
-        jList1.setModel(jmpJointListModel);
-    }//GEN-LAST:event_deleteJointButtonActionPerformed
+    }//GEN-LAST:event_jTextField5FocusLost
 
-    private void editJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editJointButtonActionPerformed
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
         // TODO add your handling code here:
-        int[] sels = jList1.getSelectedIndices();
-        int idx = sels[0];
-        OpenSimObject selectedJointTask = (OpenSimObject)jmpJointListModel.get(idx);
-        OpenSimObject taskCopyToEdit = selectedJointTask.clone();
-        AddEditJointPanel ejtPanel = new AddEditJointPanel(taskCopyToEdit);
-        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
-        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
-        d.setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            // Fire model changed event to update list in case name change
-            poJointList.setValue(idx, taskCopyToEdit);
-            jmpJointListModel.set(idx, taskCopyToEdit);
-            
-        }
-    }//GEN-LAST:event_editJointButtonActionPerformed
+    }//GEN-LAST:event_jTextField5ActionPerformed
 
-    private void addJointButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addJointButtonActionPerformed
+    private void jComboBoxFX3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFX3ActionPerformed
         // TODO add your handling code here:
-        OpenSimObject newJMPJointTask  = OpenSimObject.newInstanceOfType("JMPJoint");
-        // set name to first valid joint in model
-        savedJointTasks.add(newJMPJointTask);
-        AddEditJointPanel ejtPanel = new AddEditJointPanel(newJMPJointTask);
-        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
-        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
-        d.setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            //System.out.println(newJMPJointTask.dump());
-            jmpJointListModel.addElement(newJMPJointTask);
-            newJMPJointTask.markAdopted(); //indicate ownership will be transferred so that object is not deleted by gc
-            poJointList.adoptAndAppendValue(newJMPJointTask);
-        }
+        // Populate next two dropdown from the following 2 columns
 
-    }//GEN-LAST:event_addJointButtonActionPerformed
+    }//GEN-LAST:event_jComboBoxFX3ActionPerformed
 
-    private void addBodyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addBodyButtonActionPerformed
+    private void jComboBoxFYupdateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFYupdateForceFromPanel
         // TODO add your handling code here:
-        OpenSimObject newJMPBodyTask  = OpenSimObject.newInstanceOfType("JMPBody");
-        AddEditJMPBodyPanel ebPanel = new AddEditJMPBodyPanel(newJMPBodyTask);
-        DialogDescriptor dlg = new DialogDescriptor(ebPanel, "Edit Body Task ");
-        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
-        d.setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-        //System.out.println(newJMPJointTask.dump());
-            jmpBodyListModel.addElement(newJMPBodyTask);
-            newJMPBodyTask.markAdopted(); //indicate ownership will be transferred so that object is not deleted by gc
-            poBodyList.adoptAndAppendValue(newJMPBodyTask);
-        }
-    }//GEN-LAST:event_addBodyButtonActionPerformed
+        //updateForceFromPanel();
 
-    private void editBodyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBodyButtonActionPerformed
-        // TODO add your handling code here:
-        int[] sels = jList2.getSelectedIndices();
-        int idx = sels[0];
-        OpenSimObject selectedBodyTask = (OpenSimObject)jmpBodyListModel.get(sels[0]);
-        OpenSimObject taskCopyToEdit = selectedBodyTask.clone();
-        //System.out.println(selectedBodyTask.dump());
-        AddEditJMPBodyPanel ebPanel = new AddEditJMPBodyPanel(taskCopyToEdit);
-        DialogDescriptor dlg = new DialogDescriptor(ebPanel, "Edit Body Task ");
-        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
-        d.setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            // Fire model changed event to update list in case name change
-            poBodyList.setValue(idx, taskCopyToEdit);
-            jmpBodyListModel.set(idx, taskCopyToEdit);
-        }
-    }//GEN-LAST:event_editBodyButtonActionPerformed
+    }//GEN-LAST:event_jComboBoxFYupdateForceFromPanel
 
-    private void deleteBodyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteBodyButtonActionPerformed
+    private void jComboBoxFZupdateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFZupdateForceFromPanel
         // TODO add your handling code here:
-        int[] sels = jList2.getSelectedIndices();
-        Vector<Integer> tasksToDelete = new Vector<Integer>();
-        for (int i=0; i<sels.length; i++){
-            tasksToDelete.add(sels[i]);
-        }
-        // Delete items from jmpJointListModel in reverse order
-        for (int r=tasksToDelete.size(); r >0; r-- ){
-            jmpBodyListModel.remove(tasksToDelete.get(r-1));
-            poBodyList.removeValueAtIndex(tasksToDelete.get(r-1));
-        }
-        // Recreate list model to cleanup
-        jmpBodyListModel= new JMPBodyListModel(poBodyList);
-        jList2.setModel(jmpBodyListModel);
-    }//GEN-LAST:event_deleteBodyButtonActionPerformed
+        //updateForceFromPanel();
+    }//GEN-LAST:event_jComboBoxFZupdateForceFromPanel
+
+    private void jComboBoxFX4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFX4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFX4ActionPerformed
+
+    private void jComboBoxFY1updateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFY1updateForceFromPanel
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFY1updateForceFromPanel
+
+    private void jComboBoxFZ1updateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFZ1updateForceFromPanel
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFZ1updateForceFromPanel
+
+    private void jComboBoxFX5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFX5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFX5ActionPerformed
+
+    private void jComboBoxFY2updateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFY2updateForceFromPanel
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFY2updateForceFromPanel
+
+    private void jComboBoxFZ2updateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFZ2updateForceFromPanel
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBoxFZ2updateForceFromPanel
+
+    private void BodiesComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_BodiesComboBoxFocusLost
+        //updateForceFromPanel();
+    }//GEN-LAST:event_BodiesComboBoxFocusLost
+
+    private void BodiesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BodiesComboBoxActionPerformed
+        //updateForceFromPanel();
+    }//GEN-LAST:event_BodiesComboBoxActionPerformed
+
+    private void MarkersComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MarkersComboBoxFocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MarkersComboBoxFocusLost
+
+    private void MarkersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarkersComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MarkersComboBoxActionPerformed
+
+    private void MarkersComboBox1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MarkersComboBox1FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MarkersComboBox1FocusLost
+
+    private void MarkersComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarkersComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MarkersComboBox1ActionPerformed
+
+    private void MarkersComboBox2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MarkersComboBox2FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MarkersComboBox2FocusLost
+
+    private void MarkersComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarkersComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MarkersComboBox2ActionPerformed
+
+    private void MarkersComboBox3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MarkersComboBox3FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MarkersComboBox3FocusLost
+
+    private void MarkersComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarkersComboBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MarkersComboBox3ActionPerformed
+
+    private void MarkersComboBox4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MarkersComboBox4FocusLost
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MarkersComboBox4FocusLost
+
+    private void MarkersComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarkersComboBox4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_MarkersComboBox4ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addBodyButton;
-    private javax.swing.JButton addJointButton;
-    private javax.swing.JButton deleteBodyButton;
-    private javax.swing.JButton deleteJointButton;
-    private javax.swing.JButton editBodyButton;
-    private javax.swing.JButton editJointButton;
-    private javax.swing.JPanel jBodiesPanel;
+    private javax.swing.JComboBox BodiesComboBox;
+    private javax.swing.JComboBox MarkersComboBox;
+    private javax.swing.JComboBox MarkersComboBox1;
+    private javax.swing.JComboBox MarkersComboBox2;
+    private javax.swing.JComboBox MarkersComboBox3;
+    private javax.swing.JComboBox MarkersComboBox4;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JComboBox jComboBoxFX;
+    private javax.swing.JComboBox jComboBoxFX1;
+    private javax.swing.JComboBox jComboBoxFX2;
+    private javax.swing.JComboBox jComboBoxFX3;
+    private javax.swing.JComboBox jComboBoxFX4;
+    private javax.swing.JComboBox jComboBoxFX5;
+    private javax.swing.JComboBox jComboBoxFY;
+    private javax.swing.JComboBox jComboBoxFY1;
+    private javax.swing.JComboBox jComboBoxFY2;
+    private javax.swing.JComboBox jComboBoxFZ;
+    private javax.swing.JComboBox jComboBoxFZ1;
+    private javax.swing.JComboBox jComboBoxFZ2;
     private javax.swing.JCheckBox jEnabledCheckBox;
-    private javax.swing.JPanel jJointsPanel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JTextField jTaskNameTextField;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
-    private org.opensim.swingui.FileTextFieldAndChooser triallFilePath;
+    private javax.swing.JTextField jTextField5;
     // End of variables declaration//GEN-END:variables
     private class ListSelectionHandler implements ListSelectionListener {
 
@@ -529,9 +668,9 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         public void valueChanged(ListSelectionEvent lse) {
             // Disable delete if nothing is selected
             // Enable edit if single selection
-            int[] sels = jList1.getSelectedIndices();
-            editJointButton.setEnabled(sels.length==1);
-            deleteJointButton.setEnabled(sels.length>=1);
+            //int[] sels = jList1.getSelectedIndices();
+            //editJointButton.setEnabled(sels.length==1);
+            //deleteJointButton.setEnabled(sels.length>=1);
             
         }
     }
@@ -545,9 +684,9 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         public void valueChanged(ListSelectionEvent lse) {
             // Disable delete if nothing is selected
             // Enable edit if single selection
-            int[] sels = jList2.getSelectedIndices();
-            editBodyButton.setEnabled(sels.length==1);
-            deleteBodyButton.setEnabled(sels.length>=1);
+            //int[] sels = jList2.getSelectedIndices();
+            //editBodyButton.setEnabled(sels.length==1);
+            //deleteBodyButton.setEnabled(sels.length>=1);
             
         }
     }
