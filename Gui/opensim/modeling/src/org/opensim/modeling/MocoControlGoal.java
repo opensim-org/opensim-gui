@@ -148,16 +148,4 @@ public class MocoControlGoal extends MocoGoal {
     return opensimMocoJNI.MocoControlGoal_getExponent(swigCPtr, this);
   }
 
-  /**
-   *  Set if the goal should be divided by the displacement of the system's<br>
-   *     center of mass over the phase. 
-   */
-  public void setDivideByDisplacement(boolean tf) {
-    opensimMocoJNI.MocoControlGoal_setDivideByDisplacement(swigCPtr, this, tf);
-  }
-
-  public boolean getDivideByDisplacement() {
-    return opensimMocoJNI.MocoControlGoal_getDivideByDisplacement(swigCPtr, this);
-  }
-
 }
