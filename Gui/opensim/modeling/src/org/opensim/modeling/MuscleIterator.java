@@ -675,12 +675,12 @@ public class MuscleIterator {
     return opensimSimulationJNI.MuscleIterator_calcInextensibleTendonActiveFiberForce(swigCPtr, this, State.getCPtr(s), s, aActivation);
   }
 
-  public AbstractPath get_path(int i) {
-    return new AbstractPath(opensimSimulationJNI.MuscleIterator_get_path__SWIG_0(swigCPtr, this, i), false);
+  public AbstractGeometryPath get_path(int i) {
+    return new AbstractGeometryPath(opensimSimulationJNI.MuscleIterator_get_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public AbstractPath get_path() {
-    return new AbstractPath(opensimSimulationJNI.MuscleIterator_get_path__SWIG_1(swigCPtr, this), false);
+  public AbstractGeometryPath get_path() {
+    return new AbstractGeometryPath(opensimSimulationJNI.MuscleIterator_get_path__SWIG_1(swigCPtr, this), false);
   }
 
   public double get_optimal_force(int i) {
@@ -695,8 +695,8 @@ public class MuscleIterator {
     return opensimSimulationJNI.MuscleIterator__has_output_tension_get(swigCPtr, this);
   }
 
-  public AbstractPath getPath() {
-    return new AbstractPath(opensimSimulationJNI.MuscleIterator_getPath(swigCPtr, this), false);
+  public AbstractGeometryPath getPath() {
+    return new AbstractGeometryPath(opensimSimulationJNI.MuscleIterator_getPath(swigCPtr, this), false);
   }
 
   public GeometryPath getGeometryPath() {

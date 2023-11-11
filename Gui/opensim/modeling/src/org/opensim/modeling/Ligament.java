@@ -10,7 +10,7 @@ package org.opensim.modeling;
 
 /**
  * A class implementing a ligament. The path of the ligament is<br>
- * stored in an object derived from AbstractPath.
+ * stored in an object derived from AbstractGeometryPath.
  */
 public class Ligament extends Force {
   private transient long swigCPtr;
@@ -78,36 +78,36 @@ public class Ligament extends Force {
     opensimSimulationJNI.Ligament_copyProperty_path(swigCPtr, this, Ligament.getCPtr(source), source);
   }
 
-  public AbstractPath get_path(int i) {
-    return new AbstractPath(opensimSimulationJNI.Ligament_get_path__SWIG_0(swigCPtr, this, i), false);
+  public AbstractGeometryPath get_path(int i) {
+    return new AbstractGeometryPath(opensimSimulationJNI.Ligament_get_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public AbstractPath upd_path(int i) {
-    return new AbstractPath(opensimSimulationJNI.Ligament_upd_path__SWIG_0(swigCPtr, this, i), false);
+  public AbstractGeometryPath upd_path(int i) {
+    return new AbstractGeometryPath(opensimSimulationJNI.Ligament_upd_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_path(int i, AbstractPath value) {
-    opensimSimulationJNI.Ligament_set_path__SWIG_0(swigCPtr, this, i, AbstractPath.getCPtr(value), value);
+  public void set_path(int i, AbstractGeometryPath value) {
+    opensimSimulationJNI.Ligament_set_path__SWIG_0(swigCPtr, this, i, AbstractGeometryPath.getCPtr(value), value);
   }
 
-  public int append_path(AbstractPath value) {
-    return opensimSimulationJNI.Ligament_append_path(swigCPtr, this, AbstractPath.getCPtr(value), value);
+  public int append_path(AbstractGeometryPath value) {
+    return opensimSimulationJNI.Ligament_append_path(swigCPtr, this, AbstractGeometryPath.getCPtr(value), value);
   }
 
-  public void constructProperty_path(AbstractPath initValue) {
-    opensimSimulationJNI.Ligament_constructProperty_path(swigCPtr, this, AbstractPath.getCPtr(initValue), initValue);
+  public void constructProperty_path(AbstractGeometryPath initValue) {
+    opensimSimulationJNI.Ligament_constructProperty_path(swigCPtr, this, AbstractGeometryPath.getCPtr(initValue), initValue);
   }
 
-  public AbstractPath get_path() {
-    return new AbstractPath(opensimSimulationJNI.Ligament_get_path__SWIG_1(swigCPtr, this), false);
+  public AbstractGeometryPath get_path() {
+    return new AbstractGeometryPath(opensimSimulationJNI.Ligament_get_path__SWIG_1(swigCPtr, this), false);
   }
 
-  public AbstractPath upd_path() {
-    return new AbstractPath(opensimSimulationJNI.Ligament_upd_path__SWIG_1(swigCPtr, this), false);
+  public AbstractGeometryPath upd_path() {
+    return new AbstractGeometryPath(opensimSimulationJNI.Ligament_upd_path__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_path(AbstractPath value) {
-    opensimSimulationJNI.Ligament_set_path__SWIG_1(swigCPtr, this, AbstractPath.getCPtr(value), value);
+  public void set_path(AbstractGeometryPath value) {
+    opensimSimulationJNI.Ligament_set_path__SWIG_1(swigCPtr, this, AbstractGeometryPath.getCPtr(value), value);
   }
 
   public void copyProperty_resting_length(Ligament source) {
@@ -222,12 +222,12 @@ public class Ligament extends Force {
     this(opensimSimulationJNI.new_Ligament(), true);
   }
 
-  public AbstractPath updPath() {
-    return new AbstractPath(opensimSimulationJNI.Ligament_updPath(swigCPtr, this), false);
+  public AbstractGeometryPath updPath() {
+    return new AbstractGeometryPath(opensimSimulationJNI.Ligament_updPath(swigCPtr, this), false);
   }
 
-  public AbstractPath getPath() {
-    return new AbstractPath(opensimSimulationJNI.Ligament_getPath(swigCPtr, this), false);
+  public AbstractGeometryPath getPath() {
+    return new AbstractGeometryPath(opensimSimulationJNI.Ligament_getPath(swigCPtr, this), false);
   }
 
   public GeometryPath updGeometryPath() {

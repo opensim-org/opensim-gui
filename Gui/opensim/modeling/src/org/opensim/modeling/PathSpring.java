@@ -10,7 +10,7 @@ package org.opensim.modeling;
 
 /**
  * A class implementing a PathSpring. The path of the PathSpring is<br>
- * determined by an object derived from AbstractPath. A PathSpring is a<br>
+ * determined by an object derived from AbstractGeometryPath. A PathSpring is a<br>
  * massless Force element which applies tension along a path connected to bodies<br>
  * and can wrap over surfaces.  The tension is proportional to its stretch<br>
  * beyond its resting length and the amount of dissipation scales with amount of<br>
@@ -196,36 +196,36 @@ public class PathSpring extends Force {
     opensimSimulationJNI.PathSpring_copyProperty_path(swigCPtr, this, PathSpring.getCPtr(source), source);
   }
 
-  public AbstractPath get_path(int i) {
-    return new AbstractPath(opensimSimulationJNI.PathSpring_get_path__SWIG_0(swigCPtr, this, i), false);
+  public AbstractGeometryPath get_path(int i) {
+    return new AbstractGeometryPath(opensimSimulationJNI.PathSpring_get_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public AbstractPath upd_path(int i) {
-    return new AbstractPath(opensimSimulationJNI.PathSpring_upd_path__SWIG_0(swigCPtr, this, i), false);
+  public AbstractGeometryPath upd_path(int i) {
+    return new AbstractGeometryPath(opensimSimulationJNI.PathSpring_upd_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_path(int i, AbstractPath value) {
-    opensimSimulationJNI.PathSpring_set_path__SWIG_0(swigCPtr, this, i, AbstractPath.getCPtr(value), value);
+  public void set_path(int i, AbstractGeometryPath value) {
+    opensimSimulationJNI.PathSpring_set_path__SWIG_0(swigCPtr, this, i, AbstractGeometryPath.getCPtr(value), value);
   }
 
-  public int append_path(AbstractPath value) {
-    return opensimSimulationJNI.PathSpring_append_path(swigCPtr, this, AbstractPath.getCPtr(value), value);
+  public int append_path(AbstractGeometryPath value) {
+    return opensimSimulationJNI.PathSpring_append_path(swigCPtr, this, AbstractGeometryPath.getCPtr(value), value);
   }
 
-  public void constructProperty_path(AbstractPath initValue) {
-    opensimSimulationJNI.PathSpring_constructProperty_path(swigCPtr, this, AbstractPath.getCPtr(initValue), initValue);
+  public void constructProperty_path(AbstractGeometryPath initValue) {
+    opensimSimulationJNI.PathSpring_constructProperty_path(swigCPtr, this, AbstractGeometryPath.getCPtr(initValue), initValue);
   }
 
-  public AbstractPath get_path() {
-    return new AbstractPath(opensimSimulationJNI.PathSpring_get_path__SWIG_1(swigCPtr, this), false);
+  public AbstractGeometryPath get_path() {
+    return new AbstractGeometryPath(opensimSimulationJNI.PathSpring_get_path__SWIG_1(swigCPtr, this), false);
   }
 
-  public AbstractPath upd_path() {
-    return new AbstractPath(opensimSimulationJNI.PathSpring_upd_path__SWIG_1(swigCPtr, this), false);
+  public AbstractGeometryPath upd_path() {
+    return new AbstractGeometryPath(opensimSimulationJNI.PathSpring_upd_path__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_path(AbstractPath value) {
-    opensimSimulationJNI.PathSpring_set_path__SWIG_1(swigCPtr, this, AbstractPath.getCPtr(value), value);
+  public void set_path(AbstractGeometryPath value) {
+    opensimSimulationJNI.PathSpring_set_path__SWIG_1(swigCPtr, this, AbstractGeometryPath.getCPtr(value), value);
   }
 
   public void set_has_output_length(boolean value) {
@@ -316,12 +316,12 @@ public class PathSpring extends Force {
   /**
    *  get/set the path object 
    */
-  public AbstractPath updPath() {
-    return new AbstractPath(opensimSimulationJNI.PathSpring_updPath(swigCPtr, this), false);
+  public AbstractGeometryPath updPath() {
+    return new AbstractGeometryPath(opensimSimulationJNI.PathSpring_updPath(swigCPtr, this), false);
   }
 
-  public AbstractPath getPath() {
-    return new AbstractPath(opensimSimulationJNI.PathSpring_getPath(swigCPtr, this), false);
+  public AbstractGeometryPath getPath() {
+    return new AbstractGeometryPath(opensimSimulationJNI.PathSpring_getPath(swigCPtr, this), false);
   }
 
   public GeometryPath updGeometryPath() {
