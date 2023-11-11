@@ -10,11 +10,44 @@ package org.opensim.modeling;
 
 /**
  *  A multivariate polynomial function.<br>
+ * <br>
  * This implementation assumes a maximum of six input dimensions and allows<br>
  * computation of first-order derivatives only.<br>
- * Note: The order of coefficients for this class is the *opposite** from the order<br>
- * used in the univariate PolynomialFunction.<br>
- * 
+ * <br>
+ * For a third-order polynomial that is a function of three components (X, Y, Z),<br>
+ * the order is a follows:<br>
+ * <br>
+ * <pre><br>
+ * Index | X  Y  Z<br>
+ * 0     | 0  0  0<br>
+ * 1     | 0  0  1<br>
+ * 2     | 0  0  2<br>
+ * 3     | 0  0  3<br>
+ * 4     | 0  1  0<br>
+ * 5     | 0  1  1<br>
+ * 6     | 0  1  2<br>
+ * 7     | 0  2  0<br>
+ * 8     | 0  2  1<br>
+ * 9     | 0  3  0<br>
+ * 10    | 1  0  0<br>
+ * 11    | 1  0  1<br>
+ * 12    | 1  0  2<br>
+ * 13    | 1  1  0<br>
+ * 14    | 1  1  1<br>
+ * 15    | 1  2  0<br>
+ * 16    | 2  0  0<br>
+ * 17    | 2  0  1<br>
+ * 18    | 2  1  0<br>
+ * 19    | 3  0  0<br>
+ * </pre><br>
+ * Assuming c6 the index 6 coefficient, the corresponding term is Y Z^2.<br>
+ * <br>
+ * <br>
+ * <br>
+ * <br>
+ * <br>
+ * Note: The order of coefficients for this class is the *opposite** from the<br>
+ *       order used in the univariate PolynomialFunction.
  */
 public class MultivariatePolynomialFunction extends Function {
   private transient long swigCPtr;
@@ -195,53 +228,69 @@ public class MultivariatePolynomialFunction extends Function {
   }
 
   /**
-   *  Set coefficients
+   * The vector of coefficients for the multivariate polynomial.
    */
   public void setCoefficients(Vector coefficients) {
     opensimCommonJNI.MultivariatePolynomialFunction_setCoefficients(swigCPtr, this, Vector.getCPtr(coefficients), coefficients);
   }
 
   /**
-   *  Get coefficients
+   *  
    */
   public Vector getCoefficients() {
     return new Vector(opensimCommonJNI.MultivariatePolynomialFunction_getCoefficients(swigCPtr, this), false);
   }
 
   /**
-   *  Set dimension
+   * The number of independent variables in the multivariate polynomial.
    */
   public void setDimension(int dimension) {
     opensimCommonJNI.MultivariatePolynomialFunction_setDimension(swigCPtr, this, dimension);
   }
 
   /**
-   *  Get dimension
+   *  
    */
   public int getDimension() {
     return opensimCommonJNI.MultivariatePolynomialFunction_getDimension(swigCPtr, this);
   }
 
   /**
-   *  Set order (largest sum of exponents in a single term).
+   * The order (i.e., the largest sum of exponents in a single term) of the<br>
+   * multivariate polynomial.
    */
   public void setOrder(int order) {
     opensimCommonJNI.MultivariatePolynomialFunction_setOrder(swigCPtr, this, order);
   }
 
   /**
-   *  Get order
+   *  
    */
   public int getOrder() {
     return opensimCommonJNI.MultivariatePolynomialFunction_getOrder(swigCPtr, this);
   }
 
   /**
-   *  Return function
+   * Return a pointer to a SimTK::Function object that implements this<br>
+   * function.
    */
   public SWIGTYPE_p_SimTK__Function createSimTKFunction() {
     long cPtr = opensimCommonJNI.MultivariatePolynomialFunction_createSimTKFunction(swigCPtr, this);
     return (cPtr == 0) ? null : new SWIGTYPE_p_SimTK__Function(cPtr, false);
+  }
+
+  /**
+   * Get a vector of the terms in the polynomial function.
+   */
+  public Vector getTermValues(Vector x) {
+    return new Vector(opensimCommonJNI.MultivariatePolynomialFunction_getTermValues(swigCPtr, this, Vector.getCPtr(x), x), true);
+  }
+
+  /**
+   * Get a vector of the derivatives of the terms in the polynomial function.
+   */
+  public Vector getTermDerivatives(StdVectorInt derivComponent, Vector x) {
+    return new Vector(opensimCommonJNI.MultivariatePolynomialFunction_getTermDerivatives(swigCPtr, this, StdVectorInt.getCPtr(derivComponent), derivComponent, Vector.getCPtr(x), x), true);
   }
 
 }
