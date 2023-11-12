@@ -75,9 +75,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jComboBoxFX5" alignment="0" min="-2" pref="184" max="-2" attributes="2"/>
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                              <Component id="MarkersComboBox3" alignment="1" min="-2" pref="131" max="-2" attributes="1"/>
-                              <Component id="MarkersComboBox1" alignment="1" min="-2" pref="131" max="-2" attributes="1"/>
-                              <Component id="MarkersComboBox" alignment="1" min="-2" pref="131" max="-2" attributes="1"/>
+                              <Component id="heelMarkersComboBox" alignment="1" min="-2" pref="131" max="-2" attributes="1"/>
+                              <Component id="medialMarkersComboBox" alignment="1" min="-2" pref="131" max="-2" attributes="1"/>
+                              <Component id="toeMarkersComboBox" alignment="1" min="-2" pref="131" max="-2" attributes="1"/>
                               <Component id="HindfootBodiesComboBox" alignment="1" min="-2" pref="131" max="-2" attributes="1"/>
                           </Group>
                       </Group>
@@ -96,8 +96,8 @@
                               </Group>
                               <EmptySpace min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="MarkersComboBox2" min="-2" pref="131" max="-2" attributes="1"/>
-                                  <Component id="MarkersComboBox4" min="-2" pref="131" max="-2" attributes="1"/>
+                                  <Component id="lateralMarkersComboBox" min="-2" pref="131" max="-2" attributes="1"/>
+                                  <Component id="midfootMarkersComboBox" min="-2" pref="131" max="-2" attributes="1"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -163,21 +163,21 @@
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="MarkersComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="toeMarkersComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel9" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="MarkersComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="medialMarkersComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="MarkersComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lateralMarkersComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="MarkersComboBox3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="heelMarkersComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="MarkersComboBox4" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="midfootMarkersComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -473,7 +473,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="MarkersComboBox">
+    <Component class="javax.swing.JComboBox" name="toeMarkersComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -485,8 +485,8 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="MarkersComboBoxFocusLost"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MarkersComboBoxActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="toeMarkersComboBoxFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="toeMarkersComboBoxActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel9">
@@ -503,7 +503,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="MarkersComboBox1">
+    <Component class="javax.swing.JComboBox" name="medialMarkersComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -515,8 +515,8 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="MarkersComboBox1FocusLost"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MarkersComboBox1ActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="medialMarkersComboBoxFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="medialMarkersComboBoxActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel11">
@@ -526,7 +526,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="MarkersComboBox2">
+    <Component class="javax.swing.JComboBox" name="lateralMarkersComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -538,8 +538,8 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="MarkersComboBox2FocusLost"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MarkersComboBox2ActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="lateralMarkersComboBoxFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="lateralMarkersComboBoxActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel12">
@@ -549,7 +549,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="MarkersComboBox3">
+    <Component class="javax.swing.JComboBox" name="heelMarkersComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -561,8 +561,8 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="MarkersComboBox3FocusLost"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MarkersComboBox3ActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="heelMarkersComboBoxFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="heelMarkersComboBoxActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel13">
@@ -572,7 +572,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="MarkersComboBox4">
+    <Component class="javax.swing.JComboBox" name="midfootMarkersComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="4">
@@ -584,8 +584,8 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="MarkersComboBox4FocusLost"/>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="MarkersComboBox4ActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="midfootMarkersComboBoxFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="midfootMarkersComboBoxActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

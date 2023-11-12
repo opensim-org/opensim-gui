@@ -9,6 +9,7 @@ import java.awt.Dialog;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Vector;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -17,12 +18,19 @@ import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.util.Exceptions;
 import org.opensim.modeling.AbstractProperty;
+import org.opensim.modeling.ArrayStr;
+import org.opensim.modeling.BodyIterator;
+import org.opensim.modeling.BodyList;
+import org.opensim.modeling.FrameList;
+import org.opensim.modeling.MarkerSet;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyBoolList;
 import org.opensim.modeling.PropertyDoubleList;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.PropertyObjectList;
 import org.opensim.modeling.PropertyStringList;
+import org.opensim.view.pub.OpenSimDB;
 
 /**
  *
@@ -38,6 +46,7 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
     private PropertyDoubleList endTimeProp;
     private PropertyDoubleList beltSpeedProp;
     private PropertyStringList hindfootBodyProp, toeMarkerProp, medialMarkerProp, lateralMarkerProp, heelMarkerProp, midfootMarkerProp ;
+    private Model model;
 
     /**
      * Creates new form EditJointTaskJPanel
@@ -56,6 +65,8 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
          jStartTimeTextField.setText(String.valueOf(startTimeProp.getValue()));
          jEndTimeTextField.setText(String.valueOf(endTimeProp.getValue()));
          jBeltSpeedTextField.setText(String.valueOf(beltSpeedProp.getValue()));
+         model = OpenSimDB.getInstance().getCurrentModel();
+         populateComboBoxes();
     }
 
     void populatePropertiesFromObject() {
@@ -74,6 +85,29 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         
     }
     
+    void populateComboBoxes() {
+        BodyList bodies = model.getBodyList();
+        BodyIterator body = bodies.begin();
+        Vector<String> bNames = new Vector<String>();
+        while (!body.equals(bodies.end())) {
+            bNames.add(body.getName());
+            body.next();
+        }
+        HindfootBodiesComboBox.setModel(new javax.swing.DefaultComboBoxModel(bNames));
+        MarkerSet markers = model.getMarkerSet();
+        ArrayStr mNames = new ArrayStr();
+        markers.getNames(mNames);
+        Vector<String> markerNames = new Vector<String>();
+        for(int i=0; i<mNames.getSize(); i++){
+            markerNames.add(mNames.get(i));
+        }
+
+        toeMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(markerNames));
+        medialMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(markerNames));
+        lateralMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(markerNames));
+        heelMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(markerNames));
+        midfootMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(markerNames));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,16 +141,16 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         jComboBoxFZ2 = new javax.swing.JComboBox();
         HindfootBodiesComboBox = new javax.swing.JComboBox();
         jLabel8 = new javax.swing.JLabel();
-        MarkersComboBox = new javax.swing.JComboBox();
+        toeMarkersComboBox = new javax.swing.JComboBox();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        MarkersComboBox1 = new javax.swing.JComboBox();
+        medialMarkersComboBox = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
-        MarkersComboBox2 = new javax.swing.JComboBox();
+        lateralMarkersComboBox = new javax.swing.JComboBox();
         jLabel12 = new javax.swing.JLabel();
-        MarkersComboBox3 = new javax.swing.JComboBox();
+        heelMarkersComboBox = new javax.swing.JComboBox();
         jLabel13 = new javax.swing.JLabel();
-        MarkersComboBox4 = new javax.swing.JComboBox();
+        midfootMarkersComboBox = new javax.swing.JComboBox();
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel1.text")); // NOI18N
 
@@ -280,15 +314,15 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel8, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel8.text")); // NOI18N
 
-        MarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        MarkersComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
+        toeMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        toeMarkersComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                MarkersComboBoxFocusLost(evt);
+                toeMarkersComboBoxFocusLost(evt);
             }
         });
-        MarkersComboBox.addActionListener(new java.awt.event.ActionListener() {
+        toeMarkersComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MarkersComboBoxActionPerformed(evt);
+                toeMarkersComboBoxActionPerformed(evt);
             }
         });
 
@@ -296,57 +330,57 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel10, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel10.text")); // NOI18N
 
-        MarkersComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        MarkersComboBox1.addFocusListener(new java.awt.event.FocusAdapter() {
+        medialMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        medialMarkersComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                MarkersComboBox1FocusLost(evt);
+                medialMarkersComboBoxFocusLost(evt);
             }
         });
-        MarkersComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        medialMarkersComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MarkersComboBox1ActionPerformed(evt);
+                medialMarkersComboBoxActionPerformed(evt);
             }
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel11, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel11.text")); // NOI18N
 
-        MarkersComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        MarkersComboBox2.addFocusListener(new java.awt.event.FocusAdapter() {
+        lateralMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        lateralMarkersComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                MarkersComboBox2FocusLost(evt);
+                lateralMarkersComboBoxFocusLost(evt);
             }
         });
-        MarkersComboBox2.addActionListener(new java.awt.event.ActionListener() {
+        lateralMarkersComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MarkersComboBox2ActionPerformed(evt);
+                lateralMarkersComboBoxActionPerformed(evt);
             }
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel12, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel12.text")); // NOI18N
 
-        MarkersComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        MarkersComboBox3.addFocusListener(new java.awt.event.FocusAdapter() {
+        heelMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        heelMarkersComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                MarkersComboBox3FocusLost(evt);
+                heelMarkersComboBoxFocusLost(evt);
             }
         });
-        MarkersComboBox3.addActionListener(new java.awt.event.ActionListener() {
+        heelMarkersComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MarkersComboBox3ActionPerformed(evt);
+                heelMarkersComboBoxActionPerformed(evt);
             }
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel13, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel13.text")); // NOI18N
 
-        MarkersComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        MarkersComboBox4.addFocusListener(new java.awt.event.FocusAdapter() {
+        midfootMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        midfootMarkersComboBox.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                MarkersComboBox4FocusLost(evt);
+                midfootMarkersComboBoxFocusLost(evt);
             }
         });
-        MarkersComboBox4.addActionListener(new java.awt.event.ActionListener() {
+        midfootMarkersComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MarkersComboBox4ActionPerformed(evt);
+                midfootMarkersComboBoxActionPerformed(evt);
             }
         });
 
@@ -405,9 +439,9 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBoxFX5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(MarkersComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(MarkersComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(MarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(heelMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(medialMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(toeMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(HindfootBodiesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,8 +456,8 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
                                     .addComponent(jLabel13))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(MarkersComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(MarkersComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(lateralMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(midfootMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE))))))
         );
         layout.setVerticalGroup(
@@ -473,19 +507,19 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(toeMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MarkersComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(medialMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(MarkersComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lateralMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(MarkersComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(heelMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel12)
-                    .addComponent(MarkersComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(midfootMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -600,61 +634,57 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBoxFZ2updateForceFromPanel
 
     private void HindfootBodiesComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_HindfootBodiesComboBoxFocusLost
-        //updateForceFromPanel();
+        hindfootBodyProp.setValue((String) HindfootBodiesComboBox.getSelectedItem());
     }//GEN-LAST:event_HindfootBodiesComboBoxFocusLost
 
     private void HindfootBodiesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HindfootBodiesComboBoxActionPerformed
-        //updateForceFromPanel();
+       hindfootBodyProp.setValue((String) HindfootBodiesComboBox.getSelectedItem());
     }//GEN-LAST:event_HindfootBodiesComboBoxActionPerformed
 
-    private void MarkersComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MarkersComboBoxFocusLost
+    private void toeMarkersComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_toeMarkersComboBoxFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_MarkersComboBoxFocusLost
+    }//GEN-LAST:event_toeMarkersComboBoxFocusLost
 
-    private void MarkersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarkersComboBoxActionPerformed
+    private void toeMarkersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toeMarkersComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MarkersComboBoxActionPerformed
+    }//GEN-LAST:event_toeMarkersComboBoxActionPerformed
 
-    private void MarkersComboBox1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MarkersComboBox1FocusLost
+    private void medialMarkersComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_medialMarkersComboBoxFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_MarkersComboBox1FocusLost
+    }//GEN-LAST:event_medialMarkersComboBoxFocusLost
 
-    private void MarkersComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarkersComboBox1ActionPerformed
+    private void medialMarkersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medialMarkersComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MarkersComboBox1ActionPerformed
+    }//GEN-LAST:event_medialMarkersComboBoxActionPerformed
 
-    private void MarkersComboBox2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MarkersComboBox2FocusLost
+    private void lateralMarkersComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lateralMarkersComboBoxFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_MarkersComboBox2FocusLost
+    }//GEN-LAST:event_lateralMarkersComboBoxFocusLost
 
-    private void MarkersComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarkersComboBox2ActionPerformed
+    private void lateralMarkersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lateralMarkersComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MarkersComboBox2ActionPerformed
+    }//GEN-LAST:event_lateralMarkersComboBoxActionPerformed
 
-    private void MarkersComboBox3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MarkersComboBox3FocusLost
+    private void heelMarkersComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_heelMarkersComboBoxFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_MarkersComboBox3FocusLost
+    }//GEN-LAST:event_heelMarkersComboBoxFocusLost
 
-    private void MarkersComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarkersComboBox3ActionPerformed
+    private void heelMarkersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heelMarkersComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MarkersComboBox3ActionPerformed
+    }//GEN-LAST:event_heelMarkersComboBoxActionPerformed
 
-    private void MarkersComboBox4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_MarkersComboBox4FocusLost
+    private void midfootMarkersComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_midfootMarkersComboBoxFocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_MarkersComboBox4FocusLost
+    }//GEN-LAST:event_midfootMarkersComboBoxFocusLost
 
-    private void MarkersComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarkersComboBox4ActionPerformed
+    private void midfootMarkersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_midfootMarkersComboBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_MarkersComboBox4ActionPerformed
+    }//GEN-LAST:event_midfootMarkersComboBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox HindfootBodiesComboBox;
-    private javax.swing.JComboBox MarkersComboBox;
-    private javax.swing.JComboBox MarkersComboBox1;
-    private javax.swing.JComboBox MarkersComboBox2;
-    private javax.swing.JComboBox MarkersComboBox3;
-    private javax.swing.JComboBox MarkersComboBox4;
+    private javax.swing.JComboBox heelMarkersComboBox;
     private javax.swing.JTextField jBeltSpeedTextField;
     private javax.swing.JComboBox jComboBoxFX;
     private javax.swing.JComboBox jComboBoxFX1;
@@ -686,6 +716,10 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JCheckBox jLeftFootCheckBox;
     private javax.swing.JTextField jStartTimeTextField;
+    private javax.swing.JComboBox lateralMarkersComboBox;
+    private javax.swing.JComboBox medialMarkersComboBox;
+    private javax.swing.JComboBox midfootMarkersComboBox;
+    private javax.swing.JComboBox toeMarkersComboBox;
     // End of variables declaration//GEN-END:variables
     private class ListSelectionHandler implements ListSelectionListener {
 
