@@ -16,19 +16,19 @@ package org.opensim.modeling;
  * @see ArrayPtrs<br>
  * @author Frank C. Anderson
  */
-public class SetFunctionBasedPath extends OpenSimObject {
+public class SetFunctionBasedPaths extends OpenSimObject {
   private transient long swigCPtr;
 
-  public SetFunctionBasedPath(long cPtr, boolean cMemoryOwn) {
-    super(opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_SWIGUpcast(cPtr), cMemoryOwn);
+  public SetFunctionBasedPaths(long cPtr, boolean cMemoryOwn) {
+    super(opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(SetFunctionBasedPath obj) {
+  public static long getCPtr(SetFunctionBasedPaths obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
-  public static long swigRelease(SetFunctionBasedPath obj) {
+  public static long swigRelease(SetFunctionBasedPaths obj) {
     long ptr = 0;
     if (obj != null) {
       if (!obj.swigCMemOwn)
@@ -49,40 +49,40 @@ public class SetFunctionBasedPath extends OpenSimObject {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimActuatorsAnalysesToolsJNI.delete_SetFunctionBasedPath(swigCPtr);
+        opensimActuatorsAnalysesToolsJNI.delete_SetFunctionBasedPaths(swigCPtr);
       }
       swigCPtr = 0;
     }
     super.delete();
   }
 
-  public static SetFunctionBasedPath safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new SetFunctionBasedPath(cPtr, false);
+  public static SetFunctionBasedPaths safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new SetFunctionBasedPaths(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getClassName();
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getClassName();
   }
 
-  public SetFunctionBasedPath clone() {
-    long cPtr = opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new SetFunctionBasedPath(cPtr, true);
+  public SetFunctionBasedPaths clone() {
+    long cPtr = opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new SetFunctionBasedPaths(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getConcreteClassName(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getConcreteClassName(swigCPtr, this);
   }
 
   /**
    * Default constructor.
    */
-  public SetFunctionBasedPath() {
-    this(opensimActuatorsAnalysesToolsJNI.new_SetFunctionBasedPath__SWIG_0(), true);
+  public SetFunctionBasedPaths() {
+    this(opensimActuatorsAnalysesToolsJNI.new_SetFunctionBasedPaths__SWIG_0(), true);
   }
 
   /**
@@ -91,8 +91,8 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @param aFileName             Name of the file.<br>
    * @param aUpdateFromXMLNode    Whether to update from XML.
    */
-  public SetFunctionBasedPath(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
-    this(opensimActuatorsAnalysesToolsJNI.new_SetFunctionBasedPath__SWIG_1(aFileName, aUpdateFromXMLNode), true);
+  public SetFunctionBasedPaths(String aFileName, boolean aUpdateFromXMLNode) throws java.io.IOException {
+    this(opensimActuatorsAnalysesToolsJNI.new_SetFunctionBasedPaths__SWIG_1(aFileName, aUpdateFromXMLNode), true);
   }
 
   /**
@@ -101,8 +101,8 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @param aFileName             Name of the file.<br>
    * 
    */
-  public SetFunctionBasedPath(String aFileName) throws java.io.IOException {
-    this(opensimActuatorsAnalysesToolsJNI.new_SetFunctionBasedPath__SWIG_2(aFileName), true);
+  public SetFunctionBasedPaths(String aFileName) throws java.io.IOException {
+    this(opensimActuatorsAnalysesToolsJNI.new_SetFunctionBasedPaths__SWIG_2(aFileName), true);
   }
 
   /**
@@ -110,15 +110,15 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * <br>
    * @param aSet Set to be copied.
    */
-  public SetFunctionBasedPath(SetFunctionBasedPath aSet) {
-    this(opensimActuatorsAnalysesToolsJNI.new_SetFunctionBasedPath__SWIG_3(SetFunctionBasedPath.getCPtr(aSet), aSet), true);
+  public SetFunctionBasedPaths(SetFunctionBasedPaths aSet) {
+    this(opensimActuatorsAnalysesToolsJNI.new_SetFunctionBasedPaths__SWIG_3(SetFunctionBasedPaths.getCPtr(aSet), aSet), true);
   }
 
   /**
    * Setup groups (match group member names to set members).
    */
   public void setupGroups() {
-    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_setupGroups(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_setupGroups(swigCPtr, this);
   }
 
   /**
@@ -140,7 +140,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * false, deletes are not issued for each of the pointers.
    */
   public void setMemoryOwner(boolean aTrueFalse) {
-    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_setMemoryOwner(swigCPtr, this, aTrueFalse);
+    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_setMemoryOwner(swigCPtr, this, aTrueFalse);
   }
 
   /**
@@ -161,7 +161,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * otherwise.
    */
   public boolean setSize(int aSize) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_setSize(swigCPtr, this, aSize);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_setSize(swigCPtr, this, aSize);
   }
 
   /**
@@ -170,7 +170,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @return Size of the array.
    */
   public int getSize() {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getSize(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getSize(swigCPtr, this);
   }
 
   /**
@@ -184,7 +184,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * exists in the array, -1 is returned.
    */
   public int getIndex(FunctionBasedPath aObject, int aStartIndex) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getIndex__SWIG_0(swigCPtr, this, FunctionBasedPath.getCPtr(aObject), aObject, aStartIndex);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getIndex__SWIG_0(swigCPtr, this, FunctionBasedPath.getCPtr(aObject), aObject, aStartIndex);
   }
 
   /**
@@ -196,7 +196,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * exists in the array, -1 is returned.
    */
   public int getIndex(FunctionBasedPath aObject) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getIndex__SWIG_1(swigCPtr, this, FunctionBasedPath.getCPtr(aObject), aObject);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getIndex__SWIG_1(swigCPtr, this, FunctionBasedPath.getCPtr(aObject), aObject);
   }
 
   /**
@@ -210,7 +210,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * the array, -1 is returned.
    */
   public int getIndex(String aName, int aStartIndex) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getIndex__SWIG_2(swigCPtr, this, aName, aStartIndex);
   }
 
   /**
@@ -222,14 +222,14 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * the array, -1 is returned.
    */
   public int getIndex(String aName) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getIndex__SWIG_3(swigCPtr, this, aName);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getIndex__SWIG_3(swigCPtr, this, aName);
   }
 
   /**
    * Get names of groups containing a given object 
    */
   public void getGroupNamesContaining(String aObjectName, ArrayStr rGroupNames) {
-    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
+    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getGroupNamesContaining(swigCPtr, this, aObjectName, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
   /**
@@ -241,7 +241,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @return True if the append was successful, false otherwise.
    */
   public boolean adoptAndAppend(FunctionBasedPath aObject) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_adoptAndAppend(swigCPtr, this, FunctionBasedPath.getCPtr(aObject), aObject);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_adoptAndAppend(swigCPtr, this, FunctionBasedPath.getCPtr(aObject), aObject);
   }
 
   /**
@@ -253,7 +253,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @return True if the append was successful, false otherwise.
    */
   public boolean cloneAndAppend(FunctionBasedPath aObject) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_cloneAndAppend(swigCPtr, this, FunctionBasedPath.getCPtr(aObject), aObject);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_cloneAndAppend(swigCPtr, this, FunctionBasedPath.getCPtr(aObject), aObject);
   }
 
   /**
@@ -273,7 +273,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @return True if the insertion was successful, false otherwise.
    */
   public boolean insert(int aIndex, FunctionBasedPath aObject) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_insert(swigCPtr, this, aIndex, FunctionBasedPath.getCPtr(aObject), aObject);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_insert(swigCPtr, this, aIndex, FunctionBasedPath.getCPtr(aObject), aObject);
   }
 
   /**
@@ -291,7 +291,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @return True if the removal was successful, false otherwise.
    */
   public boolean remove(int aIndex) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_remove__SWIG_0(swigCPtr, this, aIndex);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_remove__SWIG_0(swigCPtr, this, aIndex);
   }
 
   /**
@@ -306,11 +306,11 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @return True if the removal was successful, false otherwise.
    */
   public boolean remove(FunctionBasedPath aObject) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_remove__SWIG_1(swigCPtr, this, FunctionBasedPath.getCPtr(aObject), aObject);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_remove__SWIG_1(swigCPtr, this, FunctionBasedPath.getCPtr(aObject), aObject);
   }
 
   public void clearAndDestroy() {
-    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_clearAndDestroy(swigCPtr, this);
+    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_clearAndDestroy(swigCPtr, this);
   }
 
   /**
@@ -328,7 +328,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @return True if the set was successful, false otherwise.
    */
   public boolean set(int aIndex, FunctionBasedPath aObject, boolean preserveGroups) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_set__SWIG_0(swigCPtr, this, aIndex, FunctionBasedPath.getCPtr(aObject), aObject, preserveGroups);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_set__SWIG_0(swigCPtr, this, aIndex, FunctionBasedPath.getCPtr(aObject), aObject, preserveGroups);
   }
 
   /**
@@ -345,7 +345,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @return True if the set was successful, false otherwise.
    */
   public boolean set(int aIndex, FunctionBasedPath aObject) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_set__SWIG_1(swigCPtr, this, aIndex, FunctionBasedPath.getCPtr(aObject), aObject);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_set__SWIG_1(swigCPtr, this, aIndex, FunctionBasedPath.getCPtr(aObject), aObject);
   }
 
   /**
@@ -364,7 +364,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @see operator[].
    */
   public FunctionBasedPath get(int aIndex) {
-    return new FunctionBasedPath(opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_get__SWIG_0(swigCPtr, this, aIndex), false);
+    return new FunctionBasedPath(opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_get__SWIG_0(swigCPtr, this, aIndex), false);
   }
 
   /**
@@ -379,7 +379,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @see getIndex()
    */
   public FunctionBasedPath get(String aName) {
-    return new FunctionBasedPath(opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_get__SWIG_1(swigCPtr, this, aName), false);
+    return new FunctionBasedPath(opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_get__SWIG_1(swigCPtr, this, aName), false);
   }
 
   /**
@@ -389,7 +389,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * @return true if the object exists
    */
   public boolean contains(String aName) {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_contains(swigCPtr, this, aName);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_contains(swigCPtr, this, aName);
   }
 
   /**
@@ -400,56 +400,56 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * will simply be appended to the array sent in.
    */
   public void getNames(ArrayStr rNames) {
-    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
+    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getNames(swigCPtr, this, ArrayStr.getCPtr(rNames), rNames);
   }
 
   /**
    * Get the number of groups.
    */
   public int getNumGroups() {
-    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getNumGroups(swigCPtr, this);
+    return opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getNumGroups(swigCPtr, this);
   }
 
   /**
    * Add an empty group to the set.
    */
   public void addGroup(String aGroupName) {
-    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_addGroup(swigCPtr, this, aGroupName);
+    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_addGroup(swigCPtr, this, aGroupName);
   }
 
   /**
    * Remove a group from the set. Elements are not removed.
    */
   public void removeGroup(String aGroupName) {
-    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_removeGroup(swigCPtr, this, aGroupName);
+    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_removeGroup(swigCPtr, this, aGroupName);
   }
 
   /**
    * Rename a group.
    */
   public void renameGroup(String oldGroupName, String newGroupName) {
-    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_renameGroup(swigCPtr, this, oldGroupName, newGroupName);
+    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_renameGroup(swigCPtr, this, oldGroupName, newGroupName);
   }
 
   /**
    * Add an object to a group.
    */
   public void addObjectToGroup(String aGroupName, String aObjectName) {
-    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_addObjectToGroup(swigCPtr, this, aGroupName, aObjectName);
+    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_addObjectToGroup(swigCPtr, this, aGroupName, aObjectName);
   }
 
   /**
    * Get names of all groups
    */
   public void getGroupNames(ArrayStr rGroupNames) {
-    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getGroupNames(swigCPtr, this, ArrayStr.getCPtr(rGroupNames), rGroupNames);
+    opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getGroupNames(swigCPtr, this, ArrayStr.getCPtr(rGroupNames), rGroupNames);
   }
 
   /**
    * Get a group by name.
    */
   public ObjectGroup getGroup(String aGroupName) {
-    long cPtr = opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getGroup__SWIG_0(swigCPtr, this, aGroupName);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getGroup__SWIG_0(swigCPtr, this, aGroupName);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 
@@ -457,7 +457,7 @@ public class SetFunctionBasedPath extends OpenSimObject {
    * Get a group by index.
    */
   public ObjectGroup getGroup(int aIndex) {
-    long cPtr = opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPath_getGroup__SWIG_1(swigCPtr, this, aIndex);
+    long cPtr = opensimActuatorsAnalysesToolsJNI.SetFunctionBasedPaths_getGroup__SWIG_1(swigCPtr, this, aIndex);
     return (cPtr == 0) ? null : new ObjectGroup(cPtr, false);
   }
 
