@@ -21,7 +21,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="inputModelPanel" alignment="0" max="32767" attributes="0"/>
                   <Component id="settingsPanel" alignment="1" max="32767" attributes="0"/>
-                  <Component id="outputPanel" alignment="0" pref="0" max="32767" attributes="2"/>
+                  <Component id="outputPanel" alignment="0" pref="755" max="32767" attributes="2"/>
               </Group>
           </Group>
       </Group>

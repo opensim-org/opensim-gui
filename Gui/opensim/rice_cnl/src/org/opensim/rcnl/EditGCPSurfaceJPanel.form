@@ -32,46 +32,9 @@
                   <Component id="jLabel10" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel12" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
+              <EmptySpace min="9" pref="9" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jGCPSurfaceNameTextField" min="-2" pref="152" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jStartTimeTextField" min="-2" pref="95" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jEndTimeTextField" min="-2" pref="113" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jBeltSpeedTextField" min="-2" pref="95" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                              <Component id="jComboBoxFX3" min="-2" pref="184" max="-2" attributes="2"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jComboBoxFY" min="-2" pref="204" max="-2" attributes="2"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jComboBoxFZ" min="-2" max="-2" attributes="2"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jComboBoxFX4" min="-2" pref="184" max="-2" attributes="2"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jComboBoxFY1" min="-2" pref="204" max="-2" attributes="2"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jComboBoxFZ1" min="-2" max="-2" attributes="2"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="9" pref="9" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jComboBoxFX5" alignment="0" min="-2" pref="184" max="-2" attributes="2"/>
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
@@ -83,27 +46,48 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="lateralMarkersComboBox" min="-2" pref="131" max="-2" attributes="1"/>
+                          <Component id="midfootMarkersComboBox" min="-2" pref="131" max="-2" attributes="1"/>
+                      </Group>
+                  </Group>
+                  <Component id="jGCPSurfaceNameTextField" alignment="0" min="-2" pref="152" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jStartTimeTextField" min="-2" pref="95" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jEndTimeTextField" min="-2" pref="113" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jBeltSpeedTextField" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jComboBoxFX3" min="-2" pref="184" max="-2" attributes="2"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jComboBoxFY" min="-2" pref="204" max="-2" attributes="2"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jComboBoxFZ" min="-2" max="-2" attributes="2"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jComboBoxFY2" min="-2" pref="204" max="-2" attributes="2"/>
                           <Group type="102" attributes="0">
-                              <Component id="jComboBoxFY2" min="-2" pref="204" max="-2" attributes="2"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jComboBoxFZ2" min="-2" max="-2" attributes="2"/>
-                              <EmptySpace pref="12" max="32767" attributes="0"/>
+                              <Component id="jComboBoxFX4" min="-2" pref="184" max="-2" attributes="2"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jComboBoxFY1" min="-2" pref="204" max="-2" attributes="2"/>
                           </Group>
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel11" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel13" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="lateralMarkersComboBox" min="-2" pref="131" max="-2" attributes="1"/>
-                                  <Component id="midfootMarkersComboBox" min="-2" pref="131" max="-2" attributes="1"/>
-                              </Group>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="jComboBoxFZ1" min="-2" max="-2" attributes="2"/>
+                          <Component id="jComboBoxFZ2" min="-2" max="-2" attributes="2"/>
                       </Group>
                   </Group>
               </Group>
+              <EmptySpace min="0" pref="22" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -135,26 +119,28 @@
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jLabel5" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                      <Component id="jComboBoxFX3" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxFZ" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxFY" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxFX3" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jLabel6" alignment="1" min="-2" max="-2" attributes="0"/>
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
-                      <Component id="jComboBoxFX4" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxFZ1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxFY1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxFX4" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jComboBoxFX5" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBoxFZ2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBoxFY2" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="jComboBoxFX5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxFY2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxFZ2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -259,6 +245,9 @@
           <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="EditGCPSurfaceJPanel.jLeftFootCheckBox.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jLeftFootCheckBoxActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">
       <Properties>

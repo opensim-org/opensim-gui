@@ -29,6 +29,9 @@ import org.opensim.view.pub.OpenSimDB;
 public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer {
     private GCPPersonalizationToolModel gcpPersonalizationToolModel = null;
     private Model model;
+    private GCPSurfaceListModel gcpListModel = null;
+    private PropertyObjectList surfaceListProp = null;
+    private ListSelectionModel listSelectionModel = null;
     /**
      * Creates new form JointPersonalizationJPanel
      */
@@ -36,7 +39,14 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
        if(model==null) throw new IOException("GCPPersonalizationJPanel got null model");
        this.model = model;
        gcpPersonalizationToolModel = new GCPPersonalizationToolModel(model);
+       OpenSimObject tool = gcpPersonalizationToolModel.getToolAsObject();
+       AbstractProperty ap = tool.getPropertyByName("GCPContactSurfaceSet");
+       surfaceListProp = PropertyObjectList.updAs(ap);
+       gcpListModel= new GCPSurfaceListModel(surfaceListProp);
        initComponents();
+       GCPContactSurfaceList.setModel(gcpListModel);
+       listSelectionModel = GCPContactSurfaceList.getSelectionModel();
+       listSelectionModel.addListSelectionListener(new ListSelectionHandler());
        currentModelFileTextField.setText(gcpPersonalizationToolModel.getInputModelFile());
        outputResultDirPath.setDialogTitle("Select output directory");
        outputResultDirPath.setDirectoriesOnly(true);
@@ -339,7 +349,9 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
         d.setVisible(true);
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-
+            gcpListModel.addElement(gcpContactSurface);
+            gcpContactSurface.markAdopted(); //indicate ownership will be transferred so that object is not deleted by gc
+            surfaceListProp.adoptAndAppendValue(gcpContactSurface);
         }
     }//GEN-LAST:event_addGCPSurfaceButtonaddJMPTaskButtonActionPerformed
 
@@ -347,13 +359,34 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
         // TODO add your handling code here:
         int[] sels = GCPContactSurfaceList.getSelectedIndices();
         int idx = sels[0];
-
+        OpenSimObject selectedSurface = (OpenSimObject)gcpListModel.get(idx);
+        OpenSimObject surfaceCopy = selectedSurface.clone();
+        EditGCPSurfaceJPanel gcpSurfacePanel = new EditGCPSurfaceJPanel(surfaceCopy);
+        DialogDescriptor dlg = new DialogDescriptor(gcpSurfacePanel, "Create/Edit One GCPContactSurface");
+        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
+        d.setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            gcpListModel.set(idx, surfaceCopy);
+            surfaceListProp.setValue(idx, surfaceCopy);
+        }
     }//GEN-LAST:event_editGCPSurfaceButtoneditJMPTaskButtonActionPerformed
 
     private void deleteGCPSurfaceButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteGCPSurfaceButtonActionPerformed
         // TODO add your handling code here:
         int[] sels = GCPContactSurfaceList.getSelectedIndices();
-
+        Vector<Integer> surfacesToDelete = new Vector<Integer>();
+        for (int i=0; i<sels.length; i++){
+            surfacesToDelete.add(sels[i]);
+        }
+        // Delete items from jmpJointListModel in reverse order
+        for (int r=surfacesToDelete.size(); r >0; r-- ){
+            gcpListModel.remove(surfacesToDelete.get(r-1));
+            surfaceListProp.removeValueAtIndex(surfacesToDelete.get(r-1));
+        }
+        // Recreate list model to cleanup
+        gcpListModel= new GCPSurfaceListModel(surfaceListProp);
+        GCPContactSurfaceList.setModel(gcpListModel);
     }//GEN-LAST:event_deleteGCPSurfaceButtonActionPerformed
 
     @Override
@@ -413,5 +446,19 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private org.opensim.swingui.FileTextFieldAndChooser outputResultDirPath;
     private javax.swing.JPanel settingsPanel;
     // End of variables declaration//GEN-END:variables
+    private class ListSelectionHandler implements ListSelectionListener {
 
+        public ListSelectionHandler() {
+        }
+
+        @Override
+        public void valueChanged(ListSelectionEvent lse) {
+            // Disable delete if nothing is selected
+            // Enable edit if single selection
+            int[] sels = GCPContactSurfaceList.getSelectedIndices();
+            editGCPSurfaceButton.setEnabled(sels.length==1);
+            deleteGCPSurfaceButton.setEnabled(sels.length>=1);
+            
+        }
+    }
 }

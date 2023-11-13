@@ -67,6 +67,12 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
          jBeltSpeedTextField.setText(String.valueOf(beltSpeedProp.getValue()));
          model = OpenSimDB.getInstance().getCurrentModel();
          populateComboBoxes();
+         toeMarkersComboBox.setSelectedItem(toeMarkerProp.getValue());
+         medialMarkersComboBox.setSelectedItem(medialMarkerProp.getValue());
+         lateralMarkersComboBox.setSelectedItem(lateralMarkerProp.getValue());
+         heelMarkersComboBox.setSelectedItem(heelMarkerProp.getValue());
+         midfootMarkersComboBox.setSelectedItem(midfootMarkerProp.getValue());
+         HindfootBodiesComboBox.setSelectedItem(hindfootBodyProp.getValue());
     }
 
     void populatePropertiesFromObject() {
@@ -107,7 +113,15 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         lateralMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(markerNames));
         heelMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(markerNames));
         midfootMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(markerNames));
-    }
+        
+        // Make properties consistent with UI
+        HindfootBodiesComboBoxActionPerformed(null);
+        toeMarkersComboBoxActionPerformed(null);
+        medialMarkersComboBoxActionPerformed(null);
+        lateralMarkersComboBoxActionPerformed(null);
+        heelMarkersComboBoxActionPerformed(null);
+        midfootMarkersComboBoxActionPerformed(null);
+     }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -209,6 +223,11 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLeftFootCheckBox, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLeftFootCheckBox.text")); // NOI18N
+        jLeftFootCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jLeftFootCheckBoxActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel2.text")); // NOI18N
 
@@ -403,39 +422,9 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel9)
                     .addComponent(jLabel10)
                     .addComponent(jLabel12))
+                .addGap(9, 9, 9)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jGCPSurfaceNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jStartTimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel4)
-                                .addGap(18, 18, 18)
-                                .addComponent(jEndTimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jBeltSpeedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(11, 11, 11)
-                                .addComponent(jComboBoxFX3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBoxFY, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBoxFZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBoxFX4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBoxFY1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBoxFZ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBoxFX5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -445,20 +434,38 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
                                 .addComponent(HindfootBodiesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel11)
+                            .addComponent(jLabel13))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(lateralMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(midfootMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jGCPSurfaceNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jStartTimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(jEndTimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jBeltSpeedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBoxFX3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxFY, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBoxFZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jComboBoxFY2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBoxFY2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jComboBoxFZ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addContainerGap(12, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel11)
-                                    .addComponent(jLabel13))
+                                .addComponent(jComboBoxFX4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lateralMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(midfootMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))))
+                                .addComponent(jComboBoxFY1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBoxFZ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxFZ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,22 +492,23 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel5)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBoxFX3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBoxFZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBoxFY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBoxFY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFX3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBoxFX4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBoxFZ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBoxFY1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBoxFY1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFX4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBoxFX5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBoxFZ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jComboBoxFY2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jComboBoxFX5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFY2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFZ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(HindfootBodiesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -532,23 +540,12 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
 
     private void jStartTimeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jStartTimeTextFieldActionPerformed
         // TODO add your handling code here:
-        try {
-            // TODO add your handling code here:
-            AbstractProperty timeRangeProp = gcpContactSurface.getPropertyByName("time_range");
-            PropertyDoubleList pDoubleList = PropertyDoubleList.updAs(timeRangeProp);
-            double startTime =pDoubleList.getValue(0);
-            if (jStartTimeTextField.getText().trim().length()>0)
-                startTime = numFormat.parse(jStartTimeTextField.getText().trim()).doubleValue();
-            pDoubleList.setValue(0, startTime);
-        } catch (ParseException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+        jStartTimeTextFieldFocusLost(null);
     }//GEN-LAST:event_jStartTimeTextFieldActionPerformed
 
     private void jEnabledCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jEnabledCheckBoxItemStateChanged
         // TODO add your handling code here:
-        AbstractProperty enabledProp = gcpContactSurface.getPropertyByName("is_enabled");
-        PropertyHelper.setValueBool(evt.getStateChange()==1, enabledProp);
+        enabledProp.setValue(jEnabledCheckBox.isSelected());
     }//GEN-LAST:event_jEnabledCheckBoxItemStateChanged
 
     private void jGCPSurfaceNameTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jGCPSurfaceNameTextFieldFocusLost
@@ -557,19 +554,22 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jGCPSurfaceNameTextFieldFocusLost
 
     private void jStartTimeTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jStartTimeTextFieldFocusLost
-        //jTextField3ActionPerformed(null);
+        try {
+            if(jStartTimeTextField.getText().trim().length()>0)
+                startTimeProp.setValue(0,  numFormat.parse(jStartTimeTextField.getText().trim()).doubleValue());
+        } catch (ParseException ex) {
+            Exceptions.printStackTrace(ex);
+        }
     }//GEN-LAST:event_jStartTimeTextFieldFocusLost
 
     private void jEndTimeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEndTimeTextFieldActionPerformed
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:();
-            AbstractProperty timeRangeProp = gcpContactSurface.getPropertyByName("time_range");
-            PropertyDoubleList pDoubleList = PropertyDoubleList.updAs(timeRangeProp);
-            double endTime=pDoubleList.getValue(1);
+            double endTime=endTimeProp.getValue(0);
             if (jEndTimeTextField.getText().trim().length()>0)
                 endTime = numFormat.parse(jEndTimeTextField.getText().trim()).doubleValue();
-            pDoubleList.setValue(1, endTime);
+            endTimeProp.setValue(0, endTime);
         } catch (ParseException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -577,7 +577,7 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
 
     private void jEndTimeTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jEndTimeTextFieldFocusLost
         // TODO add your handling code here:
-        //jTextField4ActionPerformed(null);
+        jEndTimeTextFieldActionPerformed(null);
     }//GEN-LAST:event_jEndTimeTextFieldFocusLost
 
     private void jEnabledCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnabledCheckBoxActionPerformed
@@ -586,10 +586,19 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
 
     private void jBeltSpeedTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jBeltSpeedTextFieldFocusLost
         // TODO add your handling code here:
+        jBeltSpeedTextFieldActionPerformed(null);
     }//GEN-LAST:event_jBeltSpeedTextFieldFocusLost
 
     private void jBeltSpeedTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBeltSpeedTextFieldActionPerformed
-        // TODO add your handling code here:
+        try {
+            double beltSpeed=beltSpeedProp.getValue();
+            // TODO add your handling code here:();
+            if (jBeltSpeedTextField.getText().trim().length()>0)
+                beltSpeed = numFormat.parse(jBeltSpeedTextField.getText().trim()).doubleValue();
+            beltSpeedProp.setValue(0, beltSpeed);
+        } catch (ParseException ex) {
+            Exceptions.printStackTrace(ex);
+        }        // TODO add your handling code here:
     }//GEN-LAST:event_jBeltSpeedTextFieldActionPerformed
 
     private void jComboBoxFX3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFX3ActionPerformed
@@ -634,7 +643,7 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_jComboBoxFZ2updateForceFromPanel
 
     private void HindfootBodiesComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_HindfootBodiesComboBoxFocusLost
-        hindfootBodyProp.setValue((String) HindfootBodiesComboBox.getSelectedItem());
+        HindfootBodiesComboBoxActionPerformed(null);
     }//GEN-LAST:event_HindfootBodiesComboBoxFocusLost
 
     private void HindfootBodiesComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HindfootBodiesComboBoxActionPerformed
@@ -643,52 +652,64 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
 
     private void toeMarkersComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_toeMarkersComboBoxFocusLost
         // TODO add your handling code here:
+        toeMarkersComboBoxActionPerformed(null);
     }//GEN-LAST:event_toeMarkersComboBoxFocusLost
 
     private void toeMarkersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toeMarkersComboBoxActionPerformed
         // TODO add your handling code here:
+        toeMarkerProp.setValue((String) toeMarkersComboBox.getSelectedItem());
     }//GEN-LAST:event_toeMarkersComboBoxActionPerformed
 
     private void medialMarkersComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_medialMarkersComboBoxFocusLost
         // TODO add your handling code here:
+        medialMarkersComboBoxActionPerformed(null);
     }//GEN-LAST:event_medialMarkersComboBoxFocusLost
 
     private void medialMarkersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_medialMarkersComboBoxActionPerformed
         // TODO add your handling code here:
+        medialMarkerProp.setValue((String) medialMarkersComboBox.getSelectedItem());
     }//GEN-LAST:event_medialMarkersComboBoxActionPerformed
 
     private void lateralMarkersComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lateralMarkersComboBoxFocusLost
         // TODO add your handling code here:
+        lateralMarkersComboBoxActionPerformed(null);
     }//GEN-LAST:event_lateralMarkersComboBoxFocusLost
 
     private void lateralMarkersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lateralMarkersComboBoxActionPerformed
         // TODO add your handling code here:
+        lateralMarkerProp.setValue((String) lateralMarkersComboBox.getSelectedItem());
     }//GEN-LAST:event_lateralMarkersComboBoxActionPerformed
 
     private void heelMarkersComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_heelMarkersComboBoxFocusLost
         // TODO add your handling code here:
+        heelMarkersComboBoxActionPerformed(null);
     }//GEN-LAST:event_heelMarkersComboBoxFocusLost
 
     private void heelMarkersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_heelMarkersComboBoxActionPerformed
         // TODO add your handling code here:
+        heelMarkerProp.setValue((String) heelMarkersComboBox.getSelectedItem());
     }//GEN-LAST:event_heelMarkersComboBoxActionPerformed
 
     private void midfootMarkersComboBoxFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_midfootMarkersComboBoxFocusLost
         // TODO add your handling code here:
+        midfootMarkersComboBoxActionPerformed(null);
     }//GEN-LAST:event_midfootMarkersComboBoxFocusLost
 
     private void midfootMarkersComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_midfootMarkersComboBoxActionPerformed
         // TODO add your handling code here:
+        midfootMarkerProp.setValue((String) midfootMarkersComboBox.getSelectedItem());
     }//GEN-LAST:event_midfootMarkersComboBoxActionPerformed
+
+    private void jLeftFootCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jLeftFootCheckBoxActionPerformed
+        // TODO add your handling code here:
+        leftFootProp.setValue(jLeftFootCheckBox.isSelected());
+    }//GEN-LAST:event_jLeftFootCheckBoxActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox HindfootBodiesComboBox;
     private javax.swing.JComboBox heelMarkersComboBox;
     private javax.swing.JTextField jBeltSpeedTextField;
-    private javax.swing.JComboBox jComboBoxFX;
-    private javax.swing.JComboBox jComboBoxFX1;
-    private javax.swing.JComboBox jComboBoxFX2;
     private javax.swing.JComboBox jComboBoxFX3;
     private javax.swing.JComboBox jComboBoxFX4;
     private javax.swing.JComboBox jComboBoxFX5;
@@ -721,36 +742,6 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox midfootMarkersComboBox;
     private javax.swing.JComboBox toeMarkersComboBox;
     // End of variables declaration//GEN-END:variables
-    private class ListSelectionHandler implements ListSelectionListener {
 
-        public ListSelectionHandler() {
-        }
-
-        @Override
-        public void valueChanged(ListSelectionEvent lse) {
-            // Disable delete if nothing is selected
-            // Enable edit if single selection
-            //int[] sels = jList1.getSelectedIndices();
-            //editJointButton.setEnabled(sels.length==1);
-            //deleteJointButton.setEnabled(sels.length>=1);
-            
-        }
-    }
-    
-       private class List2SelectionHandler implements ListSelectionListener {
-
-        public List2SelectionHandler() {
-        }
-
-        @Override
-        public void valueChanged(ListSelectionEvent lse) {
-            // Disable delete if nothing is selected
-            // Enable edit if single selection
-            //int[] sels = jList2.getSelectedIndices();
-            //editBodyButton.setEnabled(sels.length==1);
-            //deleteBodyButton.setEnabled(sels.length>=1);
-            
-        }
-    }
 
 }
