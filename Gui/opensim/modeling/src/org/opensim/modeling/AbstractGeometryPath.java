@@ -17,25 +17,25 @@ package org.opensim.modeling;
  * `OpenSim::Ligament`s, etc.<br>
  * <br>
  * This class *only* defines a length and lengthening speed. We do not assume<br>
- * that an `OpenSim::AbstractPath` is a straight line between two points or<br>
- * assume that it is many straight lines between `n` points. The derived<br>
+ * that an `OpenSim::AbstractGeometryPath` is a straight line between two points<br>
+ * or assume that it is many straight lines between `n` points. The derived<br>
  * implementation may define a path using points, or it may define a path using<br>
  * a curve fit. It may also define a path based on analytical functions for the<br>
  * length and lengthening speed.
  */
-public class AbstractPath extends ModelComponent {
+public class AbstractGeometryPath extends ModelComponent {
   private transient long swigCPtr;
 
-  public AbstractPath(long cPtr, boolean cMemoryOwn) {
-    super(opensimSimulationJNI.AbstractPath_SWIGUpcast(cPtr), cMemoryOwn);
+  public AbstractGeometryPath(long cPtr, boolean cMemoryOwn) {
+    super(opensimSimulationJNI.AbstractGeometryPath_SWIGUpcast(cPtr), cMemoryOwn);
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(AbstractPath obj) {
+  public static long getCPtr(AbstractGeometryPath obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
-  public static long swigRelease(AbstractPath obj) {
+  public static long swigRelease(AbstractGeometryPath obj) {
     long ptr = 0;
     if (obj != null) {
       if (!obj.swigCMemOwn)
@@ -56,116 +56,85 @@ public class AbstractPath extends ModelComponent {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimSimulationJNI.delete_AbstractPath(swigCPtr);
+        opensimSimulationJNI.delete_AbstractGeometryPath(swigCPtr);
       }
       swigCPtr = 0;
     }
     super.delete();
   }
 
-  public static AbstractPath safeDownCast(OpenSimObject obj) {
-    long cPtr = opensimSimulationJNI.AbstractPath_safeDownCast(OpenSimObject.getCPtr(obj), obj);
-    return (cPtr == 0) ? null : new AbstractPath(cPtr, false);
+  public static AbstractGeometryPath safeDownCast(OpenSimObject obj) {
+    long cPtr = opensimSimulationJNI.AbstractGeometryPath_safeDownCast(OpenSimObject.getCPtr(obj), obj);
+    return (cPtr == 0) ? null : new AbstractGeometryPath(cPtr, false);
   }
 
   public void assign(OpenSimObject aObject) {
-    opensimSimulationJNI.AbstractPath_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
+    opensimSimulationJNI.AbstractGeometryPath_assign(swigCPtr, this, OpenSimObject.getCPtr(aObject), aObject);
   }
 
   public static String getClassName() {
-    return opensimSimulationJNI.AbstractPath_getClassName();
+    return opensimSimulationJNI.AbstractGeometryPath_getClassName();
   }
 
   public OpenSimObject clone() {
-    long cPtr = opensimSimulationJNI.AbstractPath_clone(swigCPtr, this);
-    return (cPtr == 0) ? null : new AbstractPath(cPtr, true);
+    long cPtr = opensimSimulationJNI.AbstractGeometryPath_clone(swigCPtr, this);
+    return (cPtr == 0) ? null : new AbstractGeometryPath(cPtr, true);
   }
 
   public String getConcreteClassName() {
-    return opensimSimulationJNI.AbstractPath_getConcreteClassName(swigCPtr, this);
+    return opensimSimulationJNI.AbstractGeometryPath_getConcreteClassName(swigCPtr, this);
   }
 
   public void set_has_output_length(boolean value) {
-    opensimSimulationJNI.AbstractPath__has_output_length_set(swigCPtr, this, value);
+    opensimSimulationJNI.AbstractGeometryPath__has_output_length_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_length() {
-    return opensimSimulationJNI.AbstractPath__has_output_length_get(swigCPtr, this);
+    return opensimSimulationJNI.AbstractGeometryPath__has_output_length_get(swigCPtr, this);
   }
 
   public void set_has_output_lengthening_speed(boolean value) {
-    opensimSimulationJNI.AbstractPath__has_output_lengthening_speed_set(swigCPtr, this, value);
+    opensimSimulationJNI.AbstractGeometryPath__has_output_lengthening_speed_set(swigCPtr, this, value);
   }
 
   public boolean get_has_output_lengthening_speed() {
-    return opensimSimulationJNI.AbstractPath__has_output_lengthening_speed_get(swigCPtr, this);
+    return opensimSimulationJNI.AbstractGeometryPath__has_output_lengthening_speed_get(swigCPtr, this);
   }
 
-  public void copyProperty_Appearance(AbstractPath source) {
-    opensimSimulationJNI.AbstractPath_copyProperty_Appearance(swigCPtr, this, AbstractPath.getCPtr(source), source);
+  public void copyProperty_Appearance(AbstractGeometryPath source) {
+    opensimSimulationJNI.AbstractGeometryPath_copyProperty_Appearance(swigCPtr, this, AbstractGeometryPath.getCPtr(source), source);
   }
 
   public Appearance get_Appearance(int i) {
-    return new Appearance(opensimSimulationJNI.AbstractPath_get_Appearance__SWIG_0(swigCPtr, this, i), false);
+    return new Appearance(opensimSimulationJNI.AbstractGeometryPath_get_Appearance__SWIG_0(swigCPtr, this, i), false);
   }
 
   public Appearance upd_Appearance(int i) {
-    return new Appearance(opensimSimulationJNI.AbstractPath_upd_Appearance__SWIG_0(swigCPtr, this, i), false);
+    return new Appearance(opensimSimulationJNI.AbstractGeometryPath_upd_Appearance__SWIG_0(swigCPtr, this, i), false);
   }
 
   public void set_Appearance(int i, Appearance value) {
-    opensimSimulationJNI.AbstractPath_set_Appearance__SWIG_0(swigCPtr, this, i, Appearance.getCPtr(value), value);
+    opensimSimulationJNI.AbstractGeometryPath_set_Appearance__SWIG_0(swigCPtr, this, i, Appearance.getCPtr(value), value);
   }
 
   public int append_Appearance(Appearance value) {
-    return opensimSimulationJNI.AbstractPath_append_Appearance(swigCPtr, this, Appearance.getCPtr(value), value);
+    return opensimSimulationJNI.AbstractGeometryPath_append_Appearance(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
   public void constructProperty_Appearance(Appearance initValue) {
-    opensimSimulationJNI.AbstractPath_constructProperty_Appearance(swigCPtr, this, Appearance.getCPtr(initValue), initValue);
+    opensimSimulationJNI.AbstractGeometryPath_constructProperty_Appearance(swigCPtr, this, Appearance.getCPtr(initValue), initValue);
   }
 
   public Appearance get_Appearance() {
-    return new Appearance(opensimSimulationJNI.AbstractPath_get_Appearance__SWIG_1(swigCPtr, this), false);
+    return new Appearance(opensimSimulationJNI.AbstractGeometryPath_get_Appearance__SWIG_1(swigCPtr, this), false);
   }
 
   public Appearance upd_Appearance() {
-    return new Appearance(opensimSimulationJNI.AbstractPath_upd_Appearance__SWIG_1(swigCPtr, this), false);
+    return new Appearance(opensimSimulationJNI.AbstractGeometryPath_upd_Appearance__SWIG_1(swigCPtr, this), false);
   }
 
   public void set_Appearance(Appearance value) {
-    opensimSimulationJNI.AbstractPath_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
-  }
-
-  /**
-   * Get the current color of the path.<br>
-   * <br>
-   * This is the runtime, potentially state-dependent, color of the path. It<br>
-   * is the color used to display the path in that state (e.g., for UI<br>
-   * rendering).<br>
-   * <br>
-   * This color value is typically initialized with the default color (see:<br>
-   * `getDefaultColor`), but the color can change between simulation states<br>
-   * because downstream code (e.g. muscles) might call `setColor` to implement<br>
-   * state-dependent path coloring.
-   */
-  public Vec3 getColor(State s) {
-    return new Vec3(opensimSimulationJNI.AbstractPath_getColor(swigCPtr, this, State.getCPtr(s), s), true);
-  }
-
-  /**
-   * Set the current color of the path.<br>
-   * <br>
-   * Internally, sets the current color value of the path for the provided<br>
-   * state (e.g. using cache variables).<br>
-   * <br>
-   * The value of this variable is used as the color when the path is drawn,<br>
-   * which occurs with the state realized to Stage::Dynamics. Therefore, you<br>
-   * must call this method during realizeDynamics() or earlier in order for it<br>
-   * to have any effect.
-   */
-  public void setColor(State s, Vec3 color) {
-    opensimSimulationJNI.AbstractPath_setColor(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(color), color);
+    opensimSimulationJNI.AbstractGeometryPath_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
   /**
@@ -177,7 +146,7 @@ public class AbstractPath extends ModelComponent {
    * `GeometryPath`) to provide a relevant implementation.
    */
   public double getLength(State s) {
-    return opensimSimulationJNI.AbstractPath_getLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.AbstractGeometryPath_getLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   /**
@@ -190,12 +159,12 @@ public class AbstractPath extends ModelComponent {
    * implementation.
    */
   public double getLengtheningSpeed(State s) {
-    return opensimSimulationJNI.AbstractPath_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.AbstractGeometryPath_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
   }
 
   /**
    *  Add in the equivalent body and generalized forces to be applied to the<br>
-   *  multibody system resulting from a tension along the AbstractPath.<br>
+   *  multibody system resulting from a tension along the AbstractGeometryPath.<br>
    * <br>
    *  @param state           state used to evaluate forces<br>
    *  @param tension         scalar of the applied (+ve) tensile force<br>
@@ -203,7 +172,7 @@ public class AbstractPath extends ModelComponent {
    *  @param mobilityForces  Vector of generalized forces
    */
   public void addInEquivalentForces(State state, double tension, VectorOfSpatialVec bodyForces, Vector mobilityForces) {
-    opensimSimulationJNI.AbstractPath_addInEquivalentForces(swigCPtr, this, State.getCPtr(state), state, tension, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(mobilityForces), mobilityForces);
+    opensimSimulationJNI.AbstractGeometryPath_addInEquivalentForces(swigCPtr, this, State.getCPtr(state), state, tension, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(mobilityForces), mobilityForces);
   }
 
   /**
@@ -211,7 +180,7 @@ public class AbstractPath extends ModelComponent {
    * the specified coordinate.
    */
   public double computeMomentArm(State s, Coordinate aCoord) {
-    return opensimSimulationJNI.AbstractPath_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
+    return opensimSimulationJNI.AbstractGeometryPath_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
   }
 
   /**
@@ -221,7 +190,7 @@ public class AbstractPath extends ModelComponent {
    * they may not be and therefore must provide a relevant implementation. 
    */
   public boolean isVisualPath() {
-    return opensimSimulationJNI.AbstractPath_isVisualPath(swigCPtr, this);
+    return opensimSimulationJNI.AbstractGeometryPath_isVisualPath(swigCPtr, this);
   }
 
   /**
@@ -232,7 +201,7 @@ public class AbstractPath extends ModelComponent {
    * (potentially different) color that will be used to draw the path.
    */
   public Vec3 getDefaultColor() {
-    return new Vec3(opensimSimulationJNI.AbstractPath_getDefaultColor(swigCPtr, this), false);
+    return new Vec3(opensimSimulationJNI.AbstractGeometryPath_getDefaultColor(swigCPtr, this), false);
   }
 
   /**
@@ -248,7 +217,43 @@ public class AbstractPath extends ModelComponent {
    * get the color of the path in that state.
    */
   public void setDefaultColor(Vec3 color) {
-    opensimSimulationJNI.AbstractPath_setDefaultColor(swigCPtr, this, Vec3.getCPtr(color), color);
+    opensimSimulationJNI.AbstractGeometryPath_setDefaultColor(swigCPtr, this, Vec3.getCPtr(color), color);
+  }
+
+  /**
+   * Get the current color of the path.<br>
+   * <br>
+   * This is the runtime, potentially state-dependent, color of the path. It<br>
+   * is the color used to display the path in that state (e.g., for UI<br>
+   * rendering).<br>
+   * <br>
+   * This color value is typically initialized with the default color (see:<br>
+   * `getDefaultColor`), but the color can change between simulation states<br>
+   * because downstream code (e.g. muscles) might call `setColor` to implement<br>
+   * state-dependent path coloring.<br>
+   * <br>
+   * If not overridden in concrete implementations, this method returns the<br>
+   * default color.
+   */
+  public Vec3 getColor(State s) {
+    return new Vec3(opensimSimulationJNI.AbstractGeometryPath_getColor(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  /**
+   * Set the current color of the path.<br>
+   * <br>
+   * Internally, sets the current color value of the path for the provided<br>
+   * state (e.g. using cache variables).<br>
+   * <br>
+   * The value of this variable is used as the color when the path is drawn,<br>
+   * which occurs with the state realized to Stage::Dynamics. Therefore, you<br>
+   * must call this method during realizeDynamics() or earlier in order for it<br>
+   * to have any effect.<br>
+   * <br>
+   * If not overridden in concrete implementations, this method does nothing.
+   */
+  public void setColor(State s, Vec3 color) {
+    opensimSimulationJNI.AbstractGeometryPath_setColor(swigCPtr, this, State.getCPtr(s), s, Vec3.getCPtr(color), color);
   }
 
   /**
@@ -261,11 +266,11 @@ public class AbstractPath extends ModelComponent {
    * `extendPreScale`, which may have been called with a different state.
    */
   public double getPreScaleLength(State s) {
-    return opensimSimulationJNI.AbstractPath_getPreScaleLength(swigCPtr, this, State.getCPtr(s), s);
+    return opensimSimulationJNI.AbstractGeometryPath_getPreScaleLength(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public void setPreScaleLength(State s, double preScaleLength) {
-    opensimSimulationJNI.AbstractPath_setPreScaleLength(swigCPtr, this, State.getCPtr(s), s, preScaleLength);
+    opensimSimulationJNI.AbstractGeometryPath_setPreScaleLength(swigCPtr, this, State.getCPtr(s), s, preScaleLength);
   }
 
 }

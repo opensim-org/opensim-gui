@@ -276,6 +276,46 @@ public class MocoGoal extends OpenSimObject {
     opensimMocoJNI.MocoGoal_printDescription(swigCPtr, this);
   }
 
+  /**
+   *  Set if the goal should be divided by the displacement of the system's<br>
+   *  center of mass over the phase.<br>
+   *  Note: Increases the stage dependency of this goal to <br>
+   *  SimTK::Stage::Position, if it is not already equal or higher.
+   */
+  public void setDivideByDisplacement(boolean tf) {
+    opensimMocoJNI.MocoGoal_setDivideByDisplacement(swigCPtr, this, tf);
+  }
+
+  public boolean getDivideByDisplacement() {
+    return opensimMocoJNI.MocoGoal_getDivideByDisplacement(swigCPtr, this);
+  }
+
+  /**
+   *  Set if the goal should be divided by the phase duration.<br>
+   *  Note: Increases the stage dependency of this goal to <br>
+   *  SimTK::Stage::Topology, if it is not already equal or higher
+   */
+  public void setDivideByDuration(boolean tf) {
+    opensimMocoJNI.MocoGoal_setDivideByDuration(swigCPtr, this, tf);
+  }
+
+  public boolean getDivideByDuration() {
+    return opensimMocoJNI.MocoGoal_getDivideByDuration(swigCPtr, this);
+  }
+
+  /**
+   *  Set if the goal should be divided by the model's mass.<br>
+   *  Note: Increases the stage dependency of this goal to <br>
+   *  SimTK::Stage::Instance, if it is not already equal or higher.
+   */
+  public void setDivideByMass(boolean tf) {
+    opensimMocoJNI.MocoGoal_setDivideByMass(swigCPtr, this, tf);
+  }
+
+  public boolean getDivideByMass() {
+    return opensimMocoJNI.MocoGoal_getDivideByMass(swigCPtr, this);
+  }
+
   public final static class Mode {
     public final static MocoGoal.Mode Cost = new MocoGoal.Mode("Cost");
     public final static MocoGoal.Mode EndpointConstraint = new MocoGoal.Mode("EndpointConstraint");

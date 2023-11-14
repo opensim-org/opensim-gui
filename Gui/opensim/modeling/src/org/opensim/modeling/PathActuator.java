@@ -81,36 +81,36 @@ public class PathActuator extends ScalarActuator {
     opensimSimulationJNI.PathActuator_copyProperty_path(swigCPtr, this, PathActuator.getCPtr(source), source);
   }
 
-  public AbstractPath get_path(int i) {
-    return new AbstractPath(opensimSimulationJNI.PathActuator_get_path__SWIG_0(swigCPtr, this, i), false);
+  public AbstractGeometryPath get_path(int i) {
+    return new AbstractGeometryPath(opensimSimulationJNI.PathActuator_get_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public AbstractPath upd_path(int i) {
-    return new AbstractPath(opensimSimulationJNI.PathActuator_upd_path__SWIG_0(swigCPtr, this, i), false);
+  public AbstractGeometryPath upd_path(int i) {
+    return new AbstractGeometryPath(opensimSimulationJNI.PathActuator_upd_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_path(int i, AbstractPath value) {
-    opensimSimulationJNI.PathActuator_set_path__SWIG_0(swigCPtr, this, i, AbstractPath.getCPtr(value), value);
+  public void set_path(int i, AbstractGeometryPath value) {
+    opensimSimulationJNI.PathActuator_set_path__SWIG_0(swigCPtr, this, i, AbstractGeometryPath.getCPtr(value), value);
   }
 
-  public int append_path(AbstractPath value) {
-    return opensimSimulationJNI.PathActuator_append_path(swigCPtr, this, AbstractPath.getCPtr(value), value);
+  public int append_path(AbstractGeometryPath value) {
+    return opensimSimulationJNI.PathActuator_append_path(swigCPtr, this, AbstractGeometryPath.getCPtr(value), value);
   }
 
-  public void constructProperty_path(AbstractPath initValue) {
-    opensimSimulationJNI.PathActuator_constructProperty_path(swigCPtr, this, AbstractPath.getCPtr(initValue), initValue);
+  public void constructProperty_path(AbstractGeometryPath initValue) {
+    opensimSimulationJNI.PathActuator_constructProperty_path(swigCPtr, this, AbstractGeometryPath.getCPtr(initValue), initValue);
   }
 
-  public AbstractPath get_path() {
-    return new AbstractPath(opensimSimulationJNI.PathActuator_get_path__SWIG_1(swigCPtr, this), false);
+  public AbstractGeometryPath get_path() {
+    return new AbstractGeometryPath(opensimSimulationJNI.PathActuator_get_path__SWIG_1(swigCPtr, this), false);
   }
 
-  public AbstractPath upd_path() {
-    return new AbstractPath(opensimSimulationJNI.PathActuator_upd_path__SWIG_1(swigCPtr, this), false);
+  public AbstractGeometryPath upd_path() {
+    return new AbstractGeometryPath(opensimSimulationJNI.PathActuator_upd_path__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_path(AbstractPath value) {
-    opensimSimulationJNI.PathActuator_set_path__SWIG_1(swigCPtr, this, AbstractPath.getCPtr(value), value);
+  public void set_path(AbstractGeometryPath value) {
+    opensimSimulationJNI.PathActuator_set_path__SWIG_1(swigCPtr, this, AbstractGeometryPath.getCPtr(value), value);
   }
 
   public void copyProperty_optimal_force(PathActuator source) {
@@ -161,12 +161,12 @@ public class PathActuator extends ScalarActuator {
     this(opensimSimulationJNI.new_PathActuator(), true);
   }
 
-  public AbstractPath updPath() {
-    return new AbstractPath(opensimSimulationJNI.PathActuator_updPath(swigCPtr, this), false);
+  public AbstractGeometryPath updPath() {
+    return new AbstractGeometryPath(opensimSimulationJNI.PathActuator_updPath(swigCPtr, this), false);
   }
 
-  public AbstractPath getPath() {
-    return new AbstractPath(opensimSimulationJNI.PathActuator_getPath(swigCPtr, this), false);
+  public AbstractGeometryPath getPath() {
+    return new AbstractGeometryPath(opensimSimulationJNI.PathActuator_getPath(swigCPtr, this), false);
   }
 
   public GeometryPath updGeometryPath() {

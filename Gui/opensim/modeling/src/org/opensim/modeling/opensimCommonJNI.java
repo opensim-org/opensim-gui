@@ -96,6 +96,8 @@ public class opensimCommonJNI {
   public final static native double solveBisection__SWIG_0(long jarg1, double jarg2, double jarg3, double jarg4, int jarg5);
   public final static native double solveBisection__SWIG_1(long jarg1, double jarg2, double jarg3, double jarg4);
   public final static native double solveBisection__SWIG_2(long jarg1, double jarg2, double jarg3);
+  public final static native long computeKNearestNeighbors__SWIG_0(long jarg1, Matrix jarg1_, long jarg2, Matrix jarg2_, int jarg3);
+  public final static native long computeKNearestNeighbors__SWIG_1(long jarg1, Matrix jarg1_, long jarg2, Matrix jarg2_);
   public final static native void delete_LogSink(long jarg1);
   public final static native void LogSink_sinkImpl(long jarg1, LogSink jarg1_, String jarg2);
   public final static native void LogSink_flushImpl(long jarg1, LogSink jarg1_);
@@ -1058,6 +1060,8 @@ public class opensimCommonJNI {
   public final static native void MultivariatePolynomialFunction_setOrder(long jarg1, MultivariatePolynomialFunction jarg1_, int jarg2);
   public final static native int MultivariatePolynomialFunction_getOrder(long jarg1, MultivariatePolynomialFunction jarg1_);
   public final static native long MultivariatePolynomialFunction_createSimTKFunction(long jarg1, MultivariatePolynomialFunction jarg1_);
+  public final static native long MultivariatePolynomialFunction_getTermValues(long jarg1, MultivariatePolynomialFunction jarg1_, long jarg2, Vector jarg2_);
+  public final static native long MultivariatePolynomialFunction_getTermDerivatives(long jarg1, MultivariatePolynomialFunction jarg1_, long jarg2, StdVectorInt jarg2_, long jarg3, Vector jarg3_);
   public final static native void delete_MultivariatePolynomialFunction(long jarg1);
   public final static native long SmoothSegmentedFunctionFactory_createFiberActiveForceLengthCurve(double jarg1, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, boolean jarg8, String jarg9);
   public final static native long SmoothSegmentedFunctionFactory_createFiberForceVelocityCurve(double jarg1, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, double jarg8, boolean jarg9, String jarg10);

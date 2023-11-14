@@ -9,12 +9,12 @@
 package org.opensim.modeling;
 
 /**
- * A base class representing a path (muscle, ligament, etc.).<br>
+ * A concrete class representing a path (muscle, ligament, etc.) based on <br>
+ * geometry objects in the model (e.g., PathPoints and PathWraps).<br>
  * <br>
- * @author Peter Loan<br>
- * @version 1.0
+ * @author Peter Loan
  */
-public class GeometryPath extends AbstractPath {
+public class GeometryPath extends AbstractGeometryPath {
   private transient long swigCPtr;
 
   public GeometryPath(long cPtr, boolean cMemoryOwn) {

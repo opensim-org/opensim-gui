@@ -1774,8 +1774,8 @@ public class Model extends ModelComponent {
    *         corresponding generalized Coordinates of the Model. <br>
    *         Throws if the MultibodySystem is not valid. 
    */
-  public SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__Coordinate_const_t_t getCoordinatesInMultibodyTreeOrder() {
-    return new SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__Coordinate_const_t_t(opensimSimulationJNI.Model_getCoordinatesInMultibodyTreeOrder(swigCPtr, this), true);
+  public StdVectorReferencePtrCoordinate getCoordinatesInMultibodyTreeOrder() {
+    return new StdVectorReferencePtrCoordinate(opensimSimulationJNI.Model_getCoordinatesInMultibodyTreeOrder(swigCPtr, this), true);
   }
 
   /**

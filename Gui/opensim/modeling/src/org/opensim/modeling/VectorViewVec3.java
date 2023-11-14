@@ -59,4 +59,8 @@ public class VectorViewVec3 extends VectorBaseVec3 {
     this(opensimSimbodyJNI.new_VectorViewVec3(VectorViewVec3.getCPtr(v), v), true);
   }
 
+  public VectorViewVec3 multiplyAssign(double t) {
+    return new VectorViewVec3(opensimSimbodyJNI.VectorViewVec3_multiplyAssign(swigCPtr, this, t), true);
+  }
+
 }

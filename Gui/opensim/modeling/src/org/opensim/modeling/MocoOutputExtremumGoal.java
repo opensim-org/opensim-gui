@@ -113,29 +113,6 @@ public class MocoOutputExtremumGoal extends MocoOutputBase {
   }
 
   /**
-   *  Set if the goal should be divided by the displacement of the system's<br>
-   *     center of mass over the phase. 
-   */
-  public void setDivideByDisplacement(boolean tf) {
-    opensimMocoJNI.MocoOutputExtremumGoal_setDivideByDisplacement(swigCPtr, this, tf);
-  }
-
-  public boolean getDivideByDisplacement() {
-    return opensimMocoJNI.MocoOutputExtremumGoal_getDivideByDisplacement(swigCPtr, this);
-  }
-
-  /**
-   *  Set if the goal should be divided by the total mass of the model. 
-   */
-  public void setDivideByMass(boolean tf) {
-    opensimMocoJNI.MocoOutputExtremumGoal_setDivideByMass(swigCPtr, this, tf);
-  }
-
-  public boolean getDivideByMass() {
-    return opensimMocoJNI.MocoOutputExtremumGoal_getDivideByMass(swigCPtr, this);
-  }
-
-  /**
    *  Set the type of extremum ('minimum' or 'maximum') to be applied to the <br>
    *     output variable of choice. 
    */
