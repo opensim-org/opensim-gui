@@ -166,7 +166,7 @@ jobs:
 
     - name: symbolic link to python so GUI can find it 
       run: |
-        ln -s /Users/runner/hostedtoolcache/Python/3.8.18/x64/bin/python /usr/bin/python
+        sudo ln -s /Users/runner/hostedtoolcache/Python/3.8.18/x64/bin/python /usr/bin/python
         
     - name: Install packages
       run: |
