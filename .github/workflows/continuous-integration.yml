@@ -166,7 +166,7 @@ jobs:
 
     - name: find python 
       run: |
-        "ls -l /usr/bin" >> $GITHUB_OUTPUT
+        "which python" >> $GITHUB_OUTPUT
         
     - name: Install packages
       run: |
