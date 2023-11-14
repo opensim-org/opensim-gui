@@ -389,6 +389,12 @@ jobs:
         cmake --build . --config Release 
         cmake --install .
 
+    - name: Remove opensim-core and swig
+      run: |
+        rm -r ~/swig-source
+        rm -r $env:GITHUB_WORKSPACE\\build_core
+      
+
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
 
