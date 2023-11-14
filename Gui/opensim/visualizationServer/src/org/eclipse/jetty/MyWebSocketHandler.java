@@ -29,6 +29,10 @@
 package org.eclipse.jetty;
 
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import org.eclipse.jetty.websocket.api.Session;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketClose;
 import org.eclipse.jetty.websocket.api.annotations.OnWebSocketConnect;
@@ -43,6 +47,8 @@ import org.eclipse.jetty.websocket.api.annotations.WebSocket;
 @WebSocket
 public class MyWebSocketHandler {
 
+    private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
+    
     @OnWebSocketClose
     public void onClose(int statusCode, String reason) {
         System.out.println("Close: statusCode=" + statusCode + ", reason=" + reason);
@@ -55,6 +61,16 @@ public class MyWebSocketHandler {
 
     @OnWebSocketConnect
     public void onConnect(Session session) {
+        executorService.scheduleAtFixedRate(() -> {
+                    try {
+                        String data = "Ping";
+                        ByteBuffer payload = ByteBuffer.wrap(data.getBytes());
+                        session.getRemote().sendPing(payload);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                },
+                5, 5, TimeUnit.MINUTES);
         System.out.println("Connect: " + session.getRemoteAddress().getAddress());
         try {
             session.getRemote().sendString("Hello Webbrowser");
