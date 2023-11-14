@@ -146,9 +146,9 @@ jobs:
         path: OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe
 
   mac11:
-    name: Mac11
+    name: Mac12
 
-    runs-on: macos-11
+    runs-on: macos-12
 
     steps:
     - name: Checkout opensim-gui
