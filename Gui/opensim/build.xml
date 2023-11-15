@@ -302,7 +302,7 @@
         <exec executable="chmod">
             <arg line="+x dist/scripts/postinstall"/>
         </exec>
-        <exec executable="/usr/bin/python" dir="dist/">
+        <exec executable="python" dir="dist/">
             <arg line="set_folder_icon.py OpenSimFolder.icns 'pkgroot/OpenSim ${app.version}'"/>
         </exec>
         <exec executable="pkgbuild" dir="dist/">
