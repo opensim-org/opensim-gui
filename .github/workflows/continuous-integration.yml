@@ -396,7 +396,7 @@ jobs:
     - name: Remove opensim-core and swig
       run: |
         rm -r ~/swig-source
-        rm -r build_core
+        rm -r ../build_core
       
 
     - name: Update submodules
