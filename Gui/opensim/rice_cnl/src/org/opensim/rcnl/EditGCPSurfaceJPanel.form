@@ -36,7 +36,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jComboBoxFX5" alignment="0" min="-2" pref="184" max="-2" attributes="2"/>
+                          <Component id="jComboBoxFX2" alignment="0" min="-2" pref="184" max="-2" attributes="2"/>
                           <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                               <Component id="heelMarkersComboBox" alignment="1" min="-2" pref="131" max="-2" attributes="1"/>
                               <Component id="medialMarkersComboBox" alignment="1" min="-2" pref="131" max="-2" attributes="1"/>
@@ -65,7 +65,7 @@
                   </Group>
                   <Component id="jBeltSpeedTextField" alignment="0" min="-2" pref="95" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jComboBoxFX3" min="-2" pref="184" max="-2" attributes="2"/>
+                      <Component id="jComboBoxFX" min="-2" pref="184" max="-2" attributes="2"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jComboBoxFY" min="-2" pref="204" max="-2" attributes="2"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -75,7 +75,7 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jComboBoxFY2" min="-2" pref="204" max="-2" attributes="2"/>
                           <Group type="102" attributes="0">
-                              <Component id="jComboBoxFX4" min="-2" pref="184" max="-2" attributes="2"/>
+                              <Component id="jComboBoxFX1" min="-2" pref="184" max="-2" attributes="2"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jComboBoxFY1" min="-2" pref="204" max="-2" attributes="2"/>
                           </Group>
@@ -121,7 +121,7 @@
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                       <Component id="jComboBoxFZ" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxFY" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBoxFX3" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxFX" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -130,13 +130,13 @@
                   <Group type="103" alignment="1" groupAlignment="3" attributes="0">
                       <Component id="jComboBoxFZ1" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxFY1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jComboBoxFX4" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxFX1" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="jComboBoxFX5" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jComboBoxFX2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxFY2" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jComboBoxFZ2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -275,7 +275,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxFX3">
+    <Component class="javax.swing.JComboBox" name="jComboBoxFX">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
@@ -288,7 +288,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxFX3ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxFXActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBoxFY">
@@ -332,7 +332,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxFX4">
+    <Component class="javax.swing.JComboBox" name="jComboBoxFX1">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
@@ -345,7 +345,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxFX4ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxFX1ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBoxFY1">
@@ -389,7 +389,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBoxFX5">
+    <Component class="javax.swing.JComboBox" name="jComboBoxFX2">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="5">
@@ -402,7 +402,7 @@
         </Property>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxFX5ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComboBoxFX2ActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="jComboBoxFY2">

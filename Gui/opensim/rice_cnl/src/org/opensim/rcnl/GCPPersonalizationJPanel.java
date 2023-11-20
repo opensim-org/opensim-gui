@@ -22,6 +22,7 @@ import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyObjectList;
+import org.opensim.modeling.Storage;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -35,6 +36,7 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private GCPSurfaceListModel gcpListModel = null;
     private PropertyObjectList surfaceListProp = null;
     private ListSelectionModel listSelectionModel = null;
+    private Storage grfStorage = null;
     /**
      * Creates new form JointPersonalizationJPanel
      */
@@ -344,34 +346,44 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
     }//GEN-LAST:event_grfFilePathStateChanged
 
     private void addGCPSurfaceButtonaddJMPTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGCPSurfaceButtonaddJMPTaskButtonActionPerformed
-        // TODO add your handling code here:
-        OpenSimObject gcpContactSurface = OpenSimObject.newInstanceOfType("GCPContactSurface");
-        EditGCPSurfaceJPanel ejtPanel = new EditGCPSurfaceJPanel(gcpContactSurface);
-        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One GCPContactSurface ");
-        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
-        d.setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            gcpListModel.addElement(gcpContactSurface);
-            gcpContactSurface.markAdopted(); //indicate ownership will be transferred so that object is not deleted by gc
-            surfaceListProp.adoptAndAppendValue(gcpContactSurface);
+        try {
+            // TODO add your handling code here:
+            OpenSimObject gcpContactSurface = OpenSimObject.newInstanceOfType("GCPContactSurface");
+            grfStorage = new Storage(gcpPersonalizationToolModel.geInputGRFFile());
+            EditGCPSurfaceJPanel ejtPanel = new EditGCPSurfaceJPanel(gcpContactSurface, grfStorage);
+            DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One GCPContactSurface ");
+            Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
+            d.setVisible(true);
+            Object userInput = dlg.getValue();
+            if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+                gcpListModel.addElement(gcpContactSurface);
+                gcpContactSurface.markAdopted(); //indicate ownership will be transferred so that object is not deleted by gc
+                surfaceListProp.adoptAndAppendValue(gcpContactSurface);
+            }
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
         }
     }//GEN-LAST:event_addGCPSurfaceButtonaddJMPTaskButtonActionPerformed
 
     private void editGCPSurfaceButtoneditJMPTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editGCPSurfaceButtoneditJMPTaskButtonActionPerformed
-        // TODO add your handling code here:
-        int[] sels = GCPContactSurfaceList.getSelectedIndices();
-        int idx = sels[0];
-        OpenSimObject selectedSurface = (OpenSimObject)gcpListModel.get(idx);
-        OpenSimObject surfaceCopy = selectedSurface.clone();
-        EditGCPSurfaceJPanel gcpSurfacePanel = new EditGCPSurfaceJPanel(surfaceCopy);
-        DialogDescriptor dlg = new DialogDescriptor(gcpSurfacePanel, "Create/Edit One GCPContactSurface");
-        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
-        d.setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            gcpListModel.set(idx, surfaceCopy);
-            surfaceListProp.setValue(idx, surfaceCopy);
+        try {
+            // TODO add your handling code here:
+            int[] sels = GCPContactSurfaceList.getSelectedIndices();
+            int idx = sels[0];
+            OpenSimObject selectedSurface = (OpenSimObject)gcpListModel.get(idx);
+            OpenSimObject surfaceCopy = selectedSurface.clone();
+            grfStorage = new Storage(gcpPersonalizationToolModel.geInputGRFFile());
+            EditGCPSurfaceJPanel gcpSurfacePanel = new EditGCPSurfaceJPanel(surfaceCopy, grfStorage);
+            DialogDescriptor dlg = new DialogDescriptor(gcpSurfacePanel, "Create/Edit One GCPContactSurface");
+            Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
+            d.setVisible(true);
+            Object userInput = dlg.getValue();
+            if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+                gcpListModel.set(idx, surfaceCopy);
+                surfaceListProp.setValue(idx, surfaceCopy);
+            }
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
         }
     }//GEN-LAST:event_editGCPSurfaceButtoneditJMPTaskButtonActionPerformed
 

@@ -5,31 +5,21 @@
  */
 package org.opensim.rcnl;
 
-import java.awt.Dialog;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Vector;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.ListSelectionModel;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.filechooser.FileFilter;
-import org.openide.DialogDescriptor;
-import org.openide.DialogDisplayer;
+import javax.swing.JComboBox;
 import org.openide.util.Exceptions;
-import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.BodyIterator;
 import org.opensim.modeling.BodyList;
-import org.opensim.modeling.FrameList;
 import org.opensim.modeling.MarkerSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyBoolList;
 import org.opensim.modeling.PropertyDoubleList;
-import org.opensim.modeling.PropertyHelper;
-import org.opensim.modeling.PropertyObjectList;
 import org.opensim.modeling.PropertyStringList;
+import org.opensim.modeling.Storage;
 import org.opensim.view.pub.OpenSimDB;
 
 /**
@@ -47,7 +37,7 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
     private PropertyDoubleList beltSpeedProp;
     private PropertyStringList hindfootBodyProp, toeMarkerProp, medialMarkerProp, lateralMarkerProp, heelMarkerProp, midfootMarkerProp ;
     private Model model;
-
+    private ArrayStr lbls;
     /**
      * Creates new form EditJointTaskJPanel
      */
@@ -55,7 +45,7 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    EditGCPSurfaceJPanel(OpenSimObject gcpContactSurface) {
+    EditGCPSurfaceJPanel(OpenSimObject gcpContactSurface, Storage grfFile) {
         this.gcpContactSurface = gcpContactSurface;
          populatePropertiesFromObject();
          initComponents();
@@ -66,6 +56,9 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
          jEndTimeTextField.setText(String.valueOf(endTimeProp.getValue()));
          jBeltSpeedTextField.setText(String.valueOf(beltSpeedProp.getValue()));
          model = OpenSimDB.getInstance().getCurrentModel();
+         // obtain list of labels from the grf file and use to populate the comboBoxes
+         lbls=grfFile.getColumnLabels();
+         
          populateComboBoxes();
          toeMarkersComboBox.setSelectedItem(toeMarkerProp.getValue());
          medialMarkersComboBox.setSelectedItem(medialMarkerProp.getValue());
@@ -121,6 +114,21 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         lateralMarkersComboBoxActionPerformed(null);
         heelMarkersComboBoxActionPerformed(null);
         midfootMarkersComboBoxActionPerformed(null);
+        
+        Vector<String> colmnLabels = lbls.toVector();
+        colmnLabels.remove(0); // no default column & time shouldn't be permitted anyway'
+        String[] colNames = new String[colmnLabels.size()];
+        colmnLabels.toArray(colNames);
+        // Force dropdowns
+        jComboBoxFX.setModel(new javax.swing.DefaultComboBoxModel(colNames));
+        jComboBoxFY.setModel(new javax.swing.DefaultComboBoxModel(colNames));
+        jComboBoxFZ.setModel(new javax.swing.DefaultComboBoxModel(colNames));
+        jComboBoxFX1.setModel(new javax.swing.DefaultComboBoxModel(colNames));
+        jComboBoxFY1.setModel(new javax.swing.DefaultComboBoxModel(colNames));
+        jComboBoxFZ1.setModel(new javax.swing.DefaultComboBoxModel(colNames));
+        jComboBoxFX2.setModel(new javax.swing.DefaultComboBoxModel(colNames));
+        jComboBoxFY2.setModel(new javax.swing.DefaultComboBoxModel(colNames));
+        jComboBoxFZ2.setModel(new javax.swing.DefaultComboBoxModel(colNames));
      }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -142,15 +150,15 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jBeltSpeedTextField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jComboBoxFX3 = new javax.swing.JComboBox();
+        jComboBoxFX = new javax.swing.JComboBox();
         jComboBoxFY = new javax.swing.JComboBox();
         jComboBoxFZ = new javax.swing.JComboBox();
         jLabel6 = new javax.swing.JLabel();
-        jComboBoxFX4 = new javax.swing.JComboBox();
+        jComboBoxFX1 = new javax.swing.JComboBox();
         jComboBoxFY1 = new javax.swing.JComboBox();
         jComboBoxFZ1 = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
-        jComboBoxFX5 = new javax.swing.JComboBox();
+        jComboBoxFX2 = new javax.swing.JComboBox();
         jComboBoxFY2 = new javax.swing.JComboBox();
         jComboBoxFZ2 = new javax.swing.JComboBox();
         HindfootBodiesComboBox = new javax.swing.JComboBox();
@@ -246,10 +254,10 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel5, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel5.text")); // NOI18N
 
-        jComboBoxFX3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_px", "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxFX3.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxFX.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_px", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFX.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFX3ActionPerformed(evt);
+                jComboBoxFXActionPerformed(evt);
             }
         });
 
@@ -271,10 +279,10 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel6, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel6.text")); // NOI18N
 
-        jComboBoxFX4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_px", "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxFX4.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxFX1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_px", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFX1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFX4ActionPerformed(evt);
+                jComboBoxFX1ActionPerformed(evt);
             }
         });
 
@@ -296,10 +304,10 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel7, org.openide.util.NbBundle.getMessage(EditGCPSurfaceJPanel.class, "EditGCPSurfaceJPanel.jLabel7.text")); // NOI18N
 
-        jComboBoxFX5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_px", "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBoxFX5.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxFX2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "ground_force_px", "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxFX2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBoxFX5ActionPerformed(evt);
+                jComboBoxFX2ActionPerformed(evt);
             }
         });
 
@@ -426,7 +434,7 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBoxFX5, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxFX2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(heelMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(medialMarkersComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -449,7 +457,7 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
                         .addComponent(jEndTimeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jBeltSpeedTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBoxFX3, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFX, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBoxFY, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -458,7 +466,7 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jComboBoxFY2, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jComboBoxFX4, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jComboBoxFX1, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jComboBoxFY1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -494,18 +502,18 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBoxFZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBoxFY, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBoxFX3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBoxFX, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jComboBoxFZ1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBoxFY1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jComboBoxFX4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jComboBoxFX1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jComboBoxFX5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxFX2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBoxFY2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jComboBoxFZ2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel7))
@@ -601,11 +609,15 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         }        // TODO add your handling code here:
     }//GEN-LAST:event_jBeltSpeedTextFieldActionPerformed
 
-    private void jComboBoxFX3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFX3ActionPerformed
+    private void jComboBoxFXActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFXActionPerformed
         // TODO add your handling code here:
         // Populate next two dropdown from the following 2 columns
-
-    }//GEN-LAST:event_jComboBoxFX3ActionPerformed
+        int idx =((JComboBox)evt.getSource()).getSelectedIndex();
+        if (idx >=0 && idx <lbls.getSize()-2){
+            jComboBoxFY.setSelectedIndex(idx+1);
+            jComboBoxFZ.setSelectedIndex(idx+2);
+        }
+    }//GEN-LAST:event_jComboBoxFXActionPerformed
 
     private void jComboBoxFYupdateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFYupdateForceFromPanel
         // TODO add your handling code here:
@@ -618,9 +630,14 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         //updateForceFromPanel();
     }//GEN-LAST:event_jComboBoxFZupdateForceFromPanel
 
-    private void jComboBoxFX4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFX4ActionPerformed
+    private void jComboBoxFX1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFX1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxFX4ActionPerformed
+        int idx =((JComboBox)evt.getSource()).getSelectedIndex();
+        if (idx >=0 && idx <lbls.getSize()-2){
+            jComboBoxFY1.setSelectedIndex(idx+1);
+            jComboBoxFZ1.setSelectedIndex(idx+2);
+        }
+    }//GEN-LAST:event_jComboBoxFX1ActionPerformed
 
     private void jComboBoxFY1updateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFY1updateForceFromPanel
         // TODO add your handling code here:
@@ -630,9 +647,14 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBoxFZ1updateForceFromPanel
 
-    private void jComboBoxFX5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFX5ActionPerformed
+    private void jComboBoxFX2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFX2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBoxFX5ActionPerformed
+        int idx =((JComboBox)evt.getSource()).getSelectedIndex();
+        if (idx >=0 && idx <lbls.getSize()-2){
+            jComboBoxFY2.setSelectedIndex(idx+1);
+            jComboBoxFZ2.setSelectedIndex(idx+2);
+        }
+    }//GEN-LAST:event_jComboBoxFX2ActionPerformed
 
     private void jComboBoxFY2updateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFY2updateForceFromPanel
         // TODO add your handling code here:
@@ -710,9 +732,9 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox HindfootBodiesComboBox;
     private javax.swing.JComboBox heelMarkersComboBox;
     private javax.swing.JTextField jBeltSpeedTextField;
-    private javax.swing.JComboBox jComboBoxFX3;
-    private javax.swing.JComboBox jComboBoxFX4;
-    private javax.swing.JComboBox jComboBoxFX5;
+    private javax.swing.JComboBox jComboBoxFX;
+    private javax.swing.JComboBox jComboBoxFX1;
+    private javax.swing.JComboBox jComboBoxFX2;
     private javax.swing.JComboBox jComboBoxFY;
     private javax.swing.JComboBox jComboBoxFY1;
     private javax.swing.JComboBox jComboBoxFY2;

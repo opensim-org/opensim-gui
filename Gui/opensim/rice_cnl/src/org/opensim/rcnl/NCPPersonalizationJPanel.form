@@ -25,9 +25,9 @@
                   </Group>
                   <Component id="jPanel6" alignment="0" max="32767" attributes="0"/>
                   <Component id="inputModelPanel" alignment="0" max="32767" attributes="0"/>
-                  <Component id="outputPanel" alignment="0" pref="0" max="32767" attributes="2"/>
+                  <Component id="outputPanel" alignment="0" pref="749" max="32767" attributes="2"/>
                   <Component id="settingsPanel" alignment="1" max="32767" attributes="0"/>
-                  <Component id="previousStageOutputPanel" alignment="0" pref="0" max="32767" attributes="2"/>
+                  <Component id="previousStageOutputPanel" alignment="0" pref="749" max="32767" attributes="2"/>
               </Group>
           </Group>
       </Group>
@@ -604,7 +604,7 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="jButtonEditSynergySet" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                  <EmptySpace pref="54" max="32767" attributes="0"/>
               </Group>
               <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
