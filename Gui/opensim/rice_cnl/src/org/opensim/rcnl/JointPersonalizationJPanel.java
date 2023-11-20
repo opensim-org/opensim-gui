@@ -6,6 +6,8 @@
 package org.opensim.rcnl;
 
 import java.awt.Dialog;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
@@ -15,6 +17,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
@@ -301,7 +304,15 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
     public void saveSettings(String fileName) {
          String fullFilename = FileUtils.addExtensionIfNeeded(fileName, ".xml");
          OpenSimObject.setSerializeAllDefaults(true);
-        jointPersonalizationToolModel.getToolAsObject().print(fullFilename);
+         String toolFileContent = jointPersonalizationToolModel.getToolAsObject().dump();
+         BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter(fullFilename));
+            writer.write(toolFileContent);
+            writer.close();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
     }
 
     @Override
