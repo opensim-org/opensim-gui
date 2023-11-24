@@ -1218,6 +1218,27 @@ public class Model extends ModelComponent {
   }
 
   /**
+   *  (Advanced) Get read only access to internal Simbody RigidBodyForces at Dynamics stage *
+   */
+  public VectorOfSpatialVec getRigidBodyForces(State state) {
+    return new VectorOfSpatialVec(opensimSimulationJNI.Model_getRigidBodyForces(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  /**
+   *  (Advanced) Get read only access to internal Simbody Mobility Forces at Dynamics stage *
+   */
+  public Vector getMobilityForces(State state) {
+    return new Vector(opensimSimulationJNI.Model_getMobilityForces(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  /**
+   *  (Advanced) Get read only access to internal Simbody Body Forces due to Gravity *
+   */
+  public VectorOfSpatialVec getGravityBodyForces(State state) {
+    return new VectorOfSpatialVec(opensimSimulationJNI.Model_getGravityBodyForces(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  /**
    * ** Perform computations that depend only on time and earlier stages. *
    */
   public void realizeTime(State state) {

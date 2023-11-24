@@ -197,11 +197,12 @@ public class PolynomialPathFitter extends OpenSimObject {
    * polynomial-based path objects will be fitted.<br>
    * <br>
    * The model should be provided using a `ModelProcessor` object. We expect<br>
-   * the model to contain at least one path object derived from `AbstractGeometryPath`<br>
-   * and does not already contain any `FunctionBasedPath` objects. The bounds<br>
-   * for clamped coordinates are obeyed during the fitting process. Locked<br>
-   * coordinates are unlocked if data is provided for them, or replaced with<br>
-   * WeldJoints if no data is provided for them.
+   * the model to contain at least one path object derived from<br>
+   * `AbstractGeometryPath` and does not already contain any<br>
+   * `FunctionBasedPath` objects. The bounds for clamped coordinates are<br>
+   * obeyed during the fitting process. Locked coordinates are unlocked if<br>
+   * data is provided for them, or replaced with WeldJoints if no data is<br>
+   * provided for them.
    */
   public void setModel(ModelProcessor model) {
     opensimActuatorsAnalysesToolsJNI.PolynomialPathFitter_setModel(swigCPtr, this, ModelProcessor.getCPtr(model), model);

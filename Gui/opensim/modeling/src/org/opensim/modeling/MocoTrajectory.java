@@ -623,6 +623,14 @@ public class MocoTrajectory {
     return opensimMocoJNI.MocoTrajectory_getNumSpeeds(swigCPtr, this);
   }
 
+  public int getNumMultibodyStates() {
+    return opensimMocoJNI.MocoTrajectory_getNumMultibodyStates(swigCPtr, this);
+  }
+
+  public int getNumAuxiliaryStates() {
+    return opensimMocoJNI.MocoTrajectory_getNumAuxiliaryStates(swigCPtr, this);
+  }
+
   public int getNumAccelerations() {
     return opensimMocoJNI.MocoTrajectory_getNumAccelerations(swigCPtr, this);
   }
@@ -657,6 +665,14 @@ public class MocoTrajectory {
 
   public StdVectorString getSpeedNames() {
     return new StdVectorString(opensimMocoJNI.MocoTrajectory_getSpeedNames(swigCPtr, this), true);
+  }
+
+  public StdVectorString getMultibodyStateNames() {
+    return new StdVectorString(opensimMocoJNI.MocoTrajectory_getMultibodyStateNames(swigCPtr, this), true);
+  }
+
+  public StdVectorString getAuxiliaryStateNames() {
+    return new StdVectorString(opensimMocoJNI.MocoTrajectory_getAuxiliaryStateNames(swigCPtr, this), true);
   }
 
   public StdVectorString getAccelerationNames() {
@@ -713,6 +729,14 @@ public class MocoTrajectory {
 
   public Matrix getSpeedsTrajectory() {
     return new Matrix(opensimMocoJNI.MocoTrajectory_getSpeedsTrajectory(swigCPtr, this), true);
+  }
+
+  public Matrix getMultibodyStatesTrajectory() {
+    return new Matrix(opensimMocoJNI.MocoTrajectory_getMultibodyStatesTrajectory(swigCPtr, this), true);
+  }
+
+  public Matrix getAuxiliaryStatesTrajectory() {
+    return new Matrix(opensimMocoJNI.MocoTrajectory_getAuxiliaryStatesTrajectory(swigCPtr, this), true);
   }
 
   public Matrix getAccelerationsTrajectory() {
