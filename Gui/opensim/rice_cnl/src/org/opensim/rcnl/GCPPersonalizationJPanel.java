@@ -70,9 +70,11 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
        grfFilePath.setDirectoriesOnly(false);
        grfFilePath.setCheckIfFileExists(true);
        grfFilePath.setExtensionsAndDescription(".mot", "File to contain ground reaction forces");
+       grfFilePath.setTreatEmptyStringAsValid(false);
        
        //jCoordinateListTextArea.setText("Coordinates");
        setSettingsFileDescription("Save Greound Contact Personalization Settings file (xml)");
+       addGCPSurfaceButton.setEnabled(grfFilePath.getFileIsValid() && grfFilePath.getFileName().length()>0);
     }
 
     /**
@@ -343,6 +345,7 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private void grfFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_grfFilePathStateChanged
         // TODO add your handling code here:
         gcpPersonalizationToolModel.setInputGRFFile(grfFilePath.getFileName());
+        addGCPSurfaceButton.setEnabled(grfFilePath.getFileIsValid() && grfFilePath.getFileName().length()>0);
     }//GEN-LAST:event_grfFilePathStateChanged
 
     private void addGCPSurfaceButtonaddJMPTaskButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGCPSurfaceButtonaddJMPTaskButtonActionPerformed
@@ -437,7 +440,7 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
        osimxFilePath.setFileName(gcpPersonalizationToolModel.getInputOsimxFile());
        inputDirPath.setFileName(gcpPersonalizationToolModel.getDataDir());
        outputResultDirPath.setFileName(gcpPersonalizationToolModel.getOutputResultDir());
-
+       addGCPSurfaceButton.setEnabled(grfFilePath.getFileIsValid() && grfFilePath.getFileName().length()>0);
     }
 
     @Override
