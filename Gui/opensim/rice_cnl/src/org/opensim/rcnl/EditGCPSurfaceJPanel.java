@@ -36,6 +36,8 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
     private PropertyDoubleList endTimeProp;
     private PropertyDoubleList beltSpeedProp;
     private PropertyStringList hindfootBodyProp, toeMarkerProp, medialMarkerProp, lateralMarkerProp, heelMarkerProp, midfootMarkerProp ;
+    private PropertyStringList forceColumnsProp, momentColumnsProp, electricColumnsProp;
+    
     private Model model;
     private ArrayStr lbls;
     /**
@@ -66,6 +68,37 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
          heelMarkersComboBox.setSelectedItem(heelMarkerProp.getValue());
          midfootMarkersComboBox.setSelectedItem(midfootMarkerProp.getValue());
          HindfootBodiesComboBox.setSelectedItem(hindfootBodyProp.getValue());
+         if (forceColumnsProp.size()==3){
+           jComboBoxFX.setSelectedItem(forceColumnsProp.getValue(0));
+           jComboBoxFY.setSelectedItem(forceColumnsProp.getValue(1));
+           jComboBoxFZ.setSelectedItem(forceColumnsProp.getValue(2));
+        }
+        else {
+            forceColumnsProp.appendValue((String) jComboBoxFX.getSelectedItem());
+            forceColumnsProp.appendValue((String) jComboBoxFY.getSelectedItem());
+            forceColumnsProp.appendValue((String) jComboBoxFZ.getSelectedItem());
+        }
+        if (momentColumnsProp.size()==3){
+           jComboBoxFX1.setSelectedItem(momentColumnsProp.getValue(0));
+           jComboBoxFY1.setSelectedItem(momentColumnsProp.getValue(1));
+           jComboBoxFZ1.setSelectedItem(momentColumnsProp.getValue(2));
+        }
+        else {
+            momentColumnsProp.appendValue((String) jComboBoxFX1.getSelectedItem());
+            momentColumnsProp.appendValue((String) jComboBoxFY1.getSelectedItem());
+            momentColumnsProp.appendValue((String) jComboBoxFZ1.getSelectedItem());
+        }
+        if (electricColumnsProp.size()==3){
+           jComboBoxFX2.setSelectedItem(electricColumnsProp.getValue(0));
+           jComboBoxFY2.setSelectedItem(electricColumnsProp.getValue(1));
+           jComboBoxFZ2.setSelectedItem(electricColumnsProp.getValue(2));
+        }
+        else {
+            electricColumnsProp.appendValue((String) jComboBoxFX2.getSelectedItem());
+            electricColumnsProp.appendValue((String) jComboBoxFY2.getSelectedItem());
+            electricColumnsProp.appendValue((String) jComboBoxFZ2.getSelectedItem());
+        }
+
     }
 
     void populatePropertiesFromObject() {
@@ -81,6 +114,10 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         lateralMarkerProp = PropertyStringList.getAs(gcpContactSurface.getPropertyByName("lateral_marker"));
         heelMarkerProp = PropertyStringList.getAs(gcpContactSurface.getPropertyByName("heel_marker"));
         midfootMarkerProp = PropertyStringList.getAs(gcpContactSurface.getPropertyByName("midfoot_superior_marker"));
+        
+        forceColumnsProp = PropertyStringList.getAs(gcpContactSurface.getPropertyByName("force_columns"));
+        momentColumnsProp = PropertyStringList.getAs(gcpContactSurface.getPropertyByName("moment_columns"));
+        electricColumnsProp = PropertyStringList.getAs(gcpContactSurface.getPropertyByName("electrical_center_columns"));
         
     }
     
@@ -107,13 +144,6 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         heelMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(markerNames));
         midfootMarkersComboBox.setModel(new javax.swing.DefaultComboBoxModel(markerNames));
         
-        // Make properties consistent with UI
-        HindfootBodiesComboBoxActionPerformed(null);
-        toeMarkersComboBoxActionPerformed(null);
-        medialMarkersComboBoxActionPerformed(null);
-        lateralMarkersComboBoxActionPerformed(null);
-        heelMarkersComboBoxActionPerformed(null);
-        midfootMarkersComboBoxActionPerformed(null);
         
         Vector<String> colmnLabels = lbls.toVector();
         colmnLabels.remove(0); // no default column & time shouldn't be permitted anyway'
@@ -123,9 +153,11 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
         jComboBoxFX.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxFY.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxFZ.setModel(new javax.swing.DefaultComboBoxModel(colNames));
+        
         jComboBoxFX1.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxFY1.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxFZ1.setModel(new javax.swing.DefaultComboBoxModel(colNames));
+
         jComboBoxFX2.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxFY2.setModel(new javax.swing.DefaultComboBoxModel(colNames));
         jComboBoxFZ2.setModel(new javax.swing.DefaultComboBoxModel(colNames));
@@ -617,17 +649,20 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
             jComboBoxFY.setSelectedIndex(idx+1);
             jComboBoxFZ.setSelectedIndex(idx+2);
         }
+        forceColumnsProp.setValue(0, (String) jComboBoxFX.getSelectedItem());
+        forceColumnsProp.setValue(1, (String) jComboBoxFY.getSelectedItem());
+        forceColumnsProp.setValue(2, (String) jComboBoxFZ.getSelectedItem());
     }//GEN-LAST:event_jComboBoxFXActionPerformed
 
     private void jComboBoxFYupdateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFYupdateForceFromPanel
         // TODO add your handling code here:
-        //updateForceFromPanel();
+        forceColumnsProp.setValue(1, (String) jComboBoxFY.getSelectedItem());
 
     }//GEN-LAST:event_jComboBoxFYupdateForceFromPanel
 
     private void jComboBoxFZupdateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFZupdateForceFromPanel
         // TODO add your handling code here:
-        //updateForceFromPanel();
+        forceColumnsProp.setValue(2, (String) jComboBoxFZ.getSelectedItem());
     }//GEN-LAST:event_jComboBoxFZupdateForceFromPanel
 
     private void jComboBoxFX1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFX1ActionPerformed
@@ -637,6 +672,9 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
             jComboBoxFY1.setSelectedIndex(idx+1);
             jComboBoxFZ1.setSelectedIndex(idx+2);
         }
+        momentColumnsProp.setValue(0, (String) jComboBoxFX1.getSelectedItem());
+        momentColumnsProp.setValue(1, (String) jComboBoxFY1.getSelectedItem());
+        momentColumnsProp.setValue(2, (String) jComboBoxFZ1.getSelectedItem());
     }//GEN-LAST:event_jComboBoxFX1ActionPerformed
 
     private void jComboBoxFY1updateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFY1updateForceFromPanel
@@ -654,6 +692,9 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
             jComboBoxFY2.setSelectedIndex(idx+1);
             jComboBoxFZ2.setSelectedIndex(idx+2);
         }
+        electricColumnsProp.setValue(0, (String) jComboBoxFX2.getSelectedItem());
+        electricColumnsProp.setValue(1, (String) jComboBoxFY2.getSelectedItem());
+        electricColumnsProp.setValue(2, (String) jComboBoxFZ2.getSelectedItem());
     }//GEN-LAST:event_jComboBoxFX2ActionPerformed
 
     private void jComboBoxFY2updateForceFromPanel(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxFY2updateForceFromPanel
