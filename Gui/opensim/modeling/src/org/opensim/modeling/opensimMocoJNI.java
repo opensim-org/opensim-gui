@@ -1134,6 +1134,8 @@ public class opensimMocoJNI {
   public final static native int MocoTrajectory_getNumDerivatives(long jarg1, MocoTrajectory jarg1_);
   public final static native int MocoTrajectory_getNumValues(long jarg1, MocoTrajectory jarg1_);
   public final static native int MocoTrajectory_getNumSpeeds(long jarg1, MocoTrajectory jarg1_);
+  public final static native int MocoTrajectory_getNumMultibodyStates(long jarg1, MocoTrajectory jarg1_);
+  public final static native int MocoTrajectory_getNumAuxiliaryStates(long jarg1, MocoTrajectory jarg1_);
   public final static native int MocoTrajectory_getNumAccelerations(long jarg1, MocoTrajectory jarg1_);
   public final static native int MocoTrajectory_getNumDerivativesWithoutAccelerations(long jarg1, MocoTrajectory jarg1_);
   public final static native int MocoTrajectory_getNumParameters(long jarg1, MocoTrajectory jarg1_);
@@ -1143,6 +1145,8 @@ public class opensimMocoJNI {
   public final static native long MocoTrajectory_getDerivativeNames(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getValueNames(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getSpeedNames(long jarg1, MocoTrajectory jarg1_);
+  public final static native long MocoTrajectory_getMultibodyStateNames(long jarg1, MocoTrajectory jarg1_);
+  public final static native long MocoTrajectory_getAuxiliaryStateNames(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getAccelerationNames(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getDerivativeNamesWithoutAccelerations(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getParameterNames(long jarg1, MocoTrajectory jarg1_);
@@ -1157,6 +1161,8 @@ public class opensimMocoJNI {
   public final static native long MocoTrajectory_getDerivativesTrajectory(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getValuesTrajectory(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getSpeedsTrajectory(long jarg1, MocoTrajectory jarg1_);
+  public final static native long MocoTrajectory_getMultibodyStatesTrajectory(long jarg1, MocoTrajectory jarg1_);
+  public final static native long MocoTrajectory_getAuxiliaryStatesTrajectory(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getAccelerationsTrajectory(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getDerivativesWithoutAccelerationsTrajectory(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getParameters(long jarg1, MocoTrajectory jarg1_);

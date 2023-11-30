@@ -5343,6 +5343,9 @@ public class opensimSimulationJNI {
   public final static native long Model_updGravityForce(long jarg1, Model jarg1_);
   public final static native long Model_getForceSubsystem(long jarg1, Model jarg1_);
   public final static native long Model_updForceSubsystem(long jarg1, Model jarg1_);
+  public final static native long Model_getRigidBodyForces(long jarg1, Model jarg1_, long jarg2, State jarg2_);
+  public final static native long Model_getMobilityForces(long jarg1, Model jarg1_, long jarg2, State jarg2_);
+  public final static native long Model_getGravityBodyForces(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_realizeTime(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_realizePosition(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_realizeVelocity(long jarg1, Model jarg1_, long jarg2, State jarg2_);

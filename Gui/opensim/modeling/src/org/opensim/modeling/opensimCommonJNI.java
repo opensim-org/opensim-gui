@@ -1078,6 +1078,13 @@ public class opensimCommonJNI {
   public final static native void delete_SmoothSegmentedFunction(long jarg1);
   public final static native double SmoothSegmentedFunction_calcValue(long jarg1, SmoothSegmentedFunction jarg1_, double jarg2);
   public final static native double SmoothSegmentedFunction_calcDerivative(long jarg1, SmoothSegmentedFunction jarg1_, double jarg2, int jarg3);
+  public final static native void SmoothSegmentedFunction_ValueAndDerivative_value_set(long jarg1, SmoothSegmentedFunction.ValueAndDerivative jarg1_, double jarg2);
+  public final static native double SmoothSegmentedFunction_ValueAndDerivative_value_get(long jarg1, SmoothSegmentedFunction.ValueAndDerivative jarg1_);
+  public final static native void SmoothSegmentedFunction_ValueAndDerivative_derivative_set(long jarg1, SmoothSegmentedFunction.ValueAndDerivative jarg1_, double jarg2);
+  public final static native double SmoothSegmentedFunction_ValueAndDerivative_derivative_get(long jarg1, SmoothSegmentedFunction.ValueAndDerivative jarg1_);
+  public final static native long new_SmoothSegmentedFunction_ValueAndDerivative();
+  public final static native void delete_SmoothSegmentedFunction_ValueAndDerivative(long jarg1);
+  public final static native long SmoothSegmentedFunction_calcValueAndFirstDerivative(long jarg1, SmoothSegmentedFunction jarg1_, double jarg2);
   public final static native double SmoothSegmentedFunction_calcIntegral(long jarg1, SmoothSegmentedFunction jarg1_, double jarg2);
   public final static native boolean SmoothSegmentedFunction_isIntegralAvailable(long jarg1, SmoothSegmentedFunction jarg1_);
   public final static native boolean SmoothSegmentedFunction_isIntegralComputedLeftToRight(long jarg1, SmoothSegmentedFunction jarg1_);
