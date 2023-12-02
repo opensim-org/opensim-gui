@@ -418,22 +418,13 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
     }
 
     @Override
-    public void saveSettings(String fileName) {
-         String fullFilename = FileUtils.addExtensionIfNeeded(fileName, ".xml");
-         OpenSimObject.setSerializeAllDefaults(true);
-         String toolFileContent = gcpPersonalizationToolModel.getToolAsObject().dump();
-         BufferedWriter writer;
-        try {
-            writer = new BufferedWriter(new FileWriter(fullFilename));
-            writer.write(toolFileContent);
-            writer.close();
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+    String getToolXML() {
+        return gcpPersonalizationToolModel.getToolAsObject().dump();
     }
 
     @Override
-    public void loadSettings(String fileName) {
+    public void loadSettings(String nmsmFilename) {
+        String fileName = super.stripOuterTags(nmsmFilename);
         Model model = OpenSimDB.getInstance().getCurrentModel();
        //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
        gcpPersonalizationToolModel = new GCPPersonalizationToolModel(model, fileName);
