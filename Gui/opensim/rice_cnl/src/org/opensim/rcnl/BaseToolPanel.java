@@ -37,16 +37,39 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Observer;
 import javax.swing.AbstractAction;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileFilter;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.util.Exceptions;
+import org.opensim.modeling.OpenSimObject;
 import org.opensim.utils.FileUtils;
 import org.opensim.view.pub.OpenSimDB;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 public abstract class BaseToolPanel extends JPanel implements ActionListener, Observer {
   
@@ -60,6 +83,47 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
    protected JButton helpButton = new JButton("Help");
    protected Dialog ownerDialog = null;
    protected boolean cleanupAfterExecuting = false;  // Keep track if cleaning up needs to be done on execution finish vs. dialog close
+
+    String stripOuterTags(String nmsmFilename) {
+       try {
+           DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+           DocumentBuilder builder = dbf.newDocumentBuilder();
+           FileInputStream fis = new FileInputStream(nmsmFilename);
+           
+           Document doc = builder.parse(new File(nmsmFilename));
+           InputSource is = new InputSource(fis);
+           // get the first element
+           Element element = doc.getDocumentElement();
+           
+           // get all child nodes
+           NodeList nodes = element.getChildNodes();
+           String osimFile = nmsmFilename.replace(".xml", "osim.xml");
+           TransformerFactory transformerFactory = TransformerFactory.newInstance();
+           Transformer transformer = transformerFactory.newTransformer();
+           DOMSource source = new DOMSource(nodes.item(1));
+           FileWriter writer = new FileWriter(new File(osimFile));
+           StreamResult result = new StreamResult(writer);
+           transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+           transformer.transform(source, result);
+           writer.flush();
+           writer.close();
+           
+           return osimFile;
+       } catch (ParserConfigurationException ex) {
+           Exceptions.printStackTrace(ex);
+       } catch (FileNotFoundException ex) {
+           Exceptions.printStackTrace(ex);
+       } catch (SAXException ex) {
+           Exceptions.printStackTrace(ex);
+       } catch (IOException ex) {
+           Exceptions.printStackTrace(ex);
+       } catch (TransformerConfigurationException ex) {
+           Exceptions.printStackTrace(ex);
+       } catch (TransformerException ex) {
+           Exceptions.printStackTrace(ex);
+       }
+       return "";
+    }
 
    //------------------------------------------------------------------------
    // Load/Save Settings Actions
@@ -75,7 +139,7 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
       public SaveSettingsAction() { super("Save Settings..."); }
       public void actionPerformed(ActionEvent evt) {
          String fileName = FileUtils.getInstance().browseForFilenameToSave(settingsFilter, true, "", null);
-         if(fileName!=null) saveSettings(fileName);
+         if(fileName!=null) saveSettings(fileName, getToolXML());
       }
    }
 
@@ -97,7 +161,21 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
    public void loadSettings(String fileName) {
    
    }
-   public void saveSettings(String fileName) {}
+   public void saveSettings(String fileName, String contents) {
+         String fullFilename = FileUtils.addExtensionIfNeeded(fileName, ".xml");
+         OpenSimObject.setSerializeAllDefaults(true);
+         //String toolFileContent = jointPersonalizationToolModel.getToolAsObject().dump();
+         BufferedWriter writer;
+        try {
+            writer = new BufferedWriter(new FileWriter(fullFilename));
+            writer.write("<NMSMPipelineDocument Version=\"1.0.0\">\n");
+            writer.write(contents);
+            writer.write("</NMSMPipelineDocument>");
+            writer.close();
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+   }
    public void pressedCancel() {}
    public void pressedClose() {}
    public void pressedApply() {}
@@ -166,4 +244,6 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
        OpenSimDB.getInstance().deleteObserver(this);
        ownerDialog.dispose();
    }
+   
+   abstract String getToolXML();
 }

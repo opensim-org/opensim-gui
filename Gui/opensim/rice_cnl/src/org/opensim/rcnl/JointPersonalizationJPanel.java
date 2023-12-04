@@ -6,6 +6,9 @@
 package org.opensim.rcnl;
 
 import java.awt.Dialog;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
@@ -15,6 +18,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
@@ -298,17 +302,18 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
     }
 
     @Override
-    public void saveSettings(String fileName) {
-         String fullFilename = FileUtils.addExtensionIfNeeded(fileName, ".xml");
-         OpenSimObject.setSerializeAllDefaults(true);
-        jointPersonalizationToolModel.getToolAsObject().print(fullFilename);
+    public String getToolXML() {
+        return jointPersonalizationToolModel.getToolAsObject().dump();
     }
 
     @Override
-    public void loadSettings(String fileName) {
+    public void loadSettings(String nmsmFilename) {
+        String fileName = super.stripOuterTags(nmsmFilename);
         Model model = OpenSimDB.getInstance().getCurrentModel();
        //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
        jointPersonalizationToolModel = new JointPersonalizationToolModel(model, fileName);
+       File f= new File(fileName); 
+       f.delete();
        jointPersonalizationTaskListModel = new JMPTaskListModel(jointPersonalizationToolModel.getJointTaskListAsObjectList());
        listSelectionModel = jJointPersonalizationList.getSelectionModel();
        listSelectionModel.addListSelectionListener( new ListSelectionHandler());
