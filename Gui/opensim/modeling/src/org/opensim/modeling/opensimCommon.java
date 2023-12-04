@@ -171,6 +171,34 @@ public class opensimCommon {
     return opensimCommonJNI.solveBisection__SWIG_2(SWIGTYPE_p_std__functionT_double_fdouble_const_RF_t.getCPtr(calcResidual), left, right);
   }
 
+  /**
+   *  Compute the 'k' nearest neighbors of two matrices 'x' and 'y'. 'x' and 'y'<br>
+   *  should contain the same number of columns, but can have different numbers of<br>
+   *  rows. The function returns a matrix with 'k' number of columns and the same<br>
+   *  number of rows as 'y'. Each row in the output matrix contains 'k' distance<br>
+   *  values, where the first column contains the distance to the nearest neighbor<br>
+   *  in 'x', the second column contains the distance to the second nearest<br>
+   *  neighbor in 'x', and so on.<br>
+   *  
+   */
+  public static Matrix computeKNearestNeighbors(Matrix x, Matrix y, int k) {
+    return new Matrix(opensimCommonJNI.computeKNearestNeighbors__SWIG_0(Matrix.getCPtr(x), x, Matrix.getCPtr(y), y, k), true);
+  }
+
+  /**
+   *  Compute the 'k' nearest neighbors of two matrices 'x' and 'y'. 'x' and 'y'<br>
+   *  should contain the same number of columns, but can have different numbers of<br>
+   *  rows. The function returns a matrix with 'k' number of columns and the same<br>
+   *  number of rows as 'y'. Each row in the output matrix contains 'k' distance<br>
+   *  values, where the first column contains the distance to the nearest neighbor<br>
+   *  in 'x', the second column contains the distance to the second nearest<br>
+   *  neighbor in 'x', and so on.<br>
+   *  
+   */
+  public static Matrix computeKNearestNeighbors(Matrix x, Matrix y) {
+    return new Matrix(opensimCommonJNI.computeKNearestNeighbors__SWIG_1(Matrix.getCPtr(x), x, Matrix.getCPtr(y), y), true);
+  }
+
   public static int getArray_CAPMIN() {
     return opensimCommonJNI.Array_CAPMIN_get();
   }

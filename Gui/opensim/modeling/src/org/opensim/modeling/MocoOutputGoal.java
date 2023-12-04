@@ -83,27 +83,4 @@ public class MocoOutputGoal extends MocoOutputBase {
     this(opensimMocoJNI.new_MocoOutputGoal__SWIG_2(name, weight), true);
   }
 
-  /**
-   *  Set if the goal should be divided by the displacement of the system's<br>
-   *     center of mass over the phase. 
-   */
-  public void setDivideByDisplacement(boolean tf) {
-    opensimMocoJNI.MocoOutputGoal_setDivideByDisplacement(swigCPtr, this, tf);
-  }
-
-  public boolean getDivideByDisplacement() {
-    return opensimMocoJNI.MocoOutputGoal_getDivideByDisplacement(swigCPtr, this);
-  }
-
-  /**
-   *  Set if the goal should be divided by the total mass of the model. 
-   */
-  public void setDivideByMass(boolean tf) {
-    opensimMocoJNI.MocoOutputGoal_setDivideByMass(swigCPtr, this, tf);
-  }
-
-  public boolean getDivideByMass() {
-    return opensimMocoJNI.MocoOutputGoal_getDivideByMass(swigCPtr, this);
-  }
-
 }

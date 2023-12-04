@@ -92,7 +92,7 @@ public class ModelFactory {
   /**
    *  <br>
    *  <br>
-   *  Replace muscles in a model with a PathActuator of the same GeometryPath,<br>
+   *  Replace muscles in a model with a PathActuator of the same path,<br>
    *  optimal force, and min/max control defaults.<br>
    *  Note: This only replaces muscles within the model's ForceSet.
    */
@@ -166,6 +166,17 @@ public class ModelFactory {
    */
   public static void createReserveActuators(Model model, double optimalForce) {
     opensimActuatorsAnalysesToolsJNI.ModelFactory_createReserveActuators__SWIG_2(Model.getCPtr(model), model, optimalForce);
+  }
+
+  /**
+   *  Replace the paths of the forces in the model with the provided Set of<br>
+   *  FunctionBasedPath%s. The name of each FunctionBasedPath should match the<br>
+   *  component path (i.e., '/forceset/soleus_r') of the corresponding Force<br>
+   *  in the model. The Force objects in the model must have a property named<br>
+   *  'path' that stores an object derived from AbstractGeometryPath.
+   */
+  public static void replacePathsWithFunctionBasedPaths(Model model, SetFunctionBasedPaths functionBasedPaths) {
+    opensimActuatorsAnalysesToolsJNI.ModelFactory_replacePathsWithFunctionBasedPaths(Model.getCPtr(model), model, SetFunctionBasedPaths.getCPtr(functionBasedPaths), functionBasedPaths);
   }
 
   public ModelFactory() {

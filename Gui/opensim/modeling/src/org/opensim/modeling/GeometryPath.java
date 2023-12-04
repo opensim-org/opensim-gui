@@ -9,12 +9,12 @@
 package org.opensim.modeling;
 
 /**
- * A base class representing a path (muscle, ligament, etc.).<br>
+ * A concrete class representing a path (muscle, ligament, etc.) based on <br>
+ * geometry objects in the model (e.g., PathPoints and PathWraps).<br>
  * <br>
- * @author Peter Loan<br>
- * @version 1.0
+ * @author Peter Loan
  */
-public class GeometryPath extends ModelComponent {
+public class GeometryPath extends AbstractGeometryPath {
   private transient long swigCPtr;
 
   public GeometryPath(long cPtr, boolean cMemoryOwn) {
@@ -62,42 +62,6 @@ public class GeometryPath extends ModelComponent {
 
   public String getConcreteClassName() {
     return opensimSimulationJNI.GeometryPath_getConcreteClassName(swigCPtr, this);
-  }
-
-  public void copyProperty_Appearance(GeometryPath source) {
-    opensimSimulationJNI.GeometryPath_copyProperty_Appearance(swigCPtr, this, GeometryPath.getCPtr(source), source);
-  }
-
-  public Appearance get_Appearance(int i) {
-    return new Appearance(opensimSimulationJNI.GeometryPath_get_Appearance__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public Appearance upd_Appearance(int i) {
-    return new Appearance(opensimSimulationJNI.GeometryPath_upd_Appearance__SWIG_0(swigCPtr, this, i), false);
-  }
-
-  public void set_Appearance(int i, Appearance value) {
-    opensimSimulationJNI.GeometryPath_set_Appearance__SWIG_0(swigCPtr, this, i, Appearance.getCPtr(value), value);
-  }
-
-  public int append_Appearance(Appearance value) {
-    return opensimSimulationJNI.GeometryPath_append_Appearance(swigCPtr, this, Appearance.getCPtr(value), value);
-  }
-
-  public void constructProperty_Appearance(Appearance initValue) {
-    opensimSimulationJNI.GeometryPath_constructProperty_Appearance(swigCPtr, this, Appearance.getCPtr(initValue), initValue);
-  }
-
-  public Appearance get_Appearance() {
-    return new Appearance(opensimSimulationJNI.GeometryPath_get_Appearance__SWIG_1(swigCPtr, this), false);
-  }
-
-  public Appearance upd_Appearance() {
-    return new Appearance(opensimSimulationJNI.GeometryPath_upd_Appearance__SWIG_1(swigCPtr, this), false);
-  }
-
-  public void set_Appearance(Appearance value) {
-    opensimSimulationJNI.GeometryPath_set_Appearance__SWIG_1(swigCPtr, this, Appearance.getCPtr(value), value);
   }
 
   public GeometryPath() {
@@ -159,24 +123,6 @@ public class GeometryPath extends ModelComponent {
   }
 
   /**
-   *  If you call this prior to extendAddToSystem() it will be used to initialize<br>
-   *     the color cache variable. Otherwise %GeometryPath will choose its own<br>
-   *     default which varies depending on owner. *
-   */
-  public void setDefaultColor(Vec3 color) {
-    opensimSimulationJNI.GeometryPath_setDefaultColor(swigCPtr, this, Vec3.getCPtr(color), color);
-  }
-
-  /**
-   *  Returns the color that will be used to initialize the color cache<br>
-   *     at the next extendAddToSystem() call. The actual color used to draw the path<br>
-   *     will be taken from the cache variable, so may have changed. *
-   */
-  public Vec3 getDefaultColor() {
-    return new Vec3(opensimSimulationJNI.GeometryPath_getDefaultColor(swigCPtr, this), false);
-  }
-
-  /**
    *  %Set the value of the color cache variable owned by this %GeometryPath<br>
    *     object, in the cache of the given state. The value of this variable is used<br>
    *     as the color when the path is drawn, which occurs with the state realized <br>
@@ -205,14 +151,6 @@ public class GeometryPath extends ModelComponent {
 
   public void setLength(State s, double length) {
     opensimSimulationJNI.GeometryPath_setLength(swigCPtr, this, State.getCPtr(s), s, length);
-  }
-
-  public double getPreScaleLength(State s) {
-    return opensimSimulationJNI.GeometryPath_getPreScaleLength(swigCPtr, this, State.getCPtr(s), s);
-  }
-
-  public void setPreScaleLength(State s, double preScaleLength) {
-    opensimSimulationJNI.GeometryPath_setPreScaleLength(swigCPtr, this, State.getCPtr(s), s, preScaleLength);
   }
 
   public ArrayPathPoint getCurrentPath(State s) {
@@ -245,6 +183,10 @@ public class GeometryPath extends ModelComponent {
    */
   public void addInEquivalentForces(State state, double tension, VectorOfSpatialVec bodyForces, Vector mobilityForces) {
     opensimSimulationJNI.GeometryPath_addInEquivalentForces(swigCPtr, this, State.getCPtr(state), state, tension, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(mobilityForces), mobilityForces);
+  }
+
+  public boolean isVisualPath() {
+    return opensimSimulationJNI.GeometryPath_isVisualPath(swigCPtr, this);
   }
 
   public double computeMomentArm(State s, Coordinate aCoord) {

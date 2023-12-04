@@ -988,12 +988,12 @@ public class Millard2012EquilibriumMuscleIterator {
     opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_computeEquilibrium(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public GeometryPath get_GeometryPath(int i) {
-    return new GeometryPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_get_GeometryPath__SWIG_0(swigCPtr, this, i), false);
+  public AbstractGeometryPath get_path(int i) {
+    return new AbstractGeometryPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_get_path__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public GeometryPath get_GeometryPath() {
-    return new GeometryPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_get_GeometryPath__SWIG_1(swigCPtr, this), false);
+  public AbstractGeometryPath get_path() {
+    return new AbstractGeometryPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_get_path__SWIG_1(swigCPtr, this), false);
   }
 
   public double get_optimal_force(int i) {
@@ -1008,12 +1008,16 @@ public class Millard2012EquilibriumMuscleIterator {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator__has_output_tension_get(swigCPtr, this);
   }
 
+  public AbstractGeometryPath getPath() {
+    return new AbstractGeometryPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getPath(swigCPtr, this), false);
+  }
+
   public GeometryPath getGeometryPath() {
     return new GeometryPath(opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getGeometryPath(swigCPtr, this), false);
   }
 
-  public boolean hasGeometryPath() {
-    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_hasGeometryPath(swigCPtr, this);
+  public boolean hasVisualPath() {
+    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_hasVisualPath(swigCPtr, this);
   }
 
   public double getOptimalForce() {

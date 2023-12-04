@@ -196,6 +196,12 @@ public class opensimMocoJNI {
   public final static native void MocoGoal_initializeOnModel(long jarg1, MocoGoal jarg1_, long jarg2, Model jarg2_);
   public final static native long MocoGoal_getScaleFactors(long jarg1, MocoGoal jarg1_);
   public final static native void MocoGoal_printDescription(long jarg1, MocoGoal jarg1_);
+  public final static native void MocoGoal_setDivideByDisplacement(long jarg1, MocoGoal jarg1_, boolean jarg2);
+  public final static native boolean MocoGoal_getDivideByDisplacement(long jarg1, MocoGoal jarg1_);
+  public final static native void MocoGoal_setDivideByDuration(long jarg1, MocoGoal jarg1_, boolean jarg2);
+  public final static native boolean MocoGoal_getDivideByDuration(long jarg1, MocoGoal jarg1_);
+  public final static native void MocoGoal_setDivideByMass(long jarg1, MocoGoal jarg1_, boolean jarg2);
+  public final static native boolean MocoGoal_getDivideByMass(long jarg1, MocoGoal jarg1_);
   public final static native void delete_MocoGoal(long jarg1);
   public final static native long MocoFinalTimeGoal_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void MocoFinalTimeGoal_assign(long jarg1, MocoFinalTimeGoal jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -335,8 +341,6 @@ public class opensimMocoJNI {
   public final static native void MocoControlGoal_setWeightForControlPattern(long jarg1, MocoControlGoal jarg1_, String jarg2, double jarg3);
   public final static native void MocoControlGoal_setExponent(long jarg1, MocoControlGoal jarg1_, int jarg2);
   public final static native double MocoControlGoal_getExponent(long jarg1, MocoControlGoal jarg1_);
-  public final static native void MocoControlGoal_setDivideByDisplacement(long jarg1, MocoControlGoal jarg1_, boolean jarg2);
-  public final static native boolean MocoControlGoal_getDivideByDisplacement(long jarg1, MocoControlGoal jarg1_);
   public final static native void delete_MocoControlGoal(long jarg1);
   public final static native long MocoControlTrackingGoalReference_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void MocoControlTrackingGoalReference_assign(long jarg1, MocoControlTrackingGoalReference jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -600,10 +604,6 @@ public class opensimMocoJNI {
   public final static native long new_MocoOutputGoal__SWIG_0();
   public final static native long new_MocoOutputGoal__SWIG_1(String jarg1);
   public final static native long new_MocoOutputGoal__SWIG_2(String jarg1, double jarg2);
-  public final static native void MocoOutputGoal_setDivideByDisplacement(long jarg1, MocoOutputGoal jarg1_, boolean jarg2);
-  public final static native boolean MocoOutputGoal_getDivideByDisplacement(long jarg1, MocoOutputGoal jarg1_);
-  public final static native void MocoOutputGoal_setDivideByMass(long jarg1, MocoOutputGoal jarg1_, boolean jarg2);
-  public final static native boolean MocoOutputGoal_getDivideByMass(long jarg1, MocoOutputGoal jarg1_);
   public final static native void delete_MocoOutputGoal(long jarg1);
   public final static native long MocoOutputExtremumGoal_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void MocoOutputExtremumGoal_assign(long jarg1, MocoOutputExtremumGoal jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -613,10 +613,6 @@ public class opensimMocoJNI {
   public final static native long new_MocoOutputExtremumGoal__SWIG_0();
   public final static native long new_MocoOutputExtremumGoal__SWIG_1(String jarg1);
   public final static native long new_MocoOutputExtremumGoal__SWIG_2(String jarg1, double jarg2);
-  public final static native void MocoOutputExtremumGoal_setDivideByDisplacement(long jarg1, MocoOutputExtremumGoal jarg1_, boolean jarg2);
-  public final static native boolean MocoOutputExtremumGoal_getDivideByDisplacement(long jarg1, MocoOutputExtremumGoal jarg1_);
-  public final static native void MocoOutputExtremumGoal_setDivideByMass(long jarg1, MocoOutputExtremumGoal jarg1_, boolean jarg2);
-  public final static native boolean MocoOutputExtremumGoal_getDivideByMass(long jarg1, MocoOutputExtremumGoal jarg1_);
   public final static native void MocoOutputExtremumGoal_setExtremumType(long jarg1, MocoOutputExtremumGoal jarg1_, String jarg2);
   public final static native String MocoOutputExtremumGoal_getExtremumType(long jarg1, MocoOutputExtremumGoal jarg1_);
   public final static native void MocoOutputExtremumGoal_setSmoothingFactor(long jarg1, MocoOutputExtremumGoal jarg1_, double jarg2);
@@ -1138,6 +1134,8 @@ public class opensimMocoJNI {
   public final static native int MocoTrajectory_getNumDerivatives(long jarg1, MocoTrajectory jarg1_);
   public final static native int MocoTrajectory_getNumValues(long jarg1, MocoTrajectory jarg1_);
   public final static native int MocoTrajectory_getNumSpeeds(long jarg1, MocoTrajectory jarg1_);
+  public final static native int MocoTrajectory_getNumMultibodyStates(long jarg1, MocoTrajectory jarg1_);
+  public final static native int MocoTrajectory_getNumAuxiliaryStates(long jarg1, MocoTrajectory jarg1_);
   public final static native int MocoTrajectory_getNumAccelerations(long jarg1, MocoTrajectory jarg1_);
   public final static native int MocoTrajectory_getNumDerivativesWithoutAccelerations(long jarg1, MocoTrajectory jarg1_);
   public final static native int MocoTrajectory_getNumParameters(long jarg1, MocoTrajectory jarg1_);
@@ -1147,6 +1145,8 @@ public class opensimMocoJNI {
   public final static native long MocoTrajectory_getDerivativeNames(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getValueNames(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getSpeedNames(long jarg1, MocoTrajectory jarg1_);
+  public final static native long MocoTrajectory_getMultibodyStateNames(long jarg1, MocoTrajectory jarg1_);
+  public final static native long MocoTrajectory_getAuxiliaryStateNames(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getAccelerationNames(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getDerivativeNamesWithoutAccelerations(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getParameterNames(long jarg1, MocoTrajectory jarg1_);
@@ -1161,6 +1161,8 @@ public class opensimMocoJNI {
   public final static native long MocoTrajectory_getDerivativesTrajectory(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getValuesTrajectory(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getSpeedsTrajectory(long jarg1, MocoTrajectory jarg1_);
+  public final static native long MocoTrajectory_getMultibodyStatesTrajectory(long jarg1, MocoTrajectory jarg1_);
+  public final static native long MocoTrajectory_getAuxiliaryStatesTrajectory(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getAccelerationsTrajectory(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getDerivativesWithoutAccelerationsTrajectory(long jarg1, MocoTrajectory jarg1_);
   public final static native long MocoTrajectory_getParameters(long jarg1, MocoTrajectory jarg1_);

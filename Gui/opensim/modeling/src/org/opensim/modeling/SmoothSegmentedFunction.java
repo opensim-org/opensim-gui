@@ -130,6 +130,75 @@ public class SmoothSegmentedFunction {
     return opensimCommonJNI.SmoothSegmentedFunction_calcDerivative(swigCPtr, this, x, order);
   }
 
+  static public class ValueAndDerivative {
+    private transient long swigCPtr;
+    protected transient boolean swigCMemOwn;
+  
+    public ValueAndDerivative(long cPtr, boolean cMemoryOwn) {
+      swigCMemOwn = cMemoryOwn;
+      swigCPtr = cPtr;
+    }
+  
+    public static long getCPtr(ValueAndDerivative obj) {
+      return (obj == null) ? 0 : obj.swigCPtr;
+    }
+  
+    public static long swigRelease(ValueAndDerivative obj) {
+      long ptr = 0;
+      if (obj != null) {
+        if (!obj.swigCMemOwn)
+          throw new RuntimeException("Cannot release ownership as memory is not owned");
+        ptr = obj.swigCPtr;
+        obj.swigCMemOwn = false;
+        obj.delete();
+      }
+      return ptr;
+    }
+  
+    @SuppressWarnings("deprecation")
+    protected void finalize() {
+      delete();
+    }
+  
+    public synchronized void delete() {
+      if (swigCPtr != 0) {
+        if (swigCMemOwn) {
+          swigCMemOwn = false;
+          opensimCommonJNI.delete_SmoothSegmentedFunction_ValueAndDerivative(swigCPtr);
+        }
+        swigCPtr = 0;
+      }
+    }
+  
+    public void setValue(double value) {
+      opensimCommonJNI.SmoothSegmentedFunction_ValueAndDerivative_value_set(swigCPtr, this, value);
+    }
+  
+    public double getValue() {
+      return opensimCommonJNI.SmoothSegmentedFunction_ValueAndDerivative_value_get(swigCPtr, this);
+    }
+  
+    public void setDerivative(double value) {
+      opensimCommonJNI.SmoothSegmentedFunction_ValueAndDerivative_derivative_set(swigCPtr, this, value);
+    }
+  
+    public double getDerivative() {
+      return opensimCommonJNI.SmoothSegmentedFunction_ValueAndDerivative_derivative_get(swigCPtr, this);
+    }
+  
+    public ValueAndDerivative() {
+      this(opensimCommonJNI.new_SmoothSegmentedFunction_ValueAndDerivative(), true);
+    }
+  
+  }
+
+  /**
+   *  Returns the same as calcValue(x) and calcDerivative(x, 1), but more
+   */
+  public SmoothSegmentedFunction.ValueAndDerivative calcValueAndFirstDerivative(double x) {
+    return new SmoothSegmentedFunction.ValueAndDerivative(opensimCommonJNI.SmoothSegmentedFunction_calcValueAndFirstDerivative(swigCPtr, this, x), true);
+  }
+
   /**
    * This will return the value of the integral of this objects curve <br>
    *        evaluated at x. <br>
