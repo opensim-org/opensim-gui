@@ -4,6 +4,10 @@ GitHub issues or pull requests that
 are related to the items below. If there is no issue or pull
 request related to the change, then we may provide the commit.
 
+v4.6
+======
+
+
 v4.5
 ======
 - Fix issue [#1378](https://github.com/opensim-org/opensim-gui/issues/1378): In Static Optimization Tool, dialog box has wrong title for "Directory" in output section.
