@@ -7002,7 +7002,7 @@ public class opensimSimulationJNI {
   public final static native void delete_BufferedOrientationsReference(long jarg1);
   public final static native long BufferedOrientationsReference_getValidTimeRange(long jarg1, BufferedOrientationsReference jarg1_);
   public final static native void BufferedOrientationsReference_getValuesAtTime(long jarg1, BufferedOrientationsReference jarg1_, double jarg2, long jarg3, SimTKArrayRotation jarg3_);
-  public final static native void BufferedOrientationsReference_putValues(long jarg1, BufferedOrientationsReference jarg1_, double jarg2, long jarg3);
+  public final static native void BufferedOrientationsReference_putValues(long jarg1, BufferedOrientationsReference jarg1_, double jarg2, long jarg3, RowVectorRotation jarg3_);
   public final static native double BufferedOrientationsReference_getNextValuesAndTime(long jarg1, BufferedOrientationsReference jarg1_, long jarg2, SimTKArrayRotation jarg2_);
   public final static native boolean BufferedOrientationsReference_hasNext(long jarg1, BufferedOrientationsReference jarg1_);
   public final static native void BufferedOrientationsReference_setFinished(long jarg1, BufferedOrientationsReference jarg1_, boolean jarg2);
