@@ -1,9 +1,8 @@
 name: opensim-application-core-PR
 
 on:
-  repository_dispatch:
+  repository_dispatch
     
-
 jobs:
   windows:
     name: Windows
