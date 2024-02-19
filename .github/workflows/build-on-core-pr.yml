@@ -1,8 +1,9 @@
 name: opensim-application-core-PR
 
 on:
-  workflow_dispatch
-    
+  workflow_dispatch:
+     inputs:
+      distinct_id:   
 jobs:
   windows:
     name: Windows
@@ -10,6 +11,9 @@ jobs:
     runs-on: windows-2019
 
     steps:
+    - name: echo distinct ID ${{ github.event.inputs.distinct_id }}
+      run: echo ${{ github.event.inputs.distinct_id }}
+      
     - name: Checkout opensim-gui
       uses: actions/checkout@v3
 
