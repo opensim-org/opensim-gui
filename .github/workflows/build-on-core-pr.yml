@@ -3,7 +3,7 @@ name: opensim-application-core-PR
 on:
   workflow_dispatch:
      inputs:
-      commit_sha:   
+      distinct_id:  
 jobs:
   windows:
     name: Windows
