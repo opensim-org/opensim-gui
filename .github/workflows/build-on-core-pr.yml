@@ -52,7 +52,7 @@ jobs:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
          # obtain commit hash from event
-         ref: ${{ github.event.inputs.commit_sha }}
+         ref: ${{ github.event.inputs.commit }}
 
     
     - name: Cache opensim-core-dependencies
