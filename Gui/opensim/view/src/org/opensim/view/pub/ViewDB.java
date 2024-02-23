@@ -893,17 +893,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    }
 
    public void toggleObjectDisplay(OpenSimObject openSimObject, boolean visible) {
-      // use VisibleObject to hold on/off status, and
-      // do not repaint the windows or update any geometry because
-      // this is now handled by the functions that call toggleObjectDisplay().
-      //System.out.println("Toggle object "+openSimObject.getName()+" "+ (visible?"On":"Off"));
     if (websocketdb != null){
        // if selected object is a ModelComponent recover model from it, else use current model
        // since OpenSimObject has no method to trace back to owner model
+       Model selectedModel = getCurrentModel();
        ModelComponent modelComponent = ModelComponent.safeDownCast(openSimObject);
-       Model candidateModel = modelComponent.getModel();
-       Model modelToUse = (candidateModel==null)? getCurrentModel() : candidateModel;
-       ModelVisualizationJson vizJson = getInstance().mapModelsToJsons.get(modelToUse);
+       if (modelComponent != null)
+            selectedModel = modelComponent.getModel();
+       ModelVisualizationJson vizJson = getInstance().mapModelsToJsons.get(selectedModel);
        websocketdb.broadcastMessageJson(
                vizJson.createToggleObjectVisibilityCommand(openSimObject, visible), null);
     }
