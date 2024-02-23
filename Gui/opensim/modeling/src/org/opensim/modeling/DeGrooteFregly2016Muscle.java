@@ -912,7 +912,11 @@ public class DeGrooteFregly2016Muscle extends Muscle {
    *  Note: based on Millard2012EquilibriumMuscle.
    */
   public double calcMuscleStiffness(double tendonStiffness, double fiberStiffnessAlongTendon) {
-    return opensimActuatorsAnalysesToolsJNI.DeGrooteFregly2016Muscle_calcMuscleStiffness(swigCPtr, this, tendonStiffness, fiberStiffnessAlongTendon);
+    return opensimActuatorsAnalysesToolsJNI.DeGrooteFregly2016Muscle_calcMuscleStiffness__SWIG_0(swigCPtr, this, tendonStiffness, fiberStiffnessAlongTendon);
+  }
+
+  public double calcMuscleStiffness(State s) {
+    return opensimActuatorsAnalysesToolsJNI.DeGrooteFregly2016Muscle_calcMuscleStiffness__SWIG_1(swigCPtr, this, State.getCPtr(s), s);
   }
 
   /**

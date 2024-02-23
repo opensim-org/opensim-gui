@@ -88,8 +88,8 @@ public class StaticOptimization extends Analysis {
     this(opensimActuatorsAnalysesToolsJNI.new_StaticOptimization__SWIG_2(StaticOptimization.getCPtr(aObject), aObject), true);
   }
 
-  public void setStorageCapacityIncrements(int aIncrement) {
-    opensimActuatorsAnalysesToolsJNI.StaticOptimization_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
+  public void setStorageCapacityIncrements(int arg0) {
+    opensimActuatorsAnalysesToolsJNI.StaticOptimization_setStorageCapacityIncrements(swigCPtr, this, arg0);
   }
 
   public Storage getActivationStorage() {

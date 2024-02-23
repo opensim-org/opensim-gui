@@ -521,6 +521,14 @@ public class FiberForceLengthCurve extends Function {
   }
 
   /**
+   *  Evaluates the fiber-force-length curve value and derivative at a<br>
+   *     normalized fiber length of 'normFiberLength'. 
+   */
+  public SmoothSegmentedFunction.ValueAndDerivative calcValueAndDerivative(double normFiberLength) {
+    return new SmoothSegmentedFunction.ValueAndDerivative(opensimSimulationJNI.FiberForceLengthCurve_calcValueAndDerivative(swigCPtr, this, normFiberLength), true);
+  }
+
+  /**
    *  Calculates the derivative of the fiber-force-length multiplier with<br>
    *     respect to the normalized fiber length.<br>
    *     @param normFiberLength<br>

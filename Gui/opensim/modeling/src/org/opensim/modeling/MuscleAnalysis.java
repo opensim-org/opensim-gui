@@ -97,8 +97,8 @@ public class MuscleAnalysis extends Analysis {
     opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
-  public void setStorageCapacityIncrements(int aIncrement) {
-    opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
+  public void setStorageCapacityIncrements(int arg0) {
+    opensimActuatorsAnalysesToolsJNI.MuscleAnalysis_setStorageCapacityIncrements(swigCPtr, this, arg0);
   }
 
   public Storage getPennationAngleStorage() {

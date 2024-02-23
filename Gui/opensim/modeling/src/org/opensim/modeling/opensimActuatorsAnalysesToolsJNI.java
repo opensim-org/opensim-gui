@@ -888,7 +888,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native void DeGrooteFregly2016Muscle_calcFiberForce(long jarg1, DeGrooteFregly2016Muscle jarg1_, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6, long jarg7, long jarg8, long jarg9, long jarg10);
   public final static native double DeGrooteFregly2016Muscle_calcFiberStiffness(long jarg1, DeGrooteFregly2016Muscle jarg1_, double jarg2, double jarg3, double jarg4);
   public final static native double DeGrooteFregly2016Muscle_calcTendonStiffness(long jarg1, DeGrooteFregly2016Muscle jarg1_, double jarg2);
-  public final static native double DeGrooteFregly2016Muscle_calcMuscleStiffness(long jarg1, DeGrooteFregly2016Muscle jarg1_, double jarg2, double jarg3);
+  public final static native double DeGrooteFregly2016Muscle_calcMuscleStiffness__SWIG_0(long jarg1, DeGrooteFregly2016Muscle jarg1_, double jarg2, double jarg3);
+  public final static native double DeGrooteFregly2016Muscle_calcMuscleStiffness__SWIG_1(long jarg1, DeGrooteFregly2016Muscle jarg1_, long jarg2, State jarg2_);
   public final static native double DeGrooteFregly2016Muscle_calcPartialPennationAnglePartialFiberLength(long jarg1, DeGrooteFregly2016Muscle jarg1_, double jarg2);
   public final static native double DeGrooteFregly2016Muscle_calcPartialFiberForceAlongTendonPartialFiberLength(long jarg1, DeGrooteFregly2016Muscle jarg1_, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6);
   public final static native double DeGrooteFregly2016Muscle_calcFiberStiffnessAlongTendon(long jarg1, DeGrooteFregly2016Muscle jarg1_, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6);

@@ -143,8 +143,8 @@ public class PointKinematics extends Analysis {
     opensimActuatorsAnalysesToolsJNI.PointKinematics_setModel(swigCPtr, this, Model.getCPtr(aModel), aModel);
   }
 
-  public void setStorageCapacityIncrements(int aIncrement) {
-    opensimActuatorsAnalysesToolsJNI.PointKinematics_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
+  public void setStorageCapacityIncrements(int arg0) {
+    opensimActuatorsAnalysesToolsJNI.PointKinematics_setStorageCapacityIncrements(swigCPtr, this, arg0);
   }
 
   public Storage getAccelerationStorage() {
