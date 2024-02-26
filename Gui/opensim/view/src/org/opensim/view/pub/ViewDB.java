@@ -893,66 +893,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    }
 
    public void toggleObjectDisplay(OpenSimObject openSimObject, boolean visible) {
-      // use VisibleObject to hold on/off status, and
-      // do not repaint the windows or update any geometry because
-      // this is now handled by the functions that call toggleObjectDisplay().
-      //System.out.println("Toggle object "+openSimObject.getName()+" "+ (visible?"On":"Off"));
-       /*
-      VisibleObject vo = openSimObject.getDisplayer();
-      if (vo != null) {
-         DisplayPreference dp = vo.getDisplayPreference();
-         if (visible == true)
-            vo.setDisplayPreference(DisplayPreference.GouraudShaded); // TODO: assumes gouraud is the default
-         else
-            vo.setDisplayPreference(DisplayPreference.None);
-      }
-      else if (openSimObject instanceof Geometry){
-          ((Geometry)openSimObject).setDisplayPreference(visible? DisplayPreference.GouraudShaded:
-              DisplayPreference.None); // TODO: assumes gouraud is the default
-         
-      }
-      Marker marker = Marker.safeDownCast(openSimObject);
-      if (marker != null) {
-         SingleModelVisuals vis = getModelVisuals(marker.getBody().getModel());
-         //vis.setMarkerVisibility(marker, visible);
-         updateAnnotationAnchors(); // in case object had annotations
-         return;
-      }
-
-      Actuator act = Actuator.safeDownCast(openSimObject);
-      if (act != null) {
-         SingleModelVisuals vis = getModelVisuals(act.getModel());
-         vis.updateActuatorGeometry(act, visible); // call act.updateGeometry() if actuator is becoming visible
-         updateAnnotationAnchors(); // in case object had annotations
-         return;
-      }
-      Force f = Force.safeDownCast(openSimObject);
-      if (f != null) {
-         SingleModelVisuals vis = getModelVisuals(f.getModel());
-         vis.updateForceGeometry(f, visible); // call act.updateGeometry() if actuator is becoming visible
-         updateAnnotationAnchors(); // in case object had annotations
-         return;
-      }
-      
-      if (openSimObject instanceof ObjectGroup){
-          ObjectGroup grp = (ObjectGroup) openSimObject;
-          ArrayObjPtr members = grp.getMembers();
-          for(int i=0;i<members.getSize();i++)
-              toggleObjectDisplay(members.getitem(i), visible); // Recur
-          return;
-      }
-      // If the object is a vtkAssembly or vtkActor, sets its visibility that way too.
-      final int vtkVisible = visible ? 1 : 0;
-      vtkProp3D asm = ViewDB.getInstance().getVtkRepForObject(openSimObject);
-      ApplyFunctionToActors(asm, new ActorFunctionApplier() {
-         public void apply(vtkActor actor) {
-            actor.SetVisibility(vtkVisible);
-            actor.SetPickable(vtkVisible);
-         }});
-       */
     if (websocketdb != null){
-       
-       ModelVisualizationJson vizJson = getInstance().mapModelsToJsons.get(getCurrentModel());
+       // if selected object is a ModelComponent recover model from it, else use current model
+       // since OpenSimObject has no method to trace back to owner model
+       Model selectedModel = getCurrentModel();
+       ModelComponent modelComponent = ModelComponent.safeDownCast(openSimObject);
+       if (modelComponent != null)
+            selectedModel = modelComponent.getModel();
+       ModelVisualizationJson vizJson = getInstance().mapModelsToJsons.get(selectedModel);
        websocketdb.broadcastMessageJson(
                vizJson.createToggleObjectVisibilityCommand(openSimObject, visible), null);
     }
