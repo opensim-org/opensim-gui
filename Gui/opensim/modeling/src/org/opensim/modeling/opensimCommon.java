@@ -199,10 +199,6 @@ public class opensimCommon {
     return new Matrix(opensimCommonJNI.computeKNearestNeighbors__SWIG_1(Matrix.getCPtr(x), x, Matrix.getCPtr(y), y), true);
   }
 
-  public static int getArray_CAPMIN() {
-    return opensimCommonJNI.Array_CAPMIN_get();
-  }
-
   public static String getObjectDEFAULT_NAME() {
     return opensimCommonJNI.ObjectDEFAULT_NAME_get();
   }
@@ -213,6 +209,10 @@ public class opensimCommon {
 
   public static int getIO_STRLEN() {
     return opensimCommonJNI.IO_STRLEN_get();
+  }
+
+  public static int getIO_DBLFMTLEN() {
+    return opensimCommonJNI.IO_DBLFMTLEN_get();
   }
 
   /**

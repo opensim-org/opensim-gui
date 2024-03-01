@@ -89,8 +89,8 @@ public class Kinematics extends Analysis {
     this(opensimActuatorsAnalysesToolsJNI.new_Kinematics__SWIG_2(aFileName), true);
   }
 
-  public void setStorageCapacityIncrements(int aIncrement) {
-    opensimActuatorsAnalysesToolsJNI.Kinematics_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
+  public void setStorageCapacityIncrements(int arg0) {
+    opensimActuatorsAnalysesToolsJNI.Kinematics_setStorageCapacityIncrements(swigCPtr, this, arg0);
   }
 
   public Storage getAccelerationStorage() {

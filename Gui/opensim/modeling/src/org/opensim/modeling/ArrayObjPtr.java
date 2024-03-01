@@ -13,10 +13,7 @@ package org.opensim.modeling;
  * grows as needed.  To use this template for a class of type T, class T should<br>
  * implement the following methods:  default constructor, copy constructor,<br>
  * assignment operator (=), equality operator (==), and less than<br>
- * operator (&lt;).<br>
- * <br>
- * @version 1.0<br>
- * @author Frank C. Anderson
+ * operator (&lt;).
  */
 public class ArrayObjPtr {
   private transient long swigCPtr;
@@ -58,66 +55,24 @@ public class ArrayObjPtr {
     }
   }
 
-  /**
-   * Default constructor.<br>
-   * <br>
-   * @param aDefaultValue Default value of an array element.  This value<br>
-   * is used to initialize array elements as the size of the array is<br>
-   * changed.<br>
-   * @param aSize Initial size of the array.  The array elements are<br>
-   * initialized to aDefaultValue.<br>
-   * @param aCapacity Initial capacity of the array.  The initial capacity<br>
-   * is guaranteed to be at least as large as aSize + 1.
-   */
+  public ArrayObjPtr(ArrayObjPtr arg0) {
+    this(opensimCommonJNI.new_ArrayObjPtr__SWIG_0(ArrayObjPtr.getCPtr(arg0), arg0), true);
+  }
+
   public ArrayObjPtr(OpenSimObject aDefaultValue, int aSize, int aCapacity) {
-    this(opensimCommonJNI.new_ArrayObjPtr__SWIG_0(OpenSimObject.getCPtr(aDefaultValue), aDefaultValue, aSize, aCapacity), true);
+    this(opensimCommonJNI.new_ArrayObjPtr__SWIG_2(OpenSimObject.getCPtr(aDefaultValue), aDefaultValue, aSize, aCapacity), true);
   }
 
-  /**
-   * Default constructor.<br>
-   * <br>
-   * @param aDefaultValue Default value of an array element.  This value<br>
-   * is used to initialize array elements as the size of the array is<br>
-   * changed.<br>
-   * @param aSize Initial size of the array.  The array elements are<br>
-   * initialized to aDefaultValue.<br>
-   * 
-   */
   public ArrayObjPtr(OpenSimObject aDefaultValue, int aSize) {
-    this(opensimCommonJNI.new_ArrayObjPtr__SWIG_1(OpenSimObject.getCPtr(aDefaultValue), aDefaultValue, aSize), true);
+    this(opensimCommonJNI.new_ArrayObjPtr__SWIG_3(OpenSimObject.getCPtr(aDefaultValue), aDefaultValue, aSize), true);
   }
 
-  /**
-   * Default constructor.<br>
-   * <br>
-   * @param aDefaultValue Default value of an array element.  This value<br>
-   * is used to initialize array elements as the size of the array is<br>
-   * changed.<br>
-   * <br>
-   * 
-   */
   public ArrayObjPtr(OpenSimObject aDefaultValue) {
-    this(opensimCommonJNI.new_ArrayObjPtr__SWIG_2(OpenSimObject.getCPtr(aDefaultValue), aDefaultValue), true);
+    this(opensimCommonJNI.new_ArrayObjPtr__SWIG_4(OpenSimObject.getCPtr(aDefaultValue), aDefaultValue), true);
   }
 
-  /**
-   * Default constructor.<br>
-   * <br>
-   * <br>
-   * <br>
-   * 
-   */
   public ArrayObjPtr() {
-    this(opensimCommonJNI.new_ArrayObjPtr__SWIG_3(), true);
-  }
-
-  /**
-   * Copy constructor.<br>
-   * <br>
-   * @param aArray Array to be copied.
-   */
-  public ArrayObjPtr(ArrayObjPtr aArray) {
-    this(opensimCommonJNI.new_ArrayObjPtr__SWIG_4(ArrayObjPtr.getCPtr(aArray), aArray), true);
+    this(opensimCommonJNI.new_ArrayObjPtr__SWIG_5(), true);
   }
 
   public boolean arrayEquals(ArrayObjPtr aArray) {
@@ -136,7 +91,7 @@ public class ArrayObjPtr {
   }
 
   /**
-   * %Set the size of the array.  This method can be used to either increase<br>
+   * Set the size of the array.  This method can be used to either increase<br>
    * or decrease the size of the array.  If this size of the array is<br>
    * increased, the new elements are initialized to the default value<br>
    * that was specified at the time of construction.<br>
@@ -227,7 +182,7 @@ public class ArrayObjPtr {
   }
 
   /**
-   * %Set the value at a specified index.<br>
+   * Set the value at a specified index.<br>
    * <br>
    * @param aIndex Index of the array element to be set.  It is permissible<br>
    * for aIndex to be past the current end of the array- the capacity will<br>
@@ -318,19 +273,21 @@ public class ArrayObjPtr {
    * is approximately ln(n), where n is the size of the array.<br>
    * <br>
    * @param aValue Value to which the array elements are compared.<br>
-   * @param aFindFirst If true, find the first element that satisfies<br>
-   * the search.  If false, the index of any element that satisfies the<br>
-   * search can be returned- which index will be returned depends on the<br>
-   * length of the array and is therefore somewhat arbitrary. By default,<br>
-   * this flag is false.<br>
+   * @param aFindFirst DEPRECATED: this is now ALWAYS `true` - regardless of<br>
+   * what you are calling it with. This makes the behavior predictable on all<br>
+   * platforms.<br>
+   * <br>
+   * OLD BEHAVIOR: If true, find the first element that satisfies the search.<br>
+   * OLD BEHAVIOR: If false, the index of any element that satisfies the<br>
+   * search can be returned. Which index will be returned depends on the<br>
+   * length of the array and is therefore somewhat arbitrary.<br>
+   * OLD BEHAVIOR: By default, this flag is false (now: it is always true)<br>
    * @param aLo Lowest array index to consider in the search.<br>
    * @param aHi Highest array index to consider in the search.<br>
    * @return Index of the array element that has the largest value that is less<br>
-   * than or equal to aValue.  If there is more than one such elements with the<br>
-   * same value and aFindFirst is set to true, the index of the first of<br>
-   * these elements is returned.  If an error is encountered (e.g., the array<br>
-   * is empty), or the array contains no element that is less than or equal<br>
-   * to aValue, -1 is returned.
+   * than or equal to aValue. If an error is encountered (e.g., the array<br>
+   * is empty), or if the array contains no element that is less than or<br>
+   * equal to aValue, -1 is returned.
    */
   public int searchBinary(OpenSimObject aValue, boolean aFindFirst, int aLo, int aHi) {
     return opensimCommonJNI.ArrayObjPtr_searchBinary__SWIG_0(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue, aFindFirst, aLo, aHi);
@@ -352,19 +309,21 @@ public class ArrayObjPtr {
    * is approximately ln(n), where n is the size of the array.<br>
    * <br>
    * @param aValue Value to which the array elements are compared.<br>
-   * @param aFindFirst If true, find the first element that satisfies<br>
-   * the search.  If false, the index of any element that satisfies the<br>
-   * search can be returned- which index will be returned depends on the<br>
-   * length of the array and is therefore somewhat arbitrary. By default,<br>
-   * this flag is false.<br>
+   * @param aFindFirst DEPRECATED: this is now ALWAYS `true` - regardless of<br>
+   * what you are calling it with. This makes the behavior predictable on all<br>
+   * platforms.<br>
+   * <br>
+   * OLD BEHAVIOR: If true, find the first element that satisfies the search.<br>
+   * OLD BEHAVIOR: If false, the index of any element that satisfies the<br>
+   * search can be returned. Which index will be returned depends on the<br>
+   * length of the array and is therefore somewhat arbitrary.<br>
+   * OLD BEHAVIOR: By default, this flag is false (now: it is always true)<br>
    * @param aLo Lowest array index to consider in the search.<br>
    * <br>
    * @return Index of the array element that has the largest value that is less<br>
-   * than or equal to aValue.  If there is more than one such elements with the<br>
-   * same value and aFindFirst is set to true, the index of the first of<br>
-   * these elements is returned.  If an error is encountered (e.g., the array<br>
-   * is empty), or the array contains no element that is less than or equal<br>
-   * to aValue, -1 is returned.
+   * than or equal to aValue. If an error is encountered (e.g., the array<br>
+   * is empty), or if the array contains no element that is less than or<br>
+   * equal to aValue, -1 is returned.
    */
   public int searchBinary(OpenSimObject aValue, boolean aFindFirst, int aLo) {
     return opensimCommonJNI.ArrayObjPtr_searchBinary__SWIG_1(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue, aFindFirst, aLo);
@@ -386,19 +345,21 @@ public class ArrayObjPtr {
    * is approximately ln(n), where n is the size of the array.<br>
    * <br>
    * @param aValue Value to which the array elements are compared.<br>
-   * @param aFindFirst If true, find the first element that satisfies<br>
-   * the search.  If false, the index of any element that satisfies the<br>
-   * search can be returned- which index will be returned depends on the<br>
-   * length of the array and is therefore somewhat arbitrary. By default,<br>
-   * this flag is false.<br>
+   * @param aFindFirst DEPRECATED: this is now ALWAYS `true` - regardless of<br>
+   * what you are calling it with. This makes the behavior predictable on all<br>
+   * platforms.<br>
+   * <br>
+   * OLD BEHAVIOR: If true, find the first element that satisfies the search.<br>
+   * OLD BEHAVIOR: If false, the index of any element that satisfies the<br>
+   * search can be returned. Which index will be returned depends on the<br>
+   * length of the array and is therefore somewhat arbitrary.<br>
+   * OLD BEHAVIOR: By default, this flag is false (now: it is always true)<br>
    * <br>
    * <br>
    * @return Index of the array element that has the largest value that is less<br>
-   * than or equal to aValue.  If there is more than one such elements with the<br>
-   * same value and aFindFirst is set to true, the index of the first of<br>
-   * these elements is returned.  If an error is encountered (e.g., the array<br>
-   * is empty), or the array contains no element that is less than or equal<br>
-   * to aValue, -1 is returned.
+   * than or equal to aValue. If an error is encountered (e.g., the array<br>
+   * is empty), or if the array contains no element that is less than or<br>
+   * equal to aValue, -1 is returned.
    */
   public int searchBinary(OpenSimObject aValue, boolean aFindFirst) {
     return opensimCommonJNI.ArrayObjPtr_searchBinary__SWIG_2(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue, aFindFirst);
@@ -422,13 +383,17 @@ public class ArrayObjPtr {
    * @param aValue Value to which the array elements are compared.<br>
    * <br>
    * <br>
+   * OLD BEHAVIOR: If true, find the first element that satisfies the search.<br>
+   * OLD BEHAVIOR: If false, the index of any element that satisfies the<br>
+   * search can be returned. Which index will be returned depends on the<br>
+   * length of the array and is therefore somewhat arbitrary.<br>
+   * OLD BEHAVIOR: By default, this flag is false (now: it is always true)<br>
+   * <br>
    * <br>
    * @return Index of the array element that has the largest value that is less<br>
-   * than or equal to aValue.  If there is more than one such elements with the<br>
-   * same value and aFindFirst is set to true, the index of the first of<br>
-   * these elements is returned.  If an error is encountered (e.g., the array<br>
-   * is empty), or the array contains no element that is less than or equal<br>
-   * to aValue, -1 is returned.
+   * than or equal to aValue. If an error is encountered (e.g., the array<br>
+   * is empty), or if the array contains no element that is less than or<br>
+   * equal to aValue, -1 is returned.
    */
   public int searchBinary(OpenSimObject aValue) {
     return opensimCommonJNI.ArrayObjPtr_searchBinary__SWIG_3(swigCPtr, this, OpenSimObject.getCPtr(aValue), aValue);

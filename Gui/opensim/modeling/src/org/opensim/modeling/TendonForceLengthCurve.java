@@ -453,6 +453,14 @@ public class TendonForceLengthCurve extends Function {
   }
 
   /**
+   *  Evaluates the tendon-force-length curve value and derivative at a<br>
+   *     normalized tendon length of 'aNormLength'. 
+   */
+  public SmoothSegmentedFunction.ValueAndDerivative calcValueAndDerivative(double aNormLength) {
+    return new SmoothSegmentedFunction.ValueAndDerivative(opensimSimulationJNI.TendonForceLengthCurve_calcValueAndDerivative(swigCPtr, this, aNormLength), true);
+  }
+
+  /**
    *  Calculates the derivative of the tendon-force-length multiplier with<br>
    *     respect to the normalized tendon length.<br>
    *     @param aNormLength<br>

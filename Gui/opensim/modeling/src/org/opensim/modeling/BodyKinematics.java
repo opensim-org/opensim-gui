@@ -97,8 +97,8 @@ public class BodyKinematics extends Analysis {
     this(opensimActuatorsAnalysesToolsJNI.new_BodyKinematics__SWIG_4(BodyKinematics.getCPtr(aObject), aObject), true);
   }
 
-  public void setStorageCapacityIncrements(int aIncrement) {
-    opensimActuatorsAnalysesToolsJNI.BodyKinematics_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
+  public void setStorageCapacityIncrements(int arg0) {
+    opensimActuatorsAnalysesToolsJNI.BodyKinematics_setStorageCapacityIncrements(swigCPtr, this, arg0);
   }
 
   public Storage getAccelerationStorage() {

@@ -419,6 +419,14 @@ public class ActiveForceLengthCurve extends Function {
   }
 
   /**
+   *  Evaluates the active-force-length curve value and derivative at a<br>
+   * normalized fiber length of 'normFiberLength'. 
+   */
+  public SmoothSegmentedFunction.ValueAndDerivative calcValueAndDerivative(double normFiberLength) {
+    return new SmoothSegmentedFunction.ValueAndDerivative(opensimSimulationJNI.ActiveForceLengthCurve_calcValueAndDerivative(swigCPtr, this, normFiberLength), true);
+  }
+
+  /**
    *  Calculates the derivative of the active-force-length multiplier with<br>
    *     respect to the normalized fiber length.<br>
    *     @param normFiberLength<br>

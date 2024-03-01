@@ -89,8 +89,8 @@ public class InverseDynamics extends Analysis {
     this(opensimActuatorsAnalysesToolsJNI.new_InverseDynamics__SWIG_2(InverseDynamics.getCPtr(aObject), aObject), true);
   }
 
-  public void setStorageCapacityIncrements(int aIncrement) {
-    opensimActuatorsAnalysesToolsJNI.InverseDynamics_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
+  public void setStorageCapacityIncrements(int arg0) {
+    opensimActuatorsAnalysesToolsJNI.InverseDynamics_setStorageCapacityIncrements(swigCPtr, this, arg0);
   }
 
   public Storage getStorage() {

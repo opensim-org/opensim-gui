@@ -25,9 +25,9 @@ package org.opensim.modeling;
  * (connectee) until it is disconnected.<br>
  * <br>
  * For example, a Joint has two Sockets for the parent and child Bodies that<br>
- * it joins. The type for the socket is a PhysicalFrame and any attempt to <br>
+ * it joins. The type for the socket is a PhysicalFrame and any attempt to<br>
  * connect to a non-Body (or frame rigidly attached to a Body) will throw an<br>
- * exception. The connectAt Stage is Topology. That is, the Joint's connection <br>
+ * exception. The connectAt Stage is Topology. That is, the Joint's connection<br>
  * to a Body must be performed at the Topology system stage, and any attempt to<br>
  * change the connection status will invalidate that Stage and above.<br>
  * <br>
@@ -153,8 +153,16 @@ public class AbstractSocket {
    *  Generic access to the connectee. Not all sockets support this method<br>
    * (e.g., the connectee for an Input is not an Object). 
    */
+  public OpenSimObject getConnecteeAsObject(int index) {
+    return new OpenSimObject(opensimCommonJNI.AbstractSocket_getConnecteeAsObject__SWIG_0(swigCPtr, this, index), false);
+  }
+
+  /**
+   *  Generic access to the connectee. Not all sockets support this method<br>
+   * (e.g., the connectee for an Input is not an Object). 
+   */
   public OpenSimObject getConnecteeAsObject() {
-    return new OpenSimObject(opensimCommonJNI.AbstractSocket_getConnecteeAsObject(swigCPtr, this), false);
+    return new OpenSimObject(opensimCommonJNI.AbstractSocket_getConnecteeAsObject__SWIG_1(swigCPtr, this), false);
   }
 
   /**
@@ -210,47 +218,59 @@ public class AbstractSocket {
   }
 
   /**
-   *  %Set connectee path. This function can only be used if this socket is<br>
+   *  Set the connectee path. This function can only be used if this socket is<br>
    * not a list socket. If a connectee reference is set (with connect()) the<br>
    * connectee path is ignored; call disconnect() if you want the socket to be<br>
    * connected using the connectee path.<br>
    * <br>
    * It is preferable to use connect() instead of this function. 
    */
-  public void setConnecteePath(String name) {
-    opensimCommonJNI.AbstractSocket_setConnecteePath__SWIG_0(swigCPtr, this, name);
+  public void setConnecteePath(String path, int index) {
+    opensimCommonJNI.AbstractSocket_setConnecteePath__SWIG_0(swigCPtr, this, path, index);
   }
 
   /**
-   *  %Set connectee path of a connectee among a list of connectees. This<br>
-   * function is used if this socket is a list socket. If a connectee<br>
-   * reference is set (with connect()) the connectee path is ignored; call<br>
-   * disconnect() if you want the socket to be connected using the connectee<br>
-   * name.<br>
+   *  Set the connectee path. This function can only be used if this socket is<br>
+   * not a list socket. If a connectee reference is set (with connect()) the<br>
+   * connectee path is ignored; call disconnect() if you want the socket to be<br>
+   * connected using the connectee path.<br>
    * <br>
    * It is preferable to use connect() instead of this function. 
    */
-  public void setConnecteePath(String name, long ix) {
-    opensimCommonJNI.AbstractSocket_setConnecteePath__SWIG_1(swigCPtr, this, name, ix);
+  public void setConnecteePath(String path) {
+    opensimCommonJNI.AbstractSocket_setConnecteePath__SWIG_1(swigCPtr, this, path);
   }
 
   /**
-   *  Get connectee path. This function can only be used if this socket is<br>
-   *     not a list socket.                                                     
+   *  Get the connectee path. 
+   */
+  public String getConnecteePath(int index) {
+    return opensimCommonJNI.AbstractSocket_getConnecteePath__SWIG_0(swigCPtr, this, index);
+  }
+
+  /**
+   *  Get the connectee path. 
    */
   public String getConnecteePath() {
-    return opensimCommonJNI.AbstractSocket_getConnecteePath__SWIG_0(swigCPtr, this);
+    return opensimCommonJNI.AbstractSocket_getConnecteePath__SWIG_1(swigCPtr, this);
   }
 
   /**
-   *  Get connectee path of a connectee among a list of connectees.         
+   *  Append a connectee path to this socket. Only valid for list sockets. 
    */
-  public String getConnecteePath(long ix) {
-    return opensimCommonJNI.AbstractSocket_getConnecteePath__SWIG_1(swigCPtr, this, ix);
+  public void appendConnecteePath(String path) {
+    opensimCommonJNI.AbstractSocket_appendConnecteePath(swigCPtr, this, path);
   }
 
-  public void appendConnecteePath(String name) {
-    opensimCommonJNI.AbstractSocket_appendConnecteePath(swigCPtr, this, name);
+  /**
+   *  Assign the connectee path to this socket. For single-object sockets,<br>
+   * this overwrites the singular connectee path value. For list sockets, this<br>
+   * appends this path to the list of connectee paths. Use this to update<br>
+   * the connectee path property based on existing connectees generically<br>
+   * (e.g., during serialization). 
+   */
+  public void assignConnecteePath(String path) {
+    opensimCommonJNI.AbstractSocket_assignConnecteePath(swigCPtr, this, path);
   }
 
   /**
@@ -258,6 +278,17 @@ public class AbstractSocket {
    */
   public void clearConnecteePath() {
     opensimCommonJNI.AbstractSocket_clearConnecteePath(swigCPtr, this);
+  }
+
+  /**
+   *  Check to see if the connectee path property is "empty". For<br>
+   * single-object sockets, we check if the default connectee path string is<br>
+   * empty. For list sockets, we check if the list of connectee paths is<br>
+   * empty. Use this if making a connection based on connectee path to check<br>
+   * connectee path validity (e.g., during deserialization). 
+   */
+  public boolean isConnecteePathEmpty() {
+    return opensimCommonJNI.AbstractSocket_isConnecteePathEmpty(swigCPtr, this);
   }
 
   /**
