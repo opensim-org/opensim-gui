@@ -1407,7 +1407,7 @@ public class ModelVisualizationJson extends JSONObject {
         else {
             JSONObject pathpointCommand = (JSONObject) lastCommand.clone();
             if (force.hasVisualPath()){
-                GeometryPath gPath = GeometryPath.safeDownCast(force.getPropertyByName("GeometryPath").getValueAsObject());
+                GeometryPath gPath = GeometryPath.safeDownCast(force.getPropertyByName("path").getValueAsObject());
 
                 pathpointCommand.put("objectUuid", getFirstPathPointUUID4GeometryPath(gPath).toString());
                 commands.add(pathpointCommand);
