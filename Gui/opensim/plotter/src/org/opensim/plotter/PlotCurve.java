@@ -110,7 +110,7 @@ public class PlotCurve {
        int startIndex=xArray.findIndex(plotCurveSettings.getXMin());
        if (startIndex ==-1) // Cut to bounds with data
            startIndex=0;
-       int endIndex=xArray.rfindIndex(plotCurveSettings.getXMax());
+       int endIndex=xArray.findIndex(plotCurveSettings.getXMax());
        if (endIndex ==-1) // Cut to bounds with data
            endIndex=xArray.getSize()-1;
        double[] yFiltered = applyFilters(plotCurveSettings.getFilters(), yArray, startIndex, endIndex);
@@ -252,7 +252,7 @@ public class PlotCurve {
       int startIndex=xArray.findIndex(plotCurveSettings.getXMin());
       if (startIndex ==-1) // Cut to bounds with data
          startIndex=0;
-      int endIndex=xArray.rfindIndex(plotCurveSettings.getXMax());
+      int endIndex=xArray.findIndex(plotCurveSettings.getXMax());
       if (endIndex ==-1) // Cut to bounds with data
          endIndex=yArray.getSize()-1;
       
