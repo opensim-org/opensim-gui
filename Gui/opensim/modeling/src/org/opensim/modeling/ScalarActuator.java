@@ -190,10 +190,6 @@ public class ScalarActuator extends Actuator {
     return opensimSimulationJNI.ScalarActuator_getActuation(swigCPtr, this, State.getCPtr(s), s);
   }
 
-  public void setSpeed(State s, double aspeed) {
-    opensimSimulationJNI.ScalarActuator_setSpeed(swigCPtr, this, State.getCPtr(s), s, aspeed);
-  }
-
   public double getSpeed(State s) {
     return opensimSimulationJNI.ScalarActuator_getSpeed(swigCPtr, this, State.getCPtr(s), s);
   }

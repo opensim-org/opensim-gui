@@ -1044,6 +1044,10 @@ public class Millard2012EquilibriumMuscleIterator {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
   }
 
+  public double getSpeed(State s) {
+    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getSpeed(swigCPtr, this, State.getCPtr(s), s);
+  }
+
   public double getPower(State s) {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getPower(swigCPtr, this, State.getCPtr(s), s);
   }
@@ -1093,14 +1097,6 @@ public class Millard2012EquilibriumMuscleIterator {
 
   public double getActuation(State s) {
     return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getActuation(swigCPtr, this, State.getCPtr(s), s);
-  }
-
-  public void setSpeed(State s, double aspeed) {
-    opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_setSpeed(swigCPtr, this, State.getCPtr(s), s, aspeed);
-  }
-
-  public double getSpeed(State s) {
-    return opensimSimulationJNI.Millard2012EquilibriumMuscleIterator_getSpeed(swigCPtr, this, State.getCPtr(s), s);
   }
 
   public double getMinControl() {
