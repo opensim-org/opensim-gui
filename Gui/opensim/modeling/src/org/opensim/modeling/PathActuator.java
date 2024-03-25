@@ -197,6 +197,10 @@ public class PathActuator extends ScalarActuator {
     return opensimSimulationJNI.PathActuator_getLengtheningSpeed(swigCPtr, this, State.getCPtr(s), s);
   }
 
+  public double getSpeed(State s) {
+    return opensimSimulationJNI.PathActuator_getSpeed(swigCPtr, this, State.getCPtr(s), s);
+  }
+
   public double getPower(State s) {
     return opensimSimulationJNI.PathActuator_getPower(swigCPtr, this, State.getCPtr(s), s);
   }

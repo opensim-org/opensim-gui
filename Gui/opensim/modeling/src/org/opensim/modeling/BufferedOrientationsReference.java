@@ -10,7 +10,7 @@ package org.opensim.modeling;
 
 /**
  * Subclass of OrientationsReference that handles live data by providing a DataQueue<br>
- * that allows clients to push data into and allows the InverseKinematicsSolver to <br>
+ * that allows clients to push data into and allows the InverseKinematicsSolver to<br>
  * draw data from for solving.<br>
  * Ideally this would be templatized, allowing for all Reference classes to leverage it.<br>
  * <br>
@@ -105,8 +105,8 @@ public class BufferedOrientationsReference extends OrientationsReference {
   /**
    *  add passed in values to data procesing Queue 
    */
-  public void putValues(double time, SWIGTYPE_p_SimTK__RowVector_T_SimTK__Rotation_T_SimTK__Real_t_t dataRow) {
-    opensimSimulationJNI.BufferedOrientationsReference_putValues(swigCPtr, this, time, SWIGTYPE_p_SimTK__RowVector_T_SimTK__Rotation_T_SimTK__Real_t_t.getCPtr(dataRow));
+  public void putValues(double time, RowVectorRotation dataRow) {
+    opensimSimulationJNI.BufferedOrientationsReference_putValues(swigCPtr, this, time, RowVectorRotation.getCPtr(dataRow), dataRow);
   }
 
   public double getNextValuesAndTime(SimTKArrayRotation values) {
