@@ -320,20 +320,20 @@ public class opensimMoco {
    *  In general, this utility needs getRecordValues() to report the<br>
    *  following force and torque information at the specified indices:<br>
    * <br>
-   *  index - component (body)<br>
-   *  ------------------------<br>
-   *      0 - force-x (foot)<br>
-   *      1 - force-y (foot)<br>
-   *      2 - force-z (foot)<br>
-   *      3 - torque-x (foot)<br>
-   *      4 - torque-y (foot)<br>
-   *      5 - torque-z (foot)<br>
-   *      6 - force-x (contact plane)<br>
-   *      7 - force-y (contact plane)<br>
-   *      8 - force-z (contact plane)<br>
-   *      9 - torque-x (contact plane)<br>
-   *     10 - torque-y (contact plane)<br>
-   *     11 - torque-z (contact plane)<br>
+   *  index | component (body)<br>
+   *  ----- | ----------------<br>
+   *      0 | force-x (foot)<br>
+   *      1 | force-y (foot)<br>
+   *      2 | force-z (foot)<br>
+   *      3 | torque-x (foot)<br>
+   *      4 | torque-y (foot)<br>
+   *      5 | torque-z (foot)<br>
+   *      6 | force-x (contact plane)<br>
+   *      7 | force-y (contact plane)<br>
+   *      8 | force-z (contact plane)<br>
+   *      9 | torque-x (contact plane)<br>
+   *     10 | torque-y (contact plane)<br>
+   *     11 | torque-z (contact plane)<br>
    * <br>
    *  
    */

@@ -131,7 +131,7 @@ public class MocoOrientationTrackingGoal extends MocoGoal {
   }
 
   /**
-   *   TimeSeriesTable_&lt;SimTK::Rotation&gt;&amp; ref) 
+   *   TimeSeriesTable_&lt;SimTK::Rotation_<double&gt;&gt;&amp; ref) 
    */
   public void setRotationReference(TimeSeriesTableQuaternion ref) {
     opensimMocoJNI.MocoOrientationTrackingGoal_setRotationReference__SWIG_1(swigCPtr, this, TimeSeriesTableQuaternion.getCPtr(ref), ref);

@@ -71,8 +71,7 @@ order of the value and speed arguments must match the order in the
 the tension in the path by the moment arms. Therefore, this class only
 applies mobility (i.e., generalized) forces to the model.
 
-References
-----------
+# References
 - [1] Meyer AJ, Patten C, Fregly BJ (2017) "Lower extremity EMG-driven
       modeling of walking with automated adjustment of musculoskeletal
       geometry." PLoS ONE 12(7): e0179698.

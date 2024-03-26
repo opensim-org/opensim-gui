@@ -9,7 +9,7 @@
 package org.opensim.modeling;
 
 /**
- *  Invoke SimulationUtilities::appendCoupledCoordinateValues() on the table.
+ *  Invoke SimulationUtilities::appendCoupledCoordinateValues() on the table. 
  */
 public class TabOpAppendCoupledCoordinateValues extends TableOperator {
   private transient long swigCPtr;

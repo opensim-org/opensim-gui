@@ -21,7 +21,7 @@ package org.opensim.modeling;
  * <br>
  *  
 \frac{1}{dm} \int_{t_i}^{t_f} 
-    w_v\beta((\frac{1}{s} (\ln (1 + \exp (s\betav))))^p) ~dt
+    w_v \beta((\frac{1}{s} (\ln (1 + \exp (s \beta v))))^p) ~dt
 <br>
  * We use the following notation:<br>
  * -   d : displacement of the system, if `divide_by_displacement` is<br>
@@ -30,8 +30,8 @@ package org.opensim.modeling;
  *   true; 1 otherwise.<br>
  * -   v : the output variable of choice.<br>
  * -   w_v : the weight for output variable   v .<br>
- * -   \beta : the approximate extremum to be taken (== -1 for<br>
- *   minimum; == 1 for maximum).<br>
+ * -   \beta : the approximate extremum to be taken (  \beta  == -1 for<br>
+ *   minimum;   \beta  == 1 for maximum).<br>
  * -   s : the smoothing factor for approximating the extremum. With<br>
  *     s  == 1 the approximation is closer to the true extremum taken.<br>
  *   For   v  with potentially large magnitudes (&gt; 2000) during a simulation<br>

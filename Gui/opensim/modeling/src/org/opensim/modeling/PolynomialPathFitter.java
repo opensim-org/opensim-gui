@@ -27,8 +27,7 @@ package org.opensim.modeling;
  *       directory to which the results are written can be specified using the<br>
  *      `setOutputDirectory` method.<br>
  * <br>
- * Settings<br>
- * --------<br>
+ * # Settings<br>
  * Various settings can be adjusted to control the path fitting process. The<br>
  * `setMomentArmsThreshold` method determines whether or not a path depends on a<br>
  * model coordinate. In other words, the absolute value the moment arm of a with<br>
@@ -45,10 +44,10 @@ package org.opensim.modeling;
  * lengths computed from the original model paths and the fitted polynomial<br>
  * paths. The `setNumSamplesPerFrame` method specifies the number of samples<br>
  * taken per time frame in the coordinate values table used to fit each path.<br>
- * The `setParallel` method specifies the number of threads used to parallelize<br>
- * the path fitting process. The `setLatinHypercubeAlgorithm` method specifies<br>
- * the Latin hypercube sampling algorithm used to sample coordinate values for<br>
- * path fitting.<br>
+ * The `setNumParallelThreads` method specifies the number of threads used to <br>
+ * parallelize the path fitting process. The `setLatinHypercubeAlgorithm` method <br>
+ * specifies the Latin hypercube sampling algorithm used to sample coordinate <br>
+ * values for path fitting.<br>
  * <br>
  * The default settings are as follows:<br>
  * <br>
@@ -67,8 +66,7 @@ package org.opensim.modeling;
  *       models with larger or smaller anatomical measures (e.g., dinosaur<br>
  *       models).<br>
  * <br>
- * Usage<br>
- * -----<br>
+ * # Usage<br>
  * The most basic usage of `PolynomialPathFitter` requires the user to provide<br>
  * a model and reference trajectory. The model should contain at least one path<br>
  * object derived from `AbstractGeometryPath` and should not contain any<br>
@@ -99,8 +97,7 @@ fitter.setNumSamplesPerFrame(50);
 fitter.run();
 }<br>
  * <br>
- * Recommendations<br>
- * ---------------<br>
+ * # Recommendations<br>
  * Information from each step of the path fitting process is logged to the<br>
  * console, provided that you have set the OpenSim::Logger to level "info" or<br>
  * greater. Warnings are printed if the number of samples is likely insufficient<br>
@@ -482,7 +479,7 @@ public class PolynomialPathFitter extends OpenSimObject {
   }
 
   /**
-   *  
+   *   numThreads)
    */
   public int getNumParallelThreads() {
     return opensimActuatorsAnalysesToolsJNI.PolynomialPathFitter_getNumParallelThreads(swigCPtr, this);
