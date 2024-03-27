@@ -62,7 +62,7 @@ public final class EditPreferencesAction extends CallableSystemAction {
                                                 @Override
                                                 public void actionPerformed(ActionEvent ae) {
                                                     if(ae.getSource().equals(helpBtn)) {
-                                                        BrowserLauncher.openURL("https://simtk-confluence.stanford.edu/display/OpenSim40/User+Preferences");
+                                                        BrowserLauncher.openURL("https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim40/pages/53089896/User+Preferences");
                                                     }
                                                 }
                                             });

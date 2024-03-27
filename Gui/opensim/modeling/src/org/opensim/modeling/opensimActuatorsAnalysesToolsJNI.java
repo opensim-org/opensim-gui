@@ -34,7 +34,7 @@ public class opensimActuatorsAnalysesToolsJNI {
           String javaHome = System.getProperties().getProperty("java.home");
           boolean inMatlab = javaHome.toLowerCase().indexOf("matlab") >= 0;
           if (inMatlab) {
-              msg +=  "\nSee https://simtk-confluence.stanford.edu/display/OpenSim40/Scripting+with+Matlab";
+              msg +=  "\nSee https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim40/pages/53089380/Scripting+with+Matlab";
           }
           
           System.out.println(msg);

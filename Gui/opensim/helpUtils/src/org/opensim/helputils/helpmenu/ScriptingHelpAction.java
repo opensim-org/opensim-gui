@@ -39,7 +39,7 @@ import org.opensim.utils.TheApp;
 public final class ScriptingHelpAction extends CallableSystemAction {
 
     public void performAction() {
-        BrowserLauncher.openURL("https://simtk-confluence.stanford.edu/display/OpenSim40/Scripting");
+        BrowserLauncher.openURL("https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim40/pages/53089359/Scripting");
     }
 
     public String getName() {

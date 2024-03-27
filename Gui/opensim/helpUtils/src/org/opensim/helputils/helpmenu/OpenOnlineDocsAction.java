@@ -32,7 +32,7 @@ import org.opensim.utils.BrowserLauncher;
 public final class OpenOnlineDocsAction extends CallableSystemAction {
 
     public void performAction() {
-       BrowserLauncher.openURL("https://simtk-confluence.stanford.edu/display/OpenSim40/OpenSim+Documentation");
+       BrowserLauncher.openURL("https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim40/overview");
     }
 
     public String getName() {
