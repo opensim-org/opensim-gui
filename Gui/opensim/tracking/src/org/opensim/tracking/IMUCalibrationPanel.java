@@ -70,7 +70,7 @@ public class IMUCalibrationPanel extends BaseToolPanel implements Observer {
       helpButton.addActionListener(new ActionListener() {
 
             public void actionPerformed(ActionEvent ae) {
-                BrowserLauncher.openURL("https://simtk-confluence.stanford.edu/display/OpenSim40/IMU+Placer");
+                BrowserLauncher.openURL("https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim40/pages/53084382/IMU+Placer");
             }
       });
 

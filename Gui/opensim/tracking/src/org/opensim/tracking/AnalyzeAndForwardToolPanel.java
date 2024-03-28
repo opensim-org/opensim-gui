@@ -97,43 +97,43 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
              modeName = "forward dynamics tool"; 
              toolModel = new ForwardToolModel(model);  
 
-             helpUrl = "Forward+Dynamics";
+             helpUrl = "53089629/Forward+Dynamics";
              break;
          case InverseDynamics: 
              modeName = "inverse dynamics tool"; 
              toolModel = new AnalyzeToolModel(model, mode); 
             
-             helpUrl = "Inverse+Dynamics";
+             helpUrl = "53090074/Inverse+Dynamics";
              break;
          case CMC: 
              modeName = "CMC tool"; 
              toolModel = new CMCToolModel(model); 
             
-             helpUrl = "Computed+Muscle+Control";
+             helpUrl = "53089719/Computed+Muscle+Control";
             break;
          case RRA: 
              modeName = "RRA tool"; 
              toolModel = new RRAToolModel(model); 
              
-             helpUrl = "Residual+Reduction+Algorithm";
+             helpUrl = "53089669/Residual+Reduction+Algorithm";
              break;
          case Analyze: 
              modeName = "analyze tool"; 
              toolModel = new AnalyzeToolModel(model, mode); 
              
-             helpUrl = "Analyses";
+             helpUrl = "53089589/Analyses";
              break;
          case StaticOptimization:  
              modeName = "static optimization tool"; 
              toolModel = new AnalyzeToolModel(model, mode); 
             
-             helpUrl = "Static+Optimization";
+             helpUrl = "53090088/Static+Optimization";
              break;
       }
                          
       helpButton.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent ae) {
-          String path = "https://simtk-confluence.stanford.edu/display/OpenSim40/" + helpUrl;
+          String path = "https://opensimconfluence.atlassian.net/wiki/spaces/OpenSim40/pages/" + helpUrl;
           BrowserLauncher.openURL(path);
       }
       });
