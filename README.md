@@ -7,7 +7,7 @@
 <!-- Badges -->
 <p align=center>
     <a href="https://github.com/opensim-org/opensim-gui/actions">
-        <img src="https://github.com/opensim-org/opensim-gui/workflows/opensim-application/badge.svg" alt="Continuous Integration Badge">
+        <img src="https://github.com/opensim-org/opensim-gui/actions/workflows/continuous-integration.yml/badge.svg" alt="Continuous Integration Badge">
     </a>
     <a href="https://github.com/opensim-org/opensim-gui/releases">
         <img src="https://img.shields.io/github/v/release/opensim-org/opensim-gui?include_prereleases" alt="Releases Badge">

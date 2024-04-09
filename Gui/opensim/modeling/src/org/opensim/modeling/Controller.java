@@ -12,13 +12,38 @@ package org.opensim.modeling;
  * Controller is an abstract ModelComponent that defines the interface for   <br>
  * an OpenSim Controller. A controller computes and sets the values of the  <br>
  * controls for the actuators under its control.<br>
- * The defining method of a Controller is its computeControls() method.<br>
+ * <br>
+ * The defining method of a Controller is its computeControls() method. All<br>
+ * concrete controllers must implement this method.<br>
  * @see computeControls()<br>
  * <br>
- * Note: Controllers currently do not use the Socket mechanism to locate <br>
- * and connect to the Actuators that Controllers depend on. As a result,<br>
- * for now, Controllers do not support controlling multiple actuators with <br>
- * the same name.<br>
+ * Actuators can be connected to a Controller via the list Socket `actuators`.<br>
+ * Connection can be made via the `addActuator()` convenience method or through<br>
+ * the Socket directly:<br>
+ * <br>
+ * {@code 
+// Add an actuator to the controller.
+const auto& actuator = model.getComponent<Actuator>("/path/to/actuator");
+controller.addActuator(actuator);
+
+// Connect an actuator to the controller via the actuators Socket.
+controller.appendSocketConnectee_actuators(actuator);
+}<br>
+ * <br>
+ * Multiple actuators can be connected to a Controller via the `setActuators()`<br>
+ * convenience methods:<br>
+ * <br>
+ * {@code 
+// Add a Model's Set of Actuators to the controller.
+controller.setActuators(model.getActuators());
+
+// Add a ComponentList of Actuators to the controller.
+controller.setActuators(model.getComponentList<Actuator>());
+}<br>
+ * <br>
+ * Note: Prior to OpenSim 4.6, controlled actuators were managed via the list<br>
+ *       Property `actuator_list`. This interface is no longer supported, all<br>
+ *       actuators must be connected via the `actuators` list Socket.<br>
  * <br>
  * @author Ajay Seth
  */
@@ -88,7 +113,7 @@ public class Controller extends ModelComponent {
    *  Controller is enabled (active) by default.<br>
    *     NOTE: Prior to OpenSim 4.0, this property was named **isDisabled**.<br>
    *           If **isDisabled** is **true**, **enabled** is **false**.<br>
-   *           If **isDisabled** is **false**, **enabled** is **true**.            
+   *           If **isDisabled** is **false**, **enabled** is **true**. 
    */
   public void copyProperty_enabled(Controller source) {
     opensimSimulationJNI.Controller_copyProperty_enabled(swigCPtr, this, Controller.getCPtr(source), source);
@@ -126,28 +151,16 @@ public class Controller extends ModelComponent {
     opensimSimulationJNI.Controller_set_enabled__SWIG_1(swigCPtr, this, value);
   }
 
-  public void copyProperty_actuator_list(Controller source) {
-    opensimSimulationJNI.Controller_copyProperty_actuator_list(swigCPtr, this, Controller.getCPtr(source), source);
+  public void setPropertyIndex_socket_actuators(SWIGTYPE_p_OpenSim__PropertyIndex value) {
+    opensimSimulationJNI.Controller_PropertyIndex_socket_actuators_set(swigCPtr, this, SWIGTYPE_p_OpenSim__PropertyIndex.getCPtr(value));
   }
 
-  public String get_actuator_list(int i) {
-    return opensimSimulationJNI.Controller_get_actuator_list(swigCPtr, this, i);
+  public SWIGTYPE_p_OpenSim__PropertyIndex getPropertyIndex_socket_actuators() {
+    return new SWIGTYPE_p_OpenSim__PropertyIndex(opensimSimulationJNI.Controller_PropertyIndex_socket_actuators_get(swigCPtr, this), true);
   }
 
-  public SWIGTYPE_p_std__string upd_actuator_list(int i) {
-    return new SWIGTYPE_p_std__string(opensimSimulationJNI.Controller_upd_actuator_list(swigCPtr, this, i), false);
-  }
-
-  public void set_actuator_list(int i, String value) {
-    opensimSimulationJNI.Controller_set_actuator_list(swigCPtr, this, i, value);
-  }
-
-  public int append_actuator_list(String value) {
-    return opensimSimulationJNI.Controller_append_actuator_list(swigCPtr, this, value);
-  }
-
-  public void constructProperty_actuator_list() {
-    opensimSimulationJNI.Controller_constructProperty_actuator_list(swigCPtr, this);
+  public void appendSocketConnectee_actuators(OpenSimObject object) {
+    opensimSimulationJNI.Controller_appendSocketConnectee_actuators(swigCPtr, this, OpenSimObject.getCPtr(object), object);
   }
 
   /**
@@ -167,31 +180,21 @@ public class Controller extends ModelComponent {
   }
 
   /**
-   *  replace the current set of actuators with the provided set 
+   *  Replace the current set of actuators with the provided set. 
    */
   public void setActuators(SetActuators actuators) {
-    opensimSimulationJNI.Controller_setActuators(swigCPtr, this, SetActuators.getCPtr(actuators), actuators);
+    opensimSimulationJNI.Controller_setActuators__SWIG_0(swigCPtr, this, SetActuators.getCPtr(actuators), actuators);
+  }
+
+  public void setActuators(ActuatorList actuators) {
+    opensimSimulationJNI.Controller_setActuators__SWIG_1(swigCPtr, this, ActuatorList.getCPtr(actuators), actuators);
   }
 
   /**
-   *  add to the current set of actuators 
+   *  Add to the current set of actuators. 
    */
   public void addActuator(Actuator actuator) {
     opensimSimulationJNI.Controller_addActuator(swigCPtr, this, Actuator.getCPtr(actuator), actuator);
-  }
-
-  /**
-   *  get a const reference to the current set of const actuators 
-   */
-  public SWIGTYPE_p_OpenSim__SetT_OpenSim__Actuator_const_OpenSim__Object_t getActuatorSet() {
-    return new SWIGTYPE_p_OpenSim__SetT_OpenSim__Actuator_const_OpenSim__Object_t(opensimSimulationJNI.Controller_getActuatorSet(swigCPtr, this), false);
-  }
-
-  /**
-   *  get a writable reference to the set of const actuators for this controller 
-   */
-  public SWIGTYPE_p_OpenSim__SetT_OpenSim__Actuator_const_OpenSim__Object_t updActuators() {
-    return new SWIGTYPE_p_OpenSim__SetT_OpenSim__Actuator_const_OpenSim__Object_t(opensimSimulationJNI.Controller_updActuators(swigCPtr, this), false);
   }
 
   /**
@@ -206,8 +209,18 @@ public class Controller extends ModelComponent {
     opensimSimulationJNI.Controller_computeControls(swigCPtr, this, State.getCPtr(s), s, Vector.getCPtr(controls), controls);
   }
 
+  /**
+   *  Get the number of controls this controller computes. 
+   */
   public int getNumControls() {
     return opensimSimulationJNI.Controller_getNumControls(swigCPtr, this);
+  }
+
+  /**
+   *  Get the number of actuators that this controller is connected to. 
+   */
+  public int getNumActuators() {
+    return opensimSimulationJNI.Controller_getNumActuators(swigCPtr, this);
   }
 
 }

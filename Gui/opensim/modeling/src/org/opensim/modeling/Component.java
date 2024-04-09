@@ -604,11 +604,74 @@ public class Component extends OpenSimObject {
   }
    */
   public OpenSimObject getConnectee(String name) {
-    return new OpenSimObject(opensimCommonJNI.Component_getConnectee(swigCPtr, this, name), false);
+    return new OpenSimObject(opensimCommonJNI.Component_getConnectee__SWIG_2(swigCPtr, this, name), false);
+  }
+
+  /**
+   *  Get the connectee at the provided index as an Object. This means you<br>
+   * will not have access to the methods on the concrete connectee. This is the<br>
+   * method you must use in scripts to access the connectee.<br>
+   * <br>
+   * Example:<br>
+   * {@code 
+  const Object& obj = controller.getConnectee("actuators", 1);
+  obj.getName(); // method on Object works.
+  obj.getDefaultControls(); // error: not available.
+  }<br>
+   * <br>
+   * In MATLAB, if you want the concrete type, you need to downcast the<br>
+   * Object. Here is an example where you know the "actuators" are Actuators:<br>
+   * {@code 
+  actu = controller.getConnectee('actuators', 1);
+  controls = Actuator.safeDownCast(f).getDefaultControls();
+  }<br>
+   * <br>
+   * Exception: in Python, you will get the concrete type (in most cases):<br>
+   * {@code 
+  actu = controller.getConnectee("actuators", 1);
+  controls = actu.getDefaultControls() # works (if 'actu' is an Actuator)
+  }
+   */
+  public OpenSimObject getConnectee(String name, int index) {
+    return new OpenSimObject(opensimCommonJNI.Component_getConnectee__SWIG_3(swigCPtr, this, name, index), false);
+  }
+
+  /**
+   * Returns a pointer to the AbstractSocket with a given socket name, or `nullptr`<br>
+   * if the socket with the given name does not exist on the component.<br>
+   * <br>
+   * See `getSocket()` for more details about how the socket is looked up.<br>
+   * <br>
+   * <b>C++ example</b><br>
+   * {@code 
+  if (const AbstractSocket* s = component.tryGetSocket("frame")) {
+      // do something with *s
+  }
+  else {
+      // handle the no-socket-by-that-name case
+  }
+  }
+   */
+  public AbstractSocket tryGetSocket(String name) {
+    long cPtr = opensimCommonJNI.Component_tryGetSocket(swigCPtr, this, name);
+    return (cPtr == 0) ? null : new AbstractSocket(cPtr, false);
   }
 
   public AbstractSocket getSocket(String name) {
     return new AbstractSocket(opensimCommonJNI.Component_getSocket(swigCPtr, this, name), false);
+  }
+
+  /**
+   * Returns a writable pointer to the AbstractSocket with a given socket<br>
+   * name, or `nullptr` if the socket with the given name does not exist<br>
+   * on the component.<br>
+   * <br>
+   * See `tryGetSocket` for usage example<br>
+   * See `getSocket`/`updSocket` for other internal details
+   */
+  public AbstractSocket tryUpdSocket(String name) {
+    long cPtr = opensimCommonJNI.Component_tryUpdSocket(swigCPtr, this, name);
+    return (cPtr == 0) ? null : new AbstractSocket(cPtr, false);
   }
 
   /**
@@ -698,6 +761,20 @@ public class Component extends OpenSimObject {
   }
 
   /**
+   * If it exists on the component, returns a pointer to the named `Output`; otherwise,<br>
+   * returns a `nullptr`.<br>
+   * <br>
+   * Related: `getOutput`<br>
+   * <br>
+   * @param name  the name the `Output` to find<br>
+   * @return if it exists, a pointer to the `Output`; otherwise, `nullptr`
+   */
+  public AbstractOutput tryGetOutput(String name) {
+    long cPtr = opensimCommonJNI.Component_tryGetOutput(swigCPtr, this, name);
+    return (cPtr == 0) ? null : new AbstractOutput(cPtr, false);
+  }
+
+  /**
    * Get the Output provided by this Component by name.<br>
    * <br>
    * <b>C++ example:</b> get an Output from a Component in a model<br>
@@ -710,6 +787,20 @@ public class Component extends OpenSimObject {
    */
   public AbstractOutput getOutput(String name) {
     return new AbstractOutput(opensimCommonJNI.Component_getOutput(swigCPtr, this, name), false);
+  }
+
+  /**
+   * If it exists on the component returns a writable pointer to the named `Output`; otherwise,<br>
+   * returns a `nullptr`<br>
+   * <br>
+   * Related: `updOutput`<br>
+   * <br>
+   * @param name  the name of the `Output` to find<br>
+   * @return if it exists, a writable pointer to the `Output`; otherwise, `nullptr`
+   */
+  public AbstractOutput tryUpdOutput(String name) {
+    long cPtr = opensimCommonJNI.Component_tryUpdOutput(swigCPtr, this, name);
+    return (cPtr == 0) ? null : new AbstractOutput(cPtr, false);
   }
 
   /**

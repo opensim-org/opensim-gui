@@ -355,8 +355,8 @@ public class Storage extends StorageInterface {
     return opensimCommonJNI.Storage_getStepInterval(swigCPtr, this);
   }
 
-  public void setCapacityIncrement(int aIncrement) {
-    opensimCommonJNI.Storage_setCapacityIncrement(swigCPtr, this, aIncrement);
+  public void setCapacityIncrement(int arg0) {
+    opensimCommonJNI.Storage_setCapacityIncrement(swigCPtr, this, arg0);
   }
 
   public int getCapacityIncrement() {

@@ -93,8 +93,8 @@ public class Actuation extends Analysis {
     this(opensimActuatorsAnalysesToolsJNI.new_Actuation__SWIG_3(Actuation.getCPtr(aObject), aObject), true);
   }
 
-  public void setStorageCapacityIncrements(int aIncrement) {
-    opensimActuatorsAnalysesToolsJNI.Actuation_setStorageCapacityIncrements(swigCPtr, this, aIncrement);
+  public void setStorageCapacityIncrements(int arg0) {
+    opensimActuatorsAnalysesToolsJNI.Actuation_setStorageCapacityIncrements(swigCPtr, this, arg0);
   }
 
   public Storage getForceStorage() {

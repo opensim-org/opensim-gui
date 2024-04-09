@@ -6,7 +6,7 @@ request related to the change, then we may provide the commit.
 
 v4.6
 ======
-
+- Fix issue [#1494](https://github.com/opensim-org/opensim-gui/issues/1494): Changing muscle path color throws exception.
 
 v4.5
 ======

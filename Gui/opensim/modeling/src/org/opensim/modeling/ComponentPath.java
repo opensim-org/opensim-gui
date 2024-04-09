@@ -66,6 +66,13 @@ public class ComponentPath {
   }
 
   /**
+   * Returns the root component path (i.e. "/")
+   */
+  public static ComponentPath root() {
+    return new ComponentPath(opensimCommonJNI.ComponentPath_root(), true);
+  }
+
+  /**
    * Default constructor that constructs an empty path ("").
    */
   public ComponentPath() {
@@ -75,8 +82,8 @@ public class ComponentPath {
   /**
    * Construct a ComponentPath from a path string (e.g. "/a/b/component").
    */
-  public ComponentPath(String path) {
-    this(opensimCommonJNI.new_ComponentPath__SWIG_1(path), true);
+  public ComponentPath(String arg0) {
+    this(opensimCommonJNI.new_ComponentPath__SWIG_1(arg0), true);
   }
 
   /**
@@ -86,6 +93,13 @@ public class ComponentPath {
    */
   public ComponentPath(StdVectorString pathVec, boolean isAbsolute) {
     this(opensimCommonJNI.new_ComponentPath__SWIG_2(StdVectorString.getCPtr(pathVec), pathVec, isAbsolute), true);
+  }
+
+  /**
+   * Clears the content of the ComponentPath
+   */
+  public void clear() {
+    opensimCommonJNI.ComponentPath_clear(swigCPtr, this);
   }
 
   public char getSeparator() {
@@ -162,6 +176,13 @@ public class ComponentPath {
    */
   public String toString() {
     return opensimCommonJNI.ComponentPath_toString(swigCPtr, this);
+  }
+
+  /**
+   * Returns true if the path is empty
+   */
+  public boolean empty() {
+    return opensimCommonJNI.ComponentPath_empty(swigCPtr, this);
   }
 
   /**

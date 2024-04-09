@@ -521,7 +521,57 @@ public class ActuatorIterator {
   }
    */
   public OpenSimObject getConnectee(String name) {
-    return new OpenSimObject(opensimSimulationJNI.ActuatorIterator_getConnectee(swigCPtr, this, name), false);
+    return new OpenSimObject(opensimSimulationJNI.ActuatorIterator_getConnectee__SWIG_2(swigCPtr, this, name), false);
+  }
+
+  /**
+   *  Get the connectee at the provided index as an Object. This means you<br>
+   * will not have access to the methods on the concrete connectee. This is the<br>
+   * method you must use in scripts to access the connectee.<br>
+   * <br>
+   * Example:<br>
+   * {@code 
+  const Object& obj = controller.getConnectee("actuators", 1);
+  obj.getName(); // method on Object works.
+  obj.getDefaultControls(); // error: not available.
+  }<br>
+   * <br>
+   * In MATLAB, if you want the concrete type, you need to downcast the<br>
+   * Object. Here is an example where you know the "actuators" are Actuators:<br>
+   * {@code 
+  actu = controller.getConnectee('actuators', 1);
+  controls = Actuator.safeDownCast(f).getDefaultControls();
+  }<br>
+   * <br>
+   * Exception: in Python, you will get the concrete type (in most cases):<br>
+   * {@code 
+  actu = controller.getConnectee("actuators", 1);
+  controls = actu.getDefaultControls() # works (if 'actu' is an Actuator)
+  }
+   */
+  public OpenSimObject getConnectee(String name, int index) {
+    return new OpenSimObject(opensimSimulationJNI.ActuatorIterator_getConnectee__SWIG_3(swigCPtr, this, name, index), false);
+  }
+
+  /**
+   * Returns a pointer to the AbstractSocket with a given socket name, or `nullptr`<br>
+   * if the socket with the given name does not exist on the component.<br>
+   * <br>
+   * See `getSocket()` for more details about how the socket is looked up.<br>
+   * <br>
+   * <b>C++ example</b><br>
+   * {@code 
+  if (const AbstractSocket* s = component.tryGetSocket("frame")) {
+      // do something with *s
+  }
+  else {
+      // handle the no-socket-by-that-name case
+  }
+  }
+   */
+  public AbstractSocket tryGetSocket(String name) {
+    long cPtr = opensimSimulationJNI.ActuatorIterator_tryGetSocket(swigCPtr, this, name);
+    return (cPtr == 0) ? null : new AbstractSocket(cPtr, false);
   }
 
   public AbstractSocket getSocket(String name) {
@@ -575,6 +625,20 @@ public class ActuatorIterator {
    */
   public AbstractInput getInput(String name) {
     return new AbstractInput(opensimSimulationJNI.ActuatorIterator_getInput(swigCPtr, this, name), false);
+  }
+
+  /**
+   * If it exists on the component, returns a pointer to the named `Output`; otherwise,<br>
+   * returns a `nullptr`.<br>
+   * <br>
+   * Related: `getOutput`<br>
+   * <br>
+   * @param name  the name the `Output` to find<br>
+   * @return if it exists, a pointer to the `Output`; otherwise, `nullptr`
+   */
+  public AbstractOutput tryGetOutput(String name) {
+    long cPtr = opensimSimulationJNI.ActuatorIterator_tryGetOutput(swigCPtr, this, name);
+    return (cPtr == 0) ? null : new AbstractOutput(cPtr, false);
   }
 
   /**

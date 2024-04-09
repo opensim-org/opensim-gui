@@ -598,6 +598,14 @@ public class ForceVelocityCurve extends Function {
   }
 
   /**
+   *  Evaluates the force-velocity curve value and derivative at a normalized<br>
+   *     fiber velocity of 'normFiberVelocity'. 
+   */
+  public SmoothSegmentedFunction.ValueAndDerivative calcValueAndDerivative(double normFiberVelocity) {
+    return new SmoothSegmentedFunction.ValueAndDerivative(opensimSimulationJNI.ForceVelocityCurve_calcValueAndDerivative(swigCPtr, this, normFiberVelocity), true);
+  }
+
+  /**
    *  Calculates the derivative of the force-velocity multiplier with respect<br>
    *     to the normalized fiber velocity.<br>
    *     @param normFiberVelocity<br>

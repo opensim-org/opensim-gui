@@ -12,6 +12,11 @@ package org.opensim.modeling;
  * PrescribedController is a concrete Controller that specifies functions that <br>
  * prescribe the control values of its actuators as a function of time.<br>
  * <br>
+ * Note: Prior to OpenSim 4.6, PrescribedController support setting a prescribed<br>
+ *       control based on the actuator's index in the `ControlFunctions`<br>
+ *       property. This interface is deprecated and will be removed in a future<br>
+ *       release.<br>
+ * <br>
  * @author Ajay Seth
  */
 public class PrescribedController extends Controller {
@@ -86,9 +91,6 @@ public class PrescribedController extends Controller {
     return opensimSimulationJNI.PrescribedController_getConcreteClassName(swigCPtr, this);
   }
 
-  /**
-   *  FunctionSet of prescribed controls associated with each actuator  
-   */
   public void copyProperty_ControlFunctions(PrescribedController source) {
     opensimSimulationJNI.PrescribedController_copyProperty_ControlFunctions(swigCPtr, this, PrescribedController.getCPtr(source), source);
   }
@@ -125,9 +127,6 @@ public class PrescribedController extends Controller {
     opensimSimulationJNI.PrescribedController_set_ControlFunctions__SWIG_1(swigCPtr, this, FunctionSet.getCPtr(value), value);
   }
 
-  /**
-   *  (Optional) prescribed controls from a storage file  
-   */
   public void copyProperty_controls_file(PrescribedController source) {
     opensimSimulationJNI.PrescribedController_copyProperty_controls_file(swigCPtr, this, PrescribedController.getCPtr(source), source);
   }
@@ -168,9 +167,6 @@ public class PrescribedController extends Controller {
     opensimSimulationJNI.PrescribedController_set_controls_file__SWIG_1(swigCPtr, this, value);
   }
 
-  /**
-   *  (Optional) interpolation method for controls in storage.  
-   */
   public void copyProperty_interpolation_method(PrescribedController source) {
     opensimSimulationJNI.PrescribedController_copyProperty_interpolation_method(swigCPtr, this, PrescribedController.getCPtr(source), source);
   }
@@ -249,23 +245,19 @@ public class PrescribedController extends Controller {
   }
 
   /**
-   *  Assign a prescribed control function for the desired actuator identified <br>
-   *  by its index. Controller takes ownership of the function.<br>
-   *  @param index                the actuator's index in the controller's set<br>
+   *  Assign a prescribed control function for the desired actuator identified<br>
+   *  by the provided label. The label can be either the name of the actuator,<br>
+   *  or the absolute path to the actuator in the model. Controller takes<br>
+   *  ownership of the function.<br>
+   *  @param actuLabel            label for the actuator in the controller<br>
    *  @param prescribedFunction   the actuator's control function
    */
-  public void prescribeControlForActuator_private(int index, Function prescribedFunction) {
-    opensimSimulationJNI.PrescribedController_prescribeControlForActuator_private__SWIG_0(swigCPtr, this, index, Function.getCPtr(prescribedFunction), prescribedFunction);
+  public void prescribeControlForActuator_private(String actuLabel, Function prescribedFunction) {
+    opensimSimulationJNI.PrescribedController_prescribeControlForActuator_private__SWIG_0(swigCPtr, this, actuLabel, Function.getCPtr(prescribedFunction), prescribedFunction);
   }
 
-  /**
-   *  Assign a prescribed control function for the desired actuator identified<br>
-   *  by its name. Controller takes ownership of the function.<br>
-   *  @param actName                the actuator's name in the controller's set<br>
-   *  @param prescribedFunction     the actuator's control function
-   */
-  public void prescribeControlForActuator_private(String actName, Function prescribedFunction) {
-    opensimSimulationJNI.PrescribedController_prescribeControlForActuator_private__SWIG_1(swigCPtr, this, actName, Function.getCPtr(prescribedFunction), prescribedFunction);
+  public void prescribeControlForActuator_private(int index, Function prescribedFunction) {
+    opensimSimulationJNI.PrescribedController_prescribeControlForActuator_private__SWIG_1(swigCPtr, this, index, Function.getCPtr(prescribedFunction), prescribedFunction);
   }
 
 }
