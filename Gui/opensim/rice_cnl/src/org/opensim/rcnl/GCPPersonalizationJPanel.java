@@ -434,7 +434,8 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
        motionFilePath.setFileName(gcpPersonalizationToolModel.getInputMotionFile());
        grfFilePath.setFileName(gcpPersonalizationToolModel.geInputGRFFile());
        addGCPSurfaceButton.setEnabled(grfFilePath.getFileIsValid() && grfFilePath.getFileName().length()>0);
-       gcpListModel = new GCPSurfaceListModel(gcpPersonalizationToolModel.getGCPContactSurfaceSet());
+       surfaceListProp = gcpPersonalizationToolModel.getGCPContactSurfaceSet();
+       gcpListModel = new GCPSurfaceListModel(surfaceListProp);
        GCPContactSurfaceList.setModel(gcpListModel);
     }
 
