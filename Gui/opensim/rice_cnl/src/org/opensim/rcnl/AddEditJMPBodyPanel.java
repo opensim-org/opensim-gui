@@ -53,7 +53,7 @@ public class AddEditJMPBodyPanel extends javax.swing.JPanel {
         initComponents();
         jComboBoxBodies.setModel(cbm);
 
-        toScaleProp = jmpBodyTask.getPropertyByName("scale_bodies");
+        toScaleProp = jmpBodyTask.getPropertyByName("scale_body");
         scale_bod = PropertyBoolList.getAs(toScaleProp).getValue(0);
         
         moveMarkersProp = jmpBodyTask.getPropertyByName("move_markers");
