@@ -5,6 +5,7 @@
  */
 package org.opensim.rcnl;
 
+import java.awt.event.ActionEvent;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Vector;
@@ -98,6 +99,13 @@ public class EditGCPSurfaceJPanel extends javax.swing.JPanel {
             electricColumnsProp.appendValue((String) jComboBoxFY2.getSelectedItem());
             electricColumnsProp.appendValue((String) jComboBoxFZ2.getSelectedItem());
         }
+        // Simulate ui pick of combobox dropdowns
+        ActionEvent event = new ActionEvent(jComboBoxFX, ActionEvent.ACTION_PERFORMED, "");
+        jComboBoxFXActionPerformed(event);
+        ActionEvent event1 = new ActionEvent(jComboBoxFX1, ActionEvent.ACTION_PERFORMED, "");
+        jComboBoxFX1ActionPerformed(event1);
+        ActionEvent event2 = new ActionEvent(jComboBoxFX2, ActionEvent.ACTION_PERFORMED, "");
+        jComboBoxFX2ActionPerformed(event2);
 
     }
 
