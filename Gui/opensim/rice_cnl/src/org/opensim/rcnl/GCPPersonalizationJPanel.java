@@ -65,11 +65,11 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
        motionFilePath.setDialogTitle("Select input motion file");
        motionFilePath.setDirectoriesOnly(false);
        motionFilePath.setCheckIfFileExists(true);
-       motionFilePath.setExtensionsAndDescription(".mot", "File to contain input motion");
+       motionFilePath.setExtensionsAndDescription(".mot,.sto", "File to contain input motion");
        grfFilePath.setDialogTitle("Select input ground reaction forces file");
        grfFilePath.setDirectoriesOnly(false);
        grfFilePath.setCheckIfFileExists(true);
-       grfFilePath.setExtensionsAndDescription(".mot", "File to contain ground reaction forces");
+       grfFilePath.setExtensionsAndDescription(".mot,.sto", "File to contain ground reaction forces");
        grfFilePath.setTreatEmptyStringAsValid(false);
        
        //jCoordinateListTextArea.setText("Coordinates");
