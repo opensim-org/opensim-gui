@@ -34,6 +34,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
     private JointPersonalizationToolModel jointPersonalizationToolModel = null;
     private JMPTaskListModel jointPersonalizationTaskListModel = null;
     private ListSelectionModel listSelectionModel;
+    
     /**
      * Creates new form JointPersonalizationJPanel
      */
@@ -47,6 +48,7 @@ public class JointPersonalizationJPanel extends BaseToolPanel  implements Observ
        listSelectionModel.addListSelectionListener(
                             new ListSelectionHandler());
        currentModelFileTextField.setText(model.getInputFileName());
+       outputModelFilePath.setCheckIfFileExists(false);
        outputModelFilePath.setFileName(jointPersonalizationToolModel.getOutputModelFile());
        setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
     }
