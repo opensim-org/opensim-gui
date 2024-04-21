@@ -20,50 +20,21 @@ import org.opensim.modeling.PropertyStringList;
  */
 public class GCPPersonalizationToolModel {
 
-    /**
-     * @return the propActivationMGListString
-     */
-    public PropertyStringList getPropActivationMGListString() {
-        return propActivationMGListString;
-    }
-
-    /**
-     * @return the propNormalizedFLMGListString
-     */
-    public PropertyStringList getPropNormalizedFLMGListString() {
-        return propNormalizedFLMGListString;
-    }
-
-    /**
-     * @return the propCoordinateListString
-     */
-    public PropertyStringList getPropCoordinateListString() {
-        return propCoordinateListString;
-    }
-
     private OpenSimObject toolAsObject;
     private String resultsDir = ".";
     private String inputDir = ".";
     private double accuracy=1e-5;
     private String modelName;
     private Model model;
+    
     private PropertyStringList propInputModelFileString;
     private PropertyStringList propInputOsimxFileString;
+    private PropertyStringList propInputDirString;
     private PropertyStringList propInputMotionFileString;
     private PropertyStringList propInputGRFFileString;
-    
     private PropertyStringList propOutputResultDirString;
     
-    private PropertyStringList propCoordinateListString;
-    // Muscle groups
-    private PropertyStringList propActivationMGListString;
-    private PropertyStringList propNormalizedFLMGListString;
-    
-    private PropertyStringList propInputDirString;
-    private OpenSimObject muscleTendonLengthInitializationAsObject;
-    private PropertyBoolList propInitializationEnabled;
-    private PropertyStringList propMTPDirString;
-    private PropertyObjectList propSynergyList;
+    private PropertyObjectList propGCPContactSurfaceSet;
     
     public GCPPersonalizationToolModel(Model model) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
@@ -77,8 +48,6 @@ public class GCPPersonalizationToolModel {
              propInputModelFileString.setValue(0, proposedName);
         }
         connectPropertiesToClassMembers();
-
-        
     }
 
     private void connectPropertiesToClassMembers() {
@@ -92,6 +61,8 @@ public class GCPPersonalizationToolModel {
         propInputMotionFileString = PropertyStringList.getAs(toolAsObject.updPropertyByName("input_motion_file"));
         
         propInputGRFFileString  = PropertyStringList.getAs(toolAsObject.updPropertyByName("input_grf_file"));
+        
+        propGCPContactSurfaceSet = PropertyObjectList.getAs(toolAsObject.updPropertyByName("GCPContactSurfaceSet"));
  
     }
     public GCPPersonalizationToolModel(Model model, String fileXml) {
@@ -153,33 +124,8 @@ public class GCPPersonalizationToolModel {
         propOutputResultDirString.setValue(fileName);
     }
     
-    void setEnableInitialization(boolean newValue) {
-        propInitializationEnabled.setValue(newValue);
-    }
-    boolean getEnableInitialization() {
-        return propInitializationEnabled.getValue();
-    }
-
-    void setMTPDir(String fileName) {
-        propMTPDirString.setValue(fileName);
-    }
-    String getMTPDir() {
-        if (propMTPDirString.size()==1)
-            return propMTPDirString.getValue();
-        return "";
-    }
-    PropertyObjectList getSynergyList() {
-       return propSynergyList;
-    }
-    String getSynergiesAsString() {
-        String result = "";
-        for (int i=0; i< propSynergyList.size(); i++){
-            OpenSimObject nextSynergy = propSynergyList.getValue(i);
-               PropertyStringList muscleGroups = PropertyStringList.getAs(nextSynergy.getPropertyByName("muscle_group_name"));
-               PropertyIntList synergies = PropertyIntList.getAs(nextSynergy.getPropertyByName("num_synergies"));
-            result = result.concat("("+muscleGroups.getValue(0)+","+synergies.getValue(0)+") ");
-        }
-        return result;
+    PropertyObjectList getGCPContactSurfaceSet() {
+       return propGCPContactSurfaceSet;
     }
 
     void setInputMotionFile(String newFileName) {

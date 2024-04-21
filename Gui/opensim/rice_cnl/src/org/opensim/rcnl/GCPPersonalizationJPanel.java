@@ -431,7 +431,12 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
        osimxFilePath.setFileName(gcpPersonalizationToolModel.getInputOsimxFile());
        inputDirPath.setFileName(gcpPersonalizationToolModel.getDataDir());
        outputResultDirPath.setFileName(gcpPersonalizationToolModel.getOutputResultDir());
+       motionFilePath.setFileName(gcpPersonalizationToolModel.getInputMotionFile());
+       grfFilePath.setFileName(gcpPersonalizationToolModel.geInputGRFFile());
        addGCPSurfaceButton.setEnabled(grfFilePath.getFileIsValid() && grfFilePath.getFileName().length()>0);
+       surfaceListProp = gcpPersonalizationToolModel.getGCPContactSurfaceSet();
+       gcpListModel = new GCPSurfaceListModel(surfaceListProp);
+       GCPContactSurfaceList.setModel(gcpListModel);
     }
 
     @Override
