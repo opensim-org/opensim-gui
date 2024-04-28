@@ -6,6 +6,7 @@
 package org.opensim.rcnl;
 
 import java.awt.Dialog;
+import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Vector;
@@ -17,10 +18,12 @@ import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.openide.util.Exceptions;
 import org.opensim.modeling.AbstractProperty;
+import org.opensim.modeling.MarkerData;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyDoubleList;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.PropertyObjectList;
+import org.opensim.utils.ErrorDialog;
 
 /**
  *
@@ -37,6 +40,7 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
     private PropertyObjectList poJointList;
     private PropertyObjectList poBodyList;
     private ListSelectionModel listSelectionModel, list2SelectionModel;
+    private boolean initializing=false;
     /**
      * Creates new form EditJointTaskJPanel
      */
@@ -46,6 +50,7 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
 
     EditJMPTaskJPanel(OpenSimObject jointPersonalizationTask) {
         taskToEdit = jointPersonalizationTask;
+        initializing = true;
         AbstractProperty ap = jointPersonalizationTask.getPropertyByName("JMPJointSet");
         poJointList = PropertyObjectList.updAs(ap);
         jmpJointListModel= new JMPJointListModel(poJointList);
@@ -67,8 +72,9 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
         triallFilePath.setFileName(filepath);
         AbstractProperty timeRangeProp = taskToEdit.getPropertyByName("time_range");
         PropertyDoubleList pDoubleList = PropertyDoubleList.updAs(timeRangeProp);
-        jTextField3.setText(String.valueOf(pDoubleList.getValue(0)));
-        jTextField4.setText(String.valueOf(pDoubleList.getValue(1)));
+        jTextStartTime.setText(String.valueOf(pDoubleList.getValue(0)));
+        jTextEndTime.setText(String.valueOf(pDoubleList.getValue(1)));
+        initializing = false;
         
     }
 
@@ -86,8 +92,8 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
         jEnabledCheckBox = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
+        jTextStartTime = new javax.swing.JTextField();
+        jTextEndTime = new javax.swing.JTextField();
         jJointsPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
@@ -133,29 +139,29 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jLabel4.text")); // NOI18N
 
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jTextField3.setText(org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jTextField3.text")); // NOI18N
-        jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTextStartTime.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        jTextStartTime.setText(org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jTextStartTime.text")); // NOI18N
+        jTextStartTime.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField3FocusLost(evt);
+                jTextStartTimeFocusLost(evt);
             }
         });
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        jTextStartTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                jTextStartTimeActionPerformed(evt);
             }
         });
 
-        jTextField4.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
-        jTextField4.setText(org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jTextField4.text")); // NOI18N
-        jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTextEndTime.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
+        jTextEndTime.setText(org.openide.util.NbBundle.getMessage(EditJMPTaskJPanel.class, "EditJMPTaskJPanel.jTextEndTime.text")); // NOI18N
+        jTextEndTime.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                jTextField4FocusLost(evt);
+                jTextEndTimeFocusLost(evt);
             }
         });
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jTextEndTime.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                jTextEndTimeActionPerformed(evt);
             }
         });
 
@@ -285,11 +291,11 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -313,9 +319,9 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
                 .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextStartTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextEndTime, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jJointsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -329,25 +335,47 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
         taskToEdit.setName(jTaskNameTextField.getText());
     }//GEN-LAST:event_jTaskNameTextFieldActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void jTextStartTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextStartTimeActionPerformed
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:
             AbstractProperty timeRangeProp = taskToEdit.getPropertyByName("time_range");
             PropertyDoubleList pDoubleList = PropertyDoubleList.updAs(timeRangeProp);
             double startTime =pDoubleList.getValue(0);
-            if (jTextField3.getText().trim().length()>0)
-                startTime = numFormat.parse(jTextField3.getText().trim()).doubleValue();
+            if (jTextStartTime.getText().trim().length()>0)
+                startTime = numFormat.parse(jTextStartTime.getText().trim()).doubleValue();
             pDoubleList.setValue(0, startTime);
         } catch (ParseException ex) {
             Exceptions.printStackTrace(ex);
         }
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_jTextStartTimeActionPerformed
 
     private void triallFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_triallFilePathStateChanged
         //ikToolModel.getIKTool().setOutputMotionFileName(outputModelFilePath.getFileName());
         AbstractProperty trcfileProp = taskToEdit.getPropertyByName("marker_file_name");
+        String filepath = PropertyHelper.getValueString(trcfileProp);
+        if (triallFilePath.getFileName().equals(filepath)) // file hasn't changed or being populated form settings file
+            return;
+        
         PropertyHelper.setValueString(triallFilePath.getFileName(), trcfileProp);
+        // retrieve bounds from file and populate ui
+        MarkerData markerData;
+         try {
+            markerData = new MarkerData(triallFilePath.getFileName());
+            // Note: MarkerPlacer C++ code averages before convertToUnits rather than after.  But as long as we don't actually use the
+            // values from this file in the GUI it shouldn't matter that we're doing convertToUnits first here.
+            double[] dataTimeRange = markerData.getTimeRange();
+            jTextStartTime.setText(numFormat.format(dataTimeRange[0]));
+            jTextEndTime.setText(numFormat.format(dataTimeRange[1]));
+            AbstractProperty timeRangeProp = taskToEdit.getPropertyByName("time_range");
+            PropertyDoubleList pDoubleList = PropertyDoubleList.updAs(timeRangeProp);
+            pDoubleList.setValue(0, dataTimeRange[0]);
+            pDoubleList.setValue(1, dataTimeRange[1]);
+         } catch (IOException ex) {
+            markerData = null;
+            ErrorDialog.displayExceptionDialog(ex);
+         }
+        
     }//GEN-LAST:event_triallFilePathStateChanged
 
     private void jEnabledCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jEnabledCheckBoxItemStateChanged
@@ -361,29 +389,29 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
          taskToEdit.setName(jTaskNameTextField.getText());
     }//GEN-LAST:event_jTaskNameTextFieldFocusLost
 
-    private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
-        jTextField3ActionPerformed(null);
-    }//GEN-LAST:event_jTextField3FocusLost
+    private void jTextStartTimeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextStartTimeFocusLost
+        jTextStartTimeActionPerformed(null);
+    }//GEN-LAST:event_jTextStartTimeFocusLost
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void jTextEndTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEndTimeActionPerformed
         // TODO add your handling code here:
         try {
             // TODO add your handling code here:();
             AbstractProperty timeRangeProp = taskToEdit.getPropertyByName("time_range");
             PropertyDoubleList pDoubleList = PropertyDoubleList.updAs(timeRangeProp);
             double endTime=pDoubleList.getValue(1);
-            if (jTextField4.getText().trim().length()>0)
-                endTime = numFormat.parse(jTextField4.getText().trim()).doubleValue();
+            if (jTextEndTime.getText().trim().length()>0)
+                endTime = numFormat.parse(jTextEndTime.getText().trim()).doubleValue();
             pDoubleList.setValue(1, endTime);
         } catch (ParseException ex) {
             Exceptions.printStackTrace(ex);
         }
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_jTextEndTimeActionPerformed
 
-    private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
+    private void jTextEndTimeFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextEndTimeFocusLost
         // TODO add your handling code here:
-        jTextField4ActionPerformed(null);
-    }//GEN-LAST:event_jTextField4FocusLost
+        jTextEndTimeActionPerformed(null);
+    }//GEN-LAST:event_jTextEndTimeFocusLost
 
     private void jEnabledCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jEnabledCheckBoxActionPerformed
         // TODO add your handling code here:
@@ -516,8 +544,8 @@ public class EditJMPTaskJPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTaskNameTextField;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextEndTime;
+    private javax.swing.JTextField jTextStartTime;
     private org.opensim.swingui.FileTextFieldAndChooser triallFilePath;
     // End of variables declaration//GEN-END:variables
     private class ListSelectionHandler implements ListSelectionListener {
