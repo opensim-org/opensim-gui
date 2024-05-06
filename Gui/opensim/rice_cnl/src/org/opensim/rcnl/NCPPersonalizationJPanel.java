@@ -488,7 +488,7 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
         // TODO add your handling code here:
         // Create Panel for selecting from existing model coordinates
         CoordinateTableModel ctm = new CoordinateTableModel(ncpPersonalizationToolModel.getPropCoordinateListString(), model);
-        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm, false);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
         dlg.setModal(true);
         DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
@@ -502,7 +502,7 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private void jButtonEditActivationMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActivationMGActionPerformed
         // TODO add your handling code here:
         MuscleGroupTableModel ctm = new MuscleGroupTableModel(ncpPersonalizationToolModel.getPropActivationMGListString(), model);
-        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm, true);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
         dlg.setModal(true);
         DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
@@ -515,7 +515,7 @@ public class NCPPersonalizationJPanel extends BaseToolPanel  implements Observer
 
     private void jButtonEditNormalizedFLMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditNormalizedFLMGActionPerformed
         MuscleGroupTableModel ctm = new MuscleGroupTableModel(ncpPersonalizationToolModel.getPropNormalizedFLMGListString(), model);
-        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm, true);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
         dlg.setModal(true);
         DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);

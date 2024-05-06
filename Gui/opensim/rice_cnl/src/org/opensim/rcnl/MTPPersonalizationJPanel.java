@@ -530,7 +530,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
         // TODO add your handling code here:
         // Create Panel for selecting from existing model coordinates
         CoordinateTableModel ctm = new CoordinateTableModel(mtpPersonalizationToolModel.getPropCoordinateListString(), model);
-        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm, false);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
         dlg.setModal(true);
         DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
@@ -544,7 +544,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private void jButtonEditActivationMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditActivationMGActionPerformed
         // TODO add your handling code here:
         MuscleGroupTableModel ctm = new MuscleGroupTableModel(mtpPersonalizationToolModel.getPropActivationMGListString(), model);
-        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm, true);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
         dlg.setModal(true);
         DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
@@ -557,7 +557,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
 
     private void jButtonEditNormalizedFLMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditNormalizedFLMGActionPerformed
         MuscleGroupTableModel ctm = new MuscleGroupTableModel(mtpPersonalizationToolModel.getPropNormalizedFLMGListString(), model);
-        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm, true);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
         dlg.setModal(true);
         DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
@@ -571,7 +571,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private void jButtonEditMissingEMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditMissingEMGActionPerformed
         // TODO add your handling code here:
         MuscleGroupTableModel ctm = new MuscleGroupTableModel(mtpPersonalizationToolModel.getPropMissingEMGMGListString(), model);
-        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm, true);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
         dlg.setModal(true);
         DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
@@ -585,7 +585,7 @@ public class MTPPersonalizationJPanel extends BaseToolPanel  implements Observer
     private void jButtonEditCollectedEMGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCollectedEMGActionPerformed
         // TODO add your handling code here:
         MuscleGroupTableModel ctm = new MuscleGroupTableModel(mtpPersonalizationToolModel.getPropCollectedEMGMGListString(), model);
-        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm, true);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Groups");
         dlg.setModal(true);
         DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);

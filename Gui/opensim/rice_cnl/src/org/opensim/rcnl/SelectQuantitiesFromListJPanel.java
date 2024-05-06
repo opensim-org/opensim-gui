@@ -5,22 +5,42 @@
  */
 package org.opensim.rcnl;
 
+import java.util.ArrayList;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Ayman-NMBL
  */
-public class SelectQuantitiesFromListJPanel extends javax.swing.JPanel {
+public class SelectQuantitiesFromListJPanel extends javax.swing.JPanel implements
+        DocumentListener {
+
     AbstractTableModel tableModel;
+    ArrayList<String> metaCharacters = new ArrayList<String>();
+    private String pattern = "";
+
     /**
      * Creates new form SelectCoordinatesJPanel
      */
-    public SelectQuantitiesFromListJPanel(AbstractTableModel aTableModel) {
+    public SelectQuantitiesFromListJPanel(AbstractTableModel aTableModel, boolean showFilter) {
         tableModel = aTableModel;
         initComponents();
+        if (!showFilter)
+            FilterTextField.setEditable(false);
+        metaCharacters.add("*");
+        metaCharacters.add("+");
+        metaCharacters.add("?");
+        FilterTextField.getDocument().addDocumentListener(this);
+        FilterTextField.setText(getPattern());
     }
 
+    public String getPattern() {
+        return pattern;
+
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,8 +50,33 @@ public class SelectQuantitiesFromListJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        FilterTextField = new javax.swing.JFormattedTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(SelectQuantitiesFromListJPanel.class, "SelectQuantitiesFromListJPanel.jLabel1.text")); // NOI18N
+
+        FilterTextField.setToolTipText(org.openide.util.NbBundle.getMessage(SelectQuantitiesFromListJPanel.class, "SelectQuantitiesFromListJPanel.FilterTextField.toolTipText")); // NOI18N
+
+        javax.swing.GroupLayout jPanelLayout = new javax.swing.GroupLayout(jPanel);
+        jPanel.setLayout(jPanelLayout);
+        jPanelLayout.setHorizontalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(FilterTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 243, Short.MAX_VALUE))
+        );
+        jPanelLayout.setVerticalGroup(
+            jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelLayout.createSequentialGroup()
+                .addGroup(jPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(FilterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
 
         jTable1.setModel(tableModel);
         jTable1.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
@@ -41,24 +86,90 @@ public class SelectQuantitiesFromListJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 336, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
                     .addContainerGap()))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(268, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 300, Short.MAX_VALUE))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(73, 73, 73)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField FilterTextField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void insertUpdate(DocumentEvent de) {
+        handlePatternChange();
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent de) {
+        handlePatternChange();
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent de) {
+       handlePatternChange();
+    }
+    
+        /**
+     * Handle changes to the text in the FilterTextField
+     * a leading and a trailing .* are pre/appended for matching any substring
+     */
+    private void handlePatternChange()
+    {
+       String rawPattern = FilterTextField.getText();
+       // Remove leading and trailing special characters that may interfere
+       if (rawPattern.length()>0){
+          // remove leading and trailing special characters
+          int index=0;
+          String newPattern=rawPattern;
+          while(index < rawPattern.length()){
+            String letter=rawPattern.substring(index, index+1);
+            if (metaCharacters.contains(letter))
+               newPattern=rawPattern.substring(index);
+            else
+               break;
+            index++;
+          }
+          rawPattern=newPattern;
+          // start from the end and repeat
+          index = rawPattern.length()-1;
+           while(index >= 0){
+            String letter=rawPattern.substring(index, index+1);
+            if (metaCharacters.contains(letter))
+               newPattern=rawPattern.substring(0, index);
+            else
+               break;
+            index--;
+          }
+          rawPattern=newPattern;
+      }
+       
+       if (tableModel instanceof MuscleGroupTableModel)
+           ((MuscleGroupTableModel) tableModel).restrictNamesBy(".*"+rawPattern+".*");
+       //System.out.println("restrict by"+".*"+rawPattern+".*");
+    }  
 }
