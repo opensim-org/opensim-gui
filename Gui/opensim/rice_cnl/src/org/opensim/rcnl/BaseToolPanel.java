@@ -147,7 +147,7 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
 
       loadSettingsButton.addActionListener(new LoadSettingsAction());
       saveSettingsButton.addActionListener(new SaveSettingsAction());
- 
+      applyButton.setEnabled(false);
       OpenSimDB.getInstance().addObserver(this);
    }
 
