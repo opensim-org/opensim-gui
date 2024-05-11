@@ -444,6 +444,20 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
         super.setSettingsFileDescription(description); //To change body of generated methods, choose Tools | Templates.
     }
 
+    @Override
+    public void saveSettings(String fileName, String contents) {
+        // Before saving the settings, we need to make motion file and grf file relative to input_directory
+        String inputDir = gcpPersonalizationToolModel.getDataDir();
+        if (inputDir == null){
+            // Abort
+        }
+        String relativeMotionFile = FileUtils.makePathRelative(inputDir, gcpPersonalizationToolModel.getInputMotionFile());
+        String relativeGRFFile = FileUtils.makePathRelative(inputDir, gcpPersonalizationToolModel.geInputGRFFile());
+        // Set proprties from relative path
+        super.saveSettings(fileName, contents); //To change body of generated methods, choose Tools | Templates.
+        // Restore from model
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList<String> GCPContactSurfaceList;
