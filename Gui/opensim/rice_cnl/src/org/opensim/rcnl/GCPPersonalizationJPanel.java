@@ -430,7 +430,15 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
        gcpPersonalizationToolModel = new GCPPersonalizationToolModel(model, fileName);
        osimxFilePath.setFileName(gcpPersonalizationToolModel.getInputOsimxFile());
        inputDirPath.setFileName(gcpPersonalizationToolModel.getDataDir());
+
        outputResultDirPath.setFileName(gcpPersonalizationToolModel.getOutputResultDir());
+       // Convert relative to absolute paths if needed
+       if (gcpPersonalizationToolModel.getDataDir()!= null){
+           String curInputMotionfile = FileUtils.makePathAbsolute(gcpPersonalizationToolModel.getInputMotionFile(), gcpPersonalizationToolModel.getDataDir());
+           String curInputGRFfile = FileUtils.makePathAbsolute(gcpPersonalizationToolModel.geInputGRFFile(), gcpPersonalizationToolModel.getDataDir());
+           gcpPersonalizationToolModel.setInputMotionFile(curInputMotionfile);
+           gcpPersonalizationToolModel.setInputGRFFile(curInputGRFfile);
+       }
        motionFilePath.setFileName(gcpPersonalizationToolModel.getInputMotionFile());
        grfFilePath.setFileName(gcpPersonalizationToolModel.geInputGRFFile());
        addGCPSurfaceButton.setEnabled(grfFilePath.getFileIsValid() && grfFilePath.getFileName().length()>0);
@@ -442,6 +450,32 @@ public class GCPPersonalizationJPanel extends BaseToolPanel  implements Observer
     @Override
     public void setSettingsFileDescription(String description) {
         super.setSettingsFileDescription(description); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void saveSettings(String fileName, String contents) {
+        
+        String adjustedContents = contents;
+        // Before saving the settings, we need to make motion file and grf file relative to input_directory
+        String inputDir = gcpPersonalizationToolModel.getDataDir();
+        String saveInputMotion = gcpPersonalizationToolModel.getInputMotionFile();
+        String saveGRFfile = gcpPersonalizationToolModel.geInputGRFFile();
+
+        if (inputDir != null){
+            // Abort
+            String relativeMotionFile = FileUtils.makePathRelative(saveInputMotion, inputDir);
+            if (relativeMotionFile != null)
+                gcpPersonalizationToolModel.setInputMotionFile(relativeMotionFile);
+            String relativeGRFFile = FileUtils.makePathRelative(saveGRFfile, inputDir);
+            if (relativeGRFFile != null)
+                gcpPersonalizationToolModel.setInputGRFFile(relativeGRFFile);
+            adjustedContents = getToolXML();
+        }
+        // Set proprties from relative path
+        super.saveSettings(fileName, adjustedContents); //To change body of generated methods, choose Tools | Templates.
+        // Restore from model
+        gcpPersonalizationToolModel.setInputMotionFile(saveInputMotion);
+        gcpPersonalizationToolModel.setInputGRFFile(saveGRFfile);
     }
 
 
