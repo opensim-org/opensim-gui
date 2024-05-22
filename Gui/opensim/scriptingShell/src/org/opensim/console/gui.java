@@ -482,4 +482,9 @@ public final class gui {
         msg.put("data", option);
         sendVisulaizerMessage(msg);
     }
+    static public void getCameraInfo() {
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "getCameraParams");
+        sendVisulaizerMessage(msg);
+    }
 }
