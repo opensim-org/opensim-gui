@@ -56,6 +56,8 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
+         ref: fix_cmctaskset_copy
+         depth: 1
     
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
@@ -159,6 +161,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
+         ref: fix_cmctaskset_copy
          
     - uses: actions/setup-python@v4
       with:
@@ -313,6 +316,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
+         ref: fix_cmctaskset_copy
          
     - name: Install packages
       run: sudo apt-get update && sudo apt-get install --yes liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen python3 python3-dev python3-numpy python3-setuptools gfortran-7
