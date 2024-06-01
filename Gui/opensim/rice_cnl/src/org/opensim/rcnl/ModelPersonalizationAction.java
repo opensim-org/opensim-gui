@@ -66,16 +66,16 @@ public final class ModelPersonalizationAction extends CallableSystemAction {
         }
  
         private void updateMenu() {
-            javax.swing.JMenuItem jMPMenuItem = new JMenuItem("Joint Optimization...");
+            javax.swing.JMenuItem jMPMenuItem = new JMenuItem("Joint Model Personalization...");
             jMPMenuItem.addActionListener(new JointPersonalizationAction());
             this.add(jMPMenuItem);
-            javax.swing.JMenuItem mTPMenuItem = new JMenuItem("Muscle Tendon Optimization...");
+            javax.swing.JMenuItem mTPMenuItem = new JMenuItem("Muscle-tendon Personalization...");
             mTPMenuItem.addActionListener(new MTPPersonalizationAction());
             this.add(mTPMenuItem);
-            javax.swing.JMenuItem nCPMenuItem = new JMenuItem("Neural Control Optimization...");
+            javax.swing.JMenuItem nCPMenuItem = new JMenuItem("Neural Control Personalization...");
             nCPMenuItem.addActionListener(new NeuralControlPersonalizationAction());
             this.add(nCPMenuItem);
-            javax.swing.JMenuItem gCPMenuItem = new JMenuItem("Ground Contact Optimization...");
+            javax.swing.JMenuItem gCPMenuItem = new JMenuItem("Ground Contact Personalization...");
             gCPMenuItem.addActionListener(new GroundContactPersonalizationAction());
             this.add(gCPMenuItem);
             
