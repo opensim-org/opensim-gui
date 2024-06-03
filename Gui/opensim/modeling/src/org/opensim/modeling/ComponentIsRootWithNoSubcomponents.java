@@ -48,8 +48,8 @@ public class ComponentIsRootWithNoSubcomponents extends OpenSimException {
     super.delete();
   }
 
-  public ComponentIsRootWithNoSubcomponents(String file, long line, String func, String thisName, String componentConcreteClassName) {
-    this(opensimCommonJNI.new_ComponentIsRootWithNoSubcomponents(file, line, func, thisName, componentConcreteClassName), true);
+  public ComponentIsRootWithNoSubcomponents(String file, long line, String methodName, String thisName, String componentConcreteClassName) {
+    this(opensimCommonJNI.new_ComponentIsRootWithNoSubcomponents(file, line, methodName, thisName, componentConcreteClassName), true);
   }
 
 }

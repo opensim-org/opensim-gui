@@ -17,6 +17,7 @@ package org.opensim.modeling;
  * This is an endpoint constraint goal by default.<br>
  * Credit for using this goal to address excessive initial activation goes to<br>
  * Jessica Allen.<br>
+ * <br>
  * 
  */
 public class MocoInitialActivationGoal extends MocoGoal {

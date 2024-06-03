@@ -291,13 +291,16 @@ public class MocoContactTrackingGoal extends MocoGoal {
 
   /**
    *  Normalize each component of the 3-D tracking error by the peak value of <br>
-   *  each contact force component in the tracking data. No normalization is <br>
-   *  applied when tracking data is close to zero (default: false).
+   *  each contact force component in the tracking data. An exception is <br>
+   *  thrown when tracking data is close to zero (default: false).
    */
   public void setNormalizeTrackingError(boolean tf) {
     opensimMocoJNI.MocoContactTrackingGoal_setNormalizeTrackingError(swigCPtr, this, tf);
   }
 
+  /**
+   *   tf)
+   */
   public boolean getNormalizeTrackingError() {
     return opensimMocoJNI.MocoContactTrackingGoal_getNormalizeTrackingError(swigCPtr, this);
   }

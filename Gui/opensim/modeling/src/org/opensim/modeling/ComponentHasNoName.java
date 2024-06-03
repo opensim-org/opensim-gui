@@ -8,9 +8,6 @@
 
 package org.opensim.modeling;
 
-/**
- *  Component Exceptions
- */
 public class ComponentHasNoName extends OpenSimException {
   private transient long swigCPtr;
 
@@ -51,8 +48,8 @@ public class ComponentHasNoName extends OpenSimException {
     super.delete();
   }
 
-  public ComponentHasNoName(String file, long line, String func, String componentConcreteClassName) {
-    this(opensimCommonJNI.new_ComponentHasNoName(file, line, func, componentConcreteClassName), true);
+  public ComponentHasNoName(String file, long line, String methodName, String componentConcreteClassName) {
+    this(opensimCommonJNI.new_ComponentHasNoName(file, line, methodName, componentConcreteClassName), true);
   }
 
 }

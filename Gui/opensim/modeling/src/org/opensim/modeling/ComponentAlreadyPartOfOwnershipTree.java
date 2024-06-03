@@ -48,8 +48,8 @@ public class ComponentAlreadyPartOfOwnershipTree extends OpenSimException {
     super.delete();
   }
 
-  public ComponentAlreadyPartOfOwnershipTree(String file, long line, String func, String compName, String thisName) {
-    this(opensimCommonJNI.new_ComponentAlreadyPartOfOwnershipTree(file, line, func, compName, thisName), true);
+  public ComponentAlreadyPartOfOwnershipTree(String file, long line, String methodName, String compName, String thisName) {
+    this(opensimCommonJNI.new_ComponentAlreadyPartOfOwnershipTree(file, line, methodName, compName, thisName), true);
   }
 
 }

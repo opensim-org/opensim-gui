@@ -289,8 +289,8 @@ public class MocoStudy extends OpenSimObject {
    *      The MocoProblem must contain the model corresponding to<br>
    *      the provided trajectory.
    */
-  public void visualize(MocoTrajectory it) {
-    opensimMocoJNI.MocoStudy_visualize(swigCPtr, this, MocoTrajectory.getCPtr(it), it);
+  public void visualize(MocoTrajectory traj) {
+    opensimMocoJNI.MocoStudy_visualize(swigCPtr, this, MocoTrajectory.getCPtr(traj), traj);
   }
 
   /**
@@ -300,10 +300,36 @@ public class MocoStudy extends OpenSimObject {
    *  ".*activation" gives the activation of all muscles.<br>
    *  Constraints are not enforced but prescribed motion (e.g.,<br>
    *  PositionMotion) is.<br>
-   *  @see OpenSim#analyze() Note: Parameters in the MocoTrajectory are **not** applied to the model.
+   *  @see OpenSim#analyze() Note: Parameters in the MocoTrajectory are **not** applied to the model.<br>
+   *  Note: If the MocoTrajectory was generated from a MocoStudy with <br>
+   *        Controller%s in the model, first call <br>
+   *        MocoTrajectory::generateControlsFromModelControllers() to populate <br>
+   *        the trajectory with the correct model controls.
    */
-  public TimeSeriesTable analyze(MocoTrajectory it, StdVectorString outputPaths) {
-    return new TimeSeriesTable(opensimMocoJNI.MocoStudy_analyze(swigCPtr, this, MocoTrajectory.getCPtr(it), it, StdVectorString.getCPtr(outputPaths), outputPaths), true);
+  public TimeSeriesTable analyze(MocoTrajectory traj, StdVectorString outputPaths) {
+    return new TimeSeriesTable(opensimMocoJNI.MocoStudy_analyze(swigCPtr, this, MocoTrajectory.getCPtr(traj), traj, StdVectorString.getCPtr(outputPaths), outputPaths), true);
+  }
+
+  /**
+   *  Compute the generalized coordinate forces for the provided trajectory <br>
+   *  based on a set of applied model Force%s. This can be used to compute <br>
+   *  an inverse dynamics solution from a MocoTrajectory, where the applied <br>
+   *  model Force%s are typically external forces in the system (e.g., <br>
+   *  ExternalForce or SmoothSphereHalfSpaceForce). However, the `forcePaths`<br>
+   *  argument can contain paths to any Force%s in the model.<br>
+   * <br>
+   *  @param traj       The MocoTrajectory for which to compute the <br>
+   *                    generalized forces.<br>
+   *  @param forcePaths The model paths to the Force%s which will be applied<br>
+   *                    to the model to compute the generalized forces.<br>
+   * <br>
+   *  Note: Force's `appliesForce` property is obeyed when calculating the<br>
+   *        generalized forces.<br>
+   * <br>
+   *  
+   */
+  public TimeSeriesTable calcGeneralizedForces(MocoTrajectory traj, StdVectorString forcePaths) {
+    return new TimeSeriesTable(opensimMocoJNI.MocoStudy_calcGeneralizedForces(swigCPtr, this, MocoTrajectory.getCPtr(traj), traj, StdVectorString.getCPtr(forcePaths), forcePaths), true);
   }
 
 }

@@ -1117,6 +1117,8 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native void PolynomialPathFitter_run(long jarg1, PolynomialPathFitter jarg1_);
   public final static native void PolynomialPathFitter_setOutputDirectory(long jarg1, PolynomialPathFitter jarg1_, String jarg2);
   public final static native String PolynomialPathFitter_getOutputDirectory(long jarg1, PolynomialPathFitter jarg1_);
+  public final static native void PolynomialPathFitter_setUseStepwiseRegression(long jarg1, PolynomialPathFitter jarg1_, boolean jarg2);
+  public final static native boolean PolynomialPathFitter_getUseStepwiseRegression(long jarg1, PolynomialPathFitter jarg1_);
   public final static native void PolynomialPathFitter_setMomentArmThreshold(long jarg1, PolynomialPathFitter jarg1_, double jarg2);
   public final static native double PolynomialPathFitter_getMomentArmThreshold(long jarg1, PolynomialPathFitter jarg1_);
   public final static native void PolynomialPathFitter_setMinimumPolynomialOrder(long jarg1, PolynomialPathFitter jarg1_, int jarg2);
@@ -1136,6 +1138,10 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native int PolynomialPathFitter_getNumParallelThreads(long jarg1, PolynomialPathFitter jarg1_);
   public final static native void PolynomialPathFitter_setLatinHypercubeAlgorithm(long jarg1, PolynomialPathFitter jarg1_, String jarg2);
   public final static native String PolynomialPathFitter_getLatinHypercubeAlgorithm(long jarg1, PolynomialPathFitter jarg1_);
+  public final static native void PolynomialPathFitter_setIncludeMomentArmFunctions(long jarg1, PolynomialPathFitter jarg1_, boolean jarg2);
+  public final static native boolean PolynomialPathFitter_getIncludeMomentArmFunctions(long jarg1, PolynomialPathFitter jarg1_);
+  public final static native void PolynomialPathFitter_setIncludeLengtheningSpeedFunction(long jarg1, PolynomialPathFitter jarg1_, boolean jarg2);
+  public final static native boolean PolynomialPathFitter_getIncludeLengtheningSpeedFunction(long jarg1, PolynomialPathFitter jarg1_);
   public final static native void PolynomialPathFitter_evaluateFunctionBasedPaths__SWIG_0(long jarg1, Model jarg1_, long jarg2, TableProcessor jarg2_, String jarg3, double jarg4, double jarg5);
   public final static native void PolynomialPathFitter_evaluateFunctionBasedPaths__SWIG_1(long jarg1, Model jarg1_, long jarg2, TableProcessor jarg2_, String jarg3, double jarg4);
   public final static native void PolynomialPathFitter_evaluateFunctionBasedPaths__SWIG_2(long jarg1, Model jarg1_, long jarg2, TableProcessor jarg2_, String jarg3);

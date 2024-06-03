@@ -48,8 +48,8 @@ public class SubcomponentsWithDuplicateName extends OpenSimException {
     super.delete();
   }
 
-  public SubcomponentsWithDuplicateName(String file, long line, String func, String thisName, String duplicateName) {
-    this(opensimCommonJNI.new_SubcomponentsWithDuplicateName(file, line, func, thisName, duplicateName), true);
+  public SubcomponentsWithDuplicateName(String file, long line, String methodName, String thisName, String duplicateName) {
+    this(opensimCommonJNI.new_SubcomponentsWithDuplicateName(file, line, methodName, thisName, duplicateName), true);
   }
 
 }

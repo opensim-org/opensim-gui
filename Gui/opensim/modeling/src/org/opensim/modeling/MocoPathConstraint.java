@@ -128,11 +128,36 @@ public class MocoPathConstraint extends OpenSimObject {
   }
 
   /**
+   *  Get a map between Input control names and their indexes in the Input <br>
+   *  controls vector. This map will only include Input controls associated <br>
+   *  with InputController%s added by the user (i.e., not <br>
+   *  ActuatorInputController).<br>
+   *  
+   */
+  public SWIGTYPE_p_std__unordered_mapT_std__string_int_t getInputControlIndexMap() {
+    return new SWIGTYPE_p_std__unordered_mapT_std__string_int_t(opensimMocoJNI.MocoPathConstraint_getInputControlIndexMap(swigCPtr, this), true);
+  }
+
+  /**
+   *  Get the vector of all InputController controls. This includes both <br>
+   *  controls from InputController%s added by the user and controls from the <br>
+   *  ActuatorInputController added by MocoProblemRep.<br>
+   *  
+   */
+  public Vector getInputControls(State state) {
+    return new Vector(opensimMocoJNI.MocoPathConstraint_getInputControls(swigCPtr, this, State.getCPtr(state), state), false);
+  }
+
+  /**
    *  Perform error checks on user input for this constraint, and cache<br>
    *     quantities needed when computing the constraint errors.<br>
    *     to efficiently evaluate the constraint.<br>
    *     This function must be invoked before invoking<br>
-   *     calcPathConstraintErrors(). 
+   *     calcPathConstraintErrors(). <br>
+   *     Note: If the ControlDistributor at path "/control_distributor" added by <br>
+   *           MocoProblemRep is available in the model, this function will store<br>
+   *           a reference to it, after which getInputControlIndexMap() and<br>
+   *           getInputControls() are valid.
    */
   public void initializeOnModel(Model model, SWIGTYPE_p_OpenSim__MocoProblemInfo arg1, int pathConstraintIndex) {
     opensimMocoJNI.MocoPathConstraint_initializeOnModel(swigCPtr, this, Model.getCPtr(model), model, SWIGTYPE_p_OpenSim__MocoProblemInfo.getCPtr(arg1), pathConstraintIndex);

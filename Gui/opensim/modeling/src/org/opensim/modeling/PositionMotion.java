@@ -207,9 +207,9 @@ public class PositionMotion extends ModelComponent {
    *  Note: This fuction ignores the inDegrees header metadata.
    */
   public static PositionMotion createFromTable(Model model, TimeSeriesTable coords, boolean allowExtraColumns) {
-long cPtr = opensimSimulationJNI.PositionMotion_createFromTable__SWIG_0(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(coords), coords, allowExtraColumns);
-return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
-}
+    long cPtr = opensimSimulationJNI.PositionMotion_createFromTable__SWIG_0(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(coords), coords, allowExtraColumns);
+    return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
+  }
 
   /**
    *  Create a PositionMotion that prescribes kinematics for all coordinates<br>
@@ -225,9 +225,9 @@ return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
    *  Note: This fuction ignores the inDegrees header metadata.
    */
   public static PositionMotion createFromTable(Model model, TimeSeriesTable coords) {
-long cPtr = opensimSimulationJNI.PositionMotion_createFromTable__SWIG_1(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(coords), coords);
-return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
-}
+    long cPtr = opensimSimulationJNI.PositionMotion_createFromTable__SWIG_1(Model.getCPtr(model), model, TimeSeriesTable.getCPtr(coords), coords);
+    return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
+  }
 
   /**
    *  Create a PositionMotion that prescribes kinematics for all coordinates<br>
@@ -238,9 +238,9 @@ return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
    *  constraints.
    */
   public static PositionMotion createFromStatesTrajectory(Model model, StatesTrajectory statesTraj) {
-long cPtr = opensimSimulationJNI.PositionMotion_createFromStatesTrajectory(Model.getCPtr(model), model, StatesTrajectory.getCPtr(statesTraj), statesTraj);
-return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
-}
+    long cPtr = opensimSimulationJNI.PositionMotion_createFromStatesTrajectory(Model.getCPtr(model), model, StatesTrajectory.getCPtr(statesTraj), statesTraj);
+    return (cPtr == 0) ? null : new PositionMotion(cPtr, true);
+  }
 
   public TimeSeriesTable exportToTable(StdVectorDouble time) {
     return new TimeSeriesTable(opensimSimulationJNI.PositionMotion_exportToTable(swigCPtr, this, StdVectorDouble.getCPtr(time), time), true);

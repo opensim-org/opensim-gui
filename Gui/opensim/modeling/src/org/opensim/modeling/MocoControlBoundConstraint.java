@@ -9,10 +9,10 @@
 package org.opensim.modeling;
 
 /**
- *  This class constrains any number of control signals from ScalarActautor%s to<br>
- * be between two time-based functions. It is possible to constrain the control<br>
- * signal to be exactly to a provided function; see the equality_with_lower<br>
- * property.<br>
+ *  This class constrains any number of control signals from ScalarActuator%s <br>
+ * or Input%s to InputController%s to be between two time-based functions. It is <br>
+ * possible to constrain the control signal to match the value from a provided <br>
+ * function; see the equality_with_lower property.<br>
  * <br>
  * If a function is a GCVSpline, we ensure that the spline covers the entire<br>
  * possible time range in the problem (using the problem's time bounds). We do<br>
@@ -21,7 +21,9 @@ package org.opensim.modeling;
  * Note: If you omit the lower and upper bounds, then this class will not<br>
  * constrain any control signals, even if you have provided control paths.<br>
  * <br>
- * Note: This class can only constrain control signals for ScalarActuator%s.<br>
+ * Note: This class can only constrain control signals for ScalarActuator%s and <br>
+ * Input%s to InputController%s.<br>
+ * <br>
  * 
  */
 public class MocoControlBoundConstraint extends MocoPathConstraint {
@@ -92,7 +94,9 @@ public class MocoControlBoundConstraint extends MocoPathConstraint {
 
   /**
    *  Set the control paths (absolute paths to actuators in the model)<br>
-   *  constrained by this class.<br>
+   *  constrained by this class. If constraining an Input control, the path<br>
+   *  will be the path to the InputController appended with the Input control<br>
+   *  label (e.g., "/controllerset/my_input_controller/input_control_0").<br>
    *  
    */
   public void addControlPath(String controlPath) {

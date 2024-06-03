@@ -48,8 +48,8 @@ public class OutputNotFound extends OpenSimException {
     super.delete();
   }
 
-  public OutputNotFound(String file, long line, String func, OpenSimObject obj, String outputName) {
-    this(opensimCommonJNI.new_OutputNotFound(file, line, func, OpenSimObject.getCPtr(obj), obj, outputName), true);
+  public OutputNotFound(String file, long line, String methodName, OpenSimObject obj, String outputName) {
+    this(opensimCommonJNI.new_OutputNotFound(file, line, methodName, OpenSimObject.getCPtr(obj), obj, outputName), true);
   }
 
 }

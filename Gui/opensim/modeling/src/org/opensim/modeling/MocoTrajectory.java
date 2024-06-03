@@ -15,12 +15,13 @@ package org.opensim.modeling;
  * <br>
  * A MocoTrajectory can be written to and read from an STO (".sto") file. The file<br>
  * format is comprised of a file header followed by a row of column names and the<br>
- * stored data. The file header contains the number of states, controls, Lagrange<br>
- * multipliers (for kinematic constraints), derivatives (non-zero if the dynamics<br>
- * mode is implicit), slacks (for special solver implementations), and parameters<br>
- * (order does not matter). Order does matter for the column names and<br>
- * corresponding data columns. The columns *must* follow this order: time, states,<br>
- * controls, multipliers, derivatives, slacks, parameters.<br>
+ * stored data. The file header contains the number of states, controls, Input <br>
+ * controls, Lagrange multipliers (for kinematic constraints), derivatives <br>
+ * (non-zero if the dynamics mode is implicit), slacks (for special solver <br>
+ * implementations), and parameters (order does not matter). Order does matter for <br>
+ * the column names and corresponding data columns. The columns *must* follow this <br>
+ * order: time, states, controls, Input controls, multipliers, derivatives, slacks, <br>
+ * parameters.<br>
  * Note: Slack columns may contain real number or NaN values, depending on their<br>
  * use. For example, values for velocity correction variables used in problems<br>
  * with model kinematic constraints are defined only at the midpoint of a Hermite-<br>
@@ -32,12 +33,14 @@ package org.opensim.modeling;
  * <br>
  * num_controls=&lt;number-of-control-variables&gt;<br>
  * num_derivatives=&lt;number-of-derivative-variables&gt;<br>
+ * num_input_controls=&lt;number-of-input-control-variables&gt;<br>
  * num_multipliers=&lt;number-of-multiplier-variables&gt;<br>
  * num_parameters=&lt;number-of-parameter-variables&gt;<br>
  * num_slacks=&lt;number-of-slack-variables&gt;<br>
  * num_states=&lt;number-of-state-variables&gt;<br>
- * time,&lt;state-0-name&gt;,...,&lt;control-0-name&gt;,...,&lt;multiplier-0-name&gt;,..., <br>
- *         &lt;derivative-0-name&gt;,...,&lt;slack-0-name&gt;,...,&lt;parameter-0-name&gt;,...<br>
+ * time,&lt;state-0-name&gt;,...,&lt;control-0-name&gt;,...,&lt;input-control-0-name&gt;,..., <br>
+ *         &lt;multiplier-0-name&gt;,...,&lt;derivative-0-name&gt;,...,&lt;slack-0-name&gt;,..., <br>
+ *         &lt;parameter-0-name&gt;,...<br>
  * &lt;#&gt;,&lt;#&gt;,...,&lt;#&gt;,...,&lt;#&gt;,...,&lt;#&gt;,...,&lt;#-or-NaN&gt;,...,&lt;#&gt;  ,...<br>
  * &lt;#&gt;,&lt;#&gt;,...,&lt;#&gt;,...,&lt;#&gt;,...,&lt;#&gt;,...,&lt;#-or-NaN&gt;,...,&lt;NaN&gt;,...<br>
  *  : , : ,..., : ,..., : ,..., : ,...,    :     ,...,  :  ,...<br>
@@ -246,8 +249,12 @@ public class MocoTrajectory {
     this(opensimMocoJNI.new_MocoTrajectory__SWIG_2(StdVectorString.getCPtr(state_names), state_names, StdVectorString.getCPtr(control_names), control_names, StdVectorString.getCPtr(multiplier_names), multiplier_names, StdVectorString.getCPtr(derivative_names), derivative_names, StdVectorString.getCPtr(parameter_names), parameter_names), true);
   }
 
+  public MocoTrajectory(StdVectorString state_names, StdVectorString control_names, StdVectorString input_control_names, StdVectorString multiplier_names, StdVectorString derivative_names, StdVectorString parameter_names) {
+    this(opensimMocoJNI.new_MocoTrajectory__SWIG_3(StdVectorString.getCPtr(state_names), state_names, StdVectorString.getCPtr(control_names), control_names, StdVectorString.getCPtr(input_control_names), input_control_names, StdVectorString.getCPtr(multiplier_names), multiplier_names, StdVectorString.getCPtr(derivative_names), derivative_names, StdVectorString.getCPtr(parameter_names), parameter_names), true);
+  }
+
   public MocoTrajectory(Vector time, StdVectorString state_names, StdVectorString control_names, StdVectorString multiplier_names, StdVectorString parameter_names, Matrix statesTrajectory, Matrix controlsTrajectory, Matrix multipliersTrajectory, RowVector parameters) {
-    this(opensimMocoJNI.new_MocoTrajectory__SWIG_3(Vector.getCPtr(time), time, StdVectorString.getCPtr(state_names), state_names, StdVectorString.getCPtr(control_names), control_names, StdVectorString.getCPtr(multiplier_names), multiplier_names, StdVectorString.getCPtr(parameter_names), parameter_names, Matrix.getCPtr(statesTrajectory), statesTrajectory, Matrix.getCPtr(controlsTrajectory), controlsTrajectory, Matrix.getCPtr(multipliersTrajectory), multipliersTrajectory, RowVector.getCPtr(parameters), parameters), true);
+    this(opensimMocoJNI.new_MocoTrajectory__SWIG_4(Vector.getCPtr(time), time, StdVectorString.getCPtr(state_names), state_names, StdVectorString.getCPtr(control_names), control_names, StdVectorString.getCPtr(multiplier_names), multiplier_names, StdVectorString.getCPtr(parameter_names), parameter_names, Matrix.getCPtr(statesTrajectory), statesTrajectory, Matrix.getCPtr(controlsTrajectory), controlsTrajectory, Matrix.getCPtr(multipliersTrajectory), multipliersTrajectory, RowVector.getCPtr(parameters), parameters), true);
   }
 
   /**
@@ -255,7 +262,11 @@ public class MocoTrajectory {
    *  allows specifying a derivativesTrajectory.
    */
   public MocoTrajectory(Vector time, StdVectorString state_names, StdVectorString control_names, StdVectorString multiplier_names, StdVectorString derivative_names, StdVectorString parameter_names, Matrix statesTrajectory, Matrix controlsTrajectory, Matrix multipliersTrajectory, Matrix derivativesTrajectory, RowVector parameters) {
-    this(opensimMocoJNI.new_MocoTrajectory__SWIG_4(Vector.getCPtr(time), time, StdVectorString.getCPtr(state_names), state_names, StdVectorString.getCPtr(control_names), control_names, StdVectorString.getCPtr(multiplier_names), multiplier_names, StdVectorString.getCPtr(derivative_names), derivative_names, StdVectorString.getCPtr(parameter_names), parameter_names, Matrix.getCPtr(statesTrajectory), statesTrajectory, Matrix.getCPtr(controlsTrajectory), controlsTrajectory, Matrix.getCPtr(multipliersTrajectory), multipliersTrajectory, Matrix.getCPtr(derivativesTrajectory), derivativesTrajectory, RowVector.getCPtr(parameters), parameters), true);
+    this(opensimMocoJNI.new_MocoTrajectory__SWIG_5(Vector.getCPtr(time), time, StdVectorString.getCPtr(state_names), state_names, StdVectorString.getCPtr(control_names), control_names, StdVectorString.getCPtr(multiplier_names), multiplier_names, StdVectorString.getCPtr(derivative_names), derivative_names, StdVectorString.getCPtr(parameter_names), parameter_names, Matrix.getCPtr(statesTrajectory), statesTrajectory, Matrix.getCPtr(controlsTrajectory), controlsTrajectory, Matrix.getCPtr(multipliersTrajectory), multipliersTrajectory, Matrix.getCPtr(derivativesTrajectory), derivativesTrajectory, RowVector.getCPtr(parameters), parameters), true);
+  }
+
+  public MocoTrajectory(Vector time, StdVectorString state_names, StdVectorString control_names, StdVectorString input_control_names, StdVectorString multiplier_names, StdVectorString derivative_names, StdVectorString parameter_names, Matrix statesTrajectory, Matrix controlsTrajectory, Matrix inputControlsTrajectory, Matrix multipliersTrajectory, Matrix derivativesTrajectory, RowVector parameters) {
+    this(opensimMocoJNI.new_MocoTrajectory__SWIG_6(Vector.getCPtr(time), time, StdVectorString.getCPtr(state_names), state_names, StdVectorString.getCPtr(control_names), control_names, StdVectorString.getCPtr(input_control_names), input_control_names, StdVectorString.getCPtr(multiplier_names), multiplier_names, StdVectorString.getCPtr(derivative_names), derivative_names, StdVectorString.getCPtr(parameter_names), parameter_names, Matrix.getCPtr(statesTrajectory), statesTrajectory, Matrix.getCPtr(controlsTrajectory), controlsTrajectory, Matrix.getCPtr(inputControlsTrajectory), inputControlsTrajectory, Matrix.getCPtr(multipliersTrajectory), multipliersTrajectory, Matrix.getCPtr(derivativesTrajectory), derivativesTrajectory, RowVector.getCPtr(parameters), parameters), true);
   }
 
   /**
@@ -263,7 +274,7 @@ public class MocoTrajectory {
    *  of write() for the correct format.
    */
   public MocoTrajectory(String filepath) {
-    this(opensimMocoJNI.new_MocoTrajectory__SWIG_5(filepath), true);
+    this(opensimMocoJNI.new_MocoTrajectory__SWIG_7(filepath), true);
   }
 
   /**
@@ -386,6 +397,17 @@ public class MocoTrajectory {
   }
 
   /**
+   *  Set the value of a single Input control variable across time. The <br>
+   *  provided vector must have length getNumTimes().<br>
+   *  Note: Using `setInputControl(name, {5, 10})` uses the initializer list<br>
+   *  overload below; it does *not* construct a 5-element vector with the<br>
+   *  value 10.
+   */
+  public void setInputControl(String name, Vector trajectory) {
+    opensimMocoJNI.MocoTrajectory_setInputControl__SWIG_0(swigCPtr, this, name, Vector.getCPtr(trajectory), trajectory);
+  }
+
+  /**
    *  Set the value of a single Lagrange multiplier variable across time. The<br>
    *  provided vector must have length getNumTimes().<br>
    *  Note: Using `setMultiplier(name, {5, 10})` uses the initializer list<br>
@@ -413,6 +435,18 @@ public class MocoTrajectory {
    */
   public void setParameter(String name, double value) {
     opensimMocoJNI.MocoTrajectory_setParameter(swigCPtr, this, name, value);
+  }
+
+  /**
+   *  Set the value of a single Input control variable across time. The <br>
+   *  provided vector must have length getNumTimes().<br>
+   *  This variant supports use of an initializer list:<br>
+   *  {@code 
+   trajectory.setInputControl("/my_controller/input", {0, 0.5, 1.0});
+   }
+   */
+  public void setInputControl(String name, SWIGTYPE_p_std__initializer_listT_double_t trajectory) {
+    opensimMocoJNI.MocoTrajectory_setInputControl__SWIG_1(swigCPtr, this, name, SWIGTYPE_p_std__initializer_listT_double_t.getCPtr(trajectory));
   }
 
   /**
@@ -564,6 +598,28 @@ public class MocoTrajectory {
   }
 
   /**
+   *  Compute model controls based on any Controller%s in the model and append<br>
+   *  to the trajectory. The model must contain InputController%s with Input%s <br>
+   *  that match the Input control names in the trajectory, if they exist.<br>
+   *  Note: Use `overwrite` to replace existing control values in the<br>
+   *        trajectory, if desired. 
+   */
+  public void generateControlsFromModelControllers(Model model, boolean overwrite) {
+    opensimMocoJNI.MocoTrajectory_generateControlsFromModelControllers__SWIG_0(swigCPtr, this, Model.getCPtr(model), model, overwrite);
+  }
+
+  /**
+   *  Compute model controls based on any Controller%s in the model and append<br>
+   *  to the trajectory. The model must contain InputController%s with Input%s <br>
+   *  that match the Input control names in the trajectory, if they exist.<br>
+   *  Note: Use `overwrite` to replace existing control values in the<br>
+   *        trajectory, if desired. 
+   */
+  public void generateControlsFromModelControllers(Model model) {
+    opensimMocoJNI.MocoTrajectory_generateControlsFromModelControllers__SWIG_1(swigCPtr, this, Model.getCPtr(model), model);
+  }
+
+  /**
    *  Trim the trajectory to include the rows starting at newStartIndex and<br>
    *  and ending at newFinalIndex.
    */
@@ -605,6 +661,10 @@ public class MocoTrajectory {
 
   public int getNumControls() {
     return opensimMocoJNI.MocoTrajectory_getNumControls(swigCPtr, this);
+  }
+
+  public int getNumInputControls() {
+    return opensimMocoJNI.MocoTrajectory_getNumInputControls(swigCPtr, this);
   }
 
   public int getNumMultipliers() {
@@ -651,6 +711,10 @@ public class MocoTrajectory {
     return new StdVectorString(opensimMocoJNI.MocoTrajectory_getControlNames(swigCPtr, this), false);
   }
 
+  public StdVectorString getInputControlNames() {
+    return new StdVectorString(opensimMocoJNI.MocoTrajectory_getInputControlNames(swigCPtr, this), false);
+  }
+
   public StdVectorString getMultiplierNames() {
     return new StdVectorString(opensimMocoJNI.MocoTrajectory_getMultiplierNames(swigCPtr, this), false);
   }
@@ -695,6 +759,10 @@ public class MocoTrajectory {
     return new VectorView(opensimMocoJNI.MocoTrajectory_getControl(swigCPtr, this, name), true);
   }
 
+  public VectorView getInputControl(String name) {
+    return new VectorView(opensimMocoJNI.MocoTrajectory_getInputControl(swigCPtr, this, name), true);
+  }
+
   public VectorView getMultiplier(String name) {
     return new VectorView(opensimMocoJNI.MocoTrajectory_getMultiplier(swigCPtr, this, name), true);
   }
@@ -713,6 +781,10 @@ public class MocoTrajectory {
 
   public Matrix getControlsTrajectory() {
     return new Matrix(opensimMocoJNI.MocoTrajectory_getControlsTrajectory(swigCPtr, this), false);
+  }
+
+  public Matrix getInputControlsTrajectory() {
+    return new Matrix(opensimMocoJNI.MocoTrajectory_getInputControlsTrajectory(swigCPtr, this), false);
   }
 
   public Matrix getMultipliersTrajectory() {
@@ -831,6 +903,7 @@ public class MocoTrajectory {
    *  integrating the sum of squared error across<br>
    *  states,<br>
    *  controls,<br>
+   *  Input controls,<br>
    *  Lagrange multipliers, and<br>
    *  derivatives and dividing by the number of columns and the time duration.<br>
    *  The calculation can be expressed as follows:<br>
@@ -862,6 +935,7 @@ public class MocoTrajectory {
    *  specific<br>
    *  states,<br>
    *  controls,<br>
+   *  Input controls,<br>
    *  multipliers, and<br>
    *  derivatives to compare as keys for `columnsToUse`.<br>
    *  Values are an empty vector to compare all columns for that key,<br>
@@ -882,6 +956,7 @@ public class MocoTrajectory {
    *  integrating the sum of squared error across<br>
    *  states,<br>
    *  controls,<br>
+   *  Input controls,<br>
    *  Lagrange multipliers, and<br>
    *  derivatives and dividing by the number of columns and the time duration.<br>
    *  The calculation can be expressed as follows:<br>
@@ -913,6 +988,7 @@ public class MocoTrajectory {
    *  specific<br>
    *  states,<br>
    *  controls,<br>
+   *  Input controls,<br>
    *  multipliers, and<br>
    *  derivatives to compare as keys for `columnsToUse`.<br>
    *  Values are an empty vector to compare all columns for that key,<br>
@@ -989,6 +1065,13 @@ public class MocoTrajectory {
    */
   public TimeSeriesTable exportToControlsTable() {
     return new TimeSeriesTable(opensimMocoJNI.MocoTrajectory_exportToControlsTable(swigCPtr, this), true);
+  }
+
+  /**
+   *  Export the Input controls trajectory to a TimeSeriesTable.
+   */
+  public TimeSeriesTable exportToInputControlsTable() {
+    return new TimeSeriesTable(opensimMocoJNI.MocoTrajectory_exportToInputControlsTable(swigCPtr, this), true);
   }
 
   /**

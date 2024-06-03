@@ -80,10 +80,11 @@ public class ModelFactory {
 
   /**
    *  This model contains:<br>
-   *  - 1 body: mass 1.0 kg, `/bodyset/body`.<br>
+   *  - 1 body: mass 1.0 kg, `/body`.<br>
    *  - 1 joint: SliderJoint along x axis, `/jointset/slider`, with<br>
-   *             coordinate `/jointset/slider/position`.<br>
-   *  - 1 actuator: CoordinateActuator, controls [-10, 10], `/actuator`.<br>
+   *             coordinate `/slider/position`.<br>
+   *  - 1 actuator: CoordinateActuator, controls [-10, 10],<br>
+   *               `/forceset/actuator`.<br>
    *  Gravity is default; that is, (0, -g, 0).
    */
   public static Model createSlidingPointMass() {

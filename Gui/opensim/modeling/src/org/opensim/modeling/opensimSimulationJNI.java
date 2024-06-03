@@ -1549,6 +1549,7 @@ public class opensimSimulationJNI {
   public final static native long Force_getRecordLabels(long jarg1, Force jarg1_);
   public final static native long Force_getRecordValues(long jarg1, Force jarg1_, long jarg2, State jarg2_);
   public final static native boolean Force_hasVisualPath(long jarg1, Force jarg1_);
+  public final static native long Force_getForceIndex(long jarg1, Force jarg1_);
   public final static native void delete_Force(long jarg1);
   public final static native long SetForces_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void SetForces_assign(long jarg1, SetForces jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -5241,6 +5242,7 @@ public class opensimSimulationJNI {
   public final static native long Model_getDefaultControls(long jarg1, Model jarg1_);
   public final static native long Model_updControls(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_markControlsAsValid(long jarg1, Model jarg1_, long jarg2, State jarg2_);
+  public final static native void Model_markControlsAsInvalid(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_setControls(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native long Model_getControls(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native void Model_computeControls(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
@@ -5266,6 +5268,7 @@ public class opensimSimulationJNI {
   public final static native long Model_calcLinearMomentum(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native double Model_calcKineticEnergy(long jarg1, Model jarg1_, long jarg2, State jarg2_);
   public final static native double Model_calcPotentialEnergy(long jarg1, Model jarg1_, long jarg2, State jarg2_);
+  public final static native void Model_calcForceContributionsSum(long jarg1, Model jarg1_, long jarg2, State jarg2_, long jarg3, long jarg4, VectorOfSpatialVec jarg4_, long jarg5, Vector jarg5_);
   public final static native int Model_getNumMuscleStates(long jarg1, Model jarg1_);
   public final static native int Model_getNumProbeStates(long jarg1, Model jarg1_);
   public final static native long Model_updCoordinateSet(long jarg1, Model jarg1_);
@@ -7451,6 +7454,8 @@ public class opensimSimulationJNI {
   public final static native long FrameIterator_printComponentsMatching(long jarg1, FrameIterator jarg1_, String jarg2);
   public final static native int FrameIterator_getNumStateVariables(long jarg1, FrameIterator jarg1_);
   public final static native long FrameIterator_getStateVariableNames(long jarg1, FrameIterator jarg1_);
+  public final static native long FrameIterator_getDiscreteVariableNames(long jarg1, FrameIterator jarg1_);
+  public final static native long FrameIterator_getModelingOptionNames(long jarg1, FrameIterator jarg1_);
   public final static native int FrameIterator_getNumSockets(long jarg1, FrameIterator jarg1_);
   public final static native long FrameIterator_getSocketNames(long jarg1, FrameIterator jarg1_);
   public final static native long FrameIterator_getConnectee__SWIG_2(long jarg1, FrameIterator jarg1_, String jarg2);
@@ -7472,8 +7477,11 @@ public class opensimSimulationJNI {
   public final static native long FrameIterator_getStateVariableValues(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_);
   public final static native void FrameIterator_setStateVariableValues(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native double FrameIterator_getStateVariableDerivativeValue(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long FrameIterator_resolveVariableNameAndOwner(long jarg1, FrameIterator jarg1_, long jarg2, ComponentPath jarg2_, long jarg3);
   public final static native double FrameIterator_getDiscreteVariableValue(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long FrameIterator_getDiscreteVariableAbstractValue(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void FrameIterator_setDiscreteVariableValue(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_, String jarg3, double jarg4);
+  public final static native long FrameIterator_updDiscreteVariableAbstractValue(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native long FrameIterator_getCacheVariableIndex(long jarg1, FrameIterator jarg1_, String jarg2);
   public final static native boolean FrameIterator_isCacheVariableValid(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void FrameIterator_markCacheVariableValid(long jarg1, FrameIterator jarg1_, long jarg2, State jarg2_, String jarg3);
@@ -7587,6 +7595,8 @@ public class opensimSimulationJNI {
   public final static native long BodyIterator_printComponentsMatching(long jarg1, BodyIterator jarg1_, String jarg2);
   public final static native int BodyIterator_getNumStateVariables(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_getStateVariableNames(long jarg1, BodyIterator jarg1_);
+  public final static native long BodyIterator_getDiscreteVariableNames(long jarg1, BodyIterator jarg1_);
+  public final static native long BodyIterator_getModelingOptionNames(long jarg1, BodyIterator jarg1_);
   public final static native int BodyIterator_getNumSockets(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_getSocketNames(long jarg1, BodyIterator jarg1_);
   public final static native long BodyIterator_getConnectee__SWIG_2(long jarg1, BodyIterator jarg1_, String jarg2);
@@ -7608,8 +7618,11 @@ public class opensimSimulationJNI {
   public final static native long BodyIterator_getStateVariableValues(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_);
   public final static native void BodyIterator_setStateVariableValues(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native double BodyIterator_getStateVariableDerivativeValue(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long BodyIterator_resolveVariableNameAndOwner(long jarg1, BodyIterator jarg1_, long jarg2, ComponentPath jarg2_, long jarg3);
   public final static native double BodyIterator_getDiscreteVariableValue(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long BodyIterator_getDiscreteVariableAbstractValue(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void BodyIterator_setDiscreteVariableValue(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_, String jarg3, double jarg4);
+  public final static native long BodyIterator_updDiscreteVariableAbstractValue(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native long BodyIterator_getCacheVariableIndex(long jarg1, BodyIterator jarg1_, String jarg2);
   public final static native boolean BodyIterator_isCacheVariableValid(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void BodyIterator_markCacheVariableValid(long jarg1, BodyIterator jarg1_, long jarg2, State jarg2_, String jarg3);
@@ -7795,6 +7808,7 @@ public class opensimSimulationJNI {
   public final static native boolean MuscleIterator_shouldBeParallelized(long jarg1, MuscleIterator jarg1_);
   public final static native boolean MuscleIterator_appliesForce(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void MuscleIterator_setAppliesForce(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_, boolean jarg3);
+  public final static native long MuscleIterator_getForceIndex(long jarg1, MuscleIterator jarg1_);
   public final static native long MuscleIterator_getModel(long jarg1, MuscleIterator jarg1_);
   public final static native boolean MuscleIterator_hasModel(long jarg1, MuscleIterator jarg1_);
   public final static native void MuscleIterator_addToSystem(long jarg1, MuscleIterator jarg1_, long jarg2);
@@ -7812,6 +7826,8 @@ public class opensimSimulationJNI {
   public final static native long MuscleIterator_printComponentsMatching(long jarg1, MuscleIterator jarg1_, String jarg2);
   public final static native int MuscleIterator_getNumStateVariables(long jarg1, MuscleIterator jarg1_);
   public final static native long MuscleIterator_getStateVariableNames(long jarg1, MuscleIterator jarg1_);
+  public final static native long MuscleIterator_getDiscreteVariableNames(long jarg1, MuscleIterator jarg1_);
+  public final static native long MuscleIterator_getModelingOptionNames(long jarg1, MuscleIterator jarg1_);
   public final static native int MuscleIterator_getNumSockets(long jarg1, MuscleIterator jarg1_);
   public final static native long MuscleIterator_getSocketNames(long jarg1, MuscleIterator jarg1_);
   public final static native long MuscleIterator_getConnectee__SWIG_2(long jarg1, MuscleIterator jarg1_, String jarg2);
@@ -7833,8 +7849,11 @@ public class opensimSimulationJNI {
   public final static native long MuscleIterator_getStateVariableValues(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void MuscleIterator_setStateVariableValues(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native double MuscleIterator_getStateVariableDerivativeValue(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long MuscleIterator_resolveVariableNameAndOwner(long jarg1, MuscleIterator jarg1_, long jarg2, ComponentPath jarg2_, long jarg3);
   public final static native double MuscleIterator_getDiscreteVariableValue(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long MuscleIterator_getDiscreteVariableAbstractValue(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void MuscleIterator_setDiscreteVariableValue(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3, double jarg4);
+  public final static native long MuscleIterator_updDiscreteVariableAbstractValue(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native long MuscleIterator_getCacheVariableIndex(long jarg1, MuscleIterator jarg1_, String jarg2);
   public final static native boolean MuscleIterator_isCacheVariableValid(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void MuscleIterator_markCacheVariableValid(long jarg1, MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
@@ -7902,6 +7921,8 @@ public class opensimSimulationJNI {
   public final static native long ModelComponentIterator_printComponentsMatching(long jarg1, ModelComponentIterator jarg1_, String jarg2);
   public final static native int ModelComponentIterator_getNumStateVariables(long jarg1, ModelComponentIterator jarg1_);
   public final static native long ModelComponentIterator_getStateVariableNames(long jarg1, ModelComponentIterator jarg1_);
+  public final static native long ModelComponentIterator_getDiscreteVariableNames(long jarg1, ModelComponentIterator jarg1_);
+  public final static native long ModelComponentIterator_getModelingOptionNames(long jarg1, ModelComponentIterator jarg1_);
   public final static native int ModelComponentIterator_getNumSockets(long jarg1, ModelComponentIterator jarg1_);
   public final static native long ModelComponentIterator_getSocketNames(long jarg1, ModelComponentIterator jarg1_);
   public final static native long ModelComponentIterator_getConnectee__SWIG_2(long jarg1, ModelComponentIterator jarg1_, String jarg2);
@@ -7923,8 +7944,11 @@ public class opensimSimulationJNI {
   public final static native long ModelComponentIterator_getStateVariableValues(long jarg1, ModelComponentIterator jarg1_, long jarg2, State jarg2_);
   public final static native void ModelComponentIterator_setStateVariableValues(long jarg1, ModelComponentIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native double ModelComponentIterator_getStateVariableDerivativeValue(long jarg1, ModelComponentIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long ModelComponentIterator_resolveVariableNameAndOwner(long jarg1, ModelComponentIterator jarg1_, long jarg2, ComponentPath jarg2_, long jarg3);
   public final static native double ModelComponentIterator_getDiscreteVariableValue(long jarg1, ModelComponentIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long ModelComponentIterator_getDiscreteVariableAbstractValue(long jarg1, ModelComponentIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void ModelComponentIterator_setDiscreteVariableValue(long jarg1, ModelComponentIterator jarg1_, long jarg2, State jarg2_, String jarg3, double jarg4);
+  public final static native long ModelComponentIterator_updDiscreteVariableAbstractValue(long jarg1, ModelComponentIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native long ModelComponentIterator_getCacheVariableIndex(long jarg1, ModelComponentIterator jarg1_, String jarg2);
   public final static native boolean ModelComponentIterator_isCacheVariableValid(long jarg1, ModelComponentIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void ModelComponentIterator_markCacheVariableValid(long jarg1, ModelComponentIterator jarg1_, long jarg2, State jarg2_, String jarg3);
@@ -8008,6 +8032,8 @@ public class opensimSimulationJNI {
   public final static native long JointIterator_printComponentsMatching(long jarg1, JointIterator jarg1_, String jarg2);
   public final static native int JointIterator_getNumStateVariables(long jarg1, JointIterator jarg1_);
   public final static native long JointIterator_getStateVariableNames(long jarg1, JointIterator jarg1_);
+  public final static native long JointIterator_getDiscreteVariableNames(long jarg1, JointIterator jarg1_);
+  public final static native long JointIterator_getModelingOptionNames(long jarg1, JointIterator jarg1_);
   public final static native int JointIterator_getNumSockets(long jarg1, JointIterator jarg1_);
   public final static native long JointIterator_getSocketNames(long jarg1, JointIterator jarg1_);
   public final static native long JointIterator_getConnectee__SWIG_2(long jarg1, JointIterator jarg1_, String jarg2);
@@ -8029,8 +8055,11 @@ public class opensimSimulationJNI {
   public final static native long JointIterator_getStateVariableValues(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_);
   public final static native void JointIterator_setStateVariableValues(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native double JointIterator_getStateVariableDerivativeValue(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long JointIterator_resolveVariableNameAndOwner(long jarg1, JointIterator jarg1_, long jarg2, ComponentPath jarg2_, long jarg3);
   public final static native double JointIterator_getDiscreteVariableValue(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long JointIterator_getDiscreteVariableAbstractValue(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void JointIterator_setDiscreteVariableValue(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_, String jarg3, double jarg4);
+  public final static native long JointIterator_updDiscreteVariableAbstractValue(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native long JointIterator_getCacheVariableIndex(long jarg1, JointIterator jarg1_, String jarg2);
   public final static native boolean JointIterator_isCacheVariableValid(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void JointIterator_markCacheVariableValid(long jarg1, JointIterator jarg1_, long jarg2, State jarg2_, String jarg3);
@@ -8096,6 +8125,7 @@ public class opensimSimulationJNI {
   public final static native long ActuatorIterator_getRecordLabels(long jarg1, ActuatorIterator jarg1_);
   public final static native long ActuatorIterator_getRecordValues(long jarg1, ActuatorIterator jarg1_, long jarg2, State jarg2_);
   public final static native boolean ActuatorIterator_hasVisualPath(long jarg1, ActuatorIterator jarg1_);
+  public final static native long ActuatorIterator_getForceIndex(long jarg1, ActuatorIterator jarg1_);
   public final static native long ActuatorIterator_getModel(long jarg1, ActuatorIterator jarg1_);
   public final static native boolean ActuatorIterator_hasModel(long jarg1, ActuatorIterator jarg1_);
   public final static native void ActuatorIterator_addToSystem(long jarg1, ActuatorIterator jarg1_, long jarg2);
@@ -8113,6 +8143,8 @@ public class opensimSimulationJNI {
   public final static native long ActuatorIterator_printComponentsMatching(long jarg1, ActuatorIterator jarg1_, String jarg2);
   public final static native int ActuatorIterator_getNumStateVariables(long jarg1, ActuatorIterator jarg1_);
   public final static native long ActuatorIterator_getStateVariableNames(long jarg1, ActuatorIterator jarg1_);
+  public final static native long ActuatorIterator_getDiscreteVariableNames(long jarg1, ActuatorIterator jarg1_);
+  public final static native long ActuatorIterator_getModelingOptionNames(long jarg1, ActuatorIterator jarg1_);
   public final static native int ActuatorIterator_getNumSockets(long jarg1, ActuatorIterator jarg1_);
   public final static native long ActuatorIterator_getSocketNames(long jarg1, ActuatorIterator jarg1_);
   public final static native long ActuatorIterator_getConnectee__SWIG_2(long jarg1, ActuatorIterator jarg1_, String jarg2);
@@ -8134,8 +8166,11 @@ public class opensimSimulationJNI {
   public final static native long ActuatorIterator_getStateVariableValues(long jarg1, ActuatorIterator jarg1_, long jarg2, State jarg2_);
   public final static native void ActuatorIterator_setStateVariableValues(long jarg1, ActuatorIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native double ActuatorIterator_getStateVariableDerivativeValue(long jarg1, ActuatorIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long ActuatorIterator_resolveVariableNameAndOwner(long jarg1, ActuatorIterator jarg1_, long jarg2, ComponentPath jarg2_, long jarg3);
   public final static native double ActuatorIterator_getDiscreteVariableValue(long jarg1, ActuatorIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long ActuatorIterator_getDiscreteVariableAbstractValue(long jarg1, ActuatorIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void ActuatorIterator_setDiscreteVariableValue(long jarg1, ActuatorIterator jarg1_, long jarg2, State jarg2_, String jarg3, double jarg4);
+  public final static native long ActuatorIterator_updDiscreteVariableAbstractValue(long jarg1, ActuatorIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native long ActuatorIterator_getCacheVariableIndex(long jarg1, ActuatorIterator jarg1_, String jarg2);
   public final static native boolean ActuatorIterator_isCacheVariableValid(long jarg1, ActuatorIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void ActuatorIterator_markCacheVariableValid(long jarg1, ActuatorIterator jarg1_, long jarg2, State jarg2_, String jarg3);
@@ -8361,6 +8396,7 @@ public class opensimSimulationJNI {
   public final static native boolean Thelen2003MuscleIterator_shouldBeParallelized(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native boolean Thelen2003MuscleIterator_appliesForce(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Thelen2003MuscleIterator_setAppliesForce(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_, boolean jarg3);
+  public final static native long Thelen2003MuscleIterator_getForceIndex(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native long Thelen2003MuscleIterator_getModel(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native boolean Thelen2003MuscleIterator_hasModel(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native void Thelen2003MuscleIterator_addToSystem(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2);
@@ -8378,6 +8414,8 @@ public class opensimSimulationJNI {
   public final static native long Thelen2003MuscleIterator_printComponentsMatching(long jarg1, Thelen2003MuscleIterator jarg1_, String jarg2);
   public final static native int Thelen2003MuscleIterator_getNumStateVariables(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native long Thelen2003MuscleIterator_getStateVariableNames(long jarg1, Thelen2003MuscleIterator jarg1_);
+  public final static native long Thelen2003MuscleIterator_getDiscreteVariableNames(long jarg1, Thelen2003MuscleIterator jarg1_);
+  public final static native long Thelen2003MuscleIterator_getModelingOptionNames(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native int Thelen2003MuscleIterator_getNumSockets(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native long Thelen2003MuscleIterator_getSocketNames(long jarg1, Thelen2003MuscleIterator jarg1_);
   public final static native long Thelen2003MuscleIterator_getConnectee__SWIG_2(long jarg1, Thelen2003MuscleIterator jarg1_, String jarg2);
@@ -8399,8 +8437,11 @@ public class opensimSimulationJNI {
   public final static native long Thelen2003MuscleIterator_getStateVariableValues(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Thelen2003MuscleIterator_setStateVariableValues(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native double Thelen2003MuscleIterator_getStateVariableDerivativeValue(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long Thelen2003MuscleIterator_resolveVariableNameAndOwner(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, ComponentPath jarg2_, long jarg3);
   public final static native double Thelen2003MuscleIterator_getDiscreteVariableValue(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long Thelen2003MuscleIterator_getDiscreteVariableAbstractValue(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void Thelen2003MuscleIterator_setDiscreteVariableValue(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3, double jarg4);
+  public final static native long Thelen2003MuscleIterator_updDiscreteVariableAbstractValue(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native long Thelen2003MuscleIterator_getCacheVariableIndex(long jarg1, Thelen2003MuscleIterator jarg1_, String jarg2);
   public final static native boolean Thelen2003MuscleIterator_isCacheVariableValid(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void Thelen2003MuscleIterator_markCacheVariableValid(long jarg1, Thelen2003MuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
@@ -8639,6 +8680,7 @@ public class opensimSimulationJNI {
   public final static native boolean Millard2012EquilibriumMuscleIterator_shouldBeParallelized(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native boolean Millard2012EquilibriumMuscleIterator_appliesForce(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Millard2012EquilibriumMuscleIterator_setAppliesForce(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, boolean jarg3);
+  public final static native long Millard2012EquilibriumMuscleIterator_getForceIndex(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native long Millard2012EquilibriumMuscleIterator_getModel(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native boolean Millard2012EquilibriumMuscleIterator_hasModel(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native void Millard2012EquilibriumMuscleIterator_addToSystem(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2);
@@ -8656,6 +8698,8 @@ public class opensimSimulationJNI {
   public final static native long Millard2012EquilibriumMuscleIterator_printComponentsMatching(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, String jarg2);
   public final static native int Millard2012EquilibriumMuscleIterator_getNumStateVariables(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native long Millard2012EquilibriumMuscleIterator_getStateVariableNames(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
+  public final static native long Millard2012EquilibriumMuscleIterator_getDiscreteVariableNames(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
+  public final static native long Millard2012EquilibriumMuscleIterator_getModelingOptionNames(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native int Millard2012EquilibriumMuscleIterator_getNumSockets(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native long Millard2012EquilibriumMuscleIterator_getSocketNames(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_);
   public final static native long Millard2012EquilibriumMuscleIterator_getConnectee__SWIG_2(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, String jarg2);
@@ -8677,8 +8721,11 @@ public class opensimSimulationJNI {
   public final static native long Millard2012EquilibriumMuscleIterator_getStateVariableValues(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_);
   public final static native void Millard2012EquilibriumMuscleIterator_setStateVariableValues(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, long jarg3, Vector jarg3_);
   public final static native double Millard2012EquilibriumMuscleIterator_getStateVariableDerivativeValue(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long Millard2012EquilibriumMuscleIterator_resolveVariableNameAndOwner(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, ComponentPath jarg2_, long jarg3);
   public final static native double Millard2012EquilibriumMuscleIterator_getDiscreteVariableValue(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
+  public final static native long Millard2012EquilibriumMuscleIterator_getDiscreteVariableAbstractValue(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void Millard2012EquilibriumMuscleIterator_setDiscreteVariableValue(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3, double jarg4);
+  public final static native long Millard2012EquilibriumMuscleIterator_updDiscreteVariableAbstractValue(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native long Millard2012EquilibriumMuscleIterator_getCacheVariableIndex(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, String jarg2);
   public final static native boolean Millard2012EquilibriumMuscleIterator_isCacheVariableValid(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);
   public final static native void Millard2012EquilibriumMuscleIterator_markCacheVariableValid(long jarg1, Millard2012EquilibriumMuscleIterator jarg1_, long jarg2, State jarg2_, String jarg3);

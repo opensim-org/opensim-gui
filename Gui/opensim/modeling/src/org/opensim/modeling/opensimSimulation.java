@@ -191,6 +191,7 @@ public class opensimSimulation {
    *  The map provides the index of each control variable in the SimTK::Vector<br>
    *  returned by Model::getControls(), using the control name as the<br>
    *  key.<br>
+   * <br>
    *  @throws Exception if the order of actuators in the model does not match<br>
    *      the order of controls in Model::getControls(). This is an internal<br>
    *      error, but you may be able to avoid the error by ensuring all Actuator%s<br>

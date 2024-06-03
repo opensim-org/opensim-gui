@@ -663,6 +663,42 @@ public class MocoTrack extends MocoTool {
     opensimMocoJNI.MocoTrack_set_control_effort_weight__SWIG_1(swigCPtr, this, value);
   }
 
+  public void copyProperty_controls_weight_set(MocoTrack source) {
+    opensimMocoJNI.MocoTrack_copyProperty_controls_weight_set(swigCPtr, this, MocoTrack.getCPtr(source), source);
+  }
+
+  public MocoWeightSet get_controls_weight_set(int i) {
+    return new MocoWeightSet(opensimMocoJNI.MocoTrack_get_controls_weight_set__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public MocoWeightSet upd_controls_weight_set(int i) {
+    return new MocoWeightSet(opensimMocoJNI.MocoTrack_upd_controls_weight_set__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_controls_weight_set(int i, MocoWeightSet value) {
+    opensimMocoJNI.MocoTrack_set_controls_weight_set__SWIG_0(swigCPtr, this, i, MocoWeightSet.getCPtr(value), value);
+  }
+
+  public int append_controls_weight_set(MocoWeightSet value) {
+    return opensimMocoJNI.MocoTrack_append_controls_weight_set(swigCPtr, this, MocoWeightSet.getCPtr(value), value);
+  }
+
+  public void constructProperty_controls_weight_set(MocoWeightSet initValue) {
+    opensimMocoJNI.MocoTrack_constructProperty_controls_weight_set(swigCPtr, this, MocoWeightSet.getCPtr(initValue), initValue);
+  }
+
+  public MocoWeightSet get_controls_weight_set() {
+    return new MocoWeightSet(opensimMocoJNI.MocoTrack_get_controls_weight_set__SWIG_1(swigCPtr, this), false);
+  }
+
+  public MocoWeightSet upd_controls_weight_set() {
+    return new MocoWeightSet(opensimMocoJNI.MocoTrack_upd_controls_weight_set__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_controls_weight_set(MocoWeightSet value) {
+    opensimMocoJNI.MocoTrack_set_controls_weight_set__SWIG_1(swigCPtr, this, MocoWeightSet.getCPtr(value), value);
+  }
+
   public MocoTrack() {
     this(opensimMocoJNI.new_MocoTrack(), true);
   }

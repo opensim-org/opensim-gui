@@ -83,9 +83,9 @@ package org.opensim.modeling;
  * <h2><b> ACTIVATION &amp; MAINTENANCE HEAT RATE (W) </b></h2><br>
  * If <i>activation_maintenance_rate_on</i> is set to true, then Adot+Mdot is calculated as follows:<br>
  * <br>
- * <b>Adot+Mdot = [128*(1-r) + 25] * A^0.6 * S                                         </b>,  <i> l_CE &lt;= l_CE_opt </i><br>
+ * <b>Adot+Mdot = m * [128*(1-r) + 25] * A^0.6 * S                                         </b>,  <i> l_CE &lt;= l_CE_opt </i><br>
  * <br>
- * <b>Adot+Mdot = (0.4*[128*(1-r) + 25] + 0.6*[128*(1-r) + 25]*F_CE_iso) * A^0.6 * S   </b>,  <i> l_CE &gt;  l_CE_opt </i><br>
+ * <b>Adot+Mdot = m * (0.4*[128*(1-r) + 25] + 0.6*[128*(1-r) + 25]*F_CE_iso) * A^0.6 * S   </b>,  <i> l_CE &gt;  l_CE_opt </i><br>
  *     - <b>A = u          </b>,    u &gt;  a<br>
  *     - <b>A = (u+a)/2    </b>,    u &lt;= a<br>
  * <br>

@@ -9,13 +9,12 @@
 package org.opensim.modeling;
 
 /**
- *  A multivariate polynomial function.<br>
+ * A multivariate polynomial function.<br>
  * <br>
- * This implementation assumes a maximum of six input dimensions and allows<br>
- * computation of first-order derivatives only.<br>
+ * This implementation allows computation of first-order derivatives only.<br>
  * <br>
- * For a third-order polynomial that is a function of three components (X, Y, Z),<br>
- * the order is a follows:<br>
+ * For a third-order polynomial that is a function of three components <br>
+ * (X, Y, Z), the order is a follows:<br>
  * <br>
  * <pre><br>
  * Index | X  Y  Z<br>
@@ -46,7 +45,7 @@ package org.opensim.modeling;
  * <br>
  * <br>
  * <br>
- * Note: The order of coefficients for this class is the *opposite** from the<br>
+ * Note: The order of coefficients for this class is the opposite from the<br>
  *       order used in the univariate PolynomialFunction.
  */
 public class MultivariatePolynomialFunction extends Function {
@@ -291,6 +290,81 @@ public class MultivariatePolynomialFunction extends Function {
    */
   public Vector getTermDerivatives(StdVectorInt derivComponent, Vector x) {
     return new Vector(opensimCommonJNI.MultivariatePolynomialFunction_getTermDerivatives(swigCPtr, this, StdVectorInt.getCPtr(derivComponent), derivComponent, Vector.getCPtr(x), x), true);
+  }
+
+  /**
+   * Generate a new MultivariatePolynomialFunction representing the first<br>
+   * derivative of the current function with respect to the specified<br>
+   * component. <br>
+   * <br>
+   * Therefore, the resulting function with have the same dimension<br>
+   * as the original function, but the order will be reduced by one. The <br>
+   * coefficients of the derivative function can be negated using the <br>
+   * `negateCoefficients` argument. This may be useful, for example, if the <br>
+   * current function represents the length of a muscle path and the <br>
+   * derivative is needed for computing muscle moment arms.<br>
+   * <br>
+   * @param derivComponent The component with respect to which the derivative<br>
+   *        is taken.<br>
+   * @param negateCoefficients If true, the coefficients of the derivative<br>
+   *        function will be negated.
+   */
+  public MultivariatePolynomialFunction generateDerivativeFunction(int derivComponent, boolean negateCoefficients) {
+    return new MultivariatePolynomialFunction(opensimCommonJNI.MultivariatePolynomialFunction_generateDerivativeFunction__SWIG_0(swigCPtr, this, derivComponent, negateCoefficients), true);
+  }
+
+  /**
+   * Generate a new MultivariatePolynomialFunction representing the first<br>
+   * derivative of the current function with respect to the specified<br>
+   * component. <br>
+   * <br>
+   * Therefore, the resulting function with have the same dimension<br>
+   * as the original function, but the order will be reduced by one. The <br>
+   * coefficients of the derivative function can be negated using the <br>
+   * `negateCoefficients` argument. This may be useful, for example, if the <br>
+   * current function represents the length of a muscle path and the <br>
+   * derivative is needed for computing muscle moment arms.<br>
+   * <br>
+   * @param derivComponent The component with respect to which the derivative<br>
+   *        is taken.<br>
+   * 
+   */
+  public MultivariatePolynomialFunction generateDerivativeFunction(int derivComponent) {
+    return new MultivariatePolynomialFunction(opensimCommonJNI.MultivariatePolynomialFunction_generateDerivativeFunction__SWIG_1(swigCPtr, this, derivComponent), true);
+  }
+
+  /**
+   * Generate a new MultivariatePolynomialFunction representing the derivative<br>
+   * of the current function with respect to an independent variable not <br>
+   * included in the current function. <br>
+   * <br>
+   * If, for example, differentiating with respect to time, the resulting <br>
+   * function will have the form:<br>
+   * <br>
+   *  
+  \dot f = \frac{df}{dt} = \sum_i \frac{\partial f}{\partial q_i} \dot q_i = P \dot q
+  <br>
+   * <br>
+   * where   is the current function, \f$q_i are the independent<br>
+   * variables of the current function, and  \dot q_i are the derivative<br>
+   * of the independent variables with respect to time. The matrix   is
+  a 1 x \f$n_q "partial velocity matrix" with entries <br>
+   *   p_i = \frac{\partial f}{\partial q_i} (see Sherman et al. (2013), <br>
+   * "What is a Moment Arm? Calculating Muscle Effectiveness in Biomechanical <br>
+   * Models Using Generalized Coordinates").<br>
+   * <br>
+   * While this example and the method name suggest that the derivative is<br>
+   * with respect to time, the method can be used to generate the derivative<br>
+   * with respect to any independent variable not included in the current<br>
+   * function. <br>
+   * <br>
+   * Since the resulting function requires the independent variable<br>
+   * derivatives as an input, the dimension of the resulting function will be<br>
+   * twice the dimension of the current function. The order of the resulting<br>
+   * function will be the same as the order of the current function.
+   */
+  public MultivariatePolynomialFunction generatePartialVelocityFunction() {
+    return new MultivariatePolynomialFunction(opensimCommonJNI.MultivariatePolynomialFunction_generatePartialVelocityFunction(swigCPtr, this), true);
   }
 
 }

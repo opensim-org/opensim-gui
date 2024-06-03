@@ -9,10 +9,10 @@
 package org.opensim.modeling;
 
 /**
- *  Minimize the sum of the absolute value of the controls raised to a given<br>
- * exponent, integrated over the phase. The default weight for each control is<br>
- * 1.0; this can be changed by calling setWeight() or editing the<br>
- * `control_weights` property in XML.<br>
+ *  Minimize the sum of the absolute value of the controls (including Input <br>
+ * controls) raised to a given exponent, integrated over the phase. The default <br>
+ * weight for each control is 1.0; this can be changed by calling <br>
+ * setWeightForControl() or editing the `control_weights` property in XML.<br>
  * The exponent must be an integer greater than or equal to 2,<br>
  * and is 2 by default.<br>
  * If conducting a predictive simulation, you likely want to set<br>
@@ -35,6 +35,12 @@ package org.opensim.modeling;
  * <br>
  * If `p &gt; 2`, we first take the absolute value of the control; this is to properly<br>
  * handle odd exponents.<br>
+ * <br>
+ * If you wish to minimize all control signals except those associated with a<br>
+ * user-defined controller (e.g., PrescribedController), pass 'true' to<br>
+ * `setIgnoreControlledActuators()`. If you wish ignore Input controls, pass 'true' <br>
+ * to `setIgnoreInputControls()`.<br>
+ * <br>
  * 
  */
 public class MocoControlGoal extends MocoGoal {
@@ -119,7 +125,8 @@ public class MocoControlGoal extends MocoGoal {
    *  weight replaces the previous weight. Only controls with non-zero weights<br>
    *  that are associated with actuators for which appliesForce is True are<br>
    *  included in the cost function. Weights set here take precedence over<br>
-   *  weights specified with a regular expression.
+   *  weights specified with a regular expression.<br>
+   *  Note: Use this to also set weights for Input controls.
    */
   public void setWeightForControl(String controlName, double weight) {
     opensimMocoJNI.MocoControlGoal_setWeightForControl(swigCPtr, this, controlName, weight);
@@ -131,7 +138,8 @@ public class MocoControlGoal extends MocoGoal {
    *  Multiple pairs of patterns and weights can be provided by calling this<br>
    *  function multiple times.<br>
    *  If a control matches multiple patterns, the weight associated with the<br>
-   *  last pattern is used.
+   *  last pattern is used.<br>
+   *  Note: Use this to also set weights for Input control patterns.
    */
   public void setWeightForControlPattern(String pattern, double weight) {
     opensimMocoJNI.MocoControlGoal_setWeightForControlPattern(swigCPtr, this, pattern, weight);
@@ -146,6 +154,35 @@ public class MocoControlGoal extends MocoGoal {
 
   public double getExponent() {
     return opensimMocoJNI.MocoControlGoal_getExponent(swigCPtr, this);
+  }
+
+  /**
+   *  If true, do not minimize controls associated with user-defined<br>
+   *  controllers.
+   */
+  public void setIgnoreControlledActuators(boolean v) {
+    opensimMocoJNI.MocoControlGoal_setIgnoreControlledActuators(swigCPtr, this, v);
+  }
+
+  /**
+   *   v)
+   */
+  public boolean getIgnoreControlledActuators() {
+    return opensimMocoJNI.MocoControlGoal_getIgnoreControlledActuators(swigCPtr, this);
+  }
+
+  /**
+   *  If true, do not minimize Input controls (default: false).
+   */
+  public void setIgnoreInputControls(boolean v) {
+    opensimMocoJNI.MocoControlGoal_setIgnoreInputControls(swigCPtr, this, v);
+  }
+
+  /**
+   *   v)
+   */
+  public boolean getIgnoreInputControls() {
+    return opensimMocoJNI.MocoControlGoal_getIgnoreInputControls(swigCPtr, this);
   }
 
 }

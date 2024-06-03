@@ -48,8 +48,8 @@ public class ComponentHasNoSystem extends OpenSimException {
     super.delete();
   }
 
-  public ComponentHasNoSystem(String file, long line, String func, OpenSimObject obj) {
-    this(opensimCommonJNI.new_ComponentHasNoSystem(file, line, func, OpenSimObject.getCPtr(obj), obj), true);
+  public ComponentHasNoSystem(String file, long line, String methodName, OpenSimObject obj) {
+    this(opensimCommonJNI.new_ComponentHasNoSystem(file, line, methodName, OpenSimObject.getCPtr(obj), obj), true);
   }
 
 }
