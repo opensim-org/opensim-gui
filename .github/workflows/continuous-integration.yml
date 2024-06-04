@@ -71,7 +71,7 @@ jobs:
         key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
 
     - name: Build opensim-core-dependencies
-      # if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_deps
         mkdir $env:GITHUB_WORKSPACE\\build_deps
@@ -102,7 +102,7 @@ jobs:
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
     
     - name: Build opensim-core
-      # if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
@@ -228,7 +228,7 @@ jobs:
         key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
         
     - name: Build opensim-core-dependencies
-      # if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         mkdir build_deps
         cd build_deps
@@ -251,7 +251,7 @@ jobs:
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
         
     - name: Install SWIG
-      # if: steps.cache-swig.outputs.cache-hit != 'true'
+      if: steps.cache-swig.outputs.cache-hit != 'true'
       run: |
         mkdir ~/swig-source && cd ~/swig-source
         wget https://github.com/swig/swig/archive/refs/tags/v4.1.1.tar.gz
@@ -321,6 +321,7 @@ jobs:
         
     - name: Install NumPy 
       run: python3 -m pip install numpy==1.25
+      
     - name: Install packages
       run: sudo apt-get update && sudo apt-get install --yes liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen gfortran-7
      
@@ -391,7 +392,7 @@ jobs:
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
     
     - name: Build opensim-core
-      # if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
