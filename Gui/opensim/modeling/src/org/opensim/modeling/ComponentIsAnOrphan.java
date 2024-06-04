@@ -48,8 +48,8 @@ public class ComponentIsAnOrphan extends OpenSimException {
     super.delete();
   }
 
-  public ComponentIsAnOrphan(String file, long line, String func, String thisName, String componentConcreteClassName) {
-    this(opensimCommonJNI.new_ComponentIsAnOrphan(file, line, func, thisName, componentConcreteClassName), true);
+  public ComponentIsAnOrphan(String file, long line, String methodName, String thisName, String componentConcreteClassName) {
+    this(opensimCommonJNI.new_ComponentIsAnOrphan(file, line, methodName, thisName, componentConcreteClassName), true);
   }
 
 }

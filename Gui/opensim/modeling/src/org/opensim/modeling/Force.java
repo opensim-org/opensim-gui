@@ -124,7 +124,7 @@ public class Force extends ModelComponent {
   }
 
   /**
-   * Tell SimBody to parallelize this force. Should be <br>
+   * Tell Simbody to parallelize this force. Should be <br>
    * set to true for any forces that will take time to <br>
    * complete their calcForce method. Note that all forces<br>
    * that set this flag to false will be put in series on a<br>
@@ -174,6 +174,13 @@ public class Force extends ModelComponent {
    */
   public boolean hasVisualPath() {
     return opensimSimulationJNI.Force_hasVisualPath(swigCPtr, this);
+  }
+
+  /**
+   *  Return the index to the SimTK::Force in the underlying system. 
+   */
+  public SWIGTYPE_p_SimTK__ForceIndex getForceIndex() {
+    return new SWIGTYPE_p_SimTK__ForceIndex(opensimSimulationJNI.Force_getForceIndex(swigCPtr, this), true);
   }
 
 }

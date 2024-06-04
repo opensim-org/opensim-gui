@@ -10,10 +10,10 @@ package org.opensim.modeling;
 
 /**
  * <br>
- * The squared difference between a control<br>
- * variable value and a reference control variable value, summed over the control variables for which a<br>
- * reference is provided, and integrated over the phase. This can be used to<br>
- * track actuator controls, muscle excitations, etc.<br>
+ * The squared difference between a control (or Input control)<br>
+ * variable value and a reference control variable value, summed over the control <br>
+ * variables for which a reference is provided, and integrated over the phase. <br>
+ * This can be used to track actuator controls, muscle excitations, etc.<br>
  * <br>
  * This goal is computed as follows:<br>
  * <br>
@@ -56,6 +56,12 @@ package org.opensim.modeling;
  * 'body_actuator' is the name of the actuator and `_0` specifies the<br>
  * control index.<br>
  * <br>
+ * ## Input control variable names<br>
+ * <br>
+ * An Input control name is based on a path to an InputController in the model <br>
+ * appended with the label to the Input control to track, <br>
+ * e.g., `/controllerset/my_input_controller/input_control_0`.<br>
+ * <br>
  * ## Reference data<br>
  * <br>
  * The reference can be provided as a file name to a STO or CSV file (or<br>
@@ -92,6 +98,12 @@ controlTrackingGoal->addScaleFactor(
  * Tracking problems in direct collocation perform best when tracking smooth<br>
  * data, so it is recommended to filter the data in the reference you provide<br>
  * to the cost.<br>
+ * <br>
+ * If you wish to track all control signals except those associated with a<br>
+ * user-defined controller (e.g., PrescribedController), pass 'true' to<br>
+ * `setIgnoreControlledActuators()`. If you wish ignore Input controls, pass 'true' <br>
+ * to `setIgnoreInputControls()`.<br>
+ * <br>
  * 
  */
 public class MocoControlTrackingGoal extends MocoGoal {
@@ -175,7 +187,7 @@ public class MocoControlTrackingGoal extends MocoGoal {
 
   /**
    *  Provide a table containing reference values for the<br>
-   *  controls you want to track.<br>
+   *  controls and/or Input controls you want to track.<br>
    *  In 'auto' labeling mode, each column label must be a control variable<br>
    *  name. In 'manual' labeling mode, the column labels need not be control<br>
    *  variable names; use setReferenceLabel() to associate controls with<br>
@@ -187,9 +199,9 @@ public class MocoControlTrackingGoal extends MocoGoal {
   }
 
   /**
-   *  Set the weight for an individual control variable. If a weight is<br>
-   *  already set for the requested control, then the provided weight<br>
-   *  replaces the previous weight.<br>
+   *  Set the weight for an individual control or Input control variable. If a <br>
+   *  weight is already set for the requested control, then the provided <br>
+   *  weight replaces the previous weight.<br>
    *  If no weight is specified for a control, a weight of 1.0 is used<br>
    *  internally.<br>
    *  Set the weight to 0 to avoid tracking a given control.<br>
@@ -200,15 +212,16 @@ public class MocoControlTrackingGoal extends MocoGoal {
   }
 
   /**
-   *  Provide a MocoWeightSet to weight the control variables in the cost.<br>
-   *  Replaces the weight set if it already exists.
+   *  Provide a MocoWeightSet to weight the control and/or Input control <br>
+   *  variables in the cost. Replaces the weight set if it already exists.
    */
   public void setWeightSet(MocoWeightSet weightSet) {
     opensimMocoJNI.MocoControlTrackingGoal_setWeightSet(swigCPtr, this, MocoWeightSet.getCPtr(weightSet), weightSet);
   }
 
   /**
-   *  Set the column of the reference data that a given control should track.<br>
+   *  Set the column of the reference data that a given control or Input <br>
+   *  control should track.<br>
    *  Multiple controls can track the same column of the reference data.<br>
    *  This replaces the reference label for the given control, if one had<br>
    *  already been provided.<br>
@@ -230,7 +243,7 @@ public class MocoControlTrackingGoal extends MocoGoal {
 
   /**
    *  Specify whether the reference can have columns not associated with<br>
-   *  controls.<br>
+   *  controls or Input control.<br>
    *  If set true, then such columns will be ignored by the cost.<br>
    *  If false, such columns will cause an Exception to be raised.<br>
    *  Only takes effect in 'auto' labeling mode.
@@ -259,9 +272,38 @@ public class MocoControlTrackingGoal extends MocoGoal {
   }
 
   /**
+   *  If true, do not track controls associated with user-defined controllers.
+   */
+  public void setIgnoreControlledActuators(boolean v) {
+    opensimMocoJNI.MocoControlTrackingGoal_setIgnoreControlledActuators(swigCPtr, this, v);
+  }
+
+  /**
+   *  
+   */
+  public boolean getIgnoreControlledActuators() {
+    return opensimMocoJNI.MocoControlTrackingGoal_getIgnoreControlledActuators(swigCPtr, this);
+  }
+
+  /**
+   *  If true, do not minimize Input controls (default: false).
+   */
+  public void setIgnoreInputControls(boolean v) {
+    opensimMocoJNI.MocoControlTrackingGoal_setIgnoreInputControls(swigCPtr, this, v);
+  }
+
+  /**
+   *   v)
+   */
+  public boolean getIgnoreInputControls() {
+    return opensimMocoJNI.MocoControlTrackingGoal_getIgnoreInputControls(swigCPtr, this);
+  }
+
+  /**
    *  Add a MocoParameter to the problem that will scale the tracking reference<br>
-   *  data associated with the specified control. Scale factors are applied<br>
-   *  to the tracking error calculations based on the following equation:<br>
+   *  data associated with the specified control or Input control. Scale <br>
+   *  factors are applied to the tracking error calculations based on the <br>
+   *  following equation:<br>
    * <br>
    *      error = modelValue - scaleFactor * referenceValue<br>
    * <br>

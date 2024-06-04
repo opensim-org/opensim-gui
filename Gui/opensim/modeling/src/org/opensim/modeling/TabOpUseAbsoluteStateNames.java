@@ -15,11 +15,12 @@ package org.opensim.modeling;
  *   - `pelvis_tilt_u` -&gt; `/jointset/ground_pelvis/pelvis_tilt/speed`<br>
  *   - `soleus.activation` -&gt; `/forceset/soleus/activation`<br>
  *   - `soleus.fiber_length` -&gt; `/forceset/soleus/fiber_length`<br>
+ * <br>
  * This can also be used to convert an Inverse Kinematics Tool solution MOT<br>
  * file to be used as a states file (with only coordinate values).<br>
  * If a column label does not identify a state in the model,<br>
- * the column label is not changed. Column labels must be unique.<br>
- * This operator is implemented using updateStateLabels40(). 
+ * the column label is not changed. Column labels must be unique. This operator is <br>
+ * implemented using SimulationUtilities::updateStateLabels40(). 
  */
 public class TabOpUseAbsoluteStateNames extends TableOperator {
   private transient long swigCPtr;

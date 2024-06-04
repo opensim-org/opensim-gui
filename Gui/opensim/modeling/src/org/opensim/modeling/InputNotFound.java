@@ -48,8 +48,8 @@ public class InputNotFound extends OpenSimException {
     super.delete();
   }
 
-  public InputNotFound(String file, long line, String func, OpenSimObject obj, String inputName) {
-    this(opensimCommonJNI.new_InputNotFound(file, line, func, OpenSimObject.getCPtr(obj), obj, inputName), true);
+  public InputNotFound(String file, long line, String methodName, OpenSimObject obj, String inputName) {
+    this(opensimCommonJNI.new_InputNotFound(file, line, methodName, OpenSimObject.getCPtr(obj), obj, inputName), true);
   }
 
 }

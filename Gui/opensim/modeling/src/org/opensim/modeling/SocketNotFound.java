@@ -48,8 +48,8 @@ public class SocketNotFound extends OpenSimException {
     super.delete();
   }
 
-  public SocketNotFound(String file, long line, String func, OpenSimObject obj, String socketName) {
-    this(opensimCommonJNI.new_SocketNotFound(file, line, func, OpenSimObject.getCPtr(obj), obj, socketName), true);
+  public SocketNotFound(String file, long line, String methodName, OpenSimObject obj, String socketName) {
+    this(opensimCommonJNI.new_SocketNotFound(file, line, methodName, OpenSimObject.getCPtr(obj), obj, socketName), true);
   }
 
 }

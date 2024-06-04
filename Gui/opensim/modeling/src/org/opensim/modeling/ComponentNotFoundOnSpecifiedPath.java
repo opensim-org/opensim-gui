@@ -48,8 +48,8 @@ public class ComponentNotFoundOnSpecifiedPath extends ComponentNotFound {
     super.delete();
   }
 
-  public ComponentNotFoundOnSpecifiedPath(String file, long line, String func, String toFindName, String toFindClassName, String thisName) {
-    this(opensimCommonJNI.new_ComponentNotFoundOnSpecifiedPath(file, line, func, toFindName, toFindClassName, thisName), true);
+  public ComponentNotFoundOnSpecifiedPath(String file, long line, String methodName, String toFindName, String toFindClassName, String thisName) {
+    this(opensimCommonJNI.new_ComponentNotFoundOnSpecifiedPath(file, line, methodName, toFindName, toFindClassName, thisName), true);
   }
 
 }

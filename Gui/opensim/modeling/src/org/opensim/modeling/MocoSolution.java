@@ -24,7 +24,10 @@ package org.opensim.modeling;
  *  prevents you from silently proceeding with a failed solution.<br>
  *  In the file written by write(), the header contains solver success, the<br>
  *  objective, the individual terms in the objective (including the weight),<br>
- *  the breakdown of the objective, and other quantities.
+ *  the breakdown of the objective, and other quantities.<br>
+ *  The controls in the solution correspond to the set of model controls, even<br>
+ *  if the optimal control problem contained a different set of controls due to<br>
+ *  the presence of user-added Controller%s in the model.
  */
 public class MocoSolution extends MocoTrajectory {
   private transient long swigCPtr;

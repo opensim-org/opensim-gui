@@ -1599,6 +1599,15 @@ public class Model extends ModelComponent {
   }
 
   /**
+   * Mark controls as invalid after an update at a given state.<br>
+   * Indicates that controls are not valid for use at the dynamics stage.<br>
+   * @param s         System state in which the controls are updated 
+   */
+  public void markControlsAsInvalid(State s) {
+    opensimSimulationJNI.Model_markControlsAsInvalid(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  /**
    * Alternatively, set the controls on the model at a given state.<br>
    * Note, this method will invalidate the dynamics of the model,<br>
    * but will mark the controls as valid. (E.g. controllers will not be invoked)<br>
@@ -1765,6 +1774,26 @@ public class Model extends ModelComponent {
    */
   public double calcPotentialEnergy(State s) {
     return opensimSimulationJNI.Model_calcPotentialEnergy(swigCPtr, this, State.getCPtr(s), s);
+  }
+
+  /**
+   *  Calulate the sum of body and mobility forces in the system applied by<br>
+   * the Force%s at the supplied indexes. <br>
+   * <br>
+   * @param state            The system SimTK::State at which to <br>
+   *                               calculate forces.<br>
+   * @param forceIndexes     The indexes (SimTK::ForceIndex) of the <br>
+   *                               forces in the system for which to calculate <br>
+   *                               forces.<br>
+   * @param bodyForces       The sum of the body forces applied by the<br>
+   *                               forces at the supplied indexes.<br>
+   * @param mobilityForces   The sum of the mobility forces applied by<br>
+   *                               the forces at the supplied indexes.<br>
+   * <br>
+   * 
+   */
+  public void calcForceContributionsSum(State state, SWIGTYPE_p_SimTK__Array_T_SimTK__ForceIndex_unsigned_int_t forceIndexes, VectorOfSpatialVec bodyForces, Vector mobilityForces) {
+    opensimSimulationJNI.Model_calcForceContributionsSum(swigCPtr, this, State.getCPtr(state), state, SWIGTYPE_p_SimTK__Array_T_SimTK__ForceIndex_unsigned_int_t.getCPtr(forceIndexes), VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(mobilityForces), mobilityForces);
   }
 
   public int getNumMuscleStates() {

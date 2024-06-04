@@ -19,7 +19,8 @@ package org.opensim.modeling;
  * final variables to the same variable to enforce periodicity on a single<br>
  * continuous variable. Only state and control continuous variable pairs are<br>
  * supported, and are specified via the 'state_pairs' and 'control_pairs'<br>
- * properties.<br>
+ * properties. Control pairs can include both controls (i.e., model controls) and <br>
+ * Input controls.<br>
  * <br>
  * To handle initial and final variable values that are equal in absolute value<br>
  * but differ in sign (e.g. a pelvis rotation in walking), use<br>
@@ -60,6 +61,7 @@ pair_hamstrings2.set_final_variable("/hamstrings_r");
 periodicGoal->append_control_pairs(pair_hamstrings2);
 }<br>
  * This is an endpoint constraint goal by default.<br>
+ * <br>
  * 
  */
 public class MocoPeriodicityGoal extends MocoGoal {

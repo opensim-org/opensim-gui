@@ -28,8 +28,8 @@ package org.opensim.modeling;
  *  If kinematics are not prescribed (with PositionMotion),<br>
  *  ModelDisabledConstraints also contains an AccelerationMotion component,<br>
  *  which is used by solvers that rely on implicit multibody dynamics.<br>
- *  The initialize() function adds a DiscreteController<br>
- *  to both models; this controller is used by a solver to set the control<br>
+ *  The initialize() function adds a ControlDistributor component<br>
+ *  to both models; this component is used by a solver to set the control<br>
  *  signals for actuators to use.<br>
  *  To learn the need for and use of these two models, see <a href="#impldiverse">impldiverse</a>.</p>
  */
@@ -109,8 +109,8 @@ public class MocoProblemRep {
    *  This is a component inside ModelBase that you can use to<br>
    *  set the value of control signals.
    */
-  public SWIGTYPE_p_OpenSim__DiscreteController getDiscreteControllerBase() {
-    return new SWIGTYPE_p_OpenSim__DiscreteController(opensimMocoJNI.MocoProblemRep_getDiscreteControllerBase(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__ControlDistributor getControlDistributorBase() {
+    return new SWIGTYPE_p_OpenSim__ControlDistributor(opensimMocoJNI.MocoProblemRep_getControlDistributorBase(swigCPtr, this), false);
   }
 
   /**
@@ -154,8 +154,8 @@ public class MocoProblemRep {
    *  This is a component inside ModelDisabledConstraints that you can use to<br>
    *  set the value of control signals.
    */
-  public SWIGTYPE_p_OpenSim__DiscreteController getDiscreteControllerDisabledConstraints() {
-    return new SWIGTYPE_p_OpenSim__DiscreteController(opensimMocoJNI.MocoProblemRep_getDiscreteControllerDisabledConstraints(swigCPtr, this), false);
+  public SWIGTYPE_p_OpenSim__ControlDistributor getControlDistributorDisabledConstraints() {
+    return new SWIGTYPE_p_OpenSim__ControlDistributor(opensimMocoJNI.MocoProblemRep_getControlDistributorDisabledConstraints(swigCPtr, this), false);
   }
 
   /**
@@ -214,6 +214,16 @@ public class MocoProblemRep {
     return opensimMocoJNI.MocoProblemRep_isPrescribedKinematics(swigCPtr, this);
   }
 
+  /**
+   *  Do we need to compute controls from the model (e.g., because the model<br>
+   *  contains user-defined controllers)? If the model does not contain<br>
+   *  user-defined controls, then we prefer to use the controls directly from<br>
+   *  the optimal control problem, for efficiency.
+   */
+  public boolean getComputeControlsFromModel() {
+    return opensimMocoJNI.MocoProblemRep_getComputeControlsFromModel(swigCPtr, this);
+  }
+
   public int getNumImplicitAuxiliaryResiduals() {
     return opensimMocoJNI.MocoProblemRep_getNumImplicitAuxiliaryResiduals(swigCPtr, this);
   }
@@ -238,6 +248,13 @@ public class MocoProblemRep {
    */
   public StdVectorString createControlInfoNames() {
     return new StdVectorString(opensimMocoJNI.MocoProblemRep_createControlInfoNames(swigCPtr, this), true);
+  }
+
+  /**
+   *  Get the control names of all the Input control infos.
+   */
+  public StdVectorString createInputControlInfoNames() {
+    return new StdVectorString(opensimMocoJNI.MocoProblemRep_createInputControlInfoNames(swigCPtr, this), true);
   }
 
   /**
@@ -334,6 +351,34 @@ public class MocoProblemRep {
     return new MocoVariableInfo(opensimMocoJNI.MocoProblemRep_getControlInfo(swigCPtr, this, name), false);
   }
 
+  /**
+   *  Get information for Input control variables. <br>
+   *  See MocoPhase::setInputControlInfo().
+   */
+  public MocoVariableInfo getInputControlInfo(String name) {
+    return new MocoVariableInfo(opensimMocoJNI.MocoProblemRep_getInputControlInfo(swigCPtr, this, name), false);
+  }
+
+  /**
+   *  Get whether an info object exists for an Input control.
+   */
+  public boolean hasInputControlInfo(String name) {
+    return opensimMocoJNI.MocoProblemRep_hasInputControlInfo(swigCPtr, this, name);
+  }
+
+  /**
+   *  Get information for a control or Input control variable. This internally<br>
+   *  resolves whether the variable is a control or Input control based on <br>
+   *  the variable name. This is intend for use by solvers, where both<br>
+   *  controls and Input controls are treated as algebraic variables.
+   */
+  public MocoVariableInfo getSolverControlInfo(String name) {
+    return new MocoVariableInfo(opensimMocoJNI.MocoProblemRep_getSolverControlInfo(swigCPtr, this, name), false);
+  }
+
+  /**
+   *  Get information for a parameter. See MocoPhase::addParameter().
+   */
   public MocoParameter getParameter(String name) {
     return new MocoParameter(opensimMocoJNI.MocoProblemRep_getParameter(swigCPtr, this, name), false);
   }
@@ -487,6 +532,39 @@ public class MocoProblemRep {
    */
   public SWIGTYPE_p_std__vectorT_std__pairT_std__string_SimTK__ReferencePtrT_OpenSim__Component_const_t_t_t getImplicitComponentReferencePtrs() {
     return new SWIGTYPE_p_std__vectorT_std__pairT_std__string_SimTK__ReferencePtrT_OpenSim__Component_const_t_t_t(opensimMocoJNI.MocoProblemRep_getImplicitComponentReferencePtrs(swigCPtr, this), false);
+  }
+
+  /**
+   *  Get the vector of all InputController controls. This includes both <br>
+   *  controls from InputController%s added by the user and controls from the <br>
+   *  ActuatorInputController added by MocoProblemRep. The SimTK::State <br>
+   *  argument should be obtained from `updStateDisabledConstraints()`.
+   */
+  public Vector getInputControls(State stateDisabledConstraints) {
+    return new Vector(opensimMocoJNI.MocoProblemRep_getInputControls(swigCPtr, this, State.getCPtr(stateDisabledConstraints), stateDisabledConstraints), false);
+  }
+
+  /**
+   *  Get the vector of model controls. If the model contains user-defined<br>
+   *  controllers, this function will compute the controls from the model.<br>
+   *  Otherwise, it will return the controls directly from the<br>
+   *  ControlDistributor. This function is intended for use by solvers to<br>
+   *  compute controls needed by MocoGoal%s and MocoPathConstraint%s. The<br>
+   *  SimTK::State argument should be obtain from<br>
+   *  `updStateDisabledConstraints()`.
+   */
+  public Vector getControls(State stateDisabledConstraints) {
+    return new Vector(opensimMocoJNI.MocoProblemRep_getControls(swigCPtr, this, State.getCPtr(stateDisabledConstraints), stateDisabledConstraints), false);
+  }
+
+  /**
+   *  Get a vector of integers representing the indexes of Input controls in<br>
+   *  the ControlDistributor's 'controls' Output. This function is intended<br>
+   *  for use by solvers to account for Input controls when converting between<br>
+   *  a MocoTrajectory and solver-specific trajectory types.
+   */
+  public StdVectorInt getInputControlIndexes() {
+    return new StdVectorInt(opensimMocoJNI.MocoProblemRep_getInputControlIndexes(swigCPtr, this), true);
   }
 
 }

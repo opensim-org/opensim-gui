@@ -15,8 +15,8 @@ package org.opensim.modeling;
  * penetration depth. This component is designed for use in gradient-based<br>
  * optimizations, in which the model is required to be differentiable. This<br>
  * component models contact between a single sphere and a single half space.<br>
- * This force does NOT use ContactGeometry objects; the description of the<br>
- * contact geometries is done through properties of this component.<br>
+ * This force uses a ContactSphere (via the Socket 'sphere') and a ContactHalfSpace<br>
+ * (via the Socket 'half_space') to define the contact geometry.<br>
  * <br>
  * <br>
  * <br>

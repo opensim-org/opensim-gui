@@ -48,8 +48,8 @@ public class InvalidComponentName extends OpenSimException {
     super.delete();
   }
 
-  public InvalidComponentName(String file, long line, String func, String thisName, String invalidChars, String componentConcreteClassName) {
-    this(opensimCommonJNI.new_InvalidComponentName(file, line, func, thisName, invalidChars, componentConcreteClassName), true);
+  public InvalidComponentName(String file, long line, String methodName, String thisName, String invalidChars, String componentConcreteClassName) {
+    this(opensimCommonJNI.new_InvalidComponentName(file, line, methodName, thisName, invalidChars, componentConcreteClassName), true);
   }
 
 }

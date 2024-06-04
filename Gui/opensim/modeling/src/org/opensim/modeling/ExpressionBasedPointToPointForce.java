@@ -9,7 +9,7 @@
 package org.opensim.modeling;
 
 /**
- * A point-to-point Force who's force magnitude is determined by a user-defined<br>
+ * A point-to-point Force whose force magnitude is determined by a user-defined<br>
  * expression, with the distance (d) and its time derivative (ddot) as variables. <br>
  * The direction of the force is directed along the line connecting the two <br>
  * points. <br>
