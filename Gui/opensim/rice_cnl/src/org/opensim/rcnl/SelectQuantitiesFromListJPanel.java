@@ -25,11 +25,10 @@ public class SelectQuantitiesFromListJPanel extends javax.swing.JPanel implement
     /**
      * Creates new form SelectCoordinatesJPanel
      */
-    public SelectQuantitiesFromListJPanel(AbstractTableModel aTableModel, boolean showFilter) {
+    public SelectQuantitiesFromListJPanel(AbstractTableModel aTableModel) {
         tableModel = aTableModel;
         initComponents();
-        if (!showFilter)
-            FilterTextField.setEditable(false);
+
         metaCharacters.add("*");
         metaCharacters.add("+");
         metaCharacters.add("?");
@@ -170,6 +169,8 @@ public class SelectQuantitiesFromListJPanel extends javax.swing.JPanel implement
        
        if (tableModel instanceof MuscleGroupTableModel)
            ((MuscleGroupTableModel) tableModel).restrictNamesBy(".*"+rawPattern+".*");
+       else if (tableModel instanceof CoordinateTableModel)
+           ((CoordinateTableModel) tableModel).restrictNamesBy(".*"+rawPattern+".*");
        //System.out.println("restrict by"+".*"+rawPattern+".*");
     }  
 }
