@@ -53,7 +53,7 @@ if(Git_FOUND)
         set(VERSION_SUFFIX "-${GIT_COMMIT_DATE}-${GIT_COMMIT_HASH}")
     endif()
 endif()
-set(OPENSIMGUI_BUILD_VERSION "${PROJECT_VERSION}${VERSION_SUFFIX}" CACHE STRING
+set(OPENSIMGUI_BUILD_VERSION "${PROJECT_VERSION}" CACHE STRING
     "<date>-<commit>, or <tag> if this commit is tagged." FORCE)
 # inform user of created build version.
 message(STATUS "Build VERSION: ${OPENSIMGUI_BUILD_VERSION}")
