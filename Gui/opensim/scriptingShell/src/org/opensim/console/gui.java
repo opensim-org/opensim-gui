@@ -482,4 +482,40 @@ public final class gui {
         msg.put("data", option);
         sendVisulaizerMessage(msg);
     }
+    static public void cameraSave(String cameraName){
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "cameraOp");
+        msg.put("command", "save");
+        msg.put("name", cameraName);
+        sendVisulaizerMessage(msg);
+    }
+    static public void cameraRestore(String cameraName){
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "cameraOp");
+        msg.put("command", "set");
+        msg.put("name", cameraName);
+        sendVisulaizerMessage(msg);
+    }
+    static public void cameraToJson(){
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "cameraOp");
+        msg.put("command", "toJson");
+        sendVisulaizerMessage(msg);
+    }
+
+    static public void cameraMoveTo(String targetCameraName){
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "cameraOp");
+        msg.put("command", "moveto");
+        msg.put("targetCam", targetCameraName);
+        sendVisulaizerMessage(msg);
+    }
+    static public void cameraFromJson(String jsonFilePath){
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "cameraOp");
+        msg.put("command", "fromJson");
+        msg.put("cameraList", "ListGoesHere");
+        sendVisulaizerMessage(msg);
+
+    }
 }
