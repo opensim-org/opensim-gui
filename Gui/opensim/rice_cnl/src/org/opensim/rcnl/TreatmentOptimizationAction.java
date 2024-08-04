@@ -67,7 +67,7 @@ public final class TreatmentOptimizationAction extends CallableSystemAction {
  
         private void updateMenu() {
             javax.swing.JMenuItem tOptMenuItem = new JMenuItem("Tracking Optimization...");
-            tOptMenuItem.addActionListener(new JointPersonalizationAction());
+            tOptMenuItem.addActionListener(new TrackingOptimizationAction());
             this.add(tOptMenuItem);
             javax.swing.JMenuItem vOptMenuItem = new JMenuItem("Verification Optimization...");
             vOptMenuItem.addActionListener(new JointPersonalizationAction());
