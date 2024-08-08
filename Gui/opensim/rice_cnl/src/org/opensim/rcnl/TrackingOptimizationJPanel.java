@@ -31,7 +31,7 @@ import org.opensim.view.pub.OpenSimDB;
  * @author Ayman-NMBL
  */
 public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observer {
-    private JointPersonalizationToolModel jointPersonalizationToolModel = null;
+    private TrackingOptimizationToolModel trackingOptimizationToolModel = null;
     private JMPTaskListModel jointPersonalizationTaskListModel = null;
     private ListSelectionModel listSelectionModel;
     
@@ -40,17 +40,13 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
      */
     public TrackingOptimizationJPanel(Model model)  throws IOException  {
        if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
-       jointPersonalizationToolModel = new JointPersonalizationToolModel(model);
-       jointPersonalizationTaskListModel = new JMPTaskListModel(jointPersonalizationToolModel.getJointTaskListAsObjectList());
+//       trackingOptimizationToolModel = new JointPersonalizationToolModel(model);
+//       jointPersonalizationTaskListModel = new JMPTaskListModel(trackingOptimizationToolModel.getJointTaskListAsObjectList());
        initComponents();
-       jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
-       listSelectionModel = jJointPersonalizationList.getSelectionModel();
-       listSelectionModel.addListSelectionListener(
-                            new ListSelectionHandler());
        currentModelFileTextField.setText(model.getInputFileName());
-       outputModelFilePath.setCheckIfFileExists(false);
-       outputModelFilePath.setFileName(jointPersonalizationToolModel.getOutputModelFile());
-       setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
+//       outputModelFilePath.setCheckIfFileExists(false);
+//       outputModelFilePath.setFileName(trackingOptimizationToolModel.getOutputModelFile());
+//       setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
     }
 
     /**
@@ -62,6 +58,18 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSynergyControllerDetailsPanel = new javax.swing.JPanel();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCoordinatesListPanel1 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jCoordinateListTextArea2 = new javax.swing.JTextArea();
+        jButtonEditSynergyCoordinateList = new javax.swing.JButton();
+        surrogateModelDirPath = new org.opensim.swingui.FileTextFieldAndChooser();
+        jLabel1 = new javax.swing.JLabel();
+        JTorqueControllerDetailsPanel = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jCoordinateListTextArea3 = new javax.swing.JTextArea();
+        jButtonEditCoordinateList1 = new javax.swing.JButton();
         inputModelPanel = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         currentModelFileTextField = new javax.swing.JTextField();
@@ -95,6 +103,126 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
         jSynergyControllerPanel = new javax.swing.JPanel();
         jCheckBoxSynergyController = new javax.swing.JCheckBox();
         jEditSynergyControllerButton = new javax.swing.JButton();
+
+        jSynergyControllerDetailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(TrackingOptimizationJPanel.class, "TrackingOptimizationJPanel.jSynergyControllerDetailsPanel.border.title"))); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox1, org.openide.util.NbBundle.getMessage(TrackingOptimizationJPanel.class, "TrackingOptimizationJPanel.jCheckBox1.text")); // NOI18N
+
+        jCoordinatesListPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(TrackingOptimizationJPanel.class, "TrackingOptimizationJPanel.jCoordinatesListPanel1.border.title"))); // NOI18N
+
+        jCoordinateListTextArea2.setEditable(false);
+        jCoordinateListTextArea2.setBackground(new java.awt.Color(240, 240, 240));
+        jCoordinateListTextArea2.setColumns(20);
+        jCoordinateListTextArea2.setRows(5);
+        jCoordinateListTextArea2.setEnabled(false);
+        jCoordinateListTextArea2.setFocusable(false);
+        jScrollPane4.setViewportView(jCoordinateListTextArea2);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jButtonEditSynergyCoordinateList, org.openide.util.NbBundle.getMessage(TrackingOptimizationJPanel.class, "TrackingOptimizationJPanel.jButtonEditSynergyCoordinateList.text")); // NOI18N
+        jButtonEditSynergyCoordinateList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditSynergyCoordinateListActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jCoordinatesListPanel1Layout = new javax.swing.GroupLayout(jCoordinatesListPanel1);
+        jCoordinatesListPanel1.setLayout(jCoordinatesListPanel1Layout);
+        jCoordinatesListPanel1Layout.setHorizontalGroup(
+            jCoordinatesListPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jCoordinatesListPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 707, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonEditSynergyCoordinateList, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jCoordinatesListPanel1Layout.setVerticalGroup(
+            jCoordinatesListPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jCoordinatesListPanel1Layout.createSequentialGroup()
+                .addGroup(jCoordinatesListPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jCoordinatesListPanel1Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButtonEditSynergyCoordinateList)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        surrogateModelDirPath.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                surrogateModelDirPathStateChanged(evt);
+            }
+        });
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(TrackingOptimizationJPanel.class, "TrackingOptimizationJPanel.jLabel1.text")); // NOI18N
+
+        javax.swing.GroupLayout jSynergyControllerDetailsPanelLayout = new javax.swing.GroupLayout(jSynergyControllerDetailsPanel);
+        jSynergyControllerDetailsPanel.setLayout(jSynergyControllerDetailsPanelLayout);
+        jSynergyControllerDetailsPanelLayout.setHorizontalGroup(
+            jSynergyControllerDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jCoordinatesListPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jSynergyControllerDetailsPanelLayout.createSequentialGroup()
+                .addGroup(jSynergyControllerDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jSynergyControllerDetailsPanelLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jCheckBox1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jSynergyControllerDetailsPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(surrogateModelDirPath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jSynergyControllerDetailsPanelLayout.setVerticalGroup(
+            jSynergyControllerDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jSynergyControllerDetailsPanelLayout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jCheckBox1)
+                .addGap(18, 18, 18)
+                .addComponent(jCoordinatesListPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(jSynergyControllerDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1)
+                    .addComponent(surrogateModelDirPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        JTorqueControllerDetailsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(TrackingOptimizationJPanel.class, "TrackingOptimizationJPanel.JTorqueControllerDetailsPanel.border.title"))); // NOI18N
+
+        jCoordinateListTextArea3.setEditable(false);
+        jCoordinateListTextArea3.setBackground(new java.awt.Color(240, 240, 240));
+        jCoordinateListTextArea3.setColumns(20);
+        jCoordinateListTextArea3.setRows(5);
+        jCoordinateListTextArea3.setEnabled(false);
+        jCoordinateListTextArea3.setFocusable(false);
+        jScrollPane5.setViewportView(jCoordinateListTextArea3);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jButtonEditCoordinateList1, org.openide.util.NbBundle.getMessage(TrackingOptimizationJPanel.class, "TrackingOptimizationJPanel.jButtonEditCoordinateList1.text")); // NOI18N
+        jButtonEditCoordinateList1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEditCoordinateList1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout JTorqueControllerDetailsPanelLayout = new javax.swing.GroupLayout(JTorqueControllerDetailsPanel);
+        JTorqueControllerDetailsPanel.setLayout(JTorqueControllerDetailsPanelLayout);
+        JTorqueControllerDetailsPanelLayout.setHorizontalGroup(
+            JTorqueControllerDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JTorqueControllerDetailsPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonEditCoordinateList1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        JTorqueControllerDetailsPanelLayout.setVerticalGroup(
+            JTorqueControllerDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(JTorqueControllerDetailsPanelLayout.createSequentialGroup()
+                .addGroup(JTorqueControllerDetailsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(JTorqueControllerDetailsPanelLayout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jButtonEditCoordinateList1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         inputModelPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), org.openide.util.NbBundle.getMessage(TrackingOptimizationJPanel.class, "TrackingOptimizationJPanel.inputModelPanel.border.title"))); // NOI18N
 
@@ -190,7 +318,7 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
                     .addGap(13, 13, 13)
                     .addComponent(jLabel5)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(outputDirPath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(outputDirPath, javax.swing.GroupLayout.DEFAULT_SIZE, 929, Short.MAX_VALUE)
                     .addGap(13, 13, 13)))
         );
         outputPanelLayout.setVerticalGroup(
@@ -312,7 +440,7 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
         jConstraintTermListPanelLayout.setHorizontalGroup(
             jConstraintTermListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jConstraintTermListPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane3)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonEditConstraintTermList, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -340,7 +468,7 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
                 .addComponent(jCheckBoxTorqueController)
                 .addGap(58, 58, 58)
                 .addComponent(jEditTorqueControllerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(480, Short.MAX_VALUE))
         );
         jTorqueControllerPanelLayout.setVerticalGroup(
             jTorqueControllerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -365,7 +493,7 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
                 .addComponent(jCheckBoxSynergyController)
                 .addGap(47, 47, 47)
                 .addComponent(jEditSynergyControllerButton)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(468, Short.MAX_VALUE))
         );
         jSynergyControllerPanelLayout.setVerticalGroup(
             jSynergyControllerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -384,19 +512,17 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSynergyControllerPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSynergyControllerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCoordinatesListPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel7)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(solverSettingsFilePath, javax.swing.GroupLayout.PREFERRED_SIZE, 938, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(jTorqueControllerPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jConstraintTermListPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jCostTermListPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(solverSettingsFilePath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(19, 19, 19))
+                    .addComponent(jConstraintTermListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTorqueControllerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCostTermListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCoordinatesListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -422,12 +548,18 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(outputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(inputModelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(3, 3, 3)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(outputPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(inputModelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -443,12 +575,12 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
 
     private void osimxFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_osimxFilePathStateChanged
         // TODO add your handling code here:
-        gcpPersonalizationToolModel.setInputOsimxFile(osimxFilePath.getFileName());
+//        gcpPersonalizationToolModel.setInputOsimxFile(osimxFilePath.getFileName());
     }//GEN-LAST:event_osimxFilePathStateChanged
 
     private void InitialGuessDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_InitialGuessDirPathStateChanged
         // TODO add your handling code here:
-        gcpPersonalizationToolModel.setDataDir(InitialGuessDirPath.getFileName());
+//        gcpPersonalizationToolModel.setDataDir(InitialGuessDirPath.getFileName());
     }//GEN-LAST:event_InitialGuessDirPathStateChanged
 
     private void outputDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputDirPathStateChanged
@@ -462,16 +594,16 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
     private void jButtonEditCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCoordinateListActionPerformed
         // TODO add your handling code here:
         // Create Panel for selecting from existing model coordinates
-        CoordinateTableModel ctm = new CoordinateTableModel(mtpPersonalizationToolModel.getPropCoordinateListString(), model);
-        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
-        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
-        dlg.setModal(true);
-        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            ctm.populateCoordinateListProperty();
-            jCoordinateListTextArea.setText(mtpPersonalizationToolModel.getPropCoordinateListString().toString());
-        }
+//        CoordinateTableModel ctm = new CoordinateTableModel(trackingOptimizationToolModel.getPropCoordinateListString(), model);
+//        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+//        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
+//        dlg.setModal(true);
+//        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+//        Object userInput = dlg.getValue();
+//        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+//            ctm.populateCoordinateListProperty();
+//            jCoordinateListTextArea.setText(trackingOptimizationToolModel.getPropCoordinateListString().toString());
+//        }
     }//GEN-LAST:event_jButtonEditCoordinateListActionPerformed
 
     private void jButtonEditCostTermListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCostTermListActionPerformed
@@ -486,6 +618,18 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEditConstraintTermListActionPerformed
 
+    private void jButtonEditSynergyCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSynergyCoordinateListActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEditSynergyCoordinateListActionPerformed
+
+    private void surrogateModelDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_surrogateModelDirPathStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_surrogateModelDirPathStateChanged
+
+    private void jButtonEditCoordinateList1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCoordinateList1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonEditCoordinateList1ActionPerformed
+
     @Override
     public void update(Observable o, Object o1) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -498,7 +642,7 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
 
     @Override
     public String getToolXML() {
-        return jointPersonalizationToolModel.getToolAsObject().dump();
+        return trackingOptimizationToolModel.getToolAsObject().dump();
     }
 
     @Override
@@ -506,17 +650,17 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
         String fileName = super.stripOuterTags(nmsmFilename);
         Model model = OpenSimDB.getInstance().getCurrentModel();
        //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
-       jointPersonalizationToolModel = new JointPersonalizationToolModel(model, fileName);
-       File f= new File(fileName); 
-       f.delete();
-       jointPersonalizationTaskListModel = new JMPTaskListModel(jointPersonalizationToolModel.getJointTaskListAsObjectList());
-       listSelectionModel = jJointPersonalizationList.getSelectionModel();
-       listSelectionModel.addListSelectionListener( new ListSelectionHandler());
-       //initComponents(); Panel already constructed, no need to re-initComponents
-       jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
-       currentModelFileTextField.setText(jointPersonalizationToolModel.getInputModelFile());
-       outputModelFilePath.setFileName(jointPersonalizationToolModel.getOutputModelFile());
-       setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
+//       trackingOptimizationToolModel = new JointPersonalizationToolModel(model, fileName);
+//       File f= new File(fileName); 
+//       f.delete();
+//       jointPersonalizationTaskListModel = new JMPTaskListModel(trackingOptimizationToolModel.getJointTaskListAsObjectList());
+//       listSelectionModel = jJointPersonalizationList.getSelectionModel();
+//       listSelectionModel.addListSelectionListener( new ListSelectionHandler());
+//       //initComponents(); Panel already constructed, no need to re-initComponents
+//       jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
+//       currentModelFileTextField.setText(trackingOptimizationToolModel.getInputModelFile());
+//       outputModelFilePath.setFileName(trackingOptimizationToolModel.getOutputModelFile());
+//       setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
     }
 
     @Override
@@ -528,21 +672,29 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private org.opensim.swingui.FileTextFieldAndChooser InitialGuessDirPath;
     private org.opensim.swingui.FileTextFieldAndChooser InitialGuessDirPath1;
+    private javax.swing.JPanel JTorqueControllerDetailsPanel;
     private javax.swing.JTextField currentModelFileTextField;
     private javax.swing.JPanel inputModelPanel;
     private javax.swing.JButton jButtonEditConstraintTermList;
     private javax.swing.JButton jButtonEditCoordinateList;
+    private javax.swing.JButton jButtonEditCoordinateList1;
     private javax.swing.JButton jButtonEditCostTermList;
+    private javax.swing.JButton jButtonEditSynergyCoordinateList;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBoxSynergyController;
     private javax.swing.JCheckBox jCheckBoxTorqueController;
     private javax.swing.JTextArea jConstraintListTextArea;
     private javax.swing.JPanel jConstraintTermListPanel;
     private javax.swing.JTextArea jCoordinateListTextArea;
     private javax.swing.JTextArea jCoordinateListTextArea1;
+    private javax.swing.JTextArea jCoordinateListTextArea2;
+    private javax.swing.JTextArea jCoordinateListTextArea3;
     private javax.swing.JPanel jCoordinatesListPanel;
+    private javax.swing.JPanel jCoordinatesListPanel1;
     private javax.swing.JPanel jCostTermListPanel;
     private javax.swing.JButton jEditSynergyControllerButton;
     private javax.swing.JButton jEditTorqueControllerButton;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -553,12 +705,16 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JPanel jSynergyControllerDetailsPanel;
     private javax.swing.JPanel jSynergyControllerPanel;
     private javax.swing.JPanel jTorqueControllerPanel;
     private org.opensim.swingui.FileTextFieldAndChooser osimxFilePath;
     private org.opensim.swingui.FileTextFieldAndChooser outputDirPath;
     private javax.swing.JPanel outputPanel;
     private org.opensim.swingui.FileTextFieldAndChooser solverSettingsFilePath;
+    private org.opensim.swingui.FileTextFieldAndChooser surrogateModelDirPath;
     // End of variables declaration//GEN-END:variables
 
     private class ListSelectionHandler implements ListSelectionListener {
@@ -570,9 +726,9 @@ public class TrackingOptimizationJPanel extends BaseToolPanel  implements Observ
         public void valueChanged(ListSelectionEvent lse) {
             // Disable delete if nothing is selected
             // Enable edit if single selection
-            int[] sels = jJointPersonalizationList.getSelectedIndices();
-            editJointTaskButton.setEnabled(sels.length==1);
-            deleteJointTaskButton.setEnabled(sels.length>=1);
+//            int[] sels = jJointPersonalizationList.getSelectedIndices();
+//            editJointTaskButton.setEnabled(sels.length==1);
+//            deleteJointTaskButton.setEnabled(sels.length>=1);
             
         }
     }
