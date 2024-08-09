@@ -5,8 +5,6 @@
  */
 package org.opensim.rcnl;
 
-import java.awt.event.ActionEvent;
-import java.io.File;
 import javax.swing.JComponent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -16,7 +14,6 @@ import org.openide.awt.ActionRegistration;
 import org.openide.awt.DynamicMenuContent;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
-import org.openide.util.NbBundle.Messages;
 import org.openide.util.actions.CallableSystemAction;
 
 @ActionID(
@@ -70,10 +67,10 @@ public final class TreatmentOptimizationAction extends CallableSystemAction {
             tOptMenuItem.addActionListener(new TrackingOptimizationAction());
             this.add(tOptMenuItem);
             javax.swing.JMenuItem vOptMenuItem = new JMenuItem("Verification Optimization...");
-            vOptMenuItem.addActionListener(new JointPersonalizationAction());
+            vOptMenuItem.addActionListener(new VerificationOptimizationAction());
             this.add(vOptMenuItem);
             javax.swing.JMenuItem desOptMenuItem = new JMenuItem("Design Optimization...");
-            desOptMenuItem.addActionListener(new JointPersonalizationAction());
+            desOptMenuItem.addActionListener(new DesignOptimizationAction());
             this.add(desOptMenuItem);
         }
     }

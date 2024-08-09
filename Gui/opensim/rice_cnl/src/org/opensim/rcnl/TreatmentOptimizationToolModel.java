@@ -5,27 +5,17 @@
  */
 package org.opensim.rcnl;
 
-import java.io.File;
-import java.io.IOException;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import org.openide.util.Exceptions;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyObjectList;
 import org.opensim.modeling.PropertyStringList;
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
 
 /**
  *
  * @author Ayman-NMBL
  */
-public class TrackingOptimizationToolModel {
+public class TreatmentOptimizationToolModel {
 
     private OpenSimObject toolAsObject;
     private String resultsDir = ".";
@@ -41,8 +31,10 @@ public class TrackingOptimizationToolModel {
     private Model model;
     private  PropertyStringList propOutputModelFileString;
     private PropertyStringList propInputModelFileString;
+    public enum Mode { TrackingOptimization, VerificationOptimization, DesignOptimization };
+    public Mode mode;
     
-    public TrackingOptimizationToolModel(Model model) {
+    public TreatmentOptimizationToolModel(Model model) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
         toolAsObject = OpenSimObject.newInstanceOfType("JointModelPersonalizationTool");
         this.model = model;
@@ -60,7 +52,7 @@ public class TrackingOptimizationToolModel {
              propInputModelFileString.setValue(0, proposedName);
         }
     }
-    public TrackingOptimizationToolModel(Model model, String fileXml) {
+    public TreatmentOptimizationToolModel(Model model, String fileXml) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
         toolAsObject = OpenSimObject.makeObjectFromFile(fileXml);
         this.model = model;

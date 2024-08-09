@@ -33,14 +33,7 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
 
     private OpenSimObject taskToEdit;
     private NumberFormat numFormat = NumberFormat.getInstance();
-    private Vector<OpenSimObject> savedJointTasks = new Vector<OpenSimObject>();
-    private Vector<OpenSimObject> savedBodyTasks = new Vector<OpenSimObject>();
-    private JMPJointListModel jmpJointListModel = null;
-    private JMPBodyListModel jmpBodyListModel = null;
-    private PropertyObjectList poJointList;
-    private PropertyObjectList poBodyList;
-    private ListSelectionModel listSelectionModel, list2SelectionModel;
-    private boolean initializing=false;
+
     /**
      * Creates new form EditJointTaskJPanel
      */
@@ -49,32 +42,6 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
     }
 
     EditCosnstraintTermJPanel(OpenSimObject jointPersonalizationTask) {
-        taskToEdit = jointPersonalizationTask;
-        initializing = true;
-        AbstractProperty ap = jointPersonalizationTask.getPropertyByName("JMPJointSet");
-        poJointList = PropertyObjectList.updAs(ap);
-        jmpJointListModel= new JMPJointListModel(poJointList);
-        poBodyList = PropertyObjectList.updAs(jointPersonalizationTask.getPropertyByName("JMPBodySet"));
-        jmpBodyListModel = new JMPBodyListModel(poBodyList);
-        initComponents();
-        jList1.setModel(jmpJointListModel);
-        jList2.setModel(jmpBodyListModel);
-        listSelectionModel = jList1.getSelectionModel();
-        listSelectionModel.addListSelectionListener(new ListSelectionHandler());
-        jList2.getSelectionModel().addListSelectionListener(new List2SelectionHandler() );
-        triallFilePath.setExtensionsAndDescription(".trc", "Measurement trial marker data");
-        // Populate name, enabled, time-range and markers-file
-        jTaskNameTextField.setText(jointPersonalizationTask.getName());
-        AbstractProperty enabledProp = taskToEdit.getPropertyByName("is_enabled");
-        jEnabledCheckBox.setSelected(PropertyHelper.getValueBool(enabledProp));
-        AbstractProperty trcfileProp = taskToEdit.getPropertyByName("marker_file_name");
-        String filepath = PropertyHelper.getValueString(trcfileProp);
-        triallFilePath.setFileName(filepath);
-        AbstractProperty timeRangeProp = taskToEdit.getPropertyByName("time_range");
-        PropertyDoubleList pDoubleList = PropertyDoubleList.updAs(timeRangeProp);
-        jTextStartTime.setText(String.valueOf(pDoubleList.getValue(0)));
-        jTextEndTime.setText(String.valueOf(pDoubleList.getValue(1)));
-        initializing = false;
         
     }
 
@@ -98,6 +65,10 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField2 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jConstraintNameTextField = new javax.swing.JTextField();
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jLabel1.text")); // NOI18N
 
@@ -130,7 +101,7 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
         jComponentListPanelLayout.setHorizontalGroup(
             jComponentListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jComponentListPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 985, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editComonentListButton)
                 .addContainerGap())
@@ -145,7 +116,7 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel11, org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jLabel11.text")); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "generalized_coordinate_tracking", "generalized_speed_tracking", "marker_position_tracking", "inverse_dynamics_load_tracking", "inverse_dynamics_load_minimization", "inverse_dynamics_slope_tracking", "joint_acceleration_minimization", "external_force_tracking", "external_moment_tracking", "muscle_activation_tracking" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "kinetic_consistency", "generalized_speed_tracking", "marker_position_tracking", "inverse_dynamics_load_tracking", "inverse_dynamics_load_minimization", "inverse_dynamics_slope_tracking", "joint_acceleration_minimization", "external_force_tracking", "external_moment_tracking", "muscle_activation_tracking" }));
 
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Coordinate", "Marker", "Load", "Force", "Muscle" }));
         jComboBox2.setEnabled(false);
@@ -154,58 +125,83 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
 
         jTextField1.setText(org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jTextField1.text")); // NOI18N
 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jLabel3.text")); // NOI18N
+
+        jTextField2.setText(org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jTextField2.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jLabel4.text")); // NOI18N
+
+        jConstraintNameTextField.setText(org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jConstraintNameTextField.text")); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(318, 318, 318))
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jComponentListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComponentListPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(jLabel11)
+                        .addGap(18, 18, 18)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jEnabledCheckBox)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jEnabledCheckBox)
-                            .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jConstraintNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(16, 16, 16)
+                    .addComponent(jLabel3)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(880, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(12, 12, 12)
+                    .addComponent(jLabel4)
+                    .addComponent(jConstraintNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addComponent(jEnabledCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
+                .addGap(20, 20, 20)
                 .addComponent(jComponentListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addContainerGap())
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(480, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3)
+                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap()))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -221,21 +217,6 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
 
     private void editComonentListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComonentListButtonActionPerformed
         // TODO add your handling code here:
-        int[] sels = jList1.getSelectedIndices();
-        int idx = sels[0];
-        OpenSimObject selectedJointTask = (OpenSimObject)jmpJointListModel.get(idx);
-        OpenSimObject taskCopyToEdit = selectedJointTask.clone();
-        AddEditJointPanel ejtPanel = new AddEditJointPanel(taskCopyToEdit);
-        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
-        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
-        d.setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            // Fire model changed event to update list in case name change
-            poJointList.setValue(idx, taskCopyToEdit);
-            jmpJointListModel.set(idx, taskCopyToEdit);
-            
-        }
     }//GEN-LAST:event_editComonentListButtonActionPerformed
 
 
@@ -244,13 +225,17 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JPanel jComponentListPanel;
+    private javax.swing.JTextField jConstraintNameTextField;
     private javax.swing.JCheckBox jEnabledCheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
     private class ListSelectionHandler implements ListSelectionListener {
 
@@ -261,9 +246,7 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
         public void valueChanged(ListSelectionEvent lse) {
             // Disable delete if nothing is selected
             // Enable edit if single selection
-            int[] sels = jList1.getSelectedIndices();
-            editComonentListButton.setEnabled(sels.length==1);
-            deleteJointButton.setEnabled(sels.length>=1);
+
             
         }
     }
@@ -277,9 +260,6 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
         public void valueChanged(ListSelectionEvent lse) {
             // Disable delete if nothing is selected
             // Enable edit if single selection
-            int[] sels = jList2.getSelectedIndices();
-            editBodyButton.setEnabled(sels.length==1);
-            deleteBodyButton.setEnabled(sels.length>=1);
             
         }
     }

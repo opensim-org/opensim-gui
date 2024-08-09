@@ -6,24 +6,18 @@
 package org.opensim.rcnl;
 
 import java.awt.Dialog;
-import java.io.IOException;
 import java.text.NumberFormat;
-import java.text.ParseException;
 import java.util.Vector;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
-import javax.swing.filechooser.FileFilter;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
-import org.openide.util.Exceptions;
 import org.opensim.modeling.AbstractProperty;
-import org.opensim.modeling.MarkerData;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyDoubleList;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.PropertyObjectList;
-import org.opensim.utils.ErrorDialog;
 
 /**
  *
@@ -32,15 +26,7 @@ import org.opensim.utils.ErrorDialog;
 public class EditCostTermJPanel extends javax.swing.JPanel {
 
     private OpenSimObject taskToEdit;
-    private NumberFormat numFormat = NumberFormat.getInstance();
-    private Vector<OpenSimObject> savedJointTasks = new Vector<OpenSimObject>();
-    private Vector<OpenSimObject> savedBodyTasks = new Vector<OpenSimObject>();
-    private JMPJointListModel jmpJointListModel = null;
-    private JMPBodyListModel jmpBodyListModel = null;
-    private PropertyObjectList poJointList;
-    private PropertyObjectList poBodyList;
-    private ListSelectionModel listSelectionModel, list2SelectionModel;
-    private boolean initializing=false;
+
     /**
      * Creates new form EditJointTaskJPanel
      */
@@ -49,32 +35,6 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
     }
 
     EditCostTermJPanel(OpenSimObject jointPersonalizationTask) {
-        taskToEdit = jointPersonalizationTask;
-        initializing = true;
-        AbstractProperty ap = jointPersonalizationTask.getPropertyByName("JMPJointSet");
-        poJointList = PropertyObjectList.updAs(ap);
-        jmpJointListModel= new JMPJointListModel(poJointList);
-        poBodyList = PropertyObjectList.updAs(jointPersonalizationTask.getPropertyByName("JMPBodySet"));
-        jmpBodyListModel = new JMPBodyListModel(poBodyList);
-        initComponents();
-        jList1.setModel(jmpJointListModel);
-        jList2.setModel(jmpBodyListModel);
-        listSelectionModel = jList1.getSelectionModel();
-        listSelectionModel.addListSelectionListener(new ListSelectionHandler());
-        jList2.getSelectionModel().addListSelectionListener(new List2SelectionHandler() );
-        triallFilePath.setExtensionsAndDescription(".trc", "Measurement trial marker data");
-        // Populate name, enabled, time-range and markers-file
-        jTaskNameTextField.setText(jointPersonalizationTask.getName());
-        AbstractProperty enabledProp = taskToEdit.getPropertyByName("is_enabled");
-        jEnabledCheckBox.setSelected(PropertyHelper.getValueBool(enabledProp));
-        AbstractProperty trcfileProp = taskToEdit.getPropertyByName("marker_file_name");
-        String filepath = PropertyHelper.getValueString(trcfileProp);
-        triallFilePath.setFileName(filepath);
-        AbstractProperty timeRangeProp = taskToEdit.getPropertyByName("time_range");
-        PropertyDoubleList pDoubleList = PropertyDoubleList.updAs(timeRangeProp);
-        jTextStartTime.setText(String.valueOf(pDoubleList.getValue(0)));
-        jTextEndTime.setText(String.valueOf(pDoubleList.getValue(1)));
-        initializing = false;
         
     }
 
@@ -98,6 +58,8 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        jConstraintNameTextField = new javax.swing.JTextField();
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jLabel1.text")); // NOI18N
 
@@ -130,7 +92,7 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         jComponentListPanelLayout.setHorizontalGroup(
             jComponentListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jComponentListPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 979, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editComonentListButton)
                 .addContainerGap())
@@ -153,6 +115,10 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jLabel2.text")); // NOI18N
 
         jTextField1.setText(org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jTextField1.text")); // NOI18N
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jLabel4.text")); // NOI18N
+
+        jConstraintNameTextField.setText(org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jConstraintNameTextField.text")); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -185,11 +151,20 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
                                         .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jConstraintNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(jConstraintNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -221,21 +196,7 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
 
     private void editComonentListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComonentListButtonActionPerformed
         // TODO add your handling code here:
-        int[] sels = jList1.getSelectedIndices();
-        int idx = sels[0];
-        OpenSimObject selectedJointTask = (OpenSimObject)jmpJointListModel.get(idx);
-        OpenSimObject taskCopyToEdit = selectedJointTask.clone();
-        AddEditJointPanel ejtPanel = new AddEditJointPanel(taskCopyToEdit);
-        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Joint Task ");
-        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
-        d.setVisible(true);
-        Object userInput = dlg.getValue();
-        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            // Fire model changed event to update list in case name change
-            poJointList.setValue(idx, taskCopyToEdit);
-            jmpJointListModel.set(idx, taskCopyToEdit);
-            
-        }
+
     }//GEN-LAST:event_editComonentListButtonActionPerformed
 
 
@@ -244,10 +205,12 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JPanel jComponentListPanel;
+    private javax.swing.JTextField jConstraintNameTextField;
     private javax.swing.JCheckBox jEnabledCheckBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JList<String> jList1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
@@ -261,9 +224,6 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         public void valueChanged(ListSelectionEvent lse) {
             // Disable delete if nothing is selected
             // Enable edit if single selection
-            int[] sels = jList1.getSelectedIndices();
-            editComonentListButton.setEnabled(sels.length==1);
-            deleteJointButton.setEnabled(sels.length>=1);
             
         }
     }
@@ -277,10 +237,7 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         public void valueChanged(ListSelectionEvent lse) {
             // Disable delete if nothing is selected
             // Enable edit if single selection
-            int[] sels = jList2.getSelectedIndices();
-            editBodyButton.setEnabled(sels.length==1);
-            deleteBodyButton.setEnabled(sels.length>=1);
-            
+
         }
     }
 

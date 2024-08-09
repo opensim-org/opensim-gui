@@ -19,13 +19,13 @@ import org.opensim.view.pub.OpenSimDB;
 
 @ActionID(
         category = "Edit",
-        id = "org.opensim.rcnl.TrackingOptimizationAction"
+        id = "org.opensim.rcnl.DesignOptimizationAction"
 )
 @ActionRegistration(
-        displayName = "#CTL_TrackingOptimizationAction"
+        displayName = "#CTL_DesignOptimizationAction"
 )
-@Messages("CTL_TrackingOptimizationAction=Tracking Optimization")
-public final class TrackingOptimizationAction implements ActionListener {
+@Messages("CTL_DesignOptimizationAction=Design Optimization")
+public final class DesignOptimizationAction implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -33,17 +33,17 @@ public final class TrackingOptimizationAction implements ActionListener {
        Model model = OpenSimDB.getInstance().getCurrentModel();
       if(model==null){
           NotifyDescriptor.Message dlg =
-                          new NotifyDescriptor.Message("Error while initializing Tracking Optimization tool. No current model to personalize");
+                          new NotifyDescriptor.Message("Error while initializing Design Optimization tool. No current model to personalize");
                   DialogDisplayer.getDefault().notify(dlg);
           return;
       }
 
       try {
-         final TreatmentOptimizationJPanel jpPanel = new TreatmentOptimizationJPanel(model, TreatmentOptimizationToolModel.Mode.TrackingOptimization);
-         BaseToolPanel.openToolDialog(jpPanel, "Tracking Optimization Tool");
+         final TreatmentOptimizationJPanel jpPanel = new TreatmentOptimizationJPanel(model, TreatmentOptimizationToolModel.Mode.DesignOptimization);
+         BaseToolPanel.openToolDialog(jpPanel, "Design Optimization Tool");
       } catch (IOException ex) {
-         ErrorDialog.displayIOExceptionDialog("Tracking Optimization Error",
-                    "Error while initializing Tracking Optimization tool",ex);
+         ErrorDialog.displayIOExceptionDialog("Design Optimization Error",
+                    "Error while initializing Design Optimization tool",ex);
       }
 
         ;

@@ -184,7 +184,7 @@ public abstract class BaseToolPanel extends JPanel implements ActionListener, Ob
    // Dialog Operations
    //------------------------------------------------------------------------
    public JButton[] getDialogOptions() {
-      return new JButton[]{loadSettingsButton, saveSettingsButton, applyButton, okButton, helpButton};
+      return new JButton[]{loadSettingsButton, saveSettingsButton, okButton, helpButton};
    }
 
    public void setOwner(Dialog window) { ownerDialog = window; }
