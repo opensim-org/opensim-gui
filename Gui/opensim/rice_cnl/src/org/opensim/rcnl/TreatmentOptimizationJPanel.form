@@ -443,7 +443,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jScrollPane2" pref="865" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jButtonEditCoordinateList2" min="-2" pref="158" max="-2" attributes="0"/>
+                          <Component id="jButtonEditSettingsCoordinateList" min="-2" pref="158" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -453,7 +453,7 @@
                       <Component id="jScrollPane2" alignment="0" pref="284" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
-                          <Component id="jButtonEditCoordinateList2" min="-2" max="-2" attributes="0"/>
+                          <Component id="jButtonEditSettingsCoordinateList" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -481,14 +481,14 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JButton" name="jButtonEditCoordinateList2">
+                <Component class="javax.swing.JButton" name="jButtonEditSettingsCoordinateList">
                   <Properties>
                     <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                      <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="TreatmentOptimizationJPanel.jButtonEditCoordinateList2.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                      <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="TreatmentOptimizationJPanel.jButtonEditSettingsCoordinateList.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditCoordinateList2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditSettingsCoordinateListActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

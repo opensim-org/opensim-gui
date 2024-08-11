@@ -8,6 +8,8 @@ package org.opensim.rcnl;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import org.openide.DialogDescriptor;
+import org.openide.DialogDisplayer;
 import org.opensim.modeling.Model;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -17,6 +19,7 @@ import org.opensim.view.pub.OpenSimDB;
  */
 public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Observer {
     private TreatmentOptimizationToolModel trackingOptimizationToolModel = null;
+    private Model model;
     String modeName;
 
     /**
@@ -24,7 +27,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
      */
     public TreatmentOptimizationJPanel(Model model, TreatmentOptimizationToolModel.Mode mode)  throws IOException  {
        trackingOptimizationToolModel = new TreatmentOptimizationToolModel(model, mode);
-       
+       this.model = model;
        switch(mode) {
            case TrackingOptimization:
                modeName = "Tracking Optimization Tool";
@@ -47,18 +50,22 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
        InitialGuessDirPath.setDialogTitle("Select initial guess directory");
        InitialGuessDirPath.setCheckIfFileExists(true);
        InitialGuessDirPath.setDirectoriesOnly(true);
+       InitialGuessDirPath.setFileName(trackingOptimizationToolModel.getInitialGuessDir());
        trackedQuantitiesDirPath.setDialogTitle("Select tracked quantities directory");
        trackedQuantitiesDirPath.setCheckIfFileExists(true);
        trackedQuantitiesDirPath.setDirectoriesOnly(true);
+       trackedQuantitiesDirPath.setFileName(trackingOptimizationToolModel.getTrackedQuantitiesDir());
        outputDirPath.setDialogTitle("Select output directory");
        outputDirPath.setCheckIfFileExists(false);
        outputDirPath.setDirectoriesOnly(true);
+       outputDirPath.setFileName(trackingOptimizationToolModel.getOutputResultDir());
        solverSettingsFilePath.setCheckIfFileExists(true);
        solverSettingsFilePath.setFileName(trackingOptimizationToolModel.getOCSettingsFile());
        solverSettingsFilePath.setDialogTitle("Select solver settings file");
        solverSettingsFilePath.setDirectoriesOnly(false);
        solverSettingsFilePath.setExtensionsAndDescription(".xml", "File that contains desired solver settings");
 
+       setSettingsFileDescription("Save settings for "+modeName+" as .xml file");
     }
 
     /**
@@ -97,7 +104,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         jCoordinatesListPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jCoordinateListTextArea1 = new javax.swing.JTextArea();
-        jButtonEditCoordinateList2 = new javax.swing.JButton();
+        jButtonEditSettingsCoordinateList = new javax.swing.JButton();
         jControllersPanel = new javax.swing.JPanel();
         jSynergyControllerDetailsPanel1 = new javax.swing.JPanel();
         jCheckBox2 = new javax.swing.JCheckBox();
@@ -335,10 +342,10 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         jCoordinateListTextArea1.setFocusable(false);
         jScrollPane2.setViewportView(jCoordinateListTextArea1);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jButtonEditCoordinateList2, org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jButtonEditCoordinateList2.text")); // NOI18N
-        jButtonEditCoordinateList2.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jButtonEditSettingsCoordinateList, org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jButtonEditSettingsCoordinateList.text")); // NOI18N
+        jButtonEditSettingsCoordinateList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditCoordinateList2ActionPerformed(evt);
+                jButtonEditSettingsCoordinateListActionPerformed(evt);
             }
         });
 
@@ -349,7 +356,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
             .addGroup(jCoordinatesListPanel2Layout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonEditCoordinateList2, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonEditSettingsCoordinateList, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jCoordinatesListPanel2Layout.setVerticalGroup(
@@ -357,7 +364,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
             .addGroup(jCoordinatesListPanel2Layout.createSequentialGroup()
                 .addGap(98, 98, 98)
-                .addComponent(jButtonEditCoordinateList2)
+                .addComponent(jButtonEditSettingsCoordinateList)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -701,6 +708,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
     private void outputDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputDirPathStateChanged
         // TODO add your handling code here:
+        trackingOptimizationToolModel.setOutputResultDir(outputDirPath.getFileName());
     }//GEN-LAST:event_outputDirPathStateChanged
 
     private void trackedQuantitiesDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_trackedQuantitiesDirPathStateChanged
@@ -752,11 +760,23 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
     private void solverSettingsFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_solverSettingsFilePathStateChanged
         // TODO add your handling code here:
+        trackingOptimizationToolModel.setOCSettingsFile(solverSettingsFilePath.getFileName());
     }//GEN-LAST:event_solverSettingsFilePathStateChanged
 
-    private void jButtonEditCoordinateList2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCoordinateList2ActionPerformed
+    private void jButtonEditSettingsCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSettingsCoordinateListActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEditCoordinateList2ActionPerformed
+        CoordinateTableModel ctm = new CoordinateTableModel(trackingOptimizationToolModel.getPropCoordinateListString(), model);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
+        dlg.setModal(true);
+        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            ctm.populateCoordinateListProperty();
+            jCoordinateListTextArea1.setText(trackingOptimizationToolModel.getPropCoordinateListString().toString());
+        }
+
+    }//GEN-LAST:event_jButtonEditSettingsCoordinateListActionPerformed
 
     private void jButtonEditSynergyCoordinateList1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSynergyCoordinateList1ActionPerformed
         // TODO add your handling code here:
@@ -823,7 +843,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private javax.swing.JPanel inputModelPanel;
     private javax.swing.JPanel inputOutputPanel;
     private javax.swing.JButton jButtonEditCoordinateList;
-    private javax.swing.JButton jButtonEditCoordinateList2;
+    private javax.swing.JButton jButtonEditSettingsCoordinateList;
     private javax.swing.JButton jButtonEditSynergyCoordinateList1;
     private javax.swing.JButton jButtonEditTorqueCoordinateList;
     private javax.swing.JCheckBox jCheckBox2;

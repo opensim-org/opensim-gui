@@ -18,6 +18,7 @@ import org.opensim.modeling.PropertyStringList;
 public class TreatmentOptimizationToolModel {
 
     private OpenSimObject toolAsObject;
+
     public enum Mode { TrackingOptimization, VerificationOptimization, DesignOptimization };
     public Mode mode;
     private Model model;
@@ -27,7 +28,9 @@ public class TreatmentOptimizationToolModel {
     private PropertyStringList propTrackedQuantitiesDirString;
     private PropertyStringList propResultsDirString;
     private PropertyStringList propOCSettingsFileString;
+    private PropertyStringList propStatesCoordinateListString;
 
+    
     public TreatmentOptimizationToolModel(Model model, Mode mode) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
         this.mode = mode;
@@ -82,6 +85,8 @@ public class TreatmentOptimizationToolModel {
         propResultsDirString = PropertyStringList.getAs(propResultsDir);
         AbstractProperty propOCSettingsFile = toolAsObject.updPropertyByName("optimal_control_solver_settings_file");
         propOCSettingsFileString = PropertyStringList.getAs(propOCSettingsFile);
+        AbstractProperty propStatesCoordinateList = toolAsObject.updPropertyByName("states_coordinate_list");        
+        propStatesCoordinateListString = PropertyStringList.getAs(propStatesCoordinateList);
     }
     
     String getOutputResultDir() {
@@ -133,5 +138,8 @@ public class TreatmentOptimizationToolModel {
     void setOCSettingsFile(String newFileName) {
         propOCSettingsFileString.setValue(newFileName);
     }
-
+    
+    PropertyStringList getPropCoordinateListString() {
+        return propStatesCoordinateListString;
+    }
 }
