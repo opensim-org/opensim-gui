@@ -42,7 +42,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
        if(model==null) throw new IOException(modeName +" got null model");
        initComponents();
        // Settings Panel
-       currentModelFileTextField.setText(model.getInputFileName());
+       currentModelFileTextField.setText(trackingOptimizationToolModel.getInputModelFile());
        osimxFilePath.setCheckIfFileExists(true);
        osimxFilePath.setFileName(trackingOptimizationToolModel.getInputOsimxFile());
        osimxFilePath.setDialogTitle("Select osimx file");

@@ -36,7 +36,8 @@ public class TreatmentOptimizationToolModel {
     private PropertyStringList propRCNLSynergyCoordinateListString;
     private OpenSimObject propRCNLTorqueControllerObject;
     private PropertyStringList propRCNLTorqueCoordinateListString;
-    
+    private PropertyStringList propInputModelFileString;
+
     public TreatmentOptimizationToolModel(Model model, Mode mode) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
         this.mode = mode;
@@ -54,6 +55,12 @@ public class TreatmentOptimizationToolModel {
         }
         this.model = model;
 
+        AbstractProperty propInputModelFile = toolAsObject.updPropertyByName("input_model_file");
+        propInputModelFileString = PropertyStringList.getAs(propInputModelFile);
+        if (propInputModelFileString.size()==0 || propInputModelFileString.getValue(0).isEmpty()){
+             String proposedName = model.getInputFileName();
+             propInputModelFileString.setValue(0, proposedName);
+        }
         connectPropertiesToClassMembers();
     }
     public TreatmentOptimizationToolModel(Model model, String fileXml) {
@@ -184,5 +191,9 @@ public class TreatmentOptimizationToolModel {
     
     PropertyStringList getRCNLTorqueCoordinateListString() {
         return propRCNLTorqueCoordinateListString;
+    }
+    
+    public String getInputModelFile() {
+        return propInputModelFileString.getValue(0);
     }
 }
