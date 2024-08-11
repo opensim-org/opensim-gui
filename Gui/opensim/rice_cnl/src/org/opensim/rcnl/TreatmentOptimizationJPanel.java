@@ -116,14 +116,14 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         jOptimizeSynVecCheckBox = new javax.swing.JCheckBox();
         jCoordinatesListPanel3 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jCoordinateListTextArea4 = new javax.swing.JTextArea();
-        jButtonEditSynergyCoordinateList1 = new javax.swing.JButton();
+        jSynergyCoordinateListTextArea = new javax.swing.JTextArea();
+        jButtonEditSynergyCoordinateList = new javax.swing.JButton();
         surrogateModelDirPath = new org.opensim.swingui.FileTextFieldAndChooser();
         jLabel2 = new javax.swing.JLabel();
         jRCNLTorqueControllerPanel = new javax.swing.JPanel();
         JTorqueControllerDetailsPanel1 = new javax.swing.JPanel();
         jScrollPane9 = new javax.swing.JScrollPane();
-        jCoordinateListTextArea5 = new javax.swing.JTextArea();
+        jCoordinateListTorqueControllerTextArea = new javax.swing.JTextArea();
         jButtonEditTorqueCoordinateList = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jCostTermsPanel = new javax.swing.JPanel();
@@ -415,18 +415,18 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
         jCoordinatesListPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jCoordinatesListPanel3.border.title"))); // NOI18N
 
-        jCoordinateListTextArea4.setEditable(false);
-        jCoordinateListTextArea4.setBackground(new java.awt.Color(240, 240, 240));
-        jCoordinateListTextArea4.setColumns(20);
-        jCoordinateListTextArea4.setRows(5);
-        jCoordinateListTextArea4.setEnabled(false);
-        jCoordinateListTextArea4.setFocusable(false);
-        jScrollPane7.setViewportView(jCoordinateListTextArea4);
+        jSynergyCoordinateListTextArea.setEditable(false);
+        jSynergyCoordinateListTextArea.setBackground(new java.awt.Color(240, 240, 240));
+        jSynergyCoordinateListTextArea.setColumns(20);
+        jSynergyCoordinateListTextArea.setRows(5);
+        jSynergyCoordinateListTextArea.setEnabled(false);
+        jSynergyCoordinateListTextArea.setFocusable(false);
+        jScrollPane7.setViewportView(jSynergyCoordinateListTextArea);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jButtonEditSynergyCoordinateList1, org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jButtonEditSynergyCoordinateList1.text")); // NOI18N
-        jButtonEditSynergyCoordinateList1.addActionListener(new java.awt.event.ActionListener() {
+        org.openide.awt.Mnemonics.setLocalizedText(jButtonEditSynergyCoordinateList, org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jButtonEditSynergyCoordinateList.text")); // NOI18N
+        jButtonEditSynergyCoordinateList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonEditSynergyCoordinateList1ActionPerformed(evt);
+                jButtonEditSynergyCoordinateListActionPerformed(evt);
             }
         });
 
@@ -437,7 +437,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
             .addGroup(jCoordinatesListPanel3Layout.createSequentialGroup()
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonEditSynergyCoordinateList1, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jButtonEditSynergyCoordinateList, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jCoordinatesListPanel3Layout.setVerticalGroup(
             jCoordinatesListPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -446,7 +446,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jCoordinatesListPanel3Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButtonEditSynergyCoordinateList1)
+                .addComponent(jButtonEditSynergyCoordinateList)
                 .addGap(109, 109, 109))
         );
 
@@ -494,13 +494,13 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
         JTorqueControllerDetailsPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.JTorqueControllerDetailsPanel1.border.title"))); // NOI18N
 
-        jCoordinateListTextArea5.setEditable(false);
-        jCoordinateListTextArea5.setBackground(new java.awt.Color(240, 240, 240));
-        jCoordinateListTextArea5.setColumns(20);
-        jCoordinateListTextArea5.setRows(5);
-        jCoordinateListTextArea5.setEnabled(false);
-        jCoordinateListTextArea5.setFocusable(false);
-        jScrollPane9.setViewportView(jCoordinateListTextArea5);
+        jCoordinateListTorqueControllerTextArea.setEditable(false);
+        jCoordinateListTorqueControllerTextArea.setBackground(new java.awt.Color(240, 240, 240));
+        jCoordinateListTorqueControllerTextArea.setColumns(20);
+        jCoordinateListTorqueControllerTextArea.setRows(5);
+        jCoordinateListTorqueControllerTextArea.setEnabled(false);
+        jCoordinateListTorqueControllerTextArea.setFocusable(false);
+        jScrollPane9.setViewportView(jCoordinateListTorqueControllerTextArea);
 
         org.openide.awt.Mnemonics.setLocalizedText(jButtonEditTorqueCoordinateList, org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jButtonEditTorqueCoordinateList.text")); // NOI18N
         jButtonEditTorqueCoordinateList.addActionListener(new java.awt.event.ActionListener() {
@@ -789,9 +789,20 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
     }//GEN-LAST:event_jButtonEditSettingsCoordinateListActionPerformed
 
-    private void jButtonEditSynergyCoordinateList1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSynergyCoordinateList1ActionPerformed
+    private void jButtonEditSynergyCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSynergyCoordinateListActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButtonEditSynergyCoordinateList1ActionPerformed
+        CoordinateTableModel ctm = new CoordinateTableModel(trackingOptimizationToolModel.getRCNLSynergyCoordinateListString(), model);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
+        dlg.setModal(true);
+        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            ctm.populateCoordinateListProperty();
+            jSynergyCoordinateListTextArea.setText(trackingOptimizationToolModel.getRCNLSynergyCoordinateListString().toString());
+        }
+
+    }//GEN-LAST:event_jButtonEditSynergyCoordinateListActionPerformed
 
     private void surrogateModelDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_surrogateModelDirPathStateChanged
         // TODO add your handling code here:
@@ -800,6 +811,17 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
     private void jButtonEditTorqueCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditTorqueCoordinateListActionPerformed
         // TODO add your handling code here:
+        CoordinateTableModel ctm = new CoordinateTableModel(trackingOptimizationToolModel.getRCNLTorqueCoordinateListString(), model);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
+        dlg.setModal(true);
+        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            ctm.populateCoordinateListProperty();
+            jCoordinateListTorqueControllerTextArea.setText(trackingOptimizationToolModel.getRCNLTorqueCoordinateListString().toString());
+        }
+        
     }//GEN-LAST:event_jButtonEditTorqueCoordinateListActionPerformed
 
     private void jOptimizeSynVecCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOptimizeSynVecCheckBoxActionPerformed
@@ -861,14 +883,13 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private javax.swing.JPanel inputOutputPanel;
     private javax.swing.JButton jButtonEditCoordinateList;
     private javax.swing.JButton jButtonEditSettingsCoordinateList;
-    private javax.swing.JButton jButtonEditSynergyCoordinateList1;
+    private javax.swing.JButton jButtonEditSynergyCoordinateList;
     private javax.swing.JButton jButtonEditTorqueCoordinateList;
     private javax.swing.JPanel jConstTermsPanel;
     private javax.swing.JPanel jControllersPanel;
     private javax.swing.JTextArea jCoordinateListTextArea;
     private javax.swing.JTextArea jCoordinateListTextArea1;
-    private javax.swing.JTextArea jCoordinateListTextArea4;
-    private javax.swing.JTextArea jCoordinateListTextArea5;
+    private javax.swing.JTextArea jCoordinateListTorqueControllerTextArea;
     private javax.swing.JPanel jCoordinatesListPanel;
     private javax.swing.JPanel jCoordinatesListPanel2;
     private javax.swing.JPanel jCoordinatesListPanel3;
@@ -895,6 +916,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JPanel jSolverSettingsPanel;
     private javax.swing.JPanel jSynergyControllerDetailsPanel1;
+    private javax.swing.JTextArea jSynergyCoordinateListTextArea;
     private javax.swing.JTabbedPane jTabbedPane1;
     private org.opensim.swingui.FileTextFieldAndChooser osimxFilePath;
     private org.opensim.swingui.FileTextFieldAndChooser outputDirPath;

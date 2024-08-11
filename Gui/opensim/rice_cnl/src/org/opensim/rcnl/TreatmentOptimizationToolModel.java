@@ -33,6 +33,9 @@ public class TreatmentOptimizationToolModel {
     private OpenSimObject propRCNLSynergyControllerObject;
     private PropertyBoolList propOptimizeForSynvergyVectorBool;
     private PropertyStringList propSurrogateModelDirString;
+    private PropertyStringList propRCNLSynergyCoordinateListString;
+    private OpenSimObject propRCNLTorqueControllerObject;
+    private PropertyStringList propRCNLTorqueCoordinateListString;
     
     public TreatmentOptimizationToolModel(Model model, Mode mode) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
@@ -95,7 +98,10 @@ public class TreatmentOptimizationToolModel {
         propOptimizeForSynvergyVectorBool = PropertyBoolList.getAs(propRCNLSynergyControllerObject.updPropertyByName("optimize_synergy_vectors"));
         propSurrogateModelDirString = PropertyStringList.getAs(propRCNLSynergyControllerObject.updPropertyByName("surrogate_model_data_directory"));
         propStatesCoordinateListString = PropertyStringList.getAs(propStatesCoordinateList);
-
+        propRCNLSynergyCoordinateListString = PropertyStringList.getAs(propRCNLSynergyControllerObject.updPropertyByName("surrogate_model_coordinate_list"));
+        
+        propRCNLTorqueControllerObject = toolAsObject.updPropertyByName("RCNLTorqueController").getValueAsObject();
+        propRCNLTorqueCoordinateListString = PropertyStringList.getAs(propRCNLTorqueControllerObject.updPropertyByName("coordinate_list"));
     }
     
     String getOutputResultDir() {
@@ -172,4 +178,11 @@ public class TreatmentOptimizationToolModel {
         propOptimizeForSynvergyVectorBool.setValue(newValue);
     }
     
+    PropertyStringList getRCNLSynergyCoordinateListString() {
+        return propRCNLSynergyCoordinateListString;
+    }
+    
+    PropertyStringList getRCNLTorqueCoordinateListString() {
+        return propRCNLTorqueCoordinateListString;
+    }
 }

@@ -611,7 +611,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jScrollPane7" pref="783" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jButtonEditSynergyCoordinateList1" min="-2" pref="232" max="-2" attributes="0"/>
+                              <Component id="jButtonEditSynergyCoordinateList" min="-2" pref="232" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -623,7 +623,7 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jButtonEditSynergyCoordinateList1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonEditSynergyCoordinateList" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -637,7 +637,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTextArea" name="jCoordinateListTextArea4">
+                        <Component class="javax.swing.JTextArea" name="jSynergyCoordinateListTextArea">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -651,14 +651,14 @@
                         </Component>
                       </SubComponents>
                     </Container>
-                    <Component class="javax.swing.JButton" name="jButtonEditSynergyCoordinateList1">
+                    <Component class="javax.swing.JButton" name="jButtonEditSynergyCoordinateList">
                       <Properties>
                         <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
-                          <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="TreatmentOptimizationJPanel.jButtonEditSynergyCoordinateList1.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+                          <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="TreatmentOptimizationJPanel.jButtonEditSynergyCoordinateList.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditSynergyCoordinateList1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonEditSynergyCoordinateListActionPerformed"/>
                       </Events>
                     </Component>
                   </SubComponents>
@@ -751,7 +751,7 @@
 
                       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                       <SubComponents>
-                        <Component class="javax.swing.JTextArea" name="jCoordinateListTextArea5">
+                        <Component class="javax.swing.JTextArea" name="jCoordinateListTorqueControllerTextArea">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
                             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
