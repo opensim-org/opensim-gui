@@ -8,6 +8,7 @@ package org.opensim.rcnl;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyBoolList;
 import org.opensim.modeling.PropertyObjectList;
 import org.opensim.modeling.PropertyStringList;
 
@@ -29,7 +30,9 @@ public class TreatmentOptimizationToolModel {
     private PropertyStringList propResultsDirString;
     private PropertyStringList propOCSettingsFileString;
     private PropertyStringList propStatesCoordinateListString;
-
+    private OpenSimObject propRCNLSynergyControllerObject;
+    private PropertyBoolList propOptimizeForSynvergyVectorBool;
+    private PropertyStringList propSurrogateModelDirString;
     
     public TreatmentOptimizationToolModel(Model model, Mode mode) {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
@@ -87,6 +90,12 @@ public class TreatmentOptimizationToolModel {
         propOCSettingsFileString = PropertyStringList.getAs(propOCSettingsFile);
         AbstractProperty propStatesCoordinateList = toolAsObject.updPropertyByName("states_coordinate_list");        
         propStatesCoordinateListString = PropertyStringList.getAs(propStatesCoordinateList);
+        propRCNLSynergyControllerObject = toolAsObject.updPropertyByName("RCNLSynergyController").getValueAsObject(); 
+        // Convert to ObjectProperty so we can dig deeper
+        propOptimizeForSynvergyVectorBool = PropertyBoolList.getAs(propRCNLSynergyControllerObject.updPropertyByName("optimize_synergy_vectors"));
+        propSurrogateModelDirString = PropertyStringList.getAs(propRCNLSynergyControllerObject.updPropertyByName("surrogate_model_data_directory"));
+        propStatesCoordinateListString = PropertyStringList.getAs(propStatesCoordinateList);
+
     }
     
     String getOutputResultDir() {
@@ -142,4 +151,25 @@ public class TreatmentOptimizationToolModel {
     PropertyStringList getPropCoordinateListString() {
         return propStatesCoordinateListString;
     }
+    
+    String getSurrogateModelDir() {
+        if (propSurrogateModelDirString.size()==1)
+            return propSurrogateModelDirString.getValue();
+        return "";
+    }
+
+    void setSurrogateModelDir(String fileName) {
+        propSurrogateModelDirString.setValue(fileName);
+    }
+    
+    boolean getOptimizeSynergyVector() {
+        if (propOptimizeForSynvergyVectorBool.size()==1)
+            return propOptimizeForSynvergyVectorBool.getValue();
+        return false;
+    }
+
+    void setOptimizeSynergyVector(boolean newValue) {
+        propOptimizeForSynvergyVectorBool.setValue(newValue);
+    }
+    
 }

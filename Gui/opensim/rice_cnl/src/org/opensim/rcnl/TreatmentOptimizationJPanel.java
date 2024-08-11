@@ -41,6 +41,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
        }
        if(model==null) throw new IOException(modeName +" got null model");
        initComponents();
+       // Settings Panel
        currentModelFileTextField.setText(model.getInputFileName());
        osimxFilePath.setCheckIfFileExists(true);
        osimxFilePath.setFileName(trackingOptimizationToolModel.getInputOsimxFile());
@@ -64,7 +65,12 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
        solverSettingsFilePath.setDialogTitle("Select solver settings file");
        solverSettingsFilePath.setDirectoriesOnly(false);
        solverSettingsFilePath.setExtensionsAndDescription(".xml", "File that contains desired solver settings");
-
+       // RCNL Controllers panel
+       surrogateModelDirPath.setDialogTitle("Select surrogate model directory");
+       surrogateModelDirPath.setCheckIfFileExists(true);
+       surrogateModelDirPath.setDirectoriesOnly(true);
+       surrogateModelDirPath.setFileName(trackingOptimizationToolModel.getSurrogateModelDir());
+       
        setSettingsFileDescription("Save settings for "+modeName+" as .xml file");
     }
 
@@ -107,12 +113,12 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         jButtonEditSettingsCoordinateList = new javax.swing.JButton();
         jControllersPanel = new javax.swing.JPanel();
         jSynergyControllerDetailsPanel1 = new javax.swing.JPanel();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        jOptimizeSynVecCheckBox = new javax.swing.JCheckBox();
         jCoordinatesListPanel3 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
         jCoordinateListTextArea4 = new javax.swing.JTextArea();
         jButtonEditSynergyCoordinateList1 = new javax.swing.JButton();
-        surrogateModelDirPath1 = new org.opensim.swingui.FileTextFieldAndChooser();
+        surrogateModelDirPath = new org.opensim.swingui.FileTextFieldAndChooser();
         jLabel2 = new javax.swing.JLabel();
         jRCNLTorqueControllerPanel = new javax.swing.JPanel();
         JTorqueControllerDetailsPanel1 = new javax.swing.JPanel();
@@ -303,13 +309,15 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(inputModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(currentModelFileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(InitialGuessDirPath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(inputModelPanelLayout.createSequentialGroup()
-                        .addComponent(osimxFilePath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(3, 3, 3))
-                    .addComponent(trackedQuantitiesDirPath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGroup(inputModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(inputModelPanelLayout.createSequentialGroup()
+                                .addComponent(osimxFilePath, javax.swing.GroupLayout.DEFAULT_SIZE, 708, Short.MAX_VALUE)
+                                .addGap(3, 3, 3))
+                            .addComponent(trackedQuantitiesDirPath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(InitialGuessDirPath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
+                    .addComponent(currentModelFileTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         inputModelPanelLayout.setVerticalGroup(
             inputModelPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,7 +362,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         jCoordinatesListPanel2Layout.setHorizontalGroup(
             jCoordinatesListPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jCoordinatesListPanel2Layout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 865, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 871, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonEditSettingsCoordinateList, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -379,7 +387,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
                     .addComponent(jSolverSettingsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jCoordinatesListPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(inputModelPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(0, 0, 0))
         );
         inputOutputPanelLayout.setVerticalGroup(
             inputOutputPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,7 +406,12 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
         jSynergyControllerDetailsPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jSynergyControllerDetailsPanel1.border.title"))); // NOI18N
 
-        org.openide.awt.Mnemonics.setLocalizedText(jCheckBox2, org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jCheckBox2.text")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jOptimizeSynVecCheckBox, org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jOptimizeSynVecCheckBox.text")); // NOI18N
+        jOptimizeSynVecCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jOptimizeSynVecCheckBoxActionPerformed(evt);
+            }
+        });
 
         jCoordinatesListPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jCoordinatesListPanel3.border.title"))); // NOI18N
 
@@ -437,9 +450,9 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
                 .addGap(109, 109, 109))
         );
 
-        surrogateModelDirPath1.addChangeListener(new javax.swing.event.ChangeListener() {
+        surrogateModelDirPath.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                surrogateModelDirPath1StateChanged(evt);
+                surrogateModelDirPathStateChanged(evt);
             }
         });
 
@@ -454,26 +467,26 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
                 .addGroup(jSynergyControllerDetailsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jSynergyControllerDetailsPanel1Layout.createSequentialGroup()
                         .addGap(16, 16, 16)
-                        .addComponent(jCheckBox2)
+                        .addComponent(jOptimizeSynVecCheckBox)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jSynergyControllerDetailsPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(surrogateModelDirPath1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(surrogateModelDirPath, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jSynergyControllerDetailsPanel1Layout.setVerticalGroup(
             jSynergyControllerDetailsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jSynergyControllerDetailsPanel1Layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jCheckBox2)
+                .addComponent(jOptimizeSynVecCheckBox)
                 .addGap(18, 18, 18)
                 .addComponent(jCoordinatesListPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jSynergyControllerDetailsPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(surrogateModelDirPath1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(surrogateModelDirPath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -684,9 +697,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1061, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1061, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -782,13 +793,19 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEditSynergyCoordinateList1ActionPerformed
 
-    private void surrogateModelDirPath1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_surrogateModelDirPath1StateChanged
+    private void surrogateModelDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_surrogateModelDirPathStateChanged
         // TODO add your handling code here:
-    }//GEN-LAST:event_surrogateModelDirPath1StateChanged
+        trackingOptimizationToolModel.setSurrogateModelDir(surrogateModelDirPath.getFileName());
+    }//GEN-LAST:event_surrogateModelDirPathStateChanged
 
     private void jButtonEditTorqueCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditTorqueCoordinateListActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonEditTorqueCoordinateListActionPerformed
+
+    private void jOptimizeSynVecCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOptimizeSynVecCheckBoxActionPerformed
+        // TODO add your handling code here:
+        trackingOptimizationToolModel.setOptimizeSynergyVector(jOptimizeSynVecCheckBox.isSelected());
+    }//GEN-LAST:event_jOptimizeSynVecCheckBoxActionPerformed
 
     @Override
     public void update(Observable o, Object o1) {
@@ -846,7 +863,6 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private javax.swing.JButton jButtonEditSettingsCoordinateList;
     private javax.swing.JButton jButtonEditSynergyCoordinateList1;
     private javax.swing.JButton jButtonEditTorqueCoordinateList;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JPanel jConstTermsPanel;
     private javax.swing.JPanel jControllersPanel;
     private javax.swing.JTextArea jCoordinateListTextArea;
@@ -866,6 +882,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private javax.swing.JLabel jLabel8;
     private javax.swing.JList<String> jList1;
     private javax.swing.JList<String> jList3;
+    private javax.swing.JCheckBox jOptimizeSynVecCheckBox;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jRCNLTorqueControllerPanel;
     private javax.swing.JRadioButton jRadioButton1;
@@ -883,7 +900,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private org.opensim.swingui.FileTextFieldAndChooser outputDirPath;
     private javax.swing.JPanel outputPanel;
     private org.opensim.swingui.FileTextFieldAndChooser solverSettingsFilePath;
-    private org.opensim.swingui.FileTextFieldAndChooser surrogateModelDirPath1;
+    private org.opensim.swingui.FileTextFieldAndChooser surrogateModelDirPath;
     private org.opensim.swingui.FileTextFieldAndChooser trackedQuantitiesDirPath;
     // End of variables declaration//GEN-END:variables
 
