@@ -858,7 +858,14 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
        outputDirPath.setFileName(treatmentOptimizationToolModel.getOutputResultDir());
        solverSettingsFilePath.setFileName(treatmentOptimizationToolModel.getOCSettingsFile());
        jCoordinateListTextArea1.setText(treatmentOptimizationToolModel.getPropCoordinateListString().toString());
-
+       
+       // Controllers tab
+       jOptimizeSynVecCheckBox.setSelected(treatmentOptimizationToolModel.getOptimizeSynergyVector());
+       jSynergyCoordinateListTextArea.setText(treatmentOptimizationToolModel.getRCNLSynergyCoordinateListString().toString());
+       surrogateModelDirPath.setFileName(treatmentOptimizationToolModel.getSurrogateModelDir());
+       jCoordinateListTorqueControllerTextArea.setText(treatmentOptimizationToolModel.getRCNLTorqueCoordinateListString().toString());
+       
+       // Cost+Constraints
     }  
 
     @Override
