@@ -23,7 +23,7 @@ public class TreatmentOptimizationToolModel {
     public enum Mode { TrackingOptimization, VerificationOptimization, DesignOptimization };
     public Mode mode;
     private Model model;
-    // Cache properties for editing
+    // Cache properties for editing   
     private PropertyStringList propInputOsimxFileString;
     private PropertyStringList propInitialGuessDirString;
     private PropertyStringList propTrackedQuantitiesDirString;
@@ -67,7 +67,18 @@ public class TreatmentOptimizationToolModel {
         // TODO in case plugin is not preloaded, guard against null return or exception thown
         toolAsObject = OpenSimObject.makeObjectFromFile(fileXml);
         this.model = model;
-
+        switch(toolAsObject.getConcreteClassName()){
+            case "TrackingOptimizationTool":
+            default:
+                this.mode = TreatmentOptimizationToolModel.Mode.TrackingOptimization;
+                break;
+            case "VerificationOptimizationTool":
+                this.mode = TreatmentOptimizationToolModel.Mode.VerificationOptimization;
+                break;
+            case "DesignOptimizationTool":
+                this.mode = TreatmentOptimizationToolModel.Mode.DesignOptimization;
+                break;
+        }
         connectPropertiesToClassMembers();
     }
 
@@ -88,6 +99,8 @@ public class TreatmentOptimizationToolModel {
     
     
     private void connectPropertiesToClassMembers() {
+        AbstractProperty propInputOsimFile = toolAsObject.updPropertyByName("input_model_file");
+        propInputModelFileString = PropertyStringList.getAs(propInputOsimFile);
         AbstractProperty propInputOsimxFile = toolAsObject.updPropertyByName("input_osimx_file");
         propInputOsimxFileString = PropertyStringList.getAs(propInputOsimxFile);
         AbstractProperty propInitialGuessDir = toolAsObject.updPropertyByName("initial_guess_directory");
@@ -167,7 +180,7 @@ public class TreatmentOptimizationToolModel {
     
     String getSurrogateModelDir() {
         if (propSurrogateModelDirString.size()==1)
-            return propSurrogateModelDirString.getValue();
+            return propSurrogateModelDirString.getValue(0);
         return "";
     }
 
@@ -177,7 +190,7 @@ public class TreatmentOptimizationToolModel {
     
     boolean getOptimizeSynergyVector() {
         if (propOptimizeForSynvergyVectorBool.size()==1)
-            return propOptimizeForSynvergyVectorBool.getValue();
+            return propOptimizeForSynvergyVectorBool.getValue(0);
         return false;
     }
 
@@ -194,6 +207,8 @@ public class TreatmentOptimizationToolModel {
     }
     
     public String getInputModelFile() {
-        return propInputModelFileString.getValue(0);
+        if (propInputModelFileString.size()==1)
+            return propInputModelFileString.getValue(0);
+        return "";
     }
 }

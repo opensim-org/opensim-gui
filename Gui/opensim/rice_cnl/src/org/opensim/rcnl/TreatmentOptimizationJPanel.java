@@ -18,7 +18,7 @@ import org.opensim.view.pub.OpenSimDB;
  * @author Ayman-NMBL
  */
 public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Observer {
-    private TreatmentOptimizationToolModel trackingOptimizationToolModel = null;
+    private TreatmentOptimizationToolModel treatmentOptimizationToolModel = null;
     private Model model;
     String modeName;
 
@@ -26,7 +26,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
      * Creates new form JointPersonalizationJPanel
      */
     public TreatmentOptimizationJPanel(Model model, TreatmentOptimizationToolModel.Mode mode)  throws IOException  {
-       trackingOptimizationToolModel = new TreatmentOptimizationToolModel(model, mode);
+       treatmentOptimizationToolModel = new TreatmentOptimizationToolModel(model, mode);
        this.model = model;
        switch(mode) {
            case TrackingOptimization:
@@ -42,26 +42,26 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
        if(model==null) throw new IOException(modeName +" got null model");
        initComponents();
        // Settings Panel
-       currentModelFileTextField.setText(trackingOptimizationToolModel.getInputModelFile());
+       currentModelFileTextField.setText(treatmentOptimizationToolModel.getInputModelFile());
        osimxFilePath.setCheckIfFileExists(true);
-       osimxFilePath.setFileName(trackingOptimizationToolModel.getInputOsimxFile());
+       osimxFilePath.setFileName(treatmentOptimizationToolModel.getInputOsimxFile());
        osimxFilePath.setDialogTitle("Select osimx file");
        osimxFilePath.setDirectoriesOnly(false);
        osimxFilePath.setExtensionsAndDescription(".osimx", "File to contain pipeline specific entities");
        InitialGuessDirPath.setDialogTitle("Select initial guess directory");
        InitialGuessDirPath.setCheckIfFileExists(true);
        InitialGuessDirPath.setDirectoriesOnly(true);
-       InitialGuessDirPath.setFileName(trackingOptimizationToolModel.getInitialGuessDir());
+       InitialGuessDirPath.setFileName(treatmentOptimizationToolModel.getInitialGuessDir());
        trackedQuantitiesDirPath.setDialogTitle("Select tracked quantities directory");
        trackedQuantitiesDirPath.setCheckIfFileExists(true);
        trackedQuantitiesDirPath.setDirectoriesOnly(true);
-       trackedQuantitiesDirPath.setFileName(trackingOptimizationToolModel.getTrackedQuantitiesDir());
+       trackedQuantitiesDirPath.setFileName(treatmentOptimizationToolModel.getTrackedQuantitiesDir());
        outputDirPath.setDialogTitle("Select output directory");
        outputDirPath.setCheckIfFileExists(false);
        outputDirPath.setDirectoriesOnly(true);
-       outputDirPath.setFileName(trackingOptimizationToolModel.getOutputResultDir());
+       outputDirPath.setFileName(treatmentOptimizationToolModel.getOutputResultDir());
        solverSettingsFilePath.setCheckIfFileExists(true);
-       solverSettingsFilePath.setFileName(trackingOptimizationToolModel.getOCSettingsFile());
+       solverSettingsFilePath.setFileName(treatmentOptimizationToolModel.getOCSettingsFile());
        solverSettingsFilePath.setDialogTitle("Select solver settings file");
        solverSettingsFilePath.setDirectoriesOnly(false);
        solverSettingsFilePath.setExtensionsAndDescription(".xml", "File that contains desired solver settings");
@@ -69,7 +69,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
        surrogateModelDirPath.setDialogTitle("Select surrogate model directory");
        surrogateModelDirPath.setCheckIfFileExists(true);
        surrogateModelDirPath.setDirectoriesOnly(true);
-       surrogateModelDirPath.setFileName(trackingOptimizationToolModel.getSurrogateModelDir());
+       surrogateModelDirPath.setFileName(treatmentOptimizationToolModel.getSurrogateModelDir());
        
        setSettingsFileDescription("Save settings for "+modeName+" as .xml file");
     }
@@ -709,22 +709,22 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
     private void osimxFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_osimxFilePathStateChanged
         // TODO add your handling code here:
-        trackingOptimizationToolModel.setInputOsimxFile(osimxFilePath.getFileName());
+        treatmentOptimizationToolModel.setInputOsimxFile(osimxFilePath.getFileName());
     }//GEN-LAST:event_osimxFilePathStateChanged
 
     private void InitialGuessDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_InitialGuessDirPathStateChanged
         // TODO add your handling code here:
-        trackingOptimizationToolModel.setInitialGuessDir(InitialGuessDirPath.getFileName());
+        treatmentOptimizationToolModel.setInitialGuessDir(InitialGuessDirPath.getFileName());
     }//GEN-LAST:event_InitialGuessDirPathStateChanged
 
     private void outputDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_outputDirPathStateChanged
         // TODO add your handling code here:
-        trackingOptimizationToolModel.setOutputResultDir(outputDirPath.getFileName());
+        treatmentOptimizationToolModel.setOutputResultDir(outputDirPath.getFileName());
     }//GEN-LAST:event_outputDirPathStateChanged
 
     private void trackedQuantitiesDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_trackedQuantitiesDirPathStateChanged
         // TODO add your handling code here:
-        trackingOptimizationToolModel.setTrackedQuantitiesDir(trackedQuantitiesDirPath.getFileName());
+        treatmentOptimizationToolModel.setTrackedQuantitiesDir(trackedQuantitiesDirPath.getFileName());
     }//GEN-LAST:event_trackedQuantitiesDirPathStateChanged
 
     private void deleteConstraintTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteConstraintTermButtonActionPerformed
@@ -757,7 +757,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private void jButtonEditCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCoordinateListActionPerformed
         // TODO add your handling code here:
         // Create Panel for selecting from existing model coordinates
-        //        CoordinateTableModel ctm = new CoordinateTableModel(trackingOptimizationToolModel.getPropCoordinateListString(), model);
+        //        CoordinateTableModel ctm = new CoordinateTableModel(treatmentOptimizationToolModel.getPropCoordinateListString(), model);
         //        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
         //        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
         //        dlg.setModal(true);
@@ -765,18 +765,18 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         //        Object userInput = dlg.getValue();
         //        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
             //            ctm.populateCoordinateListProperty();
-            //            jCoordinateListTextArea.setText(trackingOptimizationToolModel.getPropCoordinateListString().toString());
+            //            jCoordinateListTextArea.setText(treatmentOptimizationToolModel.getPropCoordinateListString().toString());
             //        }
     }//GEN-LAST:event_jButtonEditCoordinateListActionPerformed
 
     private void solverSettingsFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_solverSettingsFilePathStateChanged
         // TODO add your handling code here:
-        trackingOptimizationToolModel.setOCSettingsFile(solverSettingsFilePath.getFileName());
+        treatmentOptimizationToolModel.setOCSettingsFile(solverSettingsFilePath.getFileName());
     }//GEN-LAST:event_solverSettingsFilePathStateChanged
 
     private void jButtonEditSettingsCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSettingsCoordinateListActionPerformed
         // TODO add your handling code here:
-        CoordinateTableModel ctm = new CoordinateTableModel(trackingOptimizationToolModel.getPropCoordinateListString(), model);
+        CoordinateTableModel ctm = new CoordinateTableModel(treatmentOptimizationToolModel.getPropCoordinateListString(), model);
         SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
         dlg.setModal(true);
@@ -784,14 +784,14 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
             ctm.populateCoordinateListProperty();
-            jCoordinateListTextArea1.setText(trackingOptimizationToolModel.getPropCoordinateListString().toString());
+            jCoordinateListTextArea1.setText(treatmentOptimizationToolModel.getPropCoordinateListString().toString());
         }
 
     }//GEN-LAST:event_jButtonEditSettingsCoordinateListActionPerformed
 
     private void jButtonEditSynergyCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditSynergyCoordinateListActionPerformed
         // TODO add your handling code here:
-        CoordinateTableModel ctm = new CoordinateTableModel(trackingOptimizationToolModel.getRCNLSynergyCoordinateListString(), model);
+        CoordinateTableModel ctm = new CoordinateTableModel(treatmentOptimizationToolModel.getRCNLSynergyCoordinateListString(), model);
         SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
         dlg.setModal(true);
@@ -799,19 +799,19 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
             ctm.populateCoordinateListProperty();
-            jSynergyCoordinateListTextArea.setText(trackingOptimizationToolModel.getRCNLSynergyCoordinateListString().toString());
+            jSynergyCoordinateListTextArea.setText(treatmentOptimizationToolModel.getRCNLSynergyCoordinateListString().toString());
         }
 
     }//GEN-LAST:event_jButtonEditSynergyCoordinateListActionPerformed
 
     private void surrogateModelDirPathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_surrogateModelDirPathStateChanged
         // TODO add your handling code here:
-        trackingOptimizationToolModel.setSurrogateModelDir(surrogateModelDirPath.getFileName());
+        treatmentOptimizationToolModel.setSurrogateModelDir(surrogateModelDirPath.getFileName());
     }//GEN-LAST:event_surrogateModelDirPathStateChanged
 
     private void jButtonEditTorqueCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditTorqueCoordinateListActionPerformed
         // TODO add your handling code here:
-        CoordinateTableModel ctm = new CoordinateTableModel(trackingOptimizationToolModel.getRCNLTorqueCoordinateListString(), model);
+        CoordinateTableModel ctm = new CoordinateTableModel(treatmentOptimizationToolModel.getRCNLTorqueCoordinateListString(), model);
         SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
         DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
         dlg.setModal(true);
@@ -819,14 +819,14 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
             ctm.populateCoordinateListProperty();
-            jCoordinateListTorqueControllerTextArea.setText(trackingOptimizationToolModel.getRCNLTorqueCoordinateListString().toString());
+            jCoordinateListTorqueControllerTextArea.setText(treatmentOptimizationToolModel.getRCNLTorqueCoordinateListString().toString());
         }
         
     }//GEN-LAST:event_jButtonEditTorqueCoordinateListActionPerformed
 
     private void jOptimizeSynVecCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jOptimizeSynVecCheckBoxActionPerformed
         // TODO add your handling code here:
-        trackingOptimizationToolModel.setOptimizeSynergyVector(jOptimizeSynVecCheckBox.isSelected());
+        treatmentOptimizationToolModel.setOptimizeSynergyVector(jOptimizeSynVecCheckBox.isSelected());
     }//GEN-LAST:event_jOptimizeSynVecCheckBoxActionPerformed
 
     @Override
@@ -841,26 +841,25 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
     @Override
     public String getToolXML() {
-        return trackingOptimizationToolModel.getToolAsObject().dump();
+        return treatmentOptimizationToolModel.getToolAsObject().dump();
     }
 
     @Override
     public void loadSettings(String nmsmFilename) {
         String fileName = super.stripOuterTags(nmsmFilename);
         Model model = OpenSimDB.getInstance().getCurrentModel();
+        
        //if(model==null) throw new IOException("JointPersonalizationJPanel got null model");
-//       trackingOptimizationToolModel = new JointPersonalizationToolModel(model, fileName);
-//       File f= new File(fileName); 
-//       f.delete();
-//       jointPersonalizationTaskListModel = new JMPTaskListModel(trackingOptimizationToolModel.getJointTaskListAsObjectList());
-//       listSelectionModel = jJointPersonalizationList.getSelectionModel();
-//       listSelectionModel.addListSelectionListener( new ListSelectionHandler());
-//       //initComponents(); Panel already constructed, no need to re-initComponents
-//       jJointPersonalizationList.setModel(jointPersonalizationTaskListModel);
-//       currentModelFileTextField.setText(trackingOptimizationToolModel.getInputModelFile());
-//       outputModelFilePath.setFileName(trackingOptimizationToolModel.getOutputModelFile());
-//       setSettingsFileDescription("Save Joint Personalization Settings file (xml)");
-    }
+       treatmentOptimizationToolModel = new TreatmentOptimizationToolModel(model, fileName);
+       currentModelFileTextField.setText(treatmentOptimizationToolModel.getInputModelFile());
+       osimxFilePath.setFileName(treatmentOptimizationToolModel.getInputOsimxFile());
+       InitialGuessDirPath.setFileName(treatmentOptimizationToolModel.getInitialGuessDir());
+       trackedQuantitiesDirPath.setFileName(treatmentOptimizationToolModel.getTrackedQuantitiesDir());
+       outputDirPath.setFileName(treatmentOptimizationToolModel.getOutputResultDir());
+       solverSettingsFilePath.setFileName(treatmentOptimizationToolModel.getOCSettingsFile());
+       jCoordinateListTextArea1.setText(treatmentOptimizationToolModel.getPropCoordinateListString().toString());
+
+    }  
 
     @Override
     public void setSettingsFileDescription(String description) {
