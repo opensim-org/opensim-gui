@@ -9,11 +9,16 @@ import java.awt.Dialog;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.Vector;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyObjectList;
 import org.opensim.view.pub.OpenSimDB;
 
 /**
@@ -26,6 +31,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private ListSelectionModel costListSelectionModel;
 
     private Model model;
+    private TreatmentOptimizationToolModel.Mode mode;
     String modeName;
 
     /**
@@ -34,6 +40,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     public TreatmentOptimizationJPanel(Model model, TreatmentOptimizationToolModel.Mode mode)  throws IOException  {
        treatmentOptimizationToolModel = new TreatmentOptimizationToolModel(model, mode);
        this.model = model;
+       this.mode = mode;
        switch(mode) {
            case TrackingOptimization:
                modeName = "Tracking Optimization Tool";
@@ -77,7 +84,11 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
        surrogateModelDirPath.setDirectoriesOnly(true);
        surrogateModelDirPath.setFileName(treatmentOptimizationToolModel.getSurrogateModelDir());
        
+       costTermListModel = new CostTermListModel(treatmentOptimizationToolModel.getCostTermListAsObjectList());
        setSettingsFileDescription("Save settings for "+modeName+" as .xml file");
+       costListSelectionModel = jCostTermList.getSelectionModel();
+       costListSelectionModel.addListSelectionListener(
+                            new CostListSelectionHandler());
     }
 
     /**
@@ -754,23 +765,59 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
     private void deleteCostTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCostTermButtonActionPerformed
         // TODO add your handling code here:
+        int[] sels = jCostTermList.getSelectedIndices();
+        PropertyObjectList poList = treatmentOptimizationToolModel.getCostTermListAsObjectList();
+        Vector<Integer> tasksToDelete = new Vector<Integer>();
+        for (int i=0; i<sels.length; i++){
+            //OpenSimObject selectedJointTask = (OpenSimObject)jJointPersonalizationList.get(sels[i]);
+            tasksToDelete.add(sels[i]);
+        }
+        //jJointPersonalizationList
+        // Delete items from jmpJointListModel in reverse order
+        for (int r=tasksToDelete.size(); r >0; r-- ){
+            costTermListModel.remove(tasksToDelete.get(r-1));
+            poList.removeValueAtIndex(tasksToDelete.get(r-1));
+        }
+        // Recreate list model to cleanup
+        costTermListModel = new CostTermListModel(poList);
+        jCostTermList.setModel(costTermListModel);
 
     }//GEN-LAST:event_deleteCostTermButtonActionPerformed
 
     private void editCostTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCostTermButtonActionPerformed
         // TODO add your handling code here:
-
+        int[] sels = jCostTermList.getSelectedIndices();
+        int idx = sels[0];
+        OpenSimObject currentTerm = (OpenSimObject)costTermListModel.get(idx);
+        OpenSimObject termToEdit = currentTerm.clone();
+        EditCostTermJPanel ejtPanel = new EditCostTermJPanel(termToEdit, mode);
+        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Cost Term ");
+        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
+        d.setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            costTermListModel.set(idx, termToEdit); 
+            treatmentOptimizationToolModel.getCostTermListAsObjectList().setValue(idx, termToEdit);
+        }
     }//GEN-LAST:event_editCostTermButtonActionPerformed
 
     private void addCostTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCostTermButtonActionPerformed
         // TODO add your handling code here:
         OpenSimObject costTerm = OpenSimObject.newInstanceOfType("RCNLCostTerm");
-        EditCostTermJPanel ejtPanel = new EditCostTermJPanel(costTerm);
+        EditCostTermJPanel ejtPanel = new EditCostTermJPanel(costTerm, mode);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Cost Term ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
         Object userInput = dlg.getValue();
-
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            costTermListModel.addElement(costTerm);
+            AbstractProperty ap = treatmentOptimizationToolModel.getToolAsObject().getPropertyByName("RCNLCostTermSet");
+            //System.out.println(ap.getTypeName()+" "+ap.isListProperty()+" ");
+            PropertyObjectList.updAs(ap).adoptAndAppendValue(costTerm);
+            PropertyObjectList poList = treatmentOptimizationToolModel.getCostTermListAsObjectList();
+            costTermListModel = new CostTermListModel(poList);
+            jCostTermList.setModel(costTermListModel);
+        }
 
     }//GEN-LAST:event_addCostTermButtonActionPerformed
 
@@ -886,6 +933,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
        jCoordinateListTorqueControllerTextArea.setText(treatmentOptimizationToolModel.getRCNLTorqueCoordinateListString().toString());
        
        // Cost+Constraints
+       costTermListModel = new CostTermListModel(treatmentOptimizationToolModel.getCostTermListAsObjectList());
     }  
 
     @Override
@@ -951,5 +999,35 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private org.opensim.swingui.FileTextFieldAndChooser surrogateModelDirPath;
     private org.opensim.swingui.FileTextFieldAndChooser trackedQuantitiesDirPath;
     // End of variables declaration//GEN-END:variables
+
+    private class CostListSelectionHandler implements ListSelectionListener {
+
+        public CostListSelectionHandler() {
+        }
+
+        @Override
+        public void valueChanged(ListSelectionEvent lse) {
+            // Disable delete if nothing is selected
+            // Enable edit if single selection
+            int[] sels = jCostTermList.getSelectedIndices();
+            editCostTermButton.setEnabled(sels.length==1);
+            deleteCostTermButton.setEnabled(sels.length>=1);
+        }
+    }
+    
+    private class ConstraintListSelectionHandler implements ListSelectionListener {
+
+        public ConstraintListSelectionHandler() {
+        }
+
+        @Override
+        public void valueChanged(ListSelectionEvent lse) {
+            // Disable delete if nothing is selected
+            // Enable edit if single selection
+            int[] sels = jConstraintTermList.getSelectedIndices();
+            editConstraintTermButton.setEnabled(sels.length==1);
+            deleteConstraintTermButton.setEnabled(sels.length>=1);
+        }
+    }
 
 }

@@ -69,7 +69,7 @@ public class RCNLCostTermsInfo {
         {"muscle_activation_minimization", "muscle"},
         {"external_torque_control_minimization", "coordinate"}
     };
-    String[] getCostTermTypes(TreatmentOptimizationToolModel.Mode mode) {
+    public static String[] getCostTermTypes(TreatmentOptimizationToolModel.Mode mode) {
         switch(mode){
             case TrackingOptimization:
                 return trackingCostTerms[0];
@@ -80,7 +80,7 @@ public class RCNLCostTermsInfo {
         }
         return new String[]{};
     }
-   String[] getCostTermQuantityTypes(TreatmentOptimizationToolModel.Mode mode) { 
+   public static String[] getCostTermQuantityTypes(TreatmentOptimizationToolModel.Mode mode) { 
         switch(mode){
             case TrackingOptimization:
                 return trackingCostTerms[1];
