@@ -5,12 +5,15 @@
  */
 package org.opensim.rcnl;
 
+import java.awt.Dialog;
 import java.io.IOException;
 import java.util.Observable;
 import java.util.Observer;
+import javax.swing.ListSelectionModel;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimObject;
 import org.opensim.view.pub.OpenSimDB;
 
 /**
@@ -19,6 +22,9 @@ import org.opensim.view.pub.OpenSimDB;
  */
 public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Observer {
     private TreatmentOptimizationToolModel treatmentOptimizationToolModel = null;
+    private CostTermListModel costTermListModel = null;
+    private ListSelectionModel costListSelectionModel;
+
     private Model model;
     String modeName;
 
@@ -128,13 +134,13 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         jPanel1 = new javax.swing.JPanel();
         jCostTermsPanel = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jCostTermList = new javax.swing.JList<>();
         addCostTermButton = new javax.swing.JButton();
         editCostTermButton = new javax.swing.JButton();
         deleteCostTermButton = new javax.swing.JButton();
         jConstTermsPanel = new javax.swing.JPanel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList<>();
+        jConstraintTermList = new javax.swing.JList<>();
         addConstraintTermButton = new javax.swing.JButton();
         editConstraintTermButton = new javax.swing.JButton();
         deleteConstraintTermButton = new javax.swing.JButton();
@@ -570,8 +576,8 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
         jCostTermsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jCostTermsPanel.border.title"))); // NOI18N
 
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane6.setViewportView(jList1);
+        jCostTermList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane6.setViewportView(jCostTermList);
 
         org.openide.awt.Mnemonics.setLocalizedText(addCostTermButton, org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.addCostTermButton.text")); // NOI18N
         addCostTermButton.addActionListener(new java.awt.event.ActionListener() {
@@ -623,8 +629,8 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
         jConstTermsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jConstTermsPanel.border.title"))); // NOI18N
 
-        jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane8.setViewportView(jList3);
+        jConstraintTermList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane8.setViewportView(jConstraintTermList);
 
         org.openide.awt.Mnemonics.setLocalizedText(addConstraintTermButton, org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.addConstraintTermButton.text")); // NOI18N
         addConstraintTermButton.addActionListener(new java.awt.event.ActionListener() {
@@ -737,6 +743,13 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
     private void addConstraintTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConstraintTermButtonActionPerformed
         // TODO add your handling code here:
+        OpenSimObject constraintTerm = OpenSimObject.newInstanceOfType("RCNLConstraintTerm");
+        EditCosnstraintTermJPanel ejtPanel = new EditCosnstraintTermJPanel(constraintTerm);
+        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Constraint Term ");
+        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
+        d.setVisible(true);
+        Object userInput = dlg.getValue();
+        
     }//GEN-LAST:event_addConstraintTermButtonActionPerformed
 
     private void deleteCostTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCostTermButtonActionPerformed
@@ -751,6 +764,13 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
     private void addCostTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCostTermButtonActionPerformed
         // TODO add your handling code here:
+        OpenSimObject costTerm = OpenSimObject.newInstanceOfType("RCNLCostTerm");
+        EditCostTermJPanel ejtPanel = new EditCostTermJPanel(costTerm);
+        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Cost Term ");
+        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
+        d.setVisible(true);
+        Object userInput = dlg.getValue();
+
 
     }//GEN-LAST:event_addCostTermButtonActionPerformed
 
@@ -892,6 +912,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private javax.swing.JButton jButtonEditSynergyCoordinateList;
     private javax.swing.JButton jButtonEditTorqueCoordinateList;
     private javax.swing.JPanel jConstTermsPanel;
+    private javax.swing.JList<String> jConstraintTermList;
     private javax.swing.JPanel jControllersPanel;
     private javax.swing.JTextArea jCoordinateListTextArea;
     private javax.swing.JTextArea jCoordinateListTextArea1;
@@ -899,6 +920,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private javax.swing.JPanel jCoordinatesListPanel;
     private javax.swing.JPanel jCoordinatesListPanel2;
     private javax.swing.JPanel jCoordinatesListPanel3;
+    private javax.swing.JList<String> jCostTermList;
     private javax.swing.JPanel jCostTermsPanel;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;
@@ -907,8 +929,6 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JList<String> jList3;
     private javax.swing.JCheckBox jOptimizeSynVecCheckBox;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jRCNLTorqueControllerPanel;

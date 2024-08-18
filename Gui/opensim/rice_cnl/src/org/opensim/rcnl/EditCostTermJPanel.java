@@ -25,7 +25,7 @@ import org.opensim.modeling.PropertyObjectList;
  */
 public class EditCostTermJPanel extends javax.swing.JPanel {
 
-    private OpenSimObject taskToEdit;
+    private OpenSimObject costTerm2Edit;
 
     /**
      * Creates new form EditJointTaskJPanel
@@ -34,8 +34,9 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    EditCostTermJPanel(OpenSimObject jointPersonalizationTask) {
-        
+    EditCostTermJPanel(OpenSimObject rcnlCostTerm) {
+        costTerm2Edit = rcnlCostTerm;
+        initComponents();        
     }
 
     /**
@@ -186,7 +187,7 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
 
     private void jEnabledCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jEnabledCheckBoxItemStateChanged
         // TODO add your handling code here:
-        AbstractProperty enabledProp = taskToEdit.getPropertyByName("is_enabled");
+        AbstractProperty enabledProp = costTerm2Edit.getPropertyByName("is_enabled");
         PropertyHelper.setValueBool(evt.getStateChange()==1, enabledProp);
     }//GEN-LAST:event_jEnabledCheckBoxItemStateChanged
 

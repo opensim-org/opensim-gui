@@ -211,4 +211,11 @@ public class TreatmentOptimizationToolModel {
             return propInputModelFileString.getValue(0);
         return "";
     }
+    public PropertyObjectList getCostTermListAsObjectList() {
+        AbstractProperty ap = toolAsObject.getPropertyByName("RCNLCostTermSet");
+        PropertyObjectList olist = PropertyObjectList.getAs(ap);
+        return olist;
+    }
+    
+
 }

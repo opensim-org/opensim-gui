@@ -31,7 +31,7 @@ import org.opensim.utils.ErrorDialog;
  */
 public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
 
-    private OpenSimObject taskToEdit;
+    private OpenSimObject constraintTerm2Edit;
     private NumberFormat numFormat = NumberFormat.getInstance();
 
     /**
@@ -41,8 +41,9 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    EditCosnstraintTermJPanel(OpenSimObject jointPersonalizationTask) {
-        
+    EditCosnstraintTermJPanel(OpenSimObject constraintTerm) {
+        constraintTerm2Edit = constraintTerm;
+        initComponents();        
     }
 
     /**
@@ -207,7 +208,7 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
 
     private void jEnabledCheckBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jEnabledCheckBoxItemStateChanged
         // TODO add your handling code here:
-        AbstractProperty enabledProp = taskToEdit.getPropertyByName("is_enabled");
+        AbstractProperty enabledProp = constraintTerm2Edit.getPropertyByName("is_enabled");
         PropertyHelper.setValueBool(evt.getStateChange()==1, enabledProp);
     }//GEN-LAST:event_jEnabledCheckBoxItemStateChanged
 
