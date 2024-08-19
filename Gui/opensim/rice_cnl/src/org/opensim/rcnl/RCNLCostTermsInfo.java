@@ -26,49 +26,26 @@ public class RCNLCostTermsInfo {
         {"coordinate", "coordinate", "marker", "coordinate", "controller", "controller", "controller"}
     };
     static String[][] designOptimizationCostTerms= {
-        {"generalized_coordinate_tracking", "coordinate"},
-        {"generalized_speed_tracking", "coordinate"},
-        {"marker_position_tracking", "marker"},
-        {"inverse_dynamics_load_tracking", "load" },
-        {"inverse_dynamics_slope_tracking", "load" },
-        {"kinetic_inconsistency_minimization", "load" },
-        {"joint_acceleration_minimization", "coordinate" },
-        {"external_force_tracking", "force" },
-        {"external_moment_tracking", "moment" },
-        {"muscle_activation_tracking", "muscle" },
-        {"controller_tracking", "controller" },
-        {"controller_slope_minimization", "controller"},
-        {"controller_frequency_minimization", "controller"},
-        {"controller_shape_tracking", "controller"},
-        {"joint_acceleration_minimization", "coordinate"},
-        {"joint_power_minimization", "coordinate"},
-        {"joint_energy_generation_goal", "coordinate"},
-        {"joint_energy_absorption_goal", "coordinate"},
-        {"muscle_activation_minimization", "muscle"},
-        {"external_torque_control_minimization", "coordinate"}
+        {"generalized_coordinate_tracking", "generalized_speed_tracking", "marker_position_tracking",
+            "inverse_dynamics_load_tracking", "inverse_dynamics_slope_tracking", "kinetic_inconsistency_minimization",
+            "joint_acceleration_minimization", "external_force_tracking", "external_moment_tracking",
+            "muscle_activation_tracking", "controller_tracking", "controller_slope_minimization",
+            "controller_frequency_minimization", "controller_shape_tracking", "joint_acceleration_minimization",
+            "joint_power_minimization", "joint_energy_generation_goal", "joint_energy_absorption_goal", 
+            "muscle_activation_minimization", "external_torque_control_minimization", "angular_momentum_minimization", 
+            "synergy_vector_tracking", "belt_speed_goal", "relative_walking_speed_goal", 
+            "relative_metabolic_cost_per_time", "relative_metabolic_cost_per_distance", "propulsive_impulse_goal", 
+            "braking_impulse_goal"},
+        {"coordinate", "coordinate", "marker", 
+            "load" , "load" , "load", 
+            "coordinate", "force", "moment", 
+            "muscle", "controller", "controller", 
+            "controller", "controller", "coordinate", 
+            "coordinate", "coordinate", "coordinate", 
+            "muscle", "coordinate",
+            "none", "none", "none", "none", "none", "none", "none", "none"} 
     };
-    static String[][] designOptimizationCostTermsWithCenter= {
-        {"generalized_coordinate_tracking", "coordinate"},
-        {"generalized_speed_tracking", "coordinate"},
-        {"marker_position_tracking", "marker"},
-        {"inverse_dynamics_load_tracking", "load" },
-        {"inverse_dynamics_slope_tracking", "load" },
-        {"kinetic_inconsistency_minimization", "load" },
-        {"joint_acceleration_minimization", "coordinate" },
-        {"external_force_tracking", "force" },
-        {"external_moment_tracking", "moment" },
-        {"muscle_activation_tracking", "muscle" },
-        {"controller_tracking", "controller" },
-        {"controller_slope_minimization", "controller"},
-        {"controller_frequency_minimization", "controller"},
-        {"controller_shape_tracking", "controller"},
-        {"joint_acceleration_minimization", "coordinate"},
-        {"joint_power_minimization", "coordinate"},
-        {"joint_energy_generation_goal", "coordinate"},
-        {"joint_energy_absorption_goal", "coordinate"},
-        {"muscle_activation_minimization", "muscle"},
-        {"external_torque_control_minimization", "coordinate"}
-    };
+    
     public static String[] getCostTermTypes(TreatmentOptimizationToolModel.Mode mode) {
         switch(mode){
             case TrackingOptimization:
