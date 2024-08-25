@@ -20,15 +20,11 @@ public class CostTermModel {
     OpenSimObject costTerm;
     private TreatmentOptimizationToolModel.Mode mode;
     private int termIndex = 0;
-    private PropertyStringList propComponentListString;
-    private AbstractProperty compListProp;
     
     public CostTermModel(OpenSimObject rCNLCostTerm, TreatmentOptimizationToolModel.Mode mode){
         this.model = OpenSimDB.getInstance().getCurrentModel();
         this.costTerm = rCNLCostTerm;
         this.mode = mode;
-        compListProp = costTerm.updPropertyByName("coordinate_list");
-        propComponentListString = PropertyStringList.updAs(compListProp);
     }
 
     void setTypeIndex(int selectedIndex) {
@@ -50,7 +46,11 @@ public class CostTermModel {
     PropertyStringList getPropertyComponentList() {
         switch(getComponentType()){
             case "coordinate":
-                return propComponentListString;
+                return PropertyStringList.updAs(costTerm.updPropertyByName("coordinate_list"));
+            case "marker":
+                return PropertyStringList.updAs(costTerm.updPropertyByName("marker_list"));
+            case "muscle":
+                return PropertyStringList.updAs(costTerm.updPropertyByName("muscle_list"));
         }
         return null;
     }
