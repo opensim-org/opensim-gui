@@ -4,6 +4,10 @@
  */
 package org.opensim.rcnl;
 
+import org.opensim.modeling.ArrayBool;
+import org.opensim.modeling.ArrayStr;
+import org.opensim.modeling.Model;
+
 /**
  *
  * @author ayman
@@ -43,9 +47,57 @@ public class RCNLCostTermsInfo {
             "controller", "controller", "coordinate", 
             "coordinate", "coordinate", "coordinate", 
             "muscle", "coordinate",
-            "none", "none", "none", "none", "none", "none", "none", "none"} 
+            "none", "none", "none", "none", "none", "none", "none", "none"},
+        {"N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N",
+            "Y","Y","Y","Y","Y","Y","Y","Y" 
+        } 
     };
-    
+    private static String[] coordinateList = null;
+    private static String[] muscleList = null;
+    private static String[] markerList = null;
+    private static Model currentModel=null;
+
+    // Create lists of the proper types to be used in Cost/Constraint create/edit
+    public static String[] getAvailableNamesForComponentType(String componentType, Model model) {
+        //Will evaluate these lazily for componentTypes not in model
+        if (currentModel != model){
+            // fresh or changed model
+            currentModel = model;
+            coordinateList = null;
+            muscleList = null;
+            markerList = null;
+        }
+        ArrayStr componentNames = new ArrayStr();
+        String[] availableQuantities;
+
+        switch(componentType) {
+            case "coordinate":
+                if (coordinateList == null){
+                    model.getCoordinateSet().getNames(componentNames);
+                    availableQuantities = new String[componentNames.getSize()];
+                    componentNames.toVector().copyInto(availableQuantities);
+                    coordinateList= availableQuantities;
+                }
+                return coordinateList;
+            case "marker":
+                if (markerList == null){
+                    model.getMarkerSet().getNames(componentNames);
+                    availableQuantities = new String[componentNames.getSize()];
+                    componentNames.toVector().copyInto(availableQuantities);
+                    markerList= availableQuantities;
+                }
+                return markerList;
+            case "muscle":
+                if (muscleList == null){
+                    model.getMuscles().getNames(componentNames);
+                    availableQuantities = new String[componentNames.getSize()];
+                    componentNames.toVector().copyInto(availableQuantities);
+                    muscleList= availableQuantities;
+                }
+                return muscleList;
+        }
+        return new String[]{};
+    }
     public static String[] getCostTermTypes(TreatmentOptimizationToolModel.Mode mode) {
         switch(mode){
             case TrackingOptimization:
@@ -68,4 +120,8 @@ public class RCNLCostTermsInfo {
         }
         return new String[]{};
    }   
+
+    static String[] getCostTermErrorCenter(TreatmentOptimizationToolModel.Mode mode) {
+        return designOptimizationCostTerms[2];
+    }
 }

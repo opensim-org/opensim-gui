@@ -142,7 +142,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         jScrollPane9 = new javax.swing.JScrollPane();
         jCoordinateListTorqueControllerTextArea = new javax.swing.JTextArea();
         jButtonEditTorqueCoordinateList = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jPanelCostConstraints = new javax.swing.JPanel();
         jCostTermsPanel = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jCostTermList = new javax.swing.JList<>();
@@ -691,16 +691,16 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
                 .addContainerGap(157, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jPanelCostConstraintsLayout = new javax.swing.GroupLayout(jPanelCostConstraints);
+        jPanelCostConstraints.setLayout(jPanelCostConstraintsLayout);
+        jPanelCostConstraintsLayout.setHorizontalGroup(
+            jPanelCostConstraintsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jCostTermsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jConstTermsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jPanelCostConstraintsLayout.setVerticalGroup(
+            jPanelCostConstraintsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelCostConstraintsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jCostTermsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -708,7 +708,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jPanel1.TabConstraints.tabTitle"), jPanel1); // NOI18N
+        jTabbedPane1.addTab(org.openide.util.NbBundle.getMessage(TreatmentOptimizationJPanel.class, "TreatmentOptimizationJPanel.jPanelCostConstraints.TabConstraints.tabTitle"), jPanelCostConstraints); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -978,7 +978,7 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JCheckBox jOptimizeSynVecCheckBox;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanelCostConstraints;
     private javax.swing.JPanel jRCNLTorqueControllerPanel;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;

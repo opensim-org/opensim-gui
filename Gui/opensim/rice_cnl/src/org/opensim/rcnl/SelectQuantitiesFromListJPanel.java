@@ -171,6 +171,8 @@ public class SelectQuantitiesFromListJPanel extends javax.swing.JPanel implement
            ((MuscleGroupTableModel) tableModel).restrictNamesBy(".*"+rawPattern+".*");
        else if (tableModel instanceof CoordinateTableModel)
            ((CoordinateTableModel) tableModel).restrictNamesBy(".*"+rawPattern+".*");
+       else if (tableModel instanceof ComponentTableModel)
+           ((ComponentTableModel) tableModel).restrictNamesBy(".*"+rawPattern+".*");
        //System.out.println("restrict by"+".*"+rawPattern+".*");
     }  
 }

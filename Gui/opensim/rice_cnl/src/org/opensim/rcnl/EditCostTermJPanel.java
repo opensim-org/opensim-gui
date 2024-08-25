@@ -14,10 +14,13 @@ import javax.swing.event.ListSelectionListener;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
 import org.opensim.modeling.AbstractProperty;
+import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyDoubleList;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.PropertyObjectList;
+import org.opensim.modeling.PropertyStringList;
+import org.opensim.view.pub.OpenSimDB;
 
 /**
  *
@@ -29,7 +32,10 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
     private boolean initializing=false;
     private TreatmentOptimizationToolModel.Mode mode;
     private String[] componentTypes;
+    private String[] termWithErrorCenter = null;
     String componentType;
+    private String[] availableComponentNames;
+    private CostTermModel costTermModel;
     /**
      * Creates new form EditJointTaskJPanel
      */
@@ -41,16 +47,22 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         costTerm2Edit = rcnlCostTerm;
         initializing = true;
         this.mode = mode;
+        costTermModel = new CostTermModel(costTerm2Edit, mode);
         AbstractProperty typeProp = costTerm2Edit.getPropertyByName("type");
         String saveType = PropertyHelper.getValueString(typeProp);
         initComponents(); 
         jCostTermTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(RCNLCostTermsInfo.getCostTermTypes(mode)));
         componentTypes = RCNLCostTermsInfo.getCostTermQuantityTypes(mode);
+        if (mode == TreatmentOptimizationToolModel.Mode.DesignOptimization){
+            // some terms have error center, get array and cache it
+            termWithErrorCenter = RCNLCostTermsInfo.getCostTermErrorCenter(mode);
+        }
         jCostTermNameTextField.setText(costTerm2Edit.getName());
         jCostTermTypeComboBox.setSelectedItem(saveType);
         jCostTermTypeComboBoxActionPerformed(null);
         AbstractProperty enabledProp = costTerm2Edit.getPropertyByName("is_enabled");
         jEnabledCheckBox.setSelected(PropertyHelper.getValueBool(enabledProp));
+        jErrorCenterTextField.setEnabled(mode == TreatmentOptimizationToolModel.Mode.DesignOptimization);
         initializing = false;
 
     }
@@ -67,9 +79,9 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jEnabledCheckBox = new javax.swing.JCheckBox();
         jComponentListPanel = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
         editComonentListButton = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTermComponentListTextArea = new javax.swing.JTextArea();
         jLabel11 = new javax.swing.JLabel();
         jCostTermTypeComboBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -77,6 +89,8 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jCostTermNameTextField = new javax.swing.JTextField();
         jComponentTypeTextField = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jErrorCenterTextField = new javax.swing.JTextField();
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jLabel1.text")); // NOI18N
 
@@ -94,9 +108,6 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
 
         jComponentListPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jComponentListPanel.border.title"))); // NOI18N
 
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jList1);
-
         org.openide.awt.Mnemonics.setLocalizedText(editComonentListButton, org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.editComonentListButton.text")); // NOI18N
         editComonentListButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,22 +115,30 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
             }
         });
 
+        jTermComponentListTextArea.setColumns(20);
+        jTermComponentListTextArea.setRows(5);
+        jScrollPane2.setViewportView(jTermComponentListTextArea);
+
         javax.swing.GroupLayout jComponentListPanelLayout = new javax.swing.GroupLayout(jComponentListPanel);
         jComponentListPanel.setLayout(jComponentListPanelLayout);
         jComponentListPanelLayout.setHorizontalGroup(
             jComponentListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jComponentListPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 883, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(editComonentListButton)
                 .addContainerGap())
         );
         jComponentListPanelLayout.setVerticalGroup(
             jComponentListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(jComponentListPanelLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(editComonentListButton))
+                .addGroup(jComponentListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jComponentListPanelLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(editComonentListButton))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel11, org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jLabel11.text")); // NOI18N
@@ -157,6 +176,15 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
             }
         });
 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jLabel3.text")); // NOI18N
+
+        jErrorCenterTextField.setText(org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jErrorCenterTextField.text")); // NOI18N
+        jErrorCenterTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jErrorCenterTextFieldActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -179,14 +207,18 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
                                 .addContainerGap()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jMaxErrorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel11)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComponentTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 624, Short.MAX_VALUE)))
+                                        .addComponent(jComponentTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jMaxErrorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(260, 260, 260)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jErrorCenterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
@@ -213,11 +245,14 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
                     .addComponent(jComponentTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(26, 26, 26)
                 .addComponent(jComponentListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
-                    .addComponent(jMaxErrorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(14, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jMaxErrorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(jErrorCenterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -235,6 +270,20 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
 
     private void editComonentListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComonentListButtonActionPerformed
         // TODO add your handling code here:
+        // get Component list from costTermModel as well as the corresponding property
+        String[] names = RCNLCostTermsInfo.getAvailableNamesForComponentType(costTermModel.getComponentType(), costTermModel.getModel());
+        PropertyStringList componentListProperty = costTermModel.getPropertyComponentList();
+        ComponentTableModel ctm = new ComponentTableModel(componentListProperty, names);
+        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
+        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Components");
+        dlg.setModal(true);
+        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            ctm.populateListProperty();
+            jTermComponentListTextArea.setText(costTermModel.getPropertyComponentList().toString());
+            System.out.println(costTerm2Edit.dump());
+        }
 
     }//GEN-LAST:event_editComonentListButtonActionPerformed
 
@@ -246,6 +295,13 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         jComponentTypeTextField.setText(componentType);
         AbstractProperty typeProp = costTerm2Edit.getPropertyByName("type");
         PropertyHelper.setValueString(jCostTermTypeComboBox.getSelectedItem().toString(), typeProp);
+        // If error center is required, will enable editing, else disable
+        jErrorCenterTextField.setEnabled(
+                mode == TreatmentOptimizationToolModel.Mode.DesignOptimization && 
+                termWithErrorCenter[ndx]=="Y");
+        // based on componentType, populate underlying available componentList, if none then disable
+        editComonentListButton.setEnabled(!componentType.equalsIgnoreCase("none"));
+        costTermModel.setTypeIndex(jCostTermTypeComboBox.getSelectedIndex());
     }//GEN-LAST:event_jCostTermTypeComboBoxActionPerformed
 
     private void jComponentTypeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComponentTypeTextFieldActionPerformed
@@ -262,6 +318,10 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         jCostTermNameTextFieldActionPerformed(null);
     }//GEN-LAST:event_jCostTermNameTextFieldFocusLost
 
+    private void jErrorCenterTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jErrorCenterTextFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jErrorCenterTextFieldActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton editComonentListButton;
@@ -270,13 +330,15 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
     private javax.swing.JTextField jCostTermNameTextField;
     private javax.swing.JComboBox<String> jCostTermTypeComboBox;
     private javax.swing.JCheckBox jEnabledCheckBox;
+    private javax.swing.JTextField jErrorCenterTextField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jList1;
     private javax.swing.JTextField jMaxErrorTextField;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTermComponentListTextArea;
     // End of variables declaration//GEN-END:variables
     private class ListSelectionHandler implements ListSelectionListener {
 
