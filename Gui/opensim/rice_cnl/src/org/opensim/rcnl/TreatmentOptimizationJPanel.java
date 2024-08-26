@@ -780,7 +780,6 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private void addConstraintTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConstraintTermButtonActionPerformed
         // TODO add your handling code here:
         OpenSimObject constraintTerm = OpenSimObject.newInstanceOfType("RCNLConstraintTerm");
-        System.out.println(constraintTerm.dump());
         EditCosnstraintTermJPanel ejtPanel = new EditCosnstraintTermJPanel(constraintTerm, mode);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Constraint Term ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
