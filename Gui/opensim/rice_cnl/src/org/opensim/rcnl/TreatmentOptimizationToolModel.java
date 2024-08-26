@@ -216,6 +216,11 @@ public class TreatmentOptimizationToolModel {
         PropertyObjectList olist = PropertyObjectList.getAs(ap);
         return olist;
     }
+    public PropertyObjectList getConstraintTermListAsObjectList() {
+        AbstractProperty ap = toolAsObject.getPropertyByName("RCNLConstraintTermSet");
+        PropertyObjectList olist = PropertyObjectList.getAs(ap);
+        return olist;
+    }
     
 
 }

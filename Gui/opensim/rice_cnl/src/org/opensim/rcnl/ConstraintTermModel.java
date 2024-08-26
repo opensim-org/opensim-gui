@@ -14,16 +14,16 @@ import org.opensim.view.pub.OpenSimDB;
  *
  * @author ayman
  */
-public class CostTermModel {
+public class ConstraintTermModel {
     
     Model model;
-    OpenSimObject costTerm;
+    OpenSimObject constraintTerm;
     private TreatmentOptimizationToolModel.Mode mode;
     private int termIndex = 0;
     
-    public CostTermModel(OpenSimObject rCNLCostTerm, TreatmentOptimizationToolModel.Mode mode){
+    public ConstraintTermModel(OpenSimObject rCNLConstraintTerm, TreatmentOptimizationToolModel.Mode mode){
         this.model = OpenSimDB.getInstance().getCurrentModel();
-        this.costTerm = rCNLCostTerm;
+        this.constraintTerm = rCNLConstraintTerm;
         this.mode = mode;
     }
 
@@ -36,22 +36,22 @@ public class CostTermModel {
     }
     
     public String getType() {
-        return RCNLCostTermsInfo.getCostTermTypes(mode)[termIndex];
+        return RCNLConstraintTermsInfo.getConstraintTermTypes(mode)[termIndex];
     }
     
     public String getComponentType() {
-        return RCNLCostTermsInfo.getCostTermQuantityTypes(mode)[termIndex];
+        return RCNLConstraintTermsInfo.getConstraintTermQuantityTypes(mode)[termIndex];
     }
 
     PropertyStringList getPropertyComponentList() {
         switch(getComponentType()){
             case "coordinate":
-                return PropertyStringList.updAs(costTerm.updPropertyByName("coordinate_list"));
+                return PropertyStringList.updAs(constraintTerm.updPropertyByName("coordinate_list"));
             case "marker":
-                return PropertyStringList.updAs(costTerm.updPropertyByName("marker_list"));
+                return PropertyStringList.updAs(constraintTerm.updPropertyByName("marker_list"));
             case "muscle":
-                return PropertyStringList.updAs(costTerm.updPropertyByName("muscle_list"));
+                return PropertyStringList.updAs(constraintTerm.updPropertyByName("muscle_list"));
         }
-        return PropertyStringList.updAs(costTerm.updPropertyByName("coordinate_list"));
+        return PropertyStringList.updAs(constraintTerm.updPropertyByName("coordinate_list"));
     }
 }

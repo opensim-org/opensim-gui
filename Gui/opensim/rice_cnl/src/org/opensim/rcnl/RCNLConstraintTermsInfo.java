@@ -40,7 +40,7 @@ public class RCNLConstraintTermsInfo {
             "force", "moment", "muscle",
            "coordinate", "coordinate" , "coordinate",
            "coordinate", "coordinate" , "load",
-           "muscle", "coordinate", "none", "none"
+           "muscle", "coordinate", "synergy_group", "synergy_group"
         } 
     };
     

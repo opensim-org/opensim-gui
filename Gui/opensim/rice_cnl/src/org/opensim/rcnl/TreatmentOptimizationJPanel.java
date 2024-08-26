@@ -29,6 +29,8 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private TreatmentOptimizationToolModel treatmentOptimizationToolModel = null;
     private CostTermListModel costTermListModel = null;
     private ListSelectionModel costListSelectionModel;
+    private ConstraintTermListModel constraintTermListModel = null;
+    private ListSelectionModel constraintListSelectionModel;
 
     private Model model;
     private TreatmentOptimizationToolModel.Mode mode;
@@ -85,10 +87,15 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
        surrogateModelDirPath.setFileName(treatmentOptimizationToolModel.getSurrogateModelDir());
        
        costTermListModel = new CostTermListModel(treatmentOptimizationToolModel.getCostTermListAsObjectList());
-       setSettingsFileDescription("Save settings for "+modeName+" as .xml file");
        costListSelectionModel = jCostTermList.getSelectionModel();
        costListSelectionModel.addListSelectionListener(
                             new CostListSelectionHandler());
+
+       constraintTermListModel = new ConstraintTermListModel(treatmentOptimizationToolModel.getConstraintTermListAsObjectList());
+       constraintListSelectionModel = jConstraintTermList.getSelectionModel();
+       constraintListSelectionModel.addListSelectionListener(
+                            new ConstraintListSelectionHandler());
+       setSettingsFileDescription("Save settings for "+modeName+" as .xml file");
     }
 
     /**
@@ -750,17 +757,44 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
     private void editConstraintTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editConstraintTermButtonActionPerformed
         // TODO add your handling code here:
+        int[] sels = jConstraintTermList.getSelectedIndices();
+        int idx = sels[0];
+        OpenSimObject currentTerm = (OpenSimObject)constraintTermListModel.get(idx);
+        OpenSimObject constraintTerm = currentTerm.clone();
+        EditCosnstraintTermJPanel ejtPanel = new EditCosnstraintTermJPanel(constraintTerm, mode);
+        DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Constraint Term ");
+        Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
+        d.setVisible(true);
+        Object userInput = dlg.getValue();
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            constraintTermListModel.addElement(constraintTerm);
+            AbstractProperty ap = treatmentOptimizationToolModel.getToolAsObject().getPropertyByName("RCNLConstraintTermSet");
+            //System.out.println(ap.getTypeName()+" "+ap.isListProperty()+" ");
+            PropertyObjectList.updAs(ap).adoptAndAppendValue(constraintTerm);
+            PropertyObjectList poList = treatmentOptimizationToolModel.getConstraintTermListAsObjectList();
+            constraintTermListModel = new ConstraintTermListModel(poList);
+            jConstraintTermList.setModel(constraintTermListModel);
+        }
     }//GEN-LAST:event_editConstraintTermButtonActionPerformed
 
     private void addConstraintTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConstraintTermButtonActionPerformed
         // TODO add your handling code here:
         OpenSimObject constraintTerm = OpenSimObject.newInstanceOfType("RCNLConstraintTerm");
-        EditCosnstraintTermJPanel ejtPanel = new EditCosnstraintTermJPanel(constraintTerm);
+        System.out.println(constraintTerm.dump());
+        EditCosnstraintTermJPanel ejtPanel = new EditCosnstraintTermJPanel(constraintTerm, mode);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Constraint Term ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
         Object userInput = dlg.getValue();
-        
+        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
+            constraintTermListModel.addElement(constraintTerm);
+            AbstractProperty ap = treatmentOptimizationToolModel.getToolAsObject().getPropertyByName("RCNLConstraintTermSet");
+            //System.out.println(ap.getTypeName()+" "+ap.isListProperty()+" ");
+            PropertyObjectList.updAs(ap).adoptAndAppendValue(constraintTerm);
+            PropertyObjectList poList = treatmentOptimizationToolModel.getConstraintTermListAsObjectList();
+            constraintTermListModel = new ConstraintTermListModel(poList);
+            jConstraintTermList.setModel(constraintTermListModel);
+        }        
     }//GEN-LAST:event_addConstraintTermButtonActionPerformed
 
     private void deleteCostTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteCostTermButtonActionPerformed

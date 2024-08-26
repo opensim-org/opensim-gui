@@ -16,47 +16,47 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="318" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="jComponentListPanel" max="32767" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="jComboBox2" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jEnabledCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jComboBox1" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jConstraintNameTextField" min="-2" pref="460" max="-2" attributes="0"/>
+                  <Component id="jComponentListPanel" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jComponentTypeTextField" min="-2" pref="220" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jEnabledCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jConstraintTypeComboBox" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="jConstraintNameTextField" min="-2" pref="460" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="253" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace min="0" pref="309" max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
-                  <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextField2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="880" max="32767" attributes="0"/>
-              </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -71,33 +71,27 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jConstraintTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="jEnabledCheckBox" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel11" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jComboBox2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComponentTypeTextField" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Component id="jComponentListPanel" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-          </Group>
-          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="480" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jTextField2" alignment="0" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="jComponentListPanel" min="-2" pref="199" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                      <Component id="jTextField2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="-2" attributes="0"/>
               </Group>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -136,7 +130,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="jScrollPane1" pref="985" max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="editComonentListButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -145,35 +139,20 @@
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="jScrollPane1" alignment="0" min="-2" max="-2" attributes="0"/>
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                   <Component id="editComonentListButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="43" max="32767" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace max="32767" attributes="0"/>
+                  <Component id="jScrollPane2" min="-2" pref="144" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane1">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JList" name="jList1">
-              <Properties>
-                <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                  <StringArray count="0"/>
-                </Property>
-                <Property name="selectionMode" type="int" value="0"/>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
-          </SubComponents>
-        </Container>
         <Component class="javax.swing.JButton" name="editComonentListButton">
           <Properties>
             <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
@@ -184,6 +163,21 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="editComonentListButtonActionPerformed"/>
           </Events>
         </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTextArea" name="jTermComponentListTextArea">
+              <Properties>
+                <Property name="columns" type="int" value="20"/>
+                <Property name="rows" type="int" value="5"/>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
     <Component class="javax.swing.JLabel" name="jLabel11">
@@ -193,7 +187,7 @@
         </Property>
       </Properties>
     </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox1">
+    <Component class="javax.swing.JComboBox" name="jConstraintTypeComboBox">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="10">
@@ -210,23 +204,9 @@
           </StringArray>
         </Property>
       </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-      </AuxValues>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="jComboBox2">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="5">
-            <StringItem index="0" value="Coordinate"/>
-            <StringItem index="1" value="Marker"/>
-            <StringItem index="2" value="Load"/>
-            <StringItem index="3" value="Force"/>
-            <StringItem index="4" value="Muscle"/>
-          </StringArray>
-        </Property>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jConstraintTypeComboBoxActionPerformed"/>
+      </Events>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
@@ -272,6 +252,21 @@
           <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="EditCosnstraintTermJPanel.jConstraintNameTextField.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jConstraintNameTextFieldFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jConstraintNameTextFieldActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jComponentTypeTextField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="org/opensim/rcnl/Bundle.properties" key="EditCosnstraintTermJPanel.jComponentTypeTextField.text" replaceFormat="org.openide.util.NbBundle.getMessage({sourceFileName}.class, &quot;{key}&quot;)"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jComponentTypeTextFieldActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
