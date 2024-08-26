@@ -7,12 +7,14 @@ package org.opensim.rcnl;
 
 import java.awt.Dialog;
 import java.text.NumberFormat;
+import java.text.ParseException;
 import java.util.Vector;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
@@ -36,6 +38,8 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
     String componentType;
     private String[] availableComponentNames;
     private CostTermModel costTermModel;
+    private NumberFormat numFormat = NumberFormat.getInstance();
+
     /**
      * Creates new form EditJointTaskJPanel
      */
@@ -153,6 +157,16 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jLabel2.text")); // NOI18N
 
         jMaxErrorTextField.setText(org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jMaxErrorTextField.text")); // NOI18N
+        jMaxErrorTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jMaxErrorTextFieldFocusLost(evt);
+            }
+        });
+        jMaxErrorTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMaxErrorTextFieldActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jLabel4.text")); // NOI18N
 
@@ -321,6 +335,22 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
     private void jErrorCenterTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jErrorCenterTextFieldActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jErrorCenterTextFieldActionPerformed
+
+    private void jMaxErrorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMaxErrorTextFieldActionPerformed
+        // TODO add your handling code here:
+        AbstractProperty errorProp = costTerm2Edit.getPropertyByName("max_allowable_error");
+        if(jMaxErrorTextField.getText().trim().length()>0) 
+            try {
+                PropertyHelper.setValueDouble(numFormat.parse(jMaxErrorTextField.getText().trim()).doubleValue(), errorProp);
+        } catch (ParseException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+    }//GEN-LAST:event_jMaxErrorTextFieldActionPerformed
+
+    private void jMaxErrorTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMaxErrorTextFieldFocusLost
+        // TODO add your handling code here:
+        jMaxErrorTextFieldActionPerformed(null);
+    }//GEN-LAST:event_jMaxErrorTextFieldFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
