@@ -64,7 +64,7 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         jEnabledCheckBox.setSelected(PropertyHelper.getValueBool(enabledProp));
         jErrorCenterTextField.setEnabled(mode == TreatmentOptimizationToolModel.Mode.DesignOptimization);
         initializing = false;
-
+        jTermComponentListTextArea.setText(costTermModel.getPropertyComponentList().toString());
     }
 
     /**
@@ -282,7 +282,7 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
             ctm.populateListProperty();
             jTermComponentListTextArea.setText(costTermModel.getPropertyComponentList().toString());
-            System.out.println(costTerm2Edit.dump());
+            //System.out.println(costTerm2Edit.dump());
         }
 
     }//GEN-LAST:event_editComonentListButtonActionPerformed
