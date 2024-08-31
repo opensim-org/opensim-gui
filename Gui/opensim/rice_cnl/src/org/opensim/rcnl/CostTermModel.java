@@ -7,6 +7,7 @@ package org.opensim.rcnl;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.PropertyStringList;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -20,11 +21,17 @@ public class CostTermModel {
     OpenSimObject costTerm;
     private TreatmentOptimizationToolModel.Mode mode;
     private int termIndex = 0;
+    private AbstractProperty errorProp;
+    private AbstractProperty errorCenterProp;
+    
+  
     
     public CostTermModel(OpenSimObject rCNLCostTerm, TreatmentOptimizationToolModel.Mode mode){
         this.model = OpenSimDB.getInstance().getCurrentModel();
         this.costTerm = rCNLCostTerm;
         this.mode = mode;
+        errorProp = costTerm.updPropertyByName("max_allowable_error");
+        errorCenterProp = costTerm.updPropertyByName("error_center");
     }
 
     void setTypeIndex(int selectedIndex) {
@@ -53,5 +60,18 @@ public class CostTermModel {
                 return PropertyStringList.updAs(costTerm.updPropertyByName("muscle_list"));
         }
         return PropertyStringList.updAs(costTerm.updPropertyByName("coordinate_list"));
+    }
+    
+    public double getMaxAllowableError() {
+          return PropertyHelper.getValueDouble(errorProp);
+    }
+    public void setMaxAllowableError(double newMaxErr) {
+        PropertyHelper.setValueDouble(newMaxErr, errorProp);
+    }
+    public double getErrorCenter() {
+        return PropertyHelper.getValueDouble(errorCenterProp);
+    }
+    public void setErrorCenter(double newErrorCenter) {
+        PropertyHelper.setValueDouble(newErrorCenter, errorCenterProp);
     }
 }

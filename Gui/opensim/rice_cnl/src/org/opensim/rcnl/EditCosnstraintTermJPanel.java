@@ -5,10 +5,13 @@
  */
 package org.opensim.rcnl;
 
+import java.text.NumberFormat;
+import java.text.ParseException;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyHelper;
@@ -27,6 +30,8 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
     String componentType;
     private String[] availableComponentNames;
     private ConstraintTermModel constraintTermModel;
+    private NumberFormat numFormat = NumberFormat.getInstance();
+
 
     /**
      * Creates new form EditJointTaskJPanel
@@ -53,7 +58,9 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
         AbstractProperty enabledProp = constraintTerm2Edit.getPropertyByName("is_enabled");
         jEnabledCheckBox.setSelected(PropertyHelper.getValueBool(enabledProp));
         initializing = false;
-        jTermComponentListTextArea.setText(constraintTermModel.getPropertyComponentList().toString());       
+        jTermComponentListTextArea.setText(constraintTermModel.getPropertyComponentList().toString());
+        jMaxErrorTextField.setText(String.valueOf(constraintTermModel.getMaxError()));
+        jMinErrorTextField.setText(String.valueOf(constraintTermModel.getMinError()));
     }
 
     /**
@@ -74,9 +81,9 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
         jLabel11 = new javax.swing.JLabel();
         jConstraintTypeComboBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jMinErrorTextField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jMaxErrorTextField = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jConstraintNameTextField = new javax.swing.JTextField();
         jComponentTypeTextField = new javax.swing.JTextField();
@@ -113,8 +120,8 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
         jComponentListPanelLayout.setHorizontalGroup(
             jComponentListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jComponentListPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 762, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(editComonentListButton)
                 .addContainerGap())
         );
@@ -124,10 +131,7 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
                 .addGap(34, 34, 34)
                 .addComponent(editComonentListButton)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jComponentListPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(83, 83, 83))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 103, Short.MAX_VALUE)
         );
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel11, org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jLabel11.text")); // NOI18N
@@ -141,11 +145,31 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jLabel2.text")); // NOI18N
 
-        jTextField1.setText(org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jTextField1.text")); // NOI18N
+        jMinErrorTextField.setText(org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jMinErrorTextField.text")); // NOI18N
+        jMinErrorTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jMinErrorTextFieldFocusLost(evt);
+            }
+        });
+        jMinErrorTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMinErrorTextFieldActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jLabel3.text")); // NOI18N
 
-        jTextField2.setText(org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jTextField2.text")); // NOI18N
+        jMaxErrorTextField.setText(org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jMaxErrorTextField.text")); // NOI18N
+        jMaxErrorTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jMaxErrorTextFieldFocusLost(evt);
+            }
+        });
+        jMaxErrorTextField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMaxErrorTextFieldActionPerformed(evt);
+            }
+        });
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, org.openide.util.NbBundle.getMessage(EditCosnstraintTermJPanel.class, "EditCosnstraintTermJPanel.jLabel4.text")); // NOI18N
 
@@ -175,36 +199,35 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComponentListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComponentTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jEnabledCheckBox)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jConstraintTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel4)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jConstraintNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel11)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComponentTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jEnabledCheckBox)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel3)
+                                .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(253, 253, 253)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 309, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addComponent(jConstraintTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jConstraintNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jMaxErrorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(128, 128, 128)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jMinErrorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComponentListPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,13 +247,13 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel11)
                     .addComponent(jComponentTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComponentListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComponentListPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMaxErrorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jMinErrorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel2)))
                 .addContainerGap())
         );
@@ -292,6 +315,37 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
         jConstraintNameTextFieldActionPerformed(null);
     }//GEN-LAST:event_jConstraintNameTextFieldFocusLost
 
+    private void jMaxErrorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMaxErrorTextFieldActionPerformed
+        // TODO add your handling code here:
+        if(jMaxErrorTextField.getText().trim().length()>0) 
+            try {
+                constraintTermModel.setMaxError(numFormat.parse(jMaxErrorTextField.getText().trim()).doubleValue());
+        } catch (ParseException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+    }//GEN-LAST:event_jMaxErrorTextFieldActionPerformed
+
+    private void jMaxErrorTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMaxErrorTextFieldFocusLost
+        // TODO add your handling code here:
+        jMaxErrorTextFieldActionPerformed(null);
+    }//GEN-LAST:event_jMaxErrorTextFieldFocusLost
+
+    private void jMinErrorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMinErrorTextFieldActionPerformed
+        // TODO add your handling code here:
+        if(jMinErrorTextField.getText().trim().length()>0) 
+            try {
+                constraintTermModel.setMinError(numFormat.parse(jMinErrorTextField.getText().trim()).doubleValue());
+        } catch (ParseException ex) {
+            Exceptions.printStackTrace(ex);
+        }
+
+    }//GEN-LAST:event_jMinErrorTextFieldActionPerformed
+
+    private void jMinErrorTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jMinErrorTextFieldFocusLost
+        // TODO add your handling code here:
+        jMinErrorTextFieldActionPerformed(null);
+    }//GEN-LAST:event_jMinErrorTextFieldFocusLost
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton editComonentListButton;
@@ -305,10 +359,10 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField jMaxErrorTextField;
+    private javax.swing.JTextField jMinErrorTextField;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTermComponentListTextArea;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
     private class ListSelectionHandler implements ListSelectionListener {
 

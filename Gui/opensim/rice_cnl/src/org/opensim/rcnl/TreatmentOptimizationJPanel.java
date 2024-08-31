@@ -760,20 +760,15 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         int[] sels = jConstraintTermList.getSelectedIndices();
         int idx = sels[0];
         OpenSimObject currentTerm = (OpenSimObject)constraintTermListModel.get(idx);
-        OpenSimObject constraintTerm = currentTerm.clone();
-        EditCosnstraintTermJPanel ejtPanel = new EditCosnstraintTermJPanel(constraintTerm, mode);
+        OpenSimObject termToEdit = currentTerm.clone();
+        EditCosnstraintTermJPanel ejtPanel = new EditCosnstraintTermJPanel(termToEdit, mode);
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Constraint Term ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
         Object userInput = dlg.getValue();
         if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            constraintTermListModel.addElement(constraintTerm);
-            AbstractProperty ap = treatmentOptimizationToolModel.getToolAsObject().getPropertyByName("RCNLConstraintTermSet");
-            //System.out.println(ap.getTypeName()+" "+ap.isListProperty()+" ");
-            PropertyObjectList.updAs(ap).adoptAndAppendValue(constraintTerm);
-            PropertyObjectList poList = treatmentOptimizationToolModel.getConstraintTermListAsObjectList();
-            constraintTermListModel = new ConstraintTermListModel(poList);
-            jConstraintTermList.setModel(constraintTermListModel);
+            constraintTermListModel.set(idx, termToEdit); 
+            treatmentOptimizationToolModel.getConstraintTermListAsObjectList().setValue(idx, termToEdit);
         }
     }//GEN-LAST:event_editConstraintTermButtonActionPerformed
 
@@ -856,17 +851,6 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
 
     private void jButtonEditCoordinateListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEditCoordinateListActionPerformed
         // TODO add your handling code here:
-        // Create Panel for selecting from existing model coordinates
-        //        CoordinateTableModel ctm = new CoordinateTableModel(treatmentOptimizationToolModel.getPropCoordinateListString(), model);
-        //        SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
-        //        DialogDescriptor dlg = new DialogDescriptor(selectionPanel,"Select Coordinates");
-        //        dlg.setModal(true);
-        //        DialogDisplayer.getDefault().createDialog(dlg).setVisible(true);
-        //        Object userInput = dlg.getValue();
-        //        if (((Integer)userInput).compareTo((Integer)DialogDescriptor.OK_OPTION)==0){
-            //            ctm.populateCoordinateListProperty();
-            //            jCoordinateListTextArea.setText(treatmentOptimizationToolModel.getPropCoordinateListString().toString());
-            //        }
     }//GEN-LAST:event_jButtonEditCoordinateListActionPerformed
 
     private void solverSettingsFilePathStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_solverSettingsFilePathStateChanged

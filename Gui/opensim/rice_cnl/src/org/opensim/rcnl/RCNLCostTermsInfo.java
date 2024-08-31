@@ -31,8 +31,8 @@ public class RCNLCostTermsInfo {
     };
     static String[][] designOptimizationCostTerms= {
         {"generalized_coordinate_tracking", "generalized_speed_tracking", "marker_position_tracking",
-            "inverse_dynamics_load_tracking", "inverse_dynamics_slope_tracking", "kinetic_inconsistency_minimization",
-            "joint_acceleration_minimization", "external_force_tracking", "external_moment_tracking",
+            "inverse_dynamics_load_tracking", "inverse_dynamics_slope_tracking", 
+            "external_force_tracking", "external_moment_tracking",
             "muscle_activation_tracking", "controller_tracking", "controller_slope_minimization",
             "controller_frequency_minimization", "controller_shape_tracking", "joint_acceleration_minimization",
             "joint_power_minimization", "joint_energy_generation_goal", "joint_energy_absorption_goal", 
@@ -41,14 +41,15 @@ public class RCNLCostTermsInfo {
             "relative_metabolic_cost_per_time", "relative_metabolic_cost_per_distance", "propulsive_impulse_goal", 
             "braking_impulse_goal"},
         {"coordinate", "coordinate", "marker", 
-            "load" , "load" , "load", 
-            "coordinate", "force", "moment", 
+            "load" , "load" , "force", "moment", 
             "muscle", "controller", "controller", 
             "controller", "controller", "coordinate", 
             "coordinate", "coordinate", "coordinate", 
             "muscle", "coordinate",
             "none", "none", "none", "none", "none", "none", "none", "none"},
-        {"N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N","N",
+        {"N","N","N","N","N","N",
+            "N","N","N","N","N","N",
+            "N","N","N","N","N","N",
             "Y","Y","Y","Y","Y","Y","Y","Y" 
         } 
     };

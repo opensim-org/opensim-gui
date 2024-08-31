@@ -7,6 +7,7 @@ package org.opensim.rcnl;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.PropertyStringList;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -20,11 +21,15 @@ public class ConstraintTermModel {
     OpenSimObject constraintTerm;
     private TreatmentOptimizationToolModel.Mode mode;
     private int termIndex = 0;
+    private AbstractProperty maxErrorProp;
+    private AbstractProperty minErrorProp;
     
     public ConstraintTermModel(OpenSimObject rCNLConstraintTerm, TreatmentOptimizationToolModel.Mode mode){
         this.model = OpenSimDB.getInstance().getCurrentModel();
         this.constraintTerm = rCNLConstraintTerm;
         this.mode = mode;
+        maxErrorProp = rCNLConstraintTerm.updPropertyByName("max_error");
+        minErrorProp = rCNLConstraintTerm.updPropertyByName("min_error");
     }
 
     void setTypeIndex(int selectedIndex) {
@@ -54,4 +59,17 @@ public class ConstraintTermModel {
         }
         return PropertyStringList.updAs(constraintTerm.updPropertyByName("coordinate_list"));
     }
+    public double getMaxError() {
+          return PropertyHelper.getValueDouble(maxErrorProp);
+    }
+    public void setMaxError(double newMaxErr) {
+        PropertyHelper.setValueDouble(newMaxErr, maxErrorProp);
+    }
+    public double getMinError() {
+        return PropertyHelper.getValueDouble(minErrorProp);
+    }
+    public void setMinError(double newMinError) {
+        PropertyHelper.setValueDouble(newMinError, minErrorProp);
+    }
+
 }

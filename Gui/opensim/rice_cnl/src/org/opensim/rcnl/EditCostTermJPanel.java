@@ -69,6 +69,8 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         jErrorCenterTextField.setEnabled(mode == TreatmentOptimizationToolModel.Mode.DesignOptimization);
         initializing = false;
         jTermComponentListTextArea.setText(costTermModel.getPropertyComponentList().toString());
+        jMaxErrorTextField.setText(String.valueOf(costTermModel.getMaxAllowableError()));
+        jErrorCenterTextField.setText(String.valueOf(costTermModel.getErrorCenter()));
     }
 
     /**
@@ -128,21 +130,18 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         jComponentListPanelLayout.setHorizontalGroup(
             jComponentListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jComponentListPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 886, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 780, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editComonentListButton)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jComponentListPanelLayout.setVerticalGroup(
             jComponentListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jComponentListPanelLayout.createSequentialGroup()
-                .addGroup(jComponentListPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jComponentListPanelLayout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(editComonentListButton))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(43, 43, 43)
+                .addComponent(editComonentListButton)
+                .addContainerGap(101, Short.MAX_VALUE))
+            .addComponent(jScrollPane2)
         );
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel11, org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jLabel11.text")); // NOI18N
@@ -193,6 +192,11 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         org.openide.awt.Mnemonics.setLocalizedText(jLabel3, org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jLabel3.text")); // NOI18N
 
         jErrorCenterTextField.setText(org.openide.util.NbBundle.getMessage(EditCostTermJPanel.class, "EditCostTermJPanel.jErrorCenterTextField.text")); // NOI18N
+        jErrorCenterTextField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                jErrorCenterTextFieldFocusLost(evt);
+            }
+        });
         jErrorCenterTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jErrorCenterTextFieldActionPerformed(evt);
@@ -204,42 +208,37 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jComponentListPanel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jEnabledCheckBox)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel11)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jComponentTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel2)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jMaxErrorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(131, 131, 131)
+                                    .addComponent(jLabel3)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jErrorCenterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComponentListPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jCostTermTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jEnabledCheckBox)
+                                .addComponent(jCostTermTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel11)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jComponentTypeTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jMaxErrorTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(260, 260, 260)
-                                        .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jErrorCenterTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCostTermNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCostTermNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,14 +333,19 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
 
     private void jErrorCenterTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jErrorCenterTextFieldActionPerformed
         // TODO add your handling code here:
+        if(jErrorCenterTextField.getText().trim().length()>0) 
+            try {
+                costTermModel.setErrorCenter(numFormat.parse(jErrorCenterTextField.getText().trim()).doubleValue());
+        } catch (ParseException ex) {
+            Exceptions.printStackTrace(ex);
+        }
     }//GEN-LAST:event_jErrorCenterTextFieldActionPerformed
 
     private void jMaxErrorTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMaxErrorTextFieldActionPerformed
         // TODO add your handling code here:
-        AbstractProperty errorProp = costTerm2Edit.getPropertyByName("max_allowable_error");
         if(jMaxErrorTextField.getText().trim().length()>0) 
             try {
-                PropertyHelper.setValueDouble(numFormat.parse(jMaxErrorTextField.getText().trim()).doubleValue(), errorProp);
+                costTermModel.setMaxAllowableError(numFormat.parse(jMaxErrorTextField.getText().trim()).doubleValue());
         } catch (ParseException ex) {
             Exceptions.printStackTrace(ex);
         }
@@ -351,6 +355,11 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         jMaxErrorTextFieldActionPerformed(null);
     }//GEN-LAST:event_jMaxErrorTextFieldFocusLost
+
+    private void jErrorCenterTextFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jErrorCenterTextFieldFocusLost
+        // TODO add your handling code here:
+        jErrorCenterTextFieldActionPerformed(null);
+    }//GEN-LAST:event_jErrorCenterTextFieldFocusLost
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
