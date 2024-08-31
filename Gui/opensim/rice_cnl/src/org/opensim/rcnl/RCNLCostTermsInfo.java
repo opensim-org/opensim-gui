@@ -4,8 +4,11 @@
  */
 package org.opensim.rcnl;
 
+import java.util.Vector;
 import org.opensim.modeling.ArrayBool;
 import org.opensim.modeling.ArrayStr;
+import org.opensim.modeling.Coordinate;
+import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.Model;
 
 /**
@@ -56,6 +59,7 @@ public class RCNLCostTermsInfo {
     private static String[] coordinateList = null;
     private static String[] muscleList = null;
     private static String[] markerList = null;
+    private static String[] loadList = null;
     private static Model currentModel=null;
 
     // Create lists of the proper types to be used in Cost/Constraint create/edit
@@ -67,6 +71,7 @@ public class RCNLCostTermsInfo {
             coordinateList = null;
             muscleList = null;
             markerList = null;
+            loadList = null;
         }
         ArrayStr componentNames = new ArrayStr();
         String[] availableQuantities;
@@ -96,6 +101,25 @@ public class RCNLCostTermsInfo {
                     muscleList= availableQuantities;
                 }
                 return muscleList;
+            case "load":
+                if (loadList == null){
+                    CoordinateSet coordinates = model.getCoordinateSet();
+                    Vector<String> loadNames = new Vector<String>(4);
+                    for (int i=0; i< coordinates.getSize(); i++){
+                        Coordinate co = coordinates.get(i);
+                        String loadName = co.getName();
+                        String suffix= "";
+                        if (co.getMotionType() == Coordinate.MotionType.Rotational) 
+                            suffix = "_moment";
+                        else
+                            suffix = "_force";
+                        loadNames.add(loadName.concat(suffix));
+                    }
+                    loadList = new String[loadNames.size()];
+                    loadNames.copyInto(loadList);
+                }
+                return loadList;
+
         }
         return new String[]{};
     }
