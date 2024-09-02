@@ -297,6 +297,12 @@ public class EditCosnstraintTermJPanel extends javax.swing.JPanel {
     private void jConstraintTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jConstraintTypeComboBoxActionPerformed
         int ndx = jConstraintTypeComboBox.getSelectedIndex();
         componentType = componentTypes[ndx];
+        String oldType = jComponentTypeTextField.getText();
+        jComponentTypeTextField.setText(componentType);
+        if (!oldType.trim().equalsIgnoreCase("") && !oldType.equalsIgnoreCase(componentType)){ // type change so old values not applicable
+            constraintTermModel.getPropertyComponentList().clear();
+            jTermComponentListTextArea.setText(constraintTermModel.getPropertyComponentList().toString());
+        }
         jComponentTypeTextField.setText(componentType);
         AbstractProperty typeProp = constraintTerm2Edit.getPropertyByName("type");
         PropertyHelper.setValueString(jConstraintTypeComboBox.getSelectedItem().toString(), typeProp);

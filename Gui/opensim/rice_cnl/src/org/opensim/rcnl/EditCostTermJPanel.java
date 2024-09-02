@@ -311,7 +311,12 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         // Get component type from 
         int ndx = jCostTermTypeComboBox.getSelectedIndex();
         componentType = componentTypes[ndx];
+        String oldType = jComponentTypeTextField.getText();
         jComponentTypeTextField.setText(componentType);
+        if (!oldType.trim().equalsIgnoreCase("") && !oldType.equalsIgnoreCase(componentType)){ // type change so old values not applicable
+            costTermModel.getPropertyComponentList().clear();
+            jTermComponentListTextArea.setText(costTermModel.getPropertyComponentList().toString());
+        }
         AbstractProperty typeProp = costTerm2Edit.getPropertyByName("type");
         PropertyHelper.setValueString(jCostTermTypeComboBox.getSelectedItem().toString(), typeProp);
         // If error center is required, will enable editing, else disable
@@ -321,6 +326,7 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         // based on componentType, populate underlying available componentList, if none then disable
         editComonentListButton.setEnabled(!componentType.equalsIgnoreCase("none"));
         costTermModel.setTypeIndex(jCostTermTypeComboBox.getSelectedIndex());
+        
     }//GEN-LAST:event_jCostTermTypeComboBoxActionPerformed
 
     private void jComponentTypeTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComponentTypeTextFieldActionPerformed

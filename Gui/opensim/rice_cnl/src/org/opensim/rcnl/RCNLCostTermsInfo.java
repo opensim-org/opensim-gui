@@ -134,6 +134,7 @@ public class RCNLCostTermsInfo {
                 }
                 return loadList;
             case "controller":
+            case "synergy_group":
                 if (trackedDir.equalsIgnoreCase(testTrackedDir) && initalGuessDir.equalsIgnoreCase(testInitalGuessDir) ){
                     // No need to search for synergyCommands.sto or torqueControls.sto to populate controller_List or synergy_Groups
                     if (controller_List == null){
