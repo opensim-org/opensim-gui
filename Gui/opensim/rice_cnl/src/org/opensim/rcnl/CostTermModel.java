@@ -58,6 +58,8 @@ public class CostTermModel {
                 return PropertyStringList.updAs(costTerm.updPropertyByName("marker_list"));
             case "muscle":
                 return PropertyStringList.updAs(costTerm.updPropertyByName("muscle_list"));
+            case "controller":
+                return PropertyStringList.updAs(costTerm.updPropertyByName("controller_list"));
         }
         return PropertyStringList.updAs(costTerm.updPropertyByName("coordinate_list"));
     }
