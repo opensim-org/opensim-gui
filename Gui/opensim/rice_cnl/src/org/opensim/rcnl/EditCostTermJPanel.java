@@ -39,6 +39,7 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
     private String[] availableComponentNames;
     private CostTermModel costTermModel;
     private NumberFormat numFormat = NumberFormat.getInstance();
+    private String trackedDataDir, initialGuessDir, osimxFile;
 
     /**
      * Creates new form EditJointTaskJPanel
@@ -47,10 +48,14 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    EditCostTermJPanel(OpenSimObject rcnlCostTerm, TreatmentOptimizationToolModel.Mode mode) {
+    EditCostTermJPanel(OpenSimObject rcnlCostTerm, TreatmentOptimizationToolModel.Mode mode, 
+            String trackedDataDir, String initialGuessDir, String osimxFile) {
         costTerm2Edit = rcnlCostTerm;
         initializing = true;
         this.mode = mode;
+        this.trackedDataDir = trackedDataDir;
+        this.initialGuessDir = initialGuessDir;
+        this.osimxFile = osimxFile;
         costTermModel = new CostTermModel(costTerm2Edit, mode);
         AbstractProperty typeProp = costTerm2Edit.getPropertyByName("type");
         String saveType = PropertyHelper.getValueString(typeProp);
@@ -284,7 +289,8 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
     private void editComonentListButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editComonentListButtonActionPerformed
         // TODO add your handling code here:
         // get Component list from costTermModel as well as the corresponding property
-        String[] names = RCNLCostTermsInfo.getAvailableNamesForComponentType(costTermModel.getComponentType(), costTermModel.getModel());
+        String[] names = RCNLCostTermsInfo.getAvailableNamesForComponentType(costTermModel.getComponentType(), costTermModel.getModel(), 
+                this.trackedDataDir, this.initialGuessDir, this.osimxFile);
         PropertyStringList componentListProperty = costTermModel.getPropertyComponentList();
         ComponentTableModel ctm = new ComponentTableModel(componentListProperty, names);
         SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);

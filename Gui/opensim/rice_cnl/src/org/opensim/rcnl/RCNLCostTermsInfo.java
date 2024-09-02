@@ -4,12 +4,17 @@
  */
 package org.opensim.rcnl;
 
+import java.io.File;
+import java.io.FilenameFilter;
+import java.io.IOException;
 import java.util.Vector;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.ArrayBool;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.Storage;
 
 /**
  *
@@ -60,10 +65,18 @@ public class RCNLCostTermsInfo {
     private static String[] muscleList = null;
     private static String[] markerList = null;
     private static String[] loadList = null;
+    private static String[] forces_List = null;
+    private static String[] moments_List = null;
+    private static String[] controller_List = null;
+    private static String[] synergy_Groups = null;
     private static Model currentModel=null;
+    private static String trackedDir = "";
+    private static String initalGuessDir = "";
+    private static String osimxFile = "";
+    
 
     // Create lists of the proper types to be used in Cost/Constraint create/edit
-    public static String[] getAvailableNamesForComponentType(String componentType, Model model) {
+    public static String[] getAvailableNamesForComponentType(String componentType, Model model, String testTrackedDir, String testInitalGuessDir, String testOsimxFile) {
         //Will evaluate these lazily for componentTypes not in model
         if (currentModel != model){
             // fresh or changed model
@@ -73,6 +86,7 @@ public class RCNLCostTermsInfo {
             markerList = null;
             loadList = null;
         }
+
         ArrayStr componentNames = new ArrayStr();
         String[] availableQuantities;
 
@@ -119,9 +133,55 @@ public class RCNLCostTermsInfo {
                     loadNames.copyInto(loadList);
                 }
                 return loadList;
+            case "controller":
+                if (trackedDir.equalsIgnoreCase(testTrackedDir) && initalGuessDir.equalsIgnoreCase(testInitalGuessDir) ){
+                    // No need to search for synergyCommands.sto or torqueControls.sto to populate controller_List or synergy_Groups
+                    if (controller_List == null){
+                        populateControllersList();
+                    }
+                    return controller_List;
+                }
+                else { 
+                    trackedDir = testTrackedDir;
+                    initalGuessDir = testInitalGuessDir;
+                    populateControllersList();
+                }
+                return controller_List;
 
         }
         return new String[]{};
+    }
+
+    private static void populateControllersList() {
+        String[] availableQuantities;
+        boolean found = false;
+        String[] candidateFolders = new String[]{trackedDir, initalGuessDir};
+        for (String folder : candidateFolders){
+            File dir = new File(folder);
+            File [] files = dir.listFiles(new FilenameFilter() {
+                public boolean accept(File dir, String name) {
+                    return name.endsWith("_synergyCommands.sto");
+                }
+            });
+            
+            for (File commandFile : files) {
+                try {
+                    Storage commandSto = new Storage(commandFile.getAbsolutePath(), true);
+                    // Successful find, get labels to populate controller_List, then break
+                    found = true;
+                    ArrayStr controllerNames = commandSto.getColumnLabels();
+                    controllerNames.remove(0); // time needs to be removed
+                    availableQuantities = new String[controllerNames.getSize()];
+                    controllerNames.toVector().copyInto(availableQuantities);
+                    controller_List= availableQuantities;
+                    break;
+                } catch (IOException ex) {
+                    Exceptions.printStackTrace(ex);
+                }
+            }
+            if (found)
+                break;
+        }
     }
     public static String[] getCostTermTypes(TreatmentOptimizationToolModel.Mode mode) {
         switch(mode){

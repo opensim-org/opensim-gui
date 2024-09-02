@@ -761,7 +761,10 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         int idx = sels[0];
         OpenSimObject currentTerm = (OpenSimObject)constraintTermListModel.get(idx);
         OpenSimObject termToEdit = currentTerm.clone();
-        EditCosnstraintTermJPanel ejtPanel = new EditCosnstraintTermJPanel(termToEdit, mode);
+        EditCosnstraintTermJPanel ejtPanel = new EditCosnstraintTermJPanel(termToEdit, mode, 
+                treatmentOptimizationToolModel.getTrackedQuantitiesDir(), 
+                treatmentOptimizationToolModel.getInitialGuessDir(), 
+                treatmentOptimizationToolModel.getInputOsimxFile());
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Constraint Term ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
@@ -775,7 +778,10 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private void addConstraintTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addConstraintTermButtonActionPerformed
         // TODO add your handling code here:
         OpenSimObject constraintTerm = OpenSimObject.newInstanceOfType("RCNLConstraintTerm");
-        EditCosnstraintTermJPanel ejtPanel = new EditCosnstraintTermJPanel(constraintTerm, mode);
+        EditCosnstraintTermJPanel ejtPanel = new EditCosnstraintTermJPanel(constraintTerm, mode, 
+                treatmentOptimizationToolModel.getTrackedQuantitiesDir(), 
+                treatmentOptimizationToolModel.getInitialGuessDir(), 
+                treatmentOptimizationToolModel.getInputOsimxFile());
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Constraint Term ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
@@ -818,7 +824,10 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
         int idx = sels[0];
         OpenSimObject currentTerm = (OpenSimObject)costTermListModel.get(idx);
         OpenSimObject termToEdit = currentTerm.clone();
-        EditCostTermJPanel ejtPanel = new EditCostTermJPanel(termToEdit, mode);
+        EditCostTermJPanel ejtPanel = new EditCostTermJPanel(termToEdit, mode, 
+                treatmentOptimizationToolModel.getTrackedQuantitiesDir(), 
+                treatmentOptimizationToolModel.getInitialGuessDir(), 
+                treatmentOptimizationToolModel.getInputOsimxFile());
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Cost Term ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
@@ -832,7 +841,10 @@ public class TreatmentOptimizationJPanel extends BaseToolPanel  implements Obser
     private void addCostTermButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCostTermButtonActionPerformed
         // TODO add your handling code here:
         OpenSimObject costTerm = OpenSimObject.newInstanceOfType("RCNLCostTerm");
-        EditCostTermJPanel ejtPanel = new EditCostTermJPanel(costTerm, mode);
+        EditCostTermJPanel ejtPanel = new EditCostTermJPanel(costTerm, mode, 
+                treatmentOptimizationToolModel.getTrackedQuantitiesDir(), 
+                treatmentOptimizationToolModel.getInitialGuessDir(), 
+                treatmentOptimizationToolModel.getInputOsimxFile());
         DialogDescriptor dlg = new DialogDescriptor(ejtPanel, "Create/Edit One Cost Term ");
         Dialog d = DialogDisplayer.getDefault().createDialog(dlg);
         d.setVisible(true);
