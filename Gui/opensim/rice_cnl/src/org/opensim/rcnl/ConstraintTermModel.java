@@ -57,7 +57,7 @@ public class ConstraintTermModel {
             case "muscle":
                 return PropertyStringList.updAs(constraintTerm.updPropertyByName("muscle_list"));
             case "synergy_group":
-                return PropertyStringList.updAs(constraintTerm.updPropertyByName("coordinate_list"));
+                return PropertyStringList.updAs(constraintTerm.updPropertyByName("synergy_group_list"));
         }
         return PropertyStringList.updAs(constraintTerm.updPropertyByName("coordinate_list"));
     }

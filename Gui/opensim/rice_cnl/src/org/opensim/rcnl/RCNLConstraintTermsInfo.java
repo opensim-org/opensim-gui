@@ -16,7 +16,7 @@ public class RCNLConstraintTermsInfo {
             "synergy_weight_magnitude"},
         {"load", "load", "load",
             "coordinate", "coordinate" , "load",
-            "force", "moment", "none", "none"}
+            "force", "moment", "synergy_group", "synergy_group"}
     };
     static String[][] verificationConstraintTerms= {
         {"root_segment_residual_load", "torque_model_moment_consistency", "kinetic_consistency",

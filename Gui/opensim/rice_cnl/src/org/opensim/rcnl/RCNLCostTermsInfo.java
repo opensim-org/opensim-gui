@@ -134,34 +134,47 @@ public class RCNLCostTermsInfo {
                 }
                 return loadList;
             case "controller":
-            case "synergy_group":
                 if (trackedDir.equalsIgnoreCase(testTrackedDir) && initalGuessDir.equalsIgnoreCase(testInitalGuessDir) ){
                     // No need to search for synergyCommands.sto or torqueControls.sto to populate controller_List or synergy_Groups
                     if (controller_List == null){
-                        populateControllersList();
+                        populateControllersOrSynergiesList(true);
                     }
                     return controller_List;
                 }
                 else { 
                     trackedDir = testTrackedDir;
                     initalGuessDir = testInitalGuessDir;
-                    populateControllersList();
+                    populateControllersOrSynergiesList(true);
                 }
                 return controller_List;
-
+            case "synergy_group":
+                if (trackedDir.equalsIgnoreCase(testTrackedDir) && initalGuessDir.equalsIgnoreCase(testInitalGuessDir) ){
+                    // No need to search for synergyCommands.sto or torqueControls.sto to populate controller_List or synergy_Groups
+                    if (synergy_Groups == null){
+                        populateControllersOrSynergiesList(false);
+                    }
+                    return synergy_Groups;
+                }
+                else { 
+                    trackedDir = testTrackedDir;
+                    initalGuessDir = testInitalGuessDir;
+                    populateControllersOrSynergiesList(false);
+                }
+                return synergy_Groups;
+                    
         }
         return new String[]{};
     }
 
-    private static void populateControllersList() {
+    private static void populateControllersOrSynergiesList(final boolean isController) {
         String[] availableQuantities;
-        boolean found = false;
         String[] candidateFolders = new String[]{trackedDir, initalGuessDir};
+        ArrayStr availableQuantitiesArr = new ArrayStr();
         for (String folder : candidateFolders){
             File dir = new File(folder);
             File [] files = dir.listFiles(new FilenameFilter() {
                 public boolean accept(File dir, String name) {
-                    return name.endsWith("_synergyCommands.sto");
+                    return name.endsWith("_synergyCommands.sto") || (isController && name.endsWith("torqueControls.sto"));
                 }
             });
             
@@ -169,20 +182,21 @@ public class RCNLCostTermsInfo {
                 try {
                     Storage commandSto = new Storage(commandFile.getAbsolutePath(), true);
                     // Successful find, get labels to populate controller_List, then break
-                    found = true;
                     ArrayStr controllerNames = commandSto.getColumnLabels();
                     controllerNames.remove(0); // time needs to be removed
-                    availableQuantities = new String[controllerNames.getSize()];
-                    controllerNames.toVector().copyInto(availableQuantities);
-                    controller_List= availableQuantities;
-                    break;
+                    availableQuantitiesArr.append(controllerNames);
                 } catch (IOException ex) {
                     Exceptions.printStackTrace(ex);
                 }
             }
-            if (found)
-                break;
         }
+        availableQuantities = new String[availableQuantitiesArr.getSize()];
+        availableQuantitiesArr.toVector().copyInto(availableQuantities);
+        if (isController)
+            controller_List= availableQuantities;
+        else
+            synergy_Groups = availableQuantities;
+
     }
     public static String[] getCostTermTypes(TreatmentOptimizationToolModel.Mode mode) {
         switch(mode){
