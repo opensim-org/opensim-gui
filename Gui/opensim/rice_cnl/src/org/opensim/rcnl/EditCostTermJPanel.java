@@ -14,6 +14,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import org.openide.DialogDescriptor;
 import org.openide.DialogDisplayer;
+import org.openide.NotifyDescriptor;
 import org.openide.util.Exceptions;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.Model;
@@ -291,6 +292,12 @@ public class EditCostTermJPanel extends javax.swing.JPanel {
         // get Component list from costTermModel as well as the corresponding property
         String[] names = RCNLCostTermsInfo.getAvailableNamesForComponentType(costTermModel.getComponentType(), costTermModel.getModel(), 
                 this.trackedDataDir, this.initialGuessDir, this.osimxFile);
+        if (names.length == 0 && !costTermModel.getComponentType().equalsIgnoreCase("none")){
+             NotifyDescriptor.Message dlg =
+                          new NotifyDescriptor.Message("Error populating list of options, please check model, tracked data and initial guess directories.");
+                  DialogDisplayer.getDefault().notify(dlg);
+            return;
+        }
         PropertyStringList componentListProperty = costTermModel.getPropertyComponentList();
         ComponentTableModel ctm = new ComponentTableModel(componentListProperty, names);
         SelectQuantitiesFromListJPanel selectionPanel = new SelectQuantitiesFromListJPanel(ctm);
