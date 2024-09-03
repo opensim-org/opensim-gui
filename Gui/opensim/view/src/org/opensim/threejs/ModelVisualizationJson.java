@@ -1602,7 +1602,15 @@ public class ModelVisualizationJson extends JSONObject {
         Transform localTransform = new Transform();
         if (active && pathPoint!= null){
             Vec3 location = pathPoint.getLocation(state);
-            localTransform.setP(location);
+            Frame parentFrame = pathPoint.getParentFrame();
+            Frame baseFrame = parentFrame.findBaseFrame();
+            if (baseFrame.equals(parentFrame))
+                localTransform.setP(location);
+            else {
+                // transform location to baseFrame as the scene graph for visualization uses it for mobodyindex
+                Vec3 locationInBaseFrame = parentFrame.findStationLocationInAnotherFrame(state, location, baseFrame);
+                localTransform.setP(locationInBaseFrame);
+            }
         }
         else
             localTransform.setP(computedLocation);
