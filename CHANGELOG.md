@@ -8,6 +8,7 @@ v4.6
 ======
 - Fix issue [#1494](https://github.com/opensim-org/opensim-gui/issues/1494): Changing muscle path color throws exception.
 - Fix issue [#1493](https://github.com/opensim-org/opensim-gui/issues/1493): Rotating experimental data fails or results an unusable file.
+- Fix issue [#1516](https://github.com/opensim-org/opensim-gui/issues/1516): Chains of Physical offset frames ignored when displaying GeometryPath 
 
 v4.5
 ======
