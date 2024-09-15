@@ -14,6 +14,8 @@ import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.Model;
+import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.PropertyObjectList;
 import org.opensim.modeling.Storage;
 
 /**
@@ -65,8 +67,8 @@ public class RCNLCostTermsInfo {
     private static String[] muscleList = null;
     private static String[] markerList = null;
     private static String[] loadList = null;
-    private static String[] forces_List = null;
-    private static String[] moments_List = null;
+    private static String[] forceList = null;
+    private static String[] momentList = null;
     private static String[] controller_List = null;
     private static String[] synergy_Groups = null;
     private static Model currentModel=null;
@@ -76,7 +78,8 @@ public class RCNLCostTermsInfo {
     
 
     // Create lists of the proper types to be used in Cost/Constraint create/edit
-    public static String[] getAvailableNamesForComponentType(String componentType, Model model, String testTrackedDir, String testInitalGuessDir, String testOsimxFile) {
+    public static String[] getAvailableNamesForComponentType(String componentType, Model model, String testTrackedDir, 
+            String testInitalGuessDir, String testOsimxFile) {
         //Will evaluate these lazily for componentTypes not in model
         if (currentModel != model){
             // fresh or changed model
@@ -85,6 +88,8 @@ public class RCNLCostTermsInfo {
             muscleList = null;
             markerList = null;
             loadList = null;
+            forceList = null;
+            momentList = null;
         }
 
         ArrayStr componentNames = new ArrayStr();
@@ -161,7 +166,18 @@ public class RCNLCostTermsInfo {
                     populateControllersOrSynergiesList(false);
                 }
                 return synergy_Groups;
-                    
+            case "force":
+            case "moment":
+                if (testOsimxFile.equalsIgnoreCase(osimxFile)){
+                    if (forceList == null){
+                        populateForcesAndMomentsList();
+                    }
+                }
+                else {
+                    osimxFile = testOsimxFile;
+                    populateForcesAndMomentsList();
+                }
+                return (componentType.equalsIgnoreCase("force")?forceList:momentList);
         }
         return new String[]{};
     }
@@ -180,7 +196,7 @@ public class RCNLCostTermsInfo {
             
             for (File commandFile : files) {
                 try {
-                    Storage commandSto = new Storage(commandFile.getAbsolutePath(), true);
+                    Storage commandSto = new Storage(commandFile.getAbsolutePath());
                     // Successful find, get labels to populate controller_List, then break
                     ArrayStr controllerNames = commandSto.getColumnLabels();
                     controllerNames.remove(0); // time needs to be removed
@@ -198,6 +214,21 @@ public class RCNLCostTermsInfo {
             synergy_Groups = availableQuantities;
 
     }
+    
+    private static void populateForcesAndMomentsList() {
+        String[] availableForces;
+        ArrayStr availableForcesArr = new ArrayStr();
+        String[] availableMoments;
+        ArrayStr availableMomentArr = new ArrayStr();
+        OpenSimObject osimXModel = OpenSimObject.newInstanceOfType("OsimxModel");
+        // Find RCNLContactSurface/force_columns or moment_columns and aggregate
+        PropertyObjectList contactSurfaceList = PropertyObjectList.updAs(osimXModel.updPropertyByName("RCNLContactSurfaceSet"));
+        // for each RCNLContactSurface in the set append force_set to availableForcesArr, same for moments
+        for (int i=0; i < contactSurfaceList.size(); i++){
+            
+        }
+    }
+    
     public static String[] getCostTermTypes(TreatmentOptimizationToolModel.Mode mode) {
         switch(mode){
             case TrackingOptimization:

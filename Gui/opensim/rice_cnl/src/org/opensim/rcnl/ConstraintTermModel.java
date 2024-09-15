@@ -52,8 +52,12 @@ public class ConstraintTermModel {
         switch(getComponentType()){
             case "coordinate":
                 return PropertyStringList.updAs(constraintTerm.updPropertyByName("coordinate_list"));
-            case "marker":
-                return PropertyStringList.updAs(constraintTerm.updPropertyByName("marker_list"));
+            case "load":
+                return PropertyStringList.updAs(constraintTerm.updPropertyByName("load_list"));
+            case "force":
+                return PropertyStringList.updAs(constraintTerm.updPropertyByName("force_list"));
+            case "moment":
+                return PropertyStringList.updAs(constraintTerm.updPropertyByName("moment_list"));
             case "muscle":
                 return PropertyStringList.updAs(constraintTerm.updPropertyByName("muscle_list"));
             case "synergy_group":

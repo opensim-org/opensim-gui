@@ -54,13 +54,19 @@ public class CostTermModel {
         switch(getComponentType()){
             case "coordinate":
                 return PropertyStringList.updAs(costTerm.updPropertyByName("coordinate_list"));
-            case "marker":
-                return PropertyStringList.updAs(costTerm.updPropertyByName("marker_list"));
+            case "load":
+                return PropertyStringList.updAs(costTerm.updPropertyByName("load_list"));
             case "muscle":
                 return PropertyStringList.updAs(costTerm.updPropertyByName("muscle_list"));
+            case "force":
+                return PropertyStringList.updAs(costTerm.updPropertyByName("force_list"));
+            case "moment":
+                return PropertyStringList.updAs(costTerm.updPropertyByName("moment_list"));
             case "controller":
                 return PropertyStringList.updAs(costTerm.updPropertyByName("controller_list"));
-        }
+            case "marker":
+                return PropertyStringList.updAs(costTerm.updPropertyByName("marker_list"));
+       }
         return PropertyStringList.updAs(costTerm.updPropertyByName("coordinate_list"));
     }
     
