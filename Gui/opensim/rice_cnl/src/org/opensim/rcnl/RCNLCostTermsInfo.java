@@ -9,6 +9,7 @@ import java.io.FilenameFilter;
 import java.io.IOException;
 import java.util.Vector;
 import org.openide.util.Exceptions;
+import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayBool;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Coordinate;
@@ -16,6 +17,7 @@ import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.PropertyObjectList;
+import org.opensim.modeling.PropertyStringList;
 import org.opensim.modeling.Storage;
 
 /**
@@ -219,14 +221,27 @@ public class RCNLCostTermsInfo {
         String[] availableForces;
         ArrayStr availableForcesArr = new ArrayStr();
         String[] availableMoments;
-        ArrayStr availableMomentArr = new ArrayStr();
-        OpenSimObject osimXModel = OpenSimObject.newInstanceOfType("OsimxModel");
+        ArrayStr availableMomentsArr = new ArrayStr();
+        OpenSimObject osimXModelAsObject = OpenSimObject.makeObjectFromFile(osimxFile);
         // Find RCNLContactSurface/force_columns or moment_columns and aggregate
-        PropertyObjectList contactSurfaceList = PropertyObjectList.updAs(osimXModel.updPropertyByName("RCNLContactSurfaceSet"));
+        PropertyObjectList contactSurfaceList = PropertyObjectList.updAs(osimXModelAsObject.updPropertyByName("RCNLContactSurfaceSet"));
         // for each RCNLContactSurface in the set append force_set to availableForcesArr, same for moments
         for (int i=0; i < contactSurfaceList.size(); i++){
+            OpenSimObject rCNLContactSurfaceAsObject = contactSurfaceList.getValue(i);
+            AbstractProperty forceColumnsProperty = rCNLContactSurfaceAsObject.updPropertyByName("force_columns");
+            PropertyStringList forceColsAsStringList = PropertyStringList.getAs(forceColumnsProperty);
+            for (int fc=0; fc < forceColsAsStringList.size(); fc++)
+                availableForcesArr.append(forceColsAsStringList.getValue(fc));
             
+            AbstractProperty momentColumnsProperty = rCNLContactSurfaceAsObject.updPropertyByName("moment_columns");
+            PropertyStringList momentColsAsStringList = PropertyStringList.getAs(momentColumnsProperty);
+            for (int mc=0; mc < momentColsAsStringList.size(); mc++)
+                availableMomentsArr.append(momentColsAsStringList.getValue(mc));
         }
+        forceList = new String[availableForcesArr.getSize()];
+        availableForcesArr.toVector().copyInto(forceList);
+        momentList = new String[availableMomentsArr.getSize()];
+        availableMomentsArr.toVector().copyInto(momentList);
     }
     
     public static String[] getCostTermTypes(TreatmentOptimizationToolModel.Mode mode) {
