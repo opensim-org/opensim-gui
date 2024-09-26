@@ -264,7 +264,7 @@ public final class FileUtils {
         
 	dlog.resetChoosableFileFilters();
 		
-        if(!description.equals("")) {
+        if(description != null && !description.equals("")) {
             dlog.setDialogTitle(description);
         }
         
