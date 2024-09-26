@@ -365,8 +365,8 @@ public class FunctionBasedPath extends AbstractGeometryPath {
     return opensimSimulationJNI.FunctionBasedPath_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(coord), coord);
   }
 
-  public void addInEquivalentForces(State state, double tension, VectorOfSpatialVec bodyForces, Vector mobilityForces) {
-    opensimSimulationJNI.FunctionBasedPath_addInEquivalentForces(swigCPtr, this, State.getCPtr(state), state, tension, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(mobilityForces), mobilityForces);
+  public void produceForces(State arg0, double tension, SWIGTYPE_p_OpenSim__ForceConsumer arg2) {
+    opensimSimulationJNI.FunctionBasedPath_produceForces(swigCPtr, this, State.getCPtr(arg0), arg0, tension, SWIGTYPE_p_OpenSim__ForceConsumer.getCPtr(arg2));
   }
 
   public boolean isVisualPath() {

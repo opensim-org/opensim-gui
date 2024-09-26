@@ -26,7 +26,7 @@ package org.opensim.modeling;
  * <br>
  * @author Ajay Seth
  */
-public class ExpressionBasedPointToPointForce extends Force {
+public class ExpressionBasedPointToPointForce extends ForceProducer {
   private transient long swigCPtr;
 
   public ExpressionBasedPointToPointForce(long cPtr, boolean cMemoryOwn) {
@@ -276,6 +276,14 @@ public class ExpressionBasedPointToPointForce extends Force {
     opensimSimulationJNI.ExpressionBasedPointToPointForce_set_expression__SWIG_1(swigCPtr, this, value);
   }
 
+  public void set_has_output_force_magnitude(boolean value) {
+    opensimSimulationJNI.ExpressionBasedPointToPointForce__has_output_force_magnitude_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_force_magnitude() {
+    return opensimSimulationJNI.ExpressionBasedPointToPointForce__has_output_force_magnitude_get(swigCPtr, this);
+  }
+
   /**
    *  Default constructor. *
    */
@@ -356,14 +364,6 @@ public class ExpressionBasedPointToPointForce extends Force {
    */
   public double getForceMagnitude(State state) {
     return opensimSimulationJNI.ExpressionBasedPointToPointForce_getForceMagnitude(swigCPtr, this, State.getCPtr(state), state);
-  }
-
-  /**
-   *  Compute the point-to-point force based on the user-defined expression <br>
-   *         and apply it to the model 
-   */
-  public void computeForce(State state, VectorOfSpatialVec bodyForces, Vector generalizedForces) {
-    opensimSimulationJNI.ExpressionBasedPointToPointForce_computeForce(swigCPtr, this, State.getCPtr(state), state, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(generalizedForces), generalizedForces);
   }
 
   /**

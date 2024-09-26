@@ -472,6 +472,10 @@ public class MocoInverse extends MocoTool {
     return new MocoStudy(opensimMocoJNI.MocoInverse_initialize(swigCPtr, this), true);
   }
 
+  public TimeSeriesTable initializeKinematics() {
+    return new TimeSeriesTable(opensimMocoJNI.MocoInverse_initializeKinematics(swigCPtr, this), true);
+  }
+
   /**
    *  Solve the problem returned by initialize() and compute the outputs<br>
    *  listed in output_paths.

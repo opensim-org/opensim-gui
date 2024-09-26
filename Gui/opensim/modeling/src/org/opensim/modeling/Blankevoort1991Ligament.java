@@ -147,7 +147,7 @@ affected by scaling the model.
 
 
  */
-public class Blankevoort1991Ligament extends Force {
+public class Blankevoort1991Ligament extends ForceProducer {
   private transient long swigCPtr;
 
   public Blankevoort1991Ligament(long cPtr, boolean cMemoryOwn) {
@@ -577,10 +577,6 @@ public class Blankevoort1991Ligament extends Force {
 
   public double computeMomentArm(State s, Coordinate aCoord) {
     return opensimSimulationJNI.Blankevoort1991Ligament_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
-  }
-
-  public void computeForce(State s, VectorOfSpatialVec bodyForces, Vector generalizedForces) {
-    opensimSimulationJNI.Blankevoort1991Ligament_computeForce(swigCPtr, this, State.getCPtr(s), s, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(generalizedForces), generalizedForces);
   }
 
   public double computePotentialEnergy(State state) {

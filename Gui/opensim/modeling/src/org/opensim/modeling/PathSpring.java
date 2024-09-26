@@ -22,7 +22,7 @@ package org.opensim.modeling;
  * <br>
  * @author Ajay Seth
  */
-public class PathSpring extends Force {
+public class PathSpring extends ForceProducer {
   private transient long swigCPtr;
 
   public PathSpring(long cPtr, boolean cMemoryOwn) {

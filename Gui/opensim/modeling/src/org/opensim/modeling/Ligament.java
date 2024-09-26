@@ -12,7 +12,7 @@ package org.opensim.modeling;
  * A class implementing a ligament. The path of the ligament is<br>
  * stored in an object derived from AbstractGeometryPath.
  */
-public class Ligament extends Force {
+public class Ligament extends ForceProducer {
   private transient long swigCPtr;
 
   public Ligament(long cPtr, boolean cMemoryOwn) {
@@ -276,10 +276,6 @@ public class Ligament extends Force {
 
   public double computeMomentArm(State s, Coordinate aCoord) {
     return opensimSimulationJNI.Ligament_computeMomentArm(swigCPtr, this, State.getCPtr(s), s, Coordinate.getCPtr(aCoord), aCoord);
-  }
-
-  public void computeForce(State s, VectorOfSpatialVec bodyForces, Vector generalizedForces) {
-    opensimSimulationJNI.Ligament_computeForce(swigCPtr, this, State.getCPtr(s), s, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(generalizedForces), generalizedForces);
   }
 
   /**

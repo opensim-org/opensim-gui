@@ -8,7 +8,7 @@
 
 package org.opensim.modeling;
 
-public class ExpressionBasedCoordinateForce extends Force {
+public class ExpressionBasedCoordinateForce extends ForceProducer {
   private transient long swigCPtr;
 
   public ExpressionBasedCoordinateForce(long cPtr, boolean cMemoryOwn) {
@@ -142,6 +142,14 @@ public class ExpressionBasedCoordinateForce extends Force {
     opensimSimulationJNI.ExpressionBasedCoordinateForce_set_expression__SWIG_1(swigCPtr, this, value);
   }
 
+  public void set_has_output_force_magnitude(boolean value) {
+    opensimSimulationJNI.ExpressionBasedCoordinateForce__has_output_force_magnitude_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_force_magnitude() {
+    return opensimSimulationJNI.ExpressionBasedCoordinateForce__has_output_force_magnitude_get(swigCPtr, this);
+  }
+
   /**
    *  Default constructor. *
    */
@@ -173,18 +181,18 @@ public class ExpressionBasedCoordinateForce extends Force {
    * %Set the mathematical expression that defines the force magnitude of this<br>
    * coordinate force in terms of the coordinate value (q) and its<br>
    * time derivative (qdot). Expressions with C-mathematical operations<br>
-   * such as +,-,*,/ and common functions: exp, pow, sqrt, sin, cos, tan, <br>
+   * such as +,-,*,/ and common functions: exp, pow, sqrt, sin, cos, tan,<br>
    * and so on are acceptable.<br>
    * NOTE: a limitation is that the expression may not contain whitespace<br>
    * @param expression    string containing the mathematical expression that<br>
-   *                      defines the coordinate force 
+   *                      defines the coordinate force
    */
   public void setExpression(String expression) {
     opensimSimulationJNI.ExpressionBasedCoordinateForce_setExpression(swigCPtr, this, expression);
   }
 
   /**
-   * Get the computed Force magnitude determined by evaluating the <br>
+   * Get the computed Force magnitude determined by evaluating the<br>
    * expression above. Note, computeForce must be evaluated first,<br>
    * and this is done automatically if the system is realized to Dynamics<br>
    * @param state    const state (reference) for the model<br>
@@ -192,14 +200,6 @@ public class ExpressionBasedCoordinateForce extends Force {
    */
   public double getForceMagnitude(State state) {
     return opensimSimulationJNI.ExpressionBasedCoordinateForce_getForceMagnitude(swigCPtr, this, State.getCPtr(state), state);
-  }
-
-  /**
-   *  Compute the coordinate force based on the user-defined expression <br>
-   *         and apply it to the model 
-   */
-  public void computeForce(State state, VectorOfSpatialVec bodyForces, Vector generalizedForces) {
-    opensimSimulationJNI.ExpressionBasedCoordinateForce_computeForce(swigCPtr, this, State.getCPtr(state), state, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(generalizedForces), generalizedForces);
   }
 
   /**

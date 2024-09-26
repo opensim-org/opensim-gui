@@ -10,7 +10,7 @@ package org.opensim.modeling;
 
 /**
  *  Invoke SimulationUtilities::appendCoordinateValueDerivativesAsSpeeds() on<br>
- * the table 
+ * the table. 
  */
 public class TabOpAppendCoordinateValueDerivativesAsSpeeds extends TableOperator {
   private transient long swigCPtr;

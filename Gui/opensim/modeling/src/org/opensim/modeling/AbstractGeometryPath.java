@@ -163,8 +163,23 @@ public class AbstractGeometryPath extends ModelComponent {
   }
 
   /**
+   * Requests that the concrete implementation produces forces resulting from<br>
+   * applying a tension along its path, emitting them into the supplied<br>
+   * `ForceConsumer`.<br>
+   * <br>
+   * @param state         the state used to evaluate forces<br>
+   * @param tension       scalar of the applied (+ve) tensile force<br>
+   * @param forceConsumer a `ForceConsumer` shall receive each produced force
+   */
+  public void produceForces(State state, double tension, SWIGTYPE_p_OpenSim__ForceConsumer forceConsumer) {
+    opensimSimulationJNI.AbstractGeometryPath_produceForces(swigCPtr, this, State.getCPtr(state), state, tension, SWIGTYPE_p_OpenSim__ForceConsumer.getCPtr(forceConsumer));
+  }
+
+  /**
    *  Add in the equivalent body and generalized forces to be applied to the<br>
    *  multibody system resulting from a tension along the AbstractGeometryPath.<br>
+   * <br>
+   * Note: this internally uses `produceForces`<br>
    * <br>
    *  @param state           state used to evaluate forces<br>
    *  @param tension         scalar of the applied (+ve) tensile force<br>

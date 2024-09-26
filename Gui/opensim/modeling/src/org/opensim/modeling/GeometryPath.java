@@ -186,15 +186,15 @@ public class GeometryPath extends AbstractGeometryPath {
   }
 
   /**
-   *  add in the equivalent body and generalized forces to be applied to the <br>
-   *         multibody system resulting from a tension along the GeometryPath <br>
-   *     @param state    state used to evaluate forces<br>
-   *     @param tension      scalar (double) of the applied (+ve) tensile force <br>
-   *     @param bodyForces   Vector of SpatialVec's (torque, force) on bodies<br>
-   *     @param mobilityForces  Vector of generalized forces, one per mobility   
+   * Requests forces resulting from applying a tension along its path and<br>
+   * emits them into the supplied `ForceConsumer`.<br>
+   * <br>
+   * @param state         the state used to evaluate forces<br>
+   * @param tension       scalar of the applied (+ve) tensile force<br>
+   * @param forceConsumer a `ForceConsumer` shall receive each produced force
    */
-  public void addInEquivalentForces(State state, double tension, VectorOfSpatialVec bodyForces, Vector mobilityForces) {
-    opensimSimulationJNI.GeometryPath_addInEquivalentForces(swigCPtr, this, State.getCPtr(state), state, tension, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(mobilityForces), mobilityForces);
+  public void produceForces(State state, double tension, SWIGTYPE_p_OpenSim__ForceConsumer forceConsumer) {
+    opensimSimulationJNI.GeometryPath_produceForces(swigCPtr, this, State.getCPtr(state), state, tension, SWIGTYPE_p_OpenSim__ForceConsumer.getCPtr(forceConsumer));
   }
 
   public boolean isVisualPath() {

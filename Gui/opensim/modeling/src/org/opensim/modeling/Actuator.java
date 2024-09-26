@@ -15,7 +15,7 @@ package org.opensim.modeling;
  * <br>
  * @author Ajay Seth
  */
-public class Actuator extends Force {
+public class Actuator extends ForceProducer {
   private transient long swigCPtr;
 
   public Actuator(long cPtr, boolean cMemoryOwn) {

@@ -10,7 +10,7 @@ package org.opensim.modeling;
 
 /**
  * A class implementing a constraint that maintains a constant distance between<br>
- * between two points on separate PhysicalFrames. <br>
+ * two points on separate PhysicalFrames. <br>
  * The underlying SimTK::Constraint in Simbody is a SimTK::Constraint::Rod.<br>
  * <br>
  * @author Matt DeMers

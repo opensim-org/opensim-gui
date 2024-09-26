@@ -11,10 +11,10 @@ package org.opensim.modeling;
 /**
  * Generate a force that acts to limit the range of motion of a coordinate.<br>
  * Force is experienced at upper and lower limits of the coordinate value<br>
- * according to a constant stiffnesses K_upper and K_lower, with a C2 continuous<br>
+ * according to constant stiffnesses K_upper and K_lower, with a C2-continuous<br>
  * transition from 0 to K. The transition parameter defines how far beyond the<br>
  * limit the stiffness becomes constant. The integrator will like smoother<br>
- * (i.e. larger transition regions).<br>
+ * (i.e. larger) transition regions.<br>
  * <br>
  * Damping factor is also phased in through the transition region from 0 to the<br>
  * value provided.<br>
@@ -22,14 +22,14 @@ package org.opensim.modeling;
  * Limiting force is guaranteed to be zero within the upper and lower limits.<br>
  * <br>
  * The potential energy stored in the spring component of the force is<br>
- * accessible as well as the power (nd optionally energy) dissipated.<br>
+ * accessible as well as the power (and, optionally, energy) dissipated.<br>
  * The function has the following shape:<br>
  * <br>
  * <img src="coordinate_limit_force.png"/><br>
  * <br>
  * @author Ajay Seth
  */
-public class CoordinateLimitForce extends Force {
+public class CoordinateLimitForce extends ForceProducer {
   private transient long swigCPtr;
 
   public CoordinateLimitForce(long cPtr, boolean cMemoryOwn) {

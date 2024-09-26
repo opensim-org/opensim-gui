@@ -66,6 +66,13 @@ public class ComponentPath {
   }
 
   /**
+   * Returns the separator used to delimit path elements in the path
+   */
+  public static char separator() {
+    return opensimCommonJNI.ComponentPath_separator();
+  }
+
+  /**
    * Returns the root component path (i.e. "/")
    */
   public static ComponentPath root() {

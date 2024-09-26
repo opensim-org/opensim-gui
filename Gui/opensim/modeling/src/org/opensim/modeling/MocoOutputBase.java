@@ -11,25 +11,38 @@ package org.opensim.modeling;
 /**
  *  This abstract base class provides convenience methods and common interfaces<br>
  * for all Output-related MocoGoal's. All MocoGoal's deriving from this class<br>
- * include the 'setOutputPath()', 'setOutputIndex()', and 'setExponent()' methods<br>
- * and their corresponding Object properties. The convenience method<br>
- * 'initializeOnModelBase()' should be called at the top of<br>
- * 'initializeOnModelImpl()' within each derived class. Similarly,<br>
+ * include the 'setOutputPath()', 'setSecondOutputPath()', 'setOperation()',<br>
+ * 'setOutputIndex()', and 'setExponent()' methods and their corresponding Object<br>
+ * properties. The convenience method 'initializeOnModelBase()' should be called at<br>
+ * the top of 'initializeOnModelImpl()' within each derived class. Similarly,<br>
  * 'calcOutputValue()' can be used to retrieve the Output value with<br>
  * 'calcGoalImpl()' and/or 'calcIntegrandImpl()', as needed for each derived class.<br>
  * The method 'getDependsOnStage()' returns the SimTK::Stage that should be realized<br>
  * to to calculate Output values. The method 'setValueToExponent()' can be used to<br>
  * raise a value to the exponent provided via 'setExponent()'.<br>
  * <br>
+ * Goals can be composed of one or two Outputs. The optional second Output can be<br>
+ * included by using the methods 'setSecondOutputPath()' and 'setOperation()'. The<br>
+ * Output values can be combined by addition, subtraction, multiplication, or<br>
+ * division. The first Output is always on the left hand side of the operation and<br>
+ * the second Output on the right hand side. The two Outputs can be different<br>
+ * quantities, but they must be the same type.<br>
+ * <br>
  * We support the following Output types:<br>
  * - double<br>
  * - SimTK::Vec3<br>
  * - SimTK::SpatialVec<br>
  * <br>
- * When using vector types, 'setOutputIndex()' may be used to select a specific<br>
- * element of the Output vector. If not specified, the norm of the vector is<br>
- * returned when calling 'calcOutputValue()'.<br>
+ * When using SimTK::Vec3 or SimTK::SpatialVec types, 'setOutputIndex()' may be<br>
+ * used to select a specific element of the Output vector. If no index is<br>
+ * specified, the norm of the vector will be used when calling 'calcOutputValue()'.<br>
  * <br>
+ * If using two Outputs, the Output index will be used to select the same element<br>
+ * from both Outputs before the operation. If two Outputs of type SimTK::Vec3 or<br>
+ * SimTK::SpatialVec are provided and no index is specified, the operation will be<br>
+ * applied elementwise before computing the norm. Elementwise<br>
+ * multiplication and division operations are not supported when using two<br>
+ * SimTK::SpatialVec Outputs (i.e., an index must be provided).<br>
  * 
  */
 public class MocoOutputBase extends MocoGoal {
@@ -95,8 +108,8 @@ public class MocoOutputBase extends MocoGoal {
   }
 
   /**
-   *  Set the absolute path to the output in the model to use as the integrand<br>
-   *     for this goal. The format is "/path/to/component|output_name". 
+   *  Set the absolute path to the Output in the model. The format is<br>
+   *     "/path/to/component|output_name". 
    */
   public void setOutputPath(String path) {
     opensimMocoJNI.MocoOutputBase_setOutputPath(swigCPtr, this, path);
@@ -104,6 +117,34 @@ public class MocoOutputBase extends MocoGoal {
 
   public String getOutputPath() {
     return opensimMocoJNI.MocoOutputBase_getOutputPath(swigCPtr, this);
+  }
+
+  /**
+   *  Set the absolute path to the optional second Output in the model. The<br>
+   *     format is "/path/to/component|output_name". This Output should have the same<br>
+   *     type as the first Output. If providing a second Output, the user must also<br>
+   *     provide an operation via `setOperation()`. 
+   */
+  public void setSecondOutputPath(String path) {
+    opensimMocoJNI.MocoOutputBase_setSecondOutputPath(swigCPtr, this, path);
+  }
+
+  public String getSecondOutputPath() {
+    return opensimMocoJNI.MocoOutputBase_getSecondOutputPath(swigCPtr, this);
+  }
+
+  /**
+   *  Set the operation that combines Output values where two Outputs are<br>
+   *     provided. The supported operations include "addition", "subtraction",<br>
+   *     "multiplication", or "division". If providing an operation, the user<br>
+   *     must also provide a second Output path. 
+   */
+  public void setOperation(String operation) {
+    opensimMocoJNI.MocoOutputBase_setOperation(swigCPtr, this, operation);
+  }
+
+  public String getOperation() {
+    return opensimMocoJNI.MocoOutputBase_getOperation(swigCPtr, this);
   }
 
   /**

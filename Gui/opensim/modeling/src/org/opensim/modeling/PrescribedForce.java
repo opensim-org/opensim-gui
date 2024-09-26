@@ -28,7 +28,7 @@ package org.opensim.modeling;
  * <br>
  * @author Peter Eastman, Matt DeMers
  */
-public class PrescribedForce extends Force {
+public class PrescribedForce extends ForceProducer {
   private transient long swigCPtr;
 
   public PrescribedForce(long cPtr, boolean cMemoryOwn) {

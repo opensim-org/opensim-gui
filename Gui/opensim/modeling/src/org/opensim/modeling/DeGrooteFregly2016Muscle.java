@@ -54,9 +54,28 @@ package org.opensim.modeling;
  * time-stepping forward simulation with Manager; use explicit mode for <br>
  * time-stepping.<br>
  * <br>
- * Note: Normalized tendon force is bounded in the range [0, 5] in this class.<br>
- *    The methods getMinNormalizedTendonForce() and <br>
+ * <br>
+ * The acceptable bounds for each property are enforced at model initialization.<br>
+ * These bounds are:<br>
+ *  - activation_time_constant: (0, inf]<br>
+ *  - deactivation_time_constant: (0, inf]<br>
+ *  - active_force_width_scale: [1, inf]<br>
+ *  - fiber_damping: [0, inf]<br>
+ *  - passive_fiber_strain_at_one_norm_force: (0, inf]<br>
+ *  - tendon_strain_at_one_norm_force: (0, inf]<br>
+ *  - pennation_angle_at_optimal: [0, Pi/2)<br>
+ *  - default_activation: (0, inf]<br>
+ *  - default_normalized_tendon_force: [0, 5]<br>
+ * <br>
+ * Note: The methods getMinNormalizedTendonForce() and<br>
  *    getMaxNormalizedTendonForce() provide these bounds for use in custom solvers.<br>
+ * <br>
+ * Note: Muscle properties can be optimized using MocoParameter. The acceptable<br>
+ * bounds for each property are **not** enforced during parameter optimization, so<br>
+ * the user must supply these bounds to MocoParameter.<br>
+ * <br>
+ * Note: The properties `default_activation` and `default_normalized_tendon_force`<br>
+ * cannot be optimized because they are applied during model initialization only.<br>
  * <br>
  * <br>
  * <br>

@@ -24,7 +24,7 @@ package org.opensim.modeling;
  * <br>
  * @author Matt DeMers
  */
-public class ExpressionBasedBushingForce extends TwoFrameLinkerForce {
+public class ExpressionBasedBushingForce extends TwoFrameLinkerForceProducer {
   private transient long swigCPtr;
 
   public ExpressionBasedBushingForce(long cPtr, boolean cMemoryOwn) {
@@ -494,6 +494,14 @@ public class ExpressionBasedBushingForce extends TwoFrameLinkerForce {
     opensimSimulationJNI.ExpressionBasedBushingForce_set_translational_damping__SWIG_1(swigCPtr, this, Vec3.getCPtr(value), value);
   }
 
+  public void set_has_output_bushing_force(boolean value) {
+    opensimSimulationJNI.ExpressionBasedBushingForce__has_output_bushing_force_set(swigCPtr, this, value);
+  }
+
+  public boolean get_has_output_bushing_force() {
+    return opensimSimulationJNI.ExpressionBasedBushingForce__has_output_bushing_force_get(swigCPtr, this);
+  }
+
   /**
    *  Default constructor leaves bodies unspecified, sets the bushing frames<br>
    * to be at their body origins, and sets all bushing parameters to zero. *
@@ -690,6 +698,14 @@ public class ExpressionBasedBushingForce extends TwoFrameLinkerForce {
    */
   public Vec6 calcDampingForce(State state) {
     return new Vec6(opensimSimulationJNI.ExpressionBasedBushingForce_calcDampingForce(swigCPtr, this, State.getCPtr(state), state), true);
+  }
+
+  /**
+   *  Calculate the total bushing force. This is the sum of the stiffness and<br>
+   *         damping force contributions. 
+   */
+  public Vec6 calcBushingForce(State state) {
+    return new Vec6(opensimSimulationJNI.ExpressionBasedBushingForce_calcBushingForce(swigCPtr, this, State.getCPtr(state), state), true);
   }
 
   /**

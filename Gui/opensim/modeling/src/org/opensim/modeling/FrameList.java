@@ -60,8 +60,7 @@ public class FrameList {
 
   /**
    *  Constructor that takes only a Component to iterate over (itself and its<br>
-   *     descendants). ComponentFilterMatchAll is used internally. You can<br>
-   *     change the filter using setFilter() method. 
+   *     descendants). You can change the filter using setFilter() method.
    */
   public FrameList(Component root) {
     this(opensimSimulationJNI.new_FrameList__SWIG_1(Component.getCPtr(root), root), true);

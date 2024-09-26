@@ -252,10 +252,11 @@ public class TimeSeriesTableVec6 extends DataTableVec6 {
   }
 
   /**
-   * Trim TimeSeriesTable to rows that have times that lies between <br>
-   * newStartTime, newFinalTime. The trimming is done in place, no copy is made. <br>
+   * Trim TimeSeriesTable to rows that have times that lies between newStartTime<br>
+   * and newFinalTime (inclusive). The trimming is done in place, no copy is made.<br>
    * Uses getRowIndexAfterTime to locate first row and<br>
-   * getNearestRowIndexForTime method to locate last row.
+   *      getRowIndexBeforeTime to locate last row.<br>
+   * @throws EmptyTable if the trim would make the table empty.
    */
   public void trim(double newStartTime, double newFinalTime) {
     opensimCommonJNI.TimeSeriesTableVec6_trim(swigCPtr, this, newStartTime, newFinalTime);
@@ -273,6 +274,15 @@ public class TimeSeriesTableVec6 extends DataTableVec6 {
    */
   public void trimTo(double newFinalTime) {
     opensimCommonJNI.TimeSeriesTableVec6_trimTo(swigCPtr, this, newFinalTime);
+  }
+
+  /**
+   * Trim table to rows between start_index and last_index (inclusive).<br>
+   * @throws InvalidIndices if the last index is out of range.<br>
+   * @throws EmptyTable if the trim would make the table empty.
+   */
+  public void trimToIndices(long start_index, long last_index) {
+    opensimCommonJNI.TimeSeriesTableVec6_trimToIndices(swigCPtr, this, start_index, last_index);
   }
 
   public TimeSeriesTableVec6 clone() {

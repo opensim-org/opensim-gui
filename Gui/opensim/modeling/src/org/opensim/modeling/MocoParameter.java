@@ -190,6 +190,10 @@ public class MocoParameter extends OpenSimObject {
     opensimMocoJNI.MocoParameter_appendComponentPath(swigCPtr, this, componentPath);
   }
 
+  public int getPropertyElement() {
+    return opensimMocoJNI.MocoParameter_getPropertyElement(swigCPtr, this);
+  }
+
   /**
    *  For use by solvers. This performs error checks and caches information<br>
    *     about the model that is useful during the optimization.<br>

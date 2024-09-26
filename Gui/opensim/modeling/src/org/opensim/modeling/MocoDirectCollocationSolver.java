@@ -242,40 +242,40 @@ public class MocoDirectCollocationSolver extends MocoSolver {
     opensimMocoJNI.MocoDirectCollocationSolver_set_transcription_scheme__SWIG_1(swigCPtr, this, value);
   }
 
-  public void copyProperty_interpolate_control_midpoints(MocoDirectCollocationSolver source) {
-    opensimMocoJNI.MocoDirectCollocationSolver_copyProperty_interpolate_control_midpoints(swigCPtr, this, MocoDirectCollocationSolver.getCPtr(source), source);
+  public void copyProperty_interpolate_control_mesh_interior_points(MocoDirectCollocationSolver source) {
+    opensimMocoJNI.MocoDirectCollocationSolver_copyProperty_interpolate_control_mesh_interior_points(swigCPtr, this, MocoDirectCollocationSolver.getCPtr(source), source);
   }
 
-  public boolean get_interpolate_control_midpoints(int i) {
-    return opensimMocoJNI.MocoDirectCollocationSolver_get_interpolate_control_midpoints__SWIG_0(swigCPtr, this, i);
+  public boolean get_interpolate_control_mesh_interior_points(int i) {
+    return opensimMocoJNI.MocoDirectCollocationSolver_get_interpolate_control_mesh_interior_points__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_bool upd_interpolate_control_midpoints(int i) {
-    return new SWIGTYPE_p_bool(opensimMocoJNI.MocoDirectCollocationSolver_upd_interpolate_control_midpoints__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_bool upd_interpolate_control_mesh_interior_points(int i) {
+    return new SWIGTYPE_p_bool(opensimMocoJNI.MocoDirectCollocationSolver_upd_interpolate_control_mesh_interior_points__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_interpolate_control_midpoints(int i, boolean value) {
-    opensimMocoJNI.MocoDirectCollocationSolver_set_interpolate_control_midpoints__SWIG_0(swigCPtr, this, i, value);
+  public void set_interpolate_control_mesh_interior_points(int i, boolean value) {
+    opensimMocoJNI.MocoDirectCollocationSolver_set_interpolate_control_mesh_interior_points__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_interpolate_control_midpoints(boolean value) {
-    return opensimMocoJNI.MocoDirectCollocationSolver_append_interpolate_control_midpoints(swigCPtr, this, value);
+  public int append_interpolate_control_mesh_interior_points(boolean value) {
+    return opensimMocoJNI.MocoDirectCollocationSolver_append_interpolate_control_mesh_interior_points(swigCPtr, this, value);
   }
 
-  public void constructProperty_interpolate_control_midpoints(boolean initValue) {
-    opensimMocoJNI.MocoDirectCollocationSolver_constructProperty_interpolate_control_midpoints(swigCPtr, this, initValue);
+  public void constructProperty_interpolate_control_mesh_interior_points(boolean initValue) {
+    opensimMocoJNI.MocoDirectCollocationSolver_constructProperty_interpolate_control_mesh_interior_points(swigCPtr, this, initValue);
   }
 
-  public boolean get_interpolate_control_midpoints() {
-    return opensimMocoJNI.MocoDirectCollocationSolver_get_interpolate_control_midpoints__SWIG_1(swigCPtr, this);
+  public boolean get_interpolate_control_mesh_interior_points() {
+    return opensimMocoJNI.MocoDirectCollocationSolver_get_interpolate_control_mesh_interior_points__SWIG_1(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_bool upd_interpolate_control_midpoints() {
-    return new SWIGTYPE_p_bool(opensimMocoJNI.MocoDirectCollocationSolver_upd_interpolate_control_midpoints__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_bool upd_interpolate_control_mesh_interior_points() {
+    return new SWIGTYPE_p_bool(opensimMocoJNI.MocoDirectCollocationSolver_upd_interpolate_control_mesh_interior_points__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_interpolate_control_midpoints(boolean value) {
-    opensimMocoJNI.MocoDirectCollocationSolver_set_interpolate_control_midpoints__SWIG_1(swigCPtr, this, value);
+  public void set_interpolate_control_mesh_interior_points(boolean value) {
+    opensimMocoJNI.MocoDirectCollocationSolver_set_interpolate_control_mesh_interior_points__SWIG_1(swigCPtr, this, value);
   }
 
   public void copyProperty_multibody_dynamics_mode(MocoDirectCollocationSolver source) {
@@ -748,6 +748,42 @@ public class MocoDirectCollocationSolver extends MocoSolver {
 
   public void set_implicit_auxiliary_derivative_bounds(MocoBounds value) {
     opensimMocoJNI.MocoDirectCollocationSolver_set_implicit_auxiliary_derivative_bounds__SWIG_1(swigCPtr, this, MocoBounds.getCPtr(value), value);
+  }
+
+  public void copyProperty_kinematic_constraint_method(MocoDirectCollocationSolver source) {
+    opensimMocoJNI.MocoDirectCollocationSolver_copyProperty_kinematic_constraint_method(swigCPtr, this, MocoDirectCollocationSolver.getCPtr(source), source);
+  }
+
+  public String get_kinematic_constraint_method(int i) {
+    return opensimMocoJNI.MocoDirectCollocationSolver_get_kinematic_constraint_method__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string upd_kinematic_constraint_method(int i) {
+    return new SWIGTYPE_p_std__string(opensimMocoJNI.MocoDirectCollocationSolver_upd_kinematic_constraint_method__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_kinematic_constraint_method(int i, String value) {
+    opensimMocoJNI.MocoDirectCollocationSolver_set_kinematic_constraint_method__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_kinematic_constraint_method(String value) {
+    return opensimMocoJNI.MocoDirectCollocationSolver_append_kinematic_constraint_method(swigCPtr, this, value);
+  }
+
+  public void constructProperty_kinematic_constraint_method(String initValue) {
+    opensimMocoJNI.MocoDirectCollocationSolver_constructProperty_kinematic_constraint_method(swigCPtr, this, initValue);
+  }
+
+  public String get_kinematic_constraint_method() {
+    return opensimMocoJNI.MocoDirectCollocationSolver_get_kinematic_constraint_method__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_kinematic_constraint_method() {
+    return new SWIGTYPE_p_std__string(opensimMocoJNI.MocoDirectCollocationSolver_upd_kinematic_constraint_method__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_kinematic_constraint_method(String value) {
+    opensimMocoJNI.MocoDirectCollocationSolver_set_kinematic_constraint_method__SWIG_1(swigCPtr, this, value);
   }
 
   /**

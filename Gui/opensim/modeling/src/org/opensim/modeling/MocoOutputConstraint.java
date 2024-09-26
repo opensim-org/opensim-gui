@@ -8,6 +8,27 @@
 
 package org.opensim.modeling;
 
+/**
+ *  This path constraint allows you to constrain a Model Output value throughout the<br>
+ * trajectory. You can also combine two Outputs in a constraint by supplying a<br>
+ * second output path and an operation to combine them. The operations are addition,<br>
+ * subtraction, multiplication, and division. The first Output is always on the<br>
+ * left hand side of the operation and the second Output on the right hand side.<br>
+ * The two Outputs can be different quantities, but they must be the same type.<br>
+ * <br>
+ * Outputs of type double, SimTK::Vec3, and SimTK::SpatialVec are supported.<br>
+ * When using SimTK::Vec3 or SimTK::SpatialVec types, 'setOutputIndex()'<br>
+ * may be used to select a specific element of the Output vector. If no index is<br>
+ * specified, the norm of the vector will be used when calling 'calcOutputValue()'.<br>
+ * <br>
+ * If using two Outputs, the Output index will be used to select the same element<br>
+ * from both Outputs before the operation. If two Outputs of type SimTK::Vec3 or<br>
+ * SimTK::SpatialVec are provided and no index is specified, the operation will be<br>
+ * applied elementwise before computing the norm. Elementwise<br>
+ * multiplication and division operations are not supported when using two<br>
+ * SimTK::SpatialVec Outputs (i.e., an index must be provided).<br>
+ * 
+ */
 public class MocoOutputConstraint extends MocoPathConstraint {
   private transient long swigCPtr;
 
@@ -84,6 +105,34 @@ public class MocoOutputConstraint extends MocoPathConstraint {
 
   public String getOutputPath() {
     return opensimMocoJNI.MocoOutputConstraint_getOutputPath(swigCPtr, this);
+  }
+
+  /**
+   *  Set the absolute path to the optional second Output in the model to be<br>
+   *     used in this path constraint. The format is "/path/to/component|output_name".<br>
+   *     This Output should have the same  type as the first Output. If providing a<br>
+   *     second Output, the user must also provide an operation via `setOperation()`.
+   */
+  public void setSecondOutputPath(String path) {
+    opensimMocoJNI.MocoOutputConstraint_setSecondOutputPath(swigCPtr, this, path);
+  }
+
+  public String getSecondOutputPath() {
+    return opensimMocoJNI.MocoOutputConstraint_getSecondOutputPath(swigCPtr, this);
+  }
+
+  /**
+   *  Set the operation that combines Output values where two Outputs are<br>
+   *     provided. The supported operations include "addition", "subtraction",<br>
+   *     "multiplication", or "division". If providing an operation, the user<br>
+   *     must also provide a second Output path. 
+   */
+  public void setOperation(String operation) {
+    opensimMocoJNI.MocoOutputConstraint_setOperation(swigCPtr, this, operation);
+  }
+
+  public String getOperation() {
+    return opensimMocoJNI.MocoOutputConstraint_getOperation(swigCPtr, this);
   }
 
   /**

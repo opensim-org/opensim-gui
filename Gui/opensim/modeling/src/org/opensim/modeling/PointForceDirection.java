@@ -9,10 +9,10 @@
 package org.opensim.modeling;
 
 /**
- *  Convenience class for a generic representation of geometry of a complex<br>
- *     Force (or any other object) with multiple points of contact through<br>
- *     which forces are applied to bodies. This represents one such point and an<br>
- *     array of these objects defines a complete Force distribution (ie. path).<br>
+ * Convenience class for a generic representation of geometry of a complex<br>
+ * Force (or any other object) with multiple points of contact through<br>
+ * which forces are applied to bodies. This represents one such point and an<br>
+ * array of these objects defines a complete Force distribution (i.e., path).<br>
  * <br>
  * @author Ajay Seth<br>
  * @version 1.0
@@ -57,52 +57,44 @@ public class PointForceDirection {
     }
   }
 
-  /**
-   *  Default constructor takes the point, body, direction and scale<br>
-   *         as arguments 
-   */
-  public PointForceDirection(Vec3 point, PhysicalFrame frame, Vec3 direction, double scale) {
-    this(opensimSimulationJNI.new_PointForceDirection__SWIG_0(Vec3.getCPtr(point), point, PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(direction), direction, scale), true);
-  }
-
-  /**
-   *  Default constructor takes the point, body, direction and scale<br>
-   *         as arguments 
-   */
   public PointForceDirection(Vec3 point, PhysicalFrame frame, Vec3 direction) {
-    this(opensimSimulationJNI.new_PointForceDirection__SWIG_1(Vec3.getCPtr(point), point, PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(direction), direction), true);
+    this(opensimSimulationJNI.new_PointForceDirection__SWIG_0(Vec3.getCPtr(point), point, PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(direction), direction), true);
+  }
+
+  public PointForceDirection(Vec3 point, PhysicalFrame frame, Vec3 direction, double scale) {
+    this(opensimSimulationJNI.new_PointForceDirection__SWIG_1(Vec3.getCPtr(point), point, PhysicalFrame.getCPtr(frame), frame, Vec3.getCPtr(direction), direction, scale), true);
   }
 
   /**
-   *  get point of "contact" with on a body defined in the body frame 
+   *  Returns the point of "contact", defined in `frame()` 
    */
   public Vec3 point() {
     return new Vec3(opensimSimulationJNI.PointForceDirection_point(swigCPtr, this), true);
   }
 
   /**
-   *  get the body in which the point is defined 
+   *  Returns the frame in which `point()` is defined 
    */
   public PhysicalFrame frame() {
     return new PhysicalFrame(opensimSimulationJNI.PointForceDirection_frame(swigCPtr, this), false);
   }
 
   /**
-   *  get direction of the force at the point defined in ground 
+   *  Returns the (potentially, non-unit-length) direction, defined in ground, of the force at `point()` 
    */
   public Vec3 direction() {
     return new Vec3(opensimSimulationJNI.PointForceDirection_direction(swigCPtr, this), true);
   }
 
   /**
-   *  get the scale factor on the force 
+   *  Returns the scale factor of the force 
    */
   public double scale() {
     return opensimSimulationJNI.PointForceDirection_scale(swigCPtr, this);
   }
 
   /**
-   *  replace the current direction with the resultant with a new direction 
+   *  Replaces the current direction with `direction + newDirection` 
    */
   public void addToDirection(Vec3 newDirection) {
     opensimSimulationJNI.PointForceDirection_addToDirection(swigCPtr, this, Vec3.getCPtr(newDirection), newDirection);
