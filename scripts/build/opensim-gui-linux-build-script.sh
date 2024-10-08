@@ -84,8 +84,26 @@ echo
 
 # Install dependencies from package manager.
 echo "LOG: INSTALLING DEPENDENCIES..."
-sudo apt-get update && sudo apt-get install --yes build-essential cmake autotools-dev autoconf pkg-config automake libopenblas-dev liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen python3 python3-dev python3-numpy python3-setuptools libpcre3 libpcre3-dev libpcre2-dev byacc git gfortran libtool libssl-dev libffi-dev ninja-build patchelf || ( echo "Installation of dependencies using apt-get failed." && exit )
+sudo apt-get update && sudo apt-get install --yes build-essential cmake autotools-dev autoconf pkg-config automake libopenblas-dev liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen python3 python3-dev python3-numpy python3-setuptools git libssl-dev libpcre3 libpcre3-dev libpcre2-dev libtool gfortran ninja-build patchelf libffi-dev byacc || ( echo "Installation of dependencies using apt-get failed." && exit )
 echo
+
+# If byacc available, install it (issue #3578)
+if apt-cache show byacc &> /dev/null; then
+    echo "byacc is available. Installing..."
+    sudo apt-get update
+    sudo apt-get install -y byacc
+else
+    echo "byacc is not available for installation."
+fi
+
+# Check if 'bison' is available for install (issue #3578)
+if apt-cache show bison &> /dev/null; then
+    echo "bison is available. Installing..."
+    sudo apt-get update
+    sudo apt-get install -y bison
+else
+    echo "bison is not available for installation."
+fi
 
 # Debian does not have openjdk-8-jdk available, so install from temurin repo.
 echo "LOG: INSTALLING JDK 8..."
@@ -118,7 +136,7 @@ cmake_minor_less=$(( ${cmake_version_split[1]} < ${min_cmake_version_split[1]} )
 if [[ $cmake_major_less == 1 ]] || $( [[ $cmake_major_equal == 1 ]] && [[ $cmake_minor_less == 1 ]] ); then
     mkdir ~/opensim-workspace/cmake-3.23.3-source || true
     cd ~/opensim-workspace/cmake-3.23.3-source
-    wget -nc -q --show-progress https://github.com/Kitware/CMake/releases/download/v3.23.3/cmake-3.23.3.tar.gz 
+    wget -nc -q --show-progress https://github.com/Kitware/CMake/releases/download/v3.23.3/cmake-3.23.3.tar.gz
     tar -zxvf cmake-3.23.3.tar.gz
     cd ~/opensim-workspace/cmake-3.23.3-source/cmake-3.23.3
     ./bootstrap
@@ -159,7 +177,7 @@ mkdir -p ~/opensim-workspace/swig-source || true && cd ~/opensim-workspace/swig-
 wget -nc -q --show-progress https://github.com/swig/swig/archive/refs/tags/v4.1.1.tar.gz
 tar xzf v4.1.1.tar.gz && cd swig-4.1.1
 sh autogen.sh && ./configure --prefix=$HOME/swig --disable-ccache
-make && make -j$NUM_JOBS install  
+make && make -j$NUM_JOBS install
 echo
 
 # Download and install NetBeans 12.3.
@@ -190,10 +208,24 @@ echo
 echo "LOG: BUILDING OPENSIM-CORE..."
 mkdir -p ~/opensim-workspace/opensim-core-build || true
 cd ~/opensim-workspace/opensim-core-build
-cmake ~/opensim-workspace/opensim-core-source -G"$GENERATOR" -DOPENSIM_DEPENDENCIES_DIR=~/opensim-workspace/opensim-core-dependencies-install/ -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core -DOPENSIM_INSTALL_UNIX_FHS=off -DSWIG_DIR=~/swig/share/swig -DSWIG_EXECUTABLE=~/swig/bin/swig
+cmake ~/opensim-workspace/opensim-core-source -G"$GENERATOR" -DOPENSIM_DEPENDENCIES_DIR=~/opensim-workspace/opensim-core-dependencies-install/ -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DCMAKE_INSTALL_PREFIX=~/opensim-core -DOPENSIM_INSTALL_UNIX_FHS=off -DSWIG_DIR=~/swig/share/swig -DSWIG_EXECUTABLE=~/swig/bin/swig -DOPENSIM_WITH_CASADI=$MOCO -DOPENSIM_WITH_TROPTER=$MOCO
 cmake . -LAH
 cmake --build . --config $DEBUG_TYPE -j$NUM_JOBS
+echo
+
+# Test opensim-core.
+echo "LOG: TESTING OPENSIM-CORE..."
+cd ~/opensim-workspace/opensim-core-build
+# TODO: Temporary for python to find Simbody libraries.
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:~/opensim-workspace/opensim-core-dependencies-install/simbody/lib
+ctest --parallel $NUM_JOBS --output-on-failure
+
+# Install opensim-core.
+echo "LOG: INSTALL OPENSIM-CORE..."
+cd ~/opensim-workspace/opensim-core-build
 cmake --install .
+echo 'export PATH=~/opensim-core/bin:$PATH' >> ~/.bashrc
+source ~/.bashrc
 echo
 
 # Get opensim-gui.
