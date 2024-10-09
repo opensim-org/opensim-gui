@@ -551,40 +551,148 @@ public class MocoCasADiSolver extends MocoDirectCollocationSolver {
     opensimMocoJNI.MocoCasADiSolver_set_implicit_auxiliary_derivatives_weight__SWIG_1(swigCPtr, this, value);
   }
 
-  public void copyProperty_enforce_path_constraint_midpoints(MocoCasADiSolver source) {
-    opensimMocoJNI.MocoCasADiSolver_copyProperty_enforce_path_constraint_midpoints(swigCPtr, this, MocoCasADiSolver.getCPtr(source), source);
+  public void copyProperty_enforce_path_constraint_mesh_interior_points(MocoCasADiSolver source) {
+    opensimMocoJNI.MocoCasADiSolver_copyProperty_enforce_path_constraint_mesh_interior_points(swigCPtr, this, MocoCasADiSolver.getCPtr(source), source);
   }
 
-  public boolean get_enforce_path_constraint_midpoints(int i) {
-    return opensimMocoJNI.MocoCasADiSolver_get_enforce_path_constraint_midpoints__SWIG_0(swigCPtr, this, i);
+  public boolean get_enforce_path_constraint_mesh_interior_points(int i) {
+    return opensimMocoJNI.MocoCasADiSolver_get_enforce_path_constraint_mesh_interior_points__SWIG_0(swigCPtr, this, i);
   }
 
-  public SWIGTYPE_p_bool upd_enforce_path_constraint_midpoints(int i) {
-    return new SWIGTYPE_p_bool(opensimMocoJNI.MocoCasADiSolver_upd_enforce_path_constraint_midpoints__SWIG_0(swigCPtr, this, i), false);
+  public SWIGTYPE_p_bool upd_enforce_path_constraint_mesh_interior_points(int i) {
+    return new SWIGTYPE_p_bool(opensimMocoJNI.MocoCasADiSolver_upd_enforce_path_constraint_mesh_interior_points__SWIG_0(swigCPtr, this, i), false);
   }
 
-  public void set_enforce_path_constraint_midpoints(int i, boolean value) {
-    opensimMocoJNI.MocoCasADiSolver_set_enforce_path_constraint_midpoints__SWIG_0(swigCPtr, this, i, value);
+  public void set_enforce_path_constraint_mesh_interior_points(int i, boolean value) {
+    opensimMocoJNI.MocoCasADiSolver_set_enforce_path_constraint_mesh_interior_points__SWIG_0(swigCPtr, this, i, value);
   }
 
-  public int append_enforce_path_constraint_midpoints(boolean value) {
-    return opensimMocoJNI.MocoCasADiSolver_append_enforce_path_constraint_midpoints(swigCPtr, this, value);
+  public int append_enforce_path_constraint_mesh_interior_points(boolean value) {
+    return opensimMocoJNI.MocoCasADiSolver_append_enforce_path_constraint_mesh_interior_points(swigCPtr, this, value);
   }
 
-  public void constructProperty_enforce_path_constraint_midpoints(boolean initValue) {
-    opensimMocoJNI.MocoCasADiSolver_constructProperty_enforce_path_constraint_midpoints(swigCPtr, this, initValue);
+  public void constructProperty_enforce_path_constraint_mesh_interior_points(boolean initValue) {
+    opensimMocoJNI.MocoCasADiSolver_constructProperty_enforce_path_constraint_mesh_interior_points(swigCPtr, this, initValue);
   }
 
-  public boolean get_enforce_path_constraint_midpoints() {
-    return opensimMocoJNI.MocoCasADiSolver_get_enforce_path_constraint_midpoints__SWIG_1(swigCPtr, this);
+  public boolean get_enforce_path_constraint_mesh_interior_points() {
+    return opensimMocoJNI.MocoCasADiSolver_get_enforce_path_constraint_mesh_interior_points__SWIG_1(swigCPtr, this);
   }
 
-  public SWIGTYPE_p_bool upd_enforce_path_constraint_midpoints() {
-    return new SWIGTYPE_p_bool(opensimMocoJNI.MocoCasADiSolver_upd_enforce_path_constraint_midpoints__SWIG_1(swigCPtr, this), false);
+  public SWIGTYPE_p_bool upd_enforce_path_constraint_mesh_interior_points() {
+    return new SWIGTYPE_p_bool(opensimMocoJNI.MocoCasADiSolver_upd_enforce_path_constraint_mesh_interior_points__SWIG_1(swigCPtr, this), false);
   }
 
-  public void set_enforce_path_constraint_midpoints(boolean value) {
-    opensimMocoJNI.MocoCasADiSolver_set_enforce_path_constraint_midpoints__SWIG_1(swigCPtr, this, value);
+  public void set_enforce_path_constraint_mesh_interior_points(boolean value) {
+    opensimMocoJNI.MocoCasADiSolver_set_enforce_path_constraint_mesh_interior_points__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_minimize_state_projection_distance(MocoCasADiSolver source) {
+    opensimMocoJNI.MocoCasADiSolver_copyProperty_minimize_state_projection_distance(swigCPtr, this, MocoCasADiSolver.getCPtr(source), source);
+  }
+
+  public boolean get_minimize_state_projection_distance(int i) {
+    return opensimMocoJNI.MocoCasADiSolver_get_minimize_state_projection_distance__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_bool upd_minimize_state_projection_distance(int i) {
+    return new SWIGTYPE_p_bool(opensimMocoJNI.MocoCasADiSolver_upd_minimize_state_projection_distance__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_minimize_state_projection_distance(int i, boolean value) {
+    opensimMocoJNI.MocoCasADiSolver_set_minimize_state_projection_distance__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_minimize_state_projection_distance(boolean value) {
+    return opensimMocoJNI.MocoCasADiSolver_append_minimize_state_projection_distance(swigCPtr, this, value);
+  }
+
+  public void constructProperty_minimize_state_projection_distance(boolean initValue) {
+    opensimMocoJNI.MocoCasADiSolver_constructProperty_minimize_state_projection_distance(swigCPtr, this, initValue);
+  }
+
+  public boolean get_minimize_state_projection_distance() {
+    return opensimMocoJNI.MocoCasADiSolver_get_minimize_state_projection_distance__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_bool upd_minimize_state_projection_distance() {
+    return new SWIGTYPE_p_bool(opensimMocoJNI.MocoCasADiSolver_upd_minimize_state_projection_distance__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_minimize_state_projection_distance(boolean value) {
+    opensimMocoJNI.MocoCasADiSolver_set_minimize_state_projection_distance__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_state_projection_distance_weight(MocoCasADiSolver source) {
+    opensimMocoJNI.MocoCasADiSolver_copyProperty_state_projection_distance_weight(swigCPtr, this, MocoCasADiSolver.getCPtr(source), source);
+  }
+
+  public double get_state_projection_distance_weight(int i) {
+    return opensimMocoJNI.MocoCasADiSolver_get_state_projection_distance_weight__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_state_projection_distance_weight(int i) {
+    return new SWIGTYPE_p_double(opensimMocoJNI.MocoCasADiSolver_upd_state_projection_distance_weight__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_state_projection_distance_weight(int i, double value) {
+    opensimMocoJNI.MocoCasADiSolver_set_state_projection_distance_weight__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_state_projection_distance_weight(double value) {
+    return opensimMocoJNI.MocoCasADiSolver_append_state_projection_distance_weight(swigCPtr, this, value);
+  }
+
+  public void constructProperty_state_projection_distance_weight(double initValue) {
+    opensimMocoJNI.MocoCasADiSolver_constructProperty_state_projection_distance_weight(swigCPtr, this, initValue);
+  }
+
+  public double get_state_projection_distance_weight() {
+    return opensimMocoJNI.MocoCasADiSolver_get_state_projection_distance_weight__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_state_projection_distance_weight() {
+    return new SWIGTYPE_p_double(opensimMocoJNI.MocoCasADiSolver_upd_state_projection_distance_weight__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_state_projection_distance_weight(double value) {
+    opensimMocoJNI.MocoCasADiSolver_set_state_projection_distance_weight__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_projection_slack_variable_bounds(MocoCasADiSolver source) {
+    opensimMocoJNI.MocoCasADiSolver_copyProperty_projection_slack_variable_bounds(swigCPtr, this, MocoCasADiSolver.getCPtr(source), source);
+  }
+
+  public MocoBounds get_projection_slack_variable_bounds(int i) {
+    return new MocoBounds(opensimMocoJNI.MocoCasADiSolver_get_projection_slack_variable_bounds__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public MocoBounds upd_projection_slack_variable_bounds(int i) {
+    return new MocoBounds(opensimMocoJNI.MocoCasADiSolver_upd_projection_slack_variable_bounds__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_projection_slack_variable_bounds(int i, MocoBounds value) {
+    opensimMocoJNI.MocoCasADiSolver_set_projection_slack_variable_bounds__SWIG_0(swigCPtr, this, i, MocoBounds.getCPtr(value), value);
+  }
+
+  public int append_projection_slack_variable_bounds(MocoBounds value) {
+    return opensimMocoJNI.MocoCasADiSolver_append_projection_slack_variable_bounds(swigCPtr, this, MocoBounds.getCPtr(value), value);
+  }
+
+  public void constructProperty_projection_slack_variable_bounds(MocoBounds initValue) {
+    opensimMocoJNI.MocoCasADiSolver_constructProperty_projection_slack_variable_bounds(swigCPtr, this, MocoBounds.getCPtr(initValue), initValue);
+  }
+
+  public MocoBounds get_projection_slack_variable_bounds() {
+    return new MocoBounds(opensimMocoJNI.MocoCasADiSolver_get_projection_slack_variable_bounds__SWIG_1(swigCPtr, this), false);
+  }
+
+  public MocoBounds upd_projection_slack_variable_bounds() {
+    return new MocoBounds(opensimMocoJNI.MocoCasADiSolver_upd_projection_slack_variable_bounds__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_projection_slack_variable_bounds(MocoBounds value) {
+    opensimMocoJNI.MocoCasADiSolver_set_projection_slack_variable_bounds__SWIG_1(swigCPtr, this, MocoBounds.getCPtr(value), value);
   }
 
   public MocoCasADiSolver() {

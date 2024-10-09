@@ -22,7 +22,7 @@ package org.opensim.modeling;
  * <br>
  * @author Matt DeMers
  */
-public class FunctionBasedBushingForce extends TwoFrameLinkerForce {
+public class FunctionBasedBushingForce extends TwoFrameLinkerForceProducer {
   private transient long swigCPtr;
 
   public FunctionBasedBushingForce(long cPtr, boolean cMemoryOwn) {
@@ -606,14 +606,6 @@ public class FunctionBasedBushingForce extends TwoFrameLinkerForce {
    */
   public Vec6 calcDampingForce(State state) {
     return new Vec6(opensimSimulationJNI.FunctionBasedBushingForce_calcDampingForce(swigCPtr, this, State.getCPtr(state), state), true);
-  }
-
-  /**
-   *  Compute the bushing force contribution to the system and add in to appropriate<br>
-   * bodyForce and/or system generalizedForce. 
-   */
-  public void computeForce(State s, VectorOfSpatialVec bodyForces, Vector generalizedForces) {
-    opensimSimulationJNI.FunctionBasedBushingForce_computeForce(swigCPtr, this, State.getCPtr(s), s, VectorOfSpatialVec.getCPtr(bodyForces), bodyForces, Vector.getCPtr(generalizedForces), generalizedForces);
   }
 
   /**

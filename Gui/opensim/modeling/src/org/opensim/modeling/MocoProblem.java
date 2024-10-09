@@ -150,6 +150,39 @@ public class MocoProblem extends OpenSimObject {
                 MocoPhase.convertArrayToMFB(fb));
     }
 
+    public void setInputControlInfo(String name, double[] b)
+        throws Exception {
+        setInputControlInfo(name, MocoPhase.convertArrayToMB(b));
+    }
+    public void setInputControlInfo(String name, double[] b, double[] ib)
+        throws Exception {
+        setInputControlInfo(name, MocoPhase.convertArrayToMB(b),
+                MocoPhase.convertArrayToMIB(ib));
+    }
+    public void setInputControlInfo(String name, double[] b, double[] ib,
+            double[] fb)
+        throws Exception {
+        setInputControlInfo(name, MocoPhase.convertArrayToMB(b),
+                MocoPhase.convertArrayToMIB(ib), 
+                MocoPhase.convertArrayToMFB(fb));
+    }
+    public void setInputControlInfoPattern(String pattern, double[] b)
+        throws Exception {
+        setInputControlInfoPattern(pattern, MocoPhase.convertArrayToMB(b));
+    }
+    public void setInputControlInfoPattern(String pattern, double[] b, double[] ib)
+        throws Exception {
+        setInputControlInfoPattern(pattern, MocoPhase.convertArrayToMB(b),
+                MocoPhase.convertArrayToMIB(ib));
+    }
+    public void 
+    setInputControlInfoPattern(String pattern, double[] b, double[] ib, double[] fb)
+        throws Exception {
+        setInputControlInfoPattern(pattern, MocoPhase.convertArrayToMB(b),
+                MocoPhase.convertArrayToMIB(ib), 
+                MocoPhase.convertArrayToMFB(fb));
+    }
+
   public static MocoProblem safeDownCast(OpenSimObject obj) {
     long cPtr = opensimMocoJNI.MocoProblem_safeDownCast(OpenSimObject.getCPtr(obj), obj);
     return (cPtr == 0) ? null : new MocoProblem(cPtr, false);

@@ -60,8 +60,7 @@ public class Millard2012EquilibriumMuscleList {
 
   /**
    *  Constructor that takes only a Component to iterate over (itself and its<br>
-   *     descendants). ComponentFilterMatchAll is used internally. You can<br>
-   *     change the filter using setFilter() method. 
+   *     descendants). You can change the filter using setFilter() method.
    */
   public Millard2012EquilibriumMuscleList(Component root) {
     this(opensimSimulationJNI.new_Millard2012EquilibriumMuscleList__SWIG_1(Component.getCPtr(root), root), true);

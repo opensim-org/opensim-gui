@@ -141,11 +141,12 @@ public class MocoOrientationTrackingGoal extends MocoGoal {
    *  Provide a table containing values of model state variables. These data<br>
    *     are used to create a StatesTrajectory internally, from which the<br>
    *     rotation data for the frames specified in setFramePaths() are computed.<br>
-   *     Each column label in the reference must be the path of a state variable,<br>
-   *     e.g., `/jointset/ankle_angle_r/value`. Calling this function clears the<br>
-   *     table provided via setRotationReference(), or the<br>
-   *     `rotation_reference_file` property, if any. The table is not loaded<br>
-   *     until the MocoProblem is initialized. 
+   *     Each column label in the reference should be the path of a coordinate value,<br>
+   *     e.g., `/jointset/ankle_r/ankle_angle_r/value`. Columns for states that body<br>
+   *     orientations do not depend on (e.g., `/forceset/soleus_r/activation`) are<br>
+   *     not needed. Calling this function clears the table provided via<br>
+   *     setRotationReference(), or the `rotation_reference_file` property, if any.<br>
+   *     The table is not loaded until the MocoProblem is initialized. 
    */
   public void setStatesReference(TableProcessor ref) {
     opensimMocoJNI.MocoOrientationTrackingGoal_setStatesReference(swigCPtr, this, TableProcessor.getCPtr(ref), ref);

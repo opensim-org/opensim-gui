@@ -150,6 +150,17 @@ public class MocoGeneralizedForceTrackingGoal extends MocoGoal {
   }
 
   /**
+   *  Set the tracking weight for all generalized forces whose names match the<br>
+   *  regular expression pattern. Multiple pairs of patterns and weights can <br>
+   *  be provided by calling this function multiple times. If a generalized<br>
+   *  force matches multiple patterns, the weight associated with the last<br>
+   *  pattern is used.
+   */
+  public void setWeightForGeneralizedForcePattern(String pattern, double weight) {
+    opensimMocoJNI.MocoGeneralizedForceTrackingGoal_setWeightForGeneralizedForcePattern(swigCPtr, this, pattern, weight);
+  }
+
+  /**
    *  Set the MocoWeightSet to weight the generalized coordinate forces in<br>
    *  the cost. Replaces the weight set if it already exists.
    */
@@ -184,9 +195,9 @@ public class MocoGeneralizedForceTrackingGoal extends MocoGoal {
   }
 
   /**
-   *  Whether or not to ignore coordinates that are locked, prescribed, or<br>
-   *  coupled to other coordinates. This is based on the value returned from <br>
-   *  `Coordinate::isConstrained()` (default: true).
+   *  Whether or not to ignore generalized forces for coordinates that are <br>
+   *  locked, prescribed, or coupled to other coordinates. This is based on <br>
+   *  the value returned from `Coordinate::isConstrained()` (default: true).
    */
   public void setIgnoreConstrainedCoordinates(boolean tf) {
     opensimMocoJNI.MocoGeneralizedForceTrackingGoal_setIgnoreConstrainedCoordinates(swigCPtr, this, tf);

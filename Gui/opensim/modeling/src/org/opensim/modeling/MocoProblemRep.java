@@ -457,7 +457,7 @@ public class MocoProblemRep {
 
   /**
    *  Print a description of this problem, including costs and variable<br>
-   *  bounds. Printing is done using OpenSim::log_cout().
+   *  bounds. Printing is done using OpenSim::log_info().
    */
   public void printDescription() {
     opensimMocoJNI.MocoProblemRep_printDescription(swigCPtr, this);

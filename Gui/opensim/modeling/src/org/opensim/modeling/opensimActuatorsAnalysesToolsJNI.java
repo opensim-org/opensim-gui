@@ -1078,6 +1078,14 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native long new_ModOpReplacePathsWithFunctionBasedPaths__SWIG_1(String jarg1);
   public final static native void ModOpReplacePathsWithFunctionBasedPaths_operate(long jarg1, ModOpReplacePathsWithFunctionBasedPaths jarg1_, long jarg2, Model jarg2_, String jarg3);
   public final static native void delete_ModOpReplacePathsWithFunctionBasedPaths(long jarg1);
+  public final static native long ModOpPrescribeCoordinateValues_safeDownCast(long jarg1, OpenSimObject jarg1_);
+  public final static native void ModOpPrescribeCoordinateValues_assign(long jarg1, ModOpPrescribeCoordinateValues jarg1_, long jarg2, OpenSimObject jarg2_);
+  public final static native String ModOpPrescribeCoordinateValues_getClassName();
+  public final static native long ModOpPrescribeCoordinateValues_clone(long jarg1, ModOpPrescribeCoordinateValues jarg1_);
+  public final static native String ModOpPrescribeCoordinateValues_getConcreteClassName(long jarg1, ModOpPrescribeCoordinateValues jarg1_);
+  public final static native long new_ModOpPrescribeCoordinateValues(long jarg1, TableProcessor jarg1_);
+  public final static native void ModOpPrescribeCoordinateValues_operate(long jarg1, ModOpPrescribeCoordinateValues jarg1_, long jarg2, Model jarg2_, String jarg3);
+  public final static native void delete_ModOpPrescribeCoordinateValues(long jarg1);
   public final static native long PolynomialPathFitterBounds_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void PolynomialPathFitterBounds_assign(long jarg1, PolynomialPathFitterBounds jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String PolynomialPathFitterBounds_getClassName();
@@ -2533,6 +2541,7 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native long ModOpReplaceJointsWithWelds_SWIGUpcast(long jarg1);
   public final static native long ModOpReplaceMusclesWithPathActuators_SWIGUpcast(long jarg1);
   public final static native long ModOpReplacePathsWithFunctionBasedPaths_SWIGUpcast(long jarg1);
+  public final static native long ModOpPrescribeCoordinateValues_SWIGUpcast(long jarg1);
   public final static native long PolynomialPathFitterBounds_SWIGUpcast(long jarg1);
   public final static native long PolynomialPathFitter_SWIGUpcast(long jarg1);
   public final static native long Kinematics_SWIGUpcast(long jarg1);

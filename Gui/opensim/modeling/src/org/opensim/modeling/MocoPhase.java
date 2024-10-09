@@ -179,6 +179,35 @@ public class MocoPhase extends OpenSimObject {
         setControlInfoPattern(pattern, this.convertArrayToMB(b),
                 this.convertArrayToMIB(ib), this.convertArrayToMFB(fb));
     }
+    
+    public void setInputControlInfo(String name, double[] b) throws Exception {
+        setInputControlInfo(name, this.convertArrayToMB(b));
+    }
+    public void setInputControlInfo(String name, double[] b, double[] ib)
+        throws Exception {
+        setInputControlInfo(name, this.convertArrayToMB(b),
+                this.convertArrayToMIB(ib));
+    }
+    public void setInputControlInfo(String name, double[] b, double[] ib, double[] fb)
+        throws Exception {
+        setInputControlInfo(name, this.convertArrayToMB(b),
+                this.convertArrayToMIB(ib), this.convertArrayToMFB(fb));
+    }
+    public void setInputControlInfoPattern(String pattern, double[] b) 
+        throws Exception {
+        setInputControlInfoPattern(pattern, this.convertArrayToMB(b));
+    }
+    public void setInputControlInfoPattern(String pattern, double[] b, double[] ib)
+        throws Exception {
+        setInputControlInfoPattern(pattern, this.convertArrayToMB(b),
+                this.convertArrayToMIB(ib));
+    }
+    public void 
+    setInputControlInfoPattern(String pattern, double[] b, double[] ib, double[] fb) 
+        throws Exception {
+        setInputControlInfoPattern(pattern, this.convertArrayToMB(b),
+                this.convertArrayToMIB(ib), this.convertArrayToMFB(fb));
+    }
 
   public static MocoPhase safeDownCast(OpenSimObject obj) {
     long cPtr = opensimMocoJNI.MocoPhase_safeDownCast(OpenSimObject.getCPtr(obj), obj);

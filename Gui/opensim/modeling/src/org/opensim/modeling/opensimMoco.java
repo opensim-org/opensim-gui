@@ -311,7 +311,9 @@ public class opensimMoco {
    *  distinguish between right ("<>_r") and left ("<>_l") forces, centers of<br>
    *  pressure, and torques. Centers of pressure are computed assuming the<br>
    *  that the contact plane's normal is in the y-direction, which is the OpenSim<br>
-   *  convention.<br>
+   *  convention. Torques are computed based on the center of pressure<br>
+   *  representation of the ground reaction forces: a "vertical" torque in the <br>
+   *  y-direction and zero torque in the other directions.<br>
    * <br>
    *  The forces and torques are computed from the first six outputs of<br>
    *  getRecordValues(), while the centers of pressure are computed from the second<br>

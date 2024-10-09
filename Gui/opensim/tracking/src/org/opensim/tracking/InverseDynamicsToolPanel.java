@@ -96,6 +96,7 @@ public class InverseDynamicsToolPanel extends BaseToolPanel implements Observer 
       outputDirectory.setIncludeOpenButton(true);
       outputDirectory.setDirectoriesOnly(true);
       outputDirectory.setCheckIfFileExists(false);
+      outputDirectory.setDialogTitle("Output Directory");
 
       setSettingsFileDescription("Settings file for "+modeName);
 

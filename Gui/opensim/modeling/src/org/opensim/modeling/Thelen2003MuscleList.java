@@ -60,8 +60,7 @@ public class Thelen2003MuscleList {
 
   /**
    *  Constructor that takes only a Component to iterate over (itself and its<br>
-   *     descendants). ComponentFilterMatchAll is used internally. You can<br>
-   *     change the filter using setFilter() method. 
+   *     descendants). You can change the filter using setFilter() method.
    */
   public Thelen2003MuscleList(Component root) {
     this(opensimSimulationJNI.new_Thelen2003MuscleList__SWIG_1(Component.getCPtr(root), root), true);

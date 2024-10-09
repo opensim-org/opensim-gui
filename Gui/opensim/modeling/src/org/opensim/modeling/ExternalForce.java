@@ -29,7 +29,7 @@ package org.opensim.modeling;
  * <br>
  * @author Ajay Seth
  */
-public class ExternalForce extends Force {
+public class ExternalForce extends ForceProducer {
   private transient long swigCPtr;
 
   public ExternalForce(long cPtr, boolean cMemoryOwn) {

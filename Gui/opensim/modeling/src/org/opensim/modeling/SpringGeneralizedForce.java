@@ -15,7 +15,7 @@ package org.opensim.modeling;
  * @author Frank C. Anderson, Ajay Seth<br>
  * @version 2.0
  */
-public class SpringGeneralizedForce extends Force {
+public class SpringGeneralizedForce extends ForceProducer {
   private transient long swigCPtr;
 
   public SpringGeneralizedForce(long cPtr, boolean cMemoryOwn) {

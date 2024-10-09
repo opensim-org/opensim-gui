@@ -149,8 +149,8 @@ public class MocoJointReactionGoal extends MocoGoal {
    *     replaces the previous weight. An exception is thrown during<br>
    *     initialization if a weight for an unknown measure is provided. 
    */
-  public void setWeight(String stateName, double weight) {
-    opensimMocoJNI.MocoJointReactionGoal_setWeight(swigCPtr, this, stateName, weight);
+  public void setWeight(String measure, double weight) {
+    opensimMocoJNI.MocoJointReactionGoal_setWeight(swigCPtr, this, measure, weight);
   }
 
   /**

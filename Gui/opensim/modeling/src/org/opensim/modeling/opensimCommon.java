@@ -89,26 +89,51 @@ public class opensimCommon {
    *  Linearly interpolate y(x) at new values of x. The optional 'ignoreNaNs'<br>
    *  argument will ignore any NaN values contained in the input vectors and<br>
    *  create the interpolant from the non-NaN values only. Note that this option<br>
-   *  does not necessarily prevent NaN values from being returned in 'newX', which<br>
-   *  will have NaN for any values of newX outside of the range of x.<br>
+   *  does not necessarily prevent NaN values from being returned, which will<br>
+   *  have NaN for any values of newX outside of the range of x. This is done with<br>
+   *  the 'extrapolate' option. If the 'extrapolate' argument is true, then the<br>
+   *  interpolant values will be extrapolated based on a piecewise linear function.<br>
+   *  Setting both 'ignoreNaNs' and 'extrapolate' to true prevents NaN values from<br>
+   *  occurring in the interpolant.<br>
    *  @throws Exception if x and y are different sizes, or x or y is empty.<br>
    *  
    */
-  public static Vector interpolate(Vector x, Vector y, Vector newX, boolean ignoreNaNs) {
-    return new Vector(opensimCommonJNI.interpolate__SWIG_0(Vector.getCPtr(x), x, Vector.getCPtr(y), y, Vector.getCPtr(newX), newX, ignoreNaNs), true);
+  public static Vector interpolate(Vector x, Vector y, Vector newX, boolean ignoreNaNs, boolean extrapolate) {
+    return new Vector(opensimCommonJNI.interpolate__SWIG_0(Vector.getCPtr(x), x, Vector.getCPtr(y), y, Vector.getCPtr(newX), newX, ignoreNaNs, extrapolate), true);
   }
 
   /**
    *  Linearly interpolate y(x) at new values of x. The optional 'ignoreNaNs'<br>
    *  argument will ignore any NaN values contained in the input vectors and<br>
    *  create the interpolant from the non-NaN values only. Note that this option<br>
-   *  does not necessarily prevent NaN values from being returned in 'newX', which<br>
-   *  will have NaN for any values of newX outside of the range of x.<br>
+   *  does not necessarily prevent NaN values from being returned, which will<br>
+   *  have NaN for any values of newX outside of the range of x. This is done with<br>
+   *  the 'extrapolate' option. If the 'extrapolate' argument is true, then the<br>
+   *  interpolant values will be extrapolated based on a piecewise linear function.<br>
+   *  Setting both 'ignoreNaNs' and 'extrapolate' to true prevents NaN values from<br>
+   *  occurring in the interpolant.<br>
+   *  @throws Exception if x and y are different sizes, or x or y is empty.<br>
+   *  
+   */
+  public static Vector interpolate(Vector x, Vector y, Vector newX, boolean ignoreNaNs) {
+    return new Vector(opensimCommonJNI.interpolate__SWIG_1(Vector.getCPtr(x), x, Vector.getCPtr(y), y, Vector.getCPtr(newX), newX, ignoreNaNs), true);
+  }
+
+  /**
+   *  Linearly interpolate y(x) at new values of x. The optional 'ignoreNaNs'<br>
+   *  argument will ignore any NaN values contained in the input vectors and<br>
+   *  create the interpolant from the non-NaN values only. Note that this option<br>
+   *  does not necessarily prevent NaN values from being returned, which will<br>
+   *  have NaN for any values of newX outside of the range of x. This is done with<br>
+   *  the 'extrapolate' option. If the 'extrapolate' argument is true, then the<br>
+   *  interpolant values will be extrapolated based on a piecewise linear function.<br>
+   *  Setting both 'ignoreNaNs' and 'extrapolate' to true prevents NaN values from<br>
+   *  occurring in the interpolant.<br>
    *  @throws Exception if x and y are different sizes, or x or y is empty.<br>
    *  
    */
   public static Vector interpolate(Vector x, Vector y, Vector newX) {
-    return new Vector(opensimCommonJNI.interpolate__SWIG_1(Vector.getCPtr(x), x, Vector.getCPtr(y), y, Vector.getCPtr(newX), newX), true);
+    return new Vector(opensimCommonJNI.interpolate__SWIG_2(Vector.getCPtr(x), x, Vector.getCPtr(y), y, Vector.getCPtr(newX), newX), true);
   }
 
   /**
@@ -197,6 +222,29 @@ public class opensimCommon {
    */
   public static Matrix computeKNearestNeighbors(Matrix x, Matrix y) {
     return new Matrix(opensimCommonJNI.computeKNearestNeighbors__SWIG_1(Matrix.getCPtr(x), x, Matrix.getCPtr(y), y), true);
+  }
+
+  /**
+   *  Use non-negative matrix factorization to decompose an matrix A (NxM) for a <br>
+   *  selected number of factors 'K' into two matrices W (NxK) and H (KxM) such <br>
+   *  that A = W * H. The alternating least squares (ALS) algorithm is used to <br>
+   *  solve for W and H by minimizing the Frobenius norm of the error between A <br>
+   *  and W * H. The matrices W and H are scaled assuming that the rows of H<br>
+   *  have magnitudes as if all elements in H were equal to 0.5, which prevents<br>
+   *  individual factors from being very large or very small. The algorithm <br>
+   *  terminates when the change in the error norm is less than the specified <br>
+   *  tolerance or the maximum number of iterations is reached.<br>
+   * <br>
+   *  @return The final Frobenius norm of the error between A and W * H.<br>
+   * <br>
+   *  Reference<br>
+   *  ---------<br>
+   *  Berry, M. W., et al. (2007). Algorithms and Applications for Approximate <br>
+   *  Nonnegative Matrix Factorization. Computational Statistics &amp; Data Analysis, <br>
+   *  52(1), 155-173. doi:10.1016/j.csda.2006.11.006.
+   */
+  public static double factorizeMatrixNonNegative(Matrix A, int numFactors, int maxIterations, double tolerance, Matrix W, Matrix H) {
+    return opensimCommonJNI.factorizeMatrixNonNegative(Matrix.getCPtr(A), A, numFactors, maxIterations, tolerance, Matrix.getCPtr(W), W, Matrix.getCPtr(H), H);
   }
 
   public static String getObjectDEFAULT_NAME() {

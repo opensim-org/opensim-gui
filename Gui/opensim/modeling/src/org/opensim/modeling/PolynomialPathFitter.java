@@ -44,9 +44,9 @@ package org.opensim.modeling;
  * lengths computed from the original model paths and the fitted polynomial<br>
  * paths. The `setNumSamplesPerFrame` method specifies the number of samples<br>
  * taken per time frame in the coordinate values table used to fit each path.<br>
- * The `setNumParallelThreads` method specifies the number of threads used to <br>
- * parallelize the path fitting process. The `setLatinHypercubeAlgorithm` method <br>
- * specifies the Latin hypercube sampling algorithm used to sample coordinate <br>
+ * The `setNumParallelThreads` method specifies the number of threads used to<br>
+ * parallelize the path fitting process. The `setLatinHypercubeAlgorithm` method<br>
+ * specifies the Latin hypercube sampling algorithm used to sample coordinate<br>
  * values for path fitting.<br>
  * <br>
  * The default settings are as follows:<br>
@@ -58,7 +58,7 @@ package org.opensim.modeling;
  *    - Moment arm tolerance: 1e-4 meters<br>
  *    - Path length tolerance: 1e-4 meters<br>
  *    - Number of samples per frame: 25<br>
- *    - Number of threads: (# of available hardware threads) - 2<br>
+ *    - Number of threads: number of available hardware threads<br>
  *    - Latin hypercube sampling algorithm: "random"<br>
  *    - Use stepwise regression: False<br>
  * <br>
@@ -292,10 +292,10 @@ public class PolynomialPathFitter extends OpenSimObject {
   }
 
   /**
-   * Whether or not to use stepwise regression to fit a minimal set of <br>
+   * Whether or not to use stepwise regression to fit a minimal set of<br>
    * polynomial coefficients.<br>
    * <br>
-   * Stepwise regression builds a vector of coefficients by individually <br>
+   * Stepwise regression builds a vector of coefficients by individually<br>
    * adding polynomial terms that result in the smallest path length and<br>
    * moment arm error. When a new term is added, the fitting process is<br>
    * repeated to recompute the coefficients. Polynomial terms are added until<br>
@@ -303,7 +303,7 @@ public class PolynomialPathFitter extends OpenSimObject {
    * of terms is reached.<br>
    * <br>
    * Note: By default, this setting is false.<br>
-   * Note: If enabled, stepwise regression will fit coefficients using the <br>
+   * Note: If enabled, stepwise regression will fit coefficients using the<br>
    *       maximum polynomial order based on `setMaximumPolynomialOrder()`.
    */
   public void setUseStepwiseRegression(boolean tf) {
@@ -495,8 +495,7 @@ public class PolynomialPathFitter extends OpenSimObject {
    * moment arm computations, and path fitting across multiple threads. The<br>
    * number of threads must be greater than zero.<br>
    * <br>
-   * Note: The default number of threads is set to two fewer than the number<br>
-   *       of available hardware threads.
+   * Note: The default is the number of available hardware threads.
    */
   public void setNumParallelThreads(int numThreads) {
     opensimActuatorsAnalysesToolsJNI.PolynomialPathFitter_setNumParallelThreads(swigCPtr, this, numThreads);
@@ -534,11 +533,11 @@ public class PolynomialPathFitter extends OpenSimObject {
   }
 
   /**
-   * Whether or not to include moment arm functions in the fitted path <br>
+   * Whether or not to include moment arm functions in the fitted path<br>
    * (default: false).<br>
    * <br>
    * The moment arm functions are constructed by taking the derivative of the<br>
-   * path length function with respect to the coordinate values using <br>
+   * path length function with respect to the coordinate values using<br>
    * symbolic differentiation. The function coefficients are negated to match<br>
    * the moment arm convention in OpenSim.
    */
@@ -557,16 +556,16 @@ public class PolynomialPathFitter extends OpenSimObject {
    * Whether or not to include the lengthening speed function in the fitted<br>
    * path (default: false).<br>
    * <br>
-   * The lengthening speed function is computed by taking dot product of the <br>
-   * moment arm functions by the vector of time derivatives of the coordinate <br>
-   * values using symbolic math. The result is negated to offset the negation <br>
+   * The lengthening speed function is computed by taking dot product of the<br>
+   * moment arm functions by the vector of time derivatives of the coordinate<br>
+   * values using symbolic math. The result is negated to offset the negation<br>
    * applied to the moment arm function expressions.<br>
    * <br>
-   * Note: Since FunctionBasedPath uses cached moment arm values to compute <br>
-   *       lengthening speed, including this function in the path definition <br>
+   * Note: Since FunctionBasedPath uses cached moment arm values to compute<br>
+   *       lengthening speed, including this function in the path definition<br>
    *       may make lengthening speed evaluation slower compared to<br>
    *       only including the moment arm functions (the moment arm expressions<br>
-   *       are effectively evaluated twice). Therefore, this setting is <br>
+   *       are effectively evaluated twice). Therefore, this setting is<br>
    *       disabled by default.
    */
   public void setIncludeLengtheningSpeedFunction(boolean tf) {

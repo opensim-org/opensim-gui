@@ -587,7 +587,11 @@ public class ComponentIterator {
    * @see Component#resolveVariableNameAndOwner()
    */
   public int getModelingOption(State state, String path) {
-    return opensimCommonJNI.ComponentIterator_getModelingOption(swigCPtr, this, State.getCPtr(state), state, path);
+    return opensimCommonJNI.ComponentIterator_getModelingOption__SWIG_0(swigCPtr, this, State.getCPtr(state), state, path);
+  }
+
+  public int getModelingOption(State state, ComponentPath path) {
+    return opensimCommonJNI.ComponentIterator_getModelingOption__SWIG_1(swigCPtr, this, State.getCPtr(state), state, ComponentPath.getCPtr(path), path);
   }
 
   /**
@@ -616,7 +620,11 @@ public class ComponentIterator {
    * @see Component#resolveVariableNameAndOwner()
    */
   public void setModelingOption(State state, String path, int flag) {
-    opensimCommonJNI.ComponentIterator_setModelingOption(swigCPtr, this, State.getCPtr(state), state, path, flag);
+    opensimCommonJNI.ComponentIterator_setModelingOption__SWIG_0(swigCPtr, this, State.getCPtr(state), state, path, flag);
+  }
+
+  public void setModelingOption(State state, ComponentPath path, int flag) {
+    opensimCommonJNI.ComponentIterator_setModelingOption__SWIG_1(swigCPtr, this, State.getCPtr(state), state, ComponentPath.getCPtr(path), path, flag);
   }
 
   /**
@@ -650,7 +658,7 @@ public class ComponentIterator {
    }<br>
    * <br>
    * @param state   the State for which to get the value<br>
-   * <br>
+   * @param path    path to the state variable of interest<br>
    * @throws ComponentHasNoSystem if this Component has not been added to a<br>
    *         System (i.e., if initSystem has not been called)
    */
@@ -715,7 +723,19 @@ public class ComponentIterator {
    *         System (i.e., if initSystem has not been called)
    */
   public double getStateVariableDerivativeValue(State state, String name) {
-    return opensimCommonJNI.ComponentIterator_getStateVariableDerivativeValue(swigCPtr, this, State.getCPtr(state), state, name);
+    return opensimCommonJNI.ComponentIterator_getStateVariableDerivativeValue__SWIG_0(swigCPtr, this, State.getCPtr(state), state, name);
+  }
+
+  /**
+   * Get the value of a state variable derivative computed by this Component.<br>
+   * <br>
+   * @param state   the State for which to get the derivative value<br>
+   * @param path    path to the state variable of interest<br>
+   * @throws ComponentHasNoSystem if this Component has not been added to a<br>
+   *         System (i.e., if initSystem has not been called)
+   */
+  public double getStateVariableDerivativeValue(State state, ComponentPath path) {
+    return opensimCommonJNI.ComponentIterator_getStateVariableDerivativeValue__SWIG_1(swigCPtr, this, State.getCPtr(state), state, ComponentPath.getCPtr(path), path);
   }
 
   /**

@@ -844,6 +844,21 @@ public class MuscleIterator {
     opensimSimulationJNI.MuscleIterator_addInControls(swigCPtr, this, Vector.getCPtr(actuatorControls), actuatorControls, Vector.getCPtr(modelControls), modelControls);
   }
 
+  /**
+   * Uses `implProduceForces` to produce (emit) forces evaluated from `state` into the<br>
+   * provided `ForceConsumer`.<br>
+   * <br>
+   * Note: this function only produces the forces and does not apply them to anything. It's<br>
+   *       up to the `ForceConsumer` implementation to handle the forces. Therefore,<br>
+   *       `Force::appliesForces` is ignored by this method.<br>
+   * <br>
+   * @param state       the state used to evaluate forces<br>
+   * 
+   */
+  public void produceForces(State state, SWIGTYPE_p_OpenSim__ForceConsumer forceConsumer) {
+    opensimSimulationJNI.MuscleIterator_produceForces(swigCPtr, this, State.getCPtr(state), state, SWIGTYPE_p_OpenSim__ForceConsumer.getCPtr(forceConsumer));
+  }
+
   public boolean get_appliesForce(int i) {
     return opensimSimulationJNI.MuscleIterator_get_appliesForce__SWIG_0(swigCPtr, this, i);
   }
@@ -1358,7 +1373,11 @@ public class MuscleIterator {
    * @see Component#resolveVariableNameAndOwner()
    */
   public int getModelingOption(State state, String path) {
-    return opensimSimulationJNI.MuscleIterator_getModelingOption(swigCPtr, this, State.getCPtr(state), state, path);
+    return opensimSimulationJNI.MuscleIterator_getModelingOption__SWIG_0(swigCPtr, this, State.getCPtr(state), state, path);
+  }
+
+  public int getModelingOption(State state, ComponentPath path) {
+    return opensimSimulationJNI.MuscleIterator_getModelingOption__SWIG_1(swigCPtr, this, State.getCPtr(state), state, ComponentPath.getCPtr(path), path);
   }
 
   /**
@@ -1387,7 +1406,11 @@ public class MuscleIterator {
    * @see Component#resolveVariableNameAndOwner()
    */
   public void setModelingOption(State state, String path, int flag) {
-    opensimSimulationJNI.MuscleIterator_setModelingOption(swigCPtr, this, State.getCPtr(state), state, path, flag);
+    opensimSimulationJNI.MuscleIterator_setModelingOption__SWIG_0(swigCPtr, this, State.getCPtr(state), state, path, flag);
+  }
+
+  public void setModelingOption(State state, ComponentPath path, int flag) {
+    opensimSimulationJNI.MuscleIterator_setModelingOption__SWIG_1(swigCPtr, this, State.getCPtr(state), state, ComponentPath.getCPtr(path), path, flag);
   }
 
   /**
@@ -1421,7 +1444,7 @@ public class MuscleIterator {
    }<br>
    * <br>
    * @param state   the State for which to get the value<br>
-   * <br>
+   * @param path    path to the state variable of interest<br>
    * @throws ComponentHasNoSystem if this Component has not been added to a<br>
    *         System (i.e., if initSystem has not been called)
    */
@@ -1486,7 +1509,19 @@ public class MuscleIterator {
    *         System (i.e., if initSystem has not been called)
    */
   public double getStateVariableDerivativeValue(State state, String name) {
-    return opensimSimulationJNI.MuscleIterator_getStateVariableDerivativeValue(swigCPtr, this, State.getCPtr(state), state, name);
+    return opensimSimulationJNI.MuscleIterator_getStateVariableDerivativeValue__SWIG_0(swigCPtr, this, State.getCPtr(state), state, name);
+  }
+
+  /**
+   * Get the value of a state variable derivative computed by this Component.<br>
+   * <br>
+   * @param state   the State for which to get the derivative value<br>
+   * @param path    path to the state variable of interest<br>
+   * @throws ComponentHasNoSystem if this Component has not been added to a<br>
+   *         System (i.e., if initSystem has not been called)
+   */
+  public double getStateVariableDerivativeValue(State state, ComponentPath path) {
+    return opensimSimulationJNI.MuscleIterator_getStateVariableDerivativeValue__SWIG_1(swigCPtr, this, State.getCPtr(state), state, ComponentPath.getCPtr(path), path);
   }
 
   /**

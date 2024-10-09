@@ -140,6 +140,12 @@ public class MocoTrajectory {
         for (int i = 0; i < traj.length; ++i) { v.set(i, traj[i]); }
         setControl(name, v);
     }
+    public void setInputControl(String name, double[] traj) {
+        Vector v = new Vector();
+        v.resize(traj.length);
+        for (int i = 0; i < traj.length; ++i) { v.set(i, traj[i]); }
+        setInputControl(name, v);
+    }
     public void setMultiplier(String name, double[] traj) {
         Vector v = new Vector();
         v.resize(traj.length);
@@ -168,6 +174,12 @@ public class MocoTrajectory {
         VectorView control = getControl(name);
         double[] ret = new double[control.size()];
         for (int i = 0; i < control.size(); ++i) { ret[i] = control.get(i); };
+        return ret;
+    }
+    public double[] getInputControlMat(String name) {
+        VectorView input_control = getInputControl(name);
+        double[] ret = new double[input_control.size()];
+        for (int i = 0; i < input_control.size(); ++i) { ret[i] = input_control.get(i); };
         return ret;
     }
     public double[] getMultiplierMat(String name) {
@@ -200,6 +212,16 @@ public class MocoTrajectory {
     }
     public double[][] getControlsTrajectoryMat() {
         Matrix matrix = getControlsTrajectory();
+        double[][] ret = new double[matrix.nrow()][matrix.ncol()];
+        for (int i = 0; i < matrix.nrow(); ++i) {
+            for (int j = 0; j < matrix.ncol(); ++j) {
+                ret[i][j] = matrix.getElt(i, j);
+            }
+        }
+        return ret;
+    }
+    public double[][] getInputControlsTrajectoryMat() {
+        Matrix matrix = getInputControlsTrajectory();
         double[][] ret = new double[matrix.nrow()][matrix.ncol()];
         for (int i = 0; i < matrix.nrow(); ++i) {
             for (int j = 0; j < matrix.ncol(); ++j) {
@@ -404,7 +426,7 @@ public class MocoTrajectory {
    *  value 10.
    */
   public void setInputControl(String name, Vector trajectory) {
-    opensimMocoJNI.MocoTrajectory_setInputControl__SWIG_0(swigCPtr, this, name, Vector.getCPtr(trajectory), trajectory);
+    opensimMocoJNI.MocoTrajectory_setInputControl(swigCPtr, this, name, Vector.getCPtr(trajectory), trajectory);
   }
 
   /**
@@ -435,18 +457,6 @@ public class MocoTrajectory {
    */
   public void setParameter(String name, double value) {
     opensimMocoJNI.MocoTrajectory_setParameter(swigCPtr, this, name, value);
-  }
-
-  /**
-   *  Set the value of a single Input control variable across time. The <br>
-   *  provided vector must have length getNumTimes().<br>
-   *  This variant supports use of an initializer list:<br>
-   *  {@code 
-   trajectory.setInputControl("/my_controller/input", {0, 0.5, 1.0});
-   }
-   */
-  public void setInputControl(String name, SWIGTYPE_p_std__initializer_listT_double_t trajectory) {
-    opensimMocoJNI.MocoTrajectory_setInputControl__SWIG_1(swigCPtr, this, name, SWIGTYPE_p_std__initializer_listT_double_t.getCPtr(trajectory));
   }
 
   /**
