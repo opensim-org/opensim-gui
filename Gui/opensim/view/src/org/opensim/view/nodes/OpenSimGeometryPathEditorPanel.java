@@ -637,6 +637,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
 
          // The combo box containing the body the point is attached to
          javax.swing.JComboBox comboBox = new javax.swing.JComboBox();
+         ((javax.swing.JLabel)comboBox.getRenderer()).setHorizontalAlignment(javax.swing.JLabel.RIGHT);
          comboBox.setModel(new javax.swing.DefaultComboBoxModel(physicalFrameNames));
          comboBox.setSelectedIndex(findElement(physicalFrameNames, pathPoints.get(i).getParentFrame().getAbsolutePathString()));
          comboBox.setBounds(x, height, 90, 21);

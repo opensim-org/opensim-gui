@@ -10,6 +10,7 @@ v4.6
 - Fix issue [#1493](https://github.com/opensim-org/opensim-gui/issues/1493): Rotating experimental data fails or results an unusable file.
 - Fix issue [#1516](https://github.com/opensim-org/opensim-gui/issues/1516): Chains of Physical offset frames ignored when displaying GeometryPath
 - Fix issue [#1519](https://github.com/opensim-org/opensim-gui/issues/1519): Exception thrown when browsing for output folder in Inverse Dynamics Tool dialog
+- Fix issue [#1526](https://github.com/opensim-org/opensim-gui/issues/1526): Size of combox too small when selecting frames in wrapping panel of muscle/path editor.
 
 v4.5
 ======
