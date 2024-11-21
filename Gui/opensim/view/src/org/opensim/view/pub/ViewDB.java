@@ -1367,6 +1367,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     double rendertimeAverage = ((Double) jsonObject.get("totalTime")) / ((Long) jsonObject.get("numFrames"));
                     OpenSimLogger.logMessage(msg + "FPS: " + (int) 1000 / rendertimeAverage + "\n", OpenSimLogger.INFO);
                 }
+                OpenSimLogger.logMessage(jsonObject.toString(), OpenSimLogger.INFO);
                 return;
             }
             if (msgType.equalsIgnoreCase("transforms")) {
