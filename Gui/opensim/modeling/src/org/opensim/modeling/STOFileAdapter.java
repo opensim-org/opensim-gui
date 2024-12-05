@@ -74,27 +74,19 @@ time  r_shoulder      l_shoulder      r_leg           l_leg
  */
 public class STOFileAdapter {
   private transient long swigCPtr;
-  protected transient boolean swigCMemOwn;
+  private transient boolean swigCMemOwn;
 
-  public STOFileAdapter(long cPtr, boolean cMemoryOwn) {
+  protected STOFileAdapter(long cPtr, boolean cMemoryOwn) {
     swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(STOFileAdapter obj) {
+  protected static long getCPtr(STOFileAdapter obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
-  public static long swigRelease(STOFileAdapter obj) {
-    long ptr = 0;
-    if (obj != null) {
-      if (!obj.swigCMemOwn)
-        throw new RuntimeException("Cannot release ownership as memory is not owned");
-      ptr = obj.swigCPtr;
-      obj.swigCMemOwn = false;
-      obj.delete();
-    }
-    return ptr;
+  protected void swigSetCMemOwn(boolean own) {
+    swigCMemOwn = own;
   }
 
   @SuppressWarnings("deprecation")

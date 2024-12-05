@@ -109,12 +109,52 @@ public class TabOpLowPassFilter extends TableOperator {
     opensimSimulationJNI.TabOpLowPassFilter_set_cutoff_frequency__SWIG_1(swigCPtr, this, value);
   }
 
+  public void copyProperty_trim_to_original_time_range(TabOpLowPassFilter source) {
+    opensimSimulationJNI.TabOpLowPassFilter_copyProperty_trim_to_original_time_range(swigCPtr, this, TabOpLowPassFilter.getCPtr(source), source);
+  }
+
+  public boolean get_trim_to_original_time_range(int i) {
+    return opensimSimulationJNI.TabOpLowPassFilter_get_trim_to_original_time_range__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_bool upd_trim_to_original_time_range(int i) {
+    return new SWIGTYPE_p_bool(opensimSimulationJNI.TabOpLowPassFilter_upd_trim_to_original_time_range__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_trim_to_original_time_range(int i, boolean value) {
+    opensimSimulationJNI.TabOpLowPassFilter_set_trim_to_original_time_range__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_trim_to_original_time_range(boolean value) {
+    return opensimSimulationJNI.TabOpLowPassFilter_append_trim_to_original_time_range(swigCPtr, this, value);
+  }
+
+  public void constructProperty_trim_to_original_time_range(boolean initValue) {
+    opensimSimulationJNI.TabOpLowPassFilter_constructProperty_trim_to_original_time_range(swigCPtr, this, initValue);
+  }
+
+  public boolean get_trim_to_original_time_range() {
+    return opensimSimulationJNI.TabOpLowPassFilter_get_trim_to_original_time_range__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_bool upd_trim_to_original_time_range() {
+    return new SWIGTYPE_p_bool(opensimSimulationJNI.TabOpLowPassFilter_upd_trim_to_original_time_range__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_trim_to_original_time_range(boolean value) {
+    opensimSimulationJNI.TabOpLowPassFilter_set_trim_to_original_time_range__SWIG_1(swigCPtr, this, value);
+  }
+
   public TabOpLowPassFilter() {
     this(opensimSimulationJNI.new_TabOpLowPassFilter__SWIG_0(), true);
   }
 
   public TabOpLowPassFilter(double cutoffFrequency) {
     this(opensimSimulationJNI.new_TabOpLowPassFilter__SWIG_1(cutoffFrequency), true);
+  }
+
+  public TabOpLowPassFilter(double cutoffFrequency, boolean trimToOriginalTimeRange) {
+    this(opensimSimulationJNI.new_TabOpLowPassFilter__SWIG_2(cutoffFrequency, trimToOriginalTimeRange), true);
   }
 
   public void operate(TimeSeriesTable table, Model model) {

@@ -324,6 +324,139 @@ public class StatesTrajectory {
   }
 
   /**
+   *  Export a complete trajectory of states (i.e., one that includes<br>
+   * all continuous, discrete, and modeling states) to an<br>
+   * OpenSim::StatesDocument. That StatesDocument instance can then be<br>
+   * used to serialize the states to an OSTATES file or document string by<br>
+   * calling `StatesDocument::serialize()`.<br>
+   * <br>
+   * Once the states have been serialized, they can be deserialized by<br>
+   * constructing a new StatesDocument by calling<br>
+   * ```<br>
+   *   StatesDocument(const SimTK::String&amp; filename)<br>
+   * ```<br>
+   * and then calling:<br>
+   * ```<br>
+   *   StatesDocument::deserialize(const OpenSim::Model&amp; model,<br>
+   *                           std::vector&lt;SimTK::State&gt;&amp; trajectory)<br>
+   * ```<br>
+   * <br>
+   * The .ostates format is plain-text XML (see SimTK::Xml) with a<br>
+   * specifiable precision between 1 and 20 significant figures. A precision<br>
+   * of 20 digits results in losselss de/serialization.<br>
+   * <br>
+   * A note of CAUTION:<br>
+   * Using either<br>
+   * <br>
+   *       StatesTrajectory StatesTrajectory::createFromStatesStorage() or<br>
+   *       StatesTrajectory StatesTrajectory::createFromStatesTable()<br>
+   * <br>
+   * to construct a StatesTrajectory instance will likely leave discrete<br>
+   * states (i.e., OpenSim::DiscreteVariable%s) and modeling states<br>
+   * (i.e., OpenSim::ModelingOptions%s) uninitialized. The reason is that<br>
+   * Storage and TimeSeriesTable objects include only the continuous states<br>
+   * (i.e., OpenSim::StateVariable%s).<br>
+   * <br>
+   * Thus, when relying on serialization and deserialization to reproduce a<br>
+   * complete StatesTrajectory, a StatesDocument is the preferred means as<br>
+   * it will include continuous, discrete, and modeling states.
+   */
+  public StatesDocument exportToStatesDocument(Model model, SWIGTYPE_p_SimTK__String note, int precision) {
+    return new StatesDocument(opensimSimulationJNI.StatesTrajectory_exportToStatesDocument__SWIG_0(swigCPtr, this, Model.getCPtr(model), model, SWIGTYPE_p_SimTK__String.getCPtr(note), precision), true);
+  }
+
+  /**
+   *  Export a complete trajectory of states (i.e., one that includes<br>
+   * all continuous, discrete, and modeling states) to an<br>
+   * OpenSim::StatesDocument. That StatesDocument instance can then be<br>
+   * used to serialize the states to an OSTATES file or document string by<br>
+   * calling `StatesDocument::serialize()`.<br>
+   * <br>
+   * Once the states have been serialized, they can be deserialized by<br>
+   * constructing a new StatesDocument by calling<br>
+   * ```<br>
+   *   StatesDocument(const SimTK::String&amp; filename)<br>
+   * ```<br>
+   * and then calling:<br>
+   * ```<br>
+   *   StatesDocument::deserialize(const OpenSim::Model&amp; model,<br>
+   *                           std::vector&lt;SimTK::State&gt;&amp; trajectory)<br>
+   * ```<br>
+   * <br>
+   * The .ostates format is plain-text XML (see SimTK::Xml) with a<br>
+   * specifiable precision between 1 and 20 significant figures. A precision<br>
+   * of 20 digits results in losselss de/serialization.<br>
+   * <br>
+   * A note of CAUTION:<br>
+   * Using either<br>
+   * <br>
+   *       StatesTrajectory StatesTrajectory::createFromStatesStorage() or<br>
+   *       StatesTrajectory StatesTrajectory::createFromStatesTable()<br>
+   * <br>
+   * to construct a StatesTrajectory instance will likely leave discrete<br>
+   * states (i.e., OpenSim::DiscreteVariable%s) and modeling states<br>
+   * (i.e., OpenSim::ModelingOptions%s) uninitialized. The reason is that<br>
+   * Storage and TimeSeriesTable objects include only the continuous states<br>
+   * (i.e., OpenSim::StateVariable%s).<br>
+   * <br>
+   * Thus, when relying on serialization and deserialization to reproduce a<br>
+   * complete StatesTrajectory, a StatesDocument is the preferred means as<br>
+   * it will include continuous, discrete, and modeling states.
+   */
+  public StatesDocument exportToStatesDocument(Model model, SWIGTYPE_p_SimTK__String note) {
+    return new StatesDocument(opensimSimulationJNI.StatesTrajectory_exportToStatesDocument__SWIG_1(swigCPtr, this, Model.getCPtr(model), model, SWIGTYPE_p_SimTK__String.getCPtr(note)), true);
+  }
+
+  /**
+   *  Export a complete trajectory of states (i.e., one that includes<br>
+   * all continuous, discrete, and modeling states) to an<br>
+   * OpenSim::StatesDocument. That StatesDocument instance can then be<br>
+   * used to serialize the states to an OSTATES file or document string by<br>
+   * calling `StatesDocument::serialize()`.<br>
+   * <br>
+   * Once the states have been serialized, they can be deserialized by<br>
+   * constructing a new StatesDocument by calling<br>
+   * ```<br>
+   *   StatesDocument(const SimTK::String&amp; filename)<br>
+   * ```<br>
+   * and then calling:<br>
+   * ```<br>
+   *   StatesDocument::deserialize(const OpenSim::Model&amp; model,<br>
+   *                           std::vector&lt;SimTK::State&gt;&amp; trajectory)<br>
+   * ```<br>
+   * <br>
+   * The .ostates format is plain-text XML (see SimTK::Xml) with a<br>
+   * specifiable precision between 1 and 20 significant figures. A precision<br>
+   * of 20 digits results in losselss de/serialization.<br>
+   * <br>
+   * A note of CAUTION:<br>
+   * Using either<br>
+   * <br>
+   *       StatesTrajectory StatesTrajectory::createFromStatesStorage() or<br>
+   *       StatesTrajectory StatesTrajectory::createFromStatesTable()<br>
+   * <br>
+   * to construct a StatesTrajectory instance will likely leave discrete<br>
+   * states (i.e., OpenSim::DiscreteVariable%s) and modeling states<br>
+   * (i.e., OpenSim::ModelingOptions%s) uninitialized. The reason is that<br>
+   * Storage and TimeSeriesTable objects include only the continuous states<br>
+   * (i.e., OpenSim::StateVariable%s).<br>
+   * <br>
+   * Thus, when relying on serialization and deserialization to reproduce a<br>
+   * complete StatesTrajectory, a StatesDocument is the preferred means as<br>
+   * it will include continuous, discrete, and modeling states.
+   */
+  public StatesDocument exportToStatesDocument(Model model) {
+    return new StatesDocument(opensimSimulationJNI.StatesTrajectory_exportToStatesDocument__SWIG_2(swigCPtr, this, Model.getCPtr(model), model), true);
+  }
+
+  /**
+   *  Get a read-only reference to the underlying state array. 
+   */
+  public StdVectorState getStateArray() {
+    return new StdVectorState(opensimSimulationJNI.StatesTrajectory_getStateArray(swigCPtr, this), false);
+  }
+
+  /**
    *  Thrown when trying to append a state that is not consistent with the<br>
    * rest of the trajectory. 
    */
