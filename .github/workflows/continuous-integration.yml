@@ -145,9 +145,9 @@ jobs:
         path: OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe
 
   mac:
-    name: Mac12
+    name: Mac13
 
-    runs-on: macos-12
+    runs-on: macos-13
 
     steps:
     - name: Checkout opensim-gui
@@ -162,10 +162,6 @@ jobs:
     - uses: actions/setup-python@v4
       with:
         python-version: '3.10' 
-
-    - name: symbolic link to python so GUI can find it 
-      run: |
-        # sudo ln -s /Users/runner/hostedtoolcache/Python/3.8.18/x64/bin/python /usr/bin/python
         
     - name: Install packages
       run: |
