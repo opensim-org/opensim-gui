@@ -26,6 +26,14 @@ package org.opensim.modeling;
  * read it with the loadFile() method which will examine the file extension to <br>
  * determine the expected format.<br>
  * <br>
+ * The file formats above support having normals (and/or texture coordinates) <br>
+ * either at each vertex (.vtp) or per face/vertex (obj, stl). We assume this <br>
+ * info is provided either at all or none of the vertices, otherwise it's ignored. <br>
+ * If normals are provided we assume they are interpolated at vertices, otherwise <br>
+ * normals shouldn't be in the files to begin with (redundant). Clients should check<br>
+ * that info is available at vertices first, if not check face/vertex.<br>
+ * Programmatically created meshes do not contain normals or textures as of now.<br>
+ * <br>
  * The mesh has its own local frame and vertex locations are given in that <br>
  * frame. You can scale and transform the vertices relative to that frame <br>
  * (changing the values stored in the mesh) but more commonly the mesh will be<br>
@@ -271,6 +279,50 @@ public class PolygonalMesh {
   }
 
   /**
+   *  Check whether the PolygonalMesh contains Normals information. 
+   */
+  public boolean hasNormals() {
+    return opensimSimbodyJNI.PolygonalMesh_hasNormals(swigCPtr, this);
+  }
+
+  /**
+   *  Check whether the PolygonalMesh contains Normals information at ALL vertices. 
+   */
+  public boolean hasNormalsAtVertices() {
+    return opensimSimbodyJNI.PolygonalMesh_hasNormalsAtVertices(swigCPtr, this);
+  }
+
+  /**
+   *  Check whether the PolygonalMesh contains Normals information.at ALL faces 
+   */
+  public boolean hasNormalsAtFaces() {
+    return opensimSimbodyJNI.PolygonalMesh_hasNormalsAtFaces(swigCPtr, this);
+  }
+
+  /**
+   *  Check whether the PolygonalMesh contains Texture information.at ALL faces or vertices 
+   */
+  public boolean hasTextureCoordinates() {
+    return opensimSimbodyJNI.PolygonalMesh_hasTextureCoordinates(swigCPtr, this);
+  }
+
+  /**
+   *  Check whether the PolygonalMesh contains Texture information at every face/vertex <br>
+   *         client needs to convert to visualization/triangulated layout. 
+   */
+  public boolean hasTextureCoordinatesAtFaces() {
+    return opensimSimbodyJNI.PolygonalMesh_hasTextureCoordinatesAtFaces(swigCPtr, this);
+  }
+
+  /**
+   *  Check whether the PolygonalMesh contains Texture information at every<br>
+   *        vertex, ready for visualization/triangulation. 
+   */
+  public boolean hasTextureCoordinatesAtVertices() {
+    return opensimSimbodyJNI.PolygonalMesh_hasTextureCoordinatesAtVertices(swigCPtr, this);
+  }
+
+  /**
    *  Get the position of a vertex in the mesh.<br>
    *     @param vertex  The index of the vertex (as returned by addVertex()).<br>
    *     @return The position of the specified vertex, measured and expressed in<br>
@@ -278,6 +330,35 @@ public class PolygonalMesh {
    */
   public Vec3 getVertexPosition(int vertex) {
     return new Vec3(opensimSimbodyJNI.PolygonalMesh_getVertexPosition(swigCPtr, this, vertex), false);
+  }
+
+  /**
+   *  Get the normal of a vertex in the mesh, vertex specified by face/vertex.<br>
+   *     @param faceIndex  The index of the face (as returned by addFace()).<br>
+   *     @param vertexIndex  The index of the vertex within the face.<br>
+   *     @return The Normal of the mesh at the specified face/vertex *
+   */
+  public UnitVec3 getVertexNormal(int faceIndex, int vertexIndex) {
+    return new UnitVec3(opensimSimbodyJNI.PolygonalMesh_getVertexNormal__SWIG_0(swigCPtr, this, faceIndex, vertexIndex), true);
+  }
+
+  /**
+   *  Get the normal of a vertex in the mesh.<br>
+   *     @param vertex  The index of the vertex (as returned by addVertex()).<br>
+   *     @return The Normal of the mesh at the specified vertex *
+   */
+  public UnitVec3 getVertexNormal(int vertex) {
+    return new UnitVec3(opensimSimbodyJNI.PolygonalMesh_getVertexNormal__SWIG_1(swigCPtr, this, vertex), false);
+  }
+
+  /**
+   *  Get the texture coordinate of a vertex in the mesh, vertex specified by face/vertex.<br>
+   *     @param faceIndex  The index of the face (as returned by addFace()).<br>
+   *     @param vertexIndex  The index of the vertex within the face.<br>
+   *     @return The texture coordinate of the face/vertex *
+   */
+  public Vec2 getVertexTextureCoordinate(int faceIndex, int vertexIndex) {
+    return new Vec2(opensimSimbodyJNI.PolygonalMesh_getVertexTextureCoordinate(swigCPtr, this, faceIndex, vertexIndex), true);
   }
 
   /**
@@ -311,6 +392,29 @@ public class PolygonalMesh {
   }
 
   /**
+   *  Add vertex normal to the mesh.<br>
+   *     @param normal   The unit vector of the normal to add, measured and<br>
+   *                         expressed in the mesh local frame.<br>
+   *                         Depending on the mesh format this could be vertex normal<br>
+   *                         or face normal, it's user responsibility to decide what<br>
+   *                         these mean.<br>
+   *     @return The index of the newly added normal. *
+   */
+  public int addNormal(UnitVec3 normal) {
+    return opensimSimbodyJNI.PolygonalMesh_addNormal(swigCPtr, this, UnitVec3.getCPtr(normal), normal);
+  }
+
+  /**
+   *  Add texture coordinate to the mesh.<br>
+   *     @param textureCoord   The u-v vector of texture coordinates to be associated.<br>
+   *                         with either a vertex or face/vertex.<br>
+   *     @return The index of the newly added texture coordinate. *
+   */
+  public int addTextureCoordinate(Vec2 textureCoord) {
+    return opensimSimbodyJNI.PolygonalMesh_addTextureCoordinate(swigCPtr, this, Vec2.getCPtr(textureCoord), textureCoord);
+  }
+
+  /**
    *  Add a face to the mesh. Note that the ordering of the vertices defines<br>
    *     the outward normal for the face; they must be counterclockwise around the<br>
    *     desired normal.<br>
@@ -322,6 +426,14 @@ public class PolygonalMesh {
    */
   public int addFace(SimTKArrayInt vertices) {
     return opensimSimbodyJNI.PolygonalMesh_addFace(swigCPtr, this, SimTKArrayInt.getCPtr(vertices), vertices);
+  }
+
+  public int addFaceWithNormals(SimTKArrayInt vertices, SimTKArrayInt normalIndices) {
+    return opensimSimbodyJNI.PolygonalMesh_addFaceWithNormals(swigCPtr, this, SimTKArrayInt.getCPtr(vertices), vertices, SimTKArrayInt.getCPtr(normalIndices), normalIndices);
+  }
+
+  public void addFaceTextureCoordinates(SimTKArrayInt textureIndices) {
+    opensimSimbodyJNI.PolygonalMesh_addFaceTextureCoordinates(swigCPtr, this, SimTKArrayInt.getCPtr(textureIndices), textureIndices);
   }
 
   /**
@@ -361,8 +473,63 @@ public class PolygonalMesh {
    * <br>
    *     @param pathname    The name of a mesh file with a recognized extension.
    */
+  public void loadFile(SWIGTYPE_p_String pathname) {
+    opensimSimbodyJNI.PolygonalMesh_loadFile__SWIG_0(swigCPtr, this, SWIGTYPE_p_String.getCPtr(pathname));
+  }
+
+  /**
+   *  Load a Wavefront OBJ (.obj) file, adding the vertices, faces, normals<br>
+   *     and  texture coordinates it contains to this mesh, and ignoring anything <br>
+   *     else in the file. Normals and texture coordinates are kept if available to<br>
+   *     all vertices/faces, ignored otherwise. The suffix<br>
+   *     for these files is typically ".obj" but we don't check here.<br>
+   *     @param pathname    The name of a .obj file. *
+   */
+  public void loadObjFile(SWIGTYPE_p_String pathname) {
+    opensimSimbodyJNI.PolygonalMesh_loadObjFile__SWIG_0(swigCPtr, this, SWIGTYPE_p_String.getCPtr(pathname));
+  }
+
+  /**
+   *  Alternate signature for Wavefront OBJ format that takes an already-open<br>
+   *     istream rather than a pathname. This is useful for testing since it<br>
+   *     can be supplied by a stringstream rather than a file.<br>
+   *     @param file    An input stream from which to load the file <br>
+   *                             contents. *
+   */
+  public void loadObjFile(SWIGTYPE_p_std__istream file) {
+    opensimSimbodyJNI.PolygonalMesh_loadObjFile__SWIG_1(swigCPtr, this, SWIGTYPE_p_std__istream.getCPtr(file));
+  }
+
+  /**
+   *  Load a VTK PolyData (.vtp) file, adding the vertices, faces, normals<br>
+   *     and  texture coordinates it contains to this mesh, and ignoring anything <br>
+   *     else in the file. Normals and texture coordinates are kept if available to<br>
+   *     all vertices, ignored otherwise. The suffix <br>
+   *     for these files is typically ".vtp" but we don't check here.<br>
+   *     @param pathname    The name of a .vtp file. *
+   */
+  public void loadVtpFile(SWIGTYPE_p_String pathname) {
+    opensimSimbodyJNI.PolygonalMesh_loadVtpFile(swigCPtr, this, SWIGTYPE_p_String.getCPtr(pathname));
+  }
+
+  /**
+   *  Load an STL file, adding the vertices, faces , normals<br>
+   *     it contains to this mesh, and ignoring anything <br>
+   *     else in the file. Normals are kept if available to<br>
+   *     all vertices/faces, ignored otherwise. The file may be in ascii or <br>
+   *     binary format. If the suffix is ".stla" then it can only be ascii. <br>
+   *     Otherwise, including ".stl" or anything else, we'll examine the contents to <br>
+   *     determine which format is used. STL files include many repeated vertices;<br>
+   *     we will collapse any that coincide to within a small tolerance so that there<br>
+   *     is some hope of getting a connected surface.<br>
+   *     @param pathname    The name of a .stl or .stla file. *
+   */
+  public void loadStlFile(SWIGTYPE_p_String pathname) {
+    opensimSimbodyJNI.PolygonalMesh_loadStlFile(swigCPtr, this, SWIGTYPE_p_String.getCPtr(pathname));
+  }
+
   public void loadFile(String pathname) {
-    opensimSimbodyJNI.PolygonalMesh_loadFile(swigCPtr, this, pathname);
+    opensimSimbodyJNI.PolygonalMesh_loadFile__SWIG_1(swigCPtr, this, pathname);
   }
 
 }

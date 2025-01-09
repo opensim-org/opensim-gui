@@ -1752,6 +1752,9 @@ public class opensimMocoJNI {
   public final static native void MocoStudy_visualize(long jarg1, MocoStudy jarg1_, long jarg2, MocoTrajectory jarg2_);
   public final static native long MocoStudy_analyze(long jarg1, MocoStudy jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_);
   public final static native long MocoStudy_calcGeneralizedForces(long jarg1, MocoStudy jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_);
+  public final static native long MocoStudy_analyzeVec3(long jarg1, MocoStudy jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_);
+  public final static native long MocoStudy_analyzeSpatialVec(long jarg1, MocoStudy jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_);
+  public final static native long MocoStudy_analyzeRotation(long jarg1, MocoStudy jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_);
   public final static native void delete_MocoStudy(long jarg1);
   public final static native long MocoStudyFactory_createLinearTangentSteeringStudy(double jarg1, double jarg2, double jarg3);
   public final static native long new_MocoStudyFactory();
@@ -2057,6 +2060,7 @@ public class opensimMocoJNI {
   public final static native long analyzeMocoTrajectory(long jarg1, Model jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_);
   public final static native long analyzeMocoTrajectoryVec3(long jarg1, Model jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_);
   public final static native long analyzeMocoTrajectorySpatialVec(long jarg1, Model jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_);
+  public final static native long analyzeMocoTrajectoryRotation(long jarg1, Model jarg1_, long jarg2, MocoTrajectory jarg2_, long jarg3, StdVectorString jarg3_);
   public final static native long ModOpReplaceMusclesWithDeGrooteFregly2016_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void ModOpReplaceMusclesWithDeGrooteFregly2016_assign(long jarg1, ModOpReplaceMusclesWithDeGrooteFregly2016 jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String ModOpReplaceMusclesWithDeGrooteFregly2016_getClassName();

@@ -259,10 +259,6 @@ public class opensimCommon {
     return opensimCommonJNI.IO_STRLEN_get();
   }
 
-  public static int getIO_DBLFMTLEN() {
-    return opensimCommonJNI.IO_DBLFMTLEN_get();
-  }
-
   /**
    *  Load an OpenSim (plugin) library, using a path to a library (relative or<br>
    * absolute) but *without* the file extension (.dll, .so, .dylib). This method<br>

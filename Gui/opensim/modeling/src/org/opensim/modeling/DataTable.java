@@ -821,4 +821,12 @@ public class DataTable extends AbstractDataTable {
     return new DataTableSpatialVec(opensimCommonJNI.DataTable_packSpatialVec__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
   }
 
+  public DataTableRotation packRotation() {
+    return new DataTableRotation(opensimCommonJNI.DataTable_packRotation__SWIG_0(swigCPtr, this), true);
+  }
+
+  public DataTableRotation packRotation(StdVectorString suffixes) {
+    return new DataTableRotation(opensimCommonJNI.DataTable_packRotation__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
 }

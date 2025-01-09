@@ -79,10 +79,17 @@ public class StatesTrajectoryReporter extends AbstractReporter {
   }
 
   /**
-   *  Access the accumulated states. 
+   *  Obtain the accumulated states as a StatesTrajectory object. 
    */
   public StatesTrajectory getStates() {
     return new StatesTrajectory(opensimSimulationJNI.StatesTrajectoryReporter_getStates(swigCPtr, this), false);
+  }
+
+  /**
+   *  Obtain the accumulated states as a low-level array of states. 
+   */
+  public StdVectorState getVectorOfStateObjects() {
+    return new StdVectorState(opensimSimulationJNI.StatesTrajectoryReporter_getVectorOfStateObjects(swigCPtr, this), false);
   }
 
   /**

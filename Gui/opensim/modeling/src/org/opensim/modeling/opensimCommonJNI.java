@@ -696,7 +696,6 @@ public class opensimCommonJNI {
   public final static native String Units_getLabel(long jarg1, Units jarg1_);
   public final static native String Units_getAbbreviation(long jarg1, Units jarg1_);
   public final static native int IO_STRLEN_get();
-  public final static native int IO_DBLFMTLEN_get();
   public final static native String IO_ConstructDateAndTimeStamp();
   public final static native String IO_FixSlashesInFilePath(String jarg1);
   public final static native void IO_SetScientific(boolean jarg1);
@@ -2217,6 +2216,8 @@ public class opensimCommonJNI {
   public final static native long DataTable_packQuaternion__SWIG_1(long jarg1, DataTable jarg1_, long jarg2, StdVectorString jarg2_);
   public final static native long DataTable_packSpatialVec__SWIG_0(long jarg1, DataTable jarg1_);
   public final static native long DataTable_packSpatialVec__SWIG_1(long jarg1, DataTable jarg1_, long jarg2, StdVectorString jarg2_);
+  public final static native long DataTable_packRotation__SWIG_0(long jarg1, DataTable jarg1_);
+  public final static native long DataTable_packRotation__SWIG_1(long jarg1, DataTable jarg1_, long jarg2, StdVectorString jarg2_);
   public final static native long new_DataTableVec3__SWIG_0();
   public final static native long new_DataTableVec3__SWIG_1(long jarg1, DataTableVec3 jarg1_);
   public final static native void delete_DataTableVec3(long jarg1);
@@ -2547,6 +2548,8 @@ public class opensimCommonJNI {
   public final static native long TimeSeriesTable_packQuaternion__SWIG_1(long jarg1, TimeSeriesTable jarg1_, long jarg2, StdVectorString jarg2_);
   public final static native long TimeSeriesTable_packSpatialVec__SWIG_0(long jarg1, TimeSeriesTable jarg1_);
   public final static native long TimeSeriesTable_packSpatialVec__SWIG_1(long jarg1, TimeSeriesTable jarg1_, long jarg2, StdVectorString jarg2_);
+  public final static native long TimeSeriesTable_packRotation__SWIG_0(long jarg1, TimeSeriesTable jarg1_);
+  public final static native long TimeSeriesTable_packRotation__SWIG_1(long jarg1, TimeSeriesTable jarg1_, long jarg2, StdVectorString jarg2_);
   public final static native long new_TimeSeriesTableVec3__SWIG_0();
   public final static native long new_TimeSeriesTableVec3__SWIG_1(long jarg1, TimeSeriesTableVec3 jarg1_);
   public final static native void delete_TimeSeriesTableVec3(long jarg1);
@@ -2709,6 +2712,8 @@ public class opensimCommonJNI {
   public final static native void TimeSeriesTableRotation_trimTo(long jarg1, TimeSeriesTableRotation jarg1_, double jarg2);
   public final static native void TimeSeriesTableRotation_trimToIndices(long jarg1, TimeSeriesTableRotation jarg1_, long jarg2, long jarg3);
   public final static native long TimeSeriesTableRotation_clone(long jarg1, TimeSeriesTableRotation jarg1_);
+  public final static native long TimeSeriesTableRotation_flatten__SWIG_0(long jarg1, TimeSeriesTableRotation jarg1_);
+  public final static native long TimeSeriesTableRotation_flatten__SWIG_1(long jarg1, TimeSeriesTableRotation jarg1_, long jarg2, StdVectorString jarg2_);
   public final static native void Event_label_set(long jarg1, Event jarg1_, String jarg2);
   public final static native String Event_label_get(long jarg1, Event jarg1_);
   public final static native void Event_time_set(long jarg1, Event jarg1_, double jarg2);
