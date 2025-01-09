@@ -37,9 +37,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 import javax.swing.SwingConstants;
+import javax.swing.event.PopupMenuEvent;
+import javax.swing.event.PopupMenuListener;
 import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.ArrayPathPoint;
 import org.opensim.modeling.Component;
@@ -406,13 +411,13 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       attachmentFrameLabel.setBounds(X + 300, Y - 30, 30, 16);
       javax.swing.JLabel coordLabel = new javax.swing.JLabel();
       coordLabel.setText("Coordinate");
-      coordLabel.setBounds(X + 400, Y - 30, 90, 16);
+      coordLabel.setBounds(X + 450, Y - 30, 90, 16);
       javax.swing.JLabel rangeMinLabel = new javax.swing.JLabel();
       rangeMinLabel.setText("Min");
-      rangeMinLabel.setBounds(X + 530, Y - 30, 60, 16);
+      rangeMinLabel.setBounds(X + 580, Y - 30, 60, 16);
       javax.swing.JLabel rangeMaxLabel = new javax.swing.JLabel();
       rangeMaxLabel.setText("Max");
-      rangeMaxLabel.setBounds(X + 590, Y - 30, 60, 16);
+      rangeMaxLabel.setBounds(X + 640, Y - 30, 60, 16);
       AttachmentsPanel.add(attachmentSelLabel);
       AttachmentsPanel.add(attachmentTypeLabel);
       AttachmentsPanel.add(attachmentXLabel);
@@ -639,15 +644,32 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
          javax.swing.JComboBox comboBox = new javax.swing.JComboBox();
          comboBox.setModel(new javax.swing.DefaultComboBoxModel(physicalFrameNames));
          comboBox.setSelectedIndex(findElement(physicalFrameNames, pathPoints.get(i).getParentFrame().getAbsolutePathString()));
-         comboBox.setBounds(x, height, 90, 21);
+         comboBox.setBounds(x, height, 140, 21);
          comboBox.setToolTipText("Frame the attachment point is fixed to");
          comboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                AttachmentFrameChosen(((javax.swing.JComboBox)evt.getSource()), num);
             }
          });
+         comboBox.addPopupMenuListener(new PopupMenuListener() {
+             @Override
+             public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
+                 adjustDropdownWidth(e);
+                  //To change body of generated methods, choose Tools | Templates.
+             }
+
+             @Override
+             public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
+                 adjustDropdownWidth(e); //To change body of generated methods, choose Tools | Templates.
+             }
+
+             @Override
+             public void popupMenuCanceled(PopupMenuEvent e) {
+                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+             }
+         });
          AttachmentsPanel.add(comboBox);
-         x += 100;
+         x += 150;
          
          // GUI items for via points (coord combo box, min range field, max range field)
          if (via != null) {
@@ -825,7 +847,7 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       MouseListener popupListenerDelete = new PopupListenerDelete();
       deleteButton.addMouseListener(popupListenerDelete);
       
-      Dimension d = new Dimension(640, Y + 45 + numGuiLines * 22);
+      Dimension d = new Dimension(690, Y + 45 + numGuiLines * 22);
       if (anyViaPoints) {
          d.width = 920;
          AttachmentsPanel.add(coordLabel);
@@ -839,7 +861,16 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       for (int i = 0; i < selectedObjects.size(); i++)
          updateAttachmentSelections(selectedObjects.get(i), true);
    }
-
+    public void adjustDropdownWidth(PopupMenuEvent e) {
+        JComboBox comboBox = (JComboBox) e.getSource();
+        Object accessibleChild = comboBox.getUI().getAccessibleChild(comboBox, 0);
+        if (!(accessibleChild instanceof JPopupMenu)) return;
+        JComponent scrollPane = (JComponent) ((JPopupMenu) accessibleChild).getComponent(0);
+        Dimension dimension = new Dimension();
+        dimension.width = comboBox.getPreferredSize().width+100;
+        dimension.height = scrollPane.getPreferredSize().height;
+        scrollPane.setPreferredSize(dimension);
+    }
    private void updateAttachmentSelections(SelectedObject selectedObject, boolean state) {
       if (objectWithPath != null) {
          OpenSimObject obj = selectedObject.getOpenSimObject();
@@ -1629,4 +1660,5 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
         ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(currentModel);
         ViewDB.getInstance().updatePathDisplay(currentModel, gp, EditOperation.Recreate.ordinal(), -1);
    }
+    
 }
