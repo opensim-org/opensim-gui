@@ -156,6 +156,30 @@ public class BodyIterator {
     return new Vec6(opensimSimulationJNI.BodyIterator_get_inertia__SWIG_1(swigCPtr, this), false);
   }
 
+  public boolean get_has_output_momentum_about_origin() {
+    return opensimSimulationJNI.BodyIterator__has_output_momentum_about_origin_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_angular_momentum_about_origin() {
+    return opensimSimulationJNI.BodyIterator__has_output_angular_momentum_about_origin_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_linear_momentum_about_origin() {
+    return opensimSimulationJNI.BodyIterator__has_output_linear_momentum_about_origin_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_momentum_about_mass_center() {
+    return opensimSimulationJNI.BodyIterator__has_output_momentum_about_mass_center_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_angular_momentum_about_mass_center() {
+    return opensimSimulationJNI.BodyIterator__has_output_angular_momentum_about_mass_center_get(swigCPtr, this);
+  }
+
+  public boolean get_has_output_linear_momentum_about_mass_center() {
+    return opensimSimulationJNI.BodyIterator__has_output_linear_momentum_about_mass_center_get(swigCPtr, this);
+  }
+
   /**
    *  Access Properties of the Body  The mass of the body in kg 
    */
@@ -184,6 +208,54 @@ public class BodyIterator {
    */
   public MassProperties getMassProperties() {
     return new MassProperties(opensimSimulationJNI.BodyIterator_getMassProperties(swigCPtr, this), true);
+  }
+
+  /**
+   *  Calculate the Body's spatial momentum (angular, linear) measured and <br>
+   *     expressed in Ground, but taken about the Body origin. 
+   */
+  public SpatialVec calcMomentumAboutOrigin(State s) {
+    return new SpatialVec(opensimSimulationJNI.BodyIterator_calcMomentumAboutOrigin(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  /**
+   *  Calculate the Body's angular momentum measured and expressed in Ground,<br>
+   *     but taken about the Body origin. 
+   */
+  public Vec3 calcAngularMomentumAboutOrigin(State s) {
+    return new Vec3(opensimSimulationJNI.BodyIterator_calcAngularMomentumAboutOrigin(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  /**
+   *  Calculate the Body's linear momentum measured and expressed in Ground,<br>
+   *     but taken about the Body origin. 
+   */
+  public Vec3 calcLinearMomentumAboutOrigin(State s) {
+    return new Vec3(opensimSimulationJNI.BodyIterator_calcLinearMomentumAboutOrigin(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  /**
+   *  Calculate the Body's spatial momentum (angular, linear) measured and<br>
+   *     expressed in Ground, but taken about the Body mass center. 
+   */
+  public SpatialVec calcMomentumAboutMassCenter(State s) {
+    return new SpatialVec(opensimSimulationJNI.BodyIterator_calcMomentumAboutMassCenter(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  /**
+   *  Calculate the Body's angular momentum measured and expressed in Ground,<br>
+   *     but taken about the Body mass center. 
+   */
+  public Vec3 calcAngularMomentumAboutMassCenter(State s) {
+    return new Vec3(opensimSimulationJNI.BodyIterator_calcAngularMomentumAboutMassCenter(swigCPtr, this, State.getCPtr(s), s), true);
+  }
+
+  /**
+   *  Calculate the Body's linear momentum measured and expressed in Ground,<br>
+   *     but taken about the Body mass center. 
+   */
+  public Vec3 calcLinearMomentumAboutMassCenter(State s) {
+    return new Vec3(opensimSimulationJNI.BodyIterator_calcLinearMomentumAboutMassCenter(swigCPtr, this, State.getCPtr(s), s), true);
   }
 
   public WrapObjectSet get_WrapObjectSet(int i) {

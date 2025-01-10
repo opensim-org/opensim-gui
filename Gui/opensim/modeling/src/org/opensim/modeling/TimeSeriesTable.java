@@ -322,4 +322,12 @@ public class TimeSeriesTable extends DataTable {
     return new TimeSeriesTableSpatialVec(opensimCommonJNI.TimeSeriesTable_packSpatialVec__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
   }
 
+  public TimeSeriesTableRotation packRotation() {
+    return new TimeSeriesTableRotation(opensimCommonJNI.TimeSeriesTable_packRotation__SWIG_0(swigCPtr, this), true);
+  }
+
+  public TimeSeriesTableRotation packRotation(StdVectorString suffixes) {
+    return new TimeSeriesTableRotation(opensimCommonJNI.TimeSeriesTable_packRotation__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
 }

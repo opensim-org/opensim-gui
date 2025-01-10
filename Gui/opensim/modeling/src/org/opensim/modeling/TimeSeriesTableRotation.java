@@ -290,4 +290,12 @@ public class TimeSeriesTableRotation extends DataTableRotation {
     return (cPtr == 0) ? null : new TimeSeriesTableRotation(cPtr, true);
   }
 
+  public TimeSeriesTable flatten() {
+    return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableRotation_flatten__SWIG_0(swigCPtr, this), true);
+  }
+
+  public TimeSeriesTable flatten(StdVectorString suffixes) {
+    return new TimeSeriesTable(opensimCommonJNI.TimeSeriesTableRotation_flatten__SWIG_1(swigCPtr, this, StdVectorString.getCPtr(suffixes), suffixes), true);
+  }
+
 }

@@ -293,19 +293,6 @@ public class MocoStudy extends OpenSimObject {
     opensimMocoJNI.MocoStudy_visualize(swigCPtr, this, MocoTrajectory.getCPtr(traj), traj);
   }
 
-  /**
-   *  Calculate the requested outputs using the model in the problem and the<br>
-   *  states and controls in the MocoTrajectory.<br>
-   *  The output paths can be regular expressions. For example,<br>
-   *  ".*activation" gives the activation of all muscles.<br>
-   *  Constraints are not enforced but prescribed motion (e.g.,<br>
-   *  PositionMotion) is.<br>
-   *  @see OpenSim#analyze() Note: Parameters in the MocoTrajectory are **not** applied to the model.<br>
-   *  Note: If the MocoTrajectory was generated from a MocoStudy with <br>
-   *        Controller%s in the model, first call <br>
-   *        MocoTrajectory::generateControlsFromModelControllers() to populate <br>
-   *        the trajectory with the correct model controls.
-   */
   public TimeSeriesTable analyze(MocoTrajectory traj, StdVectorString outputPaths) {
     return new TimeSeriesTable(opensimMocoJNI.MocoStudy_analyze(swigCPtr, this, MocoTrajectory.getCPtr(traj), traj, StdVectorString.getCPtr(outputPaths), outputPaths), true);
   }
@@ -330,6 +317,57 @@ public class MocoStudy extends OpenSimObject {
    */
   public TimeSeriesTable calcGeneralizedForces(MocoTrajectory traj, StdVectorString forcePaths) {
     return new TimeSeriesTable(opensimMocoJNI.MocoStudy_calcGeneralizedForces(swigCPtr, this, MocoTrajectory.getCPtr(traj), traj, StdVectorString.getCPtr(forcePaths), forcePaths), true);
+  }
+
+  /**
+   *  Calculate the requested outputs using the model in the problem and the<br>
+   *  states and controls in the MocoTrajectory.<br>
+   *  The output paths can be regular expressions. For example,<br>
+   *  ".*activation" gives the activation of all muscles.<br>
+   *  Constraints are not enforced but prescribed motion (e.g.,<br>
+   *  PositionMotion) is.<br>
+   *  @see OpenSim#analyze<T>() OpenSim::analyzeMocoTrajectory<T>() Note: Parameters in the MocoTrajectory are **not** applied to the model.<br>
+   *  Note: If the MocoTrajectory was generated from a MocoStudy with <br>
+   *        Controller%s in the model, first call <br>
+   *        MocoTrajectory::generateControlsFromModelControllers() to populate <br>
+   *        the trajectory with the correct model controls.
+   */
+  public TimeSeriesTableVec3 analyzeVec3(MocoTrajectory traj, StdVectorString outputPaths) {
+    return new TimeSeriesTableVec3(opensimMocoJNI.MocoStudy_analyzeVec3(swigCPtr, this, MocoTrajectory.getCPtr(traj), traj, StdVectorString.getCPtr(outputPaths), outputPaths), true);
+  }
+
+  /**
+   *  Calculate the requested outputs using the model in the problem and the<br>
+   *  states and controls in the MocoTrajectory.<br>
+   *  The output paths can be regular expressions. For example,<br>
+   *  ".*activation" gives the activation of all muscles.<br>
+   *  Constraints are not enforced but prescribed motion (e.g.,<br>
+   *  PositionMotion) is.<br>
+   *  @see OpenSim#analyze<T>() OpenSim::analyzeMocoTrajectory<T>() Note: Parameters in the MocoTrajectory are **not** applied to the model.<br>
+   *  Note: If the MocoTrajectory was generated from a MocoStudy with <br>
+   *        Controller%s in the model, first call <br>
+   *        MocoTrajectory::generateControlsFromModelControllers() to populate <br>
+   *        the trajectory with the correct model controls.
+   */
+  public TimeSeriesTableSpatialVec analyzeSpatialVec(MocoTrajectory traj, StdVectorString outputPaths) {
+    return new TimeSeriesTableSpatialVec(opensimMocoJNI.MocoStudy_analyzeSpatialVec(swigCPtr, this, MocoTrajectory.getCPtr(traj), traj, StdVectorString.getCPtr(outputPaths), outputPaths), true);
+  }
+
+  /**
+   *  Calculate the requested outputs using the model in the problem and the<br>
+   *  states and controls in the MocoTrajectory.<br>
+   *  The output paths can be regular expressions. For example,<br>
+   *  ".*activation" gives the activation of all muscles.<br>
+   *  Constraints are not enforced but prescribed motion (e.g.,<br>
+   *  PositionMotion) is.<br>
+   *  @see OpenSim#analyze<T>() OpenSim::analyzeMocoTrajectory<T>() Note: Parameters in the MocoTrajectory are **not** applied to the model.<br>
+   *  Note: If the MocoTrajectory was generated from a MocoStudy with <br>
+   *        Controller%s in the model, first call <br>
+   *        MocoTrajectory::generateControlsFromModelControllers() to populate <br>
+   *        the trajectory with the correct model controls.
+   */
+  public TimeSeriesTableRotation analyzeRotation(MocoTrajectory traj, StdVectorString outputPaths) {
+    return new TimeSeriesTableRotation(opensimMocoJNI.MocoStudy_analyzeRotation(swigCPtr, this, MocoTrajectory.getCPtr(traj), traj, StdVectorString.getCPtr(outputPaths), outputPaths), true);
   }
 
 }

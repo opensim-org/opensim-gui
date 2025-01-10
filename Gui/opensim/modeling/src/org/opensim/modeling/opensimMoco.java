@@ -482,4 +482,38 @@ public class opensimMoco {
     return new TimeSeriesTableSpatialVec(opensimMocoJNI.analyzeMocoTrajectorySpatialVec(Model.getCPtr(model), model, MocoTrajectory.getCPtr(trajectory), trajectory, StdVectorString.getCPtr(outputPaths), outputPaths), true);
   }
 
+  /**
+   *  Calculate the requested outputs using the model in the problem and the<br>
+   *  provided StatesTrajectory and controls table.<br>
+   *  The controls table is used to set the model's controls vector.<br>
+   *  We assume the StatesTrajectory and controls table contain the same time<br>
+   *  points.<br>
+   *  The output paths can be regular expressions. For example,<br>
+   *  ".*activation" gives the activation of all muscles.<br>
+   * <br>
+   *  The output paths must correspond to outputs that match the type provided in<br>
+   *  the template argument, otherwise they are not included in the report.<br>
+   * <br>
+   *  Note: The provided trajectory is not modified to satisfy kinematic<br>
+   *  constraints, but SimTK::Motions in the Model (e.g., PositionMotion) are<br>
+   *  applied. Therefore, this function expects that you've provided a trajectory<br>
+   *  that already satisfies kinematic constraints. If your provided trajectory<br>
+   *  does not satisfy kinematic constraints, many outputs will be incorrect.<br>
+   *  For example, in a model with a patella whose location is determined by a<br>
+   *  CoordinateCouplerConstraint, the length of a muscle that crosses the patella<br>
+   *  will be incorrect.<br>
+   * <br>
+   *  Note: Parameters and Lagrange multipliers in the MocoTrajectory are **not**<br>
+   *        applied to the model.<br>
+   * <br>
+   *  Note: If the MocoTrajectory was generated from a MocoStudy with <br>
+   *        Controller%s in the model, first call <br>
+   *        MocoTrajectory::generateControlsFromModelControllers() to populate the<br>
+   *        trajectory with the correct model controls.<br>
+   *  
+   */
+  public static TimeSeriesTableRotation analyzeMocoTrajectoryRotation(Model model, MocoTrajectory trajectory, StdVectorString outputPaths) {
+    return new TimeSeriesTableRotation(opensimMocoJNI.analyzeMocoTrajectoryRotation(Model.getCPtr(model), model, MocoTrajectory.getCPtr(trajectory), trajectory, StdVectorString.getCPtr(outputPaths), outputPaths), true);
+  }
+
 }
