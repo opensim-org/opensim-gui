@@ -42,9 +42,11 @@ import javax.swing.JComponent;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 import javax.swing.event.PopupMenuEvent;
 import javax.swing.event.PopupMenuListener;
+import javax.swing.plaf.basic.BasicComboBoxRenderer;
 import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.ArrayPathPoint;
 import org.opensim.modeling.Component;
@@ -651,23 +653,8 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
                AttachmentFrameChosen(((javax.swing.JComboBox)evt.getSource()), num);
             }
          });
-         comboBox.addPopupMenuListener(new PopupMenuListener() {
-             @Override
-             public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-                 adjustDropdownWidth(e);
-                  //To change body of generated methods, choose Tools | Templates.
-             }
-
-             @Override
-             public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
-                 adjustDropdownWidth(e); //To change body of generated methods, choose Tools | Templates.
-             }
-
-             @Override
-             public void popupMenuCanceled(PopupMenuEvent e) {
-                 //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-             }
-         });
+         comboBox.setRenderer(new ListCellRendererWithTooltip(comboBox));
+         
          AttachmentsPanel.add(comboBox);
          x += 150;
          
@@ -861,7 +848,8 @@ public class OpenSimGeometryPathEditorPanel extends javax.swing.JPanel {
       for (int i = 0; i < selectedObjects.size(); i++)
          updateAttachmentSelections(selectedObjects.get(i), true);
    }
-    public void adjustDropdownWidth(PopupMenuEvent e) {
+   
+   public void adjustDropdownWidth(PopupMenuEvent e) {
         JComboBox comboBox = (JComboBox) e.getSource();
         Object accessibleChild = comboBox.getUI().getAccessibleChild(comboBox, 0);
         if (!(accessibleChild instanceof JPopupMenu)) return;
