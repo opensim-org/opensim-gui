@@ -56,7 +56,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
-         ref: use_casadi_355
+         ref: feature_add-mesh-refcounting
          depth: 1
     
     - name: Cache opensim-core-dependencies
