@@ -142,7 +142,7 @@ jobs:
         makensis.exe make_installer.nsi
         mv OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe $env:GITHUB_WORKSPACE
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-win64
         path: OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe
@@ -296,7 +296,7 @@ jobs:
         mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-mac
         path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
@@ -424,7 +424,7 @@ jobs:
         mv Gui/opensim/dist/OpenSim-$VERSION.tar.gz $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-ub20-linux
         path: OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz
