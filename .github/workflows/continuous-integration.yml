@@ -81,7 +81,7 @@ jobs:
         # default CMAKE_CXX_FLAGS.
         # https://msdn.microsoft.com/en-us/library/19z1t1wy.aspx
         $env:CXXFLAGS = "/W0"
-        cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 16 2019" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DWIG_DIR=C:/ProgramData/chocolatey/lib/swig -DOPENSIM_WITH_TROPTER:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 16 2019" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DWIG_DIR=C:/ProgramData/chocolatey/lib/swig -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2 
         
@@ -227,7 +227,7 @@ jobs:
       run: |
         mkdir build_deps
         cd build_deps
-        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on  -DOPENSIM_WITH_CASADI:BOOL=on -DOPENSIM_WITH_TROPTER:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DCMAKE_BUILD_TYPE=Release
+        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on  -DOPENSIM_WITH_CASADI:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DCMAKE_BUILD_TYPE=Release
         cmake . -LAH
         cmake --build . --config Release
         
@@ -368,7 +368,7 @@ jobs:
       run: |
         mkdir build_deps
         cd build_deps
-        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on  -DOPENSIM_WITH_CASADI:BOOL=on -DOPENSIM_WITH_TROPTER:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on  -DOPENSIM_WITH_CASADI:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         cmake . -LAH
         cmake --build . --config Release
         
