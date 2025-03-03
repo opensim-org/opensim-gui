@@ -66,7 +66,7 @@ public class BodyVisualizationJson extends JSONObject{
         UUID uuidForComGeometry = UUID.randomUUID();
         geomJson.put("uuid", uuidForComGeometry.toString());
         geomJson.put("type", "SphereGeometry");
-        geomJson.put("radius", 25);
+        geomJson.put("radius", "0.025");
         comGeometryUUID = uuidForComGeometry;
         return geomJson;
     }     

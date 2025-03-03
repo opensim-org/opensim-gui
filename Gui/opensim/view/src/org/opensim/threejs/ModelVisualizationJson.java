@@ -113,7 +113,7 @@ public class ModelVisualizationJson extends JSONObject {
     private State state;
     private final HashMap<Integer, PhysicalFrame> mapBodyIndicesToFrames = new HashMap<Integer, PhysicalFrame>();
     private final HashMap<Integer, JSONObject> mapBodyIndicesToJson = new HashMap<Integer, JSONObject>();
-    private final static double visScaleFactor = 1000.0;
+    private final static double visScaleFactor = 1.0;
     private final HashMap<String, UUID> mapDecorativeGeometryToUUID = new HashMap<String, UUID>();
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
     private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
@@ -143,7 +143,7 @@ public class ModelVisualizationJson extends JSONObject {
     private boolean showCom = false;
     private PathColorMap currentPathColorMap;
     // Preferences
-    private double prefMuscleDisplayRadius=0.005;
+    private double prefMuscleDisplayRadius=5;
     private int NUM_PATHPOINTS_PER_WRAP_OBJECT=8;
     private double PATHPOINT_SCALEUP=1.05;
     private boolean debug_path=false;
@@ -448,7 +448,7 @@ public class ModelVisualizationJson extends JSONObject {
         String currentSize= TheApp.getCurrentVersionPreferences().get("Visualizer: Muscle Display Radius (mm)", saved);
         TheApp.getCurrentVersionPreferences().put("Visualizer: Muscle Display Radius (mm)", currentSize);
         prefMuscleDisplayRadius = Double.parseDouble(currentSize);
-        actualMuscleDisplayRadius = prefMuscleDisplayRadius;
+        actualMuscleDisplayRadius = prefMuscleDisplayRadius*.001;
         createJsonForModel(model);
         ready = true;
         if (verbose)
@@ -663,6 +663,12 @@ public class ModelVisualizationJson extends JSONObject {
         put("geometries", json_geometries);
         json_materials = new JSONArray();
         put("materials", json_materials);
+        // More recent versions of three.js ObjectLoader requires metadata
+        JSONObject metadata_object = new JSONObject();
+        metadata_object.put("version", "4.5"); 
+        metadata_object.put("type", "Object"); 
+        metadata_object.put("generator", "OpenSim generator"); 
+        put("metadata", metadata_object);
 
     }
 
@@ -1638,18 +1644,6 @@ public class ModelVisualizationJson extends JSONObject {
         UUID mat_uuid = createPathMaterial(path);
         UUID pathpt_mat_uuid = createPathPointMaterial(path);
         
-        // Create plain Geometry with vertices at PathPoints it will have 0 vertices
-        // but will be populated live in the visualizer from the Pathppoints
-        JSONObject pathGeomJson = new JSONObject();
-        UUID uuidForPathGeomGeometry = UUID.randomUUID();
-        pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
-        pathGeomJson.put("type", "PathGeometry");
-        pathGeomJson.put("radius", actualMuscleDisplayRadius);
-        pathGeomJson.put("name", path.getAbsolutePathString()+"Control");
-        if (reuse_uuid == null) {
-            json_geometries.add(pathGeomJson);
-        }
-        
         // create PathVisualiztionInfo object for the Path for book-keeping, primarily used by wrapping
         PathVisualizationInfo pathVisInfo = new PathVisualizationInfo(path);
         pathVisInfo.setMaterialID(mat_uuid);
@@ -1785,7 +1779,25 @@ public class ModelVisualizationJson extends JSONObject {
         if (hasWrapping)
             pathsWithWrapping.put(path, pathpoint_jsonArr);
 
-        pathGeomJson.put("segments", pathpoint_jsonArr.size()-1); 
+        // Create plain Geometry with vertices at PathPoints it will have 0 vertices
+        // but will be populated live in the visualizer from the Pathppoints
+        JSONObject pathGeomJson = new JSONObject();
+        UUID uuidForPathGeomGeometry = UUID.randomUUID();
+        pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
+        pathGeomJson.put("type", "CylinderGeometry");
+        pathGeomJson.put("radiusTop", actualMuscleDisplayRadius);
+        pathGeomJson.put("radiusBottom", actualMuscleDisplayRadius);
+        pathGeomJson.put("height", 0.01);
+        pathGeomJson.put("radialSegments", 4);
+        pathGeomJson.put("heightSegments", 2*(pathpoint_jsonArr.size()-1)-1);
+        pathGeomJson.put("openEnded", true);
+        // height, radialSegments, heightSegments, openended
+        pathGeomJson.put("name", path.getAbsolutePathString()+"Control");
+        if (reuse_uuid == null) {
+            json_geometries.add(pathGeomJson);
+        }
+
+        //pathGeomJson.put("segments", pathpoint_jsonArr.size()-1); 
         JSONObject gndJson = mapBodyIndicesToJson.get(0);
         if (gndJson.get("children")==null)
                 gndJson.put("children", new JSONArray());
@@ -1861,7 +1873,7 @@ public class ModelVisualizationJson extends JSONObject {
     }
 
     private void populatePathMaterialDefaults(Map<String, Object> mat_json, GeometryPath path) {
-        mat_json.put("type", "MeshPhongMaterial");
+        mat_json.put("type", "MeshStandardMaterial");
         Vec3 pathColor = path.getDefaultColor();
         String colorString = JSONUtilities.mapColorToRGBA(pathColor);
         mat_json.put("color", colorString);

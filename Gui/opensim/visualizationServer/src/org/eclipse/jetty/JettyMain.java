@@ -47,7 +47,7 @@ public class JettyMain {
     private static final String serverRootDir = TheApp.getInstallDir();
     private static final String pathToStartPage = "/threejs/editor/";
     private static int SERVER_PORT = 8002;
-    private static String serverWorkingDir = serverRootDir+"/threejs/editor/";
+    private static String serverWorkingDir = serverRootDir+"/opensim-viewer/build/";
     
     // Use static block to adjust SERVER_PORT if specified
     static {
@@ -84,7 +84,7 @@ public class JettyMain {
                         appDir = "/"+appDir;
                     // else should abort
                 }
-                serverWorkingDir = appDir+"/threejs/editor/";
+                serverWorkingDir = appDir+"/opensim-viewer/build/";
                 URI webRootUri = new File(appDir).toURI();
                 System.out.println("Web Root URI: %s%n"+webRootUri);
 
