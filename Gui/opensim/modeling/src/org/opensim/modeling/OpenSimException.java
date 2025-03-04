@@ -151,6 +151,25 @@ public class OpenSimException {
     this(opensimCommonJNI.new_OpenSimException__SWIG_7(file, line, func, OpenSimObject.getCPtr(obj), obj, msg), true);
   }
 
+  /**
+   *  The message created by this constructor will contain the class name and<br>
+   *     absolute path of the provided Component. Use this when throwing from derived<br>
+   *     components. Use OPENSIM_THROW&lt;&gt; macros at throw sites.                    
+   */
+  public OpenSimException(String file, long line, String func, Component component) {
+    this(opensimCommonJNI.new_OpenSimException__SWIG_8(file, line, func, Component.getCPtr(component), component), true);
+  }
+
+  /**
+   *  The message created by this constructor will contain the class name and<br>
+   *     ansolute path of the provided Component, and also accepts a message. Use this<br>
+   *     when throwing from derived components. Use OPENSIM_THROW&lt;&gt; macros at throw<br>
+   *     sites.                                                                    
+   */
+  public OpenSimException(String file, long line, String func, Component component, String msg) {
+    this(opensimCommonJNI.new_OpenSimException__SWIG_9(file, line, func, Component.getCPtr(component), component, msg), true);
+  }
+
   public void setMessage(String aMsg) {
     opensimCommonJNI.OpenSimException_setMessage(swigCPtr, this, aMsg);
   }

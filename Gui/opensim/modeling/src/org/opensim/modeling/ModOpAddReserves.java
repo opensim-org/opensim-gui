@@ -90,6 +90,10 @@ public class ModOpAddReserves extends ModelOperator {
     this(opensimActuatorsAnalysesToolsJNI.new_ModOpAddReserves__SWIG_3(optimalForce, bounds, skipCoordsWithActu), true);
   }
 
+  public ModOpAddReserves(double optimalForce, double bounds, boolean skipCoordsWithActu, boolean skipResidualCoords) {
+    this(opensimActuatorsAnalysesToolsJNI.new_ModOpAddReserves__SWIG_4(optimalForce, bounds, skipCoordsWithActu, skipResidualCoords), true);
+  }
+
   public void operate(Model model, String arg1) {
     opensimActuatorsAnalysesToolsJNI.ModOpAddReserves_operate(swigCPtr, this, Model.getCPtr(model), model, arg1);
   }

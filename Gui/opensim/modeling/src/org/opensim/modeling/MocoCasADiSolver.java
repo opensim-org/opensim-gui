@@ -11,13 +11,7 @@ package org.opensim.modeling;
 /**
  *  This solver uses the CasADi library (https://casadi.org) to convert the<br>
  * MocoProblem into a generic nonlinear programming problem. CasADi efficiently<br>
- * calculcates the derivatives required to solve MocoProblem%s, and may<br>
- * solve your MocoProblem more quickly that MocoTropterSolver. In general,<br>
- * we hope that the feature sets of MocoCasADiSolver and MocoTropterSolver<br>
- * are the same.<br>
- * Note, however, that parameter optimization problems are implemented much<br>
- * less efficiently in this solver; for parameter optimization, first try<br>
- * MocoTropterSolver.<br>
+ * calculcates the derivatives required to solve MocoProblem%s.<br>
  * <br>
  * Sparsity<br>
  * ========<br>
@@ -75,8 +69,7 @@ package org.opensim.modeling;
  * By default, MocoCasADiSolver is much slower than MocoTroperSolver at<br>
  * handling problems with MocoParameters. Many parameters require invoking<br>
  * Model::initSystem() to take effect, and this function is expensive (for<br>
- * CasADi, we must invoke this function for every time point, while in Tropter,<br>
- * we can invoke the function only once for every NLP iterate). However, if you<br>
+ * CasADi, we must invoke this function for every time point). However, if you<br>
  * know that all parameters in your problem do not require Model::initSystem(),<br>
  * you can substantially speed up your optimization by setting the<br>
  * parameters_require_initsystem property to false. Be careful, though: you<br>

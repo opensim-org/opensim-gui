@@ -37,7 +37,7 @@ package org.opensim.modeling;
 MocoParameter p0;
 p0.setName("torso_mass");
 p0.appendComponentPath("torso");
-p0.setParameterName("mass");
+p0.setPropertyName("mass");
 MocoBounds massBounds(60, 80);
 p0.setBounds(massBounds);
 }<br>

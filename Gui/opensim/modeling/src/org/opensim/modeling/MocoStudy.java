@@ -57,10 +57,7 @@ solution.write("solution.sto");
  * Solver<br>
  * ------<br>
  * The default solver, MocoCasADiSolver, uses the **CasADi** automatic<br>
- * differentiation and optimization library. Moco also provides the<br>
- * MocoTropterSolver, which uses the **tropter** optimal control library that is<br>
- * part of the OpenSim project. If you want to use MocoTropterSolver instead of<br>
- * MocoCasADiSolver, call initTropterSolver() before solve(). We would like to<br>
+ * differentiation and optimization library. We would like to<br>
  * support users plugging in their own solvers, but there is no timeline for this.
  */
 public class MocoStudy extends OpenSimObject {
@@ -239,18 +236,6 @@ public class MocoStudy extends OpenSimObject {
    */
   public MocoCasADiSolver initCasADiSolver() {
     return new MocoCasADiSolver(opensimMocoJNI.MocoStudy_initCasADiSolver(swigCPtr, this), false);
-  }
-
-  /**
-   *  Call this method once you have finished setting up your MocoProblem.<br>
-   *  This returns a reference to the MocoSolver, which you can then edit.<br>
-   *  If using this method in C++, make sure to include the "&" in the<br>
-   *  return type; otherwise, you'll make a copy of the solver, and the copy<br>
-   *  will have no effect on this MocoStudy.<br>
-   *  This deletes the previous solver if one exists.
-   */
-  public MocoTropterSolver initTropterSolver() {
-    return new MocoTropterSolver(opensimMocoJNI.MocoStudy_initTropterSolver(swigCPtr, this), false);
   }
 
   /**

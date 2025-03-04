@@ -739,6 +739,20 @@ public class MocoTrack extends MocoTool {
     opensimMocoJNI.MocoTrack_setMarkersReferenceFromTRC__SWIG_1(swigCPtr, this, filename);
   }
 
+  /**
+   *  Set the marker weights based on a Set of MarkerWeight objects.
+   */
+  public void setMarkerWeightsFromMarkerWeightSet(SetMarkerWeights markerWeightSet) {
+    opensimMocoJNI.MocoTrack_setMarkerWeightsFromMarkerWeightSet(swigCPtr, this, SetMarkerWeights.getCPtr(markerWeightSet), markerWeightSet);
+  }
+
+  /**
+   *  Set the marker weights based on the IKMarkerTask objects of an IKTaskSet. 
+   */
+  public void setMarkerWeightsFromIKTaskSet(IKTaskSet ikTaskSet) {
+    opensimMocoJNI.MocoTrack_setMarkerWeightsFromIKTaskSet(swigCPtr, this, IKTaskSet.getCPtr(ikTaskSet), ikTaskSet);
+  }
+
   public MocoStudy initialize() {
     return new MocoStudy(opensimMocoJNI.MocoTrack_initialize(swigCPtr, this), true);
   }

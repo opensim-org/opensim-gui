@@ -61,6 +61,8 @@ public class opensimCommonJNI {
   public final static native long new_OpenSimException__SWIG_5(String jarg1, long jarg2, String jarg3, String jarg4);
   public final static native long new_OpenSimException__SWIG_6(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_);
   public final static native long new_OpenSimException__SWIG_7(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5);
+  public final static native long new_OpenSimException__SWIG_8(String jarg1, long jarg2, String jarg3, long jarg4, Component jarg4_);
+  public final static native long new_OpenSimException__SWIG_9(String jarg1, long jarg2, String jarg3, long jarg4, Component jarg4_, String jarg5);
   public final static native void delete_OpenSimException(long jarg1);
   public final static native void OpenSimException_setMessage(long jarg1, OpenSimException jarg1_, String jarg2);
   public final static native String OpenSimException_getMessage(long jarg1, OpenSimException jarg1_);
@@ -129,7 +131,8 @@ public class opensimCommonJNI {
   public final static native void Logger_private_addSink(long jarg1, LogSink jarg1_);
   public final static native void Logger_removeSink(long jarg1, LogSink jarg1_);
   public final static native void delete_Logger(long jarg1);
-  public final static native long new_InvalidPropertyValue(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5, String jarg6);
+  public final static native long new_InvalidPropertyValue__SWIG_0(String jarg1, long jarg2, String jarg3, long jarg4, OpenSimObject jarg4_, String jarg5, String jarg6);
+  public final static native long new_InvalidPropertyValue__SWIG_1(String jarg1, long jarg2, String jarg3, long jarg4, Component jarg4_, String jarg5, String jarg6);
   public final static native void delete_InvalidPropertyValue(long jarg1);
   public final static native void AbstractProperty_setAllowableListSize__SWIG_0(long jarg1, AbstractProperty jarg1_, int jarg2, int jarg3);
   public final static native void AbstractProperty_setAllowableListSize__SWIG_1(long jarg1, AbstractProperty jarg1_, int jarg2);
