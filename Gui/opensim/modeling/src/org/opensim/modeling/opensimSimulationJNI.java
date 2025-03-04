@@ -395,8 +395,8 @@ public class opensimSimulationJNI {
   public final static native void Mesh_set_mesh_file__SWIG_1(long jarg1, Mesh jarg1_, String jarg2);
   public final static native long new_Mesh__SWIG_0();
   public final static native long new_Mesh__SWIG_1(String jarg1);
-  public final static native void delete_Mesh(long jarg1);
   public final static native String Mesh_getGeometryFilename(long jarg1, Mesh jarg1_);
+  public final static native void delete_Mesh(long jarg1);
   public final static native long FrameGeometry_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void FrameGeometry_assign(long jarg1, FrameGeometry jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String FrameGeometry_getClassName();
