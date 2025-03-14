@@ -237,7 +237,7 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
         UUID forcrep_uuid = UUID.randomUUID(); //3f63, acf9
         expForce_json.put("uuid", forcrep_uuid.toString());
         expForce_json.put("type", "Arrow");
-        expForce_json.put("opensimtype", "ExperimentalForce");
+        expForce_json.put("userData",JSONUtilities.createUserDataObject("ExperimentalForce"));
         expForce_json.put("name", getName());
         //dir -- direction from origin. Must be a unit vector. 
         //origin -- Point at which the arrow starts.

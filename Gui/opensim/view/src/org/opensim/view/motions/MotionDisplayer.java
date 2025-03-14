@@ -319,7 +319,7 @@ public class MotionDisplayer {
             motionObjectsRoot.put("parent", modelVisJson.getModelUUID().toString());
             motionObjectsRoot.put("uuid", UUID.randomUUID().toString());
             motionObjectsRoot.put("type", "Group");
-            motionObjectsRoot.put("opensimType", "MotionObjects");
+            motionObjectsRoot.put("userData",JSONUtilities.createUserDataObject("MotionObjects"));
             motionObjectsRoot.put("name", simmMotionData.getName().concat("_Objects"));
             motionObjectsRoot.put("userData", "NonEditable");
             motionObjectsRoot.put("children", new JSONArray());

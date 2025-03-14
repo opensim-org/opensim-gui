@@ -128,5 +128,11 @@ public class JSONUtilities {
         out.flush();
         out.close();
     }
+    
+    public static JSONObject createUserDataObject(String osimType) {
+        JSONObject userDataJSON = new JSONObject();
+        userDataJSON.put("opensimType", osimType);
+        return userDataJSON;
+    }
 
 }
