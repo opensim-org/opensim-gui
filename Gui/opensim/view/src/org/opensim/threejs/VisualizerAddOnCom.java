@@ -93,7 +93,7 @@ public class VisualizerAddOnCom implements VisualizerAddOn {
         obj_json.put("uuid", objectUUID.toString());
         obj_json.put("type", "Mesh");
         obj_json.put("name", "Com");
-        obj_json.put("userData",JSONUtilities.createUserDataObject("ModelCom"));
+        obj_json.put("userData",JSONUtilities.createUserDataObject("ModelCom", false));
         obj_json.put("geometry", geometryUUID.toString());
         obj_json.put("material", materialUUID.toString());
         obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(transform, new Vec3(1.), 

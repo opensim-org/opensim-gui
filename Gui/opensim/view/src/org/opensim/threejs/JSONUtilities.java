@@ -129,9 +129,10 @@ public class JSONUtilities {
         out.close();
     }
     
-    public static JSONObject createUserDataObject(String osimType) {
+    public static JSONObject createUserDataObject(String osimType, boolean isDraggable) {
         JSONObject userDataJSON = new JSONObject();
         userDataJSON.put("opensimType", osimType);
+        userDataJSON.put("draggable", isDraggable);
         return userDataJSON;
     }
 

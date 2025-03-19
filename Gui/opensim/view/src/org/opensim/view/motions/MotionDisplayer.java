@@ -319,9 +319,8 @@ public class MotionDisplayer {
             motionObjectsRoot.put("parent", modelVisJson.getModelUUID().toString());
             motionObjectsRoot.put("uuid", UUID.randomUUID().toString());
             motionObjectsRoot.put("type", "Group");
-            motionObjectsRoot.put("userData",JSONUtilities.createUserDataObject("MotionObjects"));
+            motionObjectsRoot.put("userData",JSONUtilities.createUserDataObject("MotionObjects", false));
             motionObjectsRoot.put("name", simmMotionData.getName().concat("_Objects"));
-            motionObjectsRoot.put("userData", "NonEditable");
             motionObjectsRoot.put("children", new JSONArray());
             motionObjectsRoot.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
 

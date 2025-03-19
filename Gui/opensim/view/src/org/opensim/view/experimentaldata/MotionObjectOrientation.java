@@ -162,7 +162,7 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         expSensor_json.put("uuid", imurep_uuid.toString());
         expSensor_json.put("type", "Frame");
         expSensor_json.put("size", ModelVisualizationJson.getVisScaleFactor()*.5);
-        expSensor_json.put("userData",JSONUtilities.createUserDataObject("ExperimentalSensor"));
+        expSensor_json.put("userData",JSONUtilities.createUserDataObject("ExperimentalSensor", false));
         expSensor_json.put("name", getName());
         //dir -- direction from origin. Must be a unit vector. 
         //origin -- Point at which the arrow starts.
@@ -178,7 +178,6 @@ public class MotionObjectOrientation extends MotionObjectBodyPoint {
         expSensor_json.put("origin", origin);
         expSensor_json.put("castShadow", false);
         // Allow Graphical representation to be dragged
-        //expSensor_json.put("userData", "NonEditable");
         push_rotation_to_matrix(interpolatedStates, idx, expSensor_json);
         comp_uuids.add(imurep_uuid);
         ((JSONArray)bodyJson.get("children")).add(expSensor_json);

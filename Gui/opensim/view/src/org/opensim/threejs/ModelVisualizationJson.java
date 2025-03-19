@@ -389,7 +389,7 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("name", path.getAbsolutePathString());
         obj_json.put("points", pathpoint_jsonArr);
         obj_json.put("geometry", uuidForPathGeomGeometry.toString());
-        obj_json.put("userData",JSONUtilities.createUserDataObject("Path"));
+        obj_json.put("userData",JSONUtilities.createUserDataObject("Path", false));
         // Create json entry for material (path_material) and set skinning to true
         obj_json.put("material", pathmat_uuid.toString());
         obj_json.put("PathGeometry",pathGeomJson);
@@ -559,7 +559,7 @@ public class ModelVisualizationJson extends JSONObject {
         UUID groundUuid = UUID.randomUUID();
         model_ground_json.put("uuid", groundUuid.toString());
         model_ground_json.put("type", "Group");
-        model_ground_json.put("userData",JSONUtilities.createUserDataObject("Ground"));
+        model_ground_json.put("userData",JSONUtilities.createUserDataObject("Ground", false));
         model_ground_json.put("name", model.getGround().getAbsolutePathString());
         model_ground_json.put("model_ground", true);
         json_model_children.add(model_ground_json);
@@ -653,7 +653,7 @@ public class ModelVisualizationJson extends JSONObject {
         model_object = new JSONObject();
         model_object.put("uuid", modelUUID.toString());
         model_object.put("type", "Group");
-        model_object.put("userData",JSONUtilities.createUserDataObject("Model"));
+        model_object.put("userData",JSONUtilities.createUserDataObject("Model", true));
         model_object.put("name", model.getName());
         model_object.put("children", new JSONArray());
         model_object.put("matrix", JSONUtilities.createMatrixFromTransform(getTransformWRTScene(), new Vec3(1.), 1.0));
@@ -692,7 +692,8 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("uuid", mesh_uuid.toString());
         obj_json.put("type", "Mesh");
         obj_json.put("name", geomName);
-        obj_json.put("userData",JSONUtilities.createUserDataObject(opensimComponent.getConcreteClassName()));
+        String concreteType = opensimComponent.getConcreteClassName();
+        obj_json.put("userData",JSONUtilities.createUserDataObject(opensimComponent.getConcreteClassName(), movableOpensimTypes.keySet().contains(concreteType)));
         obj_json.put("geometry", uuid_geom.toString());
         obj_json.put("material", uuid_mat.toString());
         obj_json.put("matrix", JSONUtilities.createMatrixFromTransform(dg.getTransform(), dg.getScaleFactors(), visScaleFactor));
@@ -700,9 +701,6 @@ public class ModelVisualizationJson extends JSONObject {
         if (!visible){
             obj_json.put("visible", false);
         }
-        String concreteType = opensimComponent.getConcreteClassName();
-        if (!movableOpensimTypes.keySet().contains(concreteType))
-            obj_json.put("userData", "NonEditable");
         mobody_objects.add(obj_json);
         return obj_json;
     }   
@@ -1595,11 +1593,11 @@ public class ModelVisualizationJson extends JSONObject {
         bpptInBodyJson.put("type", "Mesh");
         String name = "";
         if (pathPoint!= null){
-            bpptInBodyJson.put("userData",JSONUtilities.createUserDataObject(pathPoint.getConcreteClassName()));
+            bpptInBodyJson.put("userData",JSONUtilities.createUserDataObject(pathPoint.getConcreteClassName(), false));
             name = pathPoint.getName();
         }
         else
-            bpptInBodyJson.put("userData",JSONUtilities.createUserDataObject("ComputedPathPoint"));
+            bpptInBodyJson.put("userData",JSONUtilities.createUserDataObject("ComputedPathPoint", false));
         bpptInBodyJson.put("name", name);
         bpptInBodyJson.put("geometry", bpptGeometryJson.get("uuid"));
         bpptInBodyJson.put("material", materialUuidString);
@@ -1809,7 +1807,7 @@ public class ModelVisualizationJson extends JSONObject {
         obj_json.put("points", pathpoint_jsonArr);
         obj_json.put("active", pathpointActive_jsonArr);
         obj_json.put("geometry", uuidForPathGeomGeometry.toString());
-        obj_json.put("userData",JSONUtilities.createUserDataObject("Path"));
+        obj_json.put("userData",JSONUtilities.createUserDataObject("Path", false));
         gndChildren.add(obj_json);
         // Create json entry for material (path_material) and set skinning to true
         obj_json.put("material", mat_uuid.toString());

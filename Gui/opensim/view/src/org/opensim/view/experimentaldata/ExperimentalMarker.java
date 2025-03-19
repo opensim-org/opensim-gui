@@ -101,7 +101,7 @@ public class ExperimentalMarker extends MotionObjectBodyPoint {
         UUID mesh_uuid = UUID.randomUUID();
         expMarker_json.put("uuid", mesh_uuid.toString());
         expMarker_json.put("type", "Mesh");
-        expMarker_json.put("userData",JSONUtilities.createUserDataObject("ExperimentalMarker"));
+        expMarker_json.put("userData",JSONUtilities.createUserDataObject("ExperimentalMarker", false));
         expMarker_json.put("name", getName());
         expMarker_json.put("geometry", motionDisplayer.getExperimentalMarkerGeometryJson().get("uuid"));
         expMarker_json.put("material", motionDisplayer.getExperimentalMarkerMaterialJson().get("uuid"));
@@ -120,7 +120,6 @@ public class ExperimentalMarker extends MotionObjectBodyPoint {
         }
         expMarker_json.put("position", pos);
         expMarker_json.put("castShadow", false);
-        expMarker_json.put("userData", "NonEditable");
         
         comp_uuids.add(mesh_uuid);
         return expMarker_json;
