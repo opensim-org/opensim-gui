@@ -51,11 +51,18 @@ jobs:
         echo "ANT_HOME=C:\\Program Files\\NetBeans-12.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
       
     - name: Checkout opensim-core main
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
-    
+         
+    - name: Obtain opensim-core commit
+      id: opensim-core-commit
+      run: |
+        cd opensim-core
+        opensim_core_commit=$(git rev-parse HEAD)
+        echo "hash=$opensim_core_commit" >> $GITHUB_OUTPUT
+        
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
       uses: actions/cache@v3
@@ -82,14 +89,7 @@ jobs:
         $env:CXXFLAGS = "/W0"
         cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 17 2022" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DWIG_DIR=C:/ProgramData/chocolatey/lib/swig -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         cmake . -LAH
-        cmake --build . --config Release -- /maxcpucount:2 
-        
-    - name: Obtain opensim-core commit
-      id: opensim-core-commit
-      run: |
-        cd opensim-core
-        $opensim_core_commit=(git rev-parse HEAD)
-        echo "hash=$opensim_core_commit" >> $GITHUB_OUTPUT
+        cmake --build . --config Release -- /maxcpucount:2
 
     - name: Cache opensim-core
       id: cache-core
@@ -293,9 +293,9 @@ jobs:
         path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
 
   ubuntu:
-    name: Ubuntu2004
+    name: Ubuntu2204
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
 
@@ -424,5 +424,5 @@ jobs:
     - name: Upload GUI installer
       uses: actions/upload-artifact@v4
       with:
-        name: OpenSim-${{ steps.build-gui.outputs.version }}-ub20-linux
+        name: OpenSim-${{ steps.build-gui.outputs.version }}-ub22-linux
         path: OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz
