@@ -13,14 +13,13 @@ on:
       - '*'
 
 jobs:
-  windows:
-    name: Windows
-
-    runs-on: windows-2019
+  windows2022:
+    runs-on: windows-2022
+    name: Windows 2022
 
     steps:
     - name: Checkout opensim-gui
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install SWIG
       run: |
