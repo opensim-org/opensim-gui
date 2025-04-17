@@ -318,7 +318,7 @@ jobs:
       run: python3 -m pip install numpy==1.25
       
     - name: Install packages
-      run: sudo apt-get update && sudo apt-get install --yes liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen gfortran-7
+      run: sudo apt-get update && sudo apt-get install --yes liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen gfortran-11
      
     - name: Install SWIG
       if: steps.cache-swig.outputs.cache-hit != 'true'
