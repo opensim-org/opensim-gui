@@ -80,7 +80,7 @@ jobs:
         # /W0 disables warnings. The other flags are copied from CMake's
         # default CMAKE_CXX_FLAGS.
         # https://msdn.microsoft.com/en-us/library/19z1t1wy.aspx
-        $env:CXXFLAGS = "/W0"
+        $env:CXXFLAGS = "/W0 /MD"
         cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 17 2022" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DWIG_DIR=C:/ProgramData/chocolatey/lib/swig -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2 
@@ -106,7 +106,7 @@ jobs:
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
         chdir $env:GITHUB_WORKSPACE\\build_core
-        $env:CXXFLAGS = "/W0"
+        $env:CXXFLAGS = "/W0 /MD"
         cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DPython3_ROOT_DIR=C:/hostedtoolcache/windows/Python/3.10.11/x64 -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2
