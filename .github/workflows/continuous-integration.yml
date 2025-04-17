@@ -16,11 +16,11 @@ jobs:
   windows:
     name: Windows
 
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
     - name: Checkout opensim-gui
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install SWIG
       run: |
@@ -52,7 +52,7 @@ jobs:
         echo "ANT_HOME=C:\\Program Files\\NetBeans-12.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
       
     - name: Checkout opensim-core main
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
@@ -81,7 +81,7 @@ jobs:
         # default CMAKE_CXX_FLAGS.
         # https://msdn.microsoft.com/en-us/library/19z1t1wy.aspx
         $env:CXXFLAGS = "/W0"
-        cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 16 2019" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DWIG_DIR=C:/ProgramData/chocolatey/lib/swig -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 17 2022" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DWIG_DIR=C:/ProgramData/chocolatey/lib/swig -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2 
         
@@ -120,7 +120,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -G"Visual Studio 16 2019" -A x64 -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans-12.3/netbeans;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans-12.3/netbeans/harness"
+        cmake ../ -G"Visual Studio 17 2022" -A x64 -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans-12.3/netbeans;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans-12.3/netbeans/harness"
         cmake --build . --target CopyOpenSimCore --config Release
         cmake --build . --target CopyModels --config Release
         cmake --build . --target PrepareInstaller --config Release
@@ -151,10 +151,10 @@ jobs:
 
     steps:
     - name: Checkout opensim-gui
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Checkout opensim-core main
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
@@ -294,17 +294,17 @@ jobs:
         path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
 
   ubuntu:
-    name: Ubuntu2004
+    name: Ubuntu2204
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
 
     - name: Checkout opensim-gui
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       
     - name: Checkout opensim-core main
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
