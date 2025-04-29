@@ -40,10 +40,10 @@
             </not>
         </and>
     </condition>
-    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/threejs">
+    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/opensim-viewer">
         <os family="unix"/>
     </condition>
-    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/OpenSim/threejs">
+    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/OpenSim/opensim-viewer">
         <os family="windows"/>
     </condition>
     <property name="app.conf" value="${installer-files.dir}/opensim.conf"/>
@@ -159,17 +159,9 @@
     </target>
     <target name="copy-visualizer" description="Copy Visualizer to installer">
         <copy todir="${opensim.threejs.dir}">
-            <fileset dir="threejs">
-                <exclude name="**/docs/**"/>
-                <exclude name="**/test/**"/>
-                <exclude name="**/examples/**"/>
+            <fileset dir="opensim-viewer">
+                <exclude name=".github/**"/>
             </fileset>
-        </copy>
-        <copy todir="${opensim.threejs.dir}/examples/js">
-            <fileset dir="threejs/examples/js" />
-        </copy>
-        <copy todir="${opensim.threejs.dir}/examples/jsm">
-            <fileset dir="threejs/examples/jsm" />
         </copy>
     </target>
     <target name="build-mac-installer" depends="build-mac,copy-visualizer,copy-models">
