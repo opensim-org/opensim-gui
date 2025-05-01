@@ -2090,6 +2090,10 @@ public class AnalyzeAndForwardToolPanel extends BaseToolPanel implements Observe
 
    private void analyzeControlsCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_analyzeControlsCheckBoxActionPerformed
       analyzeToolModel().setControlsEnabled(analyzeControlsCheckBox.isSelected());
+      if (!analyzeControlsCheckBox.isSelected()){
+          analyzeControlsFileName.setFileName("", false);
+          analyzeToolModel().setControlsFileName("");
+      }
    }//GEN-LAST:event_analyzeControlsCheckBoxActionPerformed
 
    private void inputSourceRadioButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inputSourceRadioButtonActionPerformed

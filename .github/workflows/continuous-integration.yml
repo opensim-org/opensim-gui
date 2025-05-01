@@ -16,11 +16,11 @@ jobs:
   windows:
     name: Windows
 
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
     - name: Checkout opensim-gui
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install SWIG
       run: |
@@ -52,7 +52,7 @@ jobs:
         echo "ANT_HOME=C:\\Program Files\\NetBeans-12.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
       
     - name: Checkout opensim-core main
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
@@ -80,8 +80,8 @@ jobs:
         # /W0 disables warnings. The other flags are copied from CMake's
         # default CMAKE_CXX_FLAGS.
         # https://msdn.microsoft.com/en-us/library/19z1t1wy.aspx
-        $env:CXXFLAGS = "/W0"
-        cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 16 2019" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DWIG_DIR=C:/ProgramData/chocolatey/lib/swig -DOPENSIM_WITH_TROPTER:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        $env:CXXFLAGS = "/W0 /MD"
+        cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 17 2022" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DWIG_DIR=C:/ProgramData/chocolatey/lib/swig -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2 
         
@@ -101,13 +101,13 @@ jobs:
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
     
     - name: Build opensim-core
-      # if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
         chdir $env:GITHUB_WORKSPACE\\build_core
-        $env:CXXFLAGS = "/W0"
-        cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DPython3_ROOT_DIR=C:/hostedtoolcache/windows/Python/3.10.11/x64 -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
+        $env:CXXFLAGS = "/W0 /MD"
+        cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 17 2022" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DPython3_ROOT_DIR=C:/hostedtoolcache/windows/Python/3.10.11/x64 -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2
         cmake --install .
@@ -120,7 +120,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -G"Visual Studio 16 2019" -A x64 -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans-12.3/netbeans;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans-12.3/netbeans/harness"
+        cmake ../ -G"Visual Studio 17 2022" -A x64 -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans-12.3/netbeans;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans-12.3/netbeans/harness"
         cmake --build . --target CopyOpenSimCore --config Release
         cmake --build . --target CopyModels --config Release
         cmake --build . --target PrepareInstaller --config Release
@@ -139,7 +139,7 @@ jobs:
         makensis.exe make_installer.nsi
         mv OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe $env:GITHUB_WORKSPACE
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-win64
         path: OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe
@@ -151,10 +151,10 @@ jobs:
 
     steps:
     - name: Checkout opensim-gui
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Checkout opensim-core main
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
@@ -165,6 +165,7 @@ jobs:
         
     - name: Install packages
       run: |
+        brew pin cmake
         brew install cmake pkgconfig autoconf libtool automake wget pcre doxygen llvm
         brew reinstall gcc
         pip3 install numpy==1.25
@@ -227,7 +228,7 @@ jobs:
       run: |
         mkdir build_deps
         cd build_deps
-        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on  -DOPENSIM_WITH_CASADI:BOOL=on -DOPENSIM_WITH_TROPTER:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DCMAKE_BUILD_TYPE=Release
+        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on  -DOPENSIM_WITH_CASADI:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DCMAKE_BUILD_TYPE=Release
         cmake . -LAH
         cmake --build . --config Release
         
@@ -288,23 +289,23 @@ jobs:
         mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-mac
         path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
 
   ubuntu:
-    name: Ubuntu2004
+    name: Ubuntu2204
 
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
 
     steps:
 
     - name: Checkout opensim-gui
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       
     - name: Checkout opensim-core main
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
@@ -318,7 +319,7 @@ jobs:
       run: python3 -m pip install numpy==1.25
       
     - name: Install packages
-      run: sudo apt-get update && sudo apt-get install --yes liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen gfortran-7
+      run: sudo apt-get update && sudo apt-get install --yes liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen gfortran-11
      
     - name: Install SWIG
       if: steps.cache-swig.outputs.cache-hit != 'true'
@@ -368,7 +369,7 @@ jobs:
       run: |
         mkdir build_deps
         cd build_deps
-        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on  -DOPENSIM_WITH_CASADI:BOOL=on -DOPENSIM_WITH_TROPTER:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on  -DOPENSIM_WITH_CASADI:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         cmake . -LAH
         cmake --build . --config Release
         
@@ -423,7 +424,7 @@ jobs:
         mv Gui/opensim/dist/OpenSim-$VERSION.tar.gz $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-ub20-linux
         path: OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz
