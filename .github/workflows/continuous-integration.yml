@@ -116,7 +116,10 @@ jobs:
 
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
-      
+
+    - name: Set CI to false
+      run: echo "CI=false" >> $GITHUB_ENV
+
     - name: Build GUI
       id: build-gui
       run: |
