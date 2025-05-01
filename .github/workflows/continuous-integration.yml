@@ -113,7 +113,7 @@ jobs:
         cmake --install .
 
     - name: Update submodules
-      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
       
     - name: Build GUI
       id: build-gui
@@ -266,7 +266,7 @@ jobs:
         cmake --install .
 
     - name: Update submodules
-      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
 
     - name: Build GUI
       id: build-gui
@@ -404,7 +404,7 @@ jobs:
       
 
     - name: Update submodules
-      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
 
     - name: Build GUI
       id: build-gui
