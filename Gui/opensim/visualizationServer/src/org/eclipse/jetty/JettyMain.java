@@ -45,7 +45,7 @@ import org.opensim.utils.TheApp;
 public class JettyMain {
     private static boolean serverup = false;
     private static final String serverRootDir = TheApp.getInstallDir();
-    private static final String pathToStartPage = "/threejs/editor/";
+    private static final String pathToStartPage = "/opensim-viewer/";
     private static int SERVER_PORT = 8002;
     private static String serverWorkingDir = serverRootDir+"/opensim-viewer/";
     
