@@ -43,7 +43,7 @@
     <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/opensim-viewer">
         <os family="unix"/>
     </condition>
-    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/opensim-viewer">
+    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/opensim/opensim-viewer">
         <os family="windows"/>
     </condition>
     <property name="app.conf" value="${installer-files.dir}/opensim.conf"/>
