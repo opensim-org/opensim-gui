@@ -60,8 +60,8 @@ public final class FileLoadDataAction extends CallableSystemAction {
                     AnnotatedMotion amot = new AnnotatedMotion(newStorage, markerData.getMarkerNames());
                     amot.setUnitConversion(markerData.getUnits().convertTo(Units.UnitType.Meters));
                     amot.setName(new File(fileName).getName());
-                    amot.setDataRate(markerData.getDataRate());
-                    amot.setCameraRate(markerData.getCameraRate());
+                    amot.setDataRate((int)markerData.getDataRate());
+                    amot.setCameraRate((int)markerData.getCameraRate());
                     amot.setUnits(markerData.getUnits());
                     // Add the visuals to support it
                     ModelForExperimentalData modelForDataImport = new ModelForExperimentalData(nextNumber++, amot);
