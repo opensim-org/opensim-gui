@@ -88,6 +88,7 @@ public class ModelVisualizationJson extends JSONObject {
     static {
         PathColorMapFactory.registerPathColorMap("Classic", new LegacyPathColorMap());
         PathColorMapFactory.registerPathColorMap("Modern", new ModernPathColorMap());
+        PathColorMapFactory.registerPathColorMap("Book", new BookPathColorMap());
     }
     /**
      * @param currentPathColorMap the currentPathColorMap to set
