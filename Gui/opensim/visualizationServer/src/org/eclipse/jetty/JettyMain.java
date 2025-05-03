@@ -76,6 +76,7 @@ public class JettyMain {
                 Server server = new Server(SERVER_PORT);
 
                 String appDir = serverRootDir;
+                System.out.println("appDir: %s"+appDir);
                 File fp = new File(appDir);
                 if (!fp.exists()){
                     // Try adding leading "/"
