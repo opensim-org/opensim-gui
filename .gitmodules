@@ -5,10 +5,6 @@
 	path = opensim-visualizer
 	url = https://github.com/opensim-org/opensim-visualizer
 	branch = opensim-gui
-[submodule "Gui/opensim/threejs"]
-	path = Gui/opensim/threejs
-	url = https://github.com/opensim-org/three.js
-	branch = tweak_default_scene
 [submodule "Gui/opensim/opensim-viewer"]
 	path = Gui/opensim/opensim-viewer
 	url = https://github.com/opensim-org/opensim-viewer
