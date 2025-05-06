@@ -185,7 +185,7 @@
                 <include name="**/*"/>
             </fileset>
         </copy>
-        <copy todir="${opensim.threejs.dir}/..">
+        <copy todir="${opensim.dist.dir}/opensim">
             <fileset dir="opensim-viewer/build/assets">
                 <include name="**/*"/>
             </fileset>
