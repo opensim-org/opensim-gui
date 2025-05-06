@@ -162,13 +162,18 @@
             <arg value="install"/>
         </exec>
     </target>
+    <target name="install_npm_modules_mac" description="install modules using npm">
+        <exec executable="npm" dir="opensim-viewer">
+            <arg value="install"/>
+        </exec>
+    </target>
     <target name="build-visualizer-app" description="build using npm" depends="install_npm_modules">
         <exec executable="npm.cmd"  dir="opensim-viewer">
             <arg value="run"/>
             <arg value="build"/>
         </exec>
     </target>
-    <target name="build-visualizer-app-mac" description="build using npm" depends="install_npm_modules">
+    <target name="build-visualizer-app-mac" description="build using npm" depends="install_npm_modules_mac">
         <exec executable="npm"  dir="opensim-viewer">
             <arg value="run"/>
             <arg value="build"/>
@@ -177,6 +182,12 @@
     <target name="copy-visualizer" description="Copy Visualizer to installer" depends="build-visualizer-app">
         <copy todir="${opensim.threejs.dir}">
             <fileset dir="opensim-viewer/build">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+        <copy todir="${opensim.threejs.dir}/..">
+            <fileset dir="opensim-viewer/build/assets">
+                <include name="**/*"/>
             </fileset>
         </copy>
     </target>
