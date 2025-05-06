@@ -168,13 +168,19 @@
             <arg value="build"/>
         </exec>
     </target>
+    <target name="build-visualizer-app-mac" description="build using npm" depends="install_npm_modules">
+        <exec executable="npm"  dir="opensim-viewer">
+            <arg value="run"/>
+            <arg value="build"/>
+        </exec>
+    </target>
     <target name="copy-visualizer" description="Copy Visualizer to installer" depends="build-visualizer-app">
         <copy todir="${opensim.threejs.dir}">
             <fileset dir="opensim-viewer/build">
             </fileset>
         </copy>
     </target>
-    <target name="build-mac-installer" depends="build-mac,copy-visualizer,copy-models">
+    <target name="build-mac-installer" depends="build-mac,build-visualizer-app-mac,copy-visualizer,copy-models">
         <property name="lib.dir" value="/Users/aymanhabib/dev/install/opensim-core-install/lib"/>
         <!--<echoproperties/>-->
 
