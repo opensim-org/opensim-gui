@@ -40,10 +40,10 @@
             </not>
         </and>
     </condition>
-    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/opensim-viewer">
+    <condition property="opensim.viewer.dir" value="${opensim.dist.dir}/opensim-viewer">
         <os family="unix"/>
     </condition>
-    <condition property="opensim.threejs.dir" value="${opensim.dist.dir}/opensim/opensim-viewer">
+    <condition property="opensim.viewer.dir" value="${opensim.dist.dir}/opensim/opensim-viewer">
         <os family="windows"/>
     </condition>
     <property name="app.conf" value="${installer-files.dir}/opensim.conf"/>
@@ -180,26 +180,27 @@
         </exec>
     </target>
     <target name="copy-visualizer" description="Copy Visualizer to installer" depends="build-visualizer-app">
-        <copy todir="${opensim.threejs.dir}">
+        <echo message="Starting copy-visualizer..."/>
+        <copy todir="${opensim.viewer.dir}">
             <fileset dir="opensim-viewer/build">
                 <include name="**/*"/>
             </fileset>
         </copy>
-        <copy todir="${opensim.dist.dir}/opensim">
-            <fileset dir="opensim-viewer/build/assets">
-                <include name="**/*"/>
+        <copy todir="${opensim.viewer.dir}/..">
+            <fileset dir="opensim-viewer/build">
+                <include name="assets/**"/>
             </fileset>
         </copy>
     </target>
         <target name="copy-visualizer-mac" description="Copy Visualizer to installer" depends="build-visualizer-app-mac">
-        <copy todir="${opensim.threejs.dir}">
+        <copy todir="${opensim.viewer.dir}">
             <fileset dir="opensim-viewer/build">
                 <include name="**/*"/>
             </fileset>
         </copy>
         <copy todir="${opensim.dist.dir}/opensim">
-            <fileset dir="opensim-viewer/build/assets">
-                <include name="**/*"/>
+            <fileset dir="opensim-viewer/build">
+                <include name="assets/*"/>
             </fileset>
         </copy>
     </target>
