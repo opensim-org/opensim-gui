@@ -191,7 +191,19 @@
             </fileset>
         </copy>
     </target>
-    <target name="build-mac-installer" depends="build-mac,build-visualizer-app-mac,copy-visualizer,copy-models">
+        <target name="copy-visualizer-mac" description="Copy Visualizer to installer" depends="build-visualizer-app-mac">
+        <copy todir="${opensim.threejs.dir}">
+            <fileset dir="opensim-viewer/build">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+        <copy todir="${opensim.dist.dir}/opensim">
+            <fileset dir="opensim-viewer/build/assets">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="build-mac-installer" depends="build-mac,build-visualizer-app-mac,copy-visualizer-mac,copy-models">
         <property name="lib.dir" value="/Users/aymanhabib/dev/install/opensim-core-install/lib"/>
         <!--<echoproperties/>-->
 
