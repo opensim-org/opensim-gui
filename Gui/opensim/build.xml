@@ -186,21 +186,11 @@
                 <include name="**/*"/>
             </fileset>
         </copy>
-        <copy todir="${opensim.viewer.dir}/..">
-            <fileset dir="opensim-viewer/build">
-                <include name="assets/**"/>
-            </fileset>
-        </copy>
     </target>
         <target name="copy-visualizer-mac" description="Copy Visualizer to installer" depends="build-visualizer-app-mac">
         <copy todir="${opensim.viewer.dir}">
             <fileset dir="opensim-viewer/build">
                 <include name="**/*"/>
-            </fileset>
-        </copy>
-        <copy todir="${opensim.dist.dir}/opensim">
-            <fileset dir="opensim-viewer/build">
-                <include name="assets/*"/>
             </fileset>
         </copy>
     </target>
