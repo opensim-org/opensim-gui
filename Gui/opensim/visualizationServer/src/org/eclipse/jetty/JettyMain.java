@@ -44,10 +44,10 @@ import org.opensim.utils.TheApp;
  */
 public class JettyMain {
     private static boolean serverup = false;
-    private static final String serverRootDir = TheApp.getInstallDir();
-    private static final String pathToStartPage = "/opensim-viewer/";
+    private static final String serverRootDir = TheApp.getInstallDir()+"/opensim-viewer/";
+    private static final String pathToStartPage = "";
     private static int SERVER_PORT = 8002;
-    private static String serverWorkingDir = serverRootDir+"/opensim-viewer/";
+    private static String serverWorkingDir = serverRootDir;
     
     // Use static block to adjust SERVER_PORT if specified
     static {
@@ -85,7 +85,7 @@ public class JettyMain {
                         appDir = "/"+appDir;
                     // else should abort
                 }
-                serverWorkingDir = appDir+"/opensim-viewer/";
+                serverWorkingDir = appDir;
                 URI webRootUri = new File(appDir).toURI();
                 System.out.println("Web Root URI: %s%n"+webRootUri);
 
