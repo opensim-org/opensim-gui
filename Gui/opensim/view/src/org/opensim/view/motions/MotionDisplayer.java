@@ -145,7 +145,7 @@ public class MotionDisplayer {
     OpenSimContext dContext; 
     ArrayStr stateNames;
     private boolean renderMuscleActivations=false;
-    private double experimentalMarkerRadius=1000;
+    private double experimentalMarkerRadius=1;
     private double experimentalForceScaleFactor=1;
     String DEFAULT_FORCE_SHAPE="arrow";
     private String currentForceShape;
@@ -319,9 +319,8 @@ public class MotionDisplayer {
             motionObjectsRoot.put("parent", modelVisJson.getModelUUID().toString());
             motionObjectsRoot.put("uuid", UUID.randomUUID().toString());
             motionObjectsRoot.put("type", "Group");
-            motionObjectsRoot.put("opensimType", "MotionObjects");
+            motionObjectsRoot.put("userData",JSONUtilities.createUserDataObject("MotionObjects", false));
             motionObjectsRoot.put("name", simmMotionData.getName().concat("_Objects"));
-            motionObjectsRoot.put("userData", "NonEditable");
             motionObjectsRoot.put("children", new JSONArray());
             motionObjectsRoot.put("matrix", JSONUtilities.createMatrixFromTransform(new Transform(), new Vec3(1.), 1.0));
 
@@ -371,7 +370,7 @@ public class MotionDisplayer {
                 defaultMarkerRadiusString);
         TheApp.getCurrentVersionPreferences().put("Visualizer: Experimental Marker Radius (mm)", currentSize);
         this.experimentalForceScaleFactor = 1.0;
-        this.experimentalMarkerRadius = Double.parseDouble(currentSize);
+        this.experimentalMarkerRadius = Double.parseDouble(currentSize)*.001;
         this.model = model;
         dContext= OpenSimDB.getInstance().getContext(model);
         simmMotionData = motionData;

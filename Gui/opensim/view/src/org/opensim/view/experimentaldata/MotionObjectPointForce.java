@@ -237,7 +237,7 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
         UUID forcrep_uuid = UUID.randomUUID(); //3f63, acf9
         expForce_json.put("uuid", forcrep_uuid.toString());
         expForce_json.put("type", "Arrow");
-        expForce_json.put("opensimtype", "ExperimentalForce");
+        expForce_json.put("userData",JSONUtilities.createUserDataObject("ExperimentalForce", false));
         expForce_json.put("name", getName());
         //dir -- direction from origin. Must be a unit vector. 
         //origin -- Point at which the arrow starts.
@@ -262,7 +262,6 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
         }
         expForce_json.put("dir", dir);
         expForce_json.put("castShadow", false);
-        expForce_json.put("userData", "NonEditable");
         expForce_json.put("color", JSONUtilities.mapColorToHex(motionDisplayer.getDefaultForceColorVec3()));
         Transform xform = new Transform();
         double length = Math.sqrt(Math.pow(direction.get(0),2)+

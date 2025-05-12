@@ -21,6 +21,8 @@ jobs:
     steps:
     - name: Checkout opensim-gui
       uses: actions/checkout@v4
+      with:
+          ref: wire_viewer_to_gui
 
     - name: Install SWIG
       run: |
@@ -113,8 +115,11 @@ jobs:
         cmake --install .
 
     - name: Update submodules
-      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
-      
+      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
+
+    - name: Set CI to false
+      run: echo "CI=false" >> $GITHUB_ENV
+
     - name: Build GUI
       id: build-gui
       run: |
@@ -152,7 +157,9 @@ jobs:
     steps:
     - name: Checkout opensim-gui
       uses: actions/checkout@v4
-
+      with:
+          ref: wire_viewer_to_gui
+          
     - name: Checkout opensim-core main
       uses: actions/checkout@v4
       with:
@@ -266,7 +273,7 @@ jobs:
         cmake --install .
 
     - name: Update submodules
-      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
 
     - name: Build GUI
       id: build-gui
@@ -303,6 +310,8 @@ jobs:
 
     - name: Checkout opensim-gui
       uses: actions/checkout@v4
+      with:
+          ref: wire_viewer_to_gui
       
     - name: Checkout opensim-core main
       uses: actions/checkout@v4
@@ -404,7 +413,7 @@ jobs:
       
 
     - name: Update submodules
-      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
 
     - name: Build GUI
       id: build-gui

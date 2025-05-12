@@ -50,8 +50,7 @@ public class BodyVisualizationJson extends JSONObject{
         this.body = body;
         put("uuid", uuid.toString());
         put("type", "Group");
-        put("opensimType", "Frame");
-        put("userData", "NonEditable");
+        put("userData", JSONUtilities.createUserDataObject("Frame", false));
         put("name", body.getAbsolutePathString());
         Transform bodyXform = body.getTransformInGround(modelJson.getState());
         put("matrix", JSONUtilities.createMatrixFromTransform(bodyXform, vec3Unit, modelJson.getVisScaleFactor()));
@@ -66,7 +65,7 @@ public class BodyVisualizationJson extends JSONObject{
         UUID uuidForComGeometry = UUID.randomUUID();
         geomJson.put("uuid", uuidForComGeometry.toString());
         geomJson.put("type", "SphereGeometry");
-        geomJson.put("radius", 25);
+        geomJson.put("radius", "0.025");
         comGeometryUUID = uuidForComGeometry;
         return geomJson;
     }     
@@ -92,7 +91,7 @@ public class BodyVisualizationJson extends JSONObject{
         obj_json.put("uuid", comObjectUUID.toString());
         obj_json.put("type", "Mesh");
         obj_json.put("name", "Com");
-        obj_json.put("opensimType", "ModelCom");
+        obj_json.put("userData",JSONUtilities.createUserDataObject("BodyCom", false));
         obj_json.put("geometry", comGeometryUUID.toString());
         obj_json.put("material", comMaterialUUID.toString());
         Transform localTransform = new Transform();
