@@ -347,13 +347,6 @@ public class ForwardToolModel extends AbstractToolModelWithExternalLoads {
    //------------------------------------------------------------------------
    // Integrator settings (continued from AbstractToolModel
    //------------------------------------------------------------------------
-   public boolean getUseSpecifiedDt() { return forwardTool().getUseSpecifiedDt(); }
-   public void setUseSpecifiedDt(boolean useSpecifiedDt) {
-      if(getUseSpecifiedDt() != useSpecifiedDt) {
-         forwardTool().setUseSpecifiedDt(useSpecifiedDt);
-         setModified(AbstractToolModel.Operation.IntegratorSettingsChanged);
-      }
-   }
 
    //------------------------------------------------------------------------
    // External loads get/set (don't need to call setModified since AbstractToolModel does that)
