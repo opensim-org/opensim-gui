@@ -9,21 +9,62 @@
 package org.opensim.modeling;
 
 /**
- * A class that manages the execution of a simulation. This class uses a<br>
- * SimTK::Integrator and SimTK::TimeStepper to perform the simulation. By<br>
- * default, a Runge-Kutta-Merson integrator is used, but can be changed by<br>
- * using setIntegratorMethod().<br>
  * <br>
- * In order to prevent an inconsistency between the Integrator and TimeStepper,<br>
- * we only create a TimeStepper once, specifically when we call<br>
- * initialize(). To ensure this, the Manager will throw<br>
- * an exception if initialize() is called more than once. Note<br>
- * that editing the SimTK::State after calling initialize()<br>
- * will not affect the simulation.<br>
+ * A class that manages the execution of a simulation.<br>
  * <br>
- * Note that this interface means that you cannot "reinitialize" a Manager.<br>
- * If you make changes to the SimTK::State, a new Manager must be created<br>
- * before integrating again.
+ * This class uses a SimTK::Integrator and SimTK::TimeStepper to perform the<br>
+ * simulation. By default, a Runge-Kutta-Merson integrator is used, but can be<br>
+ * changed by using setIntegratorMethod().<br>
+ * <br>
+ * <br>
+ * The basic usage of a Manager is to construct it with a Model and then call<br>
+ * initialize() and integrate():<br>
+ * <br>
+ * {@code 
+SimTK::State state = model.initSystem();
+Manager manager(model);
+manager.initialize(state);
+state = manager.integrate(1.0);
+}<br>
+ * <br>
+ * See the documentation for integrate() for more usage examples.<br>
+ * <br>
+ * <br>
+ * Upon construction, a Manager creates a SimTK::Integrator (defaulted to<br>
+ * SimTK::RungeKuttaMersonIntegrator) and a SimTK::TimeStepper. These will only<br>
+ * be changed if setIntegratorMethod() is called. Therefore, any changes to the<br>
+ * SimTK::Integrator (e.g., via setIntegratorAccuracy()) should be made after<br>
+ * calling setIntegratorMethod(). Otherwise, these settings will be overridden<br>
+ * when setIntegratorMethod() is called.<br>
+ * <br>
+ * <br>
+ * After configuring the SimTK::Integrator, call the initialize() method to<br>
+ * initialize the Manager. This method initializes the internal<br>
+ * SimTK::TimeStepper and prepares data structures to record simulation<br>
+ * trajectory (e.g., if setRecordStatesTrajectory() or setWriteToStorage()<br>
+ * are set to true).<br>
+ * <br>
+ * Manager::initialize() must be called before calling Manager::integrate(). A<br>
+ * Manager may be reinitialized by calling initialize() with a different<br>
+ * initial State. Note that this effectively resets the simulation: the internal<br>
+ * SimTK::TimeStepper is reinitialized and the internal data structures are<br>
+ * cleared.<br>
+ * <br>
+ * <br>
+ * Results from a simulation can be obtained by enabling the appropriate<br>
+ * settings before calling Manager::integrate(). Manager::setPerformAnalyses()<br>
+ * enables the execution of all analyses registered with the Model during the<br>
+ * simulation via AnalysisSet::step() and is enabled by default.<br>
+ * Manager::setWriteToStorage() enables the writing of the simulation results to<br>
+ * a Storage object and is also enabled by default.<br>
+ * Manager::setRecordStatesTrajectory() enables the recording of a full<br>
+ * StatesTrajectory during a simulation; this setting is disabled by default<br>
+ * since it can have a significant impact on performance.<br>
+ * <br>
+ * When setWriteToStorage(true) is called, use getStateStorage() or<br>
+ * getStatesTable() to obtain the simulation trajectory. When<br>
+ * setRecordStatesTrajectory(true) is called, use getStatesTrajectory() to<br>
+ * obtain the simulation trajectory.
  */
 public class Manager {
   private transient long swigCPtr;
@@ -66,220 +107,285 @@ public class Manager {
   }
 
   /**
-   *  Constructor that takes a model only and internally uses a<br>
-   * SimTK::RungeKuttaMersonIntegrator with default settings (accuracy,<br>
-   * constraint tolerance, etc.). 
+   * Model-only constructor.<br>
+   * <br>
+   * You must call Model::initSystem() before passing the model to this<br>
+   * constructor. The internal SimTK::Integrator is initialized to<br>
+   * SimTK::RungeKuttaMersonIntegrator with default settings<br>
+   * (accuracy, constraint tolerance, etc.).
    */
   public Manager(Model model) {
     this(opensimSimulationJNI.new_Manager__SWIG_0(Model.getCPtr(model), model), true);
   }
 
   /**
-   *  Convenience constructor for creating and initializing a Manager (by<br>
-   * calling initialize()).<br>
-   * Do not use this constructor if you intend to change integrator settings;<br>
-   * changes to the integrator may not take effect after initializing. 
+   * Convenience constructor for creating and initializing a Manager.<br>
+   * <br>
+   * Manager::initialize() is called internally using the provided<br>
+   * SimTK::State. If integrator settings are changed after construction<br>
+   * (e.g., via setIntegratorMethod()), then initialize() must be called<br>
+   * again before calling integrate().
    */
   public Manager(Model model, State state) {
     this(opensimSimulationJNI.new_Manager__SWIG_1(Model.getCPtr(model), model, State.getCPtr(state), state), true);
   }
 
   /**
-   *  <b>(Deprecated)</b> A Constructor that does not take a model or<br>
-   * controllerSet. This constructor also does not set an integrator; you<br>
-   * must call setIntegrator() on your own. You should use one of the other<br>
-   * constructors. 
+   * Set the session name of this Manager instance.
    */
-  public Manager() {
-    this(opensimSimulationJNI.new_Manager__SWIG_2(), true);
-  }
-
   public void setSessionName(String name) {
     opensimSimulationJNI.Manager_setSessionName(swigCPtr, this, name);
   }
 
-  public void setModel(Model model) {
-    opensimSimulationJNI.Manager_setModel(swigCPtr, this, Model.getCPtr(model), model);
-  }
-
+  /**
+   * Get the session name of this Manager instance.
+   */
   public String getSessionName() {
     return opensimSimulationJNI.Manager_getSessionName(swigCPtr, this);
   }
 
-  public String toString() {
-    return opensimSimulationJNI.Manager_toString(swigCPtr, this);
-  }
-
+  /**
+   * %Set whether to perform analyses during the simulation.<br>
+   * <br>
+   * Enabling this setting will trigger the execution of all analyses<br>
+   * registered with the Model during the simulation via AnalysisSet::step().<br>
+   * <br>
+   * @see AnalysisSet#step()<br>
+   * Note: This setting is enabled by default. If you do not need to perform<br>
+   *       analyses, you can disable this setting to improve performance.<br>
+   * Note: When a Manager is reinitialized, the internal step count used for<br>
+   *       calling AnalysisSet::step() is reset to zero.
+   */
   public void setPerformAnalyses(boolean performAnalyses) {
     opensimSimulationJNI.Manager_setPerformAnalyses(swigCPtr, this, performAnalyses);
   }
 
+  /**
+   * %Set whether to write the simulation results to a Storage object.<br>
+   * <br>
+   * If this setting is enabled, the Manager will create a Storage object<br>
+   * and write the states and controls to it during the simulation.<br>
+   * <br>
+   * Note: This setting is enabled by default. If you do not need to write<br>
+   *       results to a Storage object, you can disable this setting to<br>
+   *       improve performance.
+   */
   public void setWriteToStorage(boolean writeToStorage) {
     opensimSimulationJNI.Manager_setWriteToStorage(swigCPtr, this, writeToStorage);
   }
 
   /**
-   *  Sets the integrator method used via IntegratorMethod enum. The <br>
-   * integrator will be set to its default options, even if the caller<br>
-   * requests the same integrator method. Note that this function must<br>
-   * be called before `Manager::initialize()`.<br>
+   * %Set whether to record each SimTK::State from the integration into a<br>
+   * StatesTrajectory trajectory.<br>
    * <br>
-   *       <b>C++ example</b><br>
-   *       {@code 
-        auto manager = Manager(model);
-        manager.setIntegratorMethod(Manager::IntegratorMethod::SemiExplicitEuler2);
-        }<br>
+   * This option provides an alternative to setWriteToStorage(), which records<br>
+   * state variable values at each step of the integration but not other<br>
+   * information contained in the SimTK::State (e.g., Lagrange multipliers,<br>
+   * constraint errors, etc.).<br>
    * <br>
-   *       <b>Python example</b><br>
-   *       {@code 
-        import opensim
-        manager = opensim.Manager(model)
-        manager.setIntegratorMethod(opensim.Manager.IntegratorMethod_SemiExplicitEuler2)
-        }<br>
+   * Note: This setting is disabled by default. Enabling this setting will<br>
+   *       have a significant impact on performance, greater than the speed<br>
+   *       reduction incurred from setWriteToStorage(). Therefore, it is<br>
+   *       recommend to disable this setting when generating many simulations<br>
+   *       (e.g., optimizing a controller).
+   */
+  public void setRecordStatesTrajectory(boolean recordStatesTrajectory) {
+    opensimSimulationJNI.Manager_setRecordStatesTrajectory(swigCPtr, this, recordStatesTrajectory);
+  }
+
+  /**
+   * %Set the integrator method used via the IntegratorMethod enum.<br>
    * <br>
-   *       <b>MATLAB example</b><br>
-   *       {@code 
-        import org.opensim.modeling.*
-        manager = Manager(model);
-        manager.setIntegratorMethod(5);
-        }
+   * A new SimTK::Integrator and SimTK::TimeStepper with default values are<br>
+   * created after each call to this method. Therefore, integrator settings<br>
+   * (e.g., setIntegratorAccuracy()) must be set _after_ calling this method,<br>
+   * and you should call this method before Manager::initialize().<br>
+   * <br>
+   * <b>C++ example</b><br>
+   * {@code 
+  auto manager = Manager(model);
+  manager.setIntegratorMethod(Manager::IntegratorMethod::SemiExplicitEuler2);
+  }<br>
+   * <br>
+   * <b>Python example</b><br>
+   * {@code 
+  import opensim
+  manager = opensim.Manager(model)
+  manager.setIntegratorMethod(opensim.Manager.IntegratorMethod_SemiExplicitEuler2)
+  }<br>
+   * <br>
+   * <b>MATLAB example</b><br>
+   * {@code 
+  import org.opensim.modeling.*
+  manager = Manager(model);
+  manager.setIntegratorMethod(5);
+  }
    */
   public void setIntegratorMethod(Manager.IntegratorMethod integMethod) {
     opensimSimulationJNI.Manager_setIntegratorMethod(swigCPtr, this, integMethod.swigValue());
   }
 
-  public SWIGTYPE_p_SimTK__Integrator getIntegrator() {
-    return new SWIGTYPE_p_SimTK__Integrator(opensimSimulationJNI.Manager_getIntegrator(swigCPtr, this), false);
+  /**
+   * Get the IntegratorMethod enum.
+   */
+  public Manager.IntegratorMethod getIntegratorMethod() {
+    return Manager.IntegratorMethod.swigToEnum(opensimSimulationJNI.Manager_getIntegratorMethod(swigCPtr, this));
   }
 
   /**
-   *  Sets the accuracy of the integrator. <br>
-   * For more details, see `SimTK::Integrator::setAccuracy(SimTK::Real)`. 
+   * %Set the accuracy of the internal SimTK::Integrator.<br>
+   * <br>
+   * @see SimTK#Integrator::setAccuracy(double)<br>
+   * Note: If a new integrator is set via setIntegratorMethod(), this<br>
+   *       setting will be cleared and set to the default value.
    */
   public void setIntegratorAccuracy(double accuracy) {
     opensimSimulationJNI.Manager_setIntegratorAccuracy(swigCPtr, this, accuracy);
   }
 
   /**
-   *  Sets the minimum step size of the integrator.<br>
-   * For more details, see `SimTK::Integrator::setMinimumStepSize(SimTK::Real)`. 
+   * %Set the minimum step size of the internal SimTK::Integrator.<br>
+   * <br>
+   * @see SimTK#Integrator::setMinimumStepSize(double)<br>
+   * Note: If a new integrator is set via setIntegratorMethod(), this<br>
+   *       setting will be cleared and set to the default value.<br>
+   * Note: The integrators supported by Manager by default use error-controlled<br>
+   *       adaptive stepping, meaning that the step size is adjusted<br>
+   *       automatically during integration to maintain the desired accuracy.<br>
+   *       By calling this method, you set a lower bound on the step size,<br>
+   *       which may degrade accuracy and even perfomance.
    */
   public void setIntegratorMinimumStepSize(double hmin) {
     opensimSimulationJNI.Manager_setIntegratorMinimumStepSize(swigCPtr, this, hmin);
   }
 
   /**
-   *  Sets the maximum step size of the integrator.<br>
-   * For more details, see `SimTK::Integrator::setMaximumStepSize(SimTK::Real)`. 
+   * %Set the maximum step size of the internal SimTK::Integrator.<br>
+   * <br>
+   * @see SimTK#Integrator::setMaximumStepSize(double)<br>
+   * Note: If a new integrator is set via setIntegratorMethod(), this<br>
+   *       setting will be cleared and set to the default value.<br>
+   * Note: The integrators supported by Manager by default use error-controlled<br>
+   *       adaptive stepping, meaning that the step size is adjusted<br>
+   *       automatically during integration to maintain the desired accuracy.<br>
+   *       By calling this method, you set an upper bound on the step size,<br>
+   *       which may degrade performance.
    */
   public void setIntegratorMaximumStepSize(double hmax) {
     opensimSimulationJNI.Manager_setIntegratorMaximumStepSize(swigCPtr, this, hmax);
   }
 
   /**
-   *  Sets the limit of steps the integrator can take per call of `stepTo()`.<br>
-   * Note that Manager::integrate() calls `stepTo()` for each interval when a fixed<br>
-   * step size is used.<br>
-   * For more details, see SimTK::Integrator::setInternalStepLimit(int). 
+   * %Set the limit of steps the integrator can take per call of stepTo().<br>
+   * <br>
+   * @see SimTK#Integrator::setInternalStepLimit(int).<br>
+   * Note: If a new integrator is set via setIntegratorMethod(), this<br>
+   *       setting will be cleared and set to the default value.
    */
   public void setIntegratorInternalStepLimit(int nSteps) {
     opensimSimulationJNI.Manager_setIntegratorInternalStepLimit(swigCPtr, this, nSteps);
   }
 
   /**
-   *  
+   * %Set a fixed step size for the internal SimTK::Integrator.<br>
+   * <br>
+   * @see SimTK#Integrator::setFixedStepSize(double)<br>
+   * Note: If a new integrator is set via setIntegratorMethod(), this<br>
+   *       setting will be cleared and set to the default value.<br>
+   * Note: The integrators supported by Manager by default use error-controlled<br>
+   *       adaptive stepping, meaning that the step size is adjusted<br>
+   *       automatically during integration to maintain the desired accuracy.<br>
+   *       By calling this method, you override this behavior and set a fixed<br>
+   *       step size for the integrator, which may degrade performance and<br>
+   *       accuracy. If you need a fixed reporting interval, consider using<br>
+   *       a Reporter which will preserve internal adaptive stepping.
    */
-  public void setUseSpecifiedDT(boolean aTrueFalse) {
-    opensimSimulationJNI.Manager_setUseSpecifiedDT(swigCPtr, this, aTrueFalse);
-  }
-
-  public boolean getUseSpecifiedDT() {
-    return opensimSimulationJNI.Manager_getUseSpecifiedDT(swigCPtr, this);
-  }
-
-  public void setUseConstantDT(boolean aTrueFalse) {
-    opensimSimulationJNI.Manager_setUseConstantDT(swigCPtr, this, aTrueFalse);
-  }
-
-  public boolean getUseConstantDT() {
-    return opensimSimulationJNI.Manager_getUseConstantDT(swigCPtr, this);
-  }
-
-  public ArrayDouble getDTArray() {
-    return new ArrayDouble(opensimSimulationJNI.Manager_getDTArray(swigCPtr, this), false);
-  }
-
-  public void setDTArray(Vector aDT, double aTI) {
-    opensimSimulationJNI.Manager_setDTArray__SWIG_0(swigCPtr, this, Vector.getCPtr(aDT), aDT, aTI);
-  }
-
-  public void setDTArray(Vector aDT) {
-    opensimSimulationJNI.Manager_setDTArray__SWIG_1(swigCPtr, this, Vector.getCPtr(aDT), aDT);
-  }
-
-  public double getDTArrayDT(int aStep) {
-    return opensimSimulationJNI.Manager_getDTArrayDT(swigCPtr, this, aStep);
-  }
-
-  public void printDTArray(String aFileName) {
-    opensimSimulationJNI.Manager_printDTArray__SWIG_0(swigCPtr, this, aFileName);
-  }
-
-  public void printDTArray() {
-    opensimSimulationJNI.Manager_printDTArray__SWIG_1(swigCPtr, this);
-  }
-
-  public ArrayDouble getTimeArray() {
-    return new ArrayDouble(opensimSimulationJNI.Manager_getTimeArray(swigCPtr, this), false);
-  }
-
-  public double getTimeArrayTime(int aStep) {
-    return opensimSimulationJNI.Manager_getTimeArrayTime(swigCPtr, this, aStep);
-  }
-
-  public int getTimeArrayStep(double aTime) {
-    return opensimSimulationJNI.Manager_getTimeArrayStep(swigCPtr, this, aTime);
-  }
-
-  public void printTimeArray(String aFileName) {
-    opensimSimulationJNI.Manager_printTimeArray__SWIG_0(swigCPtr, this, aFileName);
-  }
-
-  public void printTimeArray() {
-    opensimSimulationJNI.Manager_printTimeArray__SWIG_1(swigCPtr, this);
-  }
-
-  public void resetTimeAndDTArrays(double aTime) {
-    opensimSimulationJNI.Manager_resetTimeAndDTArrays(swigCPtr, this, aTime);
-  }
-
-  public double getNextTimeArrayTime(double aTime) {
-    return opensimSimulationJNI.Manager_getNextTimeArrayTime(swigCPtr, this, aTime);
+  public void setIntegratorFixedStepSize(double stepSize) {
+    opensimSimulationJNI.Manager_setIntegratorFixedStepSize(swigCPtr, this, stepSize);
   }
 
   /**
-   * Initializes the Manager by creating and initializing the underlying <br>
-   * SimTK::TimeStepper. This must be called before calling <br>
-   * Manager::integrate() Subsequent changes to the State object passed in <br>
-   * here will not affect the simulation. Calling this function multiple <br>
-   * times with the same Manager will trigger an Exception.<br>
+   * (Advanced) %Set the final time for the internal SimTK::Integrator.<br>
    * <br>
-   * Changes to the integrator (e.g., setIntegratorAccuracy()) after calling<br>
-   * initialize() may not have any effect.
+   * This setting causes the integration to stop when the final time is<br>
+   * reached, even if the integrator has not reached the final time provided<br>
+   * to Manager::integrate().<br>
+   * <br>
+   * @see SimTK#Integrator::setFinalTime(double)<br>
+   * Note: If a new integrator is set via setIntegratorMethod(), this<br>
+   *       setting will be cleared and set to the default value.
+   */
+  public void setIntegratorFinalTime(double finalTime) {
+    opensimSimulationJNI.Manager_setIntegratorFinalTime(swigCPtr, this, finalTime);
+  }
+
+  /**
+   * (Advanced) Use infinity norm (maximum absolute value) instead of default<br>
+   * RMS norm to evaluate whether accuracy has been achieved for states and<br>
+   * for constraint tolerance for the internal SimTK::Integrator.<br>
+   * <br>
+   * The infinity norm is more strict but may permit use of a looser accuracy<br>
+   * request.<br>
+   * <br>
+   * @see SimTK#Integrator::setUseInfinityNorm(boolean)<br>
+   * Note: If a new integrator is set via setIntegratorMethod(), this<br>
+   *       setting will be cleared and set to the default value.
+   */
+  public void setIntegratorUseInfinityNorm(boolean useInfinityNorm) {
+    opensimSimulationJNI.Manager_setIntegratorUseInfinityNorm(swigCPtr, this, useInfinityNorm);
+  }
+
+  /**
+   * (Advanced) %Set the tolerance within which constraints must be satisfied<br>
+   * for the internal SimTK::Integrator.<br>
+   * <br>
+   * @see SimTK#Integrator::setConstraintTolerance(double)<br>
+   * Note: If a new integrator is set via setIntegratorMethod(), this<br>
+   *       setting will be cleared and set to the default value.
+   */
+  public void setIntegratorConstraintTolerance(double tol) {
+    opensimSimulationJNI.Manager_setIntegratorConstraintTolerance(swigCPtr, this, tol);
+  }
+
+  /**
+   * Get the internal SimTK::Integrator.
+   */
+  public SWIGTYPE_p_SimTK__Integrator getIntegrator() {
+    return new SWIGTYPE_p_SimTK__Integrator(opensimSimulationJNI.Manager_getIntegrator(swigCPtr, this), false);
+  }
+
+  /**
+   *  <br>
+   * Initialize the Manager.<br>
+   * <br>
+   * This must be called after configuring the integrator and before calling<br>
+   * Manager::integrate(). If the integrator is changed via<br>
+   * setIntegratorMethod(), this method must be called again, otherwise an<br>
+   * exception is thrown. Subsequent changes to the State object passed in<br>
+   * here will not affect the simulation.
    */
   public void initialize(State s) {
     opensimSimulationJNI.Manager_initialize(swigCPtr, this, State.getCPtr(s), s);
   }
 
   /**
-   * Integrate the equations of motion for the specified model, given the current<br>
-   * state (at which the integration will start) and a finalTime. You must call<br>
-   * Manager::initialize() before calling this function.<br>
+   * Integrate the equations of motion for the specified model, given the<br>
+   * current state (at which the integration will start) and a final time. You<br>
+   * must call Manager::initialize() before calling this function.<br>
    * <br>
-   * If you must update states or controls in a loop, you must recreate the <br>
-   * manager within the loop (such discontinuous changes are considered "events"<br>
-   * and cannot be handled during integration of the otherwise continuous system).<br>
-   * The proper way to handle this situation is to create a SimTK::EventHandler.<br>
+   * If you must update the SimTK::State in a loop, you must call<br>
+   * Manager::initialize() before each call to integrate(). This is because<br>
+   * discontinuous changes are considered "events" and cannot be handled<br>
+   * during integration of the otherwise continuous system. If you make<br>
+   * changes to the state and continue integrating without re-initializing,<br>
+   * these changes will be ignored. If you make changes to the model and<br>
+   * continue integrating without re-initializing, an exception will be thrown.<br>
+   * <br>
+   * If the provided final time is greater than or equal to the current time,<br>
+   * an exception is thrown.<br>
+   * <br>
+   * Note: The proper way to handle the simulation of a discontinuous system<br>
+   *       is to create a SimTK::EventHandler.<br>
    * <br>
    * Example: Integrating from time = 1s to time = 2s<br>
    * {@code 
@@ -320,10 +426,18 @@ public class Manager {
   state.setTime(0.0);
   for (int i = 0; i < n; ++i) {
       model.getCoordinateSet().get(0).setValue(state, 0.1*i);
-      Manager manager(model);
       state.setTime(i*dTime);
       manager.initialize(state);
       state = manager.integrate((i+1)*dTime);
+  }
+  }<br>
+   * <br>
+   * Example: Integrate using a specified sequence of time steps<br>
+   * {@code 
+  state.setTime(0.0);
+  std::vector<double> times = {0.02, 0.04, 0.05, 0.06, 0.08, 0.1, 0.2};
+  for (double time : times) {
+      state = manager.integrate(time);
   }
   }
    */
@@ -332,52 +446,54 @@ public class Manager {
   }
 
   /**
-   *  Get the current State from the Integrator associated with this <br>
-   * Manager. 
+   *  <br>
+   * Get the current SimTK::State from the SimTK::Integrator associated with<br>
+   * this Manager.
    */
   public State getState() {
     return new State(opensimSimulationJNI.Manager_getState(swigCPtr, this), false);
   }
 
-  public double getFixedStepSize(int tArrayStep) {
-    return opensimSimulationJNI.Manager_getFixedStepSize(swigCPtr, this, tArrayStep);
-  }
-
-  public boolean hasStateStorage() {
-    return opensimSimulationJNI.Manager_hasStateStorage(swigCPtr, this);
+  /**
+   * Get a Storage object containing the integration states.<br>
+   * <br>
+   * Note: If setWriteToStorage(false) was called, this will return an empty<br>
+   *       Storage object.
+   */
+  public Storage getStateStorage() {
+    return new Storage(opensimSimulationJNI.Manager_getStateStorage(swigCPtr, this), true);
   }
 
   /**
-   *  Set the Storage object to be used for storing states. The Manager takes<br>
-   *     ownership of the passed-in Storage. 
+   * Get a TimeSeriesTable containing the integration states.<br>
+   * <br>
+   * The returned TimeSeriesTable is converted from the Storage object<br>
+   * populated during the simulation when setWriteToStorage() is enabled<br>
+   * (which is the default setting).<br>
+   * <br>
+   * Note: If setWriteToStorage(false) was called, this will return an empty<br>
+   *       TimeSeriesTable.
    */
-  public void setStateStorage(Storage aStorage) {
-    opensimSimulationJNI.Manager_setStateStorage(swigCPtr, this, Storage.getCPtr(aStorage), aStorage);
-  }
-
-  public Storage getStateStorage() {
-    return new Storage(opensimSimulationJNI.Manager_getStateStorage(swigCPtr, this), false);
-  }
-
   public TimeSeriesTable getStatesTable() {
     return new TimeSeriesTable(opensimSimulationJNI.Manager_getStatesTable(swigCPtr, this), true);
   }
 
-  public void halt() {
-    opensimSimulationJNI.Manager_halt(swigCPtr, this);
-  }
-
-  public void clearHalt() {
-    opensimSimulationJNI.Manager_clearHalt(swigCPtr, this);
-  }
-
-  public boolean checkHalt() {
-    return opensimSimulationJNI.Manager_checkHalt(swigCPtr, this);
+  /**
+   * Get a StatesTrajectory containing the integration states.<br>
+   * <br>
+   * Note: If setRecordStatesTrajectory(false) was called, this will return<br>
+   *       an empty StatesTrajectory.
+   */
+  public SWIGTYPE_p_StatesTrajectory getStatesTrajectory() {
+    return new SWIGTYPE_p_StatesTrajectory(opensimSimulationJNI.Manager_getStatesTrajectory(swigCPtr, this), true);
   }
 
   /**
-   *  Supported integrator methods. For MATLAB, int's must be used rather<br>
-   *         than enum's (see example in setIntegratorMethod(IntegratorMethod)). 
+   *  <br>
+   * Supported integrator methods.<br>
+   * <br>
+   * Note: For MATLAB, int's must be used rather than enum's (see example in<br>
+   * setIntegratorMethod(IntegratorMethod)). 
    */
   public final static class IntegratorMethod {
     /**
@@ -389,7 +505,7 @@ public class Manager {
      */
     public final static Manager.IntegratorMethod RungeKutta2 = new Manager.IntegratorMethod("RungeKutta2", opensimSimulationJNI.Manager_IntegratorMethod_RungeKutta2_get());
     /**
-     *  2 : For details, see SimTK::RungeKutta3Integrator. 
+     *  2 : For details, see SimTK::RungeKutta3Integrator.
      */
     public final static Manager.IntegratorMethod RungeKutta3 = new Manager.IntegratorMethod("RungeKutta3", opensimSimulationJNI.Manager_IntegratorMethod_RungeKutta3_get());
     /**
@@ -408,6 +524,10 @@ public class Manager {
      *  6 : For details, see SimTK::VerletIntegrator.
      */
     public final static Manager.IntegratorMethod Verlet = new Manager.IntegratorMethod("Verlet", opensimSimulationJNI.Manager_IntegratorMethod_Verlet_get());
+    /**
+     *  7 : For details, see SimTK::CPodesIntegrator.
+     */
+    public final static Manager.IntegratorMethod CPodes = new Manager.IntegratorMethod("CPodes", opensimSimulationJNI.Manager_IntegratorMethod_CPodes_get());
 
     public final int swigValue() {
       return swigValue;
@@ -443,7 +563,7 @@ public class Manager {
       swigNext = this.swigValue+1;
     }
 
-    private static IntegratorMethod[] swigValues = { ExplicitEuler, RungeKutta2, RungeKutta3, RungeKuttaFeldberg, RungeKuttaMerson, SemiExplicitEuler2, Verlet };
+    private static IntegratorMethod[] swigValues = { ExplicitEuler, RungeKutta2, RungeKutta3, RungeKuttaFeldberg, RungeKuttaMerson, SemiExplicitEuler2, Verlet, CPodes };
     private static int swigNext = 0;
     private final int swigValue;
     private final String swigName;

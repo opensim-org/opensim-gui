@@ -8,14 +8,6 @@
 
 package org.opensim.modeling;
 
-/**
- *  Conditional comment: *<br>
- * A class implementing a cylinder obstacle for muscle wrapping, based on<br>
- * algorithm presented in Garner &amp; Pandy (2000).<br>
- * <br>
- * @author Brian Garner, derived from Peter Loan<br>
- * updated for OpenSim 4.0 by Benjamin Michaud, 2019.
- */
 public class WrapCylinderObst extends WrapObject {
   private transient long swigCPtr;
 
