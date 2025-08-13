@@ -147,6 +147,78 @@ public class XsensDataReaderSettings extends OpenSimObject {
     opensimCommonJNI.XsensDataReaderSettings_set_trial_prefix__SWIG_1(swigCPtr, this, value);
   }
 
+  public void copyProperty_trial_extension(XsensDataReaderSettings source) {
+    opensimCommonJNI.XsensDataReaderSettings_copyProperty_trial_extension(swigCPtr, this, XsensDataReaderSettings.getCPtr(source), source);
+  }
+
+  public String get_trial_extension(int i) {
+    return opensimCommonJNI.XsensDataReaderSettings_get_trial_extension__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string upd_trial_extension(int i) {
+    return new SWIGTYPE_p_std__string(opensimCommonJNI.XsensDataReaderSettings_upd_trial_extension__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_trial_extension(int i, String value) {
+    opensimCommonJNI.XsensDataReaderSettings_set_trial_extension__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_trial_extension(String value) {
+    return opensimCommonJNI.XsensDataReaderSettings_append_trial_extension(swigCPtr, this, value);
+  }
+
+  public void constructProperty_trial_extension(String initValue) {
+    opensimCommonJNI.XsensDataReaderSettings_constructProperty_trial_extension(swigCPtr, this, initValue);
+  }
+
+  public String get_trial_extension() {
+    return opensimCommonJNI.XsensDataReaderSettings_get_trial_extension__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_trial_extension() {
+    return new SWIGTYPE_p_std__string(opensimCommonJNI.XsensDataReaderSettings_upd_trial_extension__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_trial_extension(String value) {
+    opensimCommonJNI.XsensDataReaderSettings_set_trial_extension__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_sampling_rate(XsensDataReaderSettings source) {
+    opensimCommonJNI.XsensDataReaderSettings_copyProperty_sampling_rate(swigCPtr, this, XsensDataReaderSettings.getCPtr(source), source);
+  }
+
+  public double get_sampling_rate(int i) {
+    return opensimCommonJNI.XsensDataReaderSettings_get_sampling_rate__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_sampling_rate(int i) {
+    return new SWIGTYPE_p_double(opensimCommonJNI.XsensDataReaderSettings_upd_sampling_rate__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_sampling_rate(int i, double value) {
+    opensimCommonJNI.XsensDataReaderSettings_set_sampling_rate__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_sampling_rate(double value) {
+    return opensimCommonJNI.XsensDataReaderSettings_append_sampling_rate(swigCPtr, this, value);
+  }
+
+  public void constructProperty_sampling_rate(double initValue) {
+    opensimCommonJNI.XsensDataReaderSettings_constructProperty_sampling_rate(swigCPtr, this, initValue);
+  }
+
+  public double get_sampling_rate() {
+    return opensimCommonJNI.XsensDataReaderSettings_get_sampling_rate__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_sampling_rate() {
+    return new SWIGTYPE_p_double(opensimCommonJNI.XsensDataReaderSettings_upd_sampling_rate__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_sampling_rate(double value) {
+    opensimCommonJNI.XsensDataReaderSettings_set_sampling_rate__SWIG_1(swigCPtr, this, value);
+  }
+
   public void copyProperty_ExperimentalSensors(XsensDataReaderSettings source) {
     opensimCommonJNI.XsensDataReaderSettings_copyProperty_ExperimentalSensors(swigCPtr, this, XsensDataReaderSettings.getCPtr(source), source);
   }

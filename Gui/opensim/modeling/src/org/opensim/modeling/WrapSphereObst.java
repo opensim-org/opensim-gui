@@ -8,14 +8,6 @@
 
 package org.opensim.modeling;
 
-/**
- *  Conditional comment: *<br>
- * A class implementing a sphere obstacle for muscle wrapping, based on the<br>
- * algorithm presented in Garner &amp; Pandy (2000).<br>
- * <br>
- * @author Brian Garner, derived from Peter Loan<br>
- * updated for OpenSim 4.0 by Benjamin Michaud, 2019.
- */
 public class WrapSphereObst extends WrapObject {
   private transient long swigCPtr;
 
