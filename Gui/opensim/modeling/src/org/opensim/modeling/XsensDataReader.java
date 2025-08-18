@@ -62,16 +62,17 @@ public class XsensDataReader extends IMUDataReader {
   }
 
   /**
-   * Method to get const reference to the internal XsensDataReaderSettings object<br>
-   * maintained by this reader.
+   * Method to get const reference to the internal XsensDataReaderSettings<br>
+   * object maintained by this reader.
    */
   public XsensDataReaderSettings getSettings() {
     return new XsensDataReaderSettings(opensimCommonJNI.XsensDataReader_getSettings(swigCPtr, this), false);
   }
 
   /**
-   * Method to get writable reference to the internal XsensDataReaderSettings object<br>
-   * maintained by this reader, to allow modification after construction.
+   * Method to get writable reference to the internal XsensDataReaderSettings<br>
+   * object maintained by this reader, to allow modification after<br>
+   * construction.
    */
   public XsensDataReaderSettings updSettings() {
     return new XsensDataReaderSettings(opensimCommonJNI.XsensDataReader_updSettings(swigCPtr, this), false);

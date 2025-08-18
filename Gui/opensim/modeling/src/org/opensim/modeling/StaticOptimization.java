@@ -102,6 +102,11 @@ public class StaticOptimization extends Analysis {
     return (cPtr == 0) ? null : new Storage(cPtr, false);
   }
 
+  public Storage getStatesDerivativeStore() {
+    long cPtr = opensimActuatorsAnalysesToolsJNI.StaticOptimization_getStatesDerivativeStore(swigCPtr, this);
+    return (cPtr == 0) ? null : new Storage(cPtr, false);
+  }
+
   public boolean getUseModelForceSet() {
     return opensimActuatorsAnalysesToolsJNI.StaticOptimization_getUseModelForceSet(swigCPtr, this);
   }

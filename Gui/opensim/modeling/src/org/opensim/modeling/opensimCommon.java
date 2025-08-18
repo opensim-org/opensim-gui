@@ -86,6 +86,26 @@ public class opensimCommon {
   }
 
   /**
+   * Detects the most likely string delimiter in an input string.<br>
+   * <br>
+   * This function identifies the most frequent delimiter from a predefined list<br>
+   * of common delimiters based on occurrences in the input string.<br>
+   * <br>
+   * @param input The string to analyze.<br>
+   * @param delimiters A vector of candidate delimiters.<br>
+   * <br>
+   * @return : The most likely delimiter (as an std::string),<br>
+   * or an empty string if none was found.<br>
+   * <br>
+   * Note: Supports single-character delimiters.<br>
+   * <br>
+   *  
+   */
+  public static String detectDelimiter(String input, StdVectorString delimiters) {
+    return opensimCommonJNI.detectDelimiter(input, StdVectorString.getCPtr(delimiters), delimiters);
+  }
+
+  /**
    *  Linearly interpolate y(x) at new values of x. The optional 'ignoreNaNs'<br>
    *  argument will ignore any NaN values contained in the input vectors and<br>
    *  create the interpolant from the non-NaN values only. Note that this option<br>
