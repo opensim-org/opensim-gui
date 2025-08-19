@@ -172,6 +172,7 @@ jobs:
         
     - name: Install packages
       run: |
+        brew pin cmake
         brew install cmake pkgconfig autoconf libtool automake wget pcre doxygen llvm
         brew reinstall gcc
         pip3 install numpy==1.25
