@@ -40,7 +40,7 @@ public class OpenSimSocketServlet extends WebSocketServlet {
  
     @Override
     public void configure(WebSocketServletFactory factory) {
-        factory.getPolicy().setIdleTimeout(10000);
+        factory.getPolicy().setIdleTimeout(100000);
         factory.register(VisWebSocket.class);
     }
 }
