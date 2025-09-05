@@ -540,6 +540,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           // correct selected modes
           deselectPlaybackButtons();
           jStopButton.setSelected(true);
+          ViewDB.getInstance().endAnimation();
        }
     }//GEN-LAST:event_jStopButtonActionPerformed
     
