@@ -4,7 +4,7 @@ cmake_policy(SET CMP0048 NEW)
 project(OpenSimApp VERSION 4.6)
 
 
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.5 ... 4.0)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake")
 
