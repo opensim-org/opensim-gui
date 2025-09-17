@@ -319,7 +319,7 @@ public class IMUIKToolModel extends Observable implements Observer {
        imuIkTool.upd_orientation_weights().setSize(0);
        orientation_weightset = getOrientation_weightset(); // Guard against orientation_weightset being null
        for (int j=0; j < orientation_weightset.getSize(); j++) 
-        imuIkTool.upd_orientation_weights().adoptAndAppend(orientation_weightset.get(j));
+        imuIkTool.upd_orientation_weights().cloneAndAppend(orientation_weightset.get(j));
    }
 
    public void execute() {  
