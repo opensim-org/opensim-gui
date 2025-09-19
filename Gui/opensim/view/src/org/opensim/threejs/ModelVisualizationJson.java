@@ -1051,7 +1051,7 @@ public class ModelVisualizationJson extends JSONObject {
         mat_json.put("uuid", mat_uuid.toString());
         mat_json.put("name", "MarkerMat");
         mat_json.put("type", "MeshPhongMaterial");
-        mat_json.put("transparent", true);
+        mat_json.put("transparent", false);
         mat_json.put("shininess", 30);
         mat_json.put("side", 2);
         //mat_json.put("transparent", true);
@@ -1875,7 +1875,7 @@ public class ModelVisualizationJson extends JSONObject {
         String colorString = JSONUtilities.mapColorToRGBA(pathColor);
         mat_json.put("color", colorString);
         mat_json.put("side", 2);
-        mat_json.put("transparent", true);
+        mat_json.put("transparent", false);
     }
     // Export Path in Json format to visualizer, as of now 
     // only supports Stationary PathPoints

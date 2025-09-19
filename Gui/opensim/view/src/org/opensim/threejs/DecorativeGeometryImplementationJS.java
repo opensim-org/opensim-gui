@@ -509,7 +509,7 @@ public class DecorativeGeometryImplementationJS extends DecorativeGeometryImplem
         String colorString = JSONUtilities.mapColorToRGBA(dg.getColor());
         if (isSurface){
             mat_json.put("type", "MeshStandardMaterial");
-            mat_json.put("transparent", true);
+            mat_json.put("transparent", false);
             mat_json.put("metalness", 0);
             mat_json.put("roughness", 1.0);
             mat_json.put("side", 2);

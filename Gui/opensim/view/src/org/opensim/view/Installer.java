@@ -105,7 +105,7 @@ public class Installer extends ModuleInstall {
         // and a View-database ViewDB
         // and register View as Observer of Model
         OpenSimDB.getInstance().addObserver(ViewDB.getInstance());
-        
+        ViewDB.getInstance().startVisualizationServer();
         String saved = TheApp.getCurrentVersionPreferences().get("Application: Restore Models on Startup", "Off");
         if (saved.equalsIgnoreCase("on")){ 
             /** Restore from file */            
