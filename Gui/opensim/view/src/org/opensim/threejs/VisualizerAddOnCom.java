@@ -78,7 +78,7 @@ public class VisualizerAddOnCom implements VisualizerAddOn {
         mat_json.put("name", "ComMat");
         mat_json.put("type", "MeshPhongMaterial");
         mat_json.put("shininess", 30);
-        mat_json.put("transparent", true);
+        mat_json.put("transparent", false);
         String colorString = JSONUtilities.mapColorToRGBA(new Vec3(.0, 1.0, 0));
         mat_json.put("color", colorString);
         mat_json.put("side", 2);
