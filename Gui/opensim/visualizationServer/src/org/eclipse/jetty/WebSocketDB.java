@@ -43,7 +43,7 @@ public class WebSocketDB {
     static WebSocketDB instance;
     private Set<VisWebSocket> sockets = Collections.synchronizedSet(new HashSet<VisWebSocket>());
     private Observer observer;
-    public static boolean debug = true;
+    public static boolean debug = false;
     // Keep list of OpenModel messages that are still pending (not acknowledged yet)
     private static LinkedList<String> pendingModels = new LinkedList<String>();
     /** Creates a new instance of WebSocketDB */
