@@ -569,7 +569,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           }
           ViewDB.getInstance().startAnimation();
           int timerRate = ViewDB.getInstance().getFrameTime();
-          int delayMS = 1000/timerRate*2;
+          int delayMS = 2000/timerRate;
           if (delayMS < 16) delayMS = 16; // 60 fps no faster
           animationTimer = new Timer(delayMS, new RealTimePlayActionListener(1));
           animationTimer.start();

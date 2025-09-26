@@ -144,7 +144,7 @@ public class ModelVisualizationJson extends JSONObject {
     private PathColorMap currentPathColorMap;
     // Preferences
     private double prefMuscleDisplayRadius=5;
-    private int NUM_PATHPOINTS_PER_WRAP_OBJECT=8;
+    private int NUM_PATHPOINTS_PER_WRAP_OBJECT=4;
     private double PATHPOINT_SCALEUP=1.05;
     private boolean debug_path=false;
     public Boolean getFrameVisibility(Frame b) {
