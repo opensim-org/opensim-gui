@@ -63,6 +63,8 @@ public class GroundNode extends OneFrameNode{
       addDisplayOption(displayOption.Colorable);
       addDisplayOption(displayOption.Isolatable);
       addDisplayOption(displayOption.Showable);
+      addDisplayOption(displayOption.TransparentCapable);
+
    }
 
 

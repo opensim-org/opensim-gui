@@ -76,6 +76,8 @@ public class OneGeometryNode extends OneComponentWithGeometryNode {
         addDisplayOption(displayOption.Colorable);
         addDisplayOption(displayOption.Isolatable);
         addDisplayOption(displayOption.Showable);
+        addDisplayOption(displayOption.TransparentCapable);
+
     }
     public Image getIcon(int i) {
         URL imageURL = this.getClass().getResource("icons/displayGeometryNode.png");

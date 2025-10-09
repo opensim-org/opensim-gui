@@ -236,7 +236,7 @@ public class OpenSimObjectNode extends OpenSimNode {
     // Showable: Show/Hide
     // Isolatable: ShowOnly
     // Colorable: Color, Opacity, Representation
-    public enum displayOption{Showable, Isolatable, Colorable};
+    public enum displayOption{Showable, Isolatable, Colorable, TransparentCapable};
     private ArrayList<displayOption> validDisplayOptions = new ArrayList<displayOption>();
     
     /** Creates a new instance of OpenSimObjectNode */
