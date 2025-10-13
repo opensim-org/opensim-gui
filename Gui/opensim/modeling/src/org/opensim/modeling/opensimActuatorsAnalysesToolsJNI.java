@@ -1294,6 +1294,7 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native void StaticOptimization_setStorageCapacityIncrements(long jarg1, StaticOptimization jarg1_, int jarg2);
   public final static native long StaticOptimization_getActivationStorage(long jarg1, StaticOptimization jarg1_);
   public final static native long StaticOptimization_getForceStorage(long jarg1, StaticOptimization jarg1_);
+  public final static native long StaticOptimization_getStatesDerivativeStore(long jarg1, StaticOptimization jarg1_);
   public final static native boolean StaticOptimization_getUseModelForceSet(long jarg1, StaticOptimization jarg1_);
   public final static native void StaticOptimization_setUseModelForceSet(long jarg1, StaticOptimization jarg1_, boolean jarg2);
   public final static native void StaticOptimization_setModel(long jarg1, StaticOptimization jarg1_, long jarg2, Model jarg2_);
@@ -1957,8 +1958,6 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native long ForwardTool_getManager(long jarg1, ForwardTool jarg1_);
   public final static native String ForwardTool_getStatesFileName(long jarg1, ForwardTool jarg1_);
   public final static native void ForwardTool_setStatesFileName(long jarg1, ForwardTool jarg1_, String jarg2);
-  public final static native boolean ForwardTool_getUseSpecifiedDt(long jarg1, ForwardTool jarg1_);
-  public final static native void ForwardTool_setUseSpecifiedDt(long jarg1, ForwardTool jarg1_, boolean jarg2);
   public final static native void ForwardTool_setPrintResultFiles(long jarg1, ForwardTool jarg1_, boolean jarg2);
   public final static native boolean ForwardTool_run(long jarg1, ForwardTool jarg1_) throws java.io.IOException;
   public final static native void ForwardTool_printResults(long jarg1, ForwardTool jarg1_);

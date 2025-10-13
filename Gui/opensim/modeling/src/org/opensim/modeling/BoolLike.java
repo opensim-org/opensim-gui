@@ -8,19 +8,20 @@
 
 package org.opensim.modeling;
 
-public class TableMissingHeader extends OpenSimException {
+public class BoolLike {
   private transient long swigCPtr;
+  protected transient boolean swigCMemOwn;
 
-  public TableMissingHeader(long cPtr, boolean cMemoryOwn) {
-    super(opensimCommonJNI.TableMissingHeader_SWIGUpcast(cPtr), cMemoryOwn);
+  public BoolLike(long cPtr, boolean cMemoryOwn) {
+    swigCMemOwn = cMemoryOwn;
     swigCPtr = cPtr;
   }
 
-  public static long getCPtr(TableMissingHeader obj) {
+  public static long getCPtr(BoolLike obj) {
     return (obj == null) ? 0 : obj.swigCPtr;
   }
 
-  public static long swigRelease(TableMissingHeader obj) {
+  public static long swigRelease(BoolLike obj) {
     long ptr = 0;
     if (obj != null) {
       if (!obj.swigCMemOwn)
@@ -41,19 +42,14 @@ public class TableMissingHeader extends OpenSimException {
     if (swigCPtr != 0) {
       if (swigCMemOwn) {
         swigCMemOwn = false;
-        opensimCommonJNI.delete_TableMissingHeader(swigCPtr);
+        opensimCommonJNI.delete_BoolLike(swigCPtr);
       }
       swigCPtr = 0;
     }
-    super.delete();
   }
 
-  public TableMissingHeader(String file, long line, String func, String message) {
-    this(opensimCommonJNI.new_TableMissingHeader__SWIG_0(file, line, func, message), true);
-  }
-
-  public TableMissingHeader(String file, long line, String func) {
-    this(opensimCommonJNI.new_TableMissingHeader__SWIG_1(file, line, func), true);
+  public BoolLike(boolean value_) {
+    this(opensimCommonJNI.new_BoolLike(value_), true);
   }
 
 }

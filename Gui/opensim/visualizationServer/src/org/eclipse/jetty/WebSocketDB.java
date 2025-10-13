@@ -97,7 +97,12 @@ public class WebSocketDB {
         }
         int i=0;
         for (VisWebSocket sock : sockets){
-            if (debug) System.out.println("Broadcast:"+msg.toJSONString()+"\n");
+            if (debug) {
+                System.out.println("Broadcast:"+msg.toJSONString()+"\n");
+                if (msg.get("time")!= null){
+                    System.out.println("time="+ (double)msg.get("time"));
+                }
+            }
             sock.sendVisualizerMessage(msg);
             i++;
         }

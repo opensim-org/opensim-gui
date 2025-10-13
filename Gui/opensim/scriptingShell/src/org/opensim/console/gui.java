@@ -337,6 +337,14 @@ public final class gui {
      */
     static public void gfxWindowSendKey(final char c){
     }
+    
+    static public void gfxSendCommand(String name, String value){
+         JSONObject msg = new JSONObject();
+         msg.put("Op", "UserCommand");
+         msg.put("Command", name);
+         msg.put("Value", value); 
+        ViewDB.getInstance().broadcastVisulaizerMessage(msg);
+    }
     /**
      * Get the full name of the directory used as a root for the Scripts.
      * @return string that represents the path to the Scripts directory

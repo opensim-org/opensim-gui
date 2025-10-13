@@ -58,6 +58,8 @@ public class BodiesNode extends OpenSimObjectSetNode {
       addDisplayOption(displayOption.Isolatable);
       addDisplayOption(displayOption.Showable);
       addDisplayOption(displayOption.Colorable);
+      addDisplayOption(displayOption.TransparentCapable);
+
     }
 
       public Image getIcon(int i) {

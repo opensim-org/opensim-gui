@@ -120,14 +120,6 @@ public class ForwardTool extends AbstractTool {
     opensimActuatorsAnalysesToolsJNI.ForwardTool_setStatesFileName(swigCPtr, this, aFileName);
   }
 
-  public boolean getUseSpecifiedDt() {
-    return opensimActuatorsAnalysesToolsJNI.ForwardTool_getUseSpecifiedDt(swigCPtr, this);
-  }
-
-  public void setUseSpecifiedDt(boolean aUseSpecifiedDt) {
-    opensimActuatorsAnalysesToolsJNI.ForwardTool_setUseSpecifiedDt(swigCPtr, this, aUseSpecifiedDt);
-  }
-
   public void setPrintResultFiles(boolean aToWrite) {
     opensimActuatorsAnalysesToolsJNI.ForwardTool_setPrintResultFiles(swigCPtr, this, aToWrite);
   }

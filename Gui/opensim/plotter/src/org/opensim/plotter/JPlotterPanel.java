@@ -31,6 +31,7 @@ package org.opensim.plotter;
 
 import java.awt.BorderLayout;
 import java.awt.Dialog;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -45,12 +46,18 @@ import java.util.Vector;
 import javax.swing.AbstractAction;
 import javax.swing.JCheckBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.event.TreeSelectionEvent;
@@ -983,21 +990,26 @@ public class JPlotterPanel extends javax.swing.JPanel
           openSimContext = OpenSimDB.getInstance().getContext(currentModel);
           // Guard against all models being deleted while the dialog is up
           if (currentModel==null) return;
-          SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentModel);
-          String[] coordNames = guiElem.getUnconstrainedCoordinateNames();
-          for(int i=0; i<coordNames.length; i++){
-             final String coordinateName=coordNames[i];
-             JMenuItem coordinateMenuItem = new JMenuItem(coordinateName);
-             coordinateMenuItem.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e) {
-                   populateXQty(coordinateName);
+           SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentModel);
+           String[] coordNames = guiElem.getUnconstrainedCoordinateNames();
+           JPanel panel = new JPanel(new BorderLayout());
+           final JList<String> list = new JList<>(coordNames);
+           list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+           list.addListSelectionListener(new ListSelectionListener() {
+               public void valueChanged(ListSelectionEvent e) {
+                   populateXQty(list.getSelectedValue());
                    updateContextGuiElements();
                    jPlotterAddPlotButton.setEnabled(validateXY());
-      //printPlotDescriptor();
-                }
-             });
-             jXPopupMenu.add(coordinateMenuItem);
-          }
+                   jXPopupMenu.setVisible(false);
+               }
+           });
+
+           JScrollPane scrollPane = new JScrollPane(list);
+
+           scrollPane.setPreferredSize(new Dimension(200, 300)); // limit height
+           panel.add(scrollPane, BorderLayout.CENTER);
+           jXPopupMenu.add(panel);
+
           jXPopupMenu.addSeparator();
           // for motions make a cascade menu
           ArrayList<PlotterSourceMotion> motionSources=plotterModel.getLoadedMotionSources();
@@ -1784,24 +1796,29 @@ public class JPlotterPanel extends javax.swing.JPanel
             final String qName = plotterModel.getBuiltinQuantities()[i];
             if (qName.startsWith("moment")){   // Need a cascade menu to select a GC
                final String internalName=(qName.equalsIgnoreCase("moment"))?"Moment_":"MomentArm_";
-               JMenu gcMenu = new JMenu(qName);
+               final JMenu gcMenu = new JMenu(qName);
+ 
                SingleModelGuiElements guiElem = OpenSimDB.getInstance().getModelGuiElements(currentModel);
                String[] coordNames = guiElem.getUnconstrainedCoordinateNames();
-               for(int j=0; j<coordNames.length; j++){
-                  final String coordinateName=coordNames[j];
-                  JMenuItem coordinateMenuItem = new JMenuItem(coordinateName);
-                  coordinateMenuItem.addActionListener(new ActionListener(){
-                     public void actionPerformed(ActionEvent e) {
-                        //XX4
+               JPanel panel = new JPanel(new BorderLayout());
+               final JList<String> list = new JList<>(coordNames);
+               list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+               list.addListSelectionListener(new ListSelectionListener(){
+                   public void valueChanged(ListSelectionEvent e){
                         useMuscles(true);
-                        jYQtyTextField.setText(coordinateName +" "+qName);
+                        jYQtyTextField.setText(list.getSelectedValue() +" "+qName);
                         updateContextGuiElements();
-                        sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage(internalName+coordinateName, currentModel), qName));
-                  //printPlotDescriptor();
-                     }
-                  });
-                  gcMenu.add(coordinateMenuItem);
-               }
+                        sourceY=(new PlotterSourceAnalysis(currentModel, plotterModel.getStorage(internalName+list.getSelectedValue(), currentModel), qName));
+                        jSourcePopupMenu.setVisible(false);
+                   }
+               });
+
+               JScrollPane scrollPane = new JScrollPane(list);
+               
+               scrollPane.setPreferredSize(new Dimension(200, 300)); // limit height
+               panel.add(scrollPane, BorderLayout.CENTER);
+               gcMenu.add(panel);
+
                jSourcePopupMenu.add(gcMenu);
                continue;
             }

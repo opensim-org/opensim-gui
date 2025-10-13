@@ -63,12 +63,14 @@ public final class ObjectDisplayMenuAction extends CallableSystemAction implemen
       // Check that selected objects support the operations
         Node[] selected = ExplorerTopComponent.findInstance().getExplorerManager().getSelectedNodes();
         // If any selected object is hidden (or any selected group is mixed), return false.
+        boolean enableOpacity =true;
         for(int i=0; i < selected.length; i++){
            if (! (selected[i] instanceof OpenSimObjectNode))
               continue;
             OpenSimObjectNode objectNode = (OpenSimObjectNode) selected[i];
             if (objectNode.getValidDisplayOptions().contains(displayOption.Colorable))
                showShadingOptions=true;
+            enableOpacity = enableOpacity && objectNode.getValidDisplayOptions().contains(displayOption.TransparentCapable);
         }
 
       try {      
@@ -92,7 +94,8 @@ public final class ObjectDisplayMenuAction extends CallableSystemAction implemen
             displayMenu.add(new JMenuItem(
                     (ObjectDisplayColorAction) ObjectDisplayColorAction.findObject(
                     (Class)Class.forName("org.opensim.view.ObjectDisplayColorAction"), true)));
-            displayMenu.add(new JMenuItem(
+            if (enableOpacity)
+                displayMenu.add(new JMenuItem(
                     (ObjectDisplayOpacityAction) ObjectDisplayOpacityAction.findObject(
                     (Class)Class.forName("org.opensim.view.ObjectDisplayOpacityAction"), true)));
          }

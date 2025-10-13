@@ -540,6 +540,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           // correct selected modes
           deselectPlaybackButtons();
           jStopButton.setSelected(true);
+          ViewDB.getInstance().endAnimation();
        }
     }//GEN-LAST:event_jStopButtonActionPerformed
     
@@ -568,8 +569,9 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           }
           ViewDB.getInstance().startAnimation();
           int timerRate = ViewDB.getInstance().getFrameTime();
-
-          animationTimer = new Timer(timerRate, new RealTimePlayActionListener(1));
+          int delayMS = 2000/timerRate;
+          if (delayMS < 16) delayMS = 16; // 60 fps no faster
+          animationTimer = new Timer(delayMS, new RealTimePlayActionListener(1));
           animationTimer.start();
           // correct selected modes
           deselectPlaybackButtons();

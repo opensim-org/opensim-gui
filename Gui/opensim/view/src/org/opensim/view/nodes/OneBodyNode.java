@@ -79,6 +79,8 @@ public class OneBodyNode extends OneFrameNode{
       addDisplayOption(displayOption.Colorable);
       addDisplayOption(displayOption.Isolatable);
       addDisplayOption(displayOption.Showable);
+      addDisplayOption(displayOption.TransparentCapable);
+
    }
 
 

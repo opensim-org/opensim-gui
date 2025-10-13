@@ -67,7 +67,9 @@ public class ContactGeometriesNode extends OpenSimObjectSetNode {
       if (getChildren().getNodesCount()==0) setChildren(Children.LEAF);
       addDisplayOption(displayOption.Isolatable);
       addDisplayOption(displayOption.Showable);
-      addDisplayOption(displayOption.Colorable);       
+      addDisplayOption(displayOption.Colorable);
+      addDisplayOption(displayOption.TransparentCapable);
+
    }
    /**
     * Display name

@@ -1354,12 +1354,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         String msgType = (String)jsonObject.get("type");
         if (msgType != null) {
             if (msgType.equalsIgnoreCase("info")) {
-                if (jsonObject.get("renderTime")!=null){
-                    double frameRenderTimeInMillis = JSONMessageHandler.convertObjectFromJsonToDouble(jsonObject.get("renderTime"));
-                    //System.out.println("renderTime"+frameRenderTimeInMillis);
-                    int frameRate = (int) (frameRenderTimeInMillis*1.5);
-                    if (frameRate > 30)
-                        TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(frameRate));
+                if (jsonObject.get("fps")!=null){
+                    int frameRate = (int) JSONMessageHandler.convertObjectFromJsonToDouble(jsonObject.get("fps"));
+                    //System.out.println("FPS by viewer reported as:"+frameRate);
+                    TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(frameRate));
                     return;
                 }
                 if (debugLevel > 1) {

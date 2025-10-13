@@ -44,6 +44,7 @@ public class OneWrapObjectNode extends OneComponentWithGeometryNode{
       addDisplayOption(displayOption.Showable);
       addDisplayOption(displayOption.Isolatable);
       addDisplayOption(displayOption.Colorable);
+      addDisplayOption(displayOption.TransparentCapable);
       
    }
 
