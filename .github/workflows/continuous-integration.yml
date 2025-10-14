@@ -159,7 +159,7 @@ jobs:
   mac:
     name: Mac
 
-    runs-on: macos-13
+    runs-on: macos-15
 
     steps:
     - name: Checkout opensim-gui
@@ -190,13 +190,13 @@ jobs:
     - name: Set up JDK 1.8
       uses: actions/setup-java@v3
       with:
-        distribution: 'temurin'
+        distribution: 'zulu'
         java-version: 8
 
     # - name: Setup tmate session to debug the workflow through SSH.
     #   uses: mxschmitt/action-tmate@v2
         
-    - name: Install NetBeans 12.3
+    - name: Install NetBeans 17
       # `brew cask install netbeans-java-se` requires sudo but brew won't allow sudo,
       # so we install NetBeans ourselves.
       # Note: Cask 'netbeans' gives version 11.2, while 'netbeans-java-se' gives 8.2.
@@ -219,9 +219,9 @@ jobs:
         export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
         echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
         echo $JAVA_HOME
-        wget https://archive.apache.org/dist/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-macosx.dmg
-        hdiutil attach Apache-NetBeans-12.3-bin-macosx.dmg
-        sudo installer -pkg /Volumes/Apache\ NetBeans\ 12.3/Apache\ NetBeans\ 12.3.pkg -target /
+        wget https://archive.apache.org/dist/netbeans/netbeans-installers/17/Apache-NetBeans-17-bin-macosx.dmg
+        hdiutil attach Apache-NetBeans-17-bin-macosx.dmg
+        sudo installer -pkg /Volumes/Apache\ NetBeans\ 17/Apache\ NetBeans\ 17.pkg -target /
         sudo -k
 
     - name: Cache opensim-core-dependencies
@@ -238,7 +238,7 @@ jobs:
         key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
         
     - name: Build opensim-core-dependencies
-      if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      #if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         mkdir build_deps
         cd build_deps
