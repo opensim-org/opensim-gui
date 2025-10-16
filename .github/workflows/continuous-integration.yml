@@ -168,7 +168,7 @@ jobs:
           ref: wire_viewer_to_gui_jxbrowser7
           
     - name: list folder contents post download
-      run: ls -l
+      run: ls -l opensim-visualizer/jxbrowser/release/modules/ext
       
     - name: Checkout opensim-core main
       uses: actions/checkout@v4
