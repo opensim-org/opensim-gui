@@ -282,15 +282,15 @@ jobs:
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
       
-    - name: get jxbowserJars
-      run: wget -O jxbrowser-mac-arm-7.44.1.jar "https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-mac-arm-7.44.1.jar?use_mirror=autoselect"
-           wget -O jxbrowser-7.44.1.jar "https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-7.44.1.jar?use_mirror=autoselect"
-           wget -O jxbrowser-swing-7.44.1.jar "https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-swing-7.44.1.jar?use_mirror=autoselect"
     - name: list folder contents post download
       run: ls -la
            ls -la ./opensim-visualizer/jxbrowser/release/modules/ext
-           #cp ./jxbrowser-mac-arm-7.44.1.jar opensim-visualizer/jxbrowser/release/modules/ext/jxbrowser-mac-arm-7.44.1.jar
 
+    - name: get jxbowserJars
+      run: wget -O jxbrowser-mac-arm-7.44.1.jar "https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-mac-arm-7.44.1.jar?use_mirror=autoselect"
+           # wget -O jxbrowser-7.44.1.jar "https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-7.44.1.jar?use_mirror=autoselect"
+           # wget -O jxbrowser-swing-7.44.1.jar "https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-swing-7.44.1.jar?use_mirror=autoselect"
+  
     - name: Build GUI
       id: build-gui
       run: |
