@@ -281,6 +281,10 @@ jobs:
 
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
+    - name: get jxbowserJars
+      run: wget https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-mac-arm-7.44.1.jar/download -O opensim-visualizer/jxbrowser/release/modules/ext/jxbrowser-mac-arm-7.44.1.jar
+           wget https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-7.44.1.jar/download -O opensim-visualizer/jxbrowser/release/modules/ext/jxbrowser-7.44.1.jar
+           wget https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-swing-7.44.1.jar/download -O opensim-visualizer/jxbrowser/release/modules/ext/jxbrowser-swing-7.44.1.jar
 
     - name: Build GUI
       id: build-gui
