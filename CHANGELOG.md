@@ -13,6 +13,8 @@ v4.6
 - Fix issue [#1526](https://github.com/opensim-org/opensim-gui/issues/1526): Handle very long frame names by showing as tooltips in path editor.
 - Fix issue [#1480](https://github.com/opensim-org/opensim-gui/issues/1480): Unchecking the box to use controls in AnalyzeTool doesn't work.
 - Upgrade Viewer to a react application using threejs as a module/library, rewrite of viewing functionality
+- Fix issue [#1555](https://github.com/opensim-org/opensim-gui/issues/1555): Fix crash following use of the IMUInverseKinematicsTool in the GUI.
+
 
 v4.5
 ======
