@@ -284,9 +284,11 @@ jobs:
       
     - name: get jxbowserJars
       run: wget -O jxbrowser-mac-arm-7.44.1.jar "https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-mac-arm-7.44.1.jar?use_mirror=autoselect"
-           cp jxbrowser-mac-arm-7.44.1.jar opensim-visualizer/jxbrowser/release/modules/ext/jxbrowser-mac-arm-7.44.1.jar
-           # wget https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-7.44.1.jar/download -O opensim-visualizer/jxbrowser/release/modules/ext/jxbrowser-7.44.1.jar
-           #wget https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-swing-7.44.1.jar/download -O opensim-visualizer/jxbrowser/release/modules/ext/jxbrowser-swing-7.44.1.jar
+           wget -O jxbrowser-7.44.1.jar "https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-7.44.1.jar?use_mirror=autoselect"
+           wget -O jxbrowser-swing-7.44.1.jar "https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-swing-7.44.1.jar?use_mirror=autoselect"
+           ls -la
+           ls -la ./opensim-visualizer/jxbrowser/release/modules/ext
+           #cp ./jxbrowser-mac-arm-7.44.1.jar opensim-visualizer/jxbrowser/release/modules/ext/jxbrowser-mac-arm-7.44.1.jar
 
     - name: Build GUI
       id: build-gui
