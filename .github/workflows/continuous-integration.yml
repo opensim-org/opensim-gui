@@ -47,18 +47,18 @@ jobs:
       id: cache-netbeans
       uses: actions/cache@v3
       with:
-        path: .\Apache-NetBeans-12.3-bin-windows-x64.exe
-        key: netbeans-12.3
+        path: .\Apache-NetBeans-17-bin-windows-x64.exe
+        key: netbeans-17
         
-    - name: Install Netbeans 12.3
+    - name: Install Netbeans 17
       #if: steps.cache-netbeans.outputs.cache-hit != 'true'
       run: |
-        (New-Object System.Net.WebClient).DownloadFile("https://archive.apache.org/dist/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-windows-x64.exe", "Apache-NetBeans-12.3-bin-windows-x64.exe")
-        $expectedHash = "0695d87d9c72dcf3738672ba83eb273dda02066fa5eee80896cb6ccf79175840367a13d22ab3cb9838dffaa9a219dd1f73aee0e27c085e5310da2e3bbbc92b2c"
-        $hashFromFile = Get-FileHash -Algorithm SHA512 -Path .\Apache-NetBeans-12.3-bin-windows-x64.exe
+        (New-Object System.Net.WebClient).DownloadFile("https://archive.apache.org/dist/netbeans/netbeans-installers/17/Apache-NetBeans-17-bin-windows-x64.exe", "Apache-NetBeans-17-bin-windows-x64.exe")
+        $expectedHash = "c3d7a34184c4021486751fbc3878eb2376677674ff8d6d4bf87017fd2434122c8438072aa891e535fa0fa9aeafcb49ad833a61903180772369d99571b073baac"
+        $hashFromFile = Get-FileHash -Algorithm SHA512 -Path .\Apache-NetBeans-17-bin-windows-x64.exe
         if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
-        .\Apache-NetBeans-12.3-bin-windows-x64.exe --silent | Out-Null # This installer is gregarious.
-        echo "ANT_HOME=C:\\Program Files\\NetBeans-12.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
+        .\Apache-NetBeans-17-bin-windows-x64.exe --silent | Out-Null # This installer is gregarious.
+        echo "ANT_HOME=C:\\Program Files\\NetBeans-17.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
       
     - name: Checkout opensim-core main
       uses: actions/checkout@v4
@@ -132,7 +132,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -G"Visual Studio 17 2022" -A x64 -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans-12.3/netbeans;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans-12.3/netbeans/harness"
+        cmake ../ -G"Visual Studio 17 2022" -A x64 -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans-17/netbeans;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans-17/netbeans/harness"
         cmake --build . --target CopyOpenSimCore --config Release
         cmake --build . --target CopyModels --config Release
         cmake --build . --target PrepareInstaller --config Release
