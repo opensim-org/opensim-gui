@@ -187,11 +187,11 @@ jobs:
         mkdir gfortran_version
         gfortran -v &> gfortran_version/gfortran_version.txt
     
-    - name: Set up JDK 1.23
+    - name: Set up JDK 1.11
       uses: actions/setup-java@v3
       with:
-        distribution: 'temurin'
-        java-version: 23
+        distribution: 'zulu'
+        java-version: 11
 
     # - name: Setup tmate session to debug the workflow through SSH.
     #   uses: mxschmitt/action-tmate@v2
@@ -210,13 +210,13 @@ jobs:
         sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-14.jdk
         sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-13.jdk
         sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-12.jdk
-        sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-11.jdk
+        #sudo rm -rf /Library/Java/JavaVirtualMachines/zulu-11.jdk
         sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-14.jdk
         sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-13.jdk
         sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-12.jdk
-        sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk
+        #sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk
         /usr/libexec/java_home -V
-        export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
+        export JAVA_HOME=$(/usr/libexec/java_home -v 1.11)
         echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
         echo $JAVA_HOME
         wget https://archive.apache.org/dist/netbeans/netbeans-installers/17/Apache-NetBeans-17-bin-macosx.dmg
@@ -238,7 +238,7 @@ jobs:
         key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
         
     - name: Build opensim-core-dependencies
-      if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      #if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         mkdir build_deps
         cd build_deps
@@ -270,7 +270,7 @@ jobs:
         make && make -j4 install
 
     - name: Build opensim-core
-      if: steps.cache-core.outputs.cache-hit != 'true'
+      #if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
