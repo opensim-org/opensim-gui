@@ -283,7 +283,7 @@ jobs:
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
       
     - name: list folder contents post download
-      run: ls -l opensim-visualizer/jxbrowser/release/modules/ext
+      run: ls -l opensim-visualizer
 
     - name: get jxbowserJars
       run: wget -O jxbrowser-mac-arm-7.44.1.jar "https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/jxbrowser-mac-arm-7.44.1.jar?use_mirror=autoselect"
