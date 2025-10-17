@@ -22,7 +22,7 @@ jobs:
     - name: Checkout opensim-gui
       uses: actions/checkout@v4
       with:
-          ref: wire_viewer_to_gui
+          ref: wire_viewer_to_gui_jxbrowser7
 
     - name: Install SWIG
       run: |
