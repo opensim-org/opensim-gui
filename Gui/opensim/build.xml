@@ -198,7 +198,7 @@
         <!--<echoproperties/>-->
         <!-- copy jxbrowser jar files to distro -->
         <copy todir="${opensim.dist.dir}/Resources/opensim/opensim/modules/ext" verbose="true">
-            <fileset dir="opensim-visualizer/jxbrowser/release/modules/ext">
+            <fileset dir="../opensim-visualizer/jxbrowser/release/modules/ext">
                 <include name="*.jar"/>
             </fileset>
         </copy>
