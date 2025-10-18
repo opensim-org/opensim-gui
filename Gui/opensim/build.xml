@@ -212,13 +212,6 @@
             <fileset dir="Scripts" />
         </copy>
 
-        <delete>
-            <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
-                includes="**/jxbrowser-*win*.jar"/>
-            <fileset dir="${opensim.dist.dir}/OpenSim/modules/ext"
-                includes="**/jxbrowser-*linux*.jar"/>
-        </delete>
-
         <!-- Copy the OpenSim API. -->
         <copy todir="${opensim.dist.dir}">
             <fileset dir="${api.dir}">
