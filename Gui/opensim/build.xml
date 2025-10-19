@@ -198,8 +198,8 @@
         <!--<echoproperties/>-->
         <!-- copy jxbrowser jar files to distro -->
         <copy todir="${opensim.dist.dir}/Resources/opensim/opensim/modules/ext" verbose="true">
-            <fileset dir="{basedir}/../opensim-visualizer/jxbrowser/release/modules/ext">
-                <include name="*.jar"/>
+            <fileset dir="{basedir}/../../opensim-visualizer/jxbrowser/release/modules/ext">
+                <include name="*.*"/>
             </fileset>
         </copy>
         <!-- Must use the OS's cp because Ant's copy doesn't preserve file
