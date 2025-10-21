@@ -215,6 +215,7 @@ jobs:
         sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-13.jdk
         sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-12.jdk
         sudo rm -rf /Library/Java/JavaVirtualMachines/adoptopenjdk-11.jdk
+        sudo rm -rf Java_Temurin-Hotspot_jdk
         /usr/libexec/java_home -V
         export JAVA_HOME=$(/usr/libexec/java_home -v 1.8)
         echo "JAVA_HOME=$JAVA_HOME" >> $GITHUB_ENV
@@ -238,7 +239,7 @@ jobs:
         key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
         
     - name: Build opensim-core-dependencies
-      if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      #if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         mkdir build_deps
         cd build_deps
@@ -270,7 +271,7 @@ jobs:
         make && make -j4 install
 
     - name: Build opensim-core
-      if: steps.cache-core.outputs.cache-hit != 'true'
+      #if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
