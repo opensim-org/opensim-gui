@@ -579,6 +579,10 @@ public class MotionControlJPanel extends javax.swing.JToolBar
       }
     }//GEN-LAST:event_jPlayButtonActionPerformed
     
+    public void playCurrentMotion() {
+        //TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(timeStep));
+        jPlayButtonActionPerformed(null);
+    }
     
     public void stateChanged(ChangeEvent e) 
     {

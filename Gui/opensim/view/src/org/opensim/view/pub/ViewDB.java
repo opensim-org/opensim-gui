@@ -66,6 +66,7 @@ import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
+import org.opensim.view.motions.MotionControlJPanel;
 
 
 /**
@@ -178,6 +179,20 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     public void broadcastVisulaizerMessage(JSONObject json) {
         websocketdb.broadcastMessageJson(json, null);
+    }
+
+    public void sendAnimationCommand(String setCurrentAnimation, double startTime, double endTime) {
+        JSONObject topMsg = new JSONObject();
+        topMsg.put("Op", setCurrentAnimation);
+        topMsg.put("Start", startTime);
+        topMsg.put("End", endTime);
+        websocketdb.broadcastMessageJson(topMsg, null);
+    }
+
+    public void sendClearAnimationCommand() {
+        JSONObject topMsg = new JSONObject();
+        topMsg.put("Op", "ClearCurrentAnimation");
+        websocketdb.broadcastMessageJson(topMsg, null);
     }
   
    class AppearanceChange {
@@ -1397,6 +1412,15 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             if (msgType.equalsIgnoreCase("acknowledge")){
                 WebSocketDB.getInstance().finishPendingMessage((String) jsonObject.get("uuid"));
                 return;
+            }
+            if (msgType.equalsIgnoreCase("Animation")){
+                String op = (String)jsonObject.get("OP");
+                if (op.equalsIgnoreCase("Start")){
+                    // Autoplay animation 
+                    System.out.println("Play animation frame every "+jsonObject.get("timestep"));
+                    MotionControlJPanel.getInstance().playCurrentMotion();
+                    return;
+                }
             }
         }
        Object uuid = jsonObject.get("uuid");
