@@ -1417,8 +1417,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 String op = (String)jsonObject.get("OP");
                 if (op.equalsIgnoreCase("Start")){
                     // Autoplay animation 
-                    System.out.println("Play animation frame every "+jsonObject.get("timestep"));
-                    MotionControlJPanel.getInstance().playCurrentMotion();
+                    double step = (Double)jsonObject.get("timestep");
+                    int intStep = (int) Math.round(step);
+                    //System.out.println("Play animation frame every "+intStep);
+                    MotionControlJPanel.getInstance().playCurrentMotion(intStep);
                     return;
                 }
             }

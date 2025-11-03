@@ -569,7 +569,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           }
           ViewDB.getInstance().startAnimation();
           int timerRate = ViewDB.getInstance().getFrameTime();
-          int delayMS = 2000/timerRate;
+          int delayMS = 1000/timerRate;
+          //System.out.println("Frame time ms"+ delayMS);
           if (delayMS < 16) delayMS = 16; // 60 fps no faster
           animationTimer = new Timer(delayMS, new RealTimePlayActionListener(1));
           animationTimer.start();
@@ -579,8 +580,12 @@ public class MotionControlJPanel extends javax.swing.JToolBar
       }
     }//GEN-LAST:event_jPlayButtonActionPerformed
     
-    public void playCurrentMotion() {
-        //TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(timeStep));
+    public double getSpeed() {
+       return ((Double)smodel.getValue());
+    }
+    
+    public void playCurrentMotion(int stepInMS) {
+        TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(stepInMS));
         jPlayButtonActionPerformed(null);
     }
     
