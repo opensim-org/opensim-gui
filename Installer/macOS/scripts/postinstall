@@ -1,4 +1,4 @@
-#!/bin/sh
+!/bin/sh
 
 # Who's the current user running the installer?
 # https://apple.stackexchange.com/questions/144159/how-can-i-determine-the-invoking-user-in-an-apple-installer-postinstall-script
@@ -13,7 +13,7 @@ INSTALLER_USER=$(stat -f '%Su' $HOME)
 # If installed system-wide, the permissions group will be wheel; we need it to
 # be staff.
 USERDIR_SUFFIX=@VERSION@
-THREEJS_EDITOR_DIR="$2/OpenSim @VERSION@/OpenSim @VERSION@.app/Contents/Resources/OpenSim/threejs/editor"
+THREEJS_EDITOR_DIR="$2/OpenSim @VERSION@/OpenSim @VERSION@.app/Contents/Resources/opensim/opensim-viewer/"
 chown $INSTALLER_USER:staff "$THREEJS_EDITOR_DIR"
 # Allow other users to also use OpenSim.
 chmod g+w "$THREEJS_EDITOR_DIR"
