@@ -133,7 +133,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     }
 
-    public int getFrameTime() {
+    public int getFramesPerSecond() {
         String saved = TheApp.getCurrentVersionPreferences().get("Internal.FrameRate", String.valueOf(frameRate));
         if (saved!= null)
             frameRate = Integer.parseInt(saved);
@@ -1420,7 +1420,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     // Autoplay animation 
                     double step = (Double)jsonObject.get("timestep");
                     int intStep = (int) Math.round(step);
-                    //System.out.println("Play animation frame every "+intStep);
+                    //System.out.println("Play animation with frame rate FPS "+intStep);
                     MotionControlJPanel.getInstance().playCurrentMotion(intStep);
                     return;
                 }

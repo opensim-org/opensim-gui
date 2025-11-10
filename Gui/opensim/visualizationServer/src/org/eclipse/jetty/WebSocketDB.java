@@ -44,6 +44,7 @@ public class WebSocketDB {
     private Set<VisWebSocket> sockets = Collections.synchronizedSet(new HashSet<VisWebSocket>());
     private Observer observer;
     public static boolean debug = false;
+    double lastTime = 0.0;
     // Keep list of OpenModel messages that are still pending (not acknowledged yet)
     private static LinkedList<String> pendingModels = new LinkedList<String>();
     /** Creates a new instance of WebSocketDB */
@@ -101,6 +102,8 @@ public class WebSocketDB {
                 System.out.println("Broadcast:"+msg.toJSONString()+"\n");
                 if (msg.get("time")!= null){
                     System.out.println("time="+ (double)msg.get("time"));
+                    System.out.println("Delta="+((double)msg.get("time")-lastTime));
+                    lastTime = (double)msg.get("time");
                 }
             }
             sock.sendVisualizerMessage(msg);

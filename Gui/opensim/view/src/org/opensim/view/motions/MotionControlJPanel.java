@@ -84,22 +84,20 @@ public class MotionControlJPanel extends javax.swing.JToolBar
 
       private double avgCost = 0;
       private int avgCostCount = 0;
-
       public RealTimePlayActionListener(int direction) { this.direction = direction; }
+      int frameFPS = ViewDB.getInstance().getFramesPerSecond(); // Fix delta while playing
 
       public void actionPerformed(ActionEvent evt) {
-         long currentTimeNano = System.nanoTime();
          if(firstAction) {
             firstAction = false;
-            lastActionTimeNano = currentTimeNano;
             getMasterMotion().advanceTime(0);
          } else {
             double speed = (double)(((Double)smodel.getValue()).doubleValue());
             double factor = (double)direction*1e-9*speed;
+            double timePerFrame = 1.0/((double)frameFPS);
             //System.out.println("Time since last call "+(currentTimeNano-lastActionTimeNano)+" ns");
-            getMasterMotion().advanceTime(factor*(currentTimeNano-lastActionTimeNano));
+            getMasterMotion().advanceTime(timePerFrame*speed*direction);
             //System.out.println("             masterMotion current time = "+(masterMotion.getCurrentTime()));
-            lastActionTimeNano = currentTimeNano;
          }
 
          // Kill self if done and wrapMotion is off
@@ -524,8 +522,9 @@ public class MotionControlJPanel extends javax.swing.JToolBar
               // reset motion if at end already
               getMasterMotion().setTime(getMasterMotion().getEndTime());
           }
-          int timerRate = ViewDB.getInstance().getFrameTime();
-          animationTimer = new Timer(timerRate, new RealTimePlayActionListener(-1));
+          int timerRate = ViewDB.getInstance().getFramesPerSecond();
+          int delayMS = 1000/timerRate;
+          animationTimer = new Timer(delayMS, new RealTimePlayActionListener(-1));
           animationTimer.start();
           // correct selected modes
           deselectPlaybackButtons();
@@ -566,12 +565,12 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           if (getMasterMotion().finished(1)){
               // reset motion if at end already
               getMasterMotion().setTime(getMasterMotion().getStartTime());
-          }
+           }
           ViewDB.getInstance().startAnimation();
-          int timerRate = ViewDB.getInstance().getFrameTime();
+          int timerRate = ViewDB.getInstance().getFramesPerSecond();
           int delayMS = 1000/timerRate;
           //System.out.println("Frame time ms"+ delayMS);
-          if (delayMS < 16) delayMS = 16; // 60 fps no faster
+          //if (delayMS < 16) delayMS = 16; // 60 fps no faster
           animationTimer = new Timer(delayMS, new RealTimePlayActionListener(1));
           animationTimer.start();
           // correct selected modes
