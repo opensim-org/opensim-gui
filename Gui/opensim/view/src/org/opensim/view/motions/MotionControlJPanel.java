@@ -69,7 +69,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
    boolean             motionLoaded=false;
    private MasterMotionModel   masterMotion;
    private int         rangeResolution;
-   private int         timerRate = 30;
+   private int         frameRate = 30;
    private DecimalFormat timeFormat = new DecimalFormat("0.000");
 
    private boolean internalTrigger=false;
@@ -80,6 +80,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
    private class RealTimePlayActionListener implements ActionListener {
       private boolean firstAction=true;
       private long lastActionTimeNano;
+      private double lastSimulationTime=0.0;
       private int direction;
 
       private double avgCost = 0;
@@ -93,13 +94,17 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             firstAction = false;
             lastActionTimeNano = currentTimeNano;
             getMasterMotion().advanceTime(0);
+            System.out.println("frameRate"+frameRate);
          } else {
             double speed = (double)(((Double)smodel.getValue()).doubleValue());
-            double factor = (double)direction*1e-9*speed;
+            //double factor = (double)direction*1e-9*speed;
+            double frameTime = 1.0/frameRate;
             //System.out.println("Time since last call "+(currentTimeNano-lastActionTimeNano)+" ns");
-            getMasterMotion().advanceTime(factor*(currentTimeNano-lastActionTimeNano));
-            //System.out.println("             masterMotion current time = "+(masterMotion.getCurrentTime()));
+            getMasterMotion().advanceTime((double)direction*speed*frameTime);
+            System.out.println("             masterMotion current time = "+(masterMotion.getCurrentTime()));
             lastActionTimeNano = currentTimeNano;
+            System.out.println("delta simulation time = "+(masterMotion.getCurrentTime()- lastSimulationTime));
+            lastSimulationTime = masterMotion.getCurrentTime();
          }
 
          // Kill self if done and wrapMotion is off
@@ -128,6 +133,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
     */
    public MotionControlJPanel() {
       masterMotion = new MasterMotionModel();   // initialize the object backing the GUI.
+      frameRate = ViewDB.getInstance().getFrameRate();
 
       initComponents();
       rangeResolution = jMotionSlider.getMaximum(); // assume resolution was set up as max value of slider in form designer
@@ -524,8 +530,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
               // reset motion if at end already
               getMasterMotion().setTime(getMasterMotion().getEndTime());
           }
-          int timerRate = ViewDB.getInstance().getFrameTime();
-          animationTimer = new Timer(timerRate, new RealTimePlayActionListener(-1));
+          int frameTimeInMS = 1000/frameRate;
+          animationTimer = new Timer(frameTimeInMS, new RealTimePlayActionListener(-1));
           animationTimer.start();
           // correct selected modes
           deselectPlaybackButtons();
@@ -556,6 +562,11 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           jStopButtonActionPerformed(evt);
        }
     }//GEN-LAST:event_jAdvanceButtonActionPerformed
+    // Entry point to trigger play of animation from viewer
+    public void playAnimation() {
+        jPlayButtonActionPerformed(null);
+    }
+    
     
     private void jPlayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlayButtonActionPerformed
       if (animationTimer!=null){
@@ -568,9 +579,9 @@ public class MotionControlJPanel extends javax.swing.JToolBar
               getMasterMotion().setTime(getMasterMotion().getStartTime());
           }
           ViewDB.getInstance().startAnimation();
-          int timerRate = ViewDB.getInstance().getFrameTime();
-          int delayMS = 2000/timerRate;
-          if (delayMS < 16) delayMS = 16; // 60 fps no faster
+          int timerRate = ViewDB.getInstance().getFrameRate();
+          int delayMS = 1000/timerRate;
+          //if (delayMS < 16) delayMS = 16; // 60 fps no faster
           animationTimer = new Timer(delayMS, new RealTimePlayActionListener(1));
           animationTimer.start();
           // correct selected modes
@@ -692,6 +703,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                    associatedDisplayers.get(j).setupMotionDisplay();
             }
             getMasterMotion().setTime(currentTime);
+            ViewDB.getInstance().sendCurrentAnimationCommand(getMasterMotion().getStartTime(),
+                        getMasterMotion().getEndTime());
             
          } else if (evt.getOperation() == Operation.Modified) {
             Storage motion = evt.getMotion();
@@ -806,6 +819,10 @@ public class MotionControlJPanel extends javax.swing.JToolBar
 
     public MasterMotionModel getMasterMotion() {
         return masterMotion;
+    }
+    
+    public double getSpeed() {
+        return (((Double)smodel.getValue()).doubleValue());
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

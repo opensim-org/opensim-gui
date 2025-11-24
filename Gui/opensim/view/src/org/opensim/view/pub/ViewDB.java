@@ -66,6 +66,7 @@ import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
+import org.opensim.view.motions.MotionControlJPanel;
 
 
 /**
@@ -92,15 +93,31 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         JSONObject msg = new JSONObject();
         msg.put("Op", "endAnimation");
         websocketdb.broadcastMessageJson(msg, null);
-        
+        System.out.println("Sending endAnimation message");        
     }
 
     public void startAnimation() {
         JSONObject msg = new JSONObject();
         msg.put("Op", "startAnimation");
+        msg.put("Speed", MotionControlJPanel.getInstance().getSpeed());
         websocketdb.broadcastMessageJson(msg, null);
+        System.out.println("Sending startAnimation message");
     }
 
+    public void sendCurrentAnimationCommand(double start, double end) {
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "SetCurrentAnimation");
+        msg.put("Start", start);
+        msg.put("End", end);
+        websocketdb.broadcastMessageJson(msg, null);
+    }
+    
+    public void clearCurrentAnimation() {
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "ClearCurrentAnimation");
+        websocketdb.broadcastMessageJson(msg, null);       
+    }
+    
     public void updateComponentVisuals(Model model, Component mc, Boolean frame) {
         if (websocketdb!=null){
             ModelVisualizationJson modelJson = getModelVisualizationJson(model);
@@ -131,7 +148,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     }
 
-    public int getFrameTime() {
+    public int getFrameRate() {
         String saved = TheApp.getCurrentVersionPreferences().get("Internal.FrameRate", String.valueOf(frameRate));
         if (saved!= null)
             frameRate = Integer.parseInt(saved);
@@ -1248,11 +1265,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
            repaintAll();        
     }
 
-
-    public static boolean isVtkGraphicsAvailable() {
-        return false;
-    }
-
     public static void printBounds(String name, double[] bodyBounds) {
         System.out.print("Bounds for "+name+" are:[");
         for(int i=0; i<6; i++)
@@ -1396,6 +1408,17 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             }
             if (msgType.equalsIgnoreCase("acknowledge")){
                 WebSocketDB.getInstance().finishPendingMessage((String) jsonObject.get("uuid"));
+                return;
+            }
+            if (msgType.equalsIgnoreCase("Animation")){
+                String op = (String) jsonObject.get("OP");
+                if (op.equalsIgnoreCase("start")){
+                    double timestep = (double) jsonObject.get("timestep");
+                    int desiredFrameRate = (int) Math.ceil(1000.0/timestep);
+                    TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(desiredFrameRate));
+                    System.out.println("Setting desired rate to:"+desiredFrameRate);
+                    MotionControlJPanel.getInstance().playAnimation();
+                }
                 return;
             }
         }

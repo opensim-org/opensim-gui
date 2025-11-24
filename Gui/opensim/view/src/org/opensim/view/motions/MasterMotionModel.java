@@ -89,7 +89,7 @@ public class MasterMotionModel {
    public void applyTime() 
    {
       if(displayers.size() == 0) return;
-
+      
       for(int i=0; i<displayers.size(); i++) {
          displayers.get(i).applyTimeToModel(getCurrentTime());
       }
