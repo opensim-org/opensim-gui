@@ -69,11 +69,11 @@ public class MotionControlJPanel extends javax.swing.JToolBar
    boolean             motionLoaded=false;
    private MasterMotionModel   masterMotion;
    private int         rangeResolution;
-   private int         frameRate = 30;
    private DecimalFormat timeFormat = new DecimalFormat("0.000");
-
+   private int frameNumber=0;
    private boolean internalTrigger=false;
    private static MotionControlJPanel instance=null;
+   private boolean debug = true;
    
    // ActionListener for the timer which is used to play motion forwards/backwards in such a way that
    // advances the model's time based on the real elapsed time (times the factor specified by the smodel spinner)
@@ -85,26 +85,29 @@ public class MotionControlJPanel extends javax.swing.JToolBar
 
       private double avgCost = 0;
       private int avgCostCount = 0;
-
       public RealTimePlayActionListener(int direction) { this.direction = direction; }
-
+      int frameFPS = ViewDB.getInstance().getFrameRate(); // Fix delta while playing
+      
       public void actionPerformed(ActionEvent evt) {
-         long currentTimeNano = System.nanoTime();
          if(firstAction) {
             firstAction = false;
-            lastActionTimeNano = currentTimeNano;
+            frameFPS = ViewDB.getInstance().getFrameRate();
+            if (debug) System.out.println("frameFPS in RealTimePlayActionListener="+frameFPS);
             getMasterMotion().advanceTime(0);
-            System.out.println("frameRate"+frameRate);
+            if (debug) System.out.println("frameFPS"+frameFPS);
          } else {
             double speed = (double)(((Double)smodel.getValue()).doubleValue());
             //double factor = (double)direction*1e-9*speed;
-            double frameTime = 1.0/frameRate;
+            double frameTime = 1.0/frameFPS;
             //System.out.println("Time since last call "+(currentTimeNano-lastActionTimeNano)+" ns");
             getMasterMotion().advanceTime((double)direction*speed*frameTime);
-            System.out.println("             masterMotion current time = "+(masterMotion.getCurrentTime()));
-            lastActionTimeNano = currentTimeNano;
-            System.out.println("delta simulation time = "+(masterMotion.getCurrentTime()- lastSimulationTime));
+            if (debug) System.out.println("             masterMotion current time = "+(masterMotion.getCurrentTime()));
+            frameNumber++;
+            //lastActionTimeNano = currentTimeNano;
+            //System.out.println("delta simulation time = "+(masterMotion.getCurrentTime()- lastSimulationTime));
+            if (debug) System.out.println("Frame number="+frameNumber);
             lastSimulationTime = masterMotion.getCurrentTime();
+
          }
 
          // Kill self if done and wrapMotion is off
@@ -113,6 +116,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             //animationTimer=null;
             jStopButtonActionPerformed(evt);
             ViewDB.getInstance().endAnimation();
+            if (debug) System.out.println("End Animation");
             
          } else {
             /*
@@ -133,7 +137,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
     */
    public MotionControlJPanel() {
       masterMotion = new MasterMotionModel();   // initialize the object backing the GUI.
-      frameRate = ViewDB.getInstance().getFrameRate();
 
       initComponents();
       rangeResolution = jMotionSlider.getMaximum(); // assume resolution was set up as max value of slider in form designer
@@ -530,7 +533,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
               // reset motion if at end already
               getMasterMotion().setTime(getMasterMotion().getEndTime());
           }
-          int frameTimeInMS = 1000/frameRate;
+          int frameFPS = ViewDB.getInstance().getFrameRate();
+          int frameTimeInMS = 1000/frameFPS;
           animationTimer = new Timer(frameTimeInMS, new RealTimePlayActionListener(-1));
           animationTimer.start();
           // correct selected modes
@@ -564,23 +568,28 @@ public class MotionControlJPanel extends javax.swing.JToolBar
     }//GEN-LAST:event_jAdvanceButtonActionPerformed
     // Entry point to trigger play of animation from viewer
     public void playAnimation() {
+        if (animationTimer!= null)
+            animationTimer.stop();
+        animationTimer=null;
         jPlayButtonActionPerformed(null);
     }
-    
     
     private void jPlayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlayButtonActionPerformed
       if (animationTimer!=null){
          animationTimer.stop();
          animationTimer=null;
       }
+      int timerRate = ViewDB.getInstance().getFrameRate();
       if (isMotionLoaded() && animationTimer==null){
           if (getMasterMotion().finished(1)){
               // reset motion if at end already
               getMasterMotion().setTime(getMasterMotion().getStartTime());
-          }
+           }
           ViewDB.getInstance().startAnimation();
-          int timerRate = ViewDB.getInstance().getFrameRate();
+          if (debug) System.out.println("Frame number =0");
+          frameNumber = 0;
           int delayMS = 1000/timerRate;
+
           //if (delayMS < 16) delayMS = 16; // 60 fps no faster
           animationTimer = new Timer(delayMS, new RealTimePlayActionListener(1));
           animationTimer.start();
@@ -590,6 +599,15 @@ public class MotionControlJPanel extends javax.swing.JToolBar
       }
     }//GEN-LAST:event_jPlayButtonActionPerformed
     
+    public double getSpeed() {
+       return ((Double)smodel.getValue());
+    }
+    
+    public void playCurrentMotion(int stepInMS) {
+        if (debug) System.out.println("playCurrentMotion, setting rate to "+stepInMS);
+        TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(stepInMS));
+        jPlayButtonActionPerformed(null);
+    }
     
     public void stateChanged(ChangeEvent e) 
     {
@@ -821,9 +839,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         return masterMotion;
     }
     
-    public double getSpeed() {
-        return (((Double)smodel.getValue()).doubleValue());
-    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAdvanceButton;

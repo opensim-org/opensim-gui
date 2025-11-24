@@ -152,6 +152,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         String saved = TheApp.getCurrentVersionPreferences().get("Internal.FrameRate", String.valueOf(frameRate));
         if (saved!= null)
             frameRate = Integer.parseInt(saved);
+        System.out.println("Setting frame rate to "+frameRate+" in ViewDB.getFrameRate");
         TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(frameRate));
         return frameRate; // 30 FPS default
     }
@@ -195,6 +196,20 @@ public final class ViewDB extends Observable implements Observer, LookupListener
 
     public void broadcastVisulaizerMessage(JSONObject json) {
         websocketdb.broadcastMessageJson(json, null);
+    }
+
+    public void sendAnimationCommand(String setCurrentAnimation, double startTime, double endTime) {
+        JSONObject topMsg = new JSONObject();
+        topMsg.put("Op", setCurrentAnimation);
+        topMsg.put("Start", startTime);
+        topMsg.put("End", endTime);
+        websocketdb.broadcastMessageJson(topMsg, null);
+    }
+
+    public void sendClearAnimationCommand() {
+        JSONObject topMsg = new JSONObject();
+        topMsg.put("Op", "ClearCurrentAnimation");
+        websocketdb.broadcastMessageJson(topMsg, null);
     }
   
    class AppearanceChange {
@@ -1369,6 +1384,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 if (jsonObject.get("fps")!=null){
                     int frameRate = (int) JSONMessageHandler.convertObjectFromJsonToDouble(jsonObject.get("fps"));
                     //System.out.println("FPS by viewer reported as:"+frameRate);
+                    if (debugLevel > 1) System.out.println("Setting frame rate to "+frameRate+" in ViewDB.handleJson fps");
                     TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(frameRate));
                     return;
                 }
@@ -1416,7 +1432,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     double timestep = (double) jsonObject.get("timestep");
                     int desiredFrameRate = (int) Math.ceil(1000.0/timestep);
                     TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(desiredFrameRate));
-                    System.out.println("Setting desired rate to:"+desiredFrameRate);
+                    System.out.println("Setting desired frame rate to:"+desiredFrameRate+" in handlejson Animation");
                     MotionControlJPanel.getInstance().playAnimation();
                 }
                 return;
