@@ -105,6 +105,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
 
     public void sendCurrentAnimationCommand(double start, double end) {
+        if (end-start < .01) // transient, no actual animation is being set.
+            return;
         JSONObject msg = new JSONObject();
         msg.put("Op", "SetCurrentAnimation");
         msg.put("Start", start);
@@ -1426,13 +1428,24 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 WebSocketDB.getInstance().finishPendingMessage((String) jsonObject.get("uuid"));
                 return;
             }
+            if (msgType.equalsIgnoreCase("frameack")){
+                MotionControlJPanel.getInstance().setAcknowledgeReceived(true);
+                if (debugLevel > 1) System.out.println("Ack frame #"+jsonObject.get("#"));
+                return;
+            }
+            if (msgType.equalsIgnoreCase("FinishRecording")){
+                MotionControlJPanel.getInstance().setAcknowledgeReceived(true);
+                MotionControlJPanel.getInstance().setViewerDrivenPlay(false);
+                if (debugLevel > 1) System.out.println("AEnd recording.");
+                return;
+            }
             if (msgType.equalsIgnoreCase("Animation")){
                 String op = (String) jsonObject.get("OP");
                 if (op.equalsIgnoreCase("start")){
                     double timestep = (double) jsonObject.get("timestep");
                     int desiredFrameRate = (int) Math.ceil(1000.0/timestep);
                     TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(desiredFrameRate));
-                    System.out.println("Setting desired frame rate to:"+desiredFrameRate+" in handlejson Animation");
+                    OpenSimLogger.logMessage("Setting desired frame rate to:"+desiredFrameRate+" FPS", OpenSimLogger.INFO);
                     MotionControlJPanel.getInstance().playAnimation();
                 }
                 return;

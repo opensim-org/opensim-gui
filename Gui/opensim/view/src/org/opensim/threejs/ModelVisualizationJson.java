@@ -69,6 +69,7 @@ import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapObject;
 import org.opensim.utils.TheApp;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
+import org.opensim.view.motions.MotionControlJPanel;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -733,6 +734,7 @@ public class ModelVisualizationJson extends JSONObject {
         JSONArray geompaths_json = new JSONArray();
         msg.put("paths", geompaths_json);
         msg.put("time", state.getTime());
+        msg.put("frameNumber", MotionControlJPanel.getInstance().getFrameNumber());
         msg.put("model", modelUUID.toString());
         msg.put("render", forceRender);
         appendToFrame(bodyTransforms_json, colorByState, geompaths_json);

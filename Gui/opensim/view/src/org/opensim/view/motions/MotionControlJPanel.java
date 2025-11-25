@@ -62,7 +62,50 @@ import org.opensim.view.pub.ViewDB;
  */
 public class MotionControlJPanel extends javax.swing.JToolBar 
         implements ChangeListener,  // For motion slider
-                   Observer {       // For MotionsDB
+                   Observer {       
+
+    /**
+     * @return the frameNumber
+     */
+    public int getFrameNumber() {
+        return frameNumber;
+    }
+
+    /**
+     * @param frameNumber the frameNumber to set
+     */
+    public void setFrameNumber(int frameNumber) {
+        this.frameNumber = frameNumber;
+    }
+
+    /**
+     * @return the viewerDrivenPlay
+     */
+    public boolean isViewerDrivenPlay() {
+        return viewerDrivenPlay;
+    }
+
+    /**
+     * @param viewerDrivenPlay the viewerDrivenPlay to set
+     */
+    public void setViewerDrivenPlay(boolean viewerDrivenPlay) {
+        this.viewerDrivenPlay = viewerDrivenPlay;
+    }
+
+    /**
+     * @return the acknowledgeReceived
+     */
+    public boolean isAcknowledgeReceived() {
+        return acknowledgeReceived;
+    }
+
+    /**
+     * @param acknowledgeReceived the acknowledgeReceived to set
+     */
+    public void setAcknowledgeReceived(boolean acknowledgeReceived) {
+        this.acknowledgeReceived = acknowledgeReceived;
+    }
+// For MotionsDB
    
    Timer               animationTimer=null;
    SpinnerModel        smodel = new SpinnerNumberModel(1.0, 0.0, 10.0, 0.05);
@@ -73,7 +116,9 @@ public class MotionControlJPanel extends javax.swing.JToolBar
    private int frameNumber=0;
    private boolean internalTrigger=false;
    private static MotionControlJPanel instance=null;
-   private boolean debug = true;
+   private boolean debug = false;
+   private boolean viewerDrivenPlay = false;
+   private boolean acknowledgeReceived = false;
    
    // ActionListener for the timer which is used to play motion forwards/backwards in such a way that
    // advances the model's time based on the real elapsed time (times the factor specified by the smodel spinner)
@@ -99,13 +144,19 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             double speed = (double)(((Double)smodel.getValue()).doubleValue());
             //double factor = (double)direction*1e-9*speed;
             double frameTime = 1.0/frameFPS;
+            // if viewer driven whait for sync message before advancing
+            if (isViewerDrivenPlay() && !isAcknowledgeReceived()){
+                if (debug) System.out.println("waiting for ack, no frame sent");
+                return;
+            }
             //System.out.println("Time since last call "+(currentTimeNano-lastActionTimeNano)+" ns");
             getMasterMotion().advanceTime((double)direction*speed*frameTime);
+            acknowledgeReceived = false;
             if (debug) System.out.println("             masterMotion current time = "+(masterMotion.getCurrentTime()));
-            frameNumber++;
+                setFrameNumber(getFrameNumber() + 1);
             //lastActionTimeNano = currentTimeNano;
             //System.out.println("delta simulation time = "+(masterMotion.getCurrentTime()- lastSimulationTime));
-            if (debug) System.out.println("Frame number="+frameNumber);
+            if (debug) System.out.println("Frame number="+getFrameNumber());
             lastSimulationTime = masterMotion.getCurrentTime();
 
          }
@@ -117,6 +168,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             jStopButtonActionPerformed(evt);
             ViewDB.getInstance().endAnimation();
             if (debug) System.out.println("End Animation");
+                setViewerDrivenPlay(false);
             
          } else {
             /*
@@ -551,6 +603,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           deselectPlaybackButtons();
           jStopButton.setSelected(true);
           ViewDB.getInstance().endAnimation();
+            setViewerDrivenPlay(false);
        }
     }//GEN-LAST:event_jStopButtonActionPerformed
     
@@ -571,6 +624,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         if (animationTimer!= null)
             animationTimer.stop();
         animationTimer=null;
+        setViewerDrivenPlay(true);
         jPlayButtonActionPerformed(null);
     }
     
@@ -587,7 +641,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
            }
           ViewDB.getInstance().startAnimation();
           if (debug) System.out.println("Frame number =0");
-          frameNumber = 0;
+            setFrameNumber(0);
           int delayMS = 1000/timerRate;
 
           //if (delayMS < 16) delayMS = 16; // 60 fps no faster
