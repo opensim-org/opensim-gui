@@ -144,6 +144,9 @@ jobs:
         echo $VERSION
         echo "name=VERSION::$VERSION" >> $GITHUB_ENV
         echo "version=$VERSION" >> $env:GITHUB_OUTPUT
+        ls Gui/opensim/build/cluster/modules/ext
+        echo "====="
+        ls opensim-visualizer/jxbrowser/release/modules/ext
         
     - name: Build GUI installer
       run: |
