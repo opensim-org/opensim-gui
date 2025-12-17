@@ -415,8 +415,8 @@ public class Coordinate extends ModelComponent {
    *         The provided value will be clamped to the coordinate's range if<br>
    *         the coordinate is clamped and enforceConstraints is true.
    */
-  public void setValue(State s, double aValue, boolean enforceContraints) {
-    opensimSimulationJNI.Coordinate_setValue__SWIG_0(swigCPtr, this, State.getCPtr(s), s, aValue, enforceContraints);
+  public void setValue(State s, double aValue, boolean enforceConstraints) {
+    opensimSimulationJNI.Coordinate_setValue__SWIG_0(swigCPtr, this, State.getCPtr(s), s, aValue, enforceConstraints);
   }
 
   /**
