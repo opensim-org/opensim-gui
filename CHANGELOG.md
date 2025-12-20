@@ -12,6 +12,7 @@ v4.6
 - Fix issue [#1519](https://github.com/opensim-org/opensim-gui/issues/1519): Exception thrown when browsing for output folder in Inverse Dynamics Tool dialog
 - Fix issue [#1526](https://github.com/opensim-org/opensim-gui/issues/1526): Handle very long frame names by showing as tooltips in path editor.
 - Fix issue [#1480](https://github.com/opensim-org/opensim-gui/issues/1480): Unchecking the box to use controls in AnalyzeTool doesn't work.
+- Fix issue [#1555](https://github.com/opensim-org/opensim-gui/issues/1555): Fix crash following use of the IMUInverseKinematicsTool in the GUI.
 
 v4.5
 ======
