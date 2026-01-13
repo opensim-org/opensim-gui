@@ -69,6 +69,7 @@ import org.opensim.modeling.Transform;
 import org.opensim.modeling.TransformAxis;
 import org.opensim.modeling.UnitVec3;
 import org.opensim.modeling.Vec3;
+import org.opensim.threejs.AnimationJson;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.utils.TheApp;
@@ -407,14 +408,18 @@ public class MotionDisplayer {
             for(ExperimentalDataObject nextObject:objects){
                bindExperimentalDataObjectToVisualizerObjectKeepHandle(nextObject);
             }
-            // create objects and cache their uuids
-            //createTrails(model);
             ViewDB.getInstance().addVisualizerObject(createJsonForMotionObjects(), mot.getBoundingBox());
             JSONObject modelObjectJson = (JSONObject) modelVisJson.get("object");
+            JSONObject clip = new AnimationJson(mot, objects);
+
+            // create objects and cache their uuids
+            //createTrails(model);
             if (modelObjectJson.get("children") == null) {
                 modelObjectJson.put("children", new JSONArray());
             }
+
             ((JSONArray)modelObjectJson.get("children")).add(motionObjectsRoot);
+            ViewDB.getInstance().exportAnimationToVisualizer(clip, motionObjectsRoot.get("uuid").toString());            
             return;
         }
         mapIndicesToBodies.clear();
@@ -427,6 +432,14 @@ public class MotionDisplayer {
            // This is a states file
            statesFile = true;
            setRenderMuscleActivations(true);
+           if (simmMotionData.getSize()==1)
+               return;
+           JSONObject clip = new AnimationJson(simmMotionData, modelVisJson);
+           ViewDB.getInstance().exportAnimationToVisualizer(clip, modelVisJson.getModelUUID().toString());
+           //JSONArray anims = new JSONArray();
+           //anims.add(clip);
+           //modelVisJson.put("animations", anims);
+           //ViewDB.getInstance().exportModelJsonToVisualizer(modelVisJson, null);
         } 
         else if (!liveMotion){ // This is the most common handling of old Result files
             // create a local Storage and use that to drive animation

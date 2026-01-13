@@ -195,6 +195,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         topMsg.put("Op", "ClearCurrentAnimation");
         websocketdb.broadcastMessageJson(topMsg, null);
     }
+
+    public void exportAnimationToVisualizer(JSONObject clip, String objectUUIDString) {
+        JSONObject topMsg = new JSONObject();
+        topMsg.put("Op", "AddAnimationClip");
+        topMsg.put("Root", objectUUIDString);
+        topMsg.put("Clip", clip);
+        websocketdb.broadcastMessageJson(topMsg, null);
+    }
   
    class AppearanceChange {
        Model model;
@@ -280,7 +288,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    private double nonCurrentModelOpacity = 0.4;
    private double muscleDisplayRadius = 0.005;
    private double markerDisplayRadius = .01;
-   private int debugLevel=1;
+   private int debugLevel=2;
    private NumberFormat numFormat = NumberFormat.getInstance();
    
     private final static InstanceContent lookupContents = new InstanceContent();
@@ -1316,7 +1324,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     // Adding objects to Model that hasn't been initialized causes problems downstream
                     // This scenario happens exclusively when previewing data so the time spent reading /parsing dominates anyway
                     // TODO: explore more robust mechanism to regulate communication with low overhead, -Ayman 07/18
-                    Thread.sleep(500); 
+                    Thread.sleep(100); 
                     wait = false;
                 } catch (InterruptedException ex) {
                     Exceptions.printStackTrace(ex);
@@ -1367,6 +1375,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
        // Callback, invoked when a command is received from visualizer
     // this operates only on currentJson
     private void handleJson(JSONObject jsonObject) {
+        if (debugLevel > 1)
+            System.out.println("Received msg Json"+jsonObject.toString());
         String msgType = (String)jsonObject.get("type");
         if (msgType != null) {
             if (msgType.equalsIgnoreCase("info")) {
@@ -1428,7 +1438,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }
        Object uuid = jsonObject.get("uuid");
        String uuidString = (String) uuid;
-       if (uuidString.length()==0) return;
+       if (uuidString == null || uuidString.length()==0) return;
        final OpenSimObject selectedObject = currentJson.findObjectForUUID(uuidString);
        if (selectedObject == null) return; // Not OpenSim Object, not interested
        JSONMessageHandler.handleJSON(getCurrentModel(), selectedObject, jsonObject);

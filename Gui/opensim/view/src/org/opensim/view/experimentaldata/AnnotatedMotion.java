@@ -43,8 +43,6 @@ import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSenseUtilities;
-import org.opensim.modeling.Quaternion;
-import org.opensim.modeling.Rotation;
 import org.opensim.modeling.STOFileAdapterQuaternion;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Storage;

@@ -53,6 +53,8 @@ public class JSONMessageHandler {
         if (debug)
             System.out.println("Received Message "+jsonObject.toString());
         final String eventType = (String) jsonObject.get("event");
+        if (eventType == null)
+            return;
         SwingUtilities.invokeLater(new Runnable(){
             @Override
             public void run() {

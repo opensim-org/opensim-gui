@@ -88,16 +88,24 @@ public class MotionControlJPanel extends javax.swing.JToolBar
       int frameFPS = ViewDB.getInstance().getFramesPerSecond(); // Fix delta while playing
 
       public void actionPerformed(ActionEvent evt) {
+         long currentTimeNano = System.nanoTime();
          if(firstAction) {
             firstAction = false;
+            lastActionTimeNano = currentTimeNano;
             getMasterMotion().advanceTime(0);
          } else {
             double speed = (double)(((Double)smodel.getValue()).doubleValue());
             double factor = (double)direction*1e-9*speed;
             double timePerFrame = 1.0/((double)frameFPS);
             //System.out.println("Time since last call "+(currentTimeNano-lastActionTimeNano)+" ns");
-            getMasterMotion().advanceTime(timePerFrame*speed*direction);
+            /***
+            if (fixedTimeStepping)
+                getMasterMotion().advanceTime(timePerFrame*speed*direction);
+            else
+                getMasterMotion().advanceTime(factor*(currentTimeNano-lastActionTimeNano)); 
+                **/
             //System.out.println("             masterMotion current time = "+(masterMotion.getCurrentTime()));
+            lastActionTimeNano = currentTimeNano;
          }
 
          // Kill self if done and wrapMotion is off

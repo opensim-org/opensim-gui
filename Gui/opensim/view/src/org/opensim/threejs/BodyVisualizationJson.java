@@ -51,7 +51,7 @@ public class BodyVisualizationJson extends JSONObject{
         put("uuid", uuid.toString());
         put("type", "Group");
         put("userData", JSONUtilities.createUserDataObject("Frame", false));
-        put("name", body.getAbsolutePathString());
+        put("name", body.getName());
         Transform bodyXform = body.getTransformInGround(modelJson.getState());
         put("matrix", JSONUtilities.createMatrixFromTransform(bodyXform, vec3Unit, modelJson.getVisScaleFactor()));
     }
