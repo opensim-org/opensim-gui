@@ -147,6 +147,14 @@ jobs:
         echo "====="
         ls cluster/modules/ext
         echo "====="
+
+    - name: Use precompiled jxbrowser7
+      run: |
+         mkdir prebuilt_jxb
+         chdir prebuilt_jxb
+         wget -o org-opensim-javabrowser.nbm "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm"
+         tar -xvf .\org-opensim-javabrowser.nbm
+         # Copy files over to build tree.
         
     - name: Build GUI installer
       run: |
