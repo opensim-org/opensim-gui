@@ -63,7 +63,11 @@ import org.opensim.modeling.PathPointSet;
 import org.opensim.modeling.PathWrapPoint;
 import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.PropertyHelper;
+import org.opensim.modeling.Quaternion;
+import org.opensim.modeling.Rotation;
 import org.opensim.modeling.State;
+import org.opensim.modeling.StatesTrajectory;
+import org.opensim.modeling.Storage;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapObject;
@@ -2021,5 +2025,64 @@ public class ModelVisualizationJson extends JSONObject {
     public HashMap<OpenSimObject, ArrayList<UUID>> getMapComponentToUUID() {
         return mapComponentToUUID;
     }
+    
+    public AnimationJson createAnimationJson(Storage mot) {
+     AnimationJson animationClipJson = new AnimationJson();
+     animationClipJson.put("name", mot.getName());
+     JSONArray animationsTracks = new JSONArray();
+     animationClipJson.put("tracks", animationsTracks);
+     // Convert mot into a StateTrajectory so that we can get states one at a time;
+     StatesTrajectory trajectory = StatesTrajectory.createFromStatesStorage(model, mot);
+
+
+     HashMap<Integer, PhysicalFrame> mapIndexToFrame = getMapBodyIndicesToFrames();
+     int numFrames = mapIndexToFrame.size()-1; // Exclude ground as not moving
+     Frame[] frames = new Frame[numFrames];
+     for (int iFrame=0; iFrame< numFrames; iFrame++){
+         frames[iFrame]=mapIndexToFrame.get(iFrame+1);
+     }        
+     double[] times = new double[mot.getSize()];
+     double[][] translationData = new double[numFrames][mot.getSize()*3];
+     double[][] rotationData = new double[numFrames][mot.getSize()*4];
+     for (int iState=0; iState < times.length; iState++){
+         State nextState = trajectory.get(iState);
+         times[iState] = nextState.getTime();
+         model.realizeDynamics(nextState);
+         for (int iFrame=0; iFrame< numFrames; iFrame++){
+             // Get transform for Frame iFrame, convert into pos, quaternion then append to tracks.
+             Transform xform = frames[iFrame].getTransformInGround(nextState);
+             Vec3 translation = xform.T();
+             for (int c=0; c<3; c++) 
+                 translationData[iFrame][iState*3+c] = translation.get(c);
+             Rotation rot = xform.R();
+             Quaternion quat = rot.convertRotationToQuaternion();
+             rotationData[iFrame][iState*4+3]=quat.get(0);
+             for (int c=0; c<3; c++) 
+                 rotationData[iFrame][iState*4+c] = quat.get(c+1);
+         }
+     }
+     animationClipJson.put("duration", times[times.length-1]);
+     animationClipJson.put("uuid", UUID.randomUUID().toString());
+     // Create a track for time, translationData, rotationData
+     for (int iFrame=0; iFrame< numFrames; iFrame++){
+         JSONObject positionTrack = new JSONObject();
+         String frameName = frames[iFrame].getName();
+         positionTrack.put("name", frameName+".position");
+         positionTrack.put("type", "vector");
+         positionTrack.put("times", JSONUtilities.createFromArrayDouble(times));
+         positionTrack.put("values", JSONUtilities.createFromArrayDouble(translationData[iFrame]));
+         //animationTrack.put("interpolation", "Linear");
+         animationsTracks.add(positionTrack);
+
+         JSONObject orientationTrack = new JSONObject();
+         orientationTrack.put("name", frameName+".quaternion");
+         orientationTrack.put("type", "quaternion");
+         orientationTrack.put("times", JSONUtilities.createFromArrayDouble(times));
+         orientationTrack.put("values", JSONUtilities.createFromArrayDouble(rotationData[iFrame]));
+         //animationTrack.put("interpolation", "Linear");
+         animationsTracks.add(orientationTrack);
+     }
+     return animationClipJson;
+ }
 
 }

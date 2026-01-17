@@ -182,11 +182,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         websocketdb.broadcastMessageJson(json, null);
     }
 
-    public void sendAnimationCommand(String setCurrentAnimation, double startTime, double endTime) {
+    public void sendAnimationCommand(String setCurrentAnimation, String animationUUID) {
         JSONObject topMsg = new JSONObject();
         topMsg.put("Op", setCurrentAnimation);
-        topMsg.put("Start", startTime);
-        topMsg.put("End", endTime);
+        topMsg.put("uuid", animationUUID);
         websocketdb.broadcastMessageJson(topMsg, null);
     }
 
@@ -1362,6 +1361,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         }        
         
     }
+    public void removeAnimationClip(String animationClipUUIDString){
+        if (websocketdb!=null){
+            JSONObject topMsg = new JSONObject();
+            topMsg.put("Op", "RemoveAnimationClip");
+            topMsg.put("uuid", animationClipUUIDString);
+            websocketdb.broadcastMessageJson(topMsg, null);
+        }                
+    }
     // find OpenSimObject corresponding to passed in UUID or null if not found
     public OpenSimObject getObjectFromUUID(UUID objUuid) {
         Collection<ModelVisualizationJson> values = getInstance().mapModelsToJsons.values();
@@ -1432,6 +1439,21 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     int intStep = (int) Math.round(step);
                     //System.out.println("Play animation with frame rate FPS "+intStep);
                     MotionControlJPanel.getInstance().playCurrentMotion(intStep);
+                    return;
+                }
+                if (op.equalsIgnoreCase("settime")){
+                    // Autoplay animation 
+                    Object valueObj = jsonObject.get("value");
+                    double viewerTime = 0.0;
+                    if (valueObj instanceof Double)
+                        viewerTime = (Double)valueObj;
+                    else if (valueObj instanceof Long){
+                        Long viewerTimeLong = (Long)valueObj;
+                        viewerTime = (double) viewerTimeLong;
+                    }
+                    //double viewerTime = Double.parseDouble(viewerTimeString);
+                    System.out.println("Play animation time from viewer = "+viewerTime);
+                    MotionControlJPanel.getInstance().setUserTimeNoRender(viewerTime);
                     return;
                 }
             }

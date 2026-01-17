@@ -633,6 +633,12 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          MotionControlJPanel.getInstance().setTimeTextField(time);
          MotionControlJPanel.getInstance().handleUserTimeChange();
     }
+
+    public void setUserTimeNoRender(double time) {
+         MotionControlJPanel.getInstance().setTimeTextField(time);
+         getMasterMotion().setTimeNoRender(time);
+    }
+
     
    Hashtable makeLabels(int n, double startTime, double endTime) {
       Hashtable<Integer, JLabel> labels = new Hashtable<Integer, JLabel>(5);

@@ -106,6 +106,7 @@ public class MotionDisplayer {
     private JSONObject experimentalMarkerMaterialJson=null;
     private Vec3 defaultExperimentalMarkerColor = new Vec3(0., 0., 1.);
     private ModelVisualizationJson modelVisJson=null;
+    private String animationUUIDString="";
     JSONObject motionObjectsRoot=null;
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
     private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
@@ -419,7 +420,7 @@ public class MotionDisplayer {
             }
 
             ((JSONArray)modelObjectJson.get("children")).add(motionObjectsRoot);
-            ViewDB.getInstance().exportAnimationToVisualizer(clip, motionObjectsRoot.get("uuid").toString());            
+            //ViewDB.getInstance().exportAnimationToVisualizer(clip, motionObjectsRoot.get("uuid").toString());            
             return;
         }
         mapIndicesToBodies.clear();
@@ -434,8 +435,9 @@ public class MotionDisplayer {
            setRenderMuscleActivations(true);
            if (simmMotionData.getSize()==1)
                return;
-           JSONObject clip = new AnimationJson(simmMotionData, modelVisJson);
-           ViewDB.getInstance().exportAnimationToVisualizer(clip, modelVisJson.getModelUUID().toString());
+           JSONObject clip = modelVisJson.createAnimationJson(simmMotionData);
+           //ViewDB.getInstance().exportAnimationToVisualizer(clip, modelVisJson.getModelUUID().toString());
+           animationUUIDString = clip.get("uuid").toString();
            //JSONArray anims = new JSONArray();
            //anims.add(clip);
            //modelVisJson.put("animations", anims);
@@ -451,6 +453,9 @@ public class MotionDisplayer {
             numColumnsIncludingTime = motionAsStates.getColumnLabels().getSize();
             interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
             setRenderMuscleActivations(true);
+            JSONObject clip = modelVisJson.createAnimationJson(motionAsStates);
+            //ViewDB.getInstance().exportAnimationToVisualizer(clip, modelVisJson.getModelUUID().toString());
+            animationUUIDString = clip.get("uuid").toString();
         }
         else {
            // We should build sorted lists of object names so that we can find them easily
@@ -702,12 +707,14 @@ public class MotionDisplayer {
         if (motionObjectsRoot!=null) {
             ViewDB.getInstance().removeVisualizerObject(motionObjectsRoot, 
                     modelVisJson.getModelUUID().toString());
+            //ViewDB.getInstance().removeAnimationClip(animationUUIDString);
         }
         mcf = null;
         // Recursively cleanup
         ArrayList<MotionDisplayer> associatedDisplayers = getAssociatedMotions();
         for (MotionDisplayer assoc:associatedDisplayers){
             assoc.cleanupDisplay();
+            //ViewDB.getInstance().removeAnimationClip(assoc.animationUUIDString);
         }
     }
 
@@ -872,5 +879,12 @@ public class MotionDisplayer {
             }
         }
    }
+
+    /**
+     * @return the animationUUIDString
+     */
+    public String getAnimationUUIDString() {
+        return animationUUIDString;
+    }
 
 }

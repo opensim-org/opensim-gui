@@ -57,6 +57,9 @@ import org.opensim.view.experimentaldata.ExperimentalDataObject;
  */
 public class AnimationJson extends JSONObject {
 
+    public AnimationJson() {
+        
+    }
     public AnimationJson(AnnotatedMotion mot, Vector<ExperimentalDataObject> objects) {
         put("name", mot.getName());
         double conversion = mot.getUnitConversion();

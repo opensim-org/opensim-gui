@@ -35,6 +35,7 @@ import java.util.BitSet;
 import java.util.Hashtable;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.UUID;
 import java.util.Vector;
 import javax.swing.JButton;
 import org.openide.DialogDescriptor;
@@ -267,9 +268,8 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       setChanged();
       notifyObservers(evt);
       OpenSimDB.getInstance().switchToAnalysisMode();
-      ViewDB.getInstance().sendAnimationCommand("SetCurrentAnimation", 
-                MotionControlJPanel.getInstance().getMasterMotion().getStartTime(),
-                MotionControlJPanel.getInstance().getMasterMotion().getEndTime());
+      //String animationClipUUID = getDisplayerForMotion(motion).getAnimationUUIDString();
+      //ViewDB.getInstance().sendAnimationCommand("SetCurrentAnimation", animationClipUUID);
    }
 
    public void setCurrent(Vector<ModelMotionPair> motions) {
@@ -277,9 +277,9 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       MotionEvent evt = new MotionEvent(this, MotionEvent.Operation.CurrentMotionsChanged);
       setChanged();
       notifyObservers(evt);
-      ViewDB.getInstance().sendAnimationCommand("SetCurrentAnimation", 
-                MotionControlJPanel.getInstance().getMasterMotion().getStartTime(),
-                MotionControlJPanel.getInstance().getMasterMotion().getEndTime());
+      //String animationClipUUID = getDisplayerForMotion(motions.get(0).motion).getAnimationUUIDString();
+
+      //ViewDB.getInstance().sendAnimationCommand("SetCurrentAnimation", animationClipUUID);
    }
 
    public void closeMotion(Model model, Storage simmMotionData, boolean allowCancel) {

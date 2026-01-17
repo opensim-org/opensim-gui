@@ -291,6 +291,11 @@ public class MasterMotionModel {
       fireStateChanged();
    }
 
+    public void setTimeNoRender(double userTime) {
+      currentTime = clampedTime(userTime);
+      fireStateChanged();
+   }
+
    public void advanceTime(double dt) {
       double time = getCurrentTime()+dt;
       if(wrapMotion) {
