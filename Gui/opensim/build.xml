@@ -137,7 +137,7 @@
              which the NSIS installer will run during installation.
              https://docs.microsoft.com/en-us/cpp/ide/deployment-in-visual-cpp -->
         <copy todir="${opensim.dist.dir}/bin/"
-            file="C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Redist/MSVC/14.44.35112/vcredist.x64.exe" />
+            file="{msvc.redist.exe}"/>
 
     </target>
     <target name="copy-jre" description="Copy JRE to installer">
