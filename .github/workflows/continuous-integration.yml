@@ -127,6 +127,19 @@ jobs:
     - name: Set CI to false
       run: echo "CI=false" >> $GITHUB_ENV
 
+    - name: Download VC++ Redistributable (x64, 14.44.35112.1)
+      shell: powershell
+      run: |
+        $url = "https://www.filehorse.com/download-microsoft-visual-c-redistributable-package-64/94666/download/"
+        $out = "$env:RUNNER_TEMP\vcredist_x64_14.44.35112.1.exe"
+        Write-Host "Downloading VC++ redist from $url to $out"
+        Invoke-WebRequest -Uri $url -OutFile $out -UseBasicParsing
+        if (!(Test-Path $out)) {
+          Write-Error "vcredist download failed"
+          exit 1
+        }
+        echo "MSVC_REDIST=$out" >> $env:GITHUB_ENV
+
     - name: Build GUI
       id: build-gui
       run: |
