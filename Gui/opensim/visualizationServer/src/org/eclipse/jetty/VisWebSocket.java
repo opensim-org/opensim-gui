@@ -35,6 +35,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -72,14 +73,11 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
             this.notifyObservers();
         }
         executorService.scheduleAtFixedRate(() -> {
-                    try {
-                        String data = "Ping";
-                        ByteBuffer payload = ByteBuffer.wrap(data.getBytes());
-                        peer.getRemote().sendPing(payload);
-                        //System.out.println("Sending ping to peer.");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    JSONObject hbJson = new JSONObject();
+                    hbJson.put("Op", "Hearbeat");
+                    hbJson.put("uuid", UUID.randomUUID().toString());
+                    peer.getRemote().sendStringByFuture(hbJson.toJSONString());
+                    System.out.println("Sending ping to peer.");
                 },
                 1, 1, TimeUnit.MINUTES);        
         
