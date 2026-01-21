@@ -1471,4 +1471,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     public void broadcastVisualizerMessage(JSONObject json){
         websocketdb.broadcastMessageJson(json, null);
     }
+    
+    public void sendCurrentAnimations(JSONObject animationJson) {
+        websocketdb.broadcastMessageJson(animationJson, null);
+    }
 }

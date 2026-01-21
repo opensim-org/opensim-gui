@@ -23,16 +23,26 @@
 
 package org.opensim.view.motions;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 import java.util.Vector;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
+import org.opensim.threejs.AnimationJson;
+import org.opensim.threejs.JSONUtilities;
+import org.opensim.threejs.ModelVisualizationJson;
+import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.pub.ViewDB;
 
@@ -43,10 +53,11 @@ public class MasterMotionModel {
    // Info specific to a motion/model combination is pushed down to the displayer object.
    List<MotionDisplayer> displayers=new ArrayList<MotionDisplayer>(10);  
    private boolean wrapMotion=false;
-
+   
    double currentTime=0; // this is the primary indicator of the current position
    Vector<Double> superMotionTimes = new Vector<Double>(100);
 
+   private final HashMap<MotionDisplayer, String> mapDisplayerToClips = new HashMap<>();
    private int cachedIndexClosestToCurrentTime=0;
 
    // -----------------------------------------------------------------------
@@ -301,5 +312,43 @@ public class MasterMotionModel {
          }
       }
       setTime(time);
+   }
+   /** Create a JSONArray that contains AnimationClips one per current motion, this allows
+    * for syncing motions effortlessly on the viewer side.
+    * @return 
+    */
+   public JSONObject createAnimationClips() {
+       
+     JSONObject currentAnimation = new JSONObject();
+     currentAnimation.put("Op", "AddAnimationClipList");
+     JSONArray animationClips = new JSONArray();
+     for(int i=0; i<displayers.size(); i++){
+         MotionDisplayer disp = displayers.get(i);
+        if (disp.getModel() instanceof ModelForExperimentalData){
+            Storage sto = disp.getSimmMotionData();
+            if (sto instanceof AnnotatedMotion){
+                AnnotatedMotion mot= (AnnotatedMotion) sto;
+                AnimationJson clip = new AnimationJson(mot, mot.getClassified());
+                mapDisplayerToClips.put(disp, (String)clip.get("uuid"));
+                animationClips.add(clip);
+            }
+        }
+        else {
+            // regular motion
+            ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(disp.getModel());
+            Storage sto = disp.getSimmMotionData();
+            AnimationJson clip = modelViz.createAnimationJson(sto);
+            mapDisplayerToClips.put(disp, (String)clip.get("uuid"));
+            animationClips.add(clip);
+        }
+     }
+
+     currentAnimation.put("clip_list", animationClips);
+       try {
+           JSONUtilities.writeJsonFile(currentAnimation, "animationClips.json");
+       } catch (IOException ex) {
+           Exceptions.printStackTrace(ex);
+       }
+     return currentAnimation;
    }
 }

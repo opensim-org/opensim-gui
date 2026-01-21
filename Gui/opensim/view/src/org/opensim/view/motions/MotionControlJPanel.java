@@ -138,6 +138,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             firstAction = false;
             frameFPS = ViewDB.getInstance().getFrameRate();
             if (debug) System.out.println("frameFPS in RealTimePlayActionListener="+frameFPS);
+            ViewDB.getInstance().sendCurrentAnimations(getMasterMotion().createAnimationClips());
             getMasterMotion().advanceTime(0);
             if (debug) System.out.println("frameFPS"+frameFPS);
          } else {

@@ -27,6 +27,9 @@
  */
 package org.eclipse.jetty;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -59,12 +62,20 @@ public class WebSocketDB {
         if (debug) System.out.println("Socket count ="+sockets.size());
         socket.addObserver(observer);
         observer.update(socket, null);
+    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+  LocalTime localTime = LocalTime.now();
+  System.out.println(dtf.format(localTime));
+        System.out.println("Connecting");
     }
     
     public void unRegisterSocket(VisWebSocket socket) {
         if (debug) System.out.println("unRegister Socket");
         sockets.remove(socket);
         if (debug) System.out.println("Socket count ="+sockets.size());
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+  LocalTime localTime = LocalTime.now();
+  System.out.println(dtf.format(localTime));
+        System.out.println("Disconnecting");
      }
     
     static public WebSocketDB getInstance() {

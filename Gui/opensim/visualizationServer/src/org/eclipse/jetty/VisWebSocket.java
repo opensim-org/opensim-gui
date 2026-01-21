@@ -54,7 +54,7 @@ import org.json.simple.parser.ParseException;
  *
  * @author Ayman
  */
-@WebSocket(maxTextMessageSize = 64 * 4096, maxIdleTime=10000000)
+@WebSocket(maxTextMessageSize = 64 * 4096, maxIdleTime=200000000)
 public class VisWebSocket extends Observable { // Socket to handle incoming traffic from Browser
     private static final Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
     private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
@@ -74,7 +74,7 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
         }
         executorService.scheduleAtFixedRate(() -> {
                     JSONObject hbJson = new JSONObject();
-                    hbJson.put("Op", "Hearbeat");
+                    hbJson.put("Op", "HeartBeat");
                     hbJson.put("uuid", UUID.randomUUID().toString());
                     peer.getRemote().sendStringByFuture(hbJson.toJSONString());
                     System.out.println("Sending ping to peer.");
