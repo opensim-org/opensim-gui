@@ -60,6 +60,7 @@ public class MasterMotionModel {
    private final HashMap<MotionDisplayer, String> mapDisplayerToClips = new HashMap<>();
    private int cachedIndexClosestToCurrentTime=0;
 
+   private boolean animationChanged = true;
    // -----------------------------------------------------------------------
    // Change listener stuff taken from DefaultColorSelectionModel.java
    // -----------------------------------------------------------------------
@@ -178,6 +179,7 @@ public class MasterMotionModel {
       }
       displayers.add(displayer);
        buildSuperMotion(model, simmMotionData);
+      animationChanged = true;
    }
    void add(MotionsDB.ModelMotionPair pair) {
       add(pair.model, pair.motion);
@@ -192,7 +194,7 @@ public class MasterMotionModel {
      displayers.clear();
      superMotionTimes.clear();  
      setTime(0);
-     
+     animationChanged = true;
    }
 
    // TODO: get rid of third argument
@@ -302,6 +304,11 @@ public class MasterMotionModel {
       fireStateChanged();
    }
 
+   public void setTimeNoRender(double animationTime) {
+       currentTime = animationTime;
+       fireStateChanged();
+   }
+   
    public void advanceTime(double dt) {
       double time = getCurrentTime()+dt;
       if(wrapMotion) {
@@ -322,6 +329,7 @@ public class MasterMotionModel {
      JSONObject currentAnimation = new JSONObject();
      currentAnimation.put("Op", "AddAnimationClipList");
      JSONArray animationClips = new JSONArray();
+     JSONArray animationRoots = new JSONArray();
      for(int i=0; i<displayers.size(); i++){
          MotionDisplayer disp = displayers.get(i);
         if (disp.getModel() instanceof ModelForExperimentalData){
@@ -331,6 +339,7 @@ public class MasterMotionModel {
                 AnimationJson clip = new AnimationJson(mot, mot.getClassified());
                 mapDisplayerToClips.put(disp, (String)clip.get("uuid"));
                 animationClips.add(clip);
+                animationRoots.add(disp.getModelVisJson().getModelUUID());
             }
         }
         else {
@@ -340,15 +349,34 @@ public class MasterMotionModel {
             AnimationJson clip = modelViz.createAnimationJson(sto);
             mapDisplayerToClips.put(disp, (String)clip.get("uuid"));
             animationClips.add(clip);
+            animationRoots.add(modelViz.getModelUUID().toString());
         }
      }
 
      currentAnimation.put("clip_list", animationClips);
+     currentAnimation.put("clip_roots", animationRoots);
+     currentAnimation.put("start_time", getStartTime());
        try {
            JSONUtilities.writeJsonFile(currentAnimation, "animationClips.json");
        } catch (IOException ex) {
            Exceptions.printStackTrace(ex);
        }
+     animationChanged = false;
      return currentAnimation;
    }
+
+    /**
+     * @return the animationChanged
+     */
+    public boolean isAnimationChanged() {
+        return animationChanged;
+    }
+
+    /**
+     * @param animationChanged the animationChanged to set
+     */
+    public void setAnimationChanged(boolean animationChanged) {
+        this.animationChanged = animationChanged;
+    }
+
 }

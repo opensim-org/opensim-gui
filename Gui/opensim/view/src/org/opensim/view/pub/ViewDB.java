@@ -95,24 +95,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         websocketdb.broadcastMessageJson(msg, null);
         System.out.println("Sending endAnimation message");        
     }
-
-    public void startAnimation() {
-        JSONObject msg = new JSONObject();
-        msg.put("Op", "startAnimation");
-        msg.put("Speed", MotionControlJPanel.getInstance().getSpeed());
-        websocketdb.broadcastMessageJson(msg, null);
-        System.out.println("Sending startAnimation message");
-    }
-
-    public void sendCurrentAnimationCommand(double start, double end) {
-        if (end-start < .01) // transient, no actual animation is being set.
-            return;
-        JSONObject msg = new JSONObject();
-        msg.put("Op", "SetCurrentAnimation");
-        msg.put("Start", start);
-        msg.put("End", end);
-        websocketdb.broadcastMessageJson(msg, null);
-    }
     
     public void clearCurrentAnimation() {
         JSONObject msg = new JSONObject();
@@ -1448,6 +1430,16 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     OpenSimLogger.logMessage("Setting desired frame rate to:"+desiredFrameRate+" FPS", OpenSimLogger.INFO);
                     MotionControlJPanel.getInstance().playAnimation();
                 }
+                if (op.equalsIgnoreCase("setTime")){
+                    Object valueObj = jsonObject.get("value");
+                    double animationTime = 0.0;
+                    if (valueObj instanceof Double)
+                        animationTime = (double) jsonObject.get("value");
+                    else if (valueObj instanceof Long)
+                        animationTime = (long) jsonObject.get("value");
+                    OpenSimLogger.logMessage("Setting current time to:"+String.valueOf(animationTime), OpenSimLogger.INFO);
+                    MotionControlJPanel.getInstance().setTimeNoRender(animationTime);
+                }
                 return;
             }
         }
@@ -1473,6 +1465,19 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
     
     public void sendCurrentAnimations(JSONObject animationJson) {
+        OpenSimLogger.logMessage("Sending AnimationClips to Viewer", OpenSimLogger.INFO);
         websocketdb.broadcastMessageJson(animationJson, null);
+    }
+    
+    public void playCurrentAnimations(double startTime) {
+        OpenSimLogger.logMessage("Play AnimationClips in Viewer", OpenSimLogger.INFO);
+        JSONObject currentAnimation = new JSONObject();
+        currentAnimation.put("Op", "PlayAnimation");
+        currentAnimation.put("start_time", startTime);
+        // Send start time and directiion as users may play from middle either direction
+        
+        // Could make this more robust by keeping track of uuid but as of now
+        // there's at most one animation in the viewer.
+        websocketdb.broadcastMessageJson(currentAnimation, null);
     }
 }

@@ -48,7 +48,7 @@ import org.opensim.view.pub.ViewDB;
  * @author Ayman
  */
 public class JSONMessageHandler {
-    static Boolean debug = false;
+    static Boolean debug = true;
     public static void handleJSON(final Model model, final OpenSimObject opensimObj, final JSONObject jsonObject){
         if (debug)
             System.out.println("Received Message "+jsonObject.toString());
@@ -158,11 +158,11 @@ public class JSONMessageHandler {
     static public Vec3 convertJsonXYZToVec3(JSONObject offsetObj) {
         double relativeScale = ModelVisualizationJson.getVisScaleFactor();
         Object xString = offsetObj.get("x");
-        double xValue = JSONMessageHandler.convertObjectFromJsonToDouble(xString)/relativeScale;
+        double xValue = convertObjectFromJsonToDouble(xString)/relativeScale;
         Object yString = offsetObj.get("y");
-        double yValue = JSONMessageHandler.convertObjectFromJsonToDouble(yString)/relativeScale;
+        double yValue = convertObjectFromJsonToDouble(yString)/relativeScale;
         Object zString = offsetObj.get("z");
-        double zValue = JSONMessageHandler.convertObjectFromJsonToDouble(zString)/relativeScale;
+        double zValue = convertObjectFromJsonToDouble(zString)/relativeScale;
         Vec3 offsetAsVec3 = new Vec3(xValue, yValue, zValue);
         return offsetAsVec3;
     }

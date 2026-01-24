@@ -1790,7 +1790,7 @@ public class ModelVisualizationJson extends JSONObject {
         pathGeomJson.put("heightSegments", 2*(pathpoint_jsonArr.size()-1)-1);
         pathGeomJson.put("openEnded", true);
         // height, radialSegments, heightSegments, openended
-        pathGeomJson.put("name", path.getAbsolutePathString()+"Control");
+        pathGeomJson.put("name", path.getOwner().getName()+"Control");
         if (reuse_uuid == null) {
             json_geometries.add(pathGeomJson);
         }
@@ -1804,7 +1804,7 @@ public class ModelVisualizationJson extends JSONObject {
         UUID mesh_uuid = (reuse_uuid==null)? UUID.randomUUID(): reuse_uuid;
         obj_json.put("uuid", mesh_uuid.toString());
         obj_json.put("type", "GeometryPath");
-        obj_json.put("name", path.getAbsolutePathString());
+        obj_json.put("name", path.getOwner().getName());
         obj_json.put("points", pathpoint_jsonArr);
         obj_json.put("active", pathpointActive_jsonArr);
         obj_json.put("geometry", uuidForPathGeomGeometry.toString());

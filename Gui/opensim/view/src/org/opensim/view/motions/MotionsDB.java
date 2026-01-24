@@ -267,9 +267,6 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       setChanged();
       notifyObservers(evt);
       OpenSimDB.getInstance().switchToAnalysisMode();
-      ViewDB.getInstance().sendAnimationCommand("SetCurrentAnimation", 
-                MotionControlJPanel.getInstance().getMasterMotion().getStartTime(),
-                MotionControlJPanel.getInstance().getMasterMotion().getEndTime());
    }
 
    public void setCurrent(Vector<ModelMotionPair> motions) {
@@ -277,9 +274,6 @@ public class MotionsDB extends Observable // Observed by other entities in motio
       MotionEvent evt = new MotionEvent(this, MotionEvent.Operation.CurrentMotionsChanged);
       setChanged();
       notifyObservers(evt);
-      ViewDB.getInstance().sendAnimationCommand("SetCurrentAnimation", 
-                MotionControlJPanel.getInstance().getMasterMotion().getStartTime(),
-                MotionControlJPanel.getInstance().getMasterMotion().getEndTime());
    }
 
    public void closeMotion(Model model, Storage simmMotionData, boolean allowCancel) {

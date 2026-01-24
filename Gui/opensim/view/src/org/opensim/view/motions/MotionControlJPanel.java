@@ -138,7 +138,11 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             firstAction = false;
             frameFPS = ViewDB.getInstance().getFrameRate();
             if (debug) System.out.println("frameFPS in RealTimePlayActionListener="+frameFPS);
-            ViewDB.getInstance().sendCurrentAnimations(getMasterMotion().createAnimationClips());
+            if (getMasterMotion().isAnimationChanged()){
+                ViewDB.getInstance().sendCurrentAnimations(getMasterMotion().createAnimationClips());
+            }
+            else
+                ViewDB.getInstance().playCurrentAnimations(getMasterMotion().currentTime);
             getMasterMotion().advanceTime(0);
             if (debug) System.out.println("frameFPS"+frameFPS);
          } else {
@@ -629,6 +633,9 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         jPlayButtonActionPerformed(null);
     }
     
+    public void setTimeNoRender(double animationTime) {
+        getMasterMotion().setTimeNoRender(animationTime);
+    }
     private void jPlayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlayButtonActionPerformed
       if (animationTimer!=null){
          animationTimer.stop();
@@ -639,8 +646,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           if (getMasterMotion().finished(1)){
               // reset motion if at end already
               getMasterMotion().setTime(getMasterMotion().getStartTime());
-           }
-          ViewDB.getInstance().startAnimation();
+          }
           if (debug) System.out.println("Frame number =0");
             setFrameNumber(0);
           int delayMS = 1000/timerRate;
@@ -776,8 +782,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                    associatedDisplayers.get(j).setupMotionDisplay();
             }
             getMasterMotion().setTime(currentTime);
-            ViewDB.getInstance().sendCurrentAnimationCommand(getMasterMotion().getStartTime(),
-                        getMasterMotion().getEndTime());
             
          } else if (evt.getOperation() == Operation.Modified) {
             Storage motion = evt.getMotion();
