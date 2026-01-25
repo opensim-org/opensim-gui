@@ -57,7 +57,6 @@ public class MasterMotionModel {
    double currentTime=0; // this is the primary indicator of the current position
    Vector<Double> superMotionTimes = new Vector<Double>(100);
 
-   private final HashMap<MotionDisplayer, String> mapDisplayerToClips = new HashMap<>();
    private int cachedIndexClosestToCurrentTime=0;
 
    private boolean animationChanged = true;
@@ -176,6 +175,31 @@ public class MasterMotionModel {
       if (displayer == null){
           displayer = new MotionDisplayer(simmMotionData, model);
           MotionsDB.getInstance().addMotionDisplayer(simmMotionData, displayer);
+          // create AnimationJson and keep track of uuid for future reference
+      }
+      String AnimationUUID = MotionsDB.getInstance().getAnimationClipUUIDForMotion(simmMotionData);
+      if (AnimationUUID == null){
+          AnimationJson animationClip = null;
+          ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(model);
+          if (model instanceof ModelForExperimentalData){
+              AnnotatedMotion amot = (AnnotatedMotion) simmMotionData;
+              animationClip = new AnimationJson(amot, amot.getClassified());
+          }
+          else {
+              animationClip = modelViz.createAnimationJson(simmMotionData);
+          }
+          AnimationUUID = (String) animationClip.get("uuid");
+          MotionsDB.getInstance().addAnimationClipUUID(simmMotionData, AnimationUUID);
+          JSONObject currentAnimation = new JSONObject();
+          currentAnimation.put("Clip", animationClip);
+          currentAnimation.put("Root", modelViz.getModelUUID().toString());
+          currentAnimation.put("Op", "AddAnimationClip");
+          try {
+            JSONUtilities.writeJsonFile(currentAnimation, "animationClip01.json");
+          } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+          }
+          ViewDB.getInstance().sendAnimationClip(currentAnimation);
       }
       displayers.add(displayer);
        buildSuperMotion(model, simmMotionData);
@@ -196,7 +220,14 @@ public class MasterMotionModel {
      setTime(0);
      animationChanged = true;
    }
-
+   public JSONArray getCurrentAnimationUUIDs() {
+       JSONArray animationUUIDs = new JSONArray();
+       for(int i=0; i<displayers.size(); i++){
+           MotionDisplayer md = displayers.get(i);
+           animationUUIDs.add(MotionsDB.getInstance().getAnimationClipUUIDForMotion(md.getSimmMotionData()));
+       }
+       return animationUUIDs;
+   }
    // TODO: get rid of third argument
    private void buildSuperMotion(Model model, Storage mot) {
       // Merge vector of valid times with times from passed in storage
@@ -320,51 +351,6 @@ public class MasterMotionModel {
       }
       setTime(time);
    }
-   /** Create a JSONArray that contains AnimationClips one per current motion, this allows
-    * for syncing motions effortlessly on the viewer side.
-    * @return 
-    */
-   public JSONObject createAnimationClips() {
-       
-     JSONObject currentAnimation = new JSONObject();
-     currentAnimation.put("Op", "AddAnimationClipList");
-     JSONArray animationClips = new JSONArray();
-     JSONArray animationRoots = new JSONArray();
-     for(int i=0; i<displayers.size(); i++){
-         MotionDisplayer disp = displayers.get(i);
-        if (disp.getModel() instanceof ModelForExperimentalData){
-            Storage sto = disp.getSimmMotionData();
-            if (sto instanceof AnnotatedMotion){
-                AnnotatedMotion mot= (AnnotatedMotion) sto;
-                AnimationJson clip = new AnimationJson(mot, mot.getClassified());
-                mapDisplayerToClips.put(disp, (String)clip.get("uuid"));
-                animationClips.add(clip);
-                animationRoots.add(disp.getModelVisJson().getModelUUID());
-            }
-        }
-        else {
-            // regular motion
-            ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(disp.getModel());
-            Storage sto = disp.getSimmMotionData();
-            AnimationJson clip = modelViz.createAnimationJson(sto);
-            mapDisplayerToClips.put(disp, (String)clip.get("uuid"));
-            animationClips.add(clip);
-            animationRoots.add(modelViz.getModelUUID().toString());
-        }
-     }
-
-     currentAnimation.put("clip_list", animationClips);
-     currentAnimation.put("clip_roots", animationRoots);
-     currentAnimation.put("start_time", getStartTime());
-       try {
-           JSONUtilities.writeJsonFile(currentAnimation, "animationClips.json");
-       } catch (IOException ex) {
-           Exceptions.printStackTrace(ex);
-       }
-     animationChanged = false;
-     return currentAnimation;
-   }
-
     /**
      * @return the animationChanged
      */

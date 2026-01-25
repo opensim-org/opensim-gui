@@ -75,8 +75,14 @@ public class MotionsDB extends Observable // Observed by other entities in motio
     void addMotionDisplayer(Storage simmMotionData, MotionDisplayer displayer) {
         mapMotions2Displayers.put(simmMotionData, displayer);
     }
+    void addAnimationClipUUID(Storage simmMotionData, String uuidString) {
+        mapMotions2AnimationUUIDs.put(simmMotionData, uuidString);
+    }
     public MotionDisplayer getDisplayerForMotion(Storage mot){
         return mapMotions2Displayers.get(mot);
+    }
+    public String getAnimationClipUUIDForMotion(Storage mot){
+        return mapMotions2AnimationUUIDs.get(mot);
     }
     void removeMotionDisplayer(Storage mot) {
         mapMotions2Displayers.remove(mot);
@@ -98,6 +104,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
    
    Hashtable<Storage, MotionDisplayer> mapMotions2Displayers =
            new Hashtable<Storage, MotionDisplayer>(4);
+   Hashtable<Storage, String> mapMotions2AnimationUUIDs = new Hashtable<Storage, String>(4);
    // Remember for each storage object, the file name it came from. Useful for saving/restoring application state
    // Caveats: many motions are created on the fly and have no files associated with them
    //        : If a file name is reused this info may not be current

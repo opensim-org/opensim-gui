@@ -43,6 +43,8 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.opensim.modeling.Model;
@@ -138,11 +140,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             firstAction = false;
             frameFPS = ViewDB.getInstance().getFrameRate();
             if (debug) System.out.println("frameFPS in RealTimePlayActionListener="+frameFPS);
-            if (getMasterMotion().isAnimationChanged()){
-                ViewDB.getInstance().sendCurrentAnimations(getMasterMotion().createAnimationClips());
-            }
-            else
-                ViewDB.getInstance().playCurrentAnimations(getMasterMotion().currentTime);
+            ViewDB.getInstance().playCurrentAnimations(getMasterMotion().currentTime, getMasterMotion().getCurrentAnimationUUIDs());
             getMasterMotion().advanceTime(0);
             if (debug) System.out.println("frameFPS"+frameFPS);
          } else {
@@ -585,6 +583,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          animationTimer.stop();
          animationTimer=null;
       }
+      this.reverse=true;
       if (isMotionLoaded() && animationTimer==null){
           if (getMasterMotion().finished(-1)){
               // reset motion if at end already
@@ -641,14 +640,13 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          animationTimer.stop();
          animationTimer=null;
       }
+      this.reverse=false;
       int timerRate = ViewDB.getInstance().getFrameRate();
       if (isMotionLoaded() && animationTimer==null){
           if (getMasterMotion().finished(1)){
               // reset motion if at end already
               getMasterMotion().setTime(getMasterMotion().getStartTime());
           }
-          if (debug) System.out.println("Frame number =0");
-            setFrameNumber(0);
           int delayMS = 1000/timerRate;
 
           //if (delayMS < 16) delayMS = 16; // 60 fps no faster
@@ -770,11 +768,13 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             // Current motion changed.  Update master motion
             double currentTime = getMasterMotion().getCurrentTime();
             getMasterMotion().clear();
+            JSONArray clipUUIDs = new JSONArray(); 
             for(int i=0; i<mdb.getNumCurrentMotions(); i++){
                getMasterMotion().add(mdb.getCurrentMotion(i));
                ModelMotionPair currentModelMotionPair = mdb.getCurrentMotion(i);
                Storage mot = currentModelMotionPair.motion;
                MotionsDB.getInstance().getDisplayerForMotion(mot).setupMotionDisplay();
+               clipUUIDs.add(MotionsDB.getInstance().getAnimationClipUUIDForMotion(mot));
                //
                ArrayList<MotionDisplayer> associatedDisplayers = MotionsDB.getInstance().getDisplayerForMotion(mot).getAssociatedMotions();
                // Find associated motions as well and re-associate them
@@ -782,6 +782,10 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                    associatedDisplayers.get(j).setupMotionDisplay();
             }
             getMasterMotion().setTime(currentTime);
+            JSONObject jsonMessage = new JSONObject();
+            jsonMessage.put("Op", "SetCurrentAnimations");
+            jsonMessage.put("clip_list", clipUUIDs);
+            ViewDB.getInstance().sendVisualizerCommand(jsonMessage);
             
          } else if (evt.getOperation() == Operation.Modified) {
             Storage motion = evt.getMotion();
@@ -898,7 +902,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         return masterMotion;
     }
     
-    
+    private boolean reverse = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAdvanceButton;
     private javax.swing.JButton jBackButton;
@@ -919,5 +923,12 @@ public class MotionControlJPanel extends javax.swing.JToolBar
     private javax.swing.JTextField jTimeTextField;
     private javax.swing.JToggleButton jWrapToggleButton;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the reverse
+     */
+    public boolean isReverse() {
+        return reverse;
+    }
 
 }
