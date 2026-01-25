@@ -2044,6 +2044,7 @@ public class ModelVisualizationJson extends JSONObject {
      double[] times = new double[mot.getSize()];
      double[][] translationData = new double[numFrames][mot.getSize()*3];
      double[][] rotationData = new double[numFrames][mot.getSize()*4];
+     double[] comData = new double[mot.getSize()*3];
      int numPaths = pathList.size();
      GeometryPath[] pathsArray = new GeometryPath[numPaths];
      double[][] colorData = new double[numPaths][mot.getSize()*3];
@@ -2064,6 +2065,10 @@ public class ModelVisualizationJson extends JSONObject {
              for (int c=0; c<3; c++) 
                  rotationData[iFrame][iState*4+c] = quat.get(c+1);
          }
+         Vec3 comPos = model.calcMassCenterPosition(nextState);
+         for (int c=0; c<3; c++) 
+             comData[iState*3+c] = comPos.get(c);
+
          // Now muscle colors
          Set<GeometryPath> paths = pathList.keySet();
          Iterator<GeometryPath> pathIter = paths.iterator();
@@ -2100,6 +2105,15 @@ public class ModelVisualizationJson extends JSONObject {
          //animationTrack.put("interpolation", "Linear");
          animationsTracks.add(orientationTrack);
      }
+     
+     JSONObject comTrack = new JSONObject();
+     comTrack.put("name", "Com.position");
+     comTrack.put("type", "vector");
+     comTrack.put("times", JSONUtilities.createFromArrayDouble(times));
+     comTrack.put("values", JSONUtilities.createFromArrayDouble(comData));
+     //animationTrack.put("interpolation", "Linear");
+     animationsTracks.add(comTrack);
+
      // Every path has a track for now containing only color, but eventually for Moving, Conditional and WrapPts
      for (int p=0; p < numPaths; p++) {
          String pathName = pathsArray[p].getOwner().getName();
