@@ -1411,12 +1411,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 return;
             }
             if (msgType.equalsIgnoreCase("frameack")){
-                MotionControlJPanel.getInstance().setAcknowledgeReceived(true);
                 if (debugLevel > 1) System.out.println("Ack frame #"+jsonObject.get("#"));
                 return;
             }
             if (msgType.equalsIgnoreCase("FinishRecording")){
-                MotionControlJPanel.getInstance().setAcknowledgeReceived(true);
                 MotionControlJPanel.getInstance().setViewerDrivenPlay(false);
                 if (debugLevel > 1) System.out.println("AEnd recording.");
                 return;
@@ -1437,7 +1435,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                         animationTime = (double) jsonObject.get("value");
                     else if (valueObj instanceof Long)
                         animationTime = (long) jsonObject.get("value");
-                    OpenSimLogger.logMessage("Setting current time to:"+String.valueOf(animationTime), OpenSimLogger.INFO);
+                    OpenSimLogger.logMessage("Setting current time from viewer to:"+String.valueOf(animationTime), OpenSimLogger.INFO);
                     MotionControlJPanel.getInstance().setTimeNoRender(animationTime);
                 }
                 return;

@@ -2078,6 +2078,8 @@ public class ModelVisualizationJson extends JSONObject {
              pathsArray[index] = path;
              UUID pathUUID = pathList.get(path);
              Vec3 pathColor = currentPathColorMap.getColor(path, nextState, -1);
+             if (verbose)
+                 System.out.println("Color:"+path.getOwner().getName()+"="+pathColor.toString());
              for (int c=0; c<3; c++) 
                  colorData[index][iState*3+c] = pathColor.get(c);
              index++;
@@ -2122,7 +2124,7 @@ public class ModelVisualizationJson extends JSONObject {
          colorTrack.put("type", "color");
          colorTrack.put("times", JSONUtilities.createFromArrayDouble(times));
          colorTrack.put("values", JSONUtilities.createFromArrayDouble(colorData[p]));
-         //animationTrack.put("interpolation", "Linear");
+         //colorTrack.put("interpolation", "Linear");
          animationsTracks.add(colorTrack);
      }
      return animationClipJson;

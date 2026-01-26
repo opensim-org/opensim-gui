@@ -67,20 +67,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                    Observer {       
 
     /**
-     * @return the frameNumber
-     */
-    public int getFrameNumber() {
-        return frameNumber;
-    }
-
-    /**
-     * @param frameNumber the frameNumber to set
-     */
-    public void setFrameNumber(int frameNumber) {
-        this.frameNumber = frameNumber;
-    }
-
-    /**
      * @return the viewerDrivenPlay
      */
     public boolean isViewerDrivenPlay() {
@@ -94,19 +80,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         this.viewerDrivenPlay = viewerDrivenPlay;
     }
 
-    /**
-     * @return the acknowledgeReceived
-     */
-    public boolean isAcknowledgeReceived() {
-        return acknowledgeReceived;
-    }
-
-    /**
-     * @param acknowledgeReceived the acknowledgeReceived to set
-     */
-    public void setAcknowledgeReceived(boolean acknowledgeReceived) {
-        this.acknowledgeReceived = acknowledgeReceived;
-    }
 // For MotionsDB
    
    Timer               animationTimer=null;
@@ -115,12 +88,11 @@ public class MotionControlJPanel extends javax.swing.JToolBar
    private MasterMotionModel   masterMotion;
    private int         rangeResolution;
    private DecimalFormat timeFormat = new DecimalFormat("0.000");
-   private int frameNumber=0;
    private boolean internalTrigger=false;
    private static MotionControlJPanel instance=null;
    private boolean debug = false;
    private boolean viewerDrivenPlay = false;
-   private boolean acknowledgeReceived = false;
+   private boolean isViewerAnimating=false; // debugging only for now
    
    // ActionListener for the timer which is used to play motion forwards/backwards in such a way that
    // advances the model's time based on the real elapsed time (times the factor specified by the smodel spinner)
@@ -139,39 +111,28 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          if(firstAction) {
             firstAction = false;
             frameFPS = ViewDB.getInstance().getFrameRate();
-            if (debug) System.out.println("frameFPS in RealTimePlayActionListener="+frameFPS);
+            //if (debug) System.out.println("frameFPS in RealTimePlayActionListener="+frameFPS);
             ViewDB.getInstance().playCurrentAnimations(getMasterMotion().currentTime, getMasterMotion().getCurrentAnimationUUIDs());
-            getMasterMotion().advanceTime(0);
+            //getMasterMotion().advanceTime(0);
             if (debug) System.out.println("frameFPS"+frameFPS);
          } else {
             double speed = (double)(((Double)smodel.getValue()).doubleValue());
             //double factor = (double)direction*1e-9*speed;
             double frameTime = 1.0/frameFPS;
-            // if viewer driven whait for sync message before advancing
-            if (isViewerDrivenPlay() && !isAcknowledgeReceived()){
-                if (debug) System.out.println("waiting for ack, no frame sent");
-                return;
-            }
-            //System.out.println("Time since last call "+(currentTimeNano-lastActionTimeNano)+" ns");
-            getMasterMotion().advanceTime((double)direction*speed*frameTime);
-            acknowledgeReceived = false;
-            if (debug) System.out.println("             masterMotion current time = "+(masterMotion.getCurrentTime()));
-                setFrameNumber(getFrameNumber() + 1);
-            //lastActionTimeNano = currentTimeNano;
-            //System.out.println("delta simulation time = "+(masterMotion.getCurrentTime()- lastSimulationTime));
-            if (debug) System.out.println("Frame number="+getFrameNumber());
+
             lastSimulationTime = masterMotion.getCurrentTime();
 
          }
 
          // Kill self if done and wrapMotion is off
          if (getMasterMotion().finished(direction)){
-            //animationTimer.stop();
-            //animationTimer=null;
+            animationTimer.stop();
+            animationTimer=null;
             jStopButtonActionPerformed(evt);
             ViewDB.getInstance().endAnimation();
             if (debug) System.out.println("End Animation");
                 setViewerDrivenPlay(false);
+            isViewerAnimating = false;
             
          } else {
             /*
@@ -630,6 +591,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         animationTimer=null;
         setViewerDrivenPlay(true);
         jPlayButtonActionPerformed(null);
+        isViewerAnimating = true;
     }
     
     public void setTimeNoRender(double animationTime) {
