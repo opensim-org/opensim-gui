@@ -2045,6 +2045,10 @@ public class ModelVisualizationJson extends JSONObject {
      double[][] translationData = new double[numFrames][mot.getSize()*3];
      double[][] rotationData = new double[numFrames][mot.getSize()*4];
      double[] comData = new double[mot.getSize()*3];
+     
+     int numMovingPathpoints = movingComponents.keySet().size();
+     double[][] movingPathPointData = new double[numMovingPathpoints][mot.getSize()*3];
+
      int numPaths = pathList.size();
      GeometryPath[] pathsArray = new GeometryPath[numPaths];
      double[][] colorData = new double[numPaths][mot.getSize()*3];
@@ -2084,6 +2088,16 @@ public class ModelVisualizationJson extends JSONObject {
                  colorData[index][iState*3+c] = pathColor.get(c);
              index++;
          }
+         // Handle moving path points
+         int mppIndex=0;
+         for (Component comp: movingComponents.keySet()){
+                // Update position of MovingPathpoints on each frame
+            MovingPathPoint mPathPoint = MovingPathPoint.safeDownCast(comp);
+            Vec3 location = mPathPoint.getLocation(nextState);
+            for (int c=0; c<3; c++) 
+                 movingPathPointData[mppIndex][iState*3+c] = location.get(c);
+            mppIndex++;
+        };
          
      }
      animationClipJson.put("duration", times[times.length-1]);
@@ -2115,18 +2129,40 @@ public class ModelVisualizationJson extends JSONObject {
      comTrack.put("values", JSONUtilities.createFromArrayDouble(comData));
      //animationTrack.put("interpolation", "Linear");
      animationsTracks.add(comTrack);
-
-     // Every path has a track for now containing only color, but eventually for Moving, Conditional and WrapPts
+     // Moving path points
+     int mppIndex=0;
+     for (Component comp: movingComponents.keySet()){
+         JSONObject positionTrack = new JSONObject();
+         String frameName = comp.getName();
+         positionTrack.put("name", frameName+".position");
+         positionTrack.put("type", "vector");
+         positionTrack.put("times", JSONUtilities.createFromArrayDouble(times));
+         positionTrack.put("values", JSONUtilities.createFromArrayDouble(movingPathPointData[mppIndex]));
+         //animationTrack.put("interpolation", "Linear");
+         animationsTracks.add(positionTrack);
+         mppIndex++;
+     }
+     // 
+     // Every path has 2 tracks for now containing only color, but eventually for Moving, Conditional and WrapPts
      for (int p=0; p < numPaths; p++) {
          String pathName = pathsArray[p].getPathPointSet().get(0).getName();
-         JSONObject colorTrack = new JSONObject();
-         colorTrack.put("name", pathName+".material.color");
-         colorTrack.put("type", "color");
-         colorTrack.put("times", JSONUtilities.createFromArrayDouble(times));
-         colorTrack.put("values", JSONUtilities.createFromArrayDouble(colorData[p]));
-         colorTrack.put("interpolation", "Linear");
-         animationsTracks.add(colorTrack);
+         JSONObject pathPointsColorTrack = new JSONObject();
+         pathPointsColorTrack.put("name", pathName+".material.color");
+         pathPointsColorTrack.put("type", "color");
+         pathPointsColorTrack.put("times", JSONUtilities.createFromArrayDouble(times));
+         pathPointsColorTrack.put("values", JSONUtilities.createFromArrayDouble(colorData[p]));
+         //colorTrack.put("interpolation", "Linear");
+         animationsTracks.add(pathPointsColorTrack);
+         String bellyName = pathsArray[p].getOwner().getName();
+         JSONObject muscleColorTrack = new JSONObject();
+         muscleColorTrack.put("name", bellyName+".material.color");
+         muscleColorTrack.put("type", "color");
+         muscleColorTrack.put("times", JSONUtilities.createFromArrayDouble(times));
+         muscleColorTrack.put("values", JSONUtilities.createFromArrayDouble(colorData[p]));
+         //colorTrack.put("interpolation", "Linear");
+         animationsTracks.add(muscleColorTrack);
      }
+     //
      return animationClipJson;
  }
 

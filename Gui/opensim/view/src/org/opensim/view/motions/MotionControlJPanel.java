@@ -49,6 +49,7 @@ import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
+import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.utils.TheApp;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionEvent.Operation;
@@ -736,12 +737,14 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                ModelMotionPair currentModelMotionPair = mdb.getCurrentMotion(i);
                Storage mot = currentModelMotionPair.motion;
                MotionsDB.getInstance().getDisplayerForMotion(mot).setupMotionDisplay();
-               clipUUIDs.add(MotionsDB.getInstance().getAnimationClipUUIDForMotion(mot));
+               clipUUIDs.add(MotionsDB.getInstance().getDisplayerForMotion(mot).getAnimationClipUUID());
                //
                ArrayList<MotionDisplayer> associatedDisplayers = MotionsDB.getInstance().getDisplayerForMotion(mot).getAssociatedMotions();
                // Find associated motions as well and re-associate them
-               for (int j=0; j<associatedDisplayers.size(); j++)
+               for (int j=0; j<associatedDisplayers.size(); j++){
                    associatedDisplayers.get(j).setupMotionDisplay();
+                   clipUUIDs.add(associatedDisplayers.get(j).getAnimationClipUUID());
+               }
             }
             getMasterMotion().setTime(currentTime);
             JSONObject jsonMessage = new JSONObject();
@@ -764,11 +767,37 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          } else if (evt.getOperation() == Operation.Assoc) {
              // Create MotionDisplayer and associate it to that of currentMotion
              MotionDisplayer newMotionDisplayer = new MotionDisplayer(evt.getMotion(), evt.getModel());
+             // add uuid to current animations
              MotionsDB.getInstance().addMotionDisplayer(evt.getMotion(), newMotionDisplayer);
-             getMasterMotion().getDisplayer(0).getAssociatedMotions().add(newMotionDisplayer);
-             newMotionDisplayer.setupMotionDisplay();
-             getMasterMotion().setTime(getMasterMotion().getCurrentTime());
-
+             getMasterMotion().getDisplayer(0).associateDisplayer(newMotionDisplayer);
+             // send clip to viewer
+            String animationUUID = newMotionDisplayer.getAnimationClipUUID();
+            ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(evt.getModel());
+            JSONObject currentAnimation = new JSONObject();
+            currentAnimation.put("Clip", newMotionDisplayer.getAnimationClip());
+            currentAnimation.put("Root", modelViz.getModelUUID().toString());
+            currentAnimation.put("Op", "AddAnimationClip");
+            ViewDB.getInstance().sendAnimationClip(currentAnimation);
+            newMotionDisplayer.setupMotionDisplay();
+            getMasterMotion().setTime(getMasterMotion().getCurrentTime());
+            // Update current animation
+            JSONArray clipUUIDs = new JSONArray(); 
+            for(int i=0; i<mdb.getNumCurrentMotions(); i++){
+               ModelMotionPair currentModelMotionPair = mdb.getCurrentMotion(i);
+               Storage mot = currentModelMotionPair.motion;
+               clipUUIDs.add(MotionsDB.getInstance().getDisplayerForMotion(mot).getAnimationClipUUID());
+               // collect ids of current motions and send to viewer
+               ArrayList<MotionDisplayer> associatedDisplayers = MotionsDB.getInstance().getDisplayerForMotion(mot).getAssociatedMotions();
+               // Find associated motions as well and re-associate them
+               for (int j=0; j<associatedDisplayers.size(); j++){
+                   associatedDisplayers.get(j).setupMotionDisplay();
+                   clipUUIDs.add(associatedDisplayers.get(j).getAnimationClipUUID());
+               }
+            }
+            JSONObject jsonMessage = new JSONObject();
+            jsonMessage.put("Op", "SetCurrentAnimations");
+            jsonMessage.put("clip_list", clipUUIDs);
+            ViewDB.getInstance().sendVisualizerCommand(jsonMessage);
          }
          motionLoaded = (getMasterMotion().getNumMotions() > 0);
          updatePanelDisplay();
