@@ -177,8 +177,8 @@ public class MasterMotionModel {
           MotionsDB.getInstance().addMotionDisplayer(simmMotionData, displayer);
           // create AnimationJson and keep track of uuid for future reference
       }
-      String AnimationUUID = MotionsDB.getInstance().getAnimationClipUUIDForMotion(simmMotionData);
-      if (AnimationUUID == null){
+      String animationUUID = MotionsDB.getInstance().getAnimationClipUUIDForMotion(simmMotionData);
+      if (animationUUID == null){
           AnimationJson animationClip = null;
           ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(model);
           if (model instanceof ModelForExperimentalData){
@@ -188,17 +188,17 @@ public class MasterMotionModel {
           else {
               animationClip = modelViz.createAnimationJson(simmMotionData);
           }
-          AnimationUUID = (String) animationClip.get("uuid");
-          MotionsDB.getInstance().addAnimationClipUUID(simmMotionData, AnimationUUID);
+          animationUUID = (String) animationClip.get("uuid");
+          MotionsDB.getInstance().addAnimationClipUUID(simmMotionData, animationUUID);
           JSONObject currentAnimation = new JSONObject();
           currentAnimation.put("Clip", animationClip);
           currentAnimation.put("Root", modelViz.getModelUUID().toString());
           currentAnimation.put("Op", "AddAnimationClip");
-          try {
-            JSONUtilities.writeJsonFile(currentAnimation, "animationClip01.json");
-          } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-          }
+//          try {
+//            JSONUtilities.writeJsonFile(currentAnimation, "animationClip01.json");
+//          } catch (IOException ex) {
+//            Exceptions.printStackTrace(ex);
+//          }
           ViewDB.getInstance().sendAnimationClip(currentAnimation);
       }
       displayers.add(displayer);

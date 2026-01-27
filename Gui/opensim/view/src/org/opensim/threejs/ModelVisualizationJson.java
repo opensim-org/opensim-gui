@@ -2118,13 +2118,13 @@ public class ModelVisualizationJson extends JSONObject {
 
      // Every path has a track for now containing only color, but eventually for Moving, Conditional and WrapPts
      for (int p=0; p < numPaths; p++) {
-         String pathName = pathsArray[p].getOwner().getName();
+         String pathName = pathsArray[p].getPathPointSet().get(0).getName();
          JSONObject colorTrack = new JSONObject();
          colorTrack.put("name", pathName+".material.color");
          colorTrack.put("type", "color");
          colorTrack.put("times", JSONUtilities.createFromArrayDouble(times));
          colorTrack.put("values", JSONUtilities.createFromArrayDouble(colorData[p]));
-         //colorTrack.put("interpolation", "Linear");
+         colorTrack.put("interpolation", "Linear");
          animationsTracks.add(colorTrack);
      }
      return animationClipJson;
