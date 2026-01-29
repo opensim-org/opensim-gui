@@ -27,6 +27,7 @@
  */
 package org.opensim.threejs;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -36,6 +37,8 @@ import java.util.Set;
 import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.openide.util.Exceptions;
+import org.opensim.modeling.AbstractOutput;
 import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDecorativeGeometry;
@@ -58,6 +61,7 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.MovingPathPoint;
 import org.opensim.modeling.OpenSimObject;
+import org.opensim.modeling.OutputVec3;
 import org.opensim.modeling.PathPoint;
 import org.opensim.modeling.PathPointSet;
 import org.opensim.modeling.PathWrapPoint;
@@ -2045,70 +2049,103 @@ public class ModelVisualizationJson extends JSONObject {
      double[][] translationData = new double[numFrames][mot.getSize()*3];
      double[][] rotationData = new double[numFrames][mot.getSize()*4];
      double[] comData = new double[mot.getSize()*3];
-     
+     AbstractOutput output = model.getOutput("com_position");
+     OutputVec3 outputVec3 = OutputVec3.safeDownCast(output);
+
      int numMovingPathpoints = movingComponents.keySet().size();
      double[][] movingPathPointData = new double[numMovingPathpoints][mot.getSize()*3];
+     int numConditionalPathpoints = proxyPathPoints.keySet().size();
+     double[][] conditionalPathPointData = new double[numConditionalPathpoints][mot.getSize()*3];
 
+     int numComputedPathpoints = computedPathPoints.keySet().size();
+     double[][] computedPathPointData = new double[numComputedPathpoints][mot.getSize()*3];
+     
      int numPaths = pathList.size();
      GeometryPath[] pathsArray = new GeometryPath[numPaths];
      double[][] colorData = new double[numPaths][mot.getSize()*3];
     
-     for (int iState=0; iState < times.length; iState++){
-         State nextState = trajectory.get(iState);
-         times[iState] = nextState.getTime();
-         model.realizeVelocity(nextState);
-         for (int iFrame=0; iFrame< numFrames; iFrame++){
-             // Get transform for Frame iFrame, convert into pos, quaternion then append to tracks.
-             Transform xform = frames[iFrame].getTransformInGround(nextState);
-             Vec3 translation = xform.T();
-             for (int c=0; c<3; c++) 
-                 translationData[iFrame][iState*3+c] = translation.get(c);
-             Rotation rot = xform.R();
-             Quaternion quat = rot.convertRotationToQuaternion();
-             rotationData[iFrame][iState*4+3]=quat.get(0);
-             for (int c=0; c<3; c++) 
-                 rotationData[iFrame][iState*4+c] = quat.get(c+1);
-         }
-         Vec3 comPos = model.calcMassCenterPosition(nextState);
-         for (int c=0; c<3; c++) 
-             comData[iState*3+c] = comPos.get(c);
+     for (int iState = 0; iState < times.length; iState++) {
+        State nextState = trajectory.get(iState);
+        times[iState] = nextState.getTime();
+        model.realizeVelocity(nextState);
+        // Handle frames, collect position and quaternions separately for separate tracks
+        for (int iFrame = 0; iFrame < numFrames; iFrame++) {
+            // Get transform for Frame iFrame, convert into pos, quaternion then append to tracks.
+            Transform xform = frames[iFrame].getTransformInGround(nextState);
+            Vec3 translation = xform.T();
+            addEntriesToDataArray(translationData[iFrame], iState, translation);
+            Rotation rot = xform.R();
+            Quaternion quat = rot.convertRotationToQuaternion();
+            rotationData[iFrame][iState * 4 + 3] = quat.get(0);
+            for (int c = 0; c < 3; c++) {
+                rotationData[iFrame][iState * 4 + c] = quat.get(c + 1);
+            }
+        }
+        // COM handling
+        Vec3 comPos = outputVec3.getValue(nextState);
+        addEntriesToDataArray(comData, iState, comPos);
 
-         // Now muscle colors
-         Set<GeometryPath> paths = pathList.keySet();
-         Iterator<GeometryPath> pathIter = paths.iterator();
-         int index=0;
-         while (pathIter.hasNext()) {
-             GeometryPath path = pathIter.next();
-             pathsArray[index] = path;
-             UUID pathUUID = pathList.get(path);
-             Vec3 pathColor = currentPathColorMap.getColor(path, nextState, -1);
-             if (verbose)
-                 System.out.println("Color:"+path.getOwner().getName()+"="+pathColor.toString());
-             for (int c=0; c<3; c++) 
-                 colorData[index][iState*3+c] = pathColor.get(c);
-             index++;
-         }
-         // Handle moving path points
-         int mppIndex=0;
-         for (Component comp: movingComponents.keySet()){
-                // Update position of MovingPathpoints on each frame
+        // Now muscle colors
+        Set<GeometryPath> paths = pathList.keySet();
+        Iterator<GeometryPath> pathIter = paths.iterator();
+        int index = 0;
+        while (pathIter.hasNext()) {
+            GeometryPath path = pathIter.next();
+            pathsArray[index] = path;
+            UUID pathUUID = pathList.get(path);
+            Vec3 pathColor = currentPathColorMap.getColor(path, nextState, -1);
+            if (verbose) {
+                System.out.println("Color:" + path.getOwner().getName() + "=" + pathColor.toString());
+            }
+            addEntriesToDataArray(colorData[index], iState, pathColor);
+            index++;
+        }
+        // Handle moving path points
+        int mppIndex = 0;
+        for (Component comp : movingComponents.keySet()) {
+            // Update position of MovingPathpoints on each frame
             MovingPathPoint mPathPoint = MovingPathPoint.safeDownCast(comp);
             Vec3 location = mPathPoint.getLocation(nextState);
-            for (int c=0; c<3; c++) 
-                 movingPathPointData[mppIndex][iState*3+c] = location.get(c);
+            addEntriesToDataArray(movingPathPointData[mppIndex], iState, location);
             mppIndex++;
         };
-         
+        // Handle proxyPoints 
+        int proxyIndex = 0;
+        for (AbstractPathPoint app : proxyPathPoints.keySet()) {
+            if (!app.isActive(nextState)) {
+                ComputedPathPointInfo proxyPointInfo = proxyPathPoints.get(app);
+                Vec3 loc = computePointLocationFromNeighbors(proxyPointInfo.pt1, app.getBody(), proxyPointInfo.pt2, proxyPointInfo.ratio);
+                addEntriesToDataArray(conditionalPathPointData[proxyIndex], iState, loc);
+            } else {
+                if (debug_path) {
+                    System.out.println("Pathpoint " + app.getName() + " active");
+                }
+                Vec3 location = app.getLocation(nextState);
+                addEntriesToDataArray(conditionalPathPointData[proxyIndex], iState, location);
+            }
+            proxyIndex++;
+        }
+        // Computed path points (wrapping points not engaged
+        PhysicalFrame ground = getMapBodyIndicesToFrames().get(0);
+        int computedIndex = 0;
+        // RECOMPUTE POINTS AS NO WRAPPING, points close to one end
+        for (UUID computedPointUUID : computedPathPoints.keySet()) {
+            ComputedPathPointInfo computedPointInfo = computedPathPoints.get(computedPointUUID);
+            Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, computedPointInfo.ratio);
+            addEntriesToDataArray(computedPathPointData[proxyIndex], iState, loc);
+            computedIndex++;
+        }
      }
      animationClipJson.put("duration", times[times.length-1]);
      animationClipJson.put("uuid", UUID.randomUUID().toString());
      // Create a track for time, translationData, rotationData
+     JSONArray timesData = JSONUtilities.createFromArrayDouble(times);
      for (int iFrame=0; iFrame< numFrames; iFrame++){
          JSONObject positionTrack = new JSONObject();
          String frameName = frames[iFrame].getName();
          positionTrack.put("name", frameName+".position");
          positionTrack.put("type", "vector");
-         positionTrack.put("times", JSONUtilities.createFromArrayDouble(times));
+         positionTrack.put("times", timesData);
          positionTrack.put("values", JSONUtilities.createFromArrayDouble(translationData[iFrame]));
          //animationTrack.put("interpolation", "Linear");
          animationsTracks.add(positionTrack);
@@ -2116,16 +2153,16 @@ public class ModelVisualizationJson extends JSONObject {
          JSONObject orientationTrack = new JSONObject();
          orientationTrack.put("name", frameName+".quaternion");
          orientationTrack.put("type", "quaternion");
-         orientationTrack.put("times", JSONUtilities.createFromArrayDouble(times));
+         orientationTrack.put("times", timesData);
          orientationTrack.put("values", JSONUtilities.createFromArrayDouble(rotationData[iFrame]));
          //animationTrack.put("interpolation", "Linear");
          animationsTracks.add(orientationTrack);
      }
      
      JSONObject comTrack = new JSONObject();
-     comTrack.put("name", "Com.position");
+     comTrack.put("name", "ModelCom.position");
      comTrack.put("type", "vector");
-     comTrack.put("times", JSONUtilities.createFromArrayDouble(times));
+     comTrack.put("times", timesData);
      comTrack.put("values", JSONUtilities.createFromArrayDouble(comData));
      //animationTrack.put("interpolation", "Linear");
      animationsTracks.add(comTrack);
@@ -2136,12 +2173,38 @@ public class ModelVisualizationJson extends JSONObject {
          String frameName = comp.getName();
          positionTrack.put("name", frameName+".position");
          positionTrack.put("type", "vector");
-         positionTrack.put("times", JSONUtilities.createFromArrayDouble(times));
+         positionTrack.put("times", timesData);
          positionTrack.put("values", JSONUtilities.createFromArrayDouble(movingPathPointData[mppIndex]));
          //animationTrack.put("interpolation", "Linear");
          animationsTracks.add(positionTrack);
          mppIndex++;
      }
+     // Conditional path points
+     int proxyIndex=0;
+     for (AbstractPathPoint app: proxyPathPoints.keySet()){
+         JSONObject positionTrack = new JSONObject();
+         String frameName = app.getName();
+         positionTrack.put("name", frameName+".position");
+         positionTrack.put("type", "vector");
+         positionTrack.put("times", timesData);
+         positionTrack.put("values", JSONUtilities.createFromArrayDouble(conditionalPathPointData[proxyIndex]));
+         //animationTrack.put("interpolation", "Linear");
+         animationsTracks.add(positionTrack);
+         proxyIndex++;
+     }
+     int computedIndex = 0;
+     for (UUID computedPointUUID : computedPathPoints.keySet()) {
+         JSONObject positionTrack = new JSONObject();
+         String frameName = computedPointUUID.toString();
+         positionTrack.put("name", frameName+".position");
+         positionTrack.put("type", "vector");
+         positionTrack.put("times", timesData);
+         positionTrack.put("values", JSONUtilities.createFromArrayDouble(computedPathPointData[computedIndex]));
+         //animationTrack.put("interpolation", "Linear");
+         animationsTracks.add(positionTrack);
+         computedIndex++;
+     }
+
      // 
      // Every path has 2 tracks for now containing only color, but eventually for Moving, Conditional and WrapPts
      for (int p=0; p < numPaths; p++) {
@@ -2165,5 +2228,10 @@ public class ModelVisualizationJson extends JSONObject {
      //
      return animationClipJson;
  }
+
+    private void addEntriesToDataArray(double[] comData, int iState, Vec3 comPos) {
+        for (int c=0; c<3; c++)
+            comData[iState*3+c] = comPos.get(c);
+    }
 
 }

@@ -46,6 +46,9 @@ import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ExperimentalDataObject;
+import org.opensim.view.experimentaldata.ExperimentalMarker;
+import org.opensim.view.experimentaldata.MotionObjectOrientation;
+import org.opensim.view.experimentaldata.MotionObjectPointForce;
 
 
 /**

@@ -1435,7 +1435,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                         animationTime = (double) jsonObject.get("value");
                     else if (valueObj instanceof Long)
                         animationTime = (long) jsonObject.get("value");
-                    OpenSimLogger.logMessage("Setting current time from viewer to:"+String.valueOf(animationTime), OpenSimLogger.INFO);
+                    //OpenSimLogger.logMessage("Setting current time from viewer to:"+String.valueOf(animationTime), OpenSimLogger.INFO);
                     MotionControlJPanel.getInstance().setTimeNoRender(animationTime);
                 }
                 return;
