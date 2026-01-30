@@ -156,7 +156,7 @@ public class MasterMotionModel {
    public boolean finished(int direction) {
       //int index = getIndexClosestToCurrentTime();
       //if (index==superMotionTimes.size()-1 && direction==1 || index==0 && direction==-1)
-      if (currentTime==getEndTime() && direction==1 || currentTime==getStartTime() && direction==-1)
+      if (currentTime>=getEndTime() && direction==1 || currentTime<=getStartTime() && direction==-1)
          return !wrapMotion;
       else
          return false;
