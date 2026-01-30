@@ -42,6 +42,7 @@ import org.opensim.modeling.AbstractOutput;
 import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.AbstractProperty;
 import org.opensim.modeling.ArrayDecorativeGeometry;
+import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayPathPoint;
 import org.opensim.modeling.ArrayVec3;
 import org.opensim.modeling.BodyList;
@@ -51,6 +52,7 @@ import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.ConditionalPathPoint;
+import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.Force;
 import org.opensim.modeling.Frame;
@@ -146,6 +148,7 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<Frame, VisualizerFrame> visualizerFrames = new HashMap<Frame, VisualizerFrame>();
     private ArrayList<VisualizerAddOn> visualizerAddOns = new ArrayList<VisualizerAddOn>();
     private VisualizerAddOnCom comVizAddOn = new VisualizerAddOnCom();
+    private HashMap<String, ArrayList<Double>> mapUUIDToAnimationTrack = new HashMap<>();
     private boolean showCom = false;
     private PathColorMap currentPathColorMap;
     // Preferences
@@ -318,7 +321,7 @@ public class ModelVisualizationJson extends JSONObject {
                 }
                 ArrayList<Integer> pointCount = new  ArrayList<Integer>(numWrapPoints);
                 ArrayList<Integer> visPointCount = new  ArrayList<Integer>(numWrapPoints);
-                calculateWrapPointsToVisualzerPointsMapping(firstIndex, secondIndex, actualPath, pointCount, numIntermediatePoints, visPointCount);
+                calculateWrapPointsToVisualzerPointsMapping(firstIndex, secondIndex, actualPath, pointCount, numIntermediatePoints, visPointCount, state);
                 pathVisInfo.setStartVisualizerPointIndexForSegment(segmentNumber, pathpoint_jsonArr.size());
                 for (int wrappointIndex = firstIndex + 1; wrappointIndex < secondIndex; wrappointIndex++) {
                     AbstractPathPoint nextPathPoint = actualPath.get(wrappointIndex);
@@ -821,7 +824,7 @@ public class ModelVisualizationJson extends JSONObject {
                 
                 // Update status of Wrappoints accordingly
                 for (GeometryPath path:pathsWithWrapping.keySet()){
-                    updatePathWithWrapping(path, bodyTransforms_json);
+                    updatePathWithWrapping(path, bodyTransforms_json, state);
                 }
             }            // Computed points need recomputation
 
@@ -834,9 +837,6 @@ public class ModelVisualizationJson extends JSONObject {
                 JSONObject pathUpdate_json = new JSONObject();
                 pathUpdate_json.put("uuid", pathUUID.toString());
                 Vec3 pathColor = colorByState ? currentPathColorMap.getColor(geomPathObject, state, -1) : geomPathObject.getDefaultColor();
-            
-                if (verbose)
-                    System.out.println("Color:"+geomPathObject.getOwner().getName()+"="+pathColor.toString());
                 String colorString = JSONUtilities.mapColorToRGBA(pathColor);
                 pathUpdate_json.put("color", colorString);
                 geompaths_json.add(pathUpdate_json);
@@ -1477,8 +1477,8 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<OpenSimObject, UUID> mapGeometryPathToPathPointMaterialUUID = 
                         new HashMap<OpenSimObject, UUID>();
     
-    private void updatePathWithWrapping(GeometryPath path, JSONArray bodyTransforms) {
-        ArrayPathPoint actualPath =path.getCurrentPath(state);
+    private void updatePathWithWrapping(GeometryPath path, JSONArray bodyTransforms, State curState) {
+        ArrayPathPoint actualPath =path.getCurrentPath(curState);
         JSONArray pathpointJsonArray = pathsWithWrapping.get(path);
         int numWrapObjects = path.getWrapSet().getSize();
         PathPointSet pathPointSetFromProperty = path.getPathPointSet();
@@ -1498,7 +1498,7 @@ public class ModelVisualizationJson extends JSONObject {
              }
             else if (secondIndex == -1){ // Conditional Path point that's inactive
                 int tempIndex = ppointSetIndex;
-                while (!pathPointSetFromProperty.get(tempIndex).isActive(state))
+                while (!pathPointSetFromProperty.get(tempIndex).isActive(curState))
                     tempIndex--;
                 secondPoint = pathPointSetFromProperty.get(tempIndex);
                 secondIndex = tempIndex;
@@ -1510,7 +1510,7 @@ public class ModelVisualizationJson extends JSONObject {
 
                 ArrayList<Integer> pointCount = new  ArrayList<Integer>(numWrapPoints);
                 ArrayList<Integer> visPointCount = new  ArrayList<Integer>(numWrapPoints);
-                calculateWrapPointsToVisualzerPointsMapping(firstIndex, secondIndex, actualPath, pointCount, numIntermediatePoints, visPointCount);
+                calculateWrapPointsToVisualzerPointsMapping(firstIndex, secondIndex, actualPath, pointCount, numIntermediatePoints, visPointCount, curState);
                 int startVisualizerPointIndex = pathVisInfo.getStartVisualizerPointIndexForSegment(segmentNumber);
                 // Reset all intermediate points to computed position in case wrap was disengaged, they will be updated below
                 for (int wrappointIndex = firstIndex + 1; wrappointIndex < secondIndex; wrappointIndex++) {
@@ -1519,7 +1519,7 @@ public class ModelVisualizationJson extends JSONObject {
                     if (pathWrapPoint != null) {
                         // Count how many wrap points in sequence and distribute 2 * numWrapObjects among them 
                         // for now we'll assume only one
-                        ArrayVec3 pathwrap = pathWrapPoint.getWrapPath(state);
+                        ArrayVec3 pathwrap = pathWrapPoint.getWrapPath(curState);
                         PhysicalFrame wrapPtsFrame = pathWrapPoint.getParentFrame();
                         int size = pathwrap.size();
                         int numVisPoints = visPointCount.get(wrappointIndex-firstIndex-1);
@@ -1532,14 +1532,28 @@ public class ModelVisualizationJson extends JSONObject {
                             indicesToUse[numVisPoints-1]=size-1;
                             JSONObject bodyJson = mapBodyIndicesToJson.get(0); // These points live in Ground
                             for (int j = 0; j < indicesToUse.length; j++) {
-                                Vec3 globalLocation = wrapPtsFrame.findStationLocationInAnotherFrame(state, pathwrap.get(indicesToUse[j]), getMapBodyIndicesToFrames().get(0));
+                                Vec3 globalLocation = wrapPtsFrame.findStationLocationInAnotherFrame(curState, pathwrap.get(indicesToUse[j]), getMapBodyIndicesToFrames().get(0));
                                 // Update location from wrapping
-                                JSONObject oneBodyXform_json = new JSONObject();
-                                oneBodyXform_json.put("uuid", pathpointJsonArray.get(startVisualizerPointIndex+j).toString());
-                                Transform xform = new Transform();
-                                xform.setP(globalLocation);
-                                oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), getVisScaleFactor()));
-                                bodyTransforms.add(oneBodyXform_json);
+                                String uuidString = pathpointJsonArray.get(startVisualizerPointIndex+j).toString();
+                                if (bodyTransforms != null){
+                                    JSONObject oneBodyXform_json = new JSONObject();
+                                    oneBodyXform_json.put("uuid", uuidString);
+                                    Transform xform = new Transform();
+                                    xform.setP(globalLocation);
+                                    oneBodyXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), getVisScaleFactor()));
+                                    bodyTransforms.add(oneBodyXform_json);
+                                }
+                                else { // We're creating an animation track
+                                    if (mapUUIDToAnimationTrack.containsKey(uuidString)){
+                                        for(int c =0; c <3; c++)
+                                            mapUUIDToAnimationTrack.get(uuidString).add(globalLocation.get(c));
+                                    }
+                                    else {
+                                        mapUUIDToAnimationTrack.put(uuidString, new ArrayList<Double>());
+                                        for(int c =0; c <3; c++)
+                                            mapUUIDToAnimationTrack.get(uuidString).add(globalLocation.get(c));
+                                    }
+                                }
                             }
                             startVisualizerPointIndex += numVisPoints;
                         }
@@ -1721,7 +1735,7 @@ public class ModelVisualizationJson extends JSONObject {
                 }
                 ArrayList<Integer> pointCount = new  ArrayList<Integer>(numWrapPoints);
                 ArrayList<Integer> visPointCount = new  ArrayList<Integer>(numWrapPoints);
-                calculateWrapPointsToVisualzerPointsMapping(firstIndex, secondIndex, actualPath, pointCount, numIntermediatePoints, visPointCount);
+                calculateWrapPointsToVisualzerPointsMapping(firstIndex, secondIndex, actualPath, pointCount, numIntermediatePoints, visPointCount, state);
                 pathVisInfo.setStartVisualizerPointIndexForSegment(segmentNumber, pathpoint_jsonArr.size());
                 // From here on we use numIntermediatePoints viz-points to represent totalCount positions
                 for (int wrappointIndex = firstIndex + 1; wrappointIndex < secondIndex; wrappointIndex++) {
@@ -1846,14 +1860,14 @@ public class ModelVisualizationJson extends JSONObject {
         return mat_uuid;
     }
 
-    private void calculateWrapPointsToVisualzerPointsMapping(int firstIndex, int secondIndex, ArrayPathPoint actualPath, ArrayList<Integer> pointCount, int numIntermediatePoints, ArrayList<Integer> visPointCount) {
+    private void calculateWrapPointsToVisualzerPointsMapping(int firstIndex, int secondIndex, ArrayPathPoint actualPath, ArrayList<Integer> pointCount, int numIntermediatePoints, ArrayList<Integer> visPointCount, State curState) {
         int relIndex=0;
         int totalCount = 0;
         for (int wrappointIndex = firstIndex + 1; wrappointIndex < secondIndex; wrappointIndex++) {
             PathWrapPoint pathWrapPoint = PathWrapPoint.safeDownCast(actualPath.get(wrappointIndex));
             pointCount.add(relIndex, 0);
             if ((pathWrapPoint != null)){
-                int nextCount = pathWrapPoint.getWrapPath(state).getSize();
+                int nextCount = pathWrapPoint.getWrapPath(curState).getSize();
                 pointCount.set(relIndex, nextCount);
                 totalCount += nextCount;
             }
@@ -2035,7 +2049,14 @@ public class ModelVisualizationJson extends JSONObject {
      animationClipJson.put("name", mot.getName());
      JSONArray animationsTracks = new JSONArray();
      animationClipJson.put("tracks", animationsTracks);
+     
+     
      // Convert mot into a StateTrajectory so that we can get states one at a time;
+     // create a local Storage and use that to rearrange data for animation
+     Storage motionAsStates = new Storage();
+     //dContext.resetStateToDefault(); // TODO revisit fix #279
+     model.formStateStorage(mot, motionAsStates, false);
+
      StatesTrajectory trajectory = StatesTrajectory.createFromStatesStorage(model, mot, true, true);
 
 
@@ -2066,6 +2087,7 @@ public class ModelVisualizationJson extends JSONObject {
     
      for (int iState = 0; iState < times.length; iState++) {
         State nextState = trajectory.get(iState);
+
         times[iState] = nextState.getTime();
         model.realizeVelocity(nextState);
         // Handle frames, collect position and quaternions separately for separate tracks
@@ -2088,17 +2110,16 @@ public class ModelVisualizationJson extends JSONObject {
         // Now muscle colors
         Set<GeometryPath> paths = pathList.keySet();
         Iterator<GeometryPath> pathIter = paths.iterator();
-        int index = 0;
+        int pathIndex = 0;
         while (pathIter.hasNext()) {
             GeometryPath path = pathIter.next();
-            pathsArray[index] = path;
-            UUID pathUUID = pathList.get(path);
+            pathsArray[pathIndex] = path;
             Vec3 pathColor = currentPathColorMap.getColor(path, nextState, -1);
             if (verbose) {
                 System.out.println("Color:" + path.getOwner().getName() + "=" + pathColor.toString());
             }
-            addEntriesToDataArray(colorData[index], iState, pathColor);
-            index++;
+            addEntriesToDataArray(colorData[pathIndex], iState, pathColor);
+            pathIndex++;
         }
         // Handle moving path points
         int mppIndex = 0;
@@ -2132,8 +2153,38 @@ public class ModelVisualizationJson extends JSONObject {
         for (UUID computedPointUUID : computedPathPoints.keySet()) {
             ComputedPathPointInfo computedPointInfo = computedPathPoints.get(computedPointUUID);
             Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, computedPointInfo.ratio);
-            addEntriesToDataArray(computedPathPointData[proxyIndex], iState, loc);
+            addEntriesToDataArray(computedPathPointData[computedIndex], iState, loc);
             computedIndex++;
+        }
+        // Wrapping points
+        if (!pathsWithWrapping.isEmpty()){
+            // Update status of Wrappoints accordingly
+            int expectedLength = (iState+1)*3;
+            for (GeometryPath path:pathsWithWrapping.keySet()){
+                updatePathWithWrapping(path, null, nextState);
+                // if there're points in pathsWithWrapping.value that didn't get an update
+                // grab values for them from the computedPathPointData
+                JSONArray pathpoint_jsonArr = pathsWithWrapping.get(path);
+                for (int pptIdx=0; pptIdx<pathpoint_jsonArr.size(); pptIdx++){
+                    String pointUUIDString = (String) pathpoint_jsonArr.get(pptIdx);
+                    UUID ppt_uuid = UUID.fromString(pointUUIDString);
+                    // If not potentially computed, skip over it's accounted for elsewhere
+                    if (computedPathPoints.containsKey(ppt_uuid)){
+                        ArrayList<Double> track = mapUUIDToAnimationTrack.get(ppt_uuid.toString());
+                        if (track == null){
+                            mapUUIDToAnimationTrack.put(ppt_uuid.toString(), new ArrayList<Double>());
+                            track = mapUUIDToAnimationTrack.get(ppt_uuid.toString());
+                        }
+                        if (track.size()!=expectedLength){
+                            // Copy values or recompute and append
+                            ComputedPathPointInfo computedPointInfo = computedPathPoints.get(ppt_uuid);
+                            Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, computedPointInfo.ratio);
+                            for (int ii=0; ii<3; ii++)
+                                track.add(loc.get(ii));
+                        }
+                    }
+                }
+            }
         }
      }
      animationClipJson.put("duration", times[times.length-1]);
@@ -2149,6 +2200,8 @@ public class ModelVisualizationJson extends JSONObject {
          positionTrack.put("values", JSONUtilities.createFromArrayDouble(translationData[iFrame]));
          //animationTrack.put("interpolation", "Linear");
          animationsTracks.add(positionTrack);
+         System.out.println("Name, Sizes: "+frameName+".position"+" | "+timesData.size()+" "+
+           JSONUtilities.createFromArrayDouble(translationData[iFrame]).size()+"\n");
 
          JSONObject orientationTrack = new JSONObject();
          orientationTrack.put("name", frameName+".quaternion");
@@ -2192,18 +2245,6 @@ public class ModelVisualizationJson extends JSONObject {
          animationsTracks.add(positionTrack);
          proxyIndex++;
      }
-     int computedIndex = 0;
-     for (UUID computedPointUUID : computedPathPoints.keySet()) {
-         JSONObject positionTrack = new JSONObject();
-         String frameName = computedPointUUID.toString();
-         positionTrack.put("name", frameName+".position");
-         positionTrack.put("type", "vector");
-         positionTrack.put("times", timesData);
-         positionTrack.put("values", JSONUtilities.createFromArrayDouble(computedPathPointData[computedIndex]));
-         //animationTrack.put("interpolation", "Linear");
-         animationsTracks.add(positionTrack);
-         computedIndex++;
-     }
 
      // 
      // Every path has 2 tracks for now containing only color, but eventually for Moving, Conditional and WrapPts
@@ -2214,6 +2255,10 @@ public class ModelVisualizationJson extends JSONObject {
          pathPointsColorTrack.put("type", "color");
          pathPointsColorTrack.put("times", JSONUtilities.createFromArrayDouble(times));
          pathPointsColorTrack.put("values", JSONUtilities.createFromArrayDouble(colorData[p]));
+         
+         if (verbose)
+               System.out.println("Color: RGB"+pathsArray[p].getOwner().getName()+"="+colorData[p][0]+":"+colorData[p][1]+":"+colorData[p][2]);
+
          //colorTrack.put("interpolation", "Linear");
          animationsTracks.add(pathPointsColorTrack);
          String bellyName = pathsArray[p].getOwner().getName();
@@ -2225,7 +2270,48 @@ public class ModelVisualizationJson extends JSONObject {
          //colorTrack.put("interpolation", "Linear");
          animationsTracks.add(muscleColorTrack);
      }
-     //
+     
+        if (!pathsWithWrapping.isEmpty()){
+            for (String pptUUIDString : mapUUIDToAnimationTrack.keySet()){
+                System.out.println("wrappoint uuid: ");
+                ArrayList<Double> track = mapUUIDToAnimationTrack.get(pptUUIDString);
+                JSONArray trackJson = new JSONArray();
+                trackJson.addAll(track);
+                JSONObject positionTrack = new JSONObject();
+                String frameName = pptUUIDString;
+                positionTrack.put("name", frameName+".position");
+                positionTrack.put("type", "vector");
+                positionTrack.put("times", timesData);
+                positionTrack.put("values", trackJson);
+                System.out.println("Wrap point: Name, Sizes: "+frameName+".position"+" | "+timesData.size()+" "+trackJson.size()+"\n");
+                //animationTrack.put("interpolation", "Linear");
+                animationsTracks.add(positionTrack);
+            }
+        }
+        
+        
+        int computedIndex = 0;
+        for (UUID computedPointUUID : computedPathPoints.keySet()) {
+            System.out.println("computedpoint uuid: "+computedPointUUID.toString());
+            if (!mapUUIDToAnimationTrack.keySet().contains(computedPointUUID.toString())){
+                JSONObject positionTrack = new JSONObject();
+                String frameName = computedPointUUID.toString();
+                positionTrack.put("name", frameName+".position");
+                positionTrack.put("type", "vector");
+                positionTrack.put("times", timesData);
+                positionTrack.put("values", JSONUtilities.createFromArrayDouble(computedPathPointData[computedIndex]));
+                System.out.println("Name, Sizes: "+frameName+".position"+" | "+timesData.size()+" "+
+                        JSONUtilities.createFromArrayDouble(computedPathPointData[computedIndex]).size()+"\n");
+                animationsTracks.add(positionTrack);
+            }
+            computedIndex++;
+        }
+        
+        try {
+            JSONUtilities.writeJsonFile(animationClipJson, "animationJson.json");
+        } catch (IOException ex) {
+            Exceptions.printStackTrace(ex);
+        }
      return animationClipJson;
  }
 
