@@ -290,14 +290,14 @@ public class ModelVisualizationJson extends JSONObject {
                 // create numIntermediatePoints between currentPoint and secondPoint
                 if (numIntermediatePoints > 0)
                     pathVisInfo.setStartVisualizerPointIndexForSegment(segmentNumber, pathpoint_jsonArr.size() );
-                createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr, null);
+                createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr, null, state);
             }
             else if (secondIndex == -1){ // Conditional Path point that's inactive
                 ConditionalPathPoint cpp = ConditionalPathPoint.safeDownCast(secondPoint);
                 //System.out.println("Not found in path, ppt:"+secondPoint.getName());
                 if (numIntermediatePoints>0)
                     pathVisInfo.setStartVisualizerPointIndexForSegment(segmentNumber, pathpoint_jsonArr.size());
-                Vec3 computedLocation = computePathPointLocation(secondIndex, pathPointSetFromProperty);
+                Vec3 computedLocation = computePathPointLocation(secondIndex, pathPointSetFromProperty, state);
                 JSONObject bpptInBodyJson = createPathPointObjectJson(cpp, false, computedLocation, 
                         pathpointmat_uuid.toString(), pointsVisible);
                 addParentUuid(cpp, bpptInBodyJson);
@@ -788,7 +788,7 @@ public class ModelVisualizationJson extends JSONObject {
                 if (!app.isActive(state)){
                     ComputedPathPointInfo proxyPointInfo = proxyPathPoints.get(app);
                     //System.out.println("Use proxy "+proxyPoint.getName());
-                    Vec3 loc = computePointLocationFromNeighbors(proxyPointInfo.pt1, app.getBody(), proxyPointInfo.pt2, proxyPointInfo.ratio);
+                    Vec3 loc = computePointLocationFromNeighbors(proxyPointInfo.pt1, app.getBody(), proxyPointInfo.pt2, proxyPointInfo.ratio, state);
                     Transform localTransform = new Transform();
                     localTransform.setP(loc);
                     JSONObject pathpointXform_json = new JSONObject();
@@ -812,7 +812,7 @@ public class ModelVisualizationJson extends JSONObject {
             // RECOMPUTE POINTS AS NO WRAPPING, points close to one end
             for (UUID computedPointUUID: computedPathPoints.keySet()){
                 ComputedPathPointInfo computedPointInfo = computedPathPoints.get(computedPointUUID);
-                Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, computedPointInfo.ratio);
+                Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, computedPointInfo.ratio, state);
                 Transform localTransform = new Transform();
                 localTransform.setP(loc);
                 JSONObject pathpointXform_json = new JSONObject();
@@ -1182,7 +1182,7 @@ public class ModelVisualizationJson extends JSONObject {
         return topObject;
     }
 
-    private Vec3 computePathPointLocation(int index, PathPointSet pathpointsArray) {
+    private Vec3 computePathPointLocation(int index, PathPointSet pathpointsArray, State curState) {
         // find closest Active points before and after
         int numPre = 1;
         int numPost = 1;
@@ -1200,37 +1200,38 @@ public class ModelVisualizationJson extends JSONObject {
         AbstractPathPoint postPoint = pathpointsArray.get(index + numPost);
         final PhysicalFrame parentFrame = curPoint.getParentFrame();
         proxyPathPoints.put(curPoint, new ComputedPathPointInfo(prePoint, postPoint, ratio));
-        Vec3 retVec3 = computePointLocationFromNeighbors(prePoint, parentFrame, postPoint, ratio);
+        Vec3 retVec3 = computePointLocationFromNeighbors(prePoint, parentFrame, postPoint, ratio, curState);
         return retVec3;
     }
 
-    private Vec3 computePointLocationFromNeighbors(AbstractPathPoint prePoint, final PhysicalFrame parentFrame, AbstractPathPoint postPoint, double ratio) {
+    private Vec3 computePointLocationFromNeighbors(AbstractPathPoint prePoint, final PhysicalFrame parentFrame, AbstractPathPoint postPoint, 
+            double ratio, State curState) {
         AbstractPathPoint activePrePoint = prePoint;
         AbstractPathPoint activePostPoint = postPoint;
         GeometryPath gp=null;
-        if(!activePrePoint.isActive(state)){
+        if(!activePrePoint.isActive(curState)){
             // traversebackward to first active point
             gp = GeometryPath.safeDownCast(activePrePoint.getOwner());
             PathPointSet pathPts = gp.getPathPointSet();
             int idx = pathPts.getIndex(activePrePoint);
-            while (idx >=0 && !pathPts.get(idx).isActive(state))
+            while (idx >=0 && !pathPts.get(idx).isActive(curState))
                 idx--;
             activePrePoint = pathPts.get(idx);
         }
-        Vec3 localLocation = activePrePoint.getLocation(state);
-        Vec3 preLocation = activePrePoint.getBody().findStationLocationInAnotherFrame(state, localLocation, parentFrame);
-        if (!activePostPoint.isActive(state)){
+        Vec3 localLocation = activePrePoint.getLocation(curState);
+        Vec3 preLocation = activePrePoint.getBody().findStationLocationInAnotherFrame(curState, localLocation, parentFrame);
+        if (!activePostPoint.isActive(curState)){
             if (gp==null)
                 gp = GeometryPath.safeDownCast(activePostPoint.getOwner());
             PathPointSet pathPts = gp.getPathPointSet();
             int idx = pathPts.getIndex(activePostPoint);
-            while (idx <= pathPts.getSize()-1 && !pathPts.get(idx).isActive(state))
+            while (idx <= pathPts.getSize()-1 && !pathPts.get(idx).isActive(curState))
                 idx++;
             activePostPoint = pathPts.get(idx);
             
         }
-        localLocation = activePostPoint.getLocation(state);
-        Vec3 postLocation = activePostPoint.getBody().findStationLocationInAnotherFrame(state, localLocation, parentFrame);
+        localLocation = activePostPoint.getLocation(curState);
+        Vec3 postLocation = activePostPoint.getBody().findStationLocationInAnotherFrame(curState, localLocation, parentFrame);
         Vec3 retVec3 = new Vec3();
         for (int i =0; i < 3; i++){
             retVec3.set(i, (preLocation.get(i)*(1-ratio)+postLocation.get(i)*ratio));
@@ -1245,7 +1246,7 @@ public class ModelVisualizationJson extends JSONObject {
      * points array following the uuid cooresponding to currentPathPoint
      */
     private void createComputedPathPoints(int count, AbstractPathPoint lastPathPoint, AbstractPathPoint currentPathPoint, 
-            JSONArray points, JSONArray activeState) {
+            JSONArray points, JSONArray activeState, State curState) {
         
         if (count ==0) return;
         if (debug_path)
@@ -1262,7 +1263,7 @@ public class ModelVisualizationJson extends JSONObject {
         
         for (int i = 0; i < count; i++) {
             double ratio = (1.0 + i) / (count + 1.0);
-            Vec3 location = computePointLocationFromNeighbors(lastPathPoint, getMapBodyIndicesToFrames().get(0), currentPathPoint, ratio);
+            Vec3 location = computePointLocationFromNeighbors(lastPathPoint, getMapBodyIndicesToFrames().get(0), currentPathPoint, ratio, curState);
             JSONObject bpptInBodyJson =createPathPointObjectJson(null, false, location, matuuid.toString(), false);
             UUID ppt_uuid = retrieveUuidFromJson(bpptInBodyJson);
             computedPathPoints.put(ppt_uuid, new ComputedPathPointInfo(lastPathPoint, currentPathPoint, NEAR_END));
@@ -1593,7 +1594,7 @@ public class ModelVisualizationJson extends JSONObject {
                 bodyJson.put("children", new JSONArray());
                 children = (JSONArray)bodyJson.get("children");
         }
-        Vec3 computedLocation = computePathPointLocation(index, pathpointSet);
+        Vec3 computedLocation = computePathPointLocation(index, pathpointSet, state);
         JSONObject bpptInBodyJson = createPathPointObjectJson(pathPoint, false, computedLocation, material_uuid, visible);
         children.add(bpptInBodyJson);
         return retrieveUuidFromJson(bpptInBodyJson);
@@ -1708,14 +1709,14 @@ public class ModelVisualizationJson extends JSONObject {
                 // create numIntermediatePoints between currentPoint and secondPoint
                 if (numIntermediatePoints>0)
                     pathVisInfo.setStartVisualizerPointIndexForSegment(segmentNumber, pathpoint_jsonArr.size() );
-                createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr, pathpointActive_jsonArr);
+                createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr, pathpointActive_jsonArr, state);
             }
             else if (secondIndex == -1){ // Conditional Path point that's inactive
                 ConditionalPathPoint cpp = ConditionalPathPoint.safeDownCast(secondPoint);
                 // instead of secondPoint move dow to first Active poit
                 if (numIntermediatePoints>0)
                     pathVisInfo.setStartVisualizerPointIndexForSegment(segmentNumber, pathpoint_jsonArr.size());
-                createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr, pathpointActive_jsonArr);
+                createComputedPathPoints(numIntermediatePoints, firstPoint, secondPoint, pathpoint_jsonArr, pathpointActive_jsonArr, state);
                 
                 pathpoint_uuid = addComputedPathPointObjectToParent(ppointSetIndex, pathPointSetFromProperty, pathpt_mat_uuid.toString(), 
                         visible);
@@ -2056,8 +2057,11 @@ public class ModelVisualizationJson extends JSONObject {
      Storage motionAsStates = new Storage();
      //dContext.resetStateToDefault(); // TODO revisit fix #279
      model.formStateStorage(mot, motionAsStates, false);
+     //motionAsStates.print("motionAsStates.sto");
+     
+     StatesTrajectory trajectory = StatesTrajectory.createFromStatesStorage(model, motionAsStates, true, true);
 
-     StatesTrajectory trajectory = StatesTrajectory.createFromStatesStorage(model, mot, true, true);
+     //System.out.println(motionAsStates.getColumnLabels().toString());
 
 
      HashMap<Integer, PhysicalFrame> mapIndexToFrame = getMapBodyIndicesToFrames();
@@ -2084,12 +2088,18 @@ public class ModelVisualizationJson extends JSONObject {
      int numPaths = pathList.size();
      GeometryPath[] pathsArray = new GeometryPath[numPaths];
      double[][] colorData = new double[numPaths][mot.getSize()*3];
-    
+     mapUUIDToAnimationTrack = new HashMap<>();
+     
+     // unlock coordinates as motion may correspond to state with unlocked coordinates then restore lock
+     //ArrayList<Boolean> saveCoordLocks = new ArrayList<Boolean>();
+     //for (int iCoord=0; iCoord< model.getCoordinateSet().getSize(); iCoord++){
+     //    saveCoordLocks.add(model.getCoordinateSet().get(iCoord).getDefaultLocked());
+     //    model.updCoordinateSet().get(iCoord).setDefaultLocked(false);
+     //}
      for (int iState = 0; iState < times.length; iState++) {
         State nextState = trajectory.get(iState);
-
         times[iState] = nextState.getTime();
-        model.realizeVelocity(nextState);
+        model.realizeDynamics(nextState);
         // Handle frames, collect position and quaternions separately for separate tracks
         for (int iFrame = 0; iFrame < numFrames; iFrame++) {
             // Get transform for Frame iFrame, convert into pos, quaternion then append to tracks.
@@ -2118,7 +2128,8 @@ public class ModelVisualizationJson extends JSONObject {
             if (verbose) {
                 System.out.println("Color:" + path.getOwner().getName() + "=" + pathColor.toString());
             }
-            addEntriesToDataArray(colorData[pathIndex], iState, pathColor);
+            for (int c=0; c<3; c++)
+                colorData[pathIndex][iState*3+c] = pathColor.get(c);
             pathIndex++;
         }
         // Handle moving path points
@@ -2135,7 +2146,7 @@ public class ModelVisualizationJson extends JSONObject {
         for (AbstractPathPoint app : proxyPathPoints.keySet()) {
             if (!app.isActive(nextState)) {
                 ComputedPathPointInfo proxyPointInfo = proxyPathPoints.get(app);
-                Vec3 loc = computePointLocationFromNeighbors(proxyPointInfo.pt1, app.getBody(), proxyPointInfo.pt2, proxyPointInfo.ratio);
+                Vec3 loc = computePointLocationFromNeighbors(proxyPointInfo.pt1, app.getBody(), proxyPointInfo.pt2, proxyPointInfo.ratio, nextState);
                 addEntriesToDataArray(conditionalPathPointData[proxyIndex], iState, loc);
             } else {
                 if (debug_path) {
@@ -2150,12 +2161,12 @@ public class ModelVisualizationJson extends JSONObject {
         PhysicalFrame ground = getMapBodyIndicesToFrames().get(0);
         int computedIndex = 0;
         // RECOMPUTE POINTS AS NO WRAPPING, points close to one end
-        for (UUID computedPointUUID : computedPathPoints.keySet()) {
-            ComputedPathPointInfo computedPointInfo = computedPathPoints.get(computedPointUUID);
-            Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, computedPointInfo.ratio);
-            addEntriesToDataArray(computedPathPointData[computedIndex], iState, loc);
-            computedIndex++;
-        }
+//        for (UUID computedPointUUID : computedPathPoints.keySet()) {
+//            ComputedPathPointInfo computedPointInfo = computedPathPoints.get(computedPointUUID);
+//            Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, computedPointInfo.ratio);
+//            addEntriesToDataArray(computedPathPointData[computedIndex], iState, loc);
+//            computedIndex++;
+//        }
         // Wrapping points
         if (!pathsWithWrapping.isEmpty()){
             // Update status of Wrappoints accordingly
@@ -2178,7 +2189,8 @@ public class ModelVisualizationJson extends JSONObject {
                         if (track.size()!=expectedLength){
                             // Copy values or recompute and append
                             ComputedPathPointInfo computedPointInfo = computedPathPoints.get(ppt_uuid);
-                            Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, computedPointInfo.ratio);
+                            //System.out.println("Fix track for computedpt between "+computedPointInfo.pt1.getName()+"---"+computedPointInfo.pt2.getName());
+                            Vec3 loc = computePointLocationFromNeighbors(computedPointInfo.pt1, ground, computedPointInfo.pt2, computedPointInfo.ratio, nextState);
                             for (int ii=0; ii<3; ii++)
                                 track.add(loc.get(ii));
                         }
@@ -2187,6 +2199,11 @@ public class ModelVisualizationJson extends JSONObject {
             }
         }
      }
+     // Restore locked state
+//     for (int iCoord=0; iCoord< model.getCoordinateSet().getSize(); iCoord++){
+//         Boolean saved = saveCoordLocks.get(iCoord);
+//         model.getCoordinateSet().get(iCoord).setDefaultLocked(saved);
+//     }
      animationClipJson.put("duration", times[times.length-1]);
      animationClipJson.put("uuid", UUID.randomUUID().toString());
      // Create a track for time, translationData, rotationData
@@ -2200,8 +2217,9 @@ public class ModelVisualizationJson extends JSONObject {
          positionTrack.put("values", JSONUtilities.createFromArrayDouble(translationData[iFrame]));
          //animationTrack.put("interpolation", "Linear");
          animationsTracks.add(positionTrack);
-         System.out.println("Name, Sizes: "+frameName+".position"+" | "+timesData.size()+" "+
-           JSONUtilities.createFromArrayDouble(translationData[iFrame]).size()+"\n");
+         if (verbose)
+            System.out.println("Name, Sizes: "+frameName+".position"+" | "+timesData.size()+" "+
+                    JSONUtilities.createFromArrayDouble(translationData[iFrame]).size()+"\n");
 
          JSONObject orientationTrack = new JSONObject();
          orientationTrack.put("name", frameName+".quaternion");
@@ -2273,7 +2291,6 @@ public class ModelVisualizationJson extends JSONObject {
      
         if (!pathsWithWrapping.isEmpty()){
             for (String pptUUIDString : mapUUIDToAnimationTrack.keySet()){
-                System.out.println("wrappoint uuid: ");
                 ArrayList<Double> track = mapUUIDToAnimationTrack.get(pptUUIDString);
                 JSONArray trackJson = new JSONArray();
                 trackJson.addAll(track);
@@ -2283,7 +2300,7 @@ public class ModelVisualizationJson extends JSONObject {
                 positionTrack.put("type", "vector");
                 positionTrack.put("times", timesData);
                 positionTrack.put("values", trackJson);
-                System.out.println("Wrap point: Name, Sizes: "+frameName+".position"+" | "+timesData.size()+" "+trackJson.size()+"\n");
+                //System.out.println("Wrap point: Name, Sizes: "+frameName+".position"+" | "+timesData.size()+" "+trackJson.size()+"\n");
                 //animationTrack.put("interpolation", "Linear");
                 animationsTracks.add(positionTrack);
             }
@@ -2292,7 +2309,7 @@ public class ModelVisualizationJson extends JSONObject {
         
         int computedIndex = 0;
         for (UUID computedPointUUID : computedPathPoints.keySet()) {
-            System.out.println("computedpoint uuid: "+computedPointUUID.toString());
+            //System.out.println("computedpoint uuid: "+computedPointUUID.toString());
             if (!mapUUIDToAnimationTrack.keySet().contains(computedPointUUID.toString())){
                 JSONObject positionTrack = new JSONObject();
                 String frameName = computedPointUUID.toString();
