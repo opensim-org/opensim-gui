@@ -33,6 +33,7 @@ package org.opensim.view.experimentaldata;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.opensim.modeling.AdhocModelComponent;
 import org.opensim.modeling.ArrayDecorativeGeometry;
@@ -46,7 +47,7 @@ import org.opensim.view.motions.MotionDisplayer;
  * An Object representing data to be visualized from a data/motion file e.g. Marker, GRF, etc.
  * @author ayman
  */
-public class ExperimentalDataObject extends AdhocModelComponent {
+public abstract class ExperimentalDataObject extends AdhocModelComponent {
     
     private ExperimentalDataItemType objectType=ExperimentalDataItemType.Unknown;
     //private String baseName="";
@@ -130,4 +131,14 @@ public class ExperimentalDataObject extends AdhocModelComponent {
     public Model getModel() {
         return model;
     }
+
+    // This method delegates to each experimentalDataObject the reponsibility of creating an AnimationTrack that represnts
+    // its visuals
+
+    /**
+     *
+     * @param motion The motion/storage file where this object comes from
+     * @return list of animation tracks to be sent to the viewer as a part of an animation clip
+     */
+    abstract public JSONArray createAnimationTracks(AnnotatedMotion motion);
 }

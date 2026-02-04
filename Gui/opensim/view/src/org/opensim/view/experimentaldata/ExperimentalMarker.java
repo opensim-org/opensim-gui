@@ -124,6 +124,28 @@ public class ExperimentalMarker extends MotionObjectBodyPoint {
         comp_uuids.add(mesh_uuid);
         return expMarker_json;
     }
-
+    
+    @Override    
+    public JSONArray createAnimationTracks(AnnotatedMotion mot) {
+        double conversion = mot.getUnitConversion();
+        JSONArray animationsTracks = new JSONArray();
+        double[] trackData = new double[mot.getSize()*3];
+        int idx = getStartIndexInFileNotIncludingTime();
+        for(int i=0; i< mot.getSize(); i++){
+            StateVector vec = mot.getStateVector(i);
+            ArrayDouble vecData = vec.getData();
+            trackData[i*3]=vecData.get(idx) *conversion;
+            trackData[i*3+1]=vecData.get(idx+1) *conversion;
+            trackData[i*3+2]=vecData.get(idx+2) *conversion;
+        }
+        // Create a track for experimentalmarker position with name expObj.position
+        JSONObject animationTrack = new JSONObject();
+        animationTrack.put("name", getName()+".position");
+        animationTrack.put("type", "vector");
+        animationTrack.put("values", JSONUtilities.createFromArrayDouble(trackData));
+        //animationTrack.put("interpolation", "Linear");
+        animationsTracks.add(animationTrack); 
+        return animationsTracks;
+    }
     
  }

@@ -24,6 +24,7 @@ package org.opensim.view.experimentaldata;
 
 import java.util.ArrayList;
 import java.util.UUID;
+import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.Body;
@@ -32,6 +33,8 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Sphere;
+import org.opensim.modeling.StateVector;
+import org.opensim.threejs.JSONUtilities;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.pub.OpenSimDB;
 
@@ -109,6 +112,29 @@ public class MotionObjectBodyPoint extends ExperimentalDataObject {
 
     boolean appliesForce() {
         return false;
+    }
+
+    @Override
+    public JSONArray createAnimationTracks(AnnotatedMotion mot) {
+        double conversion = mot.getUnitConversion();
+        JSONArray animationsTracks = new JSONArray();
+        double[] trackData = new double[mot.getSize()*3];
+        int idx = getStartIndexInFileNotIncludingTime();
+        for(int i=0; i< mot.getSize(); i++){
+            StateVector vec = mot.getStateVector(i);
+            ArrayDouble vecData = vec.getData();
+            trackData[i*3]=vecData.get(idx) *conversion;
+            trackData[i*3+1]=vecData.get(idx+1) *conversion;
+            trackData[i*3+2]=vecData.get(idx+2) *conversion;
+        }
+        // Create a track for time, tracks[objIndex], with name expObj.position
+        JSONObject animationTrack = new JSONObject();
+        animationTrack.put("name", getName()+".position");
+        animationTrack.put("type", "vector");
+        animationTrack.put("values", JSONUtilities.createFromArrayDouble(trackData));
+        //animationTrack.put("interpolation", "Linear");
+        animationsTracks.add(animationTrack); 
+        return animationsTracks;
     }
 
  }

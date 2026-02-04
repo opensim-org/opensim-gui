@@ -27,6 +27,7 @@
  */
 package org.opensim.threejs;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.Vector;
@@ -39,16 +40,12 @@ import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.Quaternion;
 import org.opensim.modeling.Rotation;
 import org.opensim.modeling.State;
-import org.opensim.modeling.StateVector;
 import org.opensim.modeling.StatesTrajectory;
 import org.opensim.modeling.Storage;
 import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ExperimentalDataObject;
-import org.opensim.view.experimentaldata.ExperimentalMarker;
-import org.opensim.view.experimentaldata.MotionObjectOrientation;
-import org.opensim.view.experimentaldata.MotionObjectPointForce;
 
 
 /**
@@ -61,38 +58,26 @@ public class AnimationJson extends JSONObject {
     }
     public AnimationJson(AnnotatedMotion mot, Vector<ExperimentalDataObject> objects) {
         put("name", mot.getName());
-        double conversion = mot.getUnitConversion();
         JSONArray animationsTracks = new JSONArray();
         put("tracks", animationsTracks);
         double[] times = new double[mot.getSize()];
-        double[][] trackData = new double[objects.size()][mot.getSize()*3];
+        ArrayDouble timeArray = new ArrayDouble();
+        mot.getTimeColumn(timeArray);
         for(int i=0; i< mot.getSize(); i++){
-          StateVector vec = mot.getStateVector(i);
-          times[i]=vec.getTime();
-          ArrayDouble vecData = vec.getData();
-          int objIndex=0;
-          for (ExperimentalDataObject expObj: objects){
-              int idx = expObj.getStartIndexInFileNotIncludingTime();
-              trackData[objIndex][i*3]=vecData.get(idx) *conversion;
-              trackData[objIndex][i*3+1]=vecData.get(idx+1) *conversion;
-              trackData[objIndex][i*3+2]=vecData.get(idx+2) *conversion;
-              objIndex++;
-          }
+          times[i]=timeArray.get(i);
         }
+        
         put("duration", times[times.length-1]);
         put("uuid", UUID.randomUUID().toString());
         // Create a track for time, tracks[objIndex], with name expObj.position
-        int objIndex=0;
-        JSONArray timesJason = new JSONArray();
+        JSONArray timesJson = JSONUtilities.createFromArrayDouble(times);
         for (ExperimentalDataObject expObj: objects){
-            JSONObject animationTrack = new JSONObject();
-            animationTrack.put("name", expObj.getName()+".position");
-            animationTrack.put("type", "vector");
-            animationTrack.put("times", JSONUtilities.createFromArrayDouble(times));
-            animationTrack.put("values", JSONUtilities.createFromArrayDouble(trackData[objIndex]));
-            //animationTrack.put("interpolation", "Linear");
-            animationsTracks.add(animationTrack);
-            objIndex++;
+            JSONArray objTracks = expObj.createAnimationTracks(mot);
+            for (int tr=0; tr < objTracks.size(); tr++){
+                JSONObject nextTrack = (JSONObject) objTracks.get(tr);
+                nextTrack.put("times", timesJson);
+                animationsTracks.add(nextTrack);
+            }
         }
     }
 

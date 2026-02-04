@@ -38,6 +38,7 @@ import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.OpenSimContext;
 import org.opensim.modeling.PhysicalFrame;
+import org.opensim.modeling.Quaternion;
 import org.opensim.modeling.State;
 import org.opensim.modeling.StateVector;
 import org.opensim.modeling.Transform;
@@ -296,5 +297,72 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
     public double getLength() {
         return length;
     }
-
+    @Override    
+    public JSONArray createAnimationTracks(AnnotatedMotion mot) {
+        double conversion = mot.getUnitConversion();
+        JSONArray animationsTracks = new JSONArray();
+        double[] trackData = new double[mot.getSize()*3];
+        double[] orientationData = new double[mot.getSize()*4];
+        double[] scaleData = new double[mot.getSize()*3];
+        int idx = getStartIndexInFileNotIncludingTime();
+        Vec3 torqueData = new Vec3(0.);
+        for(int motionFrameIndex=0; motionFrameIndex< mot.getSize(); motionFrameIndex++){
+            StateVector vec = mot.getStateVector(motionFrameIndex);
+            ArrayDouble vecData = vec.getData();
+            trackData[motionFrameIndex*3]=vecData.get(idx+3) *conversion;
+            trackData[motionFrameIndex*3+1]=vecData.get(idx+4) *conversion;
+            trackData[motionFrameIndex*3+2]=vecData.get(idx+5) *conversion;
+            for (int ridx=0; ridx<3; ridx++)
+                torqueData.set(ridx, vecData.get(idx+ridx));
+            double length = Math.sqrt(Math.pow(torqueData.get(0),2)+
+                Math.pow(torqueData.get(1),2)+Math.pow(torqueData.get(2),2))/1000;
+            scaleData[motionFrameIndex*3] = 1.;
+            scaleData[motionFrameIndex*3+1] = length;
+            scaleData[motionFrameIndex*3+2] = 1.;
+            // Compute quaternion that takes the [0 1 0] direction to normalized torqueData
+            UnitVec3 torqueUnit = new UnitVec3(torqueData);
+            UnitVec3 vecy = new UnitVec3(0., 1., 0.);
+            double d = torqueUnit.get(1);
+            Quaternion quat;
+            if (d > 1 - 1e-10) {
+                quat = new Quaternion(1, 0, 0, 0);
+            }
+            else if (d < -1 + 1e-10) {
+                quat = new Quaternion(0, 1, 0, 0);
+            }
+            else {
+                Vec3 c = new Vec3(vecy.get(1)*torqueUnit.get(2)-vecy.get(2)*torqueUnit.get(1),
+                    vecy.get(2)*torqueUnit.get(0)-vecy.get(0)*torqueUnit.get(2),
+                    vecy.get(0)*torqueUnit.get(1)-vecy.get(1)*torqueUnit.get(0));
+                quat = new Quaternion(1 + d, c.get(0), c.get(1), c.get(2));
+            }
+            double nq = Math.sqrt(quat.get(0)*quat.get(0) + quat.get(1)*quat.get(1) + quat.get(2)*quat.get(2) + quat.get(3)*quat.get(3));
+            // Convert to threejs quaternion ordering
+            orientationData[motionFrameIndex*4] = quat.get(1);
+            orientationData[motionFrameIndex*4+1] = quat.get(2);
+            orientationData[motionFrameIndex*4+2] = quat.get(3);
+            orientationData[motionFrameIndex*4+3] = quat.get(0);
+        }
+        // Create a track for time, tracks[objIndex], with name expObj.position
+        JSONObject positionTrack = new JSONObject();
+        positionTrack.put("name", getName()+".position");
+        positionTrack.put("type", "vector");
+        positionTrack.put("values", JSONUtilities.createFromArrayDouble(trackData));
+        //animationTrack.put("interpolation", "Linear");
+        animationsTracks.add(positionTrack);
+        JSONObject rotationTrack = new JSONObject();
+        rotationTrack.put("name", getName()+".quaternion");
+        rotationTrack.put("type", "quaternion");
+        rotationTrack.put("values", JSONUtilities.createFromArrayDouble(orientationData));
+        //animationTrack.put("interpolation", "Linear");
+        animationsTracks.add(rotationTrack); 
+        JSONObject scaleTrack = new JSONObject();
+        scaleTrack.put("name", getName()+".scale");
+        scaleTrack.put("type", "vector");
+        scaleTrack.put("values", JSONUtilities.createFromArrayDouble(scaleData));
+        //animationTrack.put("interpolation", "Linear");
+        animationsTracks.add(scaleTrack);
+        return animationsTracks;
+    }
+    
 }
