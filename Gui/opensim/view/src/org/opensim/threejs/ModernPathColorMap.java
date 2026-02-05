@@ -20,7 +20,7 @@ import org.opensim.view.MuscleColorByActivationStorage;
  *  RGB components scales linearly
  */
 public class ModernPathColorMap implements PathColorMap {
-    double weight = 0.25;
+    double weight = 0.1;
     
     @Override
     public Vec3 getColor(GeometryPath path, State state, double activation) {
@@ -35,9 +35,9 @@ public class ModernPathColorMap implements PathColorMap {
             
         }
         double redness = activationBasedColor.get(0);
-        Vec3 mappedColor = new Vec3(0.6435 + 0.07588*redness,
-            0.7009 - 0.6396*redness,
-            0.8554 - 0.6891*redness);
+        Vec3 mappedColor = new Vec3(0.13 + 0.32*redness,
+            0.16 - 0.11*redness,
+            0.89 - 0.84*redness);
         Vec3 rawColor = new Vec3(redness, 0, 1-redness);
         Vec3 weightedColor = new Vec3();
         for (int i=0; i<3; i++)

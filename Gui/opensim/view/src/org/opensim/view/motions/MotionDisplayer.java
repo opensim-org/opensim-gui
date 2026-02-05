@@ -69,6 +69,7 @@ import org.opensim.modeling.Transform;
 import org.opensim.modeling.TransformAxis;
 import org.opensim.modeling.UnitVec3;
 import org.opensim.modeling.Vec3;
+import org.opensim.threejs.AnimationJson;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.utils.TheApp;
@@ -109,12 +110,17 @@ public class MotionDisplayer {
     private final HashMap<UUID, Component> mapUUIDToComponent = new HashMap<UUID, Component>();
     private final HashMap<OpenSimObject, ArrayList<UUID>> mapComponentToUUID = 
             new HashMap<OpenSimObject, ArrayList<UUID>>();
-
+    private String clipUUID = null;
+    AnimationJson animationClip = null;
     /**
      * @return the modelVisJson
      */
     public ModelVisualizationJson getModelVisJson() {
         return modelVisJson;
+    }
+
+    public void associateDisplayer(MotionDisplayer newMotionDisplayer) {
+        getAssociatedMotions().add(newMotionDisplayer);
     }
 
     public enum ObjectTypesInMotionFiles{GenCoord, 
@@ -859,5 +865,31 @@ public class MotionDisplayer {
             }
         }
    }
+   // if a clip exists in the map, return uuid else create and add to the map
+    public String getAnimationClipUUID() {
+        clipUUID = MotionsDB.getInstance().mapMotions2AnimationUUIDs.get(simmMotionData);
+        if (clipUUID==null){
+            animationClip = createAnimationClipForModelMotion(model, simmMotionData);
+            clipUUID = (String) animationClip.get("uuid");
+            MotionsDB.getInstance().addAnimationClipUUID(simmMotionData, clipUUID);
+        }
+        return clipUUID;
+    }
+    // get the clip associated with the displayer
+    public AnimationJson getAnimationClip() {
+        return animationClip;
+    }
+    
+    public AnimationJson createAnimationClipForModelMotion(Model model, Storage simmMotionData) {
+        ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(model);
+        if (simmMotionData instanceof AnnotatedMotion){
+            AnnotatedMotion amot = (AnnotatedMotion) simmMotionData;
+            animationClip = new AnimationJson(amot, amot.getClassified());
+        }
+        else {
+            animationClip = modelViz.createAnimationJson(simmMotionData);
+        }
+        return animationClip;
+    }
 
 }

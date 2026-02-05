@@ -23,16 +23,26 @@
 
 package org.opensim.view.motions;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.UUID;
 import java.util.Vector;
 import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.EventListenerList;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.openide.util.Exceptions;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
+import org.opensim.threejs.AnimationJson;
+import org.opensim.threejs.JSONUtilities;
+import org.opensim.threejs.ModelVisualizationJson;
+import org.opensim.view.experimentaldata.AnnotatedMotion;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.pub.ViewDB;
 
@@ -43,12 +53,13 @@ public class MasterMotionModel {
    // Info specific to a motion/model combination is pushed down to the displayer object.
    List<MotionDisplayer> displayers=new ArrayList<MotionDisplayer>(10);  
    private boolean wrapMotion=false;
-
+   
    double currentTime=0; // this is the primary indicator of the current position
    Vector<Double> superMotionTimes = new Vector<Double>(100);
 
    private int cachedIndexClosestToCurrentTime=0;
 
+   private boolean animationChanged = true;
    // -----------------------------------------------------------------------
    // Change listener stuff taken from DefaultColorSelectionModel.java
    // -----------------------------------------------------------------------
@@ -145,7 +156,7 @@ public class MasterMotionModel {
    public boolean finished(int direction) {
       //int index = getIndexClosestToCurrentTime();
       //if (index==superMotionTimes.size()-1 && direction==1 || index==0 && direction==-1)
-      if (currentTime==getEndTime() && direction==1 || currentTime==getStartTime() && direction==-1)
+      if (currentTime>=getEndTime() && direction==1 || currentTime<=getStartTime() && direction==-1)
          return !wrapMotion;
       else
          return false;
@@ -164,10 +175,23 @@ public class MasterMotionModel {
       if (displayer == null){
           displayer = new MotionDisplayer(simmMotionData, model);
           MotionsDB.getInstance().addMotionDisplayer(simmMotionData, displayer);
+          
       }
+      // create AnimationJson and keep track of uuid for future reference
+      String animationUUID = displayer.getAnimationClipUUID();
+      ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(model);
+      // Package clip and send to viewer
+      JSONObject currentAnimation = new JSONObject();
+      currentAnimation.put("Clip", displayer.getAnimationClip());
+      currentAnimation.put("Root", modelViz.getModelUUID().toString());
+      currentAnimation.put("Op", "AddAnimationClip");
+      ViewDB.getInstance().sendAnimationClip(currentAnimation);
+      
       displayers.add(displayer);
-       buildSuperMotion(model, simmMotionData);
+      buildSuperMotion(model, simmMotionData);
+      animationChanged = true;
    }
+    
    void add(MotionsDB.ModelMotionPair pair) {
       add(pair.model, pair.motion);
    }
@@ -181,9 +205,16 @@ public class MasterMotionModel {
      displayers.clear();
      superMotionTimes.clear();  
      setTime(0);
-     
+     animationChanged = true;
    }
-
+   public JSONArray getCurrentAnimationUUIDs() {
+       JSONArray animationUUIDs = new JSONArray();
+       for(int i=0; i<displayers.size(); i++){
+           MotionDisplayer md = displayers.get(i);
+           animationUUIDs.add(md.getAnimationClipUUID());
+       }
+       return animationUUIDs;
+   }
    // TODO: get rid of third argument
    private void buildSuperMotion(Model model, Storage mot) {
       // Merge vector of valid times with times from passed in storage
@@ -291,6 +322,11 @@ public class MasterMotionModel {
       fireStateChanged();
    }
 
+   public void setTimeNoRender(double animationTime) {
+       currentTime = animationTime;
+       fireStateChanged();
+   }
+   
    public void advanceTime(double dt) {
       double time = getCurrentTime()+dt;
       if(wrapMotion) {
@@ -302,4 +338,18 @@ public class MasterMotionModel {
       }
       setTime(time);
    }
+    /**
+     * @return the animationChanged
+     */
+    public boolean isAnimationChanged() {
+        return animationChanged;
+    }
+
+    /**
+     * @param animationChanged the animationChanged to set
+     */
+    public void setAnimationChanged(boolean animationChanged) {
+        this.animationChanged = animationChanged;
+    }
+
 }

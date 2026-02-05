@@ -22,6 +22,7 @@
  * -------------------------------------------------------------------------- */
 package org.opensim.view.experimentaldata;
 
+import org.json.simple.JSONArray;
 import org.opensim.utils.Vec3;
 
 /**
@@ -72,6 +73,11 @@ public class MotionObjectBodyFixed extends ExperimentalDataObject {
      */
     public void setPosition(Vec3 position) {
         this.position = position;
+    }
+
+    @Override
+    public JSONArray createAnimationTracks(AnnotatedMotion motion) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

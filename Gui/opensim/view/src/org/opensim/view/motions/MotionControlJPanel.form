@@ -10,7 +10,6 @@
         <TitledBorder/>
       </Border>
     </Property>
-    <Property name="floatable" type="boolean" value="false"/>
     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
       <Color blue="ff" green="ff" red="ff" type="rgb"/>
     </Property>
@@ -63,7 +62,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jEndTimeTextField" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jMotionSlider" alignment="0" pref="292" max="32767" attributes="3"/>
+                  <Component id="jMotionSlider" alignment="0" pref="0" max="32767" attributes="3"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jWrapToggleButton" min="-2" max="-2" attributes="0"/>
