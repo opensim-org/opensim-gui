@@ -52,6 +52,7 @@ import org.opensim.modeling.Component;
 import org.opensim.modeling.ComponentIterator;
 import org.opensim.modeling.ComponentsList;
 import org.opensim.modeling.ConditionalPathPoint;
+import org.opensim.modeling.Coordinate;
 import org.opensim.modeling.CoordinateSet;
 import org.opensim.modeling.DecorativeGeometry;
 import org.opensim.modeling.Force;
@@ -2050,8 +2051,14 @@ public class ModelVisualizationJson extends JSONObject {
      animationClipJson.put("name", mot.getName());
      JSONArray animationsTracks = new JSONArray();
      animationClipJson.put("tracks", animationsTracks);
-     
-     
+     // unlock all coordinates as motion may have been generated with them unlocked
+     CoordinateSet coords = model.getCoordinateSet();
+     ArrayList<Boolean> saveCoordLocks = new ArrayList<Boolean>();
+     for(int i=0; i<coords.getSize(); i++){
+         Coordinate coord = coords.get(i);
+         saveCoordLocks.add(coord.getDefaultLocked());
+         coord.setDefaultLocked(false);
+      }
      // Convert mot into a StateTrajectory so that we can get states one at a time;
      // create a local Storage and use that to rearrange data for animation
      Storage motionAsStates = new Storage();
@@ -2060,9 +2067,6 @@ public class ModelVisualizationJson extends JSONObject {
      //motionAsStates.print("motionAsStates.sto");
      
      StatesTrajectory trajectory = StatesTrajectory.createFromStatesStorage(model, motionAsStates, true, true);
-
-     //System.out.println(motionAsStates.getColumnLabels().toString());
-
 
      HashMap<Integer, PhysicalFrame> mapIndexToFrame = getMapBodyIndicesToFrames();
      int numFrames = mapIndexToFrame.size()-1; // Exclude ground as not moving
@@ -2090,12 +2094,6 @@ public class ModelVisualizationJson extends JSONObject {
      double[][] colorData = new double[numPaths][mot.getSize()*3];
      mapUUIDToAnimationTrack = new HashMap<>();
      
-     // unlock coordinates as motion may correspond to state with unlocked coordinates then restore lock
-     //ArrayList<Boolean> saveCoordLocks = new ArrayList<Boolean>();
-     //for (int iCoord=0; iCoord< model.getCoordinateSet().getSize(); iCoord++){
-     //    saveCoordLocks.add(model.getCoordinateSet().get(iCoord).getDefaultLocked());
-     //    model.updCoordinateSet().get(iCoord).setDefaultLocked(false);
-     //}
      for (int iState = 0; iState < times.length; iState++) {
         State nextState = trajectory.get(iState);
         times[iState] = nextState.getTime();
@@ -2199,11 +2197,13 @@ public class ModelVisualizationJson extends JSONObject {
             }
         }
      }
-     // Restore locked state
-//     for (int iCoord=0; iCoord< model.getCoordinateSet().getSize(); iCoord++){
-//         Boolean saved = saveCoordLocks.get(iCoord);
-//         model.getCoordinateSet().get(iCoord).setDefaultLocked(saved);
-//     }
+     // restore coordinate locks in case we changed them to generate clip
+     //
+     for (int iCoord=0; iCoord< model.getCoordinateSet().getSize(); iCoord++){
+         Coordinate coord = coords.get(iCoord);
+         saveCoordLocks.add(coord.getDefaultLocked());
+         coord.setDefaultLocked(saveCoordLocks.get(iCoord));
+     }
      animationClipJson.put("duration", times[times.length-1]);
      animationClipJson.put("uuid", UUID.randomUUID().toString());
      // Create a track for time, translationData, rotationData
