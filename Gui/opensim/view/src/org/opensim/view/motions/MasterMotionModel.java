@@ -325,6 +325,8 @@ public class MasterMotionModel {
    public void setTimeNoRender(double animationTime) {
        currentTime = animationTime;
        fireStateChanged();
+       MotionsDB motionsDB = MotionsDB.getInstance();
+       motionsDB.reportTimeChange(getCurrentTime());
    }
    
    public void advanceTime(double dt) {
