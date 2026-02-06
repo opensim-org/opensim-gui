@@ -120,6 +120,10 @@ public class Mat33 {
     this(opensimSimbodyJNI.new_Mat33__SWIG_3(i), true);
   }
 
+  public Mat33(double e0, double e1, double e2, double e3, double e4, double e5, double e6, double e7, double e8) {
+    this(opensimSimbodyJNI.new_Mat33__SWIG_4(e0, e1, e2, e3, e4, e5, e6, e7, e8), true);
+  }
+
   public void setToNaN() {
     opensimSimbodyJNI.Mat33_setToNaN(swigCPtr, this);
   }

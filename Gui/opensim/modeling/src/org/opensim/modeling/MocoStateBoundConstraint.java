@@ -9,7 +9,7 @@
 package org.opensim.modeling;
 
 /**
- *  This path contraint allows you to bound any number of state variables<br>
+ *  This path constraint allows you to bound any number of state variables<br>
  * between two time-based functions. It is possible to constrain the state variable<br>
  * to match the value from a provided function; see the equality_with_lower<br>
  * property.<br>

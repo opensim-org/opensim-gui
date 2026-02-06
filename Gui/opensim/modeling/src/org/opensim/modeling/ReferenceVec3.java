@@ -13,7 +13,7 @@ package org.opensim.modeling;
  * be achieved/tracked via optimization and/or tracking controller. Combines<br>
  * weightings that identifies the relative importance of achieving one<br>
  * Reference value relative to the others. The specific value type is defined<br>
- * by the concrete References. For example, a MarkerRefrence is of type Vec3,<br>
+ * by the concrete References. For example, a MarkerReference is of type Vec3,<br>
  * for the 3D location coordinates of a marker. Correspondence with model<br>
  * values are established via the Reference names.<br>
  * <br>

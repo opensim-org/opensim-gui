@@ -289,6 +289,7 @@ public class opensimSimbodyJNI {
   public final static native long new_Mat33__SWIG_1(long jarg1, Mat33 jarg1_);
   public final static native long new_Mat33__SWIG_2(double jarg1);
   public final static native long new_Mat33__SWIG_3(int jarg1);
+  public final static native long new_Mat33__SWIG_4(double jarg1, double jarg2, double jarg3, double jarg4, double jarg5, double jarg6, double jarg7, double jarg8, double jarg9);
   public final static native void Mat33_setToNaN(long jarg1, Mat33 jarg1_);
   public final static native void Mat33_setToZero(long jarg1, Mat33 jarg1_);
   public final static native boolean Mat33_isNaN(long jarg1, Mat33 jarg1_);
