@@ -244,6 +244,20 @@ public class MotionDisplayer {
 
     public void setMuscleColoringFunction(MuscleColoringFunction mcbya) {
         mcf = mcbya;
+        if (clipUUID!=null){
+            // recreate the clip with mcf on
+            String oldClipUUID = clipUUID;
+            animationClip = createAnimationClipForModelMotion(model, simmMotionData);
+            clipUUID = (String) animationClip.get("uuid");
+            MotionsDB.getInstance().addAnimationClipUUID(simmMotionData, clipUUID);
+            // Send a replaceAnimationClip
+            JSONObject currentAnimation = new JSONObject();
+            currentAnimation.put("Clip", getAnimationClip());
+            currentAnimation.put("Root", modelVisJson.getModelUUID().toString());
+            currentAnimation.put("Op", "ReplaceAnimationClip");
+            currentAnimation.put("oldClip", oldClipUUID.toString());
+            ViewDB.getInstance().sendAnimationClip(currentAnimation);
+        }
         // Push it down to muscle displayers
         ViewDB.getInstance().updateModelDisplayNoRepaint(model, true, true);
     }
@@ -886,8 +900,8 @@ public class MotionDisplayer {
             AnnotatedMotion amot = (AnnotatedMotion) simmMotionData;
             animationClip = new AnimationJson(amot, amot.getClassified());
         }
-        else {
-            animationClip = modelViz.createAnimationJson(simmMotionData);
+        else { // Pass on MuscleColoringFunction
+            animationClip = modelViz.createAnimationJson(simmMotionData, mcf);
         }
         return animationClip;
     }

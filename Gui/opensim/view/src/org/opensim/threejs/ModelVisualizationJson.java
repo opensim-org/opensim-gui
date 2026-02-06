@@ -63,6 +63,7 @@ import org.opensim.modeling.Marker;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.ModelDisplayHints;
 import org.opensim.modeling.MovingPathPoint;
+import org.opensim.modeling.Muscle;
 import org.opensim.modeling.OpenSimObject;
 import org.opensim.modeling.OutputVec3;
 import org.opensim.modeling.PathPoint;
@@ -79,6 +80,7 @@ import org.opensim.modeling.Transform;
 import org.opensim.modeling.Vec3;
 import org.opensim.modeling.WrapObject;
 import org.opensim.utils.TheApp;
+import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.experimentaldata.ModelForExperimentalData;
 import org.opensim.view.motions.MotionDisplayer;
 import org.opensim.view.pub.OpenSimDB;
@@ -2046,7 +2048,7 @@ public class ModelVisualizationJson extends JSONObject {
         return mapComponentToUUID;
     }
     
-    public AnimationJson createAnimationJson(Storage mot) {
+    public AnimationJson createAnimationJson(Storage mot, MuscleColoringFunction coloringFunction) {
      AnimationJson animationClipJson = new AnimationJson();
      animationClipJson.put("name", mot.getName());
      JSONArray animationsTracks = new JSONArray();
@@ -2122,10 +2124,17 @@ public class ModelVisualizationJson extends JSONObject {
         while (pathIter.hasNext()) {
             GeometryPath path = pathIter.next();
             pathsArray[pathIndex] = path;
-            Vec3 pathColor = currentPathColorMap.getColor(path, nextState, -1);
-            if (verbose) {
-                System.out.println("Color:" + path.getOwner().getName() + "=" + pathColor.toString());
+            Vec3 pathColor;
+            if (coloringFunction==null){
+                pathColor = currentPathColorMap.getColor(path, nextState, -1);
             }
+            else {
+                double newColorInBlueToRed = coloringFunction.getColor(Muscle.safeDownCast(path.getOwner()), nextState);
+                pathColor = currentPathColorMap.getColor(path, nextState, newColorInBlueToRed);
+            }
+            if (verbose)
+                System.out.println("Color:" + path.getOwner().getName() + "=" + pathColor.toString());
+
             for (int c=0; c<3; c++)
                 colorData[pathIndex][iState*3+c] = pathColor.get(c);
             pathIndex++;

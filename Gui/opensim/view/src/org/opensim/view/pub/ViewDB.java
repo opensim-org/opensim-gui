@@ -1463,12 +1463,14 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
     
     public void sendCurrentAnimations(JSONObject animationJson) {
-        OpenSimLogger.logMessage("Sending AnimationClips to Viewer", OpenSimLogger.INFO);
+        if (debugLevel >1)
+            OpenSimLogger.logMessage("Sending AnimationClips to Viewer", OpenSimLogger.INFO);
         websocketdb.broadcastMessageJson(animationJson, null);
     }
     
     public void sendAnimationClip(JSONObject animationJson) {
-        OpenSimLogger.logMessage("Sending AnimationClip to Viewer", OpenSimLogger.INFO);
+        if (debugLevel >1)
+            OpenSimLogger.logMessage("Sending AnimationClip to Viewer", OpenSimLogger.INFO);
         websocketdb.broadcastMessageJson(animationJson, null);
     }
     
