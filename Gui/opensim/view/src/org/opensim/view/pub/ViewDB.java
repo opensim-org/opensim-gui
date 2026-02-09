@@ -1425,7 +1425,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     double timestep = (double) jsonObject.get("timestep");
                     int desiredFrameRate = (int) Math.ceil(1000.0/timestep);
                     TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(desiredFrameRate));
-                    OpenSimLogger.logMessage("Setting desired frame rate to:"+desiredFrameRate+" FPS", OpenSimLogger.INFO);
+                    if (debugLevel >1)
+                        OpenSimLogger.logMessage("Setting desired frame rate to:"+desiredFrameRate+" FPS", OpenSimLogger.INFO);
                     MotionControlJPanel.getInstance().playAnimation();
                 }
                 if (op.equalsIgnoreCase("setTime")){
@@ -1475,7 +1476,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
     
     public void playCurrentAnimations(double startTime, JSONArray uuids) {
-        OpenSimLogger.logMessage("Play AnimationClips in Viewer", OpenSimLogger.INFO);
+        if (debugLevel >1)
+            OpenSimLogger.logMessage("Play AnimationClips in Viewer", OpenSimLogger.INFO);
         JSONObject currentAnimation = new JSONObject();
         currentAnimation.put("Op", "PlayAnimation");
         currentAnimation.put("start_time", startTime);
