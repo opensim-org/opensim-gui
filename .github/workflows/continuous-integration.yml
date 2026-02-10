@@ -298,7 +298,23 @@ jobs:
 
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
-  
+ 
+    - name: Use precompiled jxbrowser7
+      run: |
+        mkdir prebuilt_jxb
+        cd prebuilt_jxb
+        # Download the NBM file
+        wget -O org-opensim-javabrowser.nbm "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm"
+        # Extract the NBM file (it's actually a zip file)
+        tar -xvf org-opensim-javabrowser.nbm
+        # Create target directory if it doesn't exist
+        mkdir -p "$env:GITHUB_WORKSPACE\opensim-visualizer\jxbrowser\release\modules\ext"
+        # Copy all jar files to the target directory
+        Copy-Item -Path "netbeans\modules\ext\*.jar" -Destination "$env:GITHUB_WORKSPACE\opensim-visualizer\jxbrowser\release\modules\ext\" -Force
+        # Verify the files were copied
+        Write-Host "Copied JAR files to opensim-visualizer:"
+        Get-ChildItem "$env:GITHUB_WORKSPACE\opensim-visualizer\jxbrowser\release\modules\ext"
+        
     - name: Build GUI
       id: build-gui
       run: |
