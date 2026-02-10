@@ -2333,11 +2333,11 @@ public class ModelVisualizationJson extends JSONObject {
             computedIndex++;
         }
         
-        try {
-            JSONUtilities.writeJsonFile(animationClipJson, "animationJson.json");
-        } catch (IOException ex) {
-            Exceptions.printStackTrace(ex);
-        }
+//        try {
+//            JSONUtilities.writeJsonFile(animationClipJson, "animationJson.json");
+//        } catch (IOException ex) {
+//            Exceptions.printStackTrace(ex);
+//        }
      return animationClipJson;
  }
 
