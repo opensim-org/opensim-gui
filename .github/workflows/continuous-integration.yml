@@ -51,7 +51,7 @@ jobs:
         key: netbeans-17
         
     - name: Install Netbeans 17
-      if: steps.cache-netbeans.outputs.cache-hit != 'true'
+      #if: steps.cache-netbeans.outputs.cache-hit != 'true'
       run: |
         (New-Object System.Net.WebClient).DownloadFile("https://archive.apache.org/dist/netbeans/netbeans-installers/17/Apache-NetBeans-17-bin-windows-x64.exe", "Apache-NetBeans-17-bin-windows-x64.exe")
         $expectedHash = "c3d7a34184c4021486751fbc3878eb2376677674ff8d6d4bf87017fd2434122c8438072aa891e535fa0fa9aeafcb49ad833a61903180772369d99571b073baac"
