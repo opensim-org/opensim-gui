@@ -138,7 +138,7 @@ jobs:
           Write-Error "vcredist download failed"
           exit 1
         }
-        echo "MSVC_REDIST=$out" >> $env:GITHUB_ENV
+        echo "msvc.redist.exe=$out" >> $env:GITHUB_ENV
 
     - name: Build GUI
       id: build-gui
