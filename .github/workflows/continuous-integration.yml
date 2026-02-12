@@ -110,7 +110,7 @@ jobs:
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
     
     - name: Build opensim-core
-      # if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
@@ -126,19 +126,14 @@ jobs:
 
     - name: Set CI to false
       run: echo "CI=false" >> $GITHUB_ENV
-
-    - name: Download VC++ Redistributable (x64, 14.44.35112.1)
-      shell: powershell
+      
+    - name: Download VC++ Redistributable
+      shell: pwsh
       run: |
-        $url = "https://www.filehorse.com/download-microsoft-visual-c-redistributable-package-64/94666/download/"
-        $out = "$env:RUNNER_TEMP\vcredist_x64_14.44.35112.1.exe"
-        Write-Host "Downloading VC++ redist from $url to $out"
-        Invoke-WebRequest -Uri $url -OutFile $out -UseBasicParsing
-        if (!(Test-Path $out)) {
-          Write-Error "vcredist download failed"
-          exit 1
-        }
-        echo "msvc.redist.exe=$out" >> $env:GITHUB_ENV
+        $url = "https://aka.ms/vs/17/vc_redist.x64.exe"
+        $dest = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\14.44.35112\vcredist_x64.exe"
+        Invoke-WebRequest -Uri $url -OutFile $dest -UseBasicParsing
+        echo "msvc.redist.exe=$dest" >> $env:GITHUB_ENV
 
     - name: Build GUI
       id: build-gui
