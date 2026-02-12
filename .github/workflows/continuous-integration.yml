@@ -140,7 +140,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -G"Visual Studio 17 2022" -A x64 -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans-17/netbeans;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans-17/netbeans/harness"
+        cmake ../ -G"Visual Studio 17 2022" -A x64 -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans-17/netbeans;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans-17/netbeans/harness;-Dmsvc.redist.exe=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\14.44.35112\vcredist_x64.exe"
         cmake --build . --target CopyOpenSimCore --config Release
         cmake --build . --target CopyModels --config Release
         cmake --build . --target PrepareInstaller --config Release
