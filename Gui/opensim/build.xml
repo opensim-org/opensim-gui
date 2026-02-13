@@ -55,7 +55,7 @@
             <fileset dir="${apiJava.dir}/opensim/modeling" />
         </copy>
     </target>
-    <target name="unzip-distro" depends="copy-jxbrowser-jar,build-zip" 
+    <target name="unzip-distro" depends="build-zip" 
             description="unZIP distribution of the suite, launchers, and selected modules from the platform.">
         <unzip src="dist/OpenSim.zip" dest="dist/installer" />
     </target>
