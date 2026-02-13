@@ -55,7 +55,7 @@
             <fileset dir="${apiJava.dir}/opensim/modeling" />
         </copy>
     </target>
-    <target name="unzip-distro" depends="build-zip" 
+    <target name="unzip-distro" depends="copy-jxbrowser-jar,build-zip" 
             description="unZIP distribution of the suite, launchers, and selected modules from the platform.">
         <unzip src="dist/OpenSim.zip" dest="dist/installer" />
     </target>
@@ -192,7 +192,7 @@
             </fileset>
         </copy>
     </target>
-        <target name="copy-visualizer-mac" description="Copy Visualizer to installer" depends="build-visualizer-app-mac">
+    <target name="copy-visualizer-mac" description="Copy Visualizer to installer" depends="build-visualizer-app-mac">
         <copy todir="${opensim.viewer.dir}">
             <fileset dir="opensim-viewer/build">
                 <include name="**/*"/>
