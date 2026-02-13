@@ -152,10 +152,7 @@ jobs:
         echo $VERSION
         echo "name=VERSION::$VERSION" >> $GITHUB_ENV
         echo "version=$VERSION" >> $env:GITHUB_OUTPUT
-        echo "====="
-        ls cluster/modules/ext
-        echo "====="
-        
+       
     - name: Build GUI installer
       run: |
         cd Gui/opensim/dist/installer
