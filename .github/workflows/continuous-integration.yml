@@ -309,31 +309,11 @@ jobs:
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
   
-    - name: Use precompiled jxbrowser7
-      run: |
-          mkdir -p prebuilt_jxb
-          cd prebuilt_jxb
-          # Download the NBM file
-          curl -L -o org-opensim-javabrowser.nbm "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm"
-          # Rename nmb and extract
-          mv org-opensim-javabrowser.nbm org-opensim-javabrowser.zip
-          unzip -q org-opensim-javabrowser.zip -d extracted
-          # Create target directory if it doesn't exist
-          mkdir -p "$GITHUB_WORKSPACE/opensim-visualizer/jxbrowser/release/modules/ext"
-          # Copy all jar files to the target directory
-          cp extracted/netbeans/modules/ext/*.jar "$GITHUB_WORKSPACE/opensim-visualizer/jxbrowser/release/modules/ext/"
-          # Verify the files were copied
-          echo "Copied JAR files to opensim-visualizer:"
-          ls -la "$GITHUB_WORKSPACE/opensim-visualizer/jxbrowser/release/modules/ext/"
-
     - name: Build GUI
       id: build-gui
       run: |
         mkdir build
         cd build
-        # TODO: Do not hard-code NetBeans version.
-        # TODO: Could download from https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
-        # cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/Apache NetBeans 12.3.app/Contents/Resources/NetBeans/netbeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/Apache NetBeans 12.3.app/Contents/Resources/NetBeans/netbeans/harness"
         cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/Apache NetBeans 17.app/Contents/Resources/NetBeans/netbeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/Apache NetBeans 17.app/Contents/Resources/NetBeans/netbeans/harness"
         make CopyOpenSimCore
         make PrepareInstaller
@@ -342,9 +322,29 @@ jobs:
         echo $VERSION
         echo "name=VERSION::$VERSION" >> $GITHUB_ENV
         echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Use precompiled jxbrowser7
+      run: |
+        mkdir -p prebuilt_jxb
+        cd prebuilt_jxb
+        # Download the NBM file
+        curl -L -o org-opensim-javabrowser.nbm "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm"
+        # Rename and extract
+        mv org-opensim-javabrowser.nbm org-opensim-javabrowser.zip
+        unzip -q org-opensim-javabrowser.zip -d extracted
+        # Create target directory if it doesn't exist
+        mkdir -p "$GITHUB_WORKSPACE/opensim-visualizer/jxbrowser/release/modules/ext"
+        # Copy all jar files to the target directory
+        cp extracted/netbeans/modules/ext/*.jar "$GITHUB_WORKSPACE/opensim-visualizer/jxbrowser/release/modules/ext/"
+        # Verify the files were copied
+        echo "Copied JAR files to opensim-visualizer:"
+        ls -la "$GITHUB_WORKSPACE/opensim-visualizer/jxbrowser/release/modules/ext/"
+
+    - name: Build GUI installer
+      run: |
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
-        mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
+        mv Gui/opensim/dist/OpenSim-${{ steps.build-gui.outputs.version }}.pkg $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
       uses: actions/upload-artifact@v4
@@ -466,6 +466,20 @@ jobs:
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
 
+    - name: Build GUI
+      id: build-gui
+      run: |
+        mkdir build
+        cd build
+        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans-12.3/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans-12.3/netbeans/harness"
+        make CopyOpenSimCore
+        make PrepareInstaller
+        # Read the value of the cache variable storing the GUI build version.
+        VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
+        echo $VERSION
+        echo "name=VERSION::$VERSION" >> $GITHUB_ENV
+        echo "version=$VERSION" >> $GITHUB_OUTPUT
+
     - name: Use precompiled jxbrowser7
       run: |
         mkdir -p prebuilt_jxb
@@ -483,22 +497,11 @@ jobs:
         echo "Copied JAR files to opensim-visualizer:"
         ls -la "$GITHUB_WORKSPACE/opensim-visualizer/jxbrowser/release/modules/ext/"
 
-    - name: Build GUI
-      id: build-gui
+    - name: Build GUI installer
       run: |
-        mkdir build
-        cd build
-        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans-12.3/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans-12.3/netbeans/harness"
-        make CopyOpenSimCore
-        make PrepareInstaller
-        # Read the value of the cache variable storing the GUI build version.
-        VERSION=`cmake -L . | grep OPENSIMGUI_BUILD_VERSION | cut -d "=" -f2`
-        echo $VERSION
-        echo "name=VERSION::$VERSION" >> $GITHUB_ENV
-        echo "version=$VERSION" >> $GITHUB_OUTPUT
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
-        mv Gui/opensim/dist/OpenSim-$VERSION.tar.gz $GITHUB_WORKSPACE
+        mv Gui/opensim/dist/OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
       uses: actions/upload-artifact@v4
