@@ -87,6 +87,10 @@ public class JSONUtilities {
         return rawPrintString.substring(1);
     }
 
+    static String mapPathToValidThreejsNodeName(String opensimPathString) {
+        String ret = opensimPathString.replace("-", "_");
+        return ret;
+    }
     static public JSONArray createMatrixFromTransform(Transform xform, Vec3 scaleFactors, double scale) {
         double retTransform[] = new double[]{1, 0, 0, 0, 0, 1, 0 , 0, 0, 0, 1, 0, 0 , 0, 0, 1};
         Rotation r = xform.R();
@@ -136,4 +140,11 @@ public class JSONUtilities {
         return userDataJSON;
     }
 
+    static public JSONArray createFromArrayDouble(double[] values) {
+        JSONArray ret = new JSONArray();
+        for (int i=0; i<values.length; i++)
+            ret.add(values[i]);
+        return ret;
+
+    }
 }

@@ -35,6 +35,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Observable;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -53,7 +54,7 @@ import org.json.simple.parser.ParseException;
  *
  * @author Ayman
  */
-@WebSocket(maxTextMessageSize = 64 * 4096, maxIdleTime=10000000)
+@WebSocket(maxTextMessageSize = 64 * 4096, maxIdleTime=2000000000)
 public class VisWebSocket extends Observable { // Socket to handle incoming traffic from Browser
     private static final Set<Session> peers = Collections.synchronizedSet(new HashSet<Session>());
     private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(1);
@@ -72,14 +73,11 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
             this.notifyObservers();
         }
         executorService.scheduleAtFixedRate(() -> {
-                    try {
-                        String data = "Ping";
-                        ByteBuffer payload = ByteBuffer.wrap(data.getBytes());
-                        peer.getRemote().sendPing(payload);
-                        //System.out.println("Sending ping to peer.");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                    JSONObject hbJson = new JSONObject();
+                    hbJson.put("Op", "HeartBeat");
+                    hbJson.put("uuid", UUID.randomUUID().toString());
+                    peer.getRemote().sendStringByFuture(hbJson.toJSONString());
+                    System.out.println("Sending ping to peer.");
                 },
                 1, 1, TimeUnit.MINUTES);        
         
@@ -100,7 +98,7 @@ public class VisWebSocket extends Observable { // Socket to handle incoming traf
     @OnWebSocketMessage
     public void visMessage(String stringToParse) {
         try {
-            //System.out.println("visMessage: " + stringToParse);
+            //System.out.println("Received visMessage: " + stringToParse);
             JSONParser parser = new JSONParser();
             JSONObject jsonObj = (JSONObject) parser.parse(stringToParse);
             setChanged();

@@ -137,13 +137,19 @@
              which the NSIS installer will run during installation.
              https://docs.microsoft.com/en-us/cpp/ide/deployment-in-visual-cpp -->
         <copy todir="${opensim.dist.dir}/bin/"
-            file="${msvc.redist.exe}" />
+            file="${msvc.redist.exe}"/>
 
     </target>
     <target name="copy-jre" description="Copy JRE to installer">
         <copy todir="${opensim.dist.dir}/jdk/jre">
             <fileset dir="${jre.dir}"/>
         </copy>
+    </target>
+    <target name="copy-jxbrowser-jar" description="Copy prebuilt opensim-visualizer module jar to distro">
+        <get src="https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/org-opensim-javabrowser.jar/download" 
+         dest="${opensim.dist.dir}/OpenSim/modules/org-opensim-javabrowser.jar" 
+         usetimestamp="false" 
+         verbose="true" />
     </target>
     <target name="copy-models" description="Copy Models and Geometry to installer">
         <copy todir="${opensim.dist.dir}/Geometry">
@@ -186,14 +192,14 @@
             </fileset>
         </copy>
     </target>
-        <target name="copy-visualizer-mac" description="Copy Visualizer to installer" depends="build-visualizer-app-mac">
+    <target name="copy-visualizer-mac" description="Copy Visualizer to installer" depends="build-visualizer-app-mac">
         <copy todir="${opensim.viewer.dir}">
             <fileset dir="opensim-viewer/build">
                 <include name="**/*"/>
             </fileset>
         </copy>
     </target>
-    <target name="build-mac-installer" depends="build-mac,build-visualizer-app-mac,copy-visualizer-mac,copy-models">
+    <target name="build-mac-installer" depends="build-mac,copy-jxbrowser-jar,build-visualizer-app-mac,copy-visualizer-mac,copy-models">
         <property name="lib.dir" value="/Users/aymanhabib/dev/install/opensim-core-install/lib"/>
         <!--<echoproperties/>-->
         <!-- Must use the OS's cp because Ant's copy doesn't preserve file

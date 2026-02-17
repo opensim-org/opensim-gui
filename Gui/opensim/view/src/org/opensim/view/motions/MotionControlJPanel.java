@@ -43,10 +43,13 @@ import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.openide.nodes.Children;
 import org.openide.nodes.Node;
 import org.opensim.modeling.Model;
 import org.opensim.modeling.Storage;
+import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.utils.TheApp;
 import org.opensim.view.ExplorerTopComponent;
 import org.opensim.view.motions.MotionEvent.Operation;
@@ -65,20 +68,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                    Observer {       
 
     /**
-     * @return the frameNumber
-     */
-    public int getFrameNumber() {
-        return frameNumber;
-    }
-
-    /**
-     * @param frameNumber the frameNumber to set
-     */
-    public void setFrameNumber(int frameNumber) {
-        this.frameNumber = frameNumber;
-    }
-
-    /**
      * @return the viewerDrivenPlay
      */
     public boolean isViewerDrivenPlay() {
@@ -92,19 +81,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         this.viewerDrivenPlay = viewerDrivenPlay;
     }
 
-    /**
-     * @return the acknowledgeReceived
-     */
-    public boolean isAcknowledgeReceived() {
-        return acknowledgeReceived;
-    }
-
-    /**
-     * @param acknowledgeReceived the acknowledgeReceived to set
-     */
-    public void setAcknowledgeReceived(boolean acknowledgeReceived) {
-        this.acknowledgeReceived = acknowledgeReceived;
-    }
 // For MotionsDB
    
    Timer               animationTimer=null;
@@ -113,12 +89,11 @@ public class MotionControlJPanel extends javax.swing.JToolBar
    private MasterMotionModel   masterMotion;
    private int         rangeResolution;
    private DecimalFormat timeFormat = new DecimalFormat("0.000");
-   private int frameNumber=0;
    private boolean internalTrigger=false;
    private static MotionControlJPanel instance=null;
    private boolean debug = false;
    private boolean viewerDrivenPlay = false;
-   private boolean acknowledgeReceived = false;
+   private boolean isViewerAnimating=false; // debugging only for now
    
    // ActionListener for the timer which is used to play motion forwards/backwards in such a way that
    // advances the model's time based on the real elapsed time (times the factor specified by the smodel spinner)
@@ -137,38 +112,28 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          if(firstAction) {
             firstAction = false;
             frameFPS = ViewDB.getInstance().getFrameRate();
-            if (debug) System.out.println("frameFPS in RealTimePlayActionListener="+frameFPS);
-            getMasterMotion().advanceTime(0);
+            //if (debug) System.out.println("frameFPS in RealTimePlayActionListener="+frameFPS);
+            ViewDB.getInstance().playCurrentAnimations(getMasterMotion().currentTime, getMasterMotion().getCurrentAnimationUUIDs());
+            //getMasterMotion().advanceTime(0);
             if (debug) System.out.println("frameFPS"+frameFPS);
          } else {
             double speed = (double)(((Double)smodel.getValue()).doubleValue());
             //double factor = (double)direction*1e-9*speed;
             double frameTime = 1.0/frameFPS;
-            // if viewer driven whait for sync message before advancing
-            if (isViewerDrivenPlay() && !isAcknowledgeReceived()){
-                if (debug) System.out.println("waiting for ack, no frame sent");
-                return;
-            }
-            //System.out.println("Time since last call "+(currentTimeNano-lastActionTimeNano)+" ns");
-            getMasterMotion().advanceTime((double)direction*speed*frameTime);
-            acknowledgeReceived = false;
-            if (debug) System.out.println("             masterMotion current time = "+(masterMotion.getCurrentTime()));
-                setFrameNumber(getFrameNumber() + 1);
-            //lastActionTimeNano = currentTimeNano;
-            //System.out.println("delta simulation time = "+(masterMotion.getCurrentTime()- lastSimulationTime));
-            if (debug) System.out.println("Frame number="+getFrameNumber());
+
             lastSimulationTime = masterMotion.getCurrentTime();
 
          }
 
          // Kill self if done and wrapMotion is off
          if (getMasterMotion().finished(direction)){
-            //animationTimer.stop();
-            //animationTimer=null;
+            animationTimer.stop();
+            animationTimer=null;
             jStopButtonActionPerformed(evt);
             ViewDB.getInstance().endAnimation();
             if (debug) System.out.println("End Animation");
                 setViewerDrivenPlay(false);
+            isViewerAnimating = false;
             
          } else {
             /*
@@ -580,6 +545,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          animationTimer.stop();
          animationTimer=null;
       }
+      this.reverse=true;
       if (isMotionLoaded() && animationTimer==null){
           if (getMasterMotion().finished(-1)){
               // reset motion if at end already
@@ -626,22 +592,24 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         animationTimer=null;
         setViewerDrivenPlay(true);
         jPlayButtonActionPerformed(null);
+        isViewerAnimating = true;
     }
     
+    public void setTimeNoRender(double animationTime) {
+        getMasterMotion().setTimeNoRender(animationTime);
+    }
     private void jPlayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlayButtonActionPerformed
       if (animationTimer!=null){
          animationTimer.stop();
          animationTimer=null;
       }
+      this.reverse=false;
       int timerRate = ViewDB.getInstance().getFrameRate();
       if (isMotionLoaded() && animationTimer==null){
           if (getMasterMotion().finished(1)){
               // reset motion if at end already
               getMasterMotion().setTime(getMasterMotion().getStartTime());
-           }
-          ViewDB.getInstance().startAnimation();
-          if (debug) System.out.println("Frame number =0");
-            setFrameNumber(0);
+          }
           int delayMS = 1000/timerRate;
 
           //if (delayMS < 16) delayMS = 16; // 60 fps no faster
@@ -763,20 +731,26 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             // Current motion changed.  Update master motion
             double currentTime = getMasterMotion().getCurrentTime();
             getMasterMotion().clear();
+            JSONArray clipUUIDs = new JSONArray(); 
             for(int i=0; i<mdb.getNumCurrentMotions(); i++){
                getMasterMotion().add(mdb.getCurrentMotion(i));
                ModelMotionPair currentModelMotionPair = mdb.getCurrentMotion(i);
                Storage mot = currentModelMotionPair.motion;
                MotionsDB.getInstance().getDisplayerForMotion(mot).setupMotionDisplay();
+               clipUUIDs.add(MotionsDB.getInstance().getDisplayerForMotion(mot).getAnimationClipUUID());
                //
                ArrayList<MotionDisplayer> associatedDisplayers = MotionsDB.getInstance().getDisplayerForMotion(mot).getAssociatedMotions();
                // Find associated motions as well and re-associate them
-               for (int j=0; j<associatedDisplayers.size(); j++)
+               for (int j=0; j<associatedDisplayers.size(); j++){
                    associatedDisplayers.get(j).setupMotionDisplay();
+                   clipUUIDs.add(associatedDisplayers.get(j).getAnimationClipUUID());
+               }
             }
             getMasterMotion().setTime(currentTime);
-            ViewDB.getInstance().sendCurrentAnimationCommand(getMasterMotion().getStartTime(),
-                        getMasterMotion().getEndTime());
+            JSONObject jsonMessage = new JSONObject();
+            jsonMessage.put("Op", "SetCurrentAnimations");
+            jsonMessage.put("clip_list", clipUUIDs);
+            ViewDB.getInstance().sendVisualizerCommand(jsonMessage);
             
          } else if (evt.getOperation() == Operation.Modified) {
             Storage motion = evt.getMotion();
@@ -793,11 +767,37 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          } else if (evt.getOperation() == Operation.Assoc) {
              // Create MotionDisplayer and associate it to that of currentMotion
              MotionDisplayer newMotionDisplayer = new MotionDisplayer(evt.getMotion(), evt.getModel());
+             // add uuid to current animations
              MotionsDB.getInstance().addMotionDisplayer(evt.getMotion(), newMotionDisplayer);
-             getMasterMotion().getDisplayer(0).getAssociatedMotions().add(newMotionDisplayer);
-             newMotionDisplayer.setupMotionDisplay();
-             getMasterMotion().setTime(getMasterMotion().getCurrentTime());
-
+             getMasterMotion().getDisplayer(0).associateDisplayer(newMotionDisplayer);
+             // send clip to viewer
+            String animationUUID = newMotionDisplayer.getAnimationClipUUID();
+            ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(evt.getModel());
+            JSONObject currentAnimation = new JSONObject();
+            currentAnimation.put("Clip", newMotionDisplayer.getAnimationClip());
+            currentAnimation.put("Root", modelViz.getModelUUID().toString());
+            currentAnimation.put("Op", "AddAnimationClip");
+            ViewDB.getInstance().sendAnimationClip(currentAnimation);
+            newMotionDisplayer.setupMotionDisplay();
+            getMasterMotion().setTime(getMasterMotion().getCurrentTime());
+            // Update current animation
+            JSONArray clipUUIDs = new JSONArray(); 
+            for(int i=0; i<mdb.getNumCurrentMotions(); i++){
+               ModelMotionPair currentModelMotionPair = mdb.getCurrentMotion(i);
+               Storage mot = currentModelMotionPair.motion;
+               clipUUIDs.add(MotionsDB.getInstance().getDisplayerForMotion(mot).getAnimationClipUUID());
+               // collect ids of current motions and send to viewer
+               ArrayList<MotionDisplayer> associatedDisplayers = MotionsDB.getInstance().getDisplayerForMotion(mot).getAssociatedMotions();
+               // Find associated motions as well and re-associate them
+               for (int j=0; j<associatedDisplayers.size(); j++){
+                   associatedDisplayers.get(j).setupMotionDisplay();
+                   clipUUIDs.add(associatedDisplayers.get(j).getAnimationClipUUID());
+               }
+            }
+            JSONObject jsonMessage = new JSONObject();
+            jsonMessage.put("Op", "SetCurrentAnimations");
+            jsonMessage.put("clip_list", clipUUIDs);
+            ViewDB.getInstance().sendVisualizerCommand(jsonMessage);
          }
          motionLoaded = (getMasterMotion().getNumMotions() > 0);
          updatePanelDisplay();
@@ -893,7 +893,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         return masterMotion;
     }
     
-    
+    private boolean reverse = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jAdvanceButton;
     private javax.swing.JButton jBackButton;
@@ -914,5 +914,12 @@ public class MotionControlJPanel extends javax.swing.JToolBar
     private javax.swing.JTextField jTimeTextField;
     private javax.swing.JToggleButton jWrapToggleButton;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the reverse
+     */
+    public boolean isReverse() {
+        return reverse;
+    }
 
 }

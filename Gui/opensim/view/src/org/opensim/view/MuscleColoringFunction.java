@@ -27,6 +27,7 @@
 package org.opensim.view;
 
 import org.opensim.modeling.Muscle;
+import org.opensim.modeling.State;
 
 /**
  *
@@ -38,5 +39,7 @@ public abstract class MuscleColoringFunction {
     }
 
     public abstract double getColor(Muscle msl);
+    
+    public abstract double getColor(Muscle path, State state);
     
 }
