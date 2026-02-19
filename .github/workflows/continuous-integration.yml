@@ -185,22 +185,17 @@ jobs:
         # Files need to go in: Gui/opensim/dist/installer/opensim/
         $installerContentPath = "Gui/opensim/dist/installer/opensim"
         
-        # Create the modules/ext directory in the installer content
-        New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/ext/"
+        # Create the modules directory in the installer content
+        New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/"
         
-        # Copy the jar files
-        Copy-Item -Path "prebuilt_jxb/extracted/netbeans/modules/ext/*.jar" -Destination "$installerContentPath/modules/ext/" -Force
+        # Copy the jxbrowser jar file from netbeans/modules/ to opensim/modules/
+        Write-Host "Copying org-opensim-javabrowser.jar to $installerContentPath/opensim/modules/"
+        Copy-Item -Path "prebuilt_jxb/extracted/netbeans/modules/org-opensim-javabrowser.jar" -Destination "$installerContentPath/modules/" -Force
         
-        # Also copy to potential cluster directories
-        $clusterPaths = @(
-            "$installerContentPath/opensim/modules/ext/",
-            "$installerContentPath/platform/modules/ext/",
-            "$installerContentPath/ide/modules/ext/"
-        )
-        
-        foreach ($clusterPath in $clusterPaths) {
-            New-Item -ItemType Directory -Force -Path $clusterPath
-            Copy-Item -Path "prebuilt_jxb/extracted/netbeans/modules/ext/*.jar" -Destination $clusterPath -Force
+        # Also copy any ext JAR files if needed
+        if (Test-Path "prebuilt_jxb/extracted/netbeans/modules/ext/") {
+            New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/ext/"
+            Copy-Item -Path "prebuilt_jxb/extracted/netbeans/modules/ext/*.jar" -Destination "$installerContentPath/modules/ext/" -Force
         }
         
         # Verify the files were copied
