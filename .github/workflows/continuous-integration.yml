@@ -135,32 +135,6 @@ jobs:
         Invoke-WebRequest -Uri $url -OutFile $dest -UseBasicParsing
         echo "msvc.redist.exe=$dest" >> $env:GITHUB_ENV
 
-    - name: Use precompiled jxbrowser7
-      run: |
-        # Create prebuilt directory
-        New-Item -ItemType Directory -Force -Path prebuilt_jxb
-        cd prebuilt_jxb
-        # Download the NBM file
-        Invoke-WebRequest -Uri "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm" -OutFile "org-opensim-javabrowser.nbm"
-        # Extract with Expand-Archive
-        Expand-Archive -Path "org-opensim-javabrowser.nbm" -DestinationPath "extracted" -Force
-        
-        # Copy to opensim-visualizer location
-        # Create target directory if it doesn't exist
-        New-Item -ItemType Directory -Force -Path "$env:GITHUB_WORKSPACE\opensim-visualizer\jxbrowser\release\modules\ext"
-        # Copy all jar files to the target directory
-        Copy-Item -Path "extracted\netbeans\modules\ext\*.jar" -Destination "$env:GITHUB_WORKSPACE\opensim-visualizer\jxbrowser\release\modules\ext\" -Force
-        
-        # Copy to GUI build location
-        New-Item -ItemType Directory -Force -Path "$env:GITHUB_WORKSPACE\Gui\opensim\build\cluster\modules\ext"
-        Copy-Item -Path "extracted\netbeans\modules\ext\*.jar" -Destination "$env:GITHUB_WORKSPACE\Gui\opensim\build\cluster\modules\ext\" -Force
-        
-        # Verify the files were copied
-        Write-Host "Copied JAR files to opensim-visualizer:"
-        Get-ChildItem "$env:GITHUB_WORKSPACE\opensim-visualizer\jxbrowser\release\modules\ext"
-        Write-Host "Copied JAR files to Gui/opensim/build/cluster/modules/ext:"
-        Get-ChildItem "$env:GITHUB_WORKSPACE\Gui\opensim\build\cluster\modules\ext"
-
     - name: Build GUI
       id: build-gui
       run: |
@@ -181,6 +155,16 @@ jobs:
 
     - name: Add jxbrowser files to installer content
       run: |
+        # Create prebuilt directory
+        New-Item -ItemType Directory -Force -Path prebuilt_jxb
+        cd prebuilt_jxb
+        
+        # Download the NBM file
+        Invoke-WebRequest -Uri "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm" -OutFile "org-opensim-javabrowser.nbm"
+        
+        # Extract with Expand-Archive
+        Expand-Archive -Path "org-opensim-javabrowser.nbm" -DestinationPath "extracted" -Force
+        
         # The NSIS installer looks for files in the 'opensim' directory relative to the installer script
         # Files need to go in: Gui/opensim/dist/installer/opensim/opensim
         $installerContentPath = "Gui/opensim/dist/installer/opensim/opensim"
