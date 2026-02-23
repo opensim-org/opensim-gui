@@ -182,14 +182,14 @@ jobs:
     - name: Add jxbrowser files to installer content
       run: |
         # The NSIS installer looks for files in the 'opensim' directory relative to the installer script
-        # Files need to go in: Gui/opensim/dist/installer/opensim/
-        $installerContentPath = "Gui/opensim/dist/installer/opensim"
+        # Files need to go in: Gui/opensim/dist/installer/opensim/opensim
+        $installerContentPath = "Gui/opensim/dist/installer/opensim/opensim"
         
         # Create the modules directory in the installer content
         New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/"
         
         # Copy the jxbrowser jar file from netbeans/modules/ to opensim/modules/
-        Write-Host "Copying org-opensim-javabrowser.jar to $installerContentPath/opensim/modules/"
+        Write-Host "Copying org-opensim-javabrowser.jar to $installerContentPath/opensim/opensim/modules/"
         Copy-Item -Path "prebuilt_jxb/extracted/netbeans/modules/org-opensim-javabrowser.jar" -Destination "$installerContentPath/modules/" -Force
         
         # Also copy any ext JAR files if needed
