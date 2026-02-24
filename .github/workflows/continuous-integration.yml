@@ -80,7 +80,7 @@ jobs:
         key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
 
     - name: Build opensim-core-dependencies
-      if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      # if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_deps
         mkdir $env:GITHUB_WORKSPACE\\build_deps
@@ -110,7 +110,7 @@ jobs:
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
     
     - name: Build opensim-core
-      # if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
@@ -152,12 +152,50 @@ jobs:
         echo $VERSION
         echo "name=VERSION::$VERSION" >> $GITHUB_ENV
         echo "version=$VERSION" >> $env:GITHUB_OUTPUT
-       
+
+    - name: Add jxbrowser files to installer content
+      run: |
+        # Set root and directories
+        $root = $env:GITHUB_WORKSPACE
+        $nbmDir = "$root\prebuilt_jxb"
+        $extractDir = "$nbmDir\extracted"
+        $installerContentPath = "$root\Gui\opensim\dist\installer\opensim\opensim"
+    
+        # Create prebuilt directory
+        New-Item -ItemType Directory -Force -Path $nbmDir
+    
+        # Download the NBM file
+        Invoke-WebRequest -Uri "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm" `
+                          -OutFile "$nbmDir\org-opensim-javabrowser.nbm"
+    
+        # Extract the NBM
+        Expand-Archive -Path "$nbmDir\org-opensim-javabrowser.nbm" -DestinationPath $extractDir -Force
+    
+        # Create installer modules directory
+        New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/"
+    
+        # Copy the main JAR
+        Write-Host "Copying org-opensim-javabrowser.jar to installer content..."
+        Copy-Item -Path "$extractDir\netbeans\modules\org-opensim-javabrowser.jar" `
+                  -Destination "$installerContentPath/modules/" -Force
+    
+        # Copy any ext JARs if they exist
+        if (Test-Path "$extractDir\netbeans\modules\ext\") {
+            New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/ext/"
+            Copy-Item -Path "$extractDir\netbeans\modules\ext\*.jar" `
+                      -Destination "$installerContentPath/modules/ext/" -Force
+        }
+    
+        # Verify files copied
+        Write-Host "JAR files now in installer content:"
+        Get-ChildItem -Path "$installerContentPath" -Recurse -Filter "*.jar" | Select-Object FullName
+        
     - name: Build GUI installer
       run: |
         cd Gui/opensim/dist/installer
         makensis.exe make_installer.nsi
         mv OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe $env:GITHUB_WORKSPACE
+        
     - name: Upload GUI installer
       uses: actions/upload-artifact@v4
       with:
@@ -296,9 +334,6 @@ jobs:
       run: |
         mkdir build
         cd build
-        # TODO: Do not hard-code NetBeans version.
-        # TODO: Could download from https://download.netbeans.org/netbeans/8.2/final/bundles/netbeans-8.2-javase-macosx.dmg
-        # cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/Apache NetBeans 12.3.app/Contents/Resources/NetBeans/netbeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/Apache NetBeans 12.3.app/Contents/Resources/NetBeans/netbeans/harness"
         cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/Apache NetBeans 17.app/Contents/Resources/NetBeans/netbeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/Apache NetBeans 17.app/Contents/Resources/NetBeans/netbeans/harness"
         make CopyOpenSimCore
         make PrepareInstaller
@@ -307,9 +342,47 @@ jobs:
         echo $VERSION
         echo "name=VERSION::$VERSION" >> $GITHUB_ENV
         echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+    - name: Add jxbrowser files to installer content
+      run: |
+        # Set root and directories
+        ROOT="$GITHUB_WORKSPACE"
+        NBM_DIR="$ROOT/prebuilt_jxb"
+        EXTRACT_DIR="$NBM_DIR/extracted"
+        INSTALLER_CONTENT="$ROOT/Gui/opensim/dist/installer/opensim/opensim"
+    
+        # Create prebuilt directory
+        mkdir -p "$NBM_DIR"
+    
+        # Download the NBM file
+        curl -L "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm" \
+             -o "$NBM_DIR/org-opensim-javabrowser.nbm"
+    
+        # Extract the NBM (nbm is a zip)
+        mkdir -p "$EXTRACT_DIR"
+        unzip -o "$NBM_DIR/org-opensim-javabrowser.nbm" -d "$EXTRACT_DIR"
+    
+        # Create installer modules directory
+        mkdir -p "$INSTALLER_CONTENT/modules/"
+    
+        # Copy the main JAR
+        cp "$EXTRACT_DIR/netbeans/modules/org-opensim-javabrowser.jar" "$INSTALLER_CONTENT/modules/"
+    
+        # Copy any ext JARs if they exist
+        if [ -d "$EXTRACT_DIR/netbeans/modules/ext" ]; then
+            mkdir -p "$INSTALLER_CONTENT/modules/ext/"
+            cp "$EXTRACT_DIR/netbeans/modules/ext/"*.jar "$INSTALLER_CONTENT/modules/ext/"
+        fi
+    
+        # Verify files copied
+        echo "JAR files now in installer content:"
+        find "$INSTALLER_CONTENT" -name "*.jar"
+
+    - name: Build GUI installer
+      run: |
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
-        mv Gui/opensim/dist/OpenSim-$VERSION.pkg $GITHUB_WORKSPACE
+        mv Gui/opensim/dist/OpenSim-${{ steps.build-gui.outputs.version }}.pkg $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
       uses: actions/upload-artifact@v4
@@ -427,7 +500,6 @@ jobs:
         rm -rf ~/swig-source
         rm -rf ~/work/opensim-gui/opensim-gui/build_core
       
-
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
 
@@ -444,9 +516,47 @@ jobs:
         echo $VERSION
         echo "name=VERSION::$VERSION" >> $GITHUB_ENV
         echo "version=$VERSION" >> $GITHUB_OUTPUT
+        
+    - name: Add jxbrowser files to installer content
+      run: |
+        # Set root and directories
+        ROOT="$GITHUB_WORKSPACE"
+        NBM_DIR="$ROOT/prebuilt_jxb"
+        EXTRACT_DIR="$NBM_DIR/extracted"
+        INSTALLER_CONTENT="$ROOT/Gui/opensim/dist/installer/opensim/opensim"
+    
+        # Create prebuilt directory
+        mkdir -p "$NBM_DIR"
+    
+        # Download the NBM file
+        wget -O "$NBM_DIR/org-opensim-javabrowser.nbm" \
+             "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm"
+    
+        # Extract the NBM (nbm is a zip)
+        mkdir -p "$EXTRACT_DIR"
+        unzip -o "$NBM_DIR/org-opensim-javabrowser.nbm" -d "$EXTRACT_DIR"
+    
+        # Create installer modules directory
+        mkdir -p "$INSTALLER_CONTENT/modules/"
+    
+        # Copy the main JAR
+        cp "$EXTRACT_DIR/netbeans/modules/org-opensim-javabrowser.jar" "$INSTALLER_CONTENT/modules/"
+    
+        # Copy any ext JARs if they exist
+        if [ -d "$EXTRACT_DIR/netbeans/modules/ext" ]; then
+            mkdir -p "$INSTALLER_CONTENT/modules/ext/"
+            cp "$EXTRACT_DIR/netbeans/modules/ext/"*.jar "$INSTALLER_CONTENT/modules/ext/"
+        fi
+    
+        # Verify files copied
+        echo "JAR files now in installer content:"
+        find "$INSTALLER_CONTENT" -name "*.jar"
+
+    - name: Build GUI installer
+      run: |
         cd $GITHUB_WORKSPACE
         ls Gui/opensim/dist
-        mv Gui/opensim/dist/OpenSim-$VERSION.tar.gz $GITHUB_WORKSPACE
+        mv Gui/opensim/dist/OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
       uses: actions/upload-artifact@v4
