@@ -38,11 +38,11 @@ package org.opensim.modeling;
  * {@code 
 periodicGoal = problem.addGoal<MocoPeriodicityGoal>("periodicGoal");
 }<br>
- * Periodic contraint for the pelvis tilt values:<br>
+ * Periodic constraint for the pelvis tilt values:<br>
  * {@code 
 periodicGoal->addStatePair({ "/jointset/ground_pelvis/pelvis_tilt/value"});
 }<br>
- * Periodic contraints for the hip flexion speeds:<br>
+ * Periodic constraints for the hip flexion speeds:<br>
  * {@code 
 periodicGoal->addStatePair({"/jointset/hip_l/hip_flexion_l/speed",
         "/jointset/hip_r/hip_flexion_r/speed"});
