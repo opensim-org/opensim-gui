@@ -72,9 +72,9 @@ public class AnnotatedMotion extends Storage {
     private double unitConversion = 1.0;
     private boolean boundingBoxComputed=false;
     private double[] currentRotations = new double[]{0., 0., 0.};
-    private double frameRate=0.;
-    private double cameraRate=0.;
-    private double dataRate=0.;
+    private int frameRate=0;
+    private int cameraRate=0;
+    private int dataRate=0;
     private MotionDisplayer motionDisplayer;
     private double displayForceScale = 1.0;
     private String displayForceShape = "arrow";
@@ -455,27 +455,27 @@ public class AnnotatedMotion extends Storage {
         writer.close();
     }
 
-    public void setDataRate(double d) {
+    public void setDataRate(int d) {
         this.dataRate = d;
     }
 
-    public void setCameraRate(double d) {
+    public void setCameraRate(int d) {
         this.cameraRate = d;
     }
 
-    public double getFrameRate() {
+    public int getFrameRate() {
         return frameRate;
     }
 
-    public void setFrameRate(double frameRate) {
+    public void setFrameRate(int frameRate) {
         this.frameRate = frameRate;
     }
 
-    public double getCameraRate() {
+    public int getCameraRate() {
         return cameraRate;
     }
 
-    public double getDataRate() {
+    public int getDataRate() {
         return dataRate;
     }
 
