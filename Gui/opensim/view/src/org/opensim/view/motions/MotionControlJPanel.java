@@ -157,7 +157,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
 
       initComponents();
       rangeResolution = jMotionSlider.getMaximum(); // assume resolution was set up as max value of slider in form designer
-
+      smodel.addChangeListener(this);
       getMasterMotion().addChangeListener(this);
       jMotionSlider.addChangeListener(this);             // listen to changes in the slider itself.
       MotionsDB.getInstance().addObserver(this);
@@ -634,6 +634,12 @@ public class MotionControlJPanel extends javax.swing.JToolBar
     public void stateChanged(ChangeEvent e) 
     {
        if (isMotionLoaded()){
+          if (e.getSource().equals(smodel)){
+              // Speed change, propagate to viewer and return
+              //System.out.println("Speed changed");
+              ViewDB.getInstance().sendAnimationSpeed();
+              return;
+          }
           if (e.getSource().equals(getMasterMotion()) && !internalTrigger){
              internalTrigger=true;
              jMotionSlider.setValue(getSliderValueForTime(getMasterMotion().getCurrentTime()));
@@ -641,9 +647,11 @@ public class MotionControlJPanel extends javax.swing.JToolBar
              setTimeTextField(getMasterMotion().getCurrentTime());
           } else if (e.getSource().equals(jMotionSlider) && !internalTrigger){
              internalTrigger=true;
+             ViewDB.getInstance().setScrubbing(true);
              getMasterMotion().setTime(getTimeForSliderValue(jMotionSlider.getValue()));
              internalTrigger=false;
              setTimeTextField(getMasterMotion().getCurrentTime());
+             ViewDB.getInstance().setScrubbing(false);
           }
        }
     }

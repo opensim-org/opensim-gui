@@ -77,6 +77,20 @@ import org.opensim.view.motions.MotionControlJPanel;
  */
 public final class ViewDB extends Observable implements Observer, LookupListener {
 
+    /**
+     * @return the scrubbing
+     */
+    public boolean isScrubbing() {
+        return scrubbing;
+    }
+
+    /**
+     * @param aScrubbing the scrubbing to set
+     */
+    public void setScrubbing(boolean aScrubbing) {
+        scrubbing = aScrubbing;
+    }
+
    // List of models currently available in all views
    private static ArrayList<Boolean> saveStatus = new ArrayList<Boolean>(4);
    // One single vtAssemby for the whole Scene
@@ -88,7 +102,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     * as a message to visualizer.
    */
    private static boolean applyAppearanceChange = true;
-
+   private static boolean scrubbing = false;
     public void endAnimation() {
         JSONObject msg = new JSONObject();
         msg.put("Op", "endAnimation");
@@ -1475,6 +1489,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         websocketdb.broadcastMessageJson(animationJson, null);
     }
     
+    public void sendAnimationSpeed() {
+        JSONObject animationSpeedJson = new JSONObject();
+        animationSpeedJson.put("Op", "SetAnimationSpeed");
+        animationSpeedJson.put("speed", MotionControlJPanel.getInstance().getSpeed());
+        websocketdb.broadcastMessageJson(animationSpeedJson, null);
+       
+    }
     public void playCurrentAnimations(double startTime, JSONArray uuids) {
         if (debugLevel >1)
             OpenSimLogger.logMessage("Play AnimationClips in Viewer", OpenSimLogger.INFO);
