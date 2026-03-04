@@ -1489,7 +1489,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         websocketdb.broadcastMessageJson(animationJson, null);
     }
     
-    public void sendAimationSpeed() {
+    public void sendAnimationSpeed() {
         JSONObject animationSpeedJson = new JSONObject();
         animationSpeedJson.put("Op", "SetAnimationSpeed");
         animationSpeedJson.put("speed", MotionControlJPanel.getInstance().getSpeed());
