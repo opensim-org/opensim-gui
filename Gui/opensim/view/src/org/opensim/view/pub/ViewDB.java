@@ -896,14 +896,22 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    public void updateModelDisplay(Model aModel, OpenSimObject specificObject) {
       if (websocketdb != null && currentJson != null && applyAppearanceChange){
         // Make xforms JSON
-        websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false, true), null);
+        //System.out.println("updateModelDisplay, scrubbig="+ getInstance().isScrubbing());
+        if (getInstance().isScrubbing())
+            websocketdb.broadcastMessageJson(currentJson.createAnimationTimeJson(), null);
+        else
+            websocketdb.broadcastMessageJson(currentJson.createFrameMessageJson(false, true), null);
       }
    }
    
    public void updateModelDisplayNoRepaint(Model aModel, boolean colorByState, boolean refresh) {
       if (websocketdb != null){
         ModelVisualizationJson cJson = mapModelsToJsons.get(aModel);
-        websocketdb.broadcastMessageJson(cJson.createFrameMessageJson(colorByState, refresh), null);
+        //System.out.println("updateModelDisplay, scrubbig="+ getInstance().isScrubbing());
+        if (getInstance().isScrubbing())
+            websocketdb.broadcastMessageJson(cJson.createAnimationTimeJson(), null);
+        else
+            websocketdb.broadcastMessageJson(cJson.createFrameMessageJson(colorByState, refresh), null);
       }
    }
 

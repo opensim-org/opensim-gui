@@ -855,7 +855,12 @@ public class ModelVisualizationJson extends JSONObject {
         }
     }
         
-
+    public JSONObject createAnimationTimeJson() {
+        JSONObject msg = new JSONObject();
+        msg.put("Op", "AnimationTime");
+        msg.put("time", state.getTime());
+        return msg;
+    }
     public JSONObject createSelectionJson(OpenSimObject obj) {
         JSONObject formJSON = new JSONObject();
         ArrayList<UUID> uuids = findUUIDForObject(obj);
