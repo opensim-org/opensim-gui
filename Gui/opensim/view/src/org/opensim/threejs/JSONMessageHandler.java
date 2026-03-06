@@ -48,7 +48,7 @@ import org.opensim.view.pub.ViewDB;
  * @author Ayman
  */
 public class JSONMessageHandler {
-    static Boolean debug = true;
+    static Boolean debug = false;
     public static void handleJSON(final Model model, final OpenSimObject opensimObj, final JSONObject jsonObject){
         if (debug)
             System.out.println("Received Message "+jsonObject.toString());
