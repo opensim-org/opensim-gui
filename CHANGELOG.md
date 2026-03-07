@@ -14,6 +14,7 @@ v4.6
 - Fix issue [#1480](https://github.com/opensim-org/opensim-gui/issues/1480): Unchecking the box to use controls in AnalyzeTool doesn't work.
 - Upgrade Viewer to a react application using threejs as a module/library, rewrite of viewing functionality
 - Fix issue [#1555](https://github.com/opensim-org/opensim-gui/issues/1555): Fix crash following use of the IMUInverseKinematicsTool in the GUI.
+- Visualizer has been rewritten as a React application in typescript using three.js as library (rev. 166) and r3f.
 
 
 v4.5
