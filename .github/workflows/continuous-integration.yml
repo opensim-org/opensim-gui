@@ -21,8 +21,6 @@ jobs:
     steps:
     - name: Checkout opensim-gui
       uses: actions/checkout@v4
-      with:
-          ref: wire_viewer_to_gui_jxbrowser7
 
     - name: Install SWIG
       run: |
@@ -213,8 +211,6 @@ jobs:
     steps:
     - name: Checkout opensim-gui
       uses: actions/checkout@v4
-      with:
-          ref: wire_viewer_to_gui_jxbrowser7
                 
     - name: Checkout opensim-core main
       uses: actions/checkout@v4
@@ -402,8 +398,6 @@ jobs:
 
     - name: Checkout opensim-gui
       uses: actions/checkout@v4
-      with:
-          ref: wire_viewer_to_gui
       
     - name: Checkout opensim-core main
       uses: actions/checkout@v4
