@@ -428,7 +428,7 @@ public final class AboutJPanel extends javax.swing.JPanel implements ImageObserv
         Image ret;
         if ((aboutRef == null) ||
                 ((ret = (Image) aboutRef.get()) == null)) {
-            ret = loadImage("/org/opensim/helputils/helpmenu/images/splash.gif");
+            ret = loadImage("/org/opensim/helputils/helpmenu/images/splash.png");
             aboutRef = new WeakReference(ret);
         }
         return ret;
