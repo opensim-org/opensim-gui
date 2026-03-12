@@ -171,18 +171,21 @@ jobs:
     
         # Create installer modules directory
         New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/"
+        New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/ext/"
     
         # Copy the main JAR
         Write-Host "Copying org-opensim-javabrowser.jar to installer content..."
         Copy-Item -Path "$extractDir\netbeans\modules\org-opensim-javabrowser.jar" `
                   -Destination "$installerContentPath/modules/" -Force
     
-        # Copy any ext JARs if they exist
-        if (Test-Path "$extractDir\netbeans\modules\ext\") {
-            New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/ext/"
-            Copy-Item -Path "$extractDir\netbeans\modules\ext\*.jar" `
-                      -Destination "$installerContentPath/modules/ext/" -Force
-        }
+        # Copy Windows-specific JARs with exact names
+        Write-Host "Copying Windows JARs to installer content..."
+        Copy-Item -Path "$extractDir\netbeans\modules\ext\jxbrowser-7.44.1.jar" `
+                  -Destination "$installerContentPath/modules/ext/" -Force
+        Copy-Item -Path "$extractDir\netbeans\modules\ext\jxbrowser-swing-7.44.1.jar" `
+                  -Destination "$installerContentPath/modules/ext/" -Force
+        Copy-Item -Path "$extractDir\netbeans\modules\ext\jxbrowser-win64-7.44.1.jar" `
+                  -Destination "$installerContentPath/modules/ext/" -Force
     
         # Verify files copied
         Write-Host "JAR files now in installer content:"
@@ -358,17 +361,17 @@ jobs:
         mkdir -p "$EXTRACT_DIR"
         unzip -o "$NBM_DIR/org-opensim-javabrowser.nbm" -d "$EXTRACT_DIR"
     
-        # Create installer modules directory
+        # Create installer modules directories
         mkdir -p "$INSTALLER_CONTENT/modules/"
+        mkdir -p "$INSTALLER_CONTENT/modules/ext/"
     
         # Copy the main JAR
         cp "$EXTRACT_DIR/netbeans/modules/org-opensim-javabrowser.jar" "$INSTALLER_CONTENT/modules/"
     
-        # Copy any ext JARs if they exist
-        if [ -d "$EXTRACT_DIR/netbeans/modules/ext" ]; then
-            mkdir -p "$INSTALLER_CONTENT/modules/ext/"
-            cp "$EXTRACT_DIR/netbeans/modules/ext/"*.jar "$INSTALLER_CONTENT/modules/ext/"
-        fi
+        # Copy macOS-specific JARs with exact names
+        cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
+        cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-swing-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
+        cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-mac-arm-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
     
         # Verify files copied
         echo "JAR files now in installer content:"
@@ -530,17 +533,16 @@ jobs:
         mkdir -p "$EXTRACT_DIR"
         unzip -o "$NBM_DIR/org-opensim-javabrowser.nbm" -d "$EXTRACT_DIR"
     
-        # Create installer modules directory
+        # Create installer modules directories
         mkdir -p "$INSTALLER_CONTENT/modules/"
+        mkdir -p "$INSTALLER_CONTENT/modules/ext/"
     
         # Copy the main JAR
         cp "$EXTRACT_DIR/netbeans/modules/org-opensim-javabrowser.jar" "$INSTALLER_CONTENT/modules/"
     
-        # Copy any ext JARs if they exist
-        if [ -d "$EXTRACT_DIR/netbeans/modules/ext" ]; then
-            mkdir -p "$INSTALLER_CONTENT/modules/ext/"
-            cp "$EXTRACT_DIR/netbeans/modules/ext/"*.jar "$INSTALLER_CONTENT/modules/ext/"
-        fi
+        # For Linux, copy only the base JARs with exact names
+        cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
+        cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-swing-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
     
         # Verify files copied
         echo "JAR files now in installer content:"
