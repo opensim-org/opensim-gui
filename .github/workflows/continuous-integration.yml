@@ -548,6 +548,7 @@ jobs:
         # create new zip file with updated contents
         cd Gui/opensim/dist/installer
         zip -r opensim.zip opensim
+        mv opensim.zip $GITHUB_WORKSPACE
 
     - name: Upload GUI installer
       uses: actions/upload-artifact@v4
