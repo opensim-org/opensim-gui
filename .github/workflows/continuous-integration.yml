@@ -546,10 +546,11 @@ jobs:
         ls Gui/opensim/dist/installer/opensim/opensim/modules/ext
         # mv Gui/opensim/dist/OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz $GITHUB_WORKSPACE
         # create new zip file with updated contents
-        zip -r opensim_updated.zip Gui/opensim/dist/installer
+        cd Gui/opensim/dist/installer
+        zip -r opensim.zip opensim
 
     - name: Upload GUI installer
       uses: actions/upload-artifact@v4
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-ub24-linux
-        path: opensim_updated.zip
+        path: opensim.zip
