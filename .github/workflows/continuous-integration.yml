@@ -515,7 +515,7 @@ jobs:
         # Create prebuilt directory
         mkdir -p "$NBM_DIR"
     
-        # Download the NBM file
+        # Download the latest NBM file
         wget -O "$NBM_DIR/org-opensim-javabrowser.nbm" \
              "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm"
     
@@ -530,7 +530,7 @@ jobs:
         # Copy the main JAR
         cp "$EXTRACT_DIR/netbeans/modules/org-opensim-javabrowser.jar" "$INSTALLER_CONTENT/modules/"
     
-        # For Linux, copy only the base JARs with exact names
+        # For Linux, ccopy all JARs with exact names
         cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
         cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-swing-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
         cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-linux64-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
