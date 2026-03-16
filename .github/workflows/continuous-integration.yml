@@ -542,8 +542,10 @@ jobs:
     - name: Build GUI installer
       run: |
         cd $GITHUB_WORKSPACE
-        ls Gui/opensim/dist
-        mv Gui/opensim/dist/OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz $GITHUB_WORKSPACE
+        ls Gui/opensim/dist/installer/opensim/opensim/modules
+        ls Gui/opensim/dist/installer/opensim/opensim/modules/ext
+        # mv Gui/opensim/dist/OpenSim-${{ steps.build-gui.outputs.version }}.tar.gz $GITHUB_WORKSPACE
+        # create new zip file with updated contents
 
     - name: Upload GUI installer
       uses: actions/upload-artifact@v4
