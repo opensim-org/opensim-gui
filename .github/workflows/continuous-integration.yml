@@ -390,9 +390,9 @@ jobs:
         path: OpenSim-${{ steps.build-gui.outputs.version }}.pkg
 
   ubuntu:
-    name: Ubuntu2204
+    name: Ubuntu2404
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
 
@@ -433,9 +433,8 @@ jobs:
 
     - name: Download and Install Netbeans
       run: |
-        wget -q https://archive.apache.org/dist/netbeans/netbeans-installers/17/apache-netbeans_17-1_all.deb
-        sudo dpkg -i apache-netbeans_17-1_all.deb
-        sudo apt-get install -f
+        wget -q https://archive.apache.org/dist/netbeans/netbeans/17/netbeans-17-bin.zip
+        unzip -q netbeans-17-bin.zip -d $HOME
 
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
@@ -496,7 +495,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans-12.3/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans-12.3/netbeans/harness"
+        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans/harness"
         make CopyOpenSimCore
         make PrepareInstaller
         # Read the value of the cache variable storing the GUI build version.
