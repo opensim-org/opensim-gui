@@ -515,7 +515,7 @@ jobs:
         # Create prebuilt directory
         mkdir -p "$NBM_DIR"
     
-        # Download the latest NBM file
+        # Download the NBM file pinned to version v4.6.0
         wget -O "$NBM_DIR/org-opensim-javabrowser.nbm" \
              "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm"
     
