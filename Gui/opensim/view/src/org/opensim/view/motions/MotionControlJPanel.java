@@ -637,7 +637,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           if (e.getSource().equals(smodel)){
               // Speed change, propagate to viewer and return
               //System.out.println("Speed changed");
-              ViewDB.getInstance().sendAimationSpeed();
+              ViewDB.getInstance().sendAnimationSpeed();
               return;
           }
           if (e.getSource().equals(getMasterMotion()) && !internalTrigger){
