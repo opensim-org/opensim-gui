@@ -1511,10 +1511,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         websocketdb.broadcastMessageJson(animationLoopJson, null);
     }
     
-    @Deprecated
-    public void sendAimationLoop() {
-        sendAnimationLoop();
-    }
     public void playCurrentAnimations(double startTime, JSONArray uuids) {
         if (debugLevel >1)
             OpenSimLogger.logMessage("Play AnimationClips in Viewer", OpenSimLogger.INFO);
