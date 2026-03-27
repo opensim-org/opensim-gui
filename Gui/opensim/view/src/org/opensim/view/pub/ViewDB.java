@@ -1497,6 +1497,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         websocketdb.broadcastMessageJson(animationJson, null);
     }
     
+     // Send animation speed (wrt real time) to viewer 
     public void sendAnimationSpeed() {
         JSONObject animationSpeedJson = new JSONObject();
         animationSpeedJson.put("Op", "SetAnimationSpeed");
@@ -1504,6 +1505,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         websocketdb.broadcastMessageJson(animationSpeedJson, null);
        
     }
+    // Send flag indicating the status of wrap motion 
     public void sendAnimationLoop() {
         JSONObject animationLoopJson = new JSONObject();
         animationLoopJson.put("Op", "SetAnimationLoop");
