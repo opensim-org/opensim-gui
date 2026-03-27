@@ -151,7 +151,7 @@ public class MasterMotionModel {
 
    public void setWrapMotion(boolean wrapMotion) {
       this.wrapMotion = wrapMotion;
-      ViewDB.getInstance().sendAimationLoop();
+      ViewDB.getInstance().sendAnimationLoop();
    }
 
    public boolean finished(int direction) {
