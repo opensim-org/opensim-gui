@@ -1504,12 +1504,16 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         websocketdb.broadcastMessageJson(animationSpeedJson, null);
        
     }
-    public void sendAimationLoop() {
+    public void sendAnimationLoop() {
         JSONObject animationLoopJson = new JSONObject();
         animationLoopJson.put("Op", "SetAnimationLoop");
         animationLoopJson.put("state", MotionControlJPanel.getInstance().getMasterMotion().isWrapMotion());
         websocketdb.broadcastMessageJson(animationLoopJson, null);
-       
+    }
+    
+    @Deprecated
+    public void sendAimationLoop() {
+        sendAnimationLoop();
     }
     public void playCurrentAnimations(double startTime, JSONArray uuids) {
         if (debugLevel >1)
