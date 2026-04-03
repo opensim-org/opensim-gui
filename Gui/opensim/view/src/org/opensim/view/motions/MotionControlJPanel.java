@@ -591,7 +591,12 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             animationTimer.stop();
         animationTimer=null;
         setViewerDrivenPlay(true);
-        jPlayButtonActionPerformed(null);
+        // Turn off looping and disable controls, also set time to start
+        masterMotion.setWrapMotion(false);
+        disableComponents();
+        masterMotion.setTime(masterMotion.getStartTime());
+        // Playing is controlled by recording, so don't play
+        //jPlayButtonActionPerformed(null);
         isViewerAnimating = true;
     }
     
