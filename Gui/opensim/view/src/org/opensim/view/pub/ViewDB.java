@@ -1394,11 +1394,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(frameRate));
                     return;
                 }
-                if (debugLevel > 1) {
-                    String msg = "Rendered " + jsonObject.get("numFrames") + " frames in " + jsonObject.get("totalTime") + " ms.";
-                    double rendertimeAverage = ((Double) jsonObject.get("totalTime")) / ((Long) jsonObject.get("numFrames"));
-                    OpenSimLogger.logMessage(msg + "FPS: " + (int) 1000 / rendertimeAverage + "\n", OpenSimLogger.INFO);
-                }
                 return;
             }
             if (msgType.equalsIgnoreCase("transforms")) {
@@ -1437,19 +1432,15 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                 return;
             }
             if (msgType.equalsIgnoreCase("FinishRecording")){
-                MotionControlJPanel.getInstance().setViewerDrivenPlay(false);
-                if (debugLevel > 1) System.out.println("AEnd recording.");
+                MotionControlJPanel.getInstance().endViewerRecording();
+                if (debugLevel > 1) System.out.println("End recording.");
                 return;
             }
             if (msgType.equalsIgnoreCase("Animation")){
                 String op = (String) jsonObject.get("OP");
                 if (op.equalsIgnoreCase("start")){
-                    double timestep = (double) jsonObject.get("timestep");
-                    int desiredFrameRate = (int) Math.ceil(1000.0/timestep);
-                    TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(desiredFrameRate));
-                    if (debugLevel >1)
-                        OpenSimLogger.logMessage("Setting desired frame rate to:"+desiredFrameRate+" FPS", OpenSimLogger.INFO);
-                    MotionControlJPanel.getInstance().playAnimation();
+                    MotionControlJPanel.getInstance().startViewerRecording();
+                    if (debugLevel > 1) System.out.println("Start recording.");
                 }
                 if (op.equalsIgnoreCase("setTime")){
                     Object valueObj = jsonObject.get("value");

@@ -558,6 +558,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           // correct selected modes
           deselectPlaybackButtons();
           jReverseButton.setSelected(true);
+          masterMotion.setWrapMotion(false);
+          jWrapToggleButton.setSelected(false);
       }
    }//GEN-LAST:event_jPlayReverseButtonActionPerformed
    
@@ -569,7 +571,9 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           deselectPlaybackButtons();
           jStopButton.setSelected(true);
           ViewDB.getInstance().endAnimation();
-            setViewerDrivenPlay(false);
+          setViewerDrivenPlay(false);
+          jPlayButton.setEnabled(true);
+          jReverseButton.setEnabled(true);
        }
     }//GEN-LAST:event_jStopButtonActionPerformed
     
@@ -586,18 +590,27 @@ public class MotionControlJPanel extends javax.swing.JToolBar
        }
     }//GEN-LAST:event_jAdvanceButtonActionPerformed
     // Entry point to trigger play of animation from viewer
-    public void playAnimation() {
+    public void startViewerRecording() {
         if (animationTimer!= null)
             animationTimer.stop();
         animationTimer=null;
         setViewerDrivenPlay(true);
         // Turn off looping and disable controls, also set time to start
         masterMotion.setWrapMotion(false);
+        jWrapToggleButton.setSelected(false);
         disableComponents();
         masterMotion.setTime(masterMotion.getStartTime());
         // Playing is controlled by recording, so don't play
         //jPlayButtonActionPerformed(null);
         isViewerAnimating = true;
+    }
+    
+    public void endViewerRecording() {
+        setViewerDrivenPlay(false);
+        enableComponents();
+        // Playing is controlled by recording, so don't play
+        //jPlayButtonActionPerformed(null);
+        isViewerAnimating = false;        
     }
     
     public void setTimeNoRender(double animationTime) {
