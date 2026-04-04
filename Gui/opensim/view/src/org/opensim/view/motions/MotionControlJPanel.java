@@ -135,17 +135,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
                 setViewerDrivenPlay(false);
             isViewerAnimating = false;
             
-         } else {
-            /*
-            double ms=1e-6*(System.nanoTime()-currentTimeNano);
-            avgCost += ms; avgCostCount++;
-            int elapsedTimeMS = (int)ms;
-            //int nextDelay = (timerRate>elapsedTimeMS) ? timerRate - elapsedTimeMS : 0;
-            //int nextDelay = 0;
-            System.out.println("Current: "+ms+" Avg: "+avgCost/avgCostCount);
-            //animationTimer.setDelay(nextDelay);
-            */
-         }
+         } 
       }
    }
    
@@ -541,6 +531,10 @@ public class MotionControlJPanel extends javax.swing.JToolBar
    }//GEN-LAST:event_jBackButtonActionPerformed
    
    private void jPlayReverseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlayReverseButtonActionPerformed
+      // if playing forward, stop first
+      if (jPlayButton.isSelected()){
+          jStopButtonActionPerformed(null);
+      }      
       if (animationTimer!=null){
          animationTimer.stop();
          animationTimer=null;
@@ -617,6 +611,10 @@ public class MotionControlJPanel extends javax.swing.JToolBar
         getMasterMotion().setTimeNoRender(animationTime);
     }
     private void jPlayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlayButtonActionPerformed
+      // if playing reverse, stop first
+      if (jReverseButton.isSelected()){
+          jStopButtonActionPerformed(null);
+      }
       if (animationTimer!=null){
          animationTimer.stop();
          animationTimer=null;
