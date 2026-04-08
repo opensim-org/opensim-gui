@@ -540,6 +540,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          animationTimer=null;
       }
       this.reverse=true;
+      jWrapToggleButton.setEnabled(!this.reverse);
       if (isMotionLoaded() && animationTimer==null){
           if (getMasterMotion().finished(-1)){
               // reset motion if at end already
@@ -620,6 +621,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          animationTimer=null;
       }
       this.reverse=false;
+      jWrapToggleButton.setEnabled(!this.reverse);
       int timerRate = ViewDB.getInstance().getFrameRate();
       if (isMotionLoaded() && animationTimer==null){
           if (getMasterMotion().finished(1)){
