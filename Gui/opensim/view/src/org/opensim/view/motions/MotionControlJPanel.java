@@ -134,7 +134,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             if (debug) System.out.println("End Animation");
                 setViewerDrivenPlay(false);
             isViewerAnimating = false;
-            
+            jMotionSlider.setEnabled(true);
          } 
       }
    }
@@ -539,6 +539,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
          animationTimer.stop();
          animationTimer=null;
       }
+      jMotionSlider.setEnabled(false);
       this.reverse=true;
       jWrapToggleButton.setEnabled(!this.reverse);
       if (isMotionLoaded() && animationTimer==null){
@@ -569,6 +570,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           setViewerDrivenPlay(false);
           jPlayButton.setEnabled(true);
           jReverseButton.setEnabled(true);
+          jMotionSlider.setEnabled(true);
        }
     }//GEN-LAST:event_jStopButtonActionPerformed
     
@@ -616,6 +618,7 @@ public class MotionControlJPanel extends javax.swing.JToolBar
       if (jReverseButton.isSelected()){
           jStopButtonActionPerformed(null);
       }
+      jMotionSlider.setEnabled(false);
       if (animationTimer!=null){
          animationTimer.stop();
          animationTimer=null;
