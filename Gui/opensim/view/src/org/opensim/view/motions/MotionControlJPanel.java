@@ -134,18 +134,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             if (debug) System.out.println("End Animation");
                 setViewerDrivenPlay(false);
             isViewerAnimating = false;
-            
-         } else {
-            /*
-            double ms=1e-6*(System.nanoTime()-currentTimeNano);
-            avgCost += ms; avgCostCount++;
-            int elapsedTimeMS = (int)ms;
-            //int nextDelay = (timerRate>elapsedTimeMS) ? timerRate - elapsedTimeMS : 0;
-            //int nextDelay = 0;
-            System.out.println("Current: "+ms+" Avg: "+avgCost/avgCostCount);
-            //animationTimer.setDelay(nextDelay);
-            */
-         }
+            jMotionSlider.setEnabled(true);
+         } 
       }
    }
    
@@ -541,11 +531,17 @@ public class MotionControlJPanel extends javax.swing.JToolBar
    }//GEN-LAST:event_jBackButtonActionPerformed
    
    private void jPlayReverseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlayReverseButtonActionPerformed
+      // if playing forward, stop first
+      if (jPlayButton.isSelected()){
+          jStopButtonActionPerformed(null);
+      }      
       if (animationTimer!=null){
          animationTimer.stop();
          animationTimer=null;
       }
+      jMotionSlider.setEnabled(false);
       this.reverse=true;
+      jWrapToggleButton.setEnabled(!this.reverse);
       if (isMotionLoaded() && animationTimer==null){
           if (getMasterMotion().finished(-1)){
               // reset motion if at end already
@@ -558,6 +554,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           // correct selected modes
           deselectPlaybackButtons();
           jReverseButton.setSelected(true);
+          masterMotion.setWrapMotion(false);
+          jWrapToggleButton.setSelected(false);
       }
    }//GEN-LAST:event_jPlayReverseButtonActionPerformed
    
@@ -569,7 +567,10 @@ public class MotionControlJPanel extends javax.swing.JToolBar
           deselectPlaybackButtons();
           jStopButton.setSelected(true);
           ViewDB.getInstance().endAnimation();
-            setViewerDrivenPlay(false);
+          setViewerDrivenPlay(false);
+          jPlayButton.setEnabled(true);
+          jReverseButton.setEnabled(true);
+          jMotionSlider.setEnabled(true);
        }
     }//GEN-LAST:event_jStopButtonActionPerformed
     
@@ -586,24 +587,44 @@ public class MotionControlJPanel extends javax.swing.JToolBar
        }
     }//GEN-LAST:event_jAdvanceButtonActionPerformed
     // Entry point to trigger play of animation from viewer
-    public void playAnimation() {
+    public void startViewerRecording() {
         if (animationTimer!= null)
             animationTimer.stop();
         animationTimer=null;
         setViewerDrivenPlay(true);
-        jPlayButtonActionPerformed(null);
+        // Turn off looping and disable controls, also set time to start
+        masterMotion.setWrapMotion(false);
+        jWrapToggleButton.setSelected(false);
+        disableComponents();
+        masterMotion.setTime(masterMotion.getStartTime());
+        // Playing is controlled by recording, so don't play
+        //jPlayButtonActionPerformed(null);
         isViewerAnimating = true;
+    }
+    
+    public void endViewerRecording() {
+        setViewerDrivenPlay(false);
+        enableComponents();
+        // Playing is controlled by recording, so don't play
+        //jPlayButtonActionPerformed(null);
+        isViewerAnimating = false;        
     }
     
     public void setTimeNoRender(double animationTime) {
         getMasterMotion().setTimeNoRender(animationTime);
     }
     private void jPlayButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPlayButtonActionPerformed
+      // if playing reverse, stop first
+      if (jReverseButton.isSelected()){
+          jStopButtonActionPerformed(null);
+      }
+      jMotionSlider.setEnabled(false);
       if (animationTimer!=null){
          animationTimer.stop();
          animationTimer=null;
       }
       this.reverse=false;
+      jWrapToggleButton.setEnabled(!this.reverse);
       int timerRate = ViewDB.getInstance().getFrameRate();
       if (isMotionLoaded() && animationTimer==null){
           if (getMasterMotion().finished(1)){
