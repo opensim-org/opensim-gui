@@ -3,7 +3,8 @@ name: opensim-application-core-PR
 on:
   workflow_dispatch:
      inputs:
-      distinct_id:  
+      distinct_id:
+        required: false
 jobs:
   windows:
     name: Windows
