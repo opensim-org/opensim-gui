@@ -2,6 +2,7 @@
 <p align=center>
     <a href="https://opensim.stanford.edu/">
         <img src="opensim_logo.png" alt="OpenSim Logo">
+    </a>
 </p>
 
 <!-- Badges -->
