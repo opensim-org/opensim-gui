@@ -665,15 +665,17 @@ public class MotionDisplayer {
      long before = 0, after=0;
      if (profile)
           before =System.nanoTime();
+     // Here handling a motion file with potentially extra columns for Forces, Markers
+     OpenSimContext context = OpenSimDB.getInstance().getContext(model);
      if (simmMotionData instanceof AnnotatedMotion){ // Experimental Data
           int dataSize = states.getSize();
           AnnotatedMotion mot = (AnnotatedMotion)simmMotionData;
           Vector<ExperimentalDataObject> objects=mot.getClassified();
           mot.updateDecorations(interpolatedStates);
+          context.getCurrentStateRef().setTime(assocTime);
+          context.realizeVelocity();
           return;
       }
-     // Here handling a motion file with potentially extra columns for Forces, Markers
-      OpenSimContext context = OpenSimDB.getInstance().getContext(model);
       
       if(statesFile || motionAsStates!=null) {
           // FIX40 speed this up by using map or YIndex
