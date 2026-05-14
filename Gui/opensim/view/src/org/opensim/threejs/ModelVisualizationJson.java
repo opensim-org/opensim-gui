@@ -145,7 +145,7 @@ public class ModelVisualizationJson extends JSONObject {
     public static boolean verbose=false;
     private boolean ready = false;
     private static final HashMap<String, Boolean> movableOpensimTypes = new HashMap<String, Boolean>();
-    private final ArrayList<MotionDisplayer> motionDisplayers = new ArrayList<MotionDisplayer>();
+    public final ArrayList<MotionDisplayer> motionDisplayers = new ArrayList<MotionDisplayer>();
     private JSONObject modelGroundJson=null;
     private boolean movable=true;
     private final HashMap<Frame, VisualizerFrame> visualizerFrames = new HashMap<Frame, VisualizerFrame>();

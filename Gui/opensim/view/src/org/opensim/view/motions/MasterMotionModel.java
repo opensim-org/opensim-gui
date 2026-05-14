@@ -178,20 +178,24 @@ public class MasterMotionModel {
           MotionsDB.getInstance().addMotionDisplayer(simmMotionData, displayer);
           
       }
-      // create AnimationJson and keep track of uuid for future reference
-      String animationUUID = displayer.getAnimationClipUUID();
-      ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(model);
-      // Package clip and send to viewer
-      JSONObject currentAnimation = new JSONObject();
-      currentAnimation.put("Clip", displayer.getAnimationClip());
-      currentAnimation.put("Root", modelViz.getModelUUID().toString());
-      currentAnimation.put("Op", "AddAnimationClip");
-      ViewDB.getInstance().sendAnimationClip(currentAnimation);
+        sendClipToViewer(displayer, model);
       
       displayers.add(displayer);
       buildSuperMotion(model, simmMotionData);
       animationChanged = true;
    }
+
+    public static void sendClipToViewer(MotionDisplayer displayer, Model model) {
+        // create AnimationJson and keep track of uuid for future reference
+        String animationUUID = displayer.getAnimationClipUUID();
+        ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(model);
+        // Package clip and send to viewer
+        JSONObject currentAnimation = new JSONObject();
+        currentAnimation.put("Clip", displayer.getAnimationClip());
+        currentAnimation.put("Root", modelViz.getModelUUID().toString());
+        currentAnimation.put("Op", "AddAnimationClip");
+        ViewDB.getInstance().sendAnimationClip(currentAnimation);
+    }
     
    void add(MotionsDB.ModelMotionPair pair) {
       add(pair.model, pair.motion);
