@@ -402,8 +402,6 @@ public class MotionDisplayer {
         interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
         
         modelVisJson.addMotionDisplayer(this);
-        if (model instanceof ModelForExperimentalData) return;
-
     }
     public static final String STRING_EXPMARKER_DEFAULT_RADIUS = "10";
     public void setupMotionDisplay() { 
@@ -422,7 +420,6 @@ public class MotionDisplayer {
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
             Vector<ExperimentalDataObject> objects=mot.getClassified();
             mot.setMotionDisplayer(this);
-            createMotionObjectsGroupJson();
             addExperimentalDataObjectsToJson(objects);
             for(ExperimentalDataObject nextObject:objects){
                bindExperimentalDataObjectToVisualizerObjectKeepHandle(nextObject);
