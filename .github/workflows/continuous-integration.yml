@@ -55,6 +55,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
+         ref: 'opensim_46'
     
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
@@ -209,7 +210,8 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
-        
+         ref: 'opensim_46'
+
     - name: Install packages
       run: |
         brew uninstall cmake
@@ -391,7 +393,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
-         
+         ref: 'opensim_46'
     - name: Install packages
       run: sudo apt-get update && sudo apt-get install --yes liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen gfortran-11
      
