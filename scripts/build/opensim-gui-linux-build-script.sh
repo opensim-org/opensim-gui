@@ -9,6 +9,7 @@ NUM_JOBS=4
 MOCO="on"
 CORE_BRANCH="main"
 GUI_BRANCH="main"
+VIEWER_BRANCH="dev"
 GENERATOR="Unix Makefiles"
 
 Help() {
@@ -25,13 +26,14 @@ Help() {
     echo "    -s         Simple build without moco (Tropter and Casadi disabled)."
     echo "    -c         Branch for opensim-core repository."
     echo "    -g         Branch for opensim-gui repository."
+    echo "    -v         Branch for opensim-viewer repository."
     echo "    -n         Use the Ninja generator to build opensim-core. If not set, Unix Makefiles is used."
     echo
     exit
 }
 
 # Get flag values if exist.
-while getopts 'j:d:sc:g:n' flag
+while getopts 'j:d:sc:g:v:n' flag
 do
     case "${flag}" in
         j) NUM_JOBS=${OPTARG};;
@@ -39,6 +41,7 @@ do
         s) MOCO="off";;
         c) CORE_BRANCH=${OPTARG};;
         g) GUI_BRANCH=${OPTARG};;
+        v) VIEWER_BRANCH=${OPTARG};;
         n) GENERATOR="Ninja";;
         *) Help;
     esac
@@ -84,22 +87,22 @@ echo
 
 # Install dependencies from package manager.
 echo "LOG: INSTALLING DEPENDENCIES..."
-sudo apt-get update && sudo apt-get install --yes build-essential cmake autotools-dev autoconf pkg-config automake libopenblas-dev liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen python3 python3-dev python3-numpy python3-setuptools libpcre3 libpcre3-dev libpcre2-dev byacc git gfortran libtool libssl-dev libffi-dev ninja-build patchelf || ( echo "Installation of dependencies using apt-get failed." && exit )
+sudo apt-get update && sudo apt-get install --yes build-essential cmake autotools-dev autoconf pkg-config automake libopenblas-dev liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen python3 python3-dev python3-setuptools libpcre3 libpcre3-dev libpcre2-dev byacc git gfortran libtool libssl-dev libffi-dev ninja-build patchelf libgl1-mesa-dev unzip wget npm || ( echo "Installation of dependencies using apt-get failed." && exit )
 echo
 
-# Debian does not have openjdk-8-jdk available, so install from temurin repo.
-echo "LOG: INSTALLING JDK 8..."
+# Install JDK 17
+echo "LOG: INSTALLING JDK 17..."
 if [[ $OS_NAME == *"Debian"* ]]; then
    sudo apt-get install -y wget apt-transport-https
    sudo mkdir -p /etc/apt/keyrings || true
    wget -O - https://packages.adoptium.net/artifactory/api/gpg/key/public | sudo tee /etc/apt/keyrings/adoptium.asc
    echo "deb [signed-by=/etc/apt/keyrings/adoptium.asc] https://packages.adoptium.net/artifactory/deb $(awk -F= '/^VERSION_CODENAME/{print$2}' /etc/os-release) main" | sudo tee /etc/apt/sources.list.d/adoptium.list
-   sudo apt update # update if you haven't already
-   sudo apt install --yes temurin-8-jdk
+   sudo apt update
+   sudo apt install --yes temurin-17-jdk
    # Export JAVA_HOME variable.
    export JAVA_HOME=$(dirname $(dirname $(readlink -f /usr/bin/java)))
 elif [[ $OS_NAME == *"Ubuntu"* ]]; then
-   sudo apt install --yes openjdk-8-jdk
+   sudo apt install --yes openjdk-17-jdk
 fi
 echo
 
@@ -118,7 +121,7 @@ cmake_minor_less=$(( ${cmake_version_split[1]} < ${min_cmake_version_split[1]} )
 if [[ $cmake_major_less == 1 ]] || $( [[ $cmake_major_equal == 1 ]] && [[ $cmake_minor_less == 1 ]] ); then
     mkdir ~/opensim-workspace/cmake-3.23.3-source || true
     cd ~/opensim-workspace/cmake-3.23.3-source
-    wget -nc -q --show-progress https://github.com/Kitware/CMake/releases/download/v3.23.3/cmake-3.23.3.tar.gz 
+    wget -nc -q --show-progress https://github.com/Kitware/CMake/releases/download/v3.23.3/cmake-3.23.3.tar.gz
     tar -zxvf cmake-3.23.3.tar.gz
     cd ~/opensim-workspace/cmake-3.23.3-source/cmake-3.23.3
     ./bootstrap
@@ -159,20 +162,20 @@ mkdir -p ~/opensim-workspace/swig-source || true && cd ~/opensim-workspace/swig-
 wget -nc -q --show-progress https://github.com/swig/swig/archive/refs/tags/v4.1.1.tar.gz
 tar xzf v4.1.1.tar.gz && cd swig-4.1.1
 sh autogen.sh && ./configure --prefix=$HOME/swig --disable-ccache
-make && make -j$NUM_JOBS install  
+make && make -j$NUM_JOBS install
 echo
 
-# Download and install NetBeans 12.3.
-echo "LOG: INSTALLING NETBEANS 12.3..."
-mkdir -p ~/opensim-workspace/Netbeans12.3 || true && cd ~/opensim-workspace/Netbeans12.3
-wget -nc -q --show-progress https://archive.apache.org/dist/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-linux-x64.sh
-chmod 755 Apache-NetBeans-12.3-bin-linux-x64.sh
-./Apache-NetBeans-12.3-bin-linux-x64.sh --silent
+# Download and install NetBeans 17 (using zip like CI, not installer)
+echo "LOG: INSTALLING NETBEANS 17..."
+cd ~
+wget -q https://archive.apache.org/dist/netbeans/netbeans/17/netbeans-17-bin.zip
+unzip -q -o netbeans-17-bin.zip -d $HOME
+rm netbeans-17-bin.zip
 echo
 
 # Get opensim-core.
 echo "LOG: CLONING OPENSIM-CORE..."
-git -C ~/opensim-workspace/opensim-core-source pull || git clone https://github.com/opensim-org/opensim-core.git ~/opensim-workspace/opensim-core-source
+git -C ~/opensim-workspace/opensim-core-source pull || git clone https://github.com/opensim-org/opensim-core.git ~/opensim-workspace/opensim-core-source || true
 cd ~/opensim-workspace/opensim-core-source
 git checkout $CORE_BRANCH
 echo
@@ -198,19 +201,48 @@ echo
 
 # Get opensim-gui.
 echo "LOG: CLONING OPENSIM-GUI..."
-git -C ~/opensim-workspace/opensim-gui-source pull || git clone https://github.com/opensim-org/opensim-gui.git ~/opensim-workspace/opensim-gui-source
+git -C ~/opensim-workspace/opensim-gui-source pull || git clone https://github.com/opensim-org/opensim-gui.git ~/opensim-workspace/opensim-gui-source || true
 cd ~/opensim-workspace/opensim-gui-source
 git checkout $GUI_BRANCH
-git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
+cd Gui/opensim/opensim-viewer
+git checkout $VIEWER_BRANCH
+cd -
 echo
 
-# Build opensim-gui.
+# Build opensim-gui
 echo "LOG: BUILDING OPENSIM-GUI..."
 mkdir -p ~/opensim-workspace/opensim-gui-build || true
 cd ~/opensim-workspace/opensim-gui-build
-cmake ~/opensim-workspace/opensim-gui-source -DCMAKE_PREFIX_PATH=~/opensim-core -DAnt_EXECUTABLE=~/netbeans-12.3/netbeans/extide/ant/bin/ant -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans-12.3/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans-12.3/netbeans/harness"
+cmake ~/opensim-workspace/opensim-gui-source -DCMAKE_PREFIX_PATH=~/opensim-core -DAnt_EXECUTABLE=~/netbeans/extide/ant/bin/ant -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans/harness"
 make CopyOpenSimCore -j$NUM_JOBS
 make PrepareInstaller -j$NUM_JOBS
+echo
+
+# Add jxbrowser files to installer content
+echo "LOG: ADDING JXBROWSER FILES TO INSTALLER CONTENT..."
+ROOT="$HOME/opensim-workspace"
+NBM_DIR="$ROOT/prebuilt_jxb"
+EXTRACT_DIR="$NBM_DIR/extracted"
+INSTALLER_CONTENT="$ROOT/opensim-gui-source/Gui/opensim/dist/installer/opensim/opensim"
+mkdir -p "$NBM_DIR" # Create prebuilt directory
+# Download the NBM file pinned to version v4.6.0
+wget -O "$NBM_DIR/org-opensim-javabrowser.nbm" \
+     "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm"
+mkdir -p "$EXTRACT_DIR" # Extract the NBM (nbm is a zip)
+unzip -o "$NBM_DIR/org-opensim-javabrowser.nbm" -d "$EXTRACT_DIR"
+# Create installer modules directories
+mkdir -p "$INSTALLER_CONTENT/modules/"
+mkdir -p "$INSTALLER_CONTENT/modules/ext/"
+# Copy the main JAR
+cp "$EXTRACT_DIR/netbeans/modules/org-opensim-javabrowser.jar" "$INSTALLER_CONTENT/modules/"
+# For Linux, copy all JARs with exact names
+cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
+cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-swing-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
+cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-linux64-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
+# Verify files copied
+echo "JAR files now in installer content:"
+find "$INSTALLER_CONTENT" -name "*.jar"
 echo
 
 # Install opensim-gui.

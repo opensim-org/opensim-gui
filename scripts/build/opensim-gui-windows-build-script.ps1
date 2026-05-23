@@ -13,7 +13,8 @@ $DEBUG_TYPE="Release"
 $NUM_JOBS=4
 $MOCO="on"
 $CORE_BRANCH="main"
-$GUI_BRANCH="master"
+$GUI_BRANCH="main"
+$VIEWER_BRANCH="dev"
 
 function Help {
     Write-Output "This script builds the last available version of OpenSim-Gui in your computer."
@@ -28,6 +29,8 @@ function Help {
     Write-Output "    -s        Simple build without moco (Tropter and Casadi disabled)."
     Write-Output "    -c        Branch for opensim-core repository."
     Write-Output "    -g        Branch for opensim-gui repository."
+    Write-Output "    -v         Branch for opensim-viewer repository."
+
     Write-Output ""
     exit
 }
@@ -51,6 +54,9 @@ if ($c) {
 if ($g) {
     $GUI_BRANCH=$g
 }
+if ($v) {
+    $VIEWER_BRANCH=$v
+}
 if ($j -lt [int]1) {
     Write-Error "Value for parameter -j not valid."
     Help
@@ -63,6 +69,7 @@ Write-Output "NUM_JOBS $NUM_JOBS"
 Write-Output "MOCO $MOCO"
 Write-Output "CORE_BRANCH $CORE_BRANCH"
 Write-Output "GUI_BRANCH $GUI_BRANCH"
+Write-Output "VIEWER_BRANCH $VIEWER_BRANCH"
 
 # Install chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
@@ -131,6 +138,9 @@ git clone https://github.com/opensim-org/opensim-gui.git C:/opensim-workspace/op
 chdir C:/opensim-workspace/opensim-gui-source
 git checkout $GUI_BRANCH
 git submodule update --init --recursive -- opensim-models opensim-visualizer
+chdir C:/opensim-workspace/opensim-gui-source/Gui/opensim/opensim-viewer
+git checkout $VIEWER_BRANCH
+chdir C:/opensim-workspace/opensim-gui-source
 
 # Build opensim-gui
 md C:/opensim-workspace/opensim-gui-build
