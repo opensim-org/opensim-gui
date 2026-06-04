@@ -196,6 +196,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
               if (currentMotions.size()==1){
                   Model model = currentMotions.get(0).model;
                   Storage primaryMot = currentMotions.get(0).motion;
+                  ExplorerTopComponent.findInstance().selectNodeForObject(primaryMot);
                   if (filePath.endsWith(".trc")){
                       try {
                           MarkerData markerData = new MarkerData(filePath);
