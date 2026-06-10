@@ -197,7 +197,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                   Model model = currentMotions.get(0).model;
                   Storage primaryMot = currentMotions.get(0).motion;
                   ExplorerTopComponent.findInstance().selectNodeForObject(primaryMot);
-                  if (filePath.endsWith(".trc")){
+                  if (filePath.toLowerCase().endsWith(".trc")){
                       try {
                           MarkerData markerData = new MarkerData(filePath);
                           Storage newStorage = new Storage();
@@ -207,6 +207,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                           amot.setName(new File(filePath).getName());
                           amot.setDataRate(markerData.getDataRate());
                           amot.setCameraRate(markerData.getCameraRate());
+                          amot.setModel(model);
                           addMotion(model, amot, primaryMot);
                       } catch (IOException ex) {
                           Exceptions.printStackTrace(ex);
