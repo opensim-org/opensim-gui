@@ -41,9 +41,7 @@ public final class FileLoadDataAction extends CallableSystemAction {
                 MotionsDB.getInstance().loadTrcFile(fileName);
             }
             else if (fileName.toLowerCase().endsWith(".mot")||fileName.toLowerCase().endsWith(".sto")){
-                if (MotionsDB.getInstance().loadMotFile(fileName)) {
-                    return;
-                }
+                MotionsDB.getInstance().loadMotFile(fileName);
             }
         }
     }

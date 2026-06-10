@@ -648,13 +648,14 @@ public class MotionsDB extends Observable // Observed by other entities in motio
     }
     
     
-    public boolean loadMotFile(String fileName) {
+    public void loadMotFile(String fileName) {
         Storage newStorage = null;
         try {
             newStorage = new Storage(fileName);
         } catch (IOException ex) {
             System.out.println("Failed to construct storage from " + fileName + ". Previewing is aborted.");
-            ex.printStackTrace();
+            ErrorDialog.displayExceptionDialog(ex);
+            return;
         }
         AnnotatedMotion amot = new AnnotatedMotion(newStorage);
         amot.setName(new File(fileName).getName());
@@ -664,12 +665,11 @@ public class MotionsDB extends Observable // Observed by other entities in motio
             OpenSimDB.getInstance().addModel(modelForDataImport);
         } catch (IOException ex) {
             ErrorDialog.displayExceptionDialog(ex);
-            return true;
+            return;
         }
         amot.setModel(modelForDataImport);
         MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
         MotionsDB.getInstance().saveStorageFileName(amot, fileName);
-        return false;
     }
 
     public void loadTrcFile(String fileName) {
