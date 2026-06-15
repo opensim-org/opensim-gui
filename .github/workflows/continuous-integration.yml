@@ -193,17 +193,6 @@ jobs:
         
     - name: Build GUI installer
       run: |
-        $version = "${{ steps.build-gui.outputs.version }}"
-        $installerDir = "$env:GITHUB_WORKSPACE\Gui\opensim\dist\installer"
-
-        # Ensure make_installer.nsi is present (copy-installer-files may have failed silently)
-        if (-not (Test-Path "$installerDir\make_installer.nsi")) {
-          Copy-Item "Gui\opensim\installer_files\Windows\make_installer.nsi" `
-                    "$installerDir\make_installer.nsi" -Force
-          (Get-Content "$installerDir\make_installer.nsi") -replace '@VERSION@', $version | `
-              Set-Content "$installerDir\make_installer.nsi"
-        }
-
         cd Gui/opensim/dist/installer
         makensis.exe make_installer.nsi
         mv OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe $env:GITHUB_WORKSPACE
