@@ -367,7 +367,8 @@ jobs:
     
         # Copy the main JAR
         cp "$EXTRACT_DIR/netbeans/modules/org-opensim-javabrowser.jar" "$INSTALLER_CONTENT/modules/"
-    
+        echo "++++++++++++++++++++++++++++++++++++++++++++++++++++"
+        echo "cp " "$EXTRACT_DIR/netbeans/modules/org-opensim-javabrowser.jar" " to " "$INSTALLER_CONTENT/modules/"
         # Copy macOS-specific JARs with exact names
         cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
         cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-swing-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
