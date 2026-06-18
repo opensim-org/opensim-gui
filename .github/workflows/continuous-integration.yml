@@ -346,7 +346,7 @@ jobs:
       run: |
         # Set root and directories
         ROOT="$GITHUB_WORKSPACE"
-        NBM_DIR="$ROOT/prebuilt_jxb"
+        NBM_DIR="$ROOT/prebuilt_jxb461"
         EXTRACT_DIR="$NBM_DIR/extracted"
         INSTALLER_CONTENT="$ROOT/Gui/opensim/dist/installer/opensim/opensim"
     
