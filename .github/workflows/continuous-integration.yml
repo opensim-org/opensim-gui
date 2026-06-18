@@ -163,7 +163,7 @@ jobs:
         New-Item -ItemType Directory -Force -Path $nbmDir
     
         # Download the NBM file
-        Invoke-WebRequest -Uri "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm" `
+        Invoke-WebRequest -Uri "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.1.dev/org-opensim-javabrowser.nbm" `
                           -OutFile "$nbmDir\org-opensim-javabrowser.nbm"
     
         # Extract the NBM
@@ -346,7 +346,7 @@ jobs:
       run: |
         # Set root and directories
         ROOT="$GITHUB_WORKSPACE"
-        NBM_DIR="$ROOT/prebuilt_jxb"
+        NBM_DIR="$ROOT/prebuilt_jxb461"
         EXTRACT_DIR="$NBM_DIR/extracted"
         INSTALLER_CONTENT="$ROOT/Gui/opensim/dist/installer/opensim/opensim"
     
@@ -354,7 +354,7 @@ jobs:
         mkdir -p "$NBM_DIR"
     
         # Download the NBM file
-        curl -L "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm" \
+        curl -L "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.1.dev/org-opensim-javabrowser.nbm" \
              -o "$NBM_DIR/org-opensim-javabrowser.nbm"
     
         # Extract the NBM (nbm is a zip)
@@ -367,7 +367,8 @@ jobs:
     
         # Copy the main JAR
         cp "$EXTRACT_DIR/netbeans/modules/org-opensim-javabrowser.jar" "$INSTALLER_CONTENT/modules/"
-    
+        echo "++++++++++++++++++++++++++++++++++++++++++++++++++++"
+        echo "cp " "$EXTRACT_DIR/netbeans/modules/org-opensim-javabrowser.jar" " to " "$INSTALLER_CONTENT/modules/"
         # Copy macOS-specific JARs with exact names
         cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
         cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-swing-7.44.1.jar" "$INSTALLER_CONTENT/modules/ext/"
@@ -517,7 +518,7 @@ jobs:
     
         # Download the NBM file pinned to version v4.6.0
         wget -O "$NBM_DIR/org-opensim-javabrowser.nbm" \
-             "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm"
+             "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.1.dev/org-opensim-javabrowser.nbm"
     
         # Extract the NBM (nbm is a zip)
         mkdir -p "$EXTRACT_DIR"

@@ -207,7 +207,6 @@ public class MotionsDB extends Observable // Observed by other entities in motio
                           amot.setName(new File(filePath).getName());
                           amot.setDataRate(markerData.getDataRate());
                           amot.setCameraRate(markerData.getCameraRate());
-                          amot.setModel(model);
                           addMotion(model, amot, primaryMot);
                       } catch (IOException ex) {
                           Exceptions.printStackTrace(ex);
