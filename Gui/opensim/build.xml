@@ -146,7 +146,7 @@
         </copy>
     </target>
     <target name="copy-jxbrowser-jar" description="Copy prebuilt opensim-visualizer module jar to distro">
-        <get src="https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7/org-opensim-javabrowser.jar/download" 
+        <get src="https://sourceforge.net/projects/myosin/files/opensim-gui/jxBrowser7-461/org-opensim-javabrowser.jar/download" 
          dest="${opensim.dist.dir}/OpenSim/modules/org-opensim-javabrowser.jar" 
          usetimestamp="false" 
          verbose="true" />
