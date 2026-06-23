@@ -3,8 +3,9 @@ param (
   [switch]$s=$false,
   [switch]$h=$false,
   [string]$d="Release",
-  [string]$c="main",
-  [string]$g="main",
+  [string]$c="opensim_46",
+  [string]$g="opensim_46",
+  [string]$v="dev",
   [int]$j=[int]4
 )
 
@@ -12,8 +13,8 @@ param (
 $DEBUG_TYPE="Release"
 $NUM_JOBS=4
 $MOCO="on"
-$CORE_BRANCH="main"
-$GUI_BRANCH="main"
+$CORE_BRANCH="opensim_46"
+$GUI_BRANCH="opensim_46"
 $VIEWER_BRANCH="dev"
 
 function Help {
@@ -29,7 +30,7 @@ function Help {
     Write-Output "    -s        Simple build without moco (Tropter and Casadi disabled)."
     Write-Output "    -c        Branch for opensim-core repository."
     Write-Output "    -g        Branch for opensim-gui repository."
-    Write-Output "    -v         Branch for opensim-viewer repository."
+    Write-Output "    -v        Branch for opensim-viewer repository."
 
     Write-Output ""
     exit
@@ -71,6 +72,9 @@ Write-Output "CORE_BRANCH $CORE_BRANCH"
 Write-Output "GUI_BRANCH $GUI_BRANCH"
 Write-Output "VIEWER_BRANCH $VIEWER_BRANCH"
 
+# Enable long path support
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
+
 # Install chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
 
@@ -87,7 +91,7 @@ choco install git.install -y
 
 # Install dependencies of opensim-core
 choco install python3 -y
-choco install openjdk11 -y
+choco install openjdk13 -y
 choco install swig --version 4.1.1 -y
 choco install nsis -y
 py -m pip install numpy==2.4
@@ -137,7 +141,7 @@ cmake --install .
 git clone https://github.com/opensim-org/opensim-gui.git C:/opensim-workspace/opensim-gui-source
 chdir C:/opensim-workspace/opensim-gui-source
 git checkout $GUI_BRANCH
-git submodule update --init --recursive -- opensim-models opensim-visualizer
+git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
 chdir C:/opensim-workspace/opensim-gui-source/Gui/opensim/opensim-viewer
 git checkout $VIEWER_BRANCH
 chdir C:/opensim-workspace/opensim-gui-source
@@ -147,11 +151,11 @@ md C:/opensim-workspace/opensim-gui-build
 chdir C:/opensim-workspace/opensim-gui-build
 md C:/opensim-gui
 cmake C:/opensim-workspace/opensim-gui-source/ -G"Visual Studio 17 2022" -A x64 -DCMAKE_PREFIX_PATH=C:/opensim-core -DAnt_EXECUTABLE="C:\Program Files\NetBeans-17\netbeans\extide\ant\bin\ant" -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:\Program Files\NetBeans-17\netbeans;-Dnbplatform.default.harness.dir=C:\Program Files\NetBeans-17\netbeans\harness"
-cmake --build . --target CopyOpenSimCore --config $DEBUG_TYPE
-cmake --build . --target CopyModels --config $DEBUG_TYPE
-cmake --build . --target PrepareInstaller --config $DEBUG_TYPE
-cmake --build . --target CopyJRE --config $DEBUG_TYPE
-cmake --build . --target CopyVisualizer --config $DEBUG_TYPE
+cmake --build . --target CopyOpenSimCore --config $DEBUG_TYPE --verbose
+cmake --build . --target CopyModels --config $DEBUG_TYPE --verbose
+cmake --build . --target PrepareInstaller --config $DEBUG_TYPE --verbose
+cmake --build . --target CopyJRE --config $DEBUG_TYPE --verbose
+cmake --build . --target CopyVisualizer --config $DEBUG_TYPE --verbose
 
 # Add jxbrowser files to installer content
 $root = "C:/opensim-workspace"
