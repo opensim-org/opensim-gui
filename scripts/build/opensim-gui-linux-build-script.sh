@@ -7,8 +7,8 @@ set -e
 DEBUG_TYPE="Release"
 NUM_JOBS=4
 MOCO="on"
-CORE_BRANCH="main"
-GUI_BRANCH="main"
+CORE_BRANCH="opensim_46"
+GUI_BRANCH="opensim_46"
 VIEWER_BRANCH="dev"
 GENERATOR="Unix Makefiles"
 
@@ -87,8 +87,14 @@ echo
 
 # Install dependencies from package manager.
 echo "LOG: INSTALLING DEPENDENCIES..."
-sudo apt-get update && sudo apt-get install --yes build-essential cmake autotools-dev autoconf pkg-config automake libopenblas-dev liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen python3 python3-dev python3-setuptools libpcre3 libpcre3-dev libpcre2-dev byacc git gfortran libtool libssl-dev libffi-dev ninja-build patchelf libgl1-mesa-dev unzip wget npm || ( echo "Installation of dependencies using apt-get failed." && exit )
+sudo apt-get update && sudo apt-get install --yes build-essential cmake autotools-dev autoconf pkg-config automake libopenblas-dev liblapack-dev freeglut3-dev libxi-dev libxmu-dev doxygen python3 python3-dev python3-setuptools python3-numpy python3-pip libpcre3 libpcre3-dev libpcre2-dev byacc git gfortran libtool libssl-dev libffi-dev ninja-build patchelf libgl1-mesa-dev unzip wget npm || ( echo "Installation of dependencies using apt-get failed." && exit )
 echo
+
+# Install libconf 2.4
+wget http://kr.archive.ubuntu.com/ubuntu/pool/universe/g/gconf/gconf2-common_3.2.6-6ubuntu1_all.deb
+wget http://kr.archive.ubuntu.com/ubuntu/pool/universe/g/gconf/libgconf-2-4_3.2.6-6ubuntu1_amd64.deb
+sudo dpkg -i gconf2-common_3.2.6-6ubuntu1_all.deb
+sudo dpkg -i libgconf-2-4_3.2.6-6ubuntu1_amd64.deb
 
 # Install JDK 17
 echo "LOG: INSTALLING JDK 17..."
@@ -210,15 +216,6 @@ git checkout $VIEWER_BRANCH
 cd -
 echo
 
-# Build opensim-gui
-echo "LOG: BUILDING OPENSIM-GUI..."
-mkdir -p ~/opensim-workspace/opensim-gui-build || true
-cd ~/opensim-workspace/opensim-gui-build
-cmake ~/opensim-workspace/opensim-gui-source -DCMAKE_PREFIX_PATH=~/opensim-core -DAnt_EXECUTABLE=~/netbeans/extide/ant/bin/ant -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans/harness"
-make CopyOpenSimCore -j$NUM_JOBS
-make PrepareInstaller -j$NUM_JOBS
-echo
-
 # Add jxbrowser files to installer content
 echo "LOG: ADDING JXBROWSER FILES TO INSTALLER CONTENT..."
 ROOT="$HOME/opensim-workspace"
@@ -243,6 +240,15 @@ cp "$EXTRACT_DIR/netbeans/modules/ext/jxbrowser-linux64-7.44.1.jar" "$INSTALLER_
 # Verify files copied
 echo "JAR files now in installer content:"
 find "$INSTALLER_CONTENT" -name "*.jar"
+echo
+
+# Build opensim-gui
+echo "LOG: BUILDING OPENSIM-GUI..."
+mkdir -p ~/opensim-workspace/opensim-gui-build || true
+cd ~/opensim-workspace/opensim-gui-build
+cmake ~/opensim-workspace/opensim-gui-source -DCMAKE_PREFIX_PATH=~/opensim-core -DAnt_EXECUTABLE=~/netbeans/extide/ant/bin/ant -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans/harness"
+make CopyOpenSimCore -j$NUM_JOBS
+make PrepareInstaller -j$NUM_JOBS
 echo
 
 # Install opensim-gui.
