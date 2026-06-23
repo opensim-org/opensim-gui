@@ -3,8 +3,9 @@ param (
   [switch]$s=$false,
   [switch]$h=$false,
   [string]$d="Release",
-  [string]$c="main",
-  [string]$g="main",
+  [string]$c="opensim_46",
+  [string]$g="opensim_46",
+  [string]$v="dev",
   [int]$j=[int]4
 )
 
@@ -12,8 +13,9 @@ param (
 $DEBUG_TYPE="Release"
 $NUM_JOBS=4
 $MOCO="on"
-$CORE_BRANCH="main"
-$GUI_BRANCH="master"
+$CORE_BRANCH="opensim_46"
+$GUI_BRANCH="opensim_46"
+$VIEWER_BRANCH="dev"
 
 function Help {
     Write-Output "This script builds the last available version of OpenSim-Gui in your computer."
@@ -28,6 +30,8 @@ function Help {
     Write-Output "    -s        Simple build without moco (Tropter and Casadi disabled)."
     Write-Output "    -c        Branch for opensim-core repository."
     Write-Output "    -g        Branch for opensim-gui repository."
+    Write-Output "    -v        Branch for opensim-viewer repository."
+
     Write-Output ""
     exit
 }
@@ -51,6 +55,9 @@ if ($c) {
 if ($g) {
     $GUI_BRANCH=$g
 }
+if ($v) {
+    $VIEWER_BRANCH=$v
+}
 if ($j -lt [int]1) {
     Write-Error "Value for parameter -j not valid."
     Help
@@ -63,6 +70,10 @@ Write-Output "NUM_JOBS $NUM_JOBS"
 Write-Output "MOCO $MOCO"
 Write-Output "CORE_BRANCH $CORE_BRANCH"
 Write-Output "GUI_BRANCH $GUI_BRANCH"
+Write-Output "VIEWER_BRANCH $VIEWER_BRANCH"
+
+# Enable long path support
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\FileSystem" -Name "LongPathsEnabled" -Value 1 -PropertyType DWORD -Force
 
 # Install chocolatey
 Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1'))
@@ -79,14 +90,14 @@ choco install cmake.install --version 3.23.3 --installargs '"ADD_CMAKE_TO_PATH=S
 choco install git.install -y
 
 # Install dependencies of opensim-core
-choco install python3  -y
-choco install jdk8  -y
-choco install swig  -y
-choco install nsis  -y
-py -m pip install numpy
+choco install python3 -y
+choco install openjdk13 -y
+choco install swig --version 4.1.1 -y
+choco install nsis -y
+py -m pip install numpy==2.4
 
 # Refresh choco environment so we can use tools from terminal now.
-$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."   
+$env:ChocolateyInstall = Convert-Path "$((Get-Command choco).Path)\..\.."
 Import-Module "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
 refreshenv
 
@@ -94,15 +105,15 @@ refreshenv
 $ProgramFilesPath = [Environment]::GetFolderPath("ProgramFiles")
 $ProgramFilesPathx86 = [Environment]::GetFolderPath("ProgramFilesX86")
 
-# Download Netbeans 12.8
-md C:/opensim-workspace/netbeans-12.3/
-chdir C:/opensim-workspace/netbeans-12.3/
+# Download Netbeans 17
+md C:/opensim-workspace/netbeans-17/
+chdir C:/opensim-workspace/netbeans-17/
 $WebClient = New-Object System.Net.WebClient
-$WebClient.DownloadFile("https://archive.apache.org/dist/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-windows-x64.exe","C:/opensim-workspace/netbeans-12.3/Apache-NetBeans-12.3-bin-windows-x64.exe")
-$expectedHash = "0695d87d9c72dcf3738672ba83eb273dda02066fa5eee80896cb6ccf79175840367a13d22ab3cb9838dffaa9a219dd1f73aee0e27c085e5310da2e3bbbc92b2c"
-$hashFromFile = Get-FileHash -Algorithm SHA512 -Path C:/opensim-workspace/netbeans-12.3/Apache-NetBeans-12.3-bin-windows-x64.exe
+$WebClient.DownloadFile("https://archive.apache.org/dist/netbeans/netbeans-installers/17/Apache-NetBeans-17-bin-windows-x64.exe","C:/opensim-workspace/netbeans-17/Apache-NetBeans-17-bin-windows-x64.exe")
+$expectedHash = "c3d7a34184c4021486751fbc3878eb2376677674ff8d6d4bf87017fd2434122c8438072aa891e535fa0fa9aeafcb49ad833a61903180772369d99571b073baac"
+$hashFromFile = Get-FileHash -Algorithm SHA512 -Path C:/opensim-workspace/netbeans-17/Apache-NetBeans-17-bin-windows-x64.exe
 if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
-C:/opensim-workspace/netbeans-12.3/Apache-NetBeans-12.3-bin-windows-x64.exe --silent | Out-Null # This installer is gregarious.
+C:/opensim-workspace/netbeans-17/Apache-NetBeans-17-bin-windows-x64.exe --silent | Out-Null # This installer is gregarious.
 
 # Clone opensim-core
 chdir C:/opensim-workspace/
@@ -113,7 +124,7 @@ git checkout $CORE_BRANCH
 # Generate dependencies project and build dependencies using superbuild
 md C:/opensim-workspace/opensim-core-dependencies-build
 chdir C:/opensim-workspace/opensim-core-dependencies-build
-cmake C:/opensim-workspace/opensim-core-source/dependencies/ -G"Visual Studio 17 2022" -A x64 -DCMAKE_INSTALL_PREFIX="C:/opensim-workspace/opensim-core-dependencies-install" -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=$MOCO -DOPENSIM_WITH_TROPTER:BOOL=$MOCO 
+cmake C:/opensim-workspace/opensim-core-source/dependencies/ -G"Visual Studio 17 2022" -A x64 -DCMAKE_INSTALL_PREFIX="C:/opensim-workspace/opensim-core-dependencies-install" -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=$MOCO -DOPENSIM_WITH_TROPTER:BOOL=$MOCO
 cmake . -LAH
 cmake --build . --config $DEBUG_TYPE -- /maxcpucount:$NUM_JOBS
 
@@ -130,18 +141,56 @@ cmake --install .
 git clone https://github.com/opensim-org/opensim-gui.git C:/opensim-workspace/opensim-gui-source
 chdir C:/opensim-workspace/opensim-gui-source
 git checkout $GUI_BRANCH
-git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
+chdir C:/opensim-workspace/opensim-gui-source/Gui/opensim/opensim-viewer
+git checkout $VIEWER_BRANCH
+chdir C:/opensim-workspace/opensim-gui-source
 
 # Build opensim-gui
 md C:/opensim-workspace/opensim-gui-build
 chdir C:/opensim-workspace/opensim-gui-build
 md C:/opensim-gui
-cmake C:/opensim-workspace/opensim-gui-source/ -G"Visual Studio 17 2022" -A x64 -DCMAKE_PREFIX_PATH=C:/opensim-core -DAnt_EXECUTABLE="C:\Program Files\NetBeans-12.3\netbeans\extide\ant\bin\ant" -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:\Program Files\NetBeans-12.3\netbeans;-Dnbplatform.default.harness.dir=C:\Program Files\NetBeans-12.3\netbeans\harness"
-cmake --build . --target CopyOpenSimCore --config $DEBUG_TYPE
-cmake --build . --target CopyModels --config $DEBUG_TYPE
-cmake --build . --target PrepareInstaller --config $DEBUG_TYPE
-cmake --build . --target CopyJRE --config $DEBUG_TYPE
-cmake --build . --target CopyVisualizer --config $DEBUG_TYPE
+cmake C:/opensim-workspace/opensim-gui-source/ -G"Visual Studio 17 2022" -A x64 -DCMAKE_PREFIX_PATH=C:/opensim-core -DAnt_EXECUTABLE="C:\Program Files\NetBeans-17\netbeans\extide\ant\bin\ant" -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:\Program Files\NetBeans-17\netbeans;-Dnbplatform.default.harness.dir=C:\Program Files\NetBeans-17\netbeans\harness"
+cmake --build . --target CopyOpenSimCore --config $DEBUG_TYPE --verbose
+cmake --build . --target CopyModels --config $DEBUG_TYPE --verbose
+cmake --build . --target PrepareInstaller --config $DEBUG_TYPE --verbose
+cmake --build . --target CopyJRE --config $DEBUG_TYPE --verbose
+cmake --build . --target CopyVisualizer --config $DEBUG_TYPE --verbose
+
+# Add jxbrowser files to installer content
+$root = "C:/opensim-workspace"
+$nbmDir = "$root\prebuilt_jxb"
+$extractDir = "$nbmDir\extracted"
+$installerContentPath = "$root\opensim-gui-source\Gui\opensim\dist\installer\opensim\opensim"
+# Create prebuilt directory
+New-Item -ItemType Directory -Force -Path $nbmDir
+# Download the NBM file
+Invoke-WebRequest -Uri "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm" `
+                  -OutFile "$nbmDir\org-opensim-javabrowser.nbm"
+# Rename to zip to avoid powershell complaining it is not a zip.
+Rename-Item -Path "$nbmDir\org-opensim-javabrowser.nbm" -NewName "org-opensim-javabrowser.zip" -Force
+# Extract the NBM
+Expand-Archive -Path "$nbmDir\org-opensim-javabrowser.zip" -DestinationPath $extractDir -Force
+# Create installer modules directory
+New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/"
+New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/ext/"
+# Copy the main JAR
+Write-Host "Copying org-opensim-javabrowser.jar to installer content..."
+Copy-Item -Path "$extractDir\netbeans\modules\org-opensim-javabrowser.jar" `
+          -Destination "$installerContentPath/modules/" -Force
+# Copy Windows-specific JARs with exact names
+Write-Host "Copying Windows JARs to installer content..."
+Copy-Item -Path "$extractDir\netbeans\modules\ext\jxbrowser-7.44.1.jar" `
+          -Destination "$installerContentPath/modules/ext/" -Force
+Copy-Item -Path "$extractDir\netbeans\modules\ext\jxbrowser-swing-7.44.1.jar" `
+          -Destination "$installerContentPath/modules/ext/" -Force
+Copy-Item -Path "$extractDir\netbeans\modules\ext\jxbrowser-win64-7.44.1.jar" `
+          -Destination "$installerContentPath/modules/ext/" -Force
+
+# Verify files copied
+Write-Host "JAR files now in installer content:"
+Get-ChildItem -Path "$installerContentPath" -Recurse -Filter "*.jar" | Select-Object FullName
+
 # Read the value of the cache variable storing the GUI build version.
 $env:match = &"$ProgramFilesPath\CMake\bin\cmake.exe" -L . | Select-String -Pattern OPENSIMGUI_BUILD_VERSION
 $version = $env:match.split('=')[1]
