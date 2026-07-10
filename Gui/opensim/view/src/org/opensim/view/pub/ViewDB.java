@@ -66,7 +66,10 @@ import org.opensim.threejs.ModelVisualizationJson;
 import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.*;
+import org.opensim.view.motions.MasterMotionModel;
 import org.opensim.view.motions.MotionControlJPanel;
+import org.opensim.view.motions.MotionDisplayer;
+import org.opensim.view.motions.MotionsDB;
 
 
 /**
@@ -1124,7 +1127,15 @@ public final class ViewDB extends Observable implements Observer, LookupListener
             vizJson = getJsonForModel(jsondb, model);
             
             exportModelJsonToVisualizer(vizJson, socket);
+            // Send animations to viewer
+            if (debugLevel >1)
+                System.out.println("ModelVisualizationJson has #"+vizJson.motionDisplayers.size());
+            for (int di=0; di < vizJson.motionDisplayers.size(); di++){
+                MotionDisplayer nextDisp = vizJson.motionDisplayers.get(di);
+                MasterMotionModel.sendClipToViewer(nextDisp, model);
+            }
         }
+
     }
 
     private void sync(VisWebSocket visWebSocket) {
@@ -1394,6 +1405,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
                     TheApp.getCurrentVersionPreferences().put("Internal.FrameRate", String.valueOf(frameRate));
                     return;
                 }
+                if (debugLevel >1)
+                    System.out.println("Received info msg "+jsonObject);
                 return;
             }
             if (msgType.equalsIgnoreCase("transforms")) {
@@ -1478,13 +1491,13 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     
     public void sendCurrentAnimations(JSONObject animationJson) {
         if (debugLevel >1)
-            OpenSimLogger.logMessage("Sending AnimationClips to Viewer", OpenSimLogger.INFO);
+            System.out.println("Sending AnimationClips to Viewer"+ animationJson.toJSONString());
         websocketdb.broadcastMessageJson(animationJson, null);
     }
     
     public void sendAnimationClip(JSONObject animationJson) {
         if (debugLevel >1)
-            OpenSimLogger.logMessage("Sending AnimationClip to Viewer", OpenSimLogger.INFO);
+            System.out.println("Sending AnimationClip to Viewer"+ animationJson.toJSONString());
         websocketdb.broadcastMessageJson(animationJson, null);
     }
     
@@ -1506,7 +1519,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     
     public void playCurrentAnimations(double startTime, JSONArray uuids) {
         if (debugLevel >1)
-            OpenSimLogger.logMessage("Play AnimationClips in Viewer", OpenSimLogger.INFO);
+            System.out.println("Play AnimationClips in Viewer"+ uuids.toJSONString() );
         JSONObject currentAnimation = new JSONObject();
         currentAnimation.put("Op", "PlayAnimation");
         currentAnimation.put("start_time", startTime);
