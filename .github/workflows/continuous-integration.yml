@@ -400,7 +400,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
-         ref: 'opensim_46
+         ref: 'opensim_46'
          
     - name: Install Python packages
       uses: actions/setup-python@v4
