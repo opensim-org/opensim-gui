@@ -63,7 +63,6 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
-         ref: 'opensim_46_release'
     
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
@@ -218,8 +217,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
-         ref: 'opensim_46_release'
-    
+        
     - uses: actions/setup-python@v4
       with:
         python-version: '3.11' 
@@ -406,7 +404,6 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
-         ref: 'opensim_46_release'
          
     - name: Install Python packages
       uses: actions/setup-python@v4
