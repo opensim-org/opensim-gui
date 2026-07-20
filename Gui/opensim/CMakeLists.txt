@@ -20,7 +20,7 @@ find_package(Ant REQUIRED)
 # Get the latest abbreviated commit hash of the working branch
 set(VERSION_SUFFIX "")
 find_package(Git)
-if(Git_FOUND)
+if(0)  #Git_FOUND
     # This command provides the annotated tag for the current commit, if it
     # exists, and returns an error if a tag does not exist.
     execute_process(
