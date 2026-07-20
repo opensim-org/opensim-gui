@@ -219,11 +219,16 @@ jobs:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
         
+    - uses: actions/setup-python@v4
+      with:
+        python-version: '3.11' 
+        
     - name: Install packages
       run: |
         brew uninstall cmake
         brew install cmake pkgconfig autoconf libtool automake wget pcre doxygen llvm
         brew reinstall gcc
+        pip3 install numpy==2.4
         gfortran -v
         mkdir gfortran_version
         gfortran -v &> gfortran_version/gfortran_version.txt
