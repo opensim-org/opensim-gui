@@ -9,7 +9,7 @@
 package org.opensim.modeling;
 
 /**
- *  Remove all muscles contained in the model's ForceSet. 
+ *  Remove all muscles contained in the model's ForceSet.
  */
 public class ModOpRemoveMuscles extends ModelOperator {
   private transient long swigCPtr;

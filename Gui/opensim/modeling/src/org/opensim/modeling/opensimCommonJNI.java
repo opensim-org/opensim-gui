@@ -104,6 +104,7 @@ public class opensimCommonJNI {
   public final static native long computeKNearestNeighbors__SWIG_0(long jarg1, Matrix jarg1_, long jarg2, Matrix jarg2_, int jarg3);
   public final static native long computeKNearestNeighbors__SWIG_1(long jarg1, Matrix jarg1_, long jarg2, Matrix jarg2_);
   public final static native double factorizeMatrixNonNegative(long jarg1, Matrix jarg1_, int jarg2, int jarg3, double jarg4, long jarg5, Matrix jarg5_, long jarg6, Matrix jarg6_);
+  public final static native int choose(int jarg1, int jarg2);
   public final static native void delete_LogSink(long jarg1);
   public final static native void LogSink_sinkImpl(long jarg1, LogSink jarg1_, String jarg2);
   public final static native void LogSink_flushImpl(long jarg1, LogSink jarg1_);
@@ -2191,6 +2192,9 @@ public class opensimCommonJNI {
   public final static native void TableUtilities_filterLowpass__SWIG_1(long jarg1, TimeSeriesTable jarg1_, double jarg2);
   public final static native void TableUtilities_pad(long jarg1, TimeSeriesTable jarg1_, int jarg2);
   public final static native long TableUtilities_convertRotationsToEulerAngles(long jarg1);
+  public final static native long TableUtilities_concatenateVec3(long jarg1, TimeSeriesTableVec3 jarg1_, long jarg2, TimeSeriesTableVec3 jarg2_);
+  public final static native long TableUtilities_concatenate(long jarg1, TimeSeriesTable jarg1_, long jarg2, TimeSeriesTable jarg2_);
+  public final static native long TableUtilities_concatenateQuaternion(long jarg1, TimeSeriesTableQuaternion jarg1_, long jarg2, TimeSeriesTableQuaternion jarg2_);
   public final static native long new_TableUtilities();
   public final static native void delete_TableUtilities(long jarg1);
   public final static native long new_DataTable__SWIG_0();

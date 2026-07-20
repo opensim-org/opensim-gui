@@ -180,6 +180,39 @@ public class TableUtilities {
     return new TimeSeriesTableVec3(opensimCommonJNI.TableUtilities_convertRotationsToEulerAngles(SWIGTYPE_p_OpenSim__TimeSeriesTable_T_SimTK__Rotation_T_SimTK__Real_t_t.getCPtr(rotTable)), true);
   }
 
+  /**
+   *  Utility to concatenate two TimeSeriesTables into a new table.<br>
+   *  Requires that both tables contain elements of the same type and<br>
+   *  have the same number of columns with the same labels. The initial<br>
+   *  time point in the second table must be greater than the final<br>
+   *  time in the first table.
+   */
+  public static TimeSeriesTableVec3 concatenateVec3(TimeSeriesTableVec3 firstTable, TimeSeriesTableVec3 secondTable) {
+    return new TimeSeriesTableVec3(opensimCommonJNI.TableUtilities_concatenateVec3(TimeSeriesTableVec3.getCPtr(firstTable), firstTable, TimeSeriesTableVec3.getCPtr(secondTable), secondTable), true);
+  }
+
+  /**
+   *  Utility to concatenate two TimeSeriesTables into a new table.<br>
+   *  Requires that both tables contain elements of the same type and<br>
+   *  have the same number of columns with the same labels. The initial<br>
+   *  time point in the second table must be greater than the final<br>
+   *  time in the first table.
+   */
+  public static TimeSeriesTable concatenate(TimeSeriesTable firstTable, TimeSeriesTable secondTable) {
+    return new TimeSeriesTable(opensimCommonJNI.TableUtilities_concatenate(TimeSeriesTable.getCPtr(firstTable), firstTable, TimeSeriesTable.getCPtr(secondTable), secondTable), true);
+  }
+
+  /**
+   *  Utility to concatenate two TimeSeriesTables into a new table.<br>
+   *  Requires that both tables contain elements of the same type and<br>
+   *  have the same number of columns with the same labels. The initial<br>
+   *  time point in the second table must be greater than the final<br>
+   *  time in the first table.
+   */
+  public static TimeSeriesTableQuaternion concatenateQuaternion(TimeSeriesTableQuaternion firstTable, TimeSeriesTableQuaternion secondTable) {
+    return new TimeSeriesTableQuaternion(opensimCommonJNI.TableUtilities_concatenateQuaternion(TimeSeriesTableQuaternion.getCPtr(firstTable), firstTable, TimeSeriesTableQuaternion.getCPtr(secondTable), secondTable), true);
+  }
+
   public TableUtilities() {
     this(opensimCommonJNI.new_TableUtilities(), true);
   }

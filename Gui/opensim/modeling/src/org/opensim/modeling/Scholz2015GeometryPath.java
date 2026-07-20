@@ -13,6 +13,10 @@ package org.opensim.modeling;
  * A concrete class representing a geometric path object defined by a list of<br>
  * path points and wrapping obstacles.<br>
  * <br>
+ * Note: `Scholz2015GeometryPath` is an experimental class. The default settings<br>
+ *       and algorithms in the underlying wrapping engine (`SimTK::CableSpan`)<br>
+ *       may change in future releases to address robustness issues.<br>
+ * <br>
  * The path consists of straight line segments and curved line segments: a<br>
  * curved segment over each obstacle, and straight segments connecting path<br>
  * points to obstacles. If no obstacle lies between two path points, the points<br>

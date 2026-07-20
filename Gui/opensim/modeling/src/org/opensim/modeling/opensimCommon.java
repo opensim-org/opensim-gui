@@ -245,26 +245,34 @@ public class opensimCommon {
   }
 
   /**
-   *  Use non-negative matrix factorization to decompose an matrix A (NxM) for a <br>
-   *  selected number of factors 'K' into two matrices W (NxK) and H (KxM) such <br>
-   *  that A = W * H. The alternating least squares (ALS) algorithm is used to <br>
-   *  solve for W and H by minimizing the Frobenius norm of the error between A <br>
+   *  Use non-negative matrix factorization to decompose an matrix A (NxM) for a<br>
+   *  selected number of factors 'K' into two matrices W (NxK) and H (KxM) such<br>
+   *  that A = W * H. The alternating least squares (ALS) algorithm is used to<br>
+   *  solve for W and H by minimizing the Frobenius norm of the error between A<br>
    *  and W * H. The matrices W and H are scaled assuming that the rows of H<br>
    *  have magnitudes as if all elements in H were equal to 0.5, which prevents<br>
-   *  individual factors from being very large or very small. The algorithm <br>
-   *  terminates when the change in the error norm is less than the specified <br>
+   *  individual factors from being very large or very small. The algorithm<br>
+   *  terminates when the change in the error norm is less than the specified<br>
    *  tolerance or the maximum number of iterations is reached.<br>
    * <br>
    *  @return The final Frobenius norm of the error between A and W * H.<br>
    * <br>
    *  Reference<br>
    *  ---------<br>
-   *  Berry, M. W., et al. (2007). Algorithms and Applications for Approximate <br>
-   *  Nonnegative Matrix Factorization. Computational Statistics &amp; Data Analysis, <br>
+   *  Berry, M. W., et al. (2007). Algorithms and Applications for Approximate<br>
+   *  Nonnegative Matrix Factorization. Computational Statistics &amp; Data Analysis,<br>
    *  52(1), 155-173. doi:10.1016/j.csda.2006.11.006.
    */
   public static double factorizeMatrixNonNegative(Matrix A, int numFactors, int maxIterations, double tolerance, Matrix W, Matrix H) {
     return opensimCommonJNI.factorizeMatrixNonNegative(Matrix.getCPtr(A), A, numFactors, maxIterations, tolerance, Matrix.getCPtr(W), W, Matrix.getCPtr(H), H);
+  }
+
+  /**
+   * Generate the number of possible combinations of `k` elements from a set<br>
+   * of `n` total elements.
+   */
+  public static int choose(int n, int k) {
+    return opensimCommonJNI.choose(n, k);
   }
 
   public static String getObjectDEFAULT_NAME() {

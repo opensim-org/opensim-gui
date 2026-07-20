@@ -333,7 +333,7 @@ public class StatesTrajectory {
    * Once the states have been serialized, they can be deserialized by<br>
    * constructing a new StatesDocument by calling<br>
    * ```<br>
-   *   StatesDocument(const SimTK::String&amp; filename)<br>
+   *   StatesDocument(const std::string&amp; filename)<br>
    * ```<br>
    * and then calling:<br>
    * ```<br>
@@ -361,8 +361,8 @@ public class StatesTrajectory {
    * complete StatesTrajectory, a StatesDocument is the preferred means as<br>
    * it will include continuous, discrete, and modeling states.
    */
-  public StatesDocument exportToStatesDocument(Model model, SWIGTYPE_p_SimTK__String note, int precision) {
-    return new StatesDocument(opensimSimulationJNI.StatesTrajectory_exportToStatesDocument__SWIG_0(swigCPtr, this, Model.getCPtr(model), model, SWIGTYPE_p_SimTK__String.getCPtr(note), precision), true);
+  public StatesDocument exportToStatesDocument(Model model, String note, int precision) {
+    return new StatesDocument(opensimSimulationJNI.StatesTrajectory_exportToStatesDocument__SWIG_0(swigCPtr, this, Model.getCPtr(model), model, note, precision), true);
   }
 
   /**
@@ -375,7 +375,7 @@ public class StatesTrajectory {
    * Once the states have been serialized, they can be deserialized by<br>
    * constructing a new StatesDocument by calling<br>
    * ```<br>
-   *   StatesDocument(const SimTK::String&amp; filename)<br>
+   *   StatesDocument(const std::string&amp; filename)<br>
    * ```<br>
    * and then calling:<br>
    * ```<br>
@@ -403,8 +403,8 @@ public class StatesTrajectory {
    * complete StatesTrajectory, a StatesDocument is the preferred means as<br>
    * it will include continuous, discrete, and modeling states.
    */
-  public StatesDocument exportToStatesDocument(Model model, SWIGTYPE_p_SimTK__String note) {
-    return new StatesDocument(opensimSimulationJNI.StatesTrajectory_exportToStatesDocument__SWIG_1(swigCPtr, this, Model.getCPtr(model), model, SWIGTYPE_p_SimTK__String.getCPtr(note)), true);
+  public StatesDocument exportToStatesDocument(Model model, String note) {
+    return new StatesDocument(opensimSimulationJNI.StatesTrajectory_exportToStatesDocument__SWIG_1(swigCPtr, this, Model.getCPtr(model), model, note), true);
   }
 
   /**
@@ -417,7 +417,7 @@ public class StatesTrajectory {
    * Once the states have been serialized, they can be deserialized by<br>
    * constructing a new StatesDocument by calling<br>
    * ```<br>
-   *   StatesDocument(const SimTK::String&amp; filename)<br>
+   *   StatesDocument(const std::string&amp; filename)<br>
    * ```<br>
    * and then calling:<br>
    * ```<br>
@@ -661,7 +661,15 @@ public class StatesTrajectory {
   /**
    *  <br>
    * This function is identical to createFromStatesTable() except that this<br>
-   * function accepts a Storage instead of a TimeSeriesTable.
+   * function accepts a Storage instead of a TimeSeriesTable.<br>
+   * <br>
+   * #### History<br>
+   * Before OpenSim 4.0, the only way to save states to a file was as<br>
+   * a Storage file, typically called a states storage file and named<br>
+   * `*_states.sto`. You can use this function to create a StatesTrajectory<br>
+   * from such a Storage file. OpenSim 4.0 introduced the ability to save and<br>
+   * read a complete StatesTrajectory to/from an OSTATES file, and so this<br>
+   * function should only be used when you are stuck with pre-4.0 files.
    */
   public static StatesTrajectory createFromStatesStorage(Model model, Storage sto, boolean allowMissingColumns, boolean allowExtraColumns, boolean assemble) {
     return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_0(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns, allowExtraColumns, assemble), true);
@@ -670,7 +678,15 @@ public class StatesTrajectory {
   /**
    *  <br>
    * This function is identical to createFromStatesTable() except that this<br>
-   * function accepts a Storage instead of a TimeSeriesTable.
+   * function accepts a Storage instead of a TimeSeriesTable.<br>
+   * <br>
+   * #### History<br>
+   * Before OpenSim 4.0, the only way to save states to a file was as<br>
+   * a Storage file, typically called a states storage file and named<br>
+   * `*_states.sto`. You can use this function to create a StatesTrajectory<br>
+   * from such a Storage file. OpenSim 4.0 introduced the ability to save and<br>
+   * read a complete StatesTrajectory to/from an OSTATES file, and so this<br>
+   * function should only be used when you are stuck with pre-4.0 files.
    */
   public static StatesTrajectory createFromStatesStorage(Model model, Storage sto, boolean allowMissingColumns, boolean allowExtraColumns) {
     return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_1(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns, allowExtraColumns), true);
@@ -679,7 +695,15 @@ public class StatesTrajectory {
   /**
    *  <br>
    * This function is identical to createFromStatesTable() except that this<br>
-   * function accepts a Storage instead of a TimeSeriesTable.
+   * function accepts a Storage instead of a TimeSeriesTable.<br>
+   * <br>
+   * #### History<br>
+   * Before OpenSim 4.0, the only way to save states to a file was as<br>
+   * a Storage file, typically called a states storage file and named<br>
+   * `*_states.sto`. You can use this function to create a StatesTrajectory<br>
+   * from such a Storage file. OpenSim 4.0 introduced the ability to save and<br>
+   * read a complete StatesTrajectory to/from an OSTATES file, and so this<br>
+   * function should only be used when you are stuck with pre-4.0 files.
    */
   public static StatesTrajectory createFromStatesStorage(Model model, Storage sto, boolean allowMissingColumns) {
     return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_2(Model.getCPtr(model), model, Storage.getCPtr(sto), sto, allowMissingColumns), true);
@@ -688,14 +712,22 @@ public class StatesTrajectory {
   /**
    *  <br>
    * This function is identical to createFromStatesTable() except that this<br>
-   * function accepts a Storage instead of a TimeSeriesTable.
+   * function accepts a Storage instead of a TimeSeriesTable.<br>
+   * <br>
+   * #### History<br>
+   * Before OpenSim 4.0, the only way to save states to a file was as<br>
+   * a Storage file, typically called a states storage file and named<br>
+   * `*_states.sto`. You can use this function to create a StatesTrajectory<br>
+   * from such a Storage file. OpenSim 4.0 introduced the ability to save and<br>
+   * read a complete StatesTrajectory to/from an OSTATES file, and so this<br>
+   * function should only be used when you are stuck with pre-4.0 files.
    */
   public static StatesTrajectory createFromStatesStorage(Model model, Storage sto) {
     return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_3(Model.getCPtr(model), model, Storage.getCPtr(sto), sto), true);
   }
 
   /**
-   *  Create a partial trajectory of States from a states table.<br>
+   * Create a partial trajectory of States from a states table.<br>
    * The resulting StatesTrajectory will restore continuous state<br>
    * variable values, but not discrete state variable values, modeling<br>
    * option values, etc. Also, keep in mind that states files usually<br>
@@ -767,7 +799,7 @@ public class StatesTrajectory {
   }
 
   /**
-   *  Create a partial trajectory of States from a states table.<br>
+   * Create a partial trajectory of States from a states table.<br>
    * The resulting StatesTrajectory will restore continuous state<br>
    * variable values, but not discrete state variable values, modeling<br>
    * option values, etc. Also, keep in mind that states files usually<br>
@@ -829,7 +861,7 @@ public class StatesTrajectory {
   }
 
   /**
-   *  Create a partial trajectory of States from a states table.<br>
+   * Create a partial trajectory of States from a states table.<br>
    * The resulting StatesTrajectory will restore continuous state<br>
    * variable values, but not discrete state variable values, modeling<br>
    * option values, etc. Also, keep in mind that states files usually<br>
@@ -888,7 +920,7 @@ public class StatesTrajectory {
   }
 
   /**
-   *  Create a partial trajectory of States from a states table.<br>
+   * Create a partial trajectory of States from a states table.<br>
    * The resulting StatesTrajectory will restore continuous state<br>
    * variable values, but not discrete state variable values, modeling<br>
    * option values, etc. Also, keep in mind that states files usually<br>
@@ -944,12 +976,22 @@ public class StatesTrajectory {
   }
 
   /**
-   *  Convenience form of createFromStatesStorage() that takes the path to a<br>
+   * Convenience form of createFromStatesStorage() that takes the path to a<br>
    * Storage file instead of a Storage object. This convenience form uses the<br>
-   * default values for `allowMissingColumns` and `allowExtraColumns`. 
+   * default values for `allowMissingColumns` and `allowExtraColumns`.
    */
   public static StatesTrajectory createFromStatesStorage(Model model, String filepath) {
     return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesStorage__SWIG_4(Model.getCPtr(model), model, filepath), true);
+  }
+
+  /**
+   * Create a StatesTrajectory from a StatesDocument.<br>
+   * <br>
+   * @param model The Model to which the states belong.<br>
+   * @param filename The path to the StatesDocument (e.g., .ostates) file.
+   */
+  public static StatesTrajectory createFromStatesDocument(Model model, String filename) {
+    return new StatesTrajectory(opensimSimulationJNI.StatesTrajectory_createFromStatesDocument(Model.getCPtr(model), model, filename), true);
   }
 
 }

@@ -222,7 +222,7 @@ public class Manager {
   }
    */
   public void setIntegratorMethod(Manager.IntegratorMethod integMethod) {
-    opensimSimulationJNI.Manager_setIntegratorMethod(swigCPtr, this, integMethod.swigValue());
+    opensimSimulationJNI.Manager_setIntegratorMethod__SWIG_0(swigCPtr, this, integMethod.swigValue());
   }
 
   /**
@@ -484,8 +484,12 @@ public class Manager {
    * Note: If setRecordStatesTrajectory(false) was called, this will return<br>
    *       an empty StatesTrajectory.
    */
-  public SWIGTYPE_p_StatesTrajectory getStatesTrajectory() {
-    return new SWIGTYPE_p_StatesTrajectory(opensimSimulationJNI.Manager_getStatesTrajectory(swigCPtr, this), true);
+  public StatesTrajectory getStatesTrajectory() {
+    return new StatesTrajectory(opensimSimulationJNI.Manager_getStatesTrajectory(swigCPtr, this), true);
+  }
+
+  public void setIntegratorMethod(int method) {
+    opensimSimulationJNI.Manager_setIntegratorMethod__SWIG_1(swigCPtr, this, method);
   }
 
   /**
