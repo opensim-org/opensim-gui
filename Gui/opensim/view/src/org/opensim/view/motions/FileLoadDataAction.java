@@ -26,24 +26,10 @@ package org.opensim.view.motions;
  *
  * @author  ayman
  */
-import java.io.File;
-import java.io.IOException;
-import org.openide.DialogDisplayer;
-import org.openide.NotifyDescriptor;
-import org.openide.util.Exceptions;
 import org.openide.util.HelpCtx;
 import org.openide.util.NbBundle;
 import org.openide.util.actions.CallableSystemAction;
-import org.opensim.modeling.DataTable;
-import org.opensim.modeling.MarkerData;
-import org.opensim.view.experimentaldata.ModelForExperimentalData;
-import org.opensim.modeling.Storage;
-import org.opensim.modeling.TimeSeriesTableQuaternion;
-import org.opensim.modeling.Units;
-import org.opensim.utils.ErrorDialog;
 import org.opensim.utils.FileUtils;
-import org.opensim.view.experimentaldata.AnnotatedMotion;
-import org.opensim.view.pub.OpenSimDB;
 
 public final class FileLoadDataAction extends CallableSystemAction {
     static int nextNumber=0;
@@ -52,57 +38,14 @@ public final class FileLoadDataAction extends CallableSystemAction {
         String fileName = FileUtils.getInstance().browseForFilename(".trc,.mot,.sto", "Experimental data file");
         if (fileName != null){
             if (fileName.toLowerCase().endsWith(".trc")){
-                MarkerData markerData;
-                try {
-                    markerData = new MarkerData(fileName);
-                    Storage newStorage = new Storage();
-                    markerData.makeRdStorage(newStorage);
-                    AnnotatedMotion amot = new AnnotatedMotion(newStorage, markerData.getMarkerNames());
-                    amot.setUnitConversion(markerData.getUnits().convertTo(Units.UnitType.Meters));
-                    amot.setName(new File(fileName).getName());
-                    amot.setDataRate(markerData.getDataRate());
-                    amot.setCameraRate(markerData.getCameraRate());
-                    amot.setUnits(markerData.getUnits());
-                    // Add the visuals to support it
-                    ModelForExperimentalData modelForDataImport = new ModelForExperimentalData(nextNumber++, amot);
-                    modelForDataImport.initSystem();
-                    amot.setModel(modelForDataImport);
-                    modelForDataImport.addMotionObjects(amot.getClassified());
-                    OpenSimDB.getInstance().addModel(modelForDataImport);
-                    MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
-                    MotionsDB.getInstance().saveStorageFileName(amot, fileName);
-                } catch (IOException ex) {
-                    NotifyDescriptor.Message dlg =
-                          new NotifyDescriptor.Message("Couldn't load data and/or model for display.\n"+
-                                "Possible reasons: data file has incorrect format or issues with file path.");
-                  DialogDisplayer.getDefault().notify(dlg);   
-                }
+                MotionsDB.getInstance().loadTrcFile(fileName);
             }
             else if (fileName.toLowerCase().endsWith(".mot")||fileName.toLowerCase().endsWith(".sto")){
-                    Storage newStorage=null;
-                    try {
-                        newStorage = new Storage(fileName);
-                    } catch (IOException ex) {
-                        System.out.println("Failed to construct storage from "+fileName+". Previewing is aborted.");
-                        ex.printStackTrace();
-                    }
-                    AnnotatedMotion amot = new AnnotatedMotion(newStorage);
-                    
-                    amot.setName(new File(fileName).getName());
-                    ModelForExperimentalData modelForDataImport=null;
-                    try {
-                        modelForDataImport = new ModelForExperimentalData(nextNumber++, amot);
-                        OpenSimDB.getInstance().addModel(modelForDataImport);
-                    } catch (IOException ex) {
-                        ErrorDialog.displayExceptionDialog(ex);
-                        return;
-                    }
-                    amot.setModel(modelForDataImport);
-                    MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
-                    MotionsDB.getInstance().saveStorageFileName(amot, fileName);
+                MotionsDB.getInstance().loadMotFile(fileName);
             }
         }
     }
+
     
     public String getName() {
         return NbBundle.getMessage(FileLoadDataAction.class, "CTL_FileLoadDataAction");
