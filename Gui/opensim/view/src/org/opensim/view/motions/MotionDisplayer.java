@@ -402,8 +402,6 @@ public class MotionDisplayer {
         interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
         
         modelVisJson.addMotionDisplayer(this);
-        if (model instanceof ModelForExperimentalData) return;
-
     }
     public static final String STRING_EXPMARKER_DEFAULT_RADIUS = "10";
     public void setupMotionDisplay() { 
@@ -422,7 +420,6 @@ public class MotionDisplayer {
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
             Vector<ExperimentalDataObject> objects=mot.getClassified();
             mot.setMotionDisplayer(this);
-            createMotionObjectsGroupJson();
             addExperimentalDataObjectsToJson(objects);
             for(ExperimentalDataObject nextObject:objects){
                bindExperimentalDataObjectToVisualizerObjectKeepHandle(nextObject);
@@ -668,15 +665,17 @@ public class MotionDisplayer {
      long before = 0, after=0;
      if (profile)
           before =System.nanoTime();
+     // Here handling a motion file with potentially extra columns for Forces, Markers
+     OpenSimContext context = OpenSimDB.getInstance().getContext(model);
      if (simmMotionData instanceof AnnotatedMotion){ // Experimental Data
           int dataSize = states.getSize();
           AnnotatedMotion mot = (AnnotatedMotion)simmMotionData;
           Vector<ExperimentalDataObject> objects=mot.getClassified();
           mot.updateDecorations(interpolatedStates);
+          context.getCurrentStateRef().setTime(assocTime);
+          context.realizeVelocity();
           return;
       }
-     // Here handling a motion file with potentially extra columns for Forces, Markers
-      OpenSimContext context = OpenSimDB.getInstance().getContext(model);
       
       if(statesFile || motionAsStates!=null) {
           // FIX40 speed this up by using map or YIndex

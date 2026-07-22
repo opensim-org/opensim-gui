@@ -65,7 +65,7 @@ public class WebSocketDB {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
   LocalTime localTime = LocalTime.now();
   System.out.println(dtf.format(localTime));
-        System.out.println("Connecting");
+        System.out.println("Connected...");
     }
     
     public void unRegisterSocket(VisWebSocket socket) {
@@ -102,7 +102,8 @@ public class WebSocketDB {
                 pendingModels.add(modelUUIDString);
             }
         }
-        //System.out.println("Broadcast:"+msg.get("Op"));
+        if (debug)
+            System.out.println("Broadcast:"+msg.toJSONString());
         if (specificSocket != null){
             specificSocket.sendVisualizerMessage(msg);
             return;
@@ -110,7 +111,7 @@ public class WebSocketDB {
         int i=0;
         for (VisWebSocket sock : sockets){
             if (debug) {
-                System.out.println("Broadcast:"+msg.toJSONString()+"\n");
+                //System.out.println("Broadcast:"+msg.toJSONString()+"\n");
                 if (msg.get("time")!= null){
                     System.out.println("time="+ (double)msg.get("time"));
                     System.out.println("Delta="+((double)msg.get("time")-lastTime));
