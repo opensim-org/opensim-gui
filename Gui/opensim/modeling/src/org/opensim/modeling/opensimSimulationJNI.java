@@ -5985,6 +5985,7 @@ public class opensimSimulationJNI {
   public final static native void AbstractGeometryPath_addInEquivalentForces(long jarg1, AbstractGeometryPath jarg1_, long jarg2, State jarg2_, double jarg3, long jarg4, VectorOfSpatialVec jarg4_, long jarg5, Vector jarg5_);
   public final static native double AbstractGeometryPath_computeMomentArm(long jarg1, AbstractGeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, Coordinate jarg3_);
   public final static native boolean AbstractGeometryPath_isVisualPath(long jarg1, AbstractGeometryPath jarg1_);
+  public final static native long AbstractGeometryPath_findIndependentCoordinates(long jarg1, AbstractGeometryPath jarg1_, long jarg2, State jarg2_);
   public final static native long AbstractGeometryPath_getDefaultColor(long jarg1, AbstractGeometryPath jarg1_);
   public final static native void AbstractGeometryPath_setDefaultColor(long jarg1, AbstractGeometryPath jarg1_, long jarg2, Vec3 jarg2_);
   public final static native long AbstractGeometryPath_getColor(long jarg1, AbstractGeometryPath jarg1_, long jarg2, State jarg2_);
@@ -6021,6 +6022,7 @@ public class opensimSimulationJNI {
   public final static native void GeometryPath_getPointForceDirections(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ArrayPointForceDirection jarg3_);
   public final static native void GeometryPath_produceForces(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, double jarg3, long jarg4);
   public final static native boolean GeometryPath_isVisualPath(long jarg1, GeometryPath jarg1_);
+  public final static native long GeometryPath_findIndependentCoordinates(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_);
   public final static native double GeometryPath_computeMomentArm(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, Coordinate jarg3_);
   public final static native void GeometryPath_extendPreScale(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
   public final static native void GeometryPath_extendPostScale(long jarg1, GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, ScaleSet jarg3_);
@@ -6079,6 +6081,7 @@ public class opensimSimulationJNI {
   public final static native double FunctionBasedPath_computeMomentArm(long jarg1, FunctionBasedPath jarg1_, long jarg2, State jarg2_, long jarg3, Coordinate jarg3_);
   public final static native void FunctionBasedPath_produceForces(long jarg1, FunctionBasedPath jarg1_, long jarg2, State jarg2_, double jarg3, long jarg4);
   public final static native boolean FunctionBasedPath_isVisualPath(long jarg1, FunctionBasedPath jarg1_);
+  public final static native long FunctionBasedPath_findIndependentCoordinates(long jarg1, FunctionBasedPath jarg1_, long jarg2, State jarg2_);
   public final static native void delete_FunctionBasedPath(long jarg1);
   public final static native long Scholz2015GeometryPathElement_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void Scholz2015GeometryPathElement_assign(long jarg1, Scholz2015GeometryPathElement jarg1_, long jarg2, OpenSimObject jarg2_);
@@ -6144,6 +6147,7 @@ public class opensimSimulationJNI {
   public final static native double Scholz2015GeometryPath_getLengtheningSpeed(long jarg1, Scholz2015GeometryPath jarg1_, long jarg2, State jarg2_);
   public final static native double Scholz2015GeometryPath_computeMomentArm(long jarg1, Scholz2015GeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, Coordinate jarg3_);
   public final static native boolean Scholz2015GeometryPath_isVisualPath(long jarg1, Scholz2015GeometryPath jarg1_);
+  public final static native long Scholz2015GeometryPath_findIndependentCoordinates(long jarg1, Scholz2015GeometryPath jarg1_, long jarg2, State jarg2_);
   public final static native void Scholz2015GeometryPath_produceForces(long jarg1, Scholz2015GeometryPath jarg1_, long jarg2, State jarg2_, double jarg3, long jarg4);
   public final static native void delete_Scholz2015GeometryPath(long jarg1);
   public final static native long Ligament_safeDownCast(long jarg1, OpenSimObject jarg1_);
@@ -7738,6 +7742,7 @@ public class opensimSimulationJNI {
   public final static native void appendCoupledCoordinateValues__SWIG_1(long jarg1, TimeSeriesTable jarg1_, long jarg2, Model jarg2_);
   public final static native void appendCoordinateValueDerivativesAsSpeeds__SWIG_0(long jarg1, TimeSeriesTable jarg1_, long jarg2, Model jarg2_, boolean jarg3);
   public final static native void appendCoordinateValueDerivativesAsSpeeds__SWIG_1(long jarg1, TimeSeriesTable jarg1_, long jarg2, Model jarg2_);
+  public final static native long findJointsBetweenPhysicalFrames(long jarg1, Model jarg1_, String jarg2, String jarg3);
   public final static native long analyze__SWIG_2(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_, long jarg5, TimeSeriesTable jarg5_);
   public final static native long analyze__SWIG_3(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_);
   public final static native long analyzeVec3__SWIG_0(long jarg1, Model jarg1_, long jarg2, TimeSeriesTable jarg2_, long jarg3, TimeSeriesTable jarg3_, long jarg4, StdVectorString jarg4_, long jarg5, TimeSeriesTable jarg5_);

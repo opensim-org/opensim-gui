@@ -373,4 +373,17 @@ public class FunctionBasedPath extends AbstractGeometryPath {
     return opensimSimulationJNI.FunctionBasedPath_isVisualPath(swigCPtr, this);
   }
 
+  /**
+   * Find the list of paths to independent coordinates which fully determine<br>
+   * the kinematic state of this path.<br>
+   * <br>
+   * `FunctionBasedPath`'s concrete implementation of this method<br>
+   * constructs the list of `ComponentPath` element directly from the<br>
+   * list property 'component_path' (i.e., the `SimTK::State` argument is<br>
+   * unused).
+   */
+  public SWIGTYPE_p_std__vectorT_OpenSim__ComponentPath_t findIndependentCoordinates(State arg0) {
+    return new SWIGTYPE_p_std__vectorT_OpenSim__ComponentPath_t(opensimSimulationJNI.FunctionBasedPath_findIndependentCoordinates(swigCPtr, this, State.getCPtr(arg0), arg0), true);
+  }
+
 }

@@ -295,6 +295,23 @@ public class opensimSimulation {
   }
 
   /**
+   *  Find the Joint%s that lie between two PhysicalFrame%s in a Model. The second<br>
+   *  frame need not be a descendant of the first frame or vice versa. If the<br>
+   *  frames are on different branches of the model, this function will return the<br>
+   *  list of joints ordered from the first frame to the second frame. Otherwise,<br>
+   *  the list of joints will use a root-to-leaf ordering.<br>
+   * <br>
+   *  Note: This function uses several passes through the model's topology to form<br>
+   *  the list of joints, so avoid repeated calls in performance critical<br>
+   *  applications.<br>
+   * <br>
+   *  
+   */
+  public static SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__Joint_const_t_t findJointsBetweenPhysicalFrames(Model model, String firstFramePath, String secondFramePath) {
+    return new SWIGTYPE_p_std__vectorT_SimTK__ReferencePtrT_OpenSim__Joint_const_t_t(opensimSimulationJNI.findJointsBetweenPhysicalFrames(Model.getCPtr(model), model, firstFramePath, secondFramePath), true);
+  }
+
+  /**
    *  Calculate the requested outputs using the model in the problem and the<br>
    *  provided states and controls tables.<br>
    *  The controls table is used to set the model's controls vector.<br>

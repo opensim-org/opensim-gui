@@ -55,7 +55,7 @@ jobs:
         $expectedHash = "c3d7a34184c4021486751fbc3878eb2376677674ff8d6d4bf87017fd2434122c8438072aa891e535fa0fa9aeafcb49ad833a61903180772369d99571b073baac"
         $hashFromFile = Get-FileHash -Algorithm SHA512 -Path .\Apache-NetBeans-17-bin-windows-x64.exe
         if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
-        .\Apache-NetBeans-17-bin-windows-x64.exe --silent | Out-Null # This installer is gregarious.
+        .\Apache-NetBeans-17-bin-windows-x64.exe --silent --javahome "$env:JAVA_HOME" | Out-Null # This installer is gregarious.
         echo "ANT_HOME=C:\\Program Files\\NetBeans-17.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
       
     - name: Checkout opensim-core main
@@ -218,8 +218,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
-         ref: 'opensim_46_release'
-    
+        
     - uses: actions/setup-python@v4
       with:
         python-version: '3.11' 
