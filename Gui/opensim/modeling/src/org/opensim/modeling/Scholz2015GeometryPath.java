@@ -13,6 +13,10 @@ package org.opensim.modeling;
  * A concrete class representing a geometric path object defined by a list of<br>
  * path points and wrapping obstacles.<br>
  * <br>
+ * Note: `Scholz2015GeometryPath` is an experimental class. The default settings<br>
+ *       and algorithms in the underlying wrapping engine (`SimTK::CableSpan`)<br>
+ *       may change in future releases to address robustness issues.<br>
+ * <br>
  * The path consists of straight line segments and curved line segments: a<br>
  * curved segment over each obstacle, and straight segments connecting path<br>
  * points to obstacles. If no obstacle lies between two path points, the points<br>
@@ -374,6 +378,27 @@ public class Scholz2015GeometryPath extends AbstractGeometryPath {
 
   public boolean isVisualPath() {
     return opensimSimulationJNI.Scholz2015GeometryPath_isVisualPath(swigCPtr, this);
+  }
+
+  /**
+   * Find the list of paths to independent coordinates which fully determine<br>
+   * the kinematic state of this path.<br>
+   * <br>
+   * `Scholz2015GeometryPath`'s concrete implementation of this method finds<br>
+   * the joints lying between the frames associated with the path's origin and<br>
+   * insertion points and returns the coordinate paths associated with these<br>
+   * joints. Locked coordinates, prescribed coordinates, and coordinates<br>
+   * dependent on other coordinates via a `CoordinateCouplerConstraint` are<br>
+   * excluded from the list.<br>
+   * <br>
+   * Note: This method uses several passes through the model's topology to<br>
+   * form the list of coordinate paths, so avoid repeated calls in performance<br>
+   * critical applications.<br>
+   * <br>
+   * @see SimulationUtilities#findJointsBetweenPhysicalFrames()
+   */
+  public SWIGTYPE_p_std__vectorT_OpenSim__ComponentPath_t findIndependentCoordinates(State arg0) {
+    return new SWIGTYPE_p_std__vectorT_OpenSim__ComponentPath_t(opensimSimulationJNI.Scholz2015GeometryPath_findIndependentCoordinates(swigCPtr, this, State.getCPtr(arg0), arg0), true);
   }
 
   public void produceForces(State s, double tension, SWIGTYPE_p_OpenSim__ForceConsumer consumer) {

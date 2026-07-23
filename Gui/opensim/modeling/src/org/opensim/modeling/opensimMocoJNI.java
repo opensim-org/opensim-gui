@@ -518,8 +518,8 @@ public class opensimMocoJNI {
   public final static native void MocoJointReactionGoal_setLoadsFrame(long jarg1, MocoJointReactionGoal jarg1_, String jarg2);
   public final static native void MocoJointReactionGoal_setExpressedInFramePath(long jarg1, MocoJointReactionGoal jarg1_, String jarg2);
   public final static native void MocoJointReactionGoal_setReactionMeasures(long jarg1, MocoJointReactionGoal jarg1_, long jarg2, StdVectorString jarg2_);
-  public final static native void MocoJointReactionGoal_setWeight(long jarg1, MocoJointReactionGoal jarg1_, String jarg2, double jarg3);
-  public final static native void MocoJointReactionGoal_setWeightSet(long jarg1, MocoJointReactionGoal jarg1_, long jarg2, MocoWeightSet jarg2_);
+  public final static native void MocoJointReactionGoal_setReactionWeight(long jarg1, MocoJointReactionGoal jarg1_, String jarg2, double jarg3);
+  public final static native void MocoJointReactionGoal_setReactionWeightSet(long jarg1, MocoJointReactionGoal jarg1_, long jarg2, MocoWeightSet jarg2_);
   public final static native void delete_MocoJointReactionGoal(long jarg1);
   public final static native long MocoSumSquaredStateGoal_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void MocoSumSquaredStateGoal_assign(long jarg1, MocoSumSquaredStateGoal jarg1_, long jarg2, OpenSimObject jarg2_);

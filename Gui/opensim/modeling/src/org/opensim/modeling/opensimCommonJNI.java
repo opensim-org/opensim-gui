@@ -104,6 +104,7 @@ public class opensimCommonJNI {
   public final static native long computeKNearestNeighbors__SWIG_0(long jarg1, Matrix jarg1_, long jarg2, Matrix jarg2_, int jarg3);
   public final static native long computeKNearestNeighbors__SWIG_1(long jarg1, Matrix jarg1_, long jarg2, Matrix jarg2_);
   public final static native double factorizeMatrixNonNegative(long jarg1, Matrix jarg1_, int jarg2, int jarg3, double jarg4, long jarg5, Matrix jarg5_, long jarg6, Matrix jarg6_);
+  public final static native int choose(int jarg1, int jarg2);
   public final static native void delete_LogSink(long jarg1);
   public final static native void LogSink_sinkImpl(long jarg1, LogSink jarg1_, String jarg2);
   public final static native void LogSink_flushImpl(long jarg1, LogSink jarg1_);
@@ -2191,6 +2192,9 @@ public class opensimCommonJNI {
   public final static native void TableUtilities_filterLowpass__SWIG_1(long jarg1, TimeSeriesTable jarg1_, double jarg2);
   public final static native void TableUtilities_pad(long jarg1, TimeSeriesTable jarg1_, int jarg2);
   public final static native long TableUtilities_convertRotationsToEulerAngles(long jarg1);
+  public final static native long TableUtilities_concatenateVec3(long jarg1, TimeSeriesTableVec3 jarg1_, long jarg2, TimeSeriesTableVec3 jarg2_);
+  public final static native long TableUtilities_concatenate(long jarg1, TimeSeriesTable jarg1_, long jarg2, TimeSeriesTable jarg2_);
+  public final static native long TableUtilities_concatenateQuaternion(long jarg1, TimeSeriesTableQuaternion jarg1_, long jarg2, TimeSeriesTableQuaternion jarg2_);
   public final static native long new_TableUtilities();
   public final static native void delete_TableUtilities(long jarg1);
   public final static native long new_DataTable__SWIG_0();
@@ -3002,21 +3006,6 @@ public class opensimCommonJNI {
   public final static native void delete_CSVFileAdapter(long jarg1);
   public final static native long CSVFileAdapter_clone(long jarg1, CSVFileAdapter jarg1_);
   public final static native void CSVFileAdapter_write(long jarg1, TimeSeriesTable jarg1_, String jarg2);
-  public final static native int C3DFileAdapter_ForceLocation_OriginOfForcePlate_get();
-  public final static native int C3DFileAdapter_ForceLocation_CenterOfPressure_get();
-  public final static native int C3DFileAdapter_ForceLocation_PointOfWrenchApplication_get();
-  public final static native long C3DFileAdapter_clone(long jarg1, C3DFileAdapter jarg1_);
-  public final static native void C3DFileAdapter_setLocationForForceExpression__SWIG_0(long jarg1, C3DFileAdapter jarg1_, int jarg2);
-  public final static native int C3DFileAdapter_getLocationForForceExpression(long jarg1, C3DFileAdapter jarg1_);
-  public final static native long C3DFileAdapter_getMarkersTable(long jarg1, C3DFileAdapter jarg1_, long jarg2, StdMapStringAbstractDataTable jarg2_);
-  public final static native long C3DFileAdapter_getForcesTable(long jarg1, C3DFileAdapter jarg1_, long jarg2, StdMapStringAbstractDataTable jarg2_);
-  public final static native long C3DFileAdapter_getAnalogDataTable(long jarg1, C3DFileAdapter jarg1_, long jarg2, StdMapStringAbstractDataTable jarg2_);
-  public final static native String C3DFileAdapter__markers_get();
-  public final static native String C3DFileAdapter__forces_get();
-  public final static native String C3DFileAdapter__analog_get();
-  public final static native void C3DFileAdapter_setLocationForForceExpression__SWIG_1(long jarg1, C3DFileAdapter jarg1_, long jarg2);
-  public final static native long new_C3DFileAdapter();
-  public final static native void delete_C3DFileAdapter(long jarg1);
   public final static native long TableSource_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void TableSource_assign(long jarg1, TableSource jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String TableSource_getClassName();
@@ -3354,7 +3343,6 @@ public class opensimCommonJNI {
   public final static native long APDMDataReaderSettings_SWIGUpcast(long jarg1);
   public final static native long APDMDataReader_SWIGSmartPtrUpcast(long jarg1);
   public final static native long STODataTypeNotSupported_SWIGUpcast(long jarg1);
-  public final static native long C3DFileAdapter_SWIGSmartPtrUpcast(long jarg1);
   public final static native long TableSource_SWIGUpcast(long jarg1);
   public final static native long TableSourceVec3_SWIGUpcast(long jarg1);
   public final static native long AbstractReporter_SWIGUpcast(long jarg1);

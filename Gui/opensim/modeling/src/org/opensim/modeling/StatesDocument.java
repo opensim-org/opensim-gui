@@ -96,7 +96,7 @@ package org.opensim.modeling;
  * <br>
  * ### Dependencies<br>
  * Most operations in class StatesDocument rely on underlying SimTK classes,<br>
- * most notably SimTK::String, SimTK::Array&lt;T&gt;, SimTK::State, and SimTK::Xml.<br>
+ * most notably SimTK::Array&lt;T&gt;, SimTK::State, and SimTK::Xml.<br>
  * <br>
  * StatesDocument has just one key OpenSim dependency: OpenSim::Model.<br>
  * OpenSim::Model brings with it all the methods it inherits from class<br>
@@ -350,13 +350,13 @@ package org.opensim.modeling;
  * the name of the model, and the document is saved to the current working<br>
  * directory. The file name can also incorporate a valid system path (e.g.,<br>
  * "C:/Users/smith/Documents/Work/BouncingBlock.ostates").<br>
- *     SimTK::String statesFileName = model.getName() + ".ostates";<br>
- *     doc.serializeToFile(statesFileName);<br>
+ *     std::string statesFileName = model.getName() + ".ostates";<br>
+ *     doc.serialize(statesFileName);<br>
  * <br>
  * ----------------------<br>
  * Save the Model to File<br>
  * ----------------------<br>
- *     SimTK::String modelFileName = model.getName() + ".osim";<br>
+ *     std::string modelFileName = model.getName() + ".osim";<br>
  *     model-&gt;print(modelFileName);<br>
  * <br>
  * ```<br>
@@ -366,8 +366,8 @@ package org.opensim.modeling;
  * -----------------------------<br>
  * Construct the Model from File<br>
  * -----------------------------<br>
- *     SimTK::String name = "BouncingBlock";<br>
- *     SimTK::String modelFileName = name + ".osim";<br>
+ *     std::string name = "BouncingBlock";<br>
+ *     std::string modelFileName = name + ".osim";<br>
  *     OpenSim::Model model(modelFileName);<br>
  *     model.buildSystem();<br>
  *     SimTK::State&amp; initState = model-&gt;initializeState();<br>
@@ -375,7 +375,7 @@ package org.opensim.modeling;
  * -----------------------------------------------<br>
  * Construct the StatesDocument Instance from File<br>
  * -----------------------------------------------<br>
- *     SimTK::String statesFileName = name + ".ostates";<br>
+ *     std::string statesFileName = name + ".ostates";<br>
  *     StatesDocument doc(statesFileName);<br>
  * <br>
  * ----------------------<br>
@@ -534,8 +534,8 @@ public class StatesDocument {
    *     @param filename The name of the file, which may be prepended by the system<br>
    *     path at which the file resides (e.g., "C:/Documents/block.ostates"). 
    */
-  public StatesDocument(SWIGTYPE_p_SimTK__String filename) {
-    this(opensimSimulationJNI.new_StatesDocument__SWIG_1(SWIGTYPE_p_SimTK__String.getCPtr(filename)), true);
+  public StatesDocument(String filename) {
+    this(opensimSimulationJNI.new_StatesDocument__SWIG_1(filename), true);
   }
 
   /**
@@ -557,8 +557,8 @@ public class StatesDocument {
    *     SimTK:LosslessNumDigitsReal (about 20), which allows for lossless<br>
    *     reproduction of state. 
    */
-  public StatesDocument(Model model, SWIGTYPE_p_SimTK__Array_T_SimTK__State_unsigned_int_t trajectory, SWIGTYPE_p_SimTK__String note, int precision) {
-    this(opensimSimulationJNI.new_StatesDocument__SWIG_2(Model.getCPtr(model), model, SWIGTYPE_p_SimTK__Array_T_SimTK__State_unsigned_int_t.getCPtr(trajectory), SWIGTYPE_p_SimTK__String.getCPtr(note), precision), true);
+  public StatesDocument(Model model, SWIGTYPE_p_SimTK__Array_T_SimTK__State_unsigned_int_t trajectory, String note, int precision) {
+    this(opensimSimulationJNI.new_StatesDocument__SWIG_2(Model.getCPtr(model), model, SWIGTYPE_p_SimTK__Array_T_SimTK__State_unsigned_int_t.getCPtr(trajectory), note, precision), true);
   }
 
   /**
@@ -577,8 +577,8 @@ public class StatesDocument {
    *     is an empty string.<br>
    *     
    */
-  public StatesDocument(Model model, SWIGTYPE_p_SimTK__Array_T_SimTK__State_unsigned_int_t trajectory, SWIGTYPE_p_SimTK__String note) {
-    this(opensimSimulationJNI.new_StatesDocument__SWIG_3(Model.getCPtr(model), model, SWIGTYPE_p_SimTK__Array_T_SimTK__State_unsigned_int_t.getCPtr(trajectory), SWIGTYPE_p_SimTK__String.getCPtr(note)), true);
+  public StatesDocument(Model model, SWIGTYPE_p_SimTK__Array_T_SimTK__State_unsigned_int_t trajectory, String note) {
+    this(opensimSimulationJNI.new_StatesDocument__SWIG_3(Model.getCPtr(model), model, SWIGTYPE_p_SimTK__Array_T_SimTK__State_unsigned_int_t.getCPtr(trajectory), note), true);
   }
 
   /**
@@ -618,8 +618,8 @@ public class StatesDocument {
    *     SimTK:LosslessNumDigitsReal (about 20), which allows for lossless<br>
    *     reproduction of state. 
    */
-  public StatesDocument(Model model, StdVectorState trajectory, SWIGTYPE_p_SimTK__String note, int precision) {
-    this(opensimSimulationJNI.new_StatesDocument__SWIG_5(Model.getCPtr(model), model, StdVectorState.getCPtr(trajectory), trajectory, SWIGTYPE_p_SimTK__String.getCPtr(note), precision), true);
+  public StatesDocument(Model model, StdVectorState trajectory, String note, int precision) {
+    this(opensimSimulationJNI.new_StatesDocument__SWIG_5(Model.getCPtr(model), model, StdVectorState.getCPtr(trajectory), trajectory, note, precision), true);
   }
 
   /**
@@ -638,8 +638,8 @@ public class StatesDocument {
    *     is an empty string.<br>
    *     
    */
-  public StatesDocument(Model model, StdVectorState trajectory, SWIGTYPE_p_SimTK__String note) {
-    this(opensimSimulationJNI.new_StatesDocument__SWIG_6(Model.getCPtr(model), model, StdVectorState.getCPtr(trajectory), trajectory, SWIGTYPE_p_SimTK__String.getCPtr(note)), true);
+  public StatesDocument(Model model, StdVectorState trajectory, String note) {
+    this(opensimSimulationJNI.new_StatesDocument__SWIG_6(Model.getCPtr(model), model, StdVectorState.getCPtr(trajectory), trajectory, note), true);
   }
 
   /**
@@ -663,8 +663,8 @@ public class StatesDocument {
   /**
    *  Get the annotation note for this states document. 
    */
-  public SWIGTYPE_p_SimTK__String getNote() {
-    return new SWIGTYPE_p_SimTK__String(opensimSimulationJNI.StatesDocument_getNote(swigCPtr, this), false);
+  public String getNote() {
+    return opensimSimulationJNI.StatesDocument_getNote(swigCPtr, this);
   }
 
   /**
@@ -681,8 +681,8 @@ public class StatesDocument {
    *     @param filename The name of the file, which may include the file system<br>
    *     path at which to write the file (e.g., "C:/Documents/block.ostates"). 
    */
-  public void serialize(SWIGTYPE_p_SimTK__String filename) {
-    opensimSimulationJNI.StatesDocument_serialize(swigCPtr, this, SWIGTYPE_p_SimTK__String.getCPtr(filename));
+  public void serialize(String filename) {
+    opensimSimulationJNI.StatesDocument_serialize(swigCPtr, this, filename);
   }
 
   /**

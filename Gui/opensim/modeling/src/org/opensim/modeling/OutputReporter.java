@@ -126,4 +126,8 @@ public class OutputReporter extends Analysis {
     this(opensimActuatorsAnalysesToolsJNI.new_OutputReporter__SWIG_2(fileName), true);
   }
 
+  public OutputReporter(OutputReporter arg0) {
+    this(opensimActuatorsAnalysesToolsJNI.new_OutputReporter__SWIG_3(OutputReporter.getCPtr(arg0), arg0), true);
+  }
+
 }
