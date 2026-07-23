@@ -38,6 +38,7 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openide.util.Exceptions;
+import org.opensim.modeling.AbstractGeometryPath;
 import org.opensim.modeling.AbstractOutput;
 import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.AbstractProperty;
@@ -73,6 +74,7 @@ import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.Quaternion;
 import org.opensim.modeling.Rotation;
+import org.opensim.modeling.Scholz2015GeometryPath;
 import org.opensim.modeling.State;
 import org.opensim.modeling.StatesTrajectory;
 import org.opensim.modeling.Storage;
@@ -142,7 +144,7 @@ public class ModelVisualizationJson extends JSONObject {
     private JSONObject pathPointGeometryJSON = null;
     private JSONObject editablePathPointGeometryJSON = null;
     private JSONObject marker_mat_json;
-    public static boolean verbose=false;
+    public static boolean verbose=true;
     private boolean ready = false;
     private static final HashMap<String, Boolean> movableOpensimTypes = new HashMap<String, Boolean>();
     public final ArrayList<MotionDisplayer> motionDisplayers = new ArrayList<MotionDisplayer>();
@@ -537,16 +539,27 @@ public class ModelVisualizationJson extends JSONObject {
                 visualizerFrames.put(ownerFrame, vf);
             }
         }
-        GeometryPath gPath = GeometryPath.safeDownCast(comp);
-        boolean isGeometryPath = (gPath!=null);
-        if (isGeometryPath){
-            if (debug_path)
-                System.out.println("Creating Json for GeometryPath of "+gPath.getOwner().getName());
-            UUID pathUUID = createJsonForGeometryPath(gPath, visibleStatus, null);
-            pathList.put(gPath, pathUUID);
-            // Add to the ID map so that PathOwner translates to GeometryPath
-            Component parentComp = gPath.getOwner();
-            addComponentToUUIDMap(parentComp, pathUUID);
+        AbstractGeometryPath aPath = AbstractGeometryPath.safeDownCast(comp);
+        boolean isPath = (aPath!=null);
+        if (isPath){
+            GeometryPath gPath = GeometryPath.safeDownCast(comp);
+            if (gPath!=null){  
+                if (debug_path)
+                    System.out.println("Creating Json for GeometryPath of "+gPath.getOwner().getName());
+
+                UUID pathUUID = createJsonForGeometryPath(gPath, visibleStatus, null);
+                pathList.put(gPath, pathUUID);
+                // Add to the ID map so that PathOwner translates to GeometryPath
+                Component parentComp = gPath.getOwner();
+                addComponentToUUIDMap(parentComp, pathUUID);
+            }
+            else {
+                 Scholz2015GeometryPath sPath = Scholz2015GeometryPath.safeDownCast(comp);
+                 System.out.println("Creating Json for GeometryPath of "+sPath.getOwner().getName());
+                 UUID pathUUID = createJsonForScholzPath(sPath, visibleStatus, null);
+                 //pathList.put(sPath, pathUUID);
+                 addComponentToUUIDMap(comp, pathUUID);
+            }
         }
         else{
             adg.clear();
@@ -1480,7 +1493,7 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<UUID, ComputedPathPointInfo> computedPathPoints = new HashMap<UUID, ComputedPathPointInfo>();
     private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
     // Keep track if PathPoints are displayed/enlarged to sync. UI and to keep across edits
-    private final HashMap<GeometryPath, Boolean> pathDisplayStatus = new HashMap<GeometryPath, Boolean>();
+    private final HashMap<AbstractGeometryPath, Boolean> pathDisplayStatus = new HashMap<>();
     // GeometryPath has material (with Skinning) and another material without Skinning for PathPoints
     // this Map maintains the mapping so the colors can stay in sync.
     private final HashMap<OpenSimObject, UUID> mapGeometryPathToPathPointMaterialUUID = 
@@ -1846,9 +1859,67 @@ public class ModelVisualizationJson extends JSONObject {
         return mesh_uuid;
     }
 
-    private UUID createPathPointMaterial(GeometryPath path) {
+    private UUID createJsonForScholzPath(Scholz2015GeometryPath path, boolean visible, UUID reuse_uuid){
+        UUID mat_uuid = createPathMaterial(path);
+        UUID pathpt_mat_uuid = createPathPointMaterial(path);
+        // Cycle through pathElements and create reps for points, #NUM_WRAP_POINTS for each obstacle
+        // for now these are notr exposed and we don't know how to get them so will just assume no wrapping
+        // to explore downstream issues
+        JSONArray pathpoint_jsonArr = new JSONArray();
+        // Keep track of First path point so that when changing color we can propagate to all path points, since they share material
+        // Also so that when adding pathpoints due to wrapping, we can get proper/shared material
+        mapGeometryPathToPathPointMaterialUUID.put(path, pathpt_mat_uuid);
+        // Fix issue #2569 where moving pathpoint is not handled properly if first in path
+        int nPts = path.getNumPathPoints();
+        for (int iE=0; iE < nPts; iE++){
+            PathPoint ppt = path.getPathPoint(iE);
+            UUID pathpoint_uuid = addPathPointObjectToParent(ppt, pathpt_mat_uuid.toString(), visible);
+            addComponentToUUIDMap(ppt, pathpoint_uuid);
+            pathpoint_jsonArr.add(pathpoint_uuid.toString());
+        }
+        JSONObject pathGeomJson = new JSONObject();
+        UUID uuidForPathGeomGeometry = UUID.randomUUID();
+        pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
+        pathGeomJson.put("type", "CylinderGeometry");
+        pathGeomJson.put("radiusTop", actualMuscleDisplayRadius);
+        pathGeomJson.put("radiusBottom", actualMuscleDisplayRadius);
+        pathGeomJson.put("height", 0.01);
+        pathGeomJson.put("radialSegments", 4);
+        pathGeomJson.put("heightSegments", 2*(pathpoint_jsonArr.size()-1)-1);
+        pathGeomJson.put("openEnded", true);
+        // height, radialSegments, heightSegments, openended
+        pathGeomJson.put("name", path.getName()+"Control");
+        if (reuse_uuid == null) {
+            json_geometries.add(pathGeomJson);
+        }
+        // Now the object/mesh to connect the geometry, material
+        JSONObject gndJson = mapBodyIndicesToJson.get(0);
+        if (gndJson.get("children")==null)
+                gndJson.put("children", new JSONArray());
+        JSONArray gndChildren = (JSONArray) gndJson.get("children");
+        Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
+        UUID mesh_uuid = (reuse_uuid==null)? UUID.randomUUID(): reuse_uuid;
+        obj_json.put("uuid", mesh_uuid.toString());
+        obj_json.put("type", "GeometryPath");
+        obj_json.put("name", path.getName());
+        obj_json.put("points", pathpoint_jsonArr);
+        obj_json.put("active", pathpoint_jsonArr);
+        obj_json.put("geometry", uuidForPathGeomGeometry.toString());
+        obj_json.put("userData",JSONUtilities.createUserDataObject("Path", false));
+        gndChildren.add(obj_json);
+        // Create json entry for material (path_material) and set skinning to true
+        obj_json.put("material", mat_uuid.toString());
+        if (!visible){ // path-belly = cylinder
+            obj_json.put("visible", false);
+        }
+        pathDisplayStatus.put(path, true);
+        return mesh_uuid;
+
+        
+    }
+    private UUID createPathPointMaterial(AbstractGeometryPath path) {
         // Repeat for pathpointMaterial
-        Map<String, Object> pathpt_mat_json = new LinkedHashMap<String, Object>();
+        Map<String, Object> pathpt_mat_json = new LinkedHashMap<>();
         UUID pathpt_mat_uuid = UUID.randomUUID();
         pathpt_mat_json.put("uuid", pathpt_mat_uuid.toString());
         populatePathMaterialDefaults(pathpt_mat_json, path);
@@ -1857,7 +1928,7 @@ public class ModelVisualizationJson extends JSONObject {
         return pathpt_mat_uuid;
     }
 
-    private UUID createPathMaterial(GeometryPath path) {
+    private UUID createPathMaterial(AbstractGeometryPath path) {
         // Create material for path, pathpts
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         UUID mat_uuid = UUID.randomUUID();
@@ -1897,7 +1968,7 @@ public class ModelVisualizationJson extends JSONObject {
         }
     }
 
-    private void populatePathMaterialDefaults(Map<String, Object> mat_json, GeometryPath path) {
+    private void populatePathMaterialDefaults(Map<String, Object> mat_json, AbstractGeometryPath path) {
         mat_json.put("type", "MeshStandardMaterial");
         Vec3 pathColor = path.getDefaultColor();
         String colorString = JSONUtilities.mapColorToRGBA(pathColor);
