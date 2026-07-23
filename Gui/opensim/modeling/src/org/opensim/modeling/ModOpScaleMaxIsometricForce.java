@@ -9,7 +9,7 @@
 package org.opensim.modeling;
 
 /**
- *  Scale the max isometric force for all muscles in the model. 
+ *  Scale the max isometric force for all muscles in the model.
  */
 public class ModOpScaleMaxIsometricForce extends ModelOperator {
   private transient long swigCPtr;

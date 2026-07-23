@@ -209,6 +209,21 @@ public class AbstractGeometryPath extends ModelComponent {
   }
 
   /**
+   * Find the list of paths to independent coordinates which fully determine<br>
+   * the kinematic state of this path.<br>
+   * <br>
+   * Internally, this may use a variety of methods to find the list of<br>
+   * coordinates. It may search the kinematic tree to find the joints lying<br>
+   * between the origin and insertion points of the path, or it may use<br>
+   * a user-defined list of coordinates as part of a function-based path<br>
+   * representation. It is up to concrete implementations<br>
+   * (e.g., `GeometryPath`) to provide a relevant implementation.
+   */
+  public SWIGTYPE_p_std__vectorT_OpenSim__ComponentPath_t findIndependentCoordinates(State arg0) {
+    return new SWIGTYPE_p_std__vectorT_OpenSim__ComponentPath_t(opensimSimulationJNI.AbstractGeometryPath_findIndependentCoordinates(swigCPtr, this, State.getCPtr(arg0), arg0), true);
+  }
+
+  /**
    * Get the default color of the path.<br>
    * <br>
    * Returns the color that will be used to initialize the color cache<br>

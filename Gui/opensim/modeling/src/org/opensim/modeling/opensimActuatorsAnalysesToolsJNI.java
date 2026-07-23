@@ -1600,6 +1600,7 @@ public class opensimActuatorsAnalysesToolsJNI {
   public final static native long new_OutputReporter__SWIG_0(long jarg1, Model jarg1_);
   public final static native long new_OutputReporter__SWIG_1();
   public final static native long new_OutputReporter__SWIG_2(String jarg1);
+  public final static native long new_OutputReporter__SWIG_3(long jarg1, OutputReporter jarg1_);
   public final static native void delete_OutputReporter(long jarg1);
   public final static native long IMUDataReporter_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void IMUDataReporter_assign(long jarg1, IMUDataReporter jarg1_, long jarg2, OpenSimObject jarg2_);

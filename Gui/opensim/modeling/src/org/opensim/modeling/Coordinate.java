@@ -625,8 +625,8 @@ public class Coordinate extends ModelComponent {
   /**
    * *
    */
-  public int getMobilizerQIndex() {
-    return opensimSimulationJNI.Coordinate_getMobilizerQIndex(swigCPtr, this);
+  public SWIGTYPE_p_SimTK__MobilizerQIndex getMobilizerQIndex() {
+    return new SWIGTYPE_p_SimTK__MobilizerQIndex(opensimSimulationJNI.Coordinate_getMobilizerQIndex(swigCPtr, this), true);
   }
 
   public int getBodyIndex() {
