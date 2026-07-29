@@ -9,52 +9,53 @@ jobs:
   windows:
     name: Windows
 
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
-    - name: echo distinct ID ${{ github.event.inputs.distinct_id }}
-      run: echo ${{ github.event.inputs.distinct_id }}
-      
     - name: Checkout opensim-gui
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
     - name: Install SWIG
       run: |
         choco install swig --version 4.1.1 --yes --limit-output --allow-downgrade
         swig -swiglib
-      
+        
     - name: Install Python packages
       uses: actions/setup-python@v4
       with:
-        python-version: '3.8'
+        python-version: '3.11'
         
     - name: Install NumPy 
-      run: python3 -m pip install numpy==1.20.2
+      run: python3 -m pip install numpy==2.4
 
-    - name: Set up JDK 1.8
-      uses: actions/setup-java@v3
+    - name: Set up JDK 11
+      uses: actions/setup-java@v4
       with:
         distribution: 'temurin'
-        java-version: 8
-
-    - name: Install Netbeans 12.3
-      # Make sure the NetBeans installer is not corrupted.
+        java-version: 11
+        
+    - name: Cache Netbeans
+      id: cache-netbeans
+      uses: actions/cache@v3
+      with:
+        path: .\Apache-NetBeans-17-bin-windows-x64.exe
+        key: netbeans-17
+        
+    - name: Install Netbeans 17
+      #if: steps.cache-netbeans.outputs.cache-hit != 'true'
       run: |
-        (New-Object System.Net.WebClient).DownloadFile("https://archive.apache.org/dist/netbeans/netbeans/12.3/Apache-NetBeans-12.3-bin-windows-x64.exe", "Apache-NetBeans-12.3-bin-windows-x64.exe")
-        $expectedHash = "0695d87d9c72dcf3738672ba83eb273dda02066fa5eee80896cb6ccf79175840367a13d22ab3cb9838dffaa9a219dd1f73aee0e27c085e5310da2e3bbbc92b2c"
-        $hashFromFile = Get-FileHash -Algorithm SHA512 -Path .\Apache-NetBeans-12.3-bin-windows-x64.exe
+        (New-Object System.Net.WebClient).DownloadFile("https://archive.apache.org/dist/netbeans/netbeans-installers/17/Apache-NetBeans-17-bin-windows-x64.exe", "Apache-NetBeans-17-bin-windows-x64.exe")
+        $expectedHash = "c3d7a34184c4021486751fbc3878eb2376677674ff8d6d4bf87017fd2434122c8438072aa891e535fa0fa9aeafcb49ad833a61903180772369d99571b073baac"
+        $hashFromFile = Get-FileHash -Algorithm SHA512 -Path .\Apache-NetBeans-17-bin-windows-x64.exe
         if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
-        .\Apache-NetBeans-12.3-bin-windows-x64.exe --silent | Out-Null # This installer is gregarious.
-        echo "ANT_HOME=C:\\Program Files\\NetBeans-12.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
+        .\Apache-NetBeans-17-bin-windows-x64.exe --silent --javahome "$env:JAVA_HOME" | Out-Null # This installer is gregarious.
+        echo "ANT_HOME=C:\\Program Files\\NetBeans-17.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
       
-    - name: Checkout opensim-core pr branch
-      uses: actions/checkout@v3
+    - name: Checkout opensim-core main
+      uses: actions/checkout@v4
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
-         # obtain commit hash from event
-         ref: ${{ github.event.inputs.commit }}
-
     
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
@@ -70,7 +71,7 @@ jobs:
         key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
 
     - name: Build opensim-core-dependencies
-      if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      #if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_deps
         mkdir $env:GITHUB_WORKSPACE\\build_deps
@@ -79,9 +80,8 @@ jobs:
         # /W0 disables warnings. The other flags are copied from CMake's
         # default CMAKE_CXX_FLAGS.
         # https://msdn.microsoft.com/en-us/library/19z1t1wy.aspx
-        $env:CXXFLAGS = "/W0"
-        cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 16 2019" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DWIG_DIR=C:/ProgramData/chocolatey/lib/swig -DOPENSIM_WITH_TROPTER:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DPython3_ROOT_DIR=C:\hostedtoolcache\windows\Python\3.8.10\x64
-        $env:CXXFLAGS = ""
+        $env:CXXFLAGS = "/W0 /MD"
+        cmake $env:GITHUB_WORKSPACE/opensim-core/dependencies -G"Visual Studio 17 2022" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DWIG_DIR=C:/ProgramData/chocolatey/lib/swig -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2 
         
@@ -101,26 +101,37 @@ jobs:
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
     
     - name: Build opensim-core
-      # if: steps.cache-core.outputs.cache-hit != 'true'
+      #if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         echo $env:GITHUB_WORKSPACE\\build_core
         mkdir $env:GITHUB_WORKSPACE\\build_core
         chdir $env:GITHUB_WORKSPACE\\build_core
-        $env:CXXFLAGS = "/W0"
-        cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 16 2019" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off -DPython3_ROOT_DIR=C:\hostedtoolcache\windows\Python\3.8.10\x64 -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
+        $env:CXXFLAGS = "/W0 /MD"
+        cmake $env:GITHUB_WORKSPACE/opensim-core -G"Visual Studio 17 2022" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off  -DBUILD_API_EXAMPLES=ON -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
         cmake . -LAH
         cmake --build . --config Release -- /maxcpucount:2
         cmake --install .
 
     - name: Update submodules
-      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/threejs
+      run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
+
+    - name: Set CI to false
+      run: echo "CI=false" >> $GITHUB_ENV
       
+    - name: Download VC++ Redistributable
+      shell: pwsh
+      run: |
+        $url = "https://aka.ms/vs/17/vc_redist.x64.exe"
+        $dest = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\14.44.35112\vcredist_x64.exe"
+        Invoke-WebRequest -Uri $url -OutFile $dest -UseBasicParsing
+        echo "msvc.redist.exe=$dest" >> $env:GITHUB_ENV
+
     - name: Build GUI
       id: build-gui
       run: |
         mkdir build
         cd build
-        cmake ../ -G"Visual Studio 16 2019" -A x64 -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans-12.3/netbeans;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans-12.3/netbeans/harness"
+        cmake ../ -G"Visual Studio 17 2022" -A x64 -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:/Program Files/NetBeans-17/netbeans;-Dnbplatform.default.harness.dir=C:/Program Files/NetBeans-17/netbeans/harness;-Dmsvc.redist.exe=C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\14.44.35112\vcredist_x64.exe"
         cmake --build . --target CopyOpenSimCore --config Release
         cmake --build . --target CopyModels --config Release
         cmake --build . --target PrepareInstaller --config Release
@@ -132,14 +143,55 @@ jobs:
         echo $VERSION
         echo "name=VERSION::$VERSION" >> $GITHUB_ENV
         echo "version=$VERSION" >> $env:GITHUB_OUTPUT
+
+    - name: Add jxbrowser files to installer content
+      run: |
+        # Set root and directories
+        $root = $env:GITHUB_WORKSPACE
+        $nbmDir = "$root\prebuilt_jxb"
+        $extractDir = "$nbmDir\extracted"
+        $installerContentPath = "$root\Gui\opensim\dist\installer\opensim\opensim"
+    
+        # Create prebuilt directory
+        New-Item -ItemType Directory -Force -Path $nbmDir
+    
+        # Download the NBM file
+        Invoke-WebRequest -Uri "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm" `
+                          -OutFile "$nbmDir\org-opensim-javabrowser.nbm"
+    
+        # Extract the NBM
+        Expand-Archive -Path "$nbmDir\org-opensim-javabrowser.nbm" -DestinationPath $extractDir -Force
+    
+        # Create installer modules directory
+        New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/"
+        New-Item -ItemType Directory -Force -Path "$installerContentPath/modules/ext/"
+    
+        # Copy the main JAR
+        Write-Host "Copying org-opensim-javabrowser.jar to installer content..."
+        Copy-Item -Path "$extractDir\netbeans\modules\org-opensim-javabrowser.jar" `
+                  -Destination "$installerContentPath/modules/" -Force
+    
+        # Copy Windows-specific JARs with exact names
+        Write-Host "Copying Windows JARs to installer content..."
+        Copy-Item -Path "$extractDir\netbeans\modules\ext\jxbrowser-7.44.1.jar" `
+                  -Destination "$installerContentPath/modules/ext/" -Force
+        Copy-Item -Path "$extractDir\netbeans\modules\ext\jxbrowser-swing-7.44.1.jar" `
+                  -Destination "$installerContentPath/modules/ext/" -Force
+        Copy-Item -Path "$extractDir\netbeans\modules\ext\jxbrowser-win64-7.44.1.jar" `
+                  -Destination "$installerContentPath/modules/ext/" -Force
+    
+        # Verify files copied
+        Write-Host "JAR files now in installer content:"
+        Get-ChildItem -Path "$installerContentPath" -Recurse -Filter "*.jar" | Select-Object FullName
         
     - name: Build GUI installer
       run: |
         cd Gui/opensim/dist/installer
         makensis.exe make_installer.nsi
         mv OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe $env:GITHUB_WORKSPACE
+        
     - name: Upload GUI installer
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: OpenSim-${{ steps.build-gui.outputs.version }}-win64
         path: OpenSim-${{ steps.build-gui.outputs.version }}-win64.exe
