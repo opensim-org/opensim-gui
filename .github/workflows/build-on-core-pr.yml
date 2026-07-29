@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
      inputs:
       distinct_id:
-        required: false
+        required: true
 jobs:
   windows:
     name: Windows
@@ -12,6 +12,9 @@ jobs:
     runs-on: windows-2022
 
     steps:
+    - name: Log distinct ID
+      run: echo ${{ inputs.distinct_id }}
+
     - name: Checkout opensim-gui
       uses: actions/checkout@v4
 
