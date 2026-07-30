@@ -1,0 +1,152 @@
+name: 'Build opensim-core'
+description: 'Installs SWIG, Python/NumPy, JDK, NetBeans, and VC++ Redistributable, then checks out and builds opensim-core and its dependencies, with caching'
+
+inputs:
+  swig-version:
+    description: 'SWIG version to install via choco'
+    required: false
+    default: '4.1.1'
+  python-version:
+    description: 'Python version'
+    required: false
+    default: '3.11'
+  numpy-version:
+    description: 'NumPy version'
+    required: false
+    default: '2.4'
+  java-version:
+    description: 'JDK version (Temurin)'
+    required: false
+    default: '11'
+  repository:
+    description: 'opensim-core repository to check out'
+    required: false
+    default: 'opensim-org/opensim-core'
+  ref:
+    description: 'Branch, tag, or SHA to check out (defaults to the repository default branch)'
+    required: false
+    default: ''
+  path:
+    description: 'Path to check out opensim-core into'
+    required: false
+    default: 'opensim-core'
+
+outputs:
+  commit-hash:
+    description: 'The opensim-core commit hash that was built'
+    value: ${{ steps.opensim-core-commit.outputs.hash }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install SWIG
+      shell: pwsh
+      run: |
+        choco install swig --version ${{ inputs.swig-version }} --yes --limit-output --allow-downgrade
+        swig -swiglib
+
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install NumPy
+      shell: pwsh
+      run: python3 -m pip install numpy==${{ inputs.numpy-version }}
+
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: ${{ inputs.java-version }}
+
+    - name: Cache Netbeans
+      id: cache-netbeans
+      uses: actions/cache@v3
+      with:
+        path: .\Apache-NetBeans-17-bin-windows-x64.exe
+        key: netbeans-17
+
+    - name: Install Netbeans 17
+      shell: pwsh
+      #if: steps.cache-netbeans.outputs.cache-hit != 'true'
+      run: |
+        (New-Object System.Net.WebClient).DownloadFile("https://archive.apache.org/dist/netbeans/netbeans-installers/17/Apache-NetBeans-17-bin-windows-x64.exe", "Apache-NetBeans-17-bin-windows-x64.exe")
+        $expectedHash = "c3d7a34184c4021486751fbc3878eb2376677674ff8d6d4bf87017fd2434122c8438072aa891e535fa0fa9aeafcb49ad833a61903180772369d99571b073baac"
+        $hashFromFile = Get-FileHash -Algorithm SHA512 -Path .\Apache-NetBeans-17-bin-windows-x64.exe
+        if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
+        .\Apache-NetBeans-17-bin-windows-x64.exe --silent --javahome "$env:JAVA_HOME" | Out-Null # This installer is gregarious.
+        echo "ANT_HOME=C:\\Program Files\\NetBeans-17.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
+
+    - name: Download VC++ Redistributable
+      shell: pwsh
+      run: |
+        $url = "https://aka.ms/vs/17/vc_redist.x64.exe"
+        $dest = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\14.44.35112\vcredist_x64.exe"
+        Invoke-WebRequest -Uri $url -OutFile $dest -UseBasicParsing
+        echo "msvc.redist.exe=$dest" >> $env:GITHUB_ENV
+
+    - name: Checkout opensim-core
+      uses: actions/checkout@v4
+      with:
+        repository: ${{ inputs.repository }}
+        ref: ${{ inputs.ref }}
+        path: ${{ inputs.path }}
+
+    - name: Cache opensim-core-dependencies
+      id: cache-dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/opensim_dependencies_install
+        # Every time a cache is created, it's stored with this key.
+        # In subsequent runs, if the key matches the key of an existing cache,
+        # then the cache is used. We chose for this key to depend on the
+        # operating system and a hash of the hashes of all files in the
+        # dependencies directory (non-recursive).
+        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
+        key: ${{ runner.os }}-dependencies-${{ hashFiles(format('{0}/dependencies/*', inputs.path)) }}
+
+    - name: Build opensim-core-dependencies
+      shell: pwsh
+      #if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      run: |
+        echo $env:GITHUB_WORKSPACE\\build_deps
+        mkdir $env:GITHUB_WORKSPACE\\build_deps
+        chdir $env:GITHUB_WORKSPACE\\build_deps
+        # gci -r $env:GITHUB_WORKSPACE\\opensim-core
+        # /W0 disables warnings. The other flags are copied from CMake's
+        # default CMAKE_CXX_FLAGS.
+        # https://msdn.microsoft.com/en-us/library/19z1t1wy.aspx
+        $env:CXXFLAGS = "/W0 /MD"
+        cmake $env:GITHUB_WORKSPACE/${{ inputs.path }}/dependencies -G"Visual Studio 17 2022" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DWIG_DIR=C:/ProgramData/chocolatey/lib/swig -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
+        cmake . -LAH
+        cmake --build . --config Release -- /maxcpucount:2
+
+    - name: Obtain opensim-core commit
+      id: opensim-core-commit
+      shell: pwsh
+      run: |
+        cd ${{ inputs.path }}
+        $opensim_core_commit=(git rev-parse HEAD)
+        echo "hash=$opensim_core_commit" >> $GITHUB_OUTPUT
+
+    - name: Cache opensim-core
+      id: cache-core
+      uses: actions/cache@v3
+      with:
+        path: ~/opensim-core-install
+        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
+        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
+
+    - name: Build opensim-core
+      shell: pwsh
+      #if: steps.cache-core.outputs.cache-hit != 'true'
+      run: |
+        echo $env:GITHUB_WORKSPACE\\build_core
+        mkdir $env:GITHUB_WORKSPACE\\build_core
+        chdir $env:GITHUB_WORKSPACE\\build_core
+        $env:CXXFLAGS = "/W0 /MD"
+        cmake $env:GITHUB_WORKSPACE/${{ inputs.path }} -G"Visual Studio 17 2022" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off  -DBUILD_API_EXAMPLES=ON -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
+        cmake . -LAH
+        cmake --build . --config Release -- /maxcpucount:2
+        cmake --install .
