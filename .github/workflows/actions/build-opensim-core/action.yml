@@ -103,7 +103,7 @@ runs:
 
     - name: Build dependencies
       shell: pwsh
-      if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      #if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}/dependencies
         cmake -G "Visual Studio 17 2022" . --preset ci-msvc-windows-release -LAH
@@ -120,13 +120,14 @@ runs:
         $env:match = cmake -N -L build/ci-msvc-windows-release | Select-String -Pattern OPENSIM_QUALIFIED_VERSION
         $version = $env:match.split('=')[1]
         echo "version=$version" >> $env:GITHUB_OUTPUT
-        echo "CMAKE_INSTALL_PREFIX=$env:GITHUB_WORKSPACE\build\ci-msvc-windows-release\install" >> $env:GITHUB_OUTPUT
-        echo "OPENSIM_DEPENDENCIES_DIR=$env:GITHUB_WORKSPACE\build\dependencies\ci-msvc-windows-release\install" >> $env:GITHUB_OUTPUT
+        echo "CMAKE_INSTALL_PREFIX=$env:GITHUB_WORKSPACE\${{ inputs.path }}\build\ci-msvc-windows-release\install" >> $env:GITHUB_OUTPUT
+        echo "OPENSIM_DEPENDENCIES_DIR=$env:GITHUB_WORKSPACE\${{ inputs.path }}\build\dependencies\ci-msvc-windows-release\install" >> $env:GITHUB_OUTPUT
 
     - name: Build opensim-core
       shell: pwsh
     # Install now to avoid building bindings twice (TODO: still an issue with Visual Studio 2022).
       run: |
+        chdir $env:GITHUB_WORKSPACE/${{ inputs.path }} 
         cmake --build --preset ci-msvc-windows-release -j 4
         cmake --build --preset ci-msvc-windows-release --target doxygen
         cmake --build --preset ci-msvc-windows-release --target install

@@ -26,6 +26,7 @@ jobs:
         uses: ./.github/workflows/actions/build-opensim-core
         with:
           repository: opensim-org/opensim-core
+          ref: main
 
       - name: Build GUI installer
         uses: ./.github/workflows/actions/build-gui-installer
@@ -34,7 +35,7 @@ jobs:
   mac:
     name: Mac
 
-    runs-on: macos-14
+    runs-on: macos-15
 
     steps:
     - name: Checkout opensim-gui
@@ -45,6 +46,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
+         ref: main
         
     - uses: actions/setup-python@v4
       with:
@@ -135,7 +137,6 @@ jobs:
         key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
         
     - name: Install SWIG
-      if: steps.cache-swig.outputs.cache-hit != 'true'
       run: |
         mkdir ~/swig-source && cd ~/swig-source
         wget https://github.com/swig/swig/archive/refs/tags/v4.1.1.tar.gz
@@ -144,7 +145,6 @@ jobs:
         make && make -j4 install
 
     - name: Build opensim-core
-      #if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         mkdir build_core
         cd build_core
