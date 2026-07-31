@@ -102,6 +102,7 @@ runs:
         path: ${{ inputs.path }}
 
     - name: Build dependencies
+      shell: pwsh
       if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         chdir $env:GITHUB_WORKSPACE\\dependencies
@@ -109,6 +110,7 @@ runs:
         cmake --build --preset ci-msvc-windows-release -j 4
 
     - name: Configure opensim-core
+      shell: pwsh
       id: configure
       run: |
         cmake -G "Visual Studio 17 2022" . --preset ci-msvc-windows-release -LAH `
@@ -121,6 +123,7 @@ runs:
         echo "OPENSIM_DEPENDENCIES_DIR=$env:GITHUB_WORKSPACE\build\dependencies\ci-msvc-windows-release\install" >> $env:GITHUB_OUTPUT
 
     - name: Build opensim-core
+      shell: pwsh
     # Install now to avoid building bindings twice (TODO: still an issue with Visual Studio 2022).
       run: |
         cmake --build --preset ci-msvc-windows-release -j 4
