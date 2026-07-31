@@ -105,7 +105,7 @@ runs:
       shell: pwsh
       if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
-        chdir $env:GITHUB_WORKSPACE\\dependencies
+        chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}/dependencies
         cmake -G "Visual Studio 17 2022" . --preset ci-msvc-windows-release -LAH
         cmake --build --preset ci-msvc-windows-release -j 4
 
@@ -113,6 +113,7 @@ runs:
       shell: pwsh
       id: configure
       run: |
+        chdir $env:GITHUB_WORKSPACE/${{ inputs.path }} 
         cmake -G "Visual Studio 17 2022" . --preset ci-msvc-windows-release -LAH `
             -DPython3_ROOT_DIR=$env:pythonLocation
 
