@@ -115,7 +115,7 @@ runs:
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }} 
         cmake -G "Visual Studio 17 2022" . --preset ci-msvc-windows-release -LAH `
-            -DPython3_ROOT_DIR=$env:pythonLocation
+            -DPython3_ROOT_DIR=$env:pythonLocation  -DSWIG_DOXYGEN=OFF -DBUILD_PYTHON_WRAPPING=OFF
 
         $env:match = cmake -N -L build/ci-msvc-windows-release | Select-String -Pattern OPENSIM_QUALIFIED_VERSION
         $version = $env:match.split('=')[1]
@@ -128,6 +128,6 @@ runs:
     # Install now to avoid building bindings twice (TODO: still an issue with Visual Studio 2022).
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }} 
-        cmake --build --preset ci-msvc-windows-release -j 4 -DSWIG_DOXYGEN=OFF -DBUILD_PYTHON_WRAPPING=OFF
+        cmake --build --preset ci-msvc-windows-release -j 4
         cmake --build --preset ci-msvc-windows-release --target doxygen
         cmake --build --preset ci-msvc-windows-release --target install
