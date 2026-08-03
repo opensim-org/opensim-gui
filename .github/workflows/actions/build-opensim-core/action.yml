@@ -67,14 +67,22 @@ runs:
         path: .\Apache-NetBeans-17-bin-windows-x64.exe
         key: netbeans-17
 
-    - name: Install Netbeans 17
+    - name: Download Netbeans 17
       shell: pwsh
-      #if: steps.cache-netbeans.outputs.cache-hit != 'true'
+      if: steps.cache-netbeans.outputs.cache-hit != 'true'
       run: |
         (New-Object System.Net.WebClient).DownloadFile("https://archive.apache.org/dist/netbeans/netbeans-installers/17/Apache-NetBeans-17-bin-windows-x64.exe", "Apache-NetBeans-17-bin-windows-x64.exe")
+
+    - name: Verify Netbeans installer hash
+      shell: pwsh
+      run: |
         $expectedHash = "c3d7a34184c4021486751fbc3878eb2376677674ff8d6d4bf87017fd2434122c8438072aa891e535fa0fa9aeafcb49ad833a61903180772369d99571b073baac"
         $hashFromFile = Get-FileHash -Algorithm SHA512 -Path .\Apache-NetBeans-17-bin-windows-x64.exe
         if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
+
+    - name: Install Netbeans 17
+      shell: pwsh
+      run: |
         .\Apache-NetBeans-17-bin-windows-x64.exe --silent --javahome "$env:JAVA_HOME" | Out-Null # This installer is gregarious.
         echo "ANT_HOME=C:\\Program Files\\NetBeans-17.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
 
