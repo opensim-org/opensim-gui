@@ -67,9 +67,6 @@ jobs:
         distribution: 'zulu'
         java-version: 8
 
-    # - name: Setup tmate session to debug the workflow through SSH.
-    #   uses: mxschmitt/action-tmate@v2
-        
     - name: Install NetBeans 17
       # `brew cask install netbeans-java-se` requires sudo but brew won't allow sudo,
       # so we install NetBeans ourselves.
@@ -103,24 +100,13 @@ jobs:
       id: cache-dependencies
       uses: actions/cache@v3
       with:
-        # Matches the dependencies preset's installDir:
-        # ${sourceDir}/../build/dependencies/${presetName}/install, where
-        # sourceDir is opensim-core/dependencies.
         path: opensim-core/build/dependencies/ci-make-macos-release/install
-        # Every time a cache is created, it's stored with this key.
-        # In subsequent runs, if the key matches the key of an existing cache,
-        # then the cache is used. We chose for this key to depend on the
-        # operating system, the preset, and a hash of the hashes of all files
-        # in the dependencies directory (non-recursive).
-        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
         key: ${{ runner.os }}-dependencies-ci-make-macos-release-${{ hashFiles('opensim-core/dependencies/*') }}
         
     - name: Build opensim-core-dependencies
       if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         cd opensim-core/dependencies
-        # SUPERBUILD_ezc3d and OPENSIM_WITH_CASADI are already on via the
-        # dependencies preset's "default" config.
         cmake . --preset ci-make-macos-release -LAH
         cmake --build --preset ci-make-macos-release -j 4
         
@@ -135,7 +121,6 @@ jobs:
       id: cache-core
       uses: actions/cache@v3
       with:
-        # Matches the root preset's installDir: ${sourceDir}/build/${presetName}/install.
         path: opensim-core/build/ci-make-macos-release/install
         key: ${{ runner.os }}-ci-make-macos-release-${{ steps.opensim-core-commit.outputs.hash }}
         
@@ -151,12 +136,6 @@ jobs:
       if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         cd opensim-core
-        # OPENSIM_DEPENDENCIES_DIR is already set by the preset to
-        # build/dependencies/ci-make-macos-release/install (built above).
-        # BUILD_JAVA_WRAPPING / BUILD_PYTHON_WRAPPING / BUILD_API_EXAMPLES /
-        # OPENSIM_C3D_PARSER / OPENSIM_INSTALL_UNIX_FHS / OPENSIM_DISABLE_LOG_FILE
-        # are already set via the "default"/"ci" presets. SWIG_EXECUTABLE is
-        # environment-specific, and BUILD_TESTING isn't set by any preset.
         cmake . --preset ci-make-macos-release -LAH -DSWIG_EXECUTABLE=~/swig/bin/swig -DBUILD_TESTING=off
         cmake --build --preset ci-make-macos-release -j 4
         cmake --build --preset ci-make-macos-release --target install
@@ -276,24 +255,13 @@ jobs:
       id: cache-dependencies
       uses: actions/cache@v3
       with:
-        # Matches the dependencies preset's installDir:
-        # ${sourceDir}/../build/dependencies/${presetName}/install, where
-        # sourceDir is opensim-core/dependencies.
         path: opensim-core/build/dependencies/ci-make-linux-release/install
-        # Every time a cache is created, it's stored with this key.
-        # In subsequent runs, if the key matches the key of an existing cache,
-        # then the cache is used. We chose for this key to depend on the
-        # operating system, the preset, and a hash of the hashes of all files
-        # in the dependencies directory (non-recursive).
-        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
         key: ${{ runner.os }}-dependencies-ci-make-linux-release-${{ hashFiles('opensim-core/dependencies/*') }}
 
     - name: Build opensim-core-dependencies
       if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         cd opensim-core/dependencies
-        # SUPERBUILD_ezc3d and OPENSIM_WITH_CASADI are already on via the
-        # dependencies preset's "default" config.
         cmake . --preset ci-make-linux-release -LAH
         cmake --build --preset ci-make-linux-release -j 4
         
@@ -308,7 +276,6 @@ jobs:
       id: cache-core
       uses: actions/cache@v3
       with:
-        # Matches the root preset's installDir: ${sourceDir}/build/${presetName}/install.
         path: opensim-core/build/ci-make-linux-release/install
         key: ${{ runner.os }}-ci-make-linux-release-${{ steps.opensim-core-commit.outputs.hash }}
     
@@ -316,12 +283,6 @@ jobs:
       if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         cd opensim-core
-        # OPENSIM_DEPENDENCIES_DIR is already set by the preset to
-        # build/dependencies/ci-make-linux-release/install (built above).
-        # BUILD_JAVA_WRAPPING / BUILD_PYTHON_WRAPPING / BUILD_API_EXAMPLES /
-        # OPENSIM_C3D_PARSER / OPENSIM_INSTALL_UNIX_FHS are already set via
-        # the "default"/"ci" presets. SWIG_DIR/SWIG_EXECUTABLE are
-        # environment-specific, and BUILD_TESTING isn't set by any preset.
         cmake . --preset ci-make-linux-release -LAH -DSWIG_DIR=~/swig/share/swig -DSWIG_EXECUTABLE=~/swig/bin/swig -DBUILD_TESTING=off
         cmake --build --preset ci-make-linux-release -j 4
         cmake --build --preset ci-make-linux-release --target install
