@@ -63,17 +63,24 @@ public class Logger {
   }
 
   /**
+   *  Write `message` at level `logLevel` to the log.
+   */
+  public static void logMessage(SWIGTYPE_p_LogLevel logLevel, SWIGTYPE_p_std__string_view message) {
+    opensimCommonJNI.Logger_logMessage(SWIGTYPE_p_LogLevel.getCPtr(logLevel), SWIGTYPE_p_std__string_view.getCPtr(message));
+  }
+
+  /**
    *  Log messages of importance `level` and greater.<br>
    *  For example, if the level is set to Info, then Critical, Error, Warn,<br>
    *  and Info messages are logged, while Debug and Trace messages are not<br>
    *  logged.
    */
-  public static void setLevel(Logger.Level level) {
-    opensimCommonJNI.Logger_setLevel(level.swigValue());
+  public static void setLevel(SWIGTYPE_p_LogLevel level) {
+    opensimCommonJNI.Logger_setLevel(SWIGTYPE_p_LogLevel.getCPtr(level));
   }
 
-  public static Logger.Level getLevel() {
-    return Logger.Level.swigToEnum(opensimCommonJNI.Logger_getLevel());
+  public static SWIGTYPE_p_LogLevel getLevel() {
+    return new SWIGTYPE_p_LogLevel(opensimCommonJNI.Logger_getLevel(), true);
   }
 
   /**
@@ -107,12 +114,11 @@ public class Logger {
    }
    }
    */
-  public static boolean shouldLog(Logger.Level level) {
-    return opensimCommonJNI.Logger_shouldLog(level.swigValue());
+  public static boolean shouldLog(SWIGTYPE_p_LogLevel level) {
+    return opensimCommonJNI.Logger_shouldLog(SWIGTYPE_p_LogLevel.getCPtr(level));
   }
 
   /**
-   *  Use these functions instead of using spdlog directly.<br>
    *  <br>
    *  <br>
    *  Log messages to a file at the level getLevel().<br>
@@ -128,7 +134,6 @@ public class Logger {
   }
 
   /**
-   *  Use these functions instead of using spdlog directly.<br>
    *  <br>
    *  <br>
    *  Log messages to a file at the level getLevel().<br>
@@ -169,88 +174,6 @@ public class Logger {
    */
   public static void removeSink(LogSink sink) {
     opensimCommonJNI.Logger_removeSink(LogSink.getCPtr(sink), sink);
-  }
-
-  /**
-   *  This enum lists the types of messages that should be logged. These<br>
-   *  levels match those of the spdlog logging library that OpenSim uses for<br>
-   *  logging.
-   */
-  public final static class Level {
-    /**
-     *  Do not log any messages. Useful when running an optimization or<br>
-     *  automated pipeline.
-     */
-    public final static Logger.Level Off = new Logger.Level("Off", opensimCommonJNI.Logger_Level_Off_get());
-    /**
-     *  Only log critical errors.
-     */
-    public final static Logger.Level Critical = new Logger.Level("Critical", opensimCommonJNI.Logger_Level_Critical_get());
-    /**
-     *  Log all messages that require user intervention.
-     */
-    public final static Logger.Level Error = new Logger.Level("Error", opensimCommonJNI.Logger_Level_Error_get());
-    /**
-     *  Log warnings. Warnings are generated when the software will proceed<br>
-     *  but the user should check their input.
-     */
-    public final static Logger.Level Warn = new Logger.Level("Warn", opensimCommonJNI.Logger_Level_Warn_get());
-    /**
-     *  Default.
-     */
-    public final static Logger.Level Info = new Logger.Level("Info", opensimCommonJNI.Logger_Level_Info_get());
-    /**
-     *  Log information that may be useful when debugging the operation of<br>
-     *  the<br>
-     *  software to investigate unexpected results.
-     */
-    public final static Logger.Level Debug = new Logger.Level("Debug", opensimCommonJNI.Logger_Level_Debug_get());
-    /**
-     *  Log as much as possible, including messages that describe the<br>
-     *  software's<br>
-     *  behavior step by step. Note: OpenSim has very few Trace-level<br>
-     *  messages.
-     */
-    public final static Logger.Level Trace = new Logger.Level("Trace", opensimCommonJNI.Logger_Level_Trace_get());
-
-    public final int swigValue() {
-      return swigValue;
-    }
-
-    public String toString() {
-      return swigName;
-    }
-
-    public static Level swigToEnum(int swigValue) {
-      if (swigValue < swigValues.length && swigValue >= 0 && swigValues[swigValue].swigValue == swigValue)
-        return swigValues[swigValue];
-      for (int i = 0; i < swigValues.length; i++)
-        if (swigValues[i].swigValue == swigValue)
-          return swigValues[i];
-      throw new IllegalArgumentException("No enum " + Level.class + " with value " + swigValue);
-    }
-
-    private Level(String swigName) {
-      this.swigName = swigName;
-      this.swigValue = swigNext++;
-    }
-
-    private Level(String swigName, int swigValue) {
-      this.swigName = swigName;
-      this.swigValue = swigValue;
-      swigNext = swigValue+1;
-    }
-
-    private Level(String swigName, Level swigEnum) {
-      this.swigName = swigName;
-      this.swigValue = swigEnum.swigValue;
-      swigNext = this.swigValue+1;
-    }
-
-    private static Level[] swigValues = { Off, Critical, Error, Warn, Info, Debug, Trace };
-    private static int swigNext = 0;
-    private final int swigValue;
-    private final String swigName;
   }
 
 }

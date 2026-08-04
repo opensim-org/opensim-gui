@@ -106,28 +106,26 @@ public class opensimCommonJNI {
   public final static native double factorizeMatrixNonNegative(long jarg1, Matrix jarg1_, int jarg2, int jarg3, double jarg4, long jarg5, Matrix jarg5_, long jarg6, Matrix jarg6_);
   public final static native int choose(int jarg1, int jarg2);
   public final static native void delete_LogSink(long jarg1);
-  public final static native void LogSink_sinkImpl(long jarg1, LogSink jarg1_, String jarg2);
+  public final static native void LogSink_sink(long jarg1, LogSink jarg1_, long jarg2);
+  public final static native void LogSink_flush(long jarg1, LogSink jarg1_);
+  public final static native long LogSink_getLevel(long jarg1, LogSink jarg1_);
+  public final static native void LogSink_setLevel(long jarg1, LogSink jarg1_, long jarg2);
+  public final static native boolean LogSink_shouldLog(long jarg1, LogSink jarg1_, long jarg2);
+  public final static native void LogSink_sinkImpl__SWIG_0(long jarg1, LogSink jarg1_, long jarg2);
+  public final static native void LogSink_sinkImplSwigExplicitLogSink__SWIG_0(long jarg1, LogSink jarg1_, long jarg2);
+  public final static native void LogSink_sinkImpl__SWIG_1(long jarg1, LogSink jarg1_, String jarg2);
+  public final static native void LogSink_sinkImplSwigExplicitLogSink__SWIG_1(long jarg1, LogSink jarg1_, String jarg2);
   public final static native void LogSink_flushImpl(long jarg1, LogSink jarg1_);
   public final static native void LogSink_flushImplSwigExplicitLogSink(long jarg1, LogSink jarg1_);
   public final static native long new_LogSink();
   public final static native void LogSink_director_connect(LogSink obj, long cptr, boolean mem_own, boolean weak_global);
   public final static native void LogSink_change_ownership(LogSink obj, long cptr, boolean take_or_release);
-  public final static native void StringLogSink_clear(long jarg1, StringLogSink jarg1_);
-  public final static native String StringLogSink_getString(long jarg1, StringLogSink jarg1_);
-  public final static native long new_StringLogSink();
-  public final static native void delete_StringLogSink(long jarg1);
-  public final static native int Logger_Level_Off_get();
-  public final static native int Logger_Level_Critical_get();
-  public final static native int Logger_Level_Error_get();
-  public final static native int Logger_Level_Warn_get();
-  public final static native int Logger_Level_Info_get();
-  public final static native int Logger_Level_Debug_get();
-  public final static native int Logger_Level_Trace_get();
-  public final static native void Logger_setLevel(int jarg1);
-  public final static native int Logger_getLevel();
+  public final static native void Logger_logMessage(long jarg1, long jarg2);
+  public final static native void Logger_setLevel(long jarg1);
+  public final static native long Logger_getLevel();
   public final static native void Logger_setLevelString(String jarg1);
   public final static native String Logger_getLevelString();
-  public final static native boolean Logger_shouldLog(int jarg1);
+  public final static native boolean Logger_shouldLog(long jarg1);
   public final static native void Logger_addFileSink__SWIG_0(String jarg1);
   public final static native void Logger_addFileSink__SWIG_1();
   public final static native void Logger_removeFileSink();
@@ -3006,6 +3004,21 @@ public class opensimCommonJNI {
   public final static native void delete_CSVFileAdapter(long jarg1);
   public final static native long CSVFileAdapter_clone(long jarg1, CSVFileAdapter jarg1_);
   public final static native void CSVFileAdapter_write(long jarg1, TimeSeriesTable jarg1_, String jarg2);
+  public final static native int C3DFileAdapter_ForceLocation_OriginOfForcePlate_get();
+  public final static native int C3DFileAdapter_ForceLocation_CenterOfPressure_get();
+  public final static native int C3DFileAdapter_ForceLocation_PointOfWrenchApplication_get();
+  public final static native long C3DFileAdapter_clone(long jarg1, C3DFileAdapter jarg1_);
+  public final static native void C3DFileAdapter_setLocationForForceExpression__SWIG_0(long jarg1, C3DFileAdapter jarg1_, int jarg2);
+  public final static native int C3DFileAdapter_getLocationForForceExpression(long jarg1, C3DFileAdapter jarg1_);
+  public final static native long C3DFileAdapter_getMarkersTable(long jarg1, C3DFileAdapter jarg1_, long jarg2, StdMapStringAbstractDataTable jarg2_);
+  public final static native long C3DFileAdapter_getForcesTable(long jarg1, C3DFileAdapter jarg1_, long jarg2, StdMapStringAbstractDataTable jarg2_);
+  public final static native long C3DFileAdapter_getAnalogDataTable(long jarg1, C3DFileAdapter jarg1_, long jarg2, StdMapStringAbstractDataTable jarg2_);
+  public final static native String C3DFileAdapter__markers_get();
+  public final static native String C3DFileAdapter__forces_get();
+  public final static native String C3DFileAdapter__analog_get();
+  public final static native void C3DFileAdapter_setLocationForForceExpression__SWIG_1(long jarg1, C3DFileAdapter jarg1_, long jarg2);
+  public final static native long new_C3DFileAdapter();
+  public final static native void delete_C3DFileAdapter(long jarg1);
   public final static native long TableSource_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void TableSource_assign(long jarg1, TableSource jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String TableSource_getClassName();
@@ -3217,7 +3230,6 @@ public class opensimCommonJNI {
   public final static native long IOError_SWIGUpcast(long jarg1);
   public final static native long ComponentNotFound_SWIGUpcast(long jarg1);
   public final static native long NonUniqueLabels_SWIGUpcast(long jarg1);
-  public final static native long StringLogSink_SWIGSmartPtrUpcast(long jarg1);
   public final static native long InvalidPropertyValue_SWIGUpcast(long jarg1);
   public final static native long PropertyStringList_SWIGUpcast(long jarg1);
   public final static native long PropertyObjectList_SWIGUpcast(long jarg1);
@@ -3343,6 +3355,7 @@ public class opensimCommonJNI {
   public final static native long APDMDataReaderSettings_SWIGUpcast(long jarg1);
   public final static native long APDMDataReader_SWIGSmartPtrUpcast(long jarg1);
   public final static native long STODataTypeNotSupported_SWIGUpcast(long jarg1);
+  public final static native long C3DFileAdapter_SWIGSmartPtrUpcast(long jarg1);
   public final static native long TableSource_SWIGUpcast(long jarg1);
   public final static native long TableSourceVec3_SWIGUpcast(long jarg1);
   public final static native long AbstractReporter_SWIGUpcast(long jarg1);
@@ -3356,7 +3369,10 @@ public class opensimCommonJNI {
   public final static native long ConsoleReporterVec3_SWIGUpcast(long jarg1);
   public final static native long GCVSplineSet_SWIGUpcast(long jarg1);
 
-  public static void SwigDirector_LogSink_sinkImpl(LogSink jself, String msg) {
+  public static void SwigDirector_LogSink_sinkImpl__SWIG_0(LogSink jself, long arg0) {
+    jself.sinkImpl(new SWIGTYPE_p_LogMessage(arg0, false));
+  }
+  public static void SwigDirector_LogSink_sinkImpl__SWIG_1(LogSink jself, String msg) {
     jself.sinkImpl(msg);
   }
   public static void SwigDirector_LogSink_flushImpl(LogSink jself) {

@@ -66,13 +66,53 @@ public class LogSink {
   }
 
   /**
-   *  This function is invoked whenever a message is logged at the desired<br>
-   *  Log::Level.
+   *  Sinks `msg` into this `LogSink`.
    */
-  protected void sinkImpl(String msg) {
-    opensimCommonJNI.LogSink_sinkImpl(swigCPtr, this, msg);
+  public void sink(SWIGTYPE_p_LogMessage msg) {
+    opensimCommonJNI.LogSink_sink(swigCPtr, this, SWIGTYPE_p_LogMessage.getCPtr(msg));
   }
 
+  /**
+   *  Tells this `LogSink` to flush any buffered content to its output.
+   */
+  public void flush() {
+    opensimCommonJNI.LogSink_flush(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_LogLevel getLevel() {
+    return new SWIGTYPE_p_LogLevel(opensimCommonJNI.LogSink_getLevel(swigCPtr, this), true);
+  }
+
+  public void setLevel(SWIGTYPE_p_LogLevel logLevel) {
+    opensimCommonJNI.LogSink_setLevel(swigCPtr, this, SWIGTYPE_p_LogLevel.getCPtr(logLevel));
+  }
+
+  public boolean shouldLog(SWIGTYPE_p_LogLevel logLevel) {
+    return opensimCommonJNI.LogSink_shouldLog(swigCPtr, this, SWIGTYPE_p_LogLevel.getCPtr(logLevel));
+  }
+
+  /**
+   *  Implementors may override this function to provide their own<br>
+   *  message sinking behavior.
+   */
+  protected void sinkImpl(SWIGTYPE_p_LogMessage arg0) {
+    if (getClass() == LogSink.class) opensimCommonJNI.LogSink_sinkImpl__SWIG_0(swigCPtr, this, SWIGTYPE_p_LogMessage.getCPtr(arg0)); else opensimCommonJNI.LogSink_sinkImplSwigExplicitLogSink__SWIG_0(swigCPtr, this, SWIGTYPE_p_LogMessage.getCPtr(arg0));
+  }
+
+  /**
+   *  Implementors may override this function to provide their own<br>
+   *  message sinking behavior.<br>
+   * <br>
+   *  Legacy shim: OpenSim 2019/11 to 2026/06 only provided this overload.
+   */
+  protected void sinkImpl(String msg) {
+    if (getClass() == LogSink.class) opensimCommonJNI.LogSink_sinkImpl__SWIG_1(swigCPtr, this, msg); else opensimCommonJNI.LogSink_sinkImplSwigExplicitLogSink__SWIG_1(swigCPtr, this, msg);
+  }
+
+  /**
+   *  Implementors may override this function to provide their own<br>
+   *  message flushing behavior.
+   */
   protected void flushImpl() {
     if (getClass() == LogSink.class) opensimCommonJNI.LogSink_flushImpl(swigCPtr, this); else opensimCommonJNI.LogSink_flushImplSwigExplicitLogSink(swigCPtr, this);
   }
