@@ -206,7 +206,7 @@ jobs:
   mac:
     name: Mac
 
-    runs-on: macos-14
+    runs-on: macos-15
 
     steps:
     - name: Checkout opensim-gui
@@ -217,6 +217,7 @@ jobs:
       with:
          repository: opensim-org/opensim-core
          path: 'opensim-core'
+         ref: main
         
     - uses: actions/setup-python@v4
       with:
@@ -238,9 +239,6 @@ jobs:
         distribution: 'zulu'
         java-version: 8
 
-    # - name: Setup tmate session to debug the workflow through SSH.
-    #   uses: mxschmitt/action-tmate@v2
-        
     - name: Install NetBeans 17
       # `brew cask install netbeans-java-se` requires sudo but brew won't allow sudo,
       # so we install NetBeans ourselves.
@@ -274,23 +272,15 @@ jobs:
       id: cache-dependencies
       uses: actions/cache@v3
       with:
-        path: ~/opensim_dependencies_install
-        # Every time a cache is created, it's stored with this key.
-        # In subsequent runs, if the key matches the key of an existing cache,
-        # then the cache is used. We chose for this key to depend on the
-        # operating system and a hash of the hashes of all files in the
-        # dependencies directory (non-recursive).
-        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
-        key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
+        path: opensim-core/build/dependencies/ci-make-macos-release/install
+        key: ${{ runner.os }}-dependencies-ci-make-macos-release-${{ hashFiles('opensim-core/dependencies/*') }}
         
     - name: Build opensim-core-dependencies
-      #if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
-        mkdir build_deps
-        cd build_deps
-        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on  -DOPENSIM_WITH_CASADI:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install -DCMAKE_BUILD_TYPE=Release
-        cmake . -LAH
-        cmake --build . --config Release
+        cd opensim-core/dependencies
+        cmake . --preset ci-make-macos-release -LAH
+        cmake --build --preset ci-make-macos-release -j 4
         
     - name: Obtain opensim-core commit
       id: opensim-core-commit
@@ -303,11 +293,10 @@ jobs:
       id: cache-core
       uses: actions/cache@v3
       with:
-        path: ~/opensim-core-install
-        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
+        path: opensim-core/build/ci-make-macos-release/install
+        key: ${{ runner.os }}-ci-make-macos-release-${{ steps.opensim-core-commit.outputs.hash }}
         
     - name: Install SWIG
-      if: steps.cache-swig.outputs.cache-hit != 'true'
       run: |
         mkdir ~/swig-source && cd ~/swig-source
         wget https://github.com/swig/swig/archive/refs/tags/v4.1.1.tar.gz
@@ -316,14 +305,12 @@ jobs:
         make && make -j4 install
 
     - name: Build opensim-core
-      #if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
-        mkdir build_core
-        cd build_core
-        cmake ../opensim-core -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DSWIG_EXECUTABLE=~/swig/bin/swig -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off  -DBUILD_API_EXAMPLES=ON -DCMAKE_INSTALL_PREFIX=~/opensim-core-install -DOPENSIM_INSTALL_UNIX_FHS=OFF -DOPENSIM_DISABLE_LOG_FILE=ON
-        cmake . -LAH
-        cmake --build . --config Release 
-        cmake --install .
+        cd opensim-core
+        cmake . --preset ci-make-macos-release -LAH -DSWIG_EXECUTABLE=~/swig/bin/swig -DBUILD_TESTING=off
+        cmake --build --preset ci-make-macos-release -j 4
+        cmake --build --preset ci-make-macos-release --target install
 
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
@@ -333,7 +320,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/Apache NetBeans 17.app/Contents/Resources/NetBeans/netbeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/Apache NetBeans 17.app/Contents/Resources/NetBeans/netbeans/harness"
+        cmake ../ -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/opensim-core/build/ci-make-macos-release/install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=/Applications/NetBeans/Apache NetBeans 17.app/Contents/Resources/NetBeans/netbeans;-Dnbplatform.default.harness.dir=/Applications/NetBeans/Apache NetBeans 17.app/Contents/Resources/NetBeans/netbeans/harness"
         make CopyOpenSimCore
         make PrepareInstaller
         # Read the value of the cache variable storing the GUI build version.
@@ -440,23 +427,15 @@ jobs:
       id: cache-dependencies
       uses: actions/cache@v3
       with:
-        path: ~/opensim_dependencies_install
-        # Every time a cache is created, it's stored with this key.
-        # In subsequent runs, if the key matches the key of an existing cache,
-        # then the cache is used. We chose for this key to depend on the
-        # operating system and a hash of the hashes of all files in the
-        # dependencies directory (non-recursive).
-        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
-        key: ${{ runner.os }}-dependencies-${{ hashFiles('opensim-core/dependencies/*') }}
+        path: opensim-core/build/dependencies/ci-make-linux-release/install
+        key: ${{ runner.os }}-dependencies-ci-make-linux-release-${{ hashFiles('opensim-core/dependencies/*') }}
 
     - name: Build opensim-core-dependencies
-      #if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
-        mkdir build_deps
-        cd build_deps
-        cmake ../opensim-core/dependencies -DSUPERBUILD_ezc3d:BOOL=on  -DOPENSIM_WITH_CASADI:BOOL=on -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
-        cmake . -LAH
-        cmake --build . --config Release
+        cd opensim-core/dependencies
+        cmake . --preset ci-make-linux-release -LAH
+        cmake --build --preset ci-make-linux-release -j 4
         
     - name: Obtain opensim-core commit
       id: opensim-core-commit
@@ -469,23 +448,20 @@ jobs:
       id: cache-core
       uses: actions/cache@v3
       with:
-        path: ~/opensim-core-install
-        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
+        path: opensim-core/build/ci-make-linux-release/install
+        key: ${{ runner.os }}-ci-make-linux-release-${{ steps.opensim-core-commit.outputs.hash }}
     
     - name: Build opensim-core
-      #if: steps.cache-core.outputs.cache-hit != 'true'
+      if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
-        mkdir build_core
-        cd build_core
-        cmake ../opensim-core -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off  -DBUILD_API_EXAMPLES=ON -DCMAKE_INSTALL_PREFIX=~/opensim-core-install -DOPENSIM_INSTALL_UNIX_FHS=OFF -DSWIG_DIR=~/swig/share/swig -DSWIG_EXECUTABLE=~/swig/bin/swig
-        cmake . -LAH
-        cmake --build . --config Release 
-        cmake --install .
+        cd opensim-core
+        cmake . --preset ci-make-linux-release -LAH -DSWIG_DIR=~/swig/share/swig -DSWIG_EXECUTABLE=~/swig/bin/swig -DBUILD_TESTING=off
+        cmake --build --preset ci-make-linux-release -j 4
+        cmake --build --preset ci-make-linux-release --target install
 
-    - name: Remove opensim-core and swig
+    - name: Remove swig source
       run: |
         rm -rf ~/swig-source
-        rm -rf ~/work/opensim-gui/opensim-gui/build_core
       
     - name: Update submodules
       run: git submodule update --init --recursive -- opensim-models opensim-visualizer Gui/opensim/opensim-viewer
@@ -495,7 +471,7 @@ jobs:
       run: |
         mkdir build
         cd build
-        cmake ../ -DCMAKE_PREFIX_PATH=~/opensim-core-install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans/harness"
+        cmake ../ -DCMAKE_PREFIX_PATH=$GITHUB_WORKSPACE/opensim-core/build/ci-make-linux-release/install -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=$HOME/netbeans;-Dnbplatform.default.harness.dir=$HOME/netbeans/harness"
         make CopyOpenSimCore
         make PrepareInstaller
         # Read the value of the cache variable storing the GUI build version.
