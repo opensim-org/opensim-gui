@@ -120,7 +120,7 @@ runs:
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}/dependencies
         cmake . -G "Visual Studio 17 2022"  --preset msvc-dev-gui-default -LAH
-        cmake --build --preset msvc-dev-gui-default -j 4
+        cmake -build . -j 4
 
     - name: Obtain opensim-core commit
       id: opensim-core-commit
@@ -145,5 +145,5 @@ runs:
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
         cmake . -G "Visual Studio 17 2022" --preset msvc-dev-gui-default
         cmake . -LAH
-        cmake --build --preset msvc-dev-gui-default --config Release
+        cmake --build . --config Release
         cmake --install .
