@@ -118,7 +118,8 @@ runs:
       shell: pwsh
       #if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
-        cmake -G "Visual Studio 17 2022" $env:GITHUB_WORKSPACE/${{ inputs.path }}/dependencies --preset msvc-dev-gui-default -LAH
+        chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}/dependencies
+        cmake . -G "Visual Studio 17 2022"  --preset msvc-dev-gui-default -LAH
         cmake --build --preset msvc-dev-gui-default -j 4
 
     - name: Obtain opensim-core commit
@@ -141,7 +142,8 @@ runs:
       shell: pwsh
       #if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
-        cmake $env:GITHUB_WORKSPACE/${{ inputs.path }} -G "Visual Studio 17 2022" --preset msvc-dev-gui-default
+        chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
+        cmake . -G "Visual Studio 17 2022" --preset msvc-dev-gui-default
         cmake . -LAH
         cmake --build --preset msvc-dev-gui-default --config Release
         cmake --install .
