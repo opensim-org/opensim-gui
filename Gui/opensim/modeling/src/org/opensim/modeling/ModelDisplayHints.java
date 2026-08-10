@@ -253,6 +253,78 @@ public class ModelDisplayHints extends OpenSimObject {
     opensimCommonJNI.ModelDisplayHints_set_show_path_points__SWIG_1(swigCPtr, this, value);
   }
 
+  public void copyProperty_discretize_path(ModelDisplayHints source) {
+    opensimCommonJNI.ModelDisplayHints_copyProperty_discretize_path(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
+  }
+
+  public boolean get_discretize_path(int i) {
+    return opensimCommonJNI.ModelDisplayHints_get_discretize_path__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_bool upd_discretize_path(int i) {
+    return new SWIGTYPE_p_bool(opensimCommonJNI.ModelDisplayHints_upd_discretize_path__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_discretize_path(int i, boolean value) {
+    opensimCommonJNI.ModelDisplayHints_set_discretize_path__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_discretize_path(boolean value) {
+    return opensimCommonJNI.ModelDisplayHints_append_discretize_path(swigCPtr, this, value);
+  }
+
+  public void constructProperty_discretize_path(boolean initValue) {
+    opensimCommonJNI.ModelDisplayHints_constructProperty_discretize_path(swigCPtr, this, initValue);
+  }
+
+  public boolean get_discretize_path() {
+    return opensimCommonJNI.ModelDisplayHints_get_discretize_path__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_bool upd_discretize_path() {
+    return new SWIGTYPE_p_bool(opensimCommonJNI.ModelDisplayHints_upd_discretize_path__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_discretize_path(boolean value) {
+    opensimCommonJNI.ModelDisplayHints_set_discretize_path__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_num_samples_per_wrap_segment(ModelDisplayHints source) {
+    opensimCommonJNI.ModelDisplayHints_copyProperty_num_samples_per_wrap_segment(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
+  }
+
+  public int get_num_samples_per_wrap_segment(int i) {
+    return opensimCommonJNI.ModelDisplayHints_get_num_samples_per_wrap_segment__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_int upd_num_samples_per_wrap_segment(int i) {
+    return new SWIGTYPE_p_int(opensimCommonJNI.ModelDisplayHints_upd_num_samples_per_wrap_segment__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_num_samples_per_wrap_segment(int i, int value) {
+    opensimCommonJNI.ModelDisplayHints_set_num_samples_per_wrap_segment__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_num_samples_per_wrap_segment(int value) {
+    return opensimCommonJNI.ModelDisplayHints_append_num_samples_per_wrap_segment(swigCPtr, this, value);
+  }
+
+  public void constructProperty_num_samples_per_wrap_segment(int initValue) {
+    opensimCommonJNI.ModelDisplayHints_constructProperty_num_samples_per_wrap_segment(swigCPtr, this, initValue);
+  }
+
+  public int get_num_samples_per_wrap_segment() {
+    return opensimCommonJNI.ModelDisplayHints_get_num_samples_per_wrap_segment__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_int upd_num_samples_per_wrap_segment() {
+    return new SWIGTYPE_p_int(opensimCommonJNI.ModelDisplayHints_upd_num_samples_per_wrap_segment__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_num_samples_per_wrap_segment(int value) {
+    opensimCommonJNI.ModelDisplayHints_set_num_samples_per_wrap_segment__SWIG_1(swigCPtr, this, value);
+  }
+
   public void copyProperty_show_markers(ModelDisplayHints source) {
     opensimCommonJNI.ModelDisplayHints_copyProperty_show_markers(swigCPtr, this, ModelDisplayHints.getCPtr(source), source);
   }
