@@ -572,7 +572,8 @@ public class ModelVisualizationJson extends JSONObject {
             }
             else {
                  Scholz2015GeometryPath sPath = Scholz2015GeometryPath.safeDownCast(comp);
-                 System.out.println("Creating Json for GeometryPath of "+sPath.getOwner().getName());
+                 if (debug_path)
+                    System.out.println("Creating Json for GeometryPath of "+sPath.getOwner().getName());
                  UUID pathUUID = createJsonForScholzPath(sPath, visibleStatus, null, state);
                  //pathList.put(sPath, pathUUID);
                  addComponentToUUIDMap(comp, pathUUID);
@@ -2313,8 +2314,26 @@ public class ModelVisualizationJson extends JSONObject {
             int expectedLength = (iState+1)*3;
             for (AbstractGeometryPath apath:pathsWithWrapping.keySet()){
                 GeometryPath  path = GeometryPath.safeDownCast(apath);
-                if (path == null) // Scholz path ignore for now
+                if (path == null) {
+                    // Scholz path handling for now
+                    JSONArray pathpoint_jsonArr = pathsWithWrapping.get(apath);
+                    Scholz2015GeometryPath sPath = Scholz2015GeometryPath.safeDownCast(apath);
+                    ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+                    sPath.generateDecorations(false, mdh, nextState, adg);
+                    for (int pptIdx=0; pptIdx<pathpoint_jsonArr.size(); pptIdx++){
+                        String pointUUIDString = (String) pathpoint_jsonArr.get(pptIdx);
+                        UUID ppt_uuid = UUID.fromString(pointUUIDString);
+                        ArrayList<Double> track = mapUUIDToAnimationTrack.get(ppt_uuid.toString());
+                        if (track == null){
+                            mapUUIDToAnimationTrack.put(ppt_uuid.toString(), new ArrayList<Double>());
+                            track = mapUUIDToAnimationTrack.get(ppt_uuid.toString());
+                        }
+                        // At this point we have a track for the uuid corresponding to the scholzPoint
+                        for (int ii=0; ii<3; ii++)
+                                track.add(adg.getElt(pptIdx).getTransform().T().get(ii));
+                    }
                     continue;
+                }
                 updatePathWithWrapping(path, null, nextState);
                 // if there're points in pathsWithWrapping.value that didn't get an update
                 // grab values for them from the computedPathPointData
