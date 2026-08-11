@@ -144,7 +144,7 @@ public class ModelVisualizationJson extends JSONObject {
     private JSONObject pathPointGeometryJSON = null;
     private JSONObject editablePathPointGeometryJSON = null;
     private JSONObject marker_mat_json;
-    public static boolean verbose=true;
+    public static boolean verbose=false;
     private boolean ready = false;
     private static final HashMap<String, Boolean> movableOpensimTypes = new HashMap<String, Boolean>();
     public final ArrayList<MotionDisplayer> motionDisplayers = new ArrayList<MotionDisplayer>();
@@ -856,8 +856,15 @@ public class ModelVisualizationJson extends JSONObject {
             if (!pathsWithWrapping.isEmpty()){
                 
                 // Update status of Wrappoints accordingly
-                for (GeometryPath path:pathsWithWrapping.keySet()){
-                    updatePathWithWrapping(path, bodyTransforms_json, state);
+                for (AbstractGeometryPath path:pathsWithWrapping.keySet()){
+                    GeometryPath gPath = GeometryPath.safeDownCast(path);
+                    if (gPath != null)
+                        updatePathWithWrapping(gPath, bodyTransforms_json, state);
+                    else {
+                        Scholz2015GeometryPath sPath = Scholz2015GeometryPath.safeDownCast(path);
+                        if (sPath != null)
+                            updateScholzPath(sPath, bodyTransforms_json, state);
+                    }
                 }
             }            // Computed points need recomputation
 
@@ -1508,7 +1515,7 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<AbstractPathPoint, ComputedPathPointInfo> proxyPathPoints = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
     // Points that are generated but stay dormant pending Condition (ConditionalPathPoint) or Wrapping
     private final HashMap<UUID, ComputedPathPointInfo> computedPathPoints = new HashMap<UUID, ComputedPathPointInfo>();
-    private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
+    private final HashMap<AbstractGeometryPath, JSONArray> pathsWithWrapping = new HashMap<AbstractGeometryPath, JSONArray>();
     // Keep track if PathPoints are displayed/enlarged to sync. UI and to keep across edits
     private final HashMap<AbstractGeometryPath, Boolean> pathDisplayStatus = new HashMap<>();
     // GeometryPath has material (with Skinning) and another material without Skinning for PathPoints
@@ -1605,6 +1612,21 @@ public class ModelVisualizationJson extends JSONObject {
         }
     }
 
+    private void updateScholzPath(Scholz2015GeometryPath sPath, JSONArray bodyTransforms, State state) {
+        // Call generateDecorations and for each point (in gnd frame) send new xform
+        //System.out.println("updateScholzPath called");
+        ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+        sPath.generateDecorations(false, mdh, state, adg);
+        JSONArray pathPoints = pathsWithWrapping.get(sPath);
+        for (int i=0; i< pathPoints.size(); i++){
+            JSONObject onePointXform_json = new JSONObject();
+            Transform xform = adg.getElt(i).getTransform();
+            onePointXform_json.put("uuid", pathPoints.get(i));
+            onePointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), getVisScaleFactor()));
+            bodyTransforms.add(onePointXform_json);
+       }
+
+    }
     private UUID addPathPointObjectToParent(AbstractPathPoint pathPoint, String material, boolean visible) {
         
         // Parent
@@ -1915,6 +1937,7 @@ public class ModelVisualizationJson extends JSONObject {
             UUID scholzPathPointUUID = retrieveUuidFromJson(scholzPathPointJson);
             pathpoint_jsonArr.add(scholzPathPointUUID.toString());
             gndChildren.add(scholzPathPointJson);
+            pathsWithWrapping.put(path, pathpoint_jsonArr);
         }
         JSONObject pathGeomJson = new JSONObject();
         UUID uuidForPathGeomGeometry = UUID.randomUUID();
@@ -2288,7 +2311,10 @@ public class ModelVisualizationJson extends JSONObject {
         if (!pathsWithWrapping.isEmpty()){
             // Update status of Wrappoints accordingly
             int expectedLength = (iState+1)*3;
-            for (GeometryPath path:pathsWithWrapping.keySet()){
+            for (AbstractGeometryPath apath:pathsWithWrapping.keySet()){
+                GeometryPath  path = GeometryPath.safeDownCast(apath);
+                if (path == null) // Scholz path ignore for now
+                    continue;
                 updatePathWithWrapping(path, null, nextState);
                 // if there're points in pathsWithWrapping.value that didn't get an update
                 // grab values for them from the computedPathPointData
