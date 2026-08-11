@@ -101,25 +101,13 @@ runs:
         ref: ${{ inputs.ref }}
         path: ${{ inputs.path }}
 
-    - name: Cache opensim-core-dependencies
-      id: cache-dependencies
-      uses: actions/cache@v3
-      with:
-        path: ~/opensim_dependencies_install
-        # Every time a cache is created, it's stored with this key.
-        # In subsequent runs, if the key matches the key of an existing cache,
-        # then the cache is used. We chose for this key to depend on the
-        # operating system and a hash of the hashes of all files in the
-        # dependencies directory (non-recursive).
-        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
-        key: ${{ runner.os }}-dependencies-${{ hashFiles(format('{0}/dependencies/*', inputs.path)) }}
-
     - name: Build opensim-core-dependencies
       shell: pwsh
       #if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}/dependencies
         cmake . -G "Visual Studio 17 2022"  --preset msvc-dev-gui-default -LAH
+        # dependencies are installed into $env:GITHUB_WORKSPACE/${{ inputs.path }}/build/dependencies/msvc-dev-gui-default/install
         cmake --build --preset msvc-dev-gui-default -j 4
 
     - name: Obtain opensim-core commit
@@ -130,20 +118,11 @@ runs:
         $opensim_core_commit=(git rev-parse HEAD)
         echo "hash=$opensim_core_commit" >> $GITHUB_OUTPUT
 
-    - name: Cache opensim-core
-      id: cache-core
-      uses: actions/cache@v3
-      with:
-        path: ~/opensim-core-install
-        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
-        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
-
     - name: Build opensim-core
       shell: pwsh
       #if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
-        cmake . -G "Visual Studio 17 2022" --preset msvc-dev-gui-default
-        cmake . -LAH
+        cmake . -G "Visual Studio 17 2022" --preset msvc-dev-gui-default  -DSIMBODY_HOME=$env:GITHUB_WORKSPACE/${{ inputs.path }}/build/dependencies/msvc-dev-gui-default/install/simbody/cmake
         cmake --build --preset msvc-dev-gui-default
         cmake --install .
