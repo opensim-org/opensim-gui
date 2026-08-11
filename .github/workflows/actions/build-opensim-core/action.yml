@@ -145,5 +145,5 @@ runs:
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
         cmake . -G "Visual Studio 17 2022" --preset msvc-dev-gui-default
         cmake . -LAH
-        cmake --build --preset msvc-dev-gui-default --config Release
+        cmake --build --preset msvc-dev-gui-default
         cmake --install .
