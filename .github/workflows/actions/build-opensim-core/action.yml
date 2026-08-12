@@ -123,6 +123,6 @@ runs:
       #if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
-        cmake . -G "Visual Studio 17 2022" --preset msvc-dev-gui-default  -DSIMBODY_HOME=$env:GITHUB_WORKSPACE/${{ inputs.path }}/build/dependencies/msvc-dev-gui-default/install/simbody/cmake
-        cmake --build --preset msvc-dev-gui-default
-        cmake --install .
+        cmake . --preset msvc-dev-gui-default -LAH -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install"
+        cmake --build --preset msvc-dev-gui-default -j 4 
+        cmake --build --preset msvc-dev-gui-default --target install
