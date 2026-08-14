@@ -17,7 +17,7 @@ inputs:
   java-version:
     description: 'JDK version (Temurin)'
     required: false
-    default: '11'
+    default: '17'
   repository:
     description: 'opensim-core repository to check out'
     required: false
@@ -103,32 +103,19 @@ runs:
 
     - name: Cache opensim-core-dependencies
       id: cache-dependencies
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
-        path: ~/opensim_dependencies_install
-        # Every time a cache is created, it's stored with this key.
-        # In subsequent runs, if the key matches the key of an existing cache,
-        # then the cache is used. We chose for this key to depend on the
-        # operating system and a hash of the hashes of all files in the
-        # dependencies directory (non-recursive).
-        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
-        key: ${{ runner.os }}-dependencies-${{ hashFiles(format('{0}/dependencies/*', inputs.path)) }}
+        path: ${{ github.workspace }}/${{ inputs.path }}/build/dependencies
+        key: ${{ runner.os }}-deps-msvc-dev-gui-default-${{ inputs.swig-version }}-${{ hashFiles(format('{0}/dependencies/CMakeLists.txt', inputs.path), format('{0}/dependencies/**/CMakeLists.txt', inputs.path), format('{0}/CMakePresets.json', inputs.path)) }}
 
     - name: Build opensim-core-dependencies
       shell: pwsh
-      #if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
       run: |
-        echo $env:GITHUB_WORKSPACE\\build_deps
-        mkdir $env:GITHUB_WORKSPACE\\build_deps
-        chdir $env:GITHUB_WORKSPACE\\build_deps
-        # gci -r $env:GITHUB_WORKSPACE\\opensim-core
-        # /W0 disables warnings. The other flags are copied from CMake's
-        # default CMAKE_CXX_FLAGS.
-        # https://msdn.microsoft.com/en-us/library/19z1t1wy.aspx
-        $env:CXXFLAGS = "/W0 /MD"
-        cmake $env:GITHUB_WORKSPACE/${{ inputs.path }}/dependencies -G"Visual Studio 17 2022" -A x64 -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=on -DWIG_DIR=C:/ProgramData/chocolatey/lib/swig -DCMAKE_INSTALL_PREFIX=~/opensim_dependencies_install
-        cmake . -LAH
-        cmake --build . --config Release -- /maxcpucount:2
+        chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}/dependencies
+        cmake . -G "Visual Studio 17 2022"  --preset msvc-dev-gui-default -LAH
+        # dependencies are installed into $env:GITHUB_WORKSPACE/${{ inputs.path }}/build/dependencies/msvc-dev-gui-default/install
+        cmake --build --preset msvc-dev-gui-default -j 4
 
     - name: Obtain opensim-core commit
       id: opensim-core-commit
@@ -138,23 +125,22 @@ runs:
         $opensim_core_commit=(git rev-parse HEAD)
         echo "hash=$opensim_core_commit" >> $GITHUB_OUTPUT
 
-    - name: Cache opensim-core
+    - name: Cache opensim-core build
       id: cache-core
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
-        path: ~/opensim-core-install
-        # https://help.github.com/en/actions/automating-your-workflow-with-github-actions/caching-dependencies-to-speed-up-workflows#matching-a-cache-key
-        key: ${{ runner.os }}-${{ steps.opensim-core-commit.outputs.hash }}
+        path: |
+          ${{ github.workspace }}/${{ inputs.path }}/build
+          !${{ github.workspace }}/${{ inputs.path }}/build/dependencies
+        key: ${{ runner.os }}-core-msvc-dev-gui-default-${{ steps.opensim-core-commit.outputs.hash }}
+        restore-keys: |
+          ${{ runner.os }}-core-msvc-dev-gui-default-
 
     - name: Build opensim-core
       shell: pwsh
       #if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
-        echo $env:GITHUB_WORKSPACE\\build_core
-        mkdir $env:GITHUB_WORKSPACE\\build_core
-        chdir $env:GITHUB_WORKSPACE\\build_core
-        $env:CXXFLAGS = "/W0 /MD"
-        cmake $env:GITHUB_WORKSPACE/${{ inputs.path }} -G"Visual Studio 17 2022" -A x64 -DOPENSIM_DEPENDENCIES_DIR=~/opensim_dependencies_install -DBUILD_JAVA_WRAPPING=on -DBUILD_PYTHON_WRAPPING=on -DOPENSIM_C3D_PARSER=ezc3d -DBUILD_TESTING=off  -DBUILD_API_EXAMPLES=ON -DCMAKE_INSTALL_PREFIX=~/opensim-core-install
-        cmake . -LAH
-        cmake --build . --config Release -- /maxcpucount:2
-        cmake --install .
+        chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
+        cmake . --preset msvc-dev-gui-default -LAH -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install"
+        cmake --build --preset msvc-dev-gui-default -j 4 
+        cmake --build --preset msvc-dev-gui-default --target install
