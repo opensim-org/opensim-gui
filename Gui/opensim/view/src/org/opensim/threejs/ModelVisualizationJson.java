@@ -435,6 +435,24 @@ public class ModelVisualizationJson extends JSONObject {
         ppt_object.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1.), 1.0));
         return ppt_object;
     }
+    // if scholzPath has non-engaged segment it returns NaNs, fix them
+    private void fixNanPathpointPositions(ArrayDecorativeGeometry adg) {
+        Vec3 lastValidPosition = new Vec3(0., 0., 0.);
+        for (int i=0; i<adg.size()/2+1; i++){
+            int pointIndex = getDecorativeGeometryIndexFromPointIndexScholz(i);
+            Vec3 pointPos = adg.getElt(pointIndex).getTransform().T();
+            double pointPosX = pointPos.get(0);
+            if (Double.isNaN(pointPosX)){
+                // copy lastValidPosition into 
+                for (int c=0; c<3; c++)
+                    adg.getElt(pointIndex).getTransform().T().set(c,lastValidPosition.get(c));
+            }
+            else
+                for (int c=0; c<3; c++)
+                    lastValidPosition.set(c, pointPos.get(c)); 
+        }
+        
+    }
      // The following inner class and Map are used to cache "computed" pathpoints to speed up 
     // recomputation on the fly
     class ComputedPathPointInfo {
@@ -489,6 +507,7 @@ public class ModelVisualizationJson extends JSONObject {
         mdh.set_show_frames(true);
         // Settings for path display of ScholzPath
         mdh.set_discretize_path(true);
+        mdh.set_show_path_points(true); // so that scholzPath generates the points not just the lines
         mdh.set_num_samples_per_wrap_segment(NUM_PATHPOINTS_PER_WRAP_OBJECT);
         ComponentsList mcList = model.getComponentsList();
         ComponentIterator mcIter = mcList.begin();
@@ -1618,10 +1637,13 @@ public class ModelVisualizationJson extends JSONObject {
         //System.out.println("updateScholzPath called");
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         sPath.generateDecorations(false, mdh, state, adg);
+        fixNanPathpointPositions(adg);
         JSONArray pathPoints = pathsWithWrapping.get(sPath);
+         // generateDecorations produces the order pt1,pt2,line12,pt3,line23...
         for (int i=0; i< pathPoints.size(); i++){
+            int idx = getDecorativeGeometryIndexFromPointIndexScholz(i);
             JSONObject onePointXform_json = new JSONObject();
-            Transform xform = adg.getElt(i).getTransform();
+            Transform xform = adg.getElt(idx).getTransform();
             onePointXform_json.put("uuid", pathPoints.get(i));
             onePointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), getVisScaleFactor()));
             bodyTransforms.add(onePointXform_json);
@@ -1914,7 +1936,8 @@ public class ModelVisualizationJson extends JSONObject {
         int totalNumPoints =  path.getNumPathPoints() + NUM_PATHPOINTS_PER_WRAP_OBJECT * numObstacles;
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         path.generateDecorations(false, mdh, state, adg);
-        assert(adg.size()==totalNumPoints);
+        fixNanPathpointPositions(adg);
+        assert(adg.size()== 2*totalNumPoints-1); // 
         for (int iE=0; iE < path.getNumPathPoints(); iE++){
             PathPoint ppt = path.getPathPoint(iE);
             UUID pathpoint_uuid = addPathPointObjectToParent(ppt, pathpt_mat_uuid.toString(), visible);
@@ -1926,20 +1949,22 @@ public class ModelVisualizationJson extends JSONObject {
         if (gndJson.get("children")==null)
                 gndJson.put("children", new JSONArray());
         JSONArray gndChildren = (JSONArray) gndJson.get("children");
-        for (int ip=0; ip < adg.size(); ip++){
+        for (int ip=0; ip < adg.size()/2+1; ip++){ //skip every other Decoration as it's a line
             // create a pathpoints in ground frame and add its uuid to pathpoint_jsonArr
             // as of now this includes points coincident with pathpoints on bodies
             // API is responsible for keeping these in sync on calls to generateDecorations
             // Every pathpoint will have unique uuid
             // Geometry of decorativesphere transform from adg
             // Material of pathpt_mat_uuid
-            JSONObject scholzPathPointJson = createScholzPathPointObjectJson(pathpt_mat_uuid, adg.at(ip));
+            int idx = getDecorativeGeometryIndexFromPointIndexScholz(ip);
+            JSONObject scholzPathPointJson = createScholzPathPointObjectJson(pathpt_mat_uuid, adg.at(idx));
             // retrieve uuid to include in pathpoint_jsonArr
             UUID scholzPathPointUUID = retrieveUuidFromJson(scholzPathPointJson);
             pathpoint_jsonArr.add(scholzPathPointUUID.toString());
             gndChildren.add(scholzPathPointJson);
-            pathsWithWrapping.put(path, pathpoint_jsonArr);
+            //System.out.println("Adding a point at glround frame:");
         }
+        pathsWithWrapping.put(path, pathpoint_jsonArr);
         JSONObject pathGeomJson = new JSONObject();
         UUID uuidForPathGeomGeometry = UUID.randomUUID();
         pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
@@ -1948,10 +1973,12 @@ public class ModelVisualizationJson extends JSONObject {
         pathGeomJson.put("radiusBottom", actualMuscleDisplayRadius);
         pathGeomJson.put("height", 0.01);
         pathGeomJson.put("radialSegments", 4);
+        // fix this 0902?
         pathGeomJson.put("heightSegments", 2*(pathpoint_jsonArr.size()-1)-1);
         pathGeomJson.put("openEnded", true);
         // height, radialSegments, heightSegments, openended
         pathGeomJson.put("name", path.getName()+"Control");
+        //System.out.println("pathGeomJson:"+pathGeomJson.toJSONString());
         if (reuse_uuid == null) {
             json_geometries.add(pathGeomJson);
         }
@@ -1974,6 +2001,10 @@ public class ModelVisualizationJson extends JSONObject {
         return mesh_uuid;
 
         
+    }
+
+    private static int getDecorativeGeometryIndexFromPointIndexScholz(int ip) {
+        return (ip==0)?ip:ip*2-1;
     }
     private UUID createPathPointMaterial(AbstractGeometryPath path) {
         // Repeat for pathpointMaterial
@@ -2314,12 +2345,13 @@ public class ModelVisualizationJson extends JSONObject {
             int expectedLength = (iState+1)*3;
             for (AbstractGeometryPath apath:pathsWithWrapping.keySet()){
                 GeometryPath  path = GeometryPath.safeDownCast(apath);
-                if (path == null) {
+                Scholz2015GeometryPath sPath = Scholz2015GeometryPath.safeDownCast(apath);
+                if (path == null && sPath != null) {
                     // Scholz path handling for now
                     JSONArray pathpoint_jsonArr = pathsWithWrapping.get(apath);
-                    Scholz2015GeometryPath sPath = Scholz2015GeometryPath.safeDownCast(apath);
                     ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
                     sPath.generateDecorations(false, mdh, nextState, adg);
+                    fixNanPathpointPositions(adg);
                     for (int pptIdx=0; pptIdx<pathpoint_jsonArr.size(); pptIdx++){
                         String pointUUIDString = (String) pathpoint_jsonArr.get(pptIdx);
                         UUID ppt_uuid = UUID.fromString(pointUUIDString);
@@ -2328,9 +2360,10 @@ public class ModelVisualizationJson extends JSONObject {
                             mapUUIDToAnimationTrack.put(ppt_uuid.toString(), new ArrayList<Double>());
                             track = mapUUIDToAnimationTrack.get(ppt_uuid.toString());
                         }
+                        int idx = getDecorativeGeometryIndexFromPointIndexScholz(pptIdx);
                         // At this point we have a track for the uuid corresponding to the scholzPoint
                         for (int ii=0; ii<3; ii++)
-                                track.add(adg.getElt(pptIdx).getTransform().T().get(ii));
+                                track.add(adg.getElt(idx).getTransform().T().get(ii));
                     }
                     continue;
                 }
