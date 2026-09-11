@@ -1,0 +1,146 @@
+name: 'Build opensim-core'
+description: 'Installs SWIG, Python/NumPy, JDK, NetBeans, and VC++ Redistributable, then checks out and builds opensim-core and its dependencies, with caching'
+
+inputs:
+  swig-version:
+    description: 'SWIG version to install via choco'
+    required: false
+    default: '4.1.1'
+  python-version:
+    description: 'Python version'
+    required: false
+    default: '3.11'
+  numpy-version:
+    description: 'NumPy version'
+    required: false
+    default: '2.4'
+  java-version:
+    description: 'JDK version (Temurin)'
+    required: false
+    default: '17'
+  repository:
+    description: 'opensim-core repository to check out'
+    required: false
+    default: 'opensim-org/opensim-core'
+  ref:
+    description: 'Branch, tag, or SHA to check out (defaults to the repository default branch)'
+    required: false
+    default: ''
+  path:
+    description: 'Path to check out opensim-core into'
+    required: false
+    default: 'opensim-core'
+
+outputs:
+  commit-hash:
+    description: 'The opensim-core commit hash that was built'
+    value: ${{ steps.opensim-core-commit.outputs.hash }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install SWIG
+      shell: pwsh
+      run: |
+        choco install swig --version ${{ inputs.swig-version }} --yes --limit-output --allow-downgrade
+        swig -swiglib
+
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install NumPy
+      shell: pwsh
+      run: python3 -m pip install numpy==${{ inputs.numpy-version }}
+
+    - name: Set up JDK
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: ${{ inputs.java-version }}
+
+    - name: Cache Netbeans
+      id: cache-netbeans
+      uses: actions/cache@v3
+      with:
+        path: .\Apache-NetBeans-17-bin-windows-x64.exe
+        key: netbeans-17
+
+    - name: Download Netbeans 17
+      shell: pwsh
+      if: steps.cache-netbeans.outputs.cache-hit != 'true'
+      run: |
+        (New-Object System.Net.WebClient).DownloadFile("https://archive.apache.org/dist/netbeans/netbeans-installers/17/Apache-NetBeans-17-bin-windows-x64.exe", "Apache-NetBeans-17-bin-windows-x64.exe")
+
+    - name: Verify Netbeans installer hash
+      shell: pwsh
+      run: |
+        $expectedHash = "c3d7a34184c4021486751fbc3878eb2376677674ff8d6d4bf87017fd2434122c8438072aa891e535fa0fa9aeafcb49ad833a61903180772369d99571b073baac"
+        $hashFromFile = Get-FileHash -Algorithm SHA512 -Path .\Apache-NetBeans-17-bin-windows-x64.exe
+        if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
+
+    - name: Install Netbeans 17
+      shell: pwsh
+      run: |
+        .\Apache-NetBeans-17-bin-windows-x64.exe --silent --javahome "$env:JAVA_HOME" | Out-Null # This installer is gregarious.
+        echo "ANT_HOME=C:\\Program Files\\NetBeans-17.0\\netbeans\\extide\\ant" >> $GITHUB_ENV
+
+    - name: Download VC++ Redistributable
+      shell: pwsh
+      run: |
+        $url = "https://aka.ms/vs/17/vc_redist.x64.exe"
+        $dest = "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\VC\Redist\MSVC\14.44.35112\vcredist_x64.exe"
+        Invoke-WebRequest -Uri $url -OutFile $dest -UseBasicParsing
+        echo "msvc.redist.exe=$dest" >> $env:GITHUB_ENV
+
+    - name: Checkout opensim-core
+      uses: actions/checkout@v4
+      with:
+        repository: ${{ inputs.repository }}
+        ref: ${{ inputs.ref }}
+        path: ${{ inputs.path }}
+
+    - name: Cache opensim-core-dependencies
+      id: cache-dependencies
+      uses: actions/cache@v4
+      with:
+        path: ${{ github.workspace }}/${{ inputs.path }}/build/dependencies
+        key: ${{ runner.os }}-deps-msvc-dev-gui-default-${{ inputs.swig-version }}-${{ hashFiles(format('{0}/dependencies/CMakeLists.txt', inputs.path), format('{0}/dependencies/**/CMakeLists.txt', inputs.path), format('{0}/CMakePresets.json', inputs.path)) }}
+
+    - name: Build opensim-core-dependencies
+      shell: pwsh
+      if: steps.cache-dependencies.outputs.cache-hit != 'true'
+      run: |
+        chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}/dependencies
+        cmake . -G "Visual Studio 17 2022"  --preset msvc-dev-gui-default -LAH
+        # dependencies are installed into $env:GITHUB_WORKSPACE/${{ inputs.path }}/build/dependencies/msvc-dev-gui-default/install
+        cmake --build --preset msvc-dev-gui-default -j 4
+
+    - name: Obtain opensim-core commit
+      id: opensim-core-commit
+      shell: pwsh
+      run: |
+        cd ${{ inputs.path }}
+        $opensim_core_commit=(git rev-parse HEAD)
+        echo "hash=$opensim_core_commit" >> $GITHUB_OUTPUT
+
+    - name: Cache opensim-core build
+      id: cache-core
+      uses: actions/cache@v4
+      with:
+        path: |
+          ${{ github.workspace }}/${{ inputs.path }}/build
+          !${{ github.workspace }}/${{ inputs.path }}/build/dependencies
+        key: ${{ runner.os }}-core-msvc-dev-gui-default-${{ steps.opensim-core-commit.outputs.hash }}
+        restore-keys: |
+          ${{ runner.os }}-core-msvc-dev-gui-default-
+
+    - name: Build opensim-core
+      shell: pwsh
+      #if: steps.cache-core.outputs.cache-hit != 'true'
+      run: |
+        chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
+        cmake . --preset msvc-dev-gui-default -LAH -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install"
+        cmake --build --preset msvc-dev-gui-default -j 4 
+        cmake --build --preset msvc-dev-gui-default --target install
