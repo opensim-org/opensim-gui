@@ -441,8 +441,7 @@ public class ModelVisualizationJson extends JSONObject {
         for (int i=0; i<adg.size()/2+1; i++){
             int pointIndex = getDecorativeGeometryIndexFromPointIndexScholz(i);
             Vec3 pointPos = adg.getElt(pointIndex).getTransform().T();
-            double pointPosX = pointPos.get(0);
-            if (Double.isNaN(pointPosX)){
+            if (Double.isNaN(pointPos.get(0)) || Double.isNaN(pointPos.get(1)) || Double.isNaN(pointPos.get(2))){
                 // copy lastValidPosition into 
                 for (int c=0; c<3; c++)
                     adg.getElt(pointIndex).getTransform().T().set(c,lastValidPosition.get(c));
