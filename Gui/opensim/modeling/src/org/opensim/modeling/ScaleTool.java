@@ -78,20 +78,264 @@ public class ScaleTool extends OpenSimObject {
     return opensimActuatorsAnalysesToolsJNI.ScaleTool_getConcreteClassName(swigCPtr, this);
   }
 
+  public void copyProperty_mass(ScaleTool source) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_copyProperty_mass(swigCPtr, this, ScaleTool.getCPtr(source), source);
+  }
+
+  public double get_mass(int i) {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_get_mass__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_mass(int i) {
+    return new SWIGTYPE_p_double(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_mass__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_mass(int i, double value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_mass__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_mass(double value) {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_append_mass(swigCPtr, this, value);
+  }
+
+  public void constructProperty_mass(double initValue) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_constructProperty_mass(swigCPtr, this, initValue);
+  }
+
+  public double get_mass() {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_get_mass__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_mass() {
+    return new SWIGTYPE_p_double(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_mass__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_mass(double value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_mass__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_height(ScaleTool source) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_copyProperty_height(swigCPtr, this, ScaleTool.getCPtr(source), source);
+  }
+
+  public double get_height(int i) {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_get_height__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_height(int i) {
+    return new SWIGTYPE_p_double(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_height__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_height(int i, double value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_height__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_height(double value) {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_append_height(swigCPtr, this, value);
+  }
+
+  public void constructProperty_height(double initValue) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_constructProperty_height(swigCPtr, this, initValue);
+  }
+
+  public double get_height() {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_get_height__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_height() {
+    return new SWIGTYPE_p_double(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_height__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_height(double value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_height__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_age(ScaleTool source) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_copyProperty_age(swigCPtr, this, ScaleTool.getCPtr(source), source);
+  }
+
+  public double get_age(int i) {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_get_age__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_double upd_age(int i) {
+    return new SWIGTYPE_p_double(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_age__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_age(int i, double value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_age__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_age(double value) {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_append_age(swigCPtr, this, value);
+  }
+
+  public void constructProperty_age(double initValue) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_constructProperty_age(swigCPtr, this, initValue);
+  }
+
+  public double get_age() {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_get_age__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_double upd_age() {
+    return new SWIGTYPE_p_double(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_age__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_age(double value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_age__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_notes(ScaleTool source) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_copyProperty_notes(swigCPtr, this, ScaleTool.getCPtr(source), source);
+  }
+
+  public String get_notes(int i) {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_get_notes__SWIG_0(swigCPtr, this, i);
+  }
+
+  public SWIGTYPE_p_std__string upd_notes(int i) {
+    return new SWIGTYPE_p_std__string(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_notes__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_notes(int i, String value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_notes__SWIG_0(swigCPtr, this, i, value);
+  }
+
+  public int append_notes(String value) {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_append_notes(swigCPtr, this, value);
+  }
+
+  public void constructProperty_notes(String initValue) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_constructProperty_notes(swigCPtr, this, initValue);
+  }
+
+  public String get_notes() {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_get_notes__SWIG_1(swigCPtr, this);
+  }
+
+  public SWIGTYPE_p_std__string upd_notes() {
+    return new SWIGTYPE_p_std__string(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_notes__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_notes(String value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_notes__SWIG_1(swigCPtr, this, value);
+  }
+
+  public void copyProperty_GenericModelMaker(ScaleTool source) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_copyProperty_GenericModelMaker(swigCPtr, this, ScaleTool.getCPtr(source), source);
+  }
+
+  public GenericModelMaker get_GenericModelMaker(int i) {
+    return new GenericModelMaker(opensimActuatorsAnalysesToolsJNI.ScaleTool_get_GenericModelMaker__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public GenericModelMaker upd_GenericModelMaker(int i) {
+    return new GenericModelMaker(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_GenericModelMaker__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_GenericModelMaker(int i, GenericModelMaker value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_GenericModelMaker__SWIG_0(swigCPtr, this, i, GenericModelMaker.getCPtr(value), value);
+  }
+
+  public int append_GenericModelMaker(GenericModelMaker value) {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_append_GenericModelMaker(swigCPtr, this, GenericModelMaker.getCPtr(value), value);
+  }
+
+  public void constructProperty_GenericModelMaker(GenericModelMaker initValue) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_constructProperty_GenericModelMaker(swigCPtr, this, GenericModelMaker.getCPtr(initValue), initValue);
+  }
+
+  public GenericModelMaker get_GenericModelMaker() {
+    return new GenericModelMaker(opensimActuatorsAnalysesToolsJNI.ScaleTool_get_GenericModelMaker__SWIG_1(swigCPtr, this), false);
+  }
+
+  public GenericModelMaker upd_GenericModelMaker() {
+    return new GenericModelMaker(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_GenericModelMaker__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_GenericModelMaker(GenericModelMaker value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_GenericModelMaker__SWIG_1(swigCPtr, this, GenericModelMaker.getCPtr(value), value);
+  }
+
+  public void copyProperty_ModelScaler(ScaleTool source) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_copyProperty_ModelScaler(swigCPtr, this, ScaleTool.getCPtr(source), source);
+  }
+
+  public ModelScaler get_ModelScaler(int i) {
+    return new ModelScaler(opensimActuatorsAnalysesToolsJNI.ScaleTool_get_ModelScaler__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public ModelScaler upd_ModelScaler(int i) {
+    return new ModelScaler(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_ModelScaler__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_ModelScaler(int i, ModelScaler value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_ModelScaler__SWIG_0(swigCPtr, this, i, ModelScaler.getCPtr(value), value);
+  }
+
+  public int append_ModelScaler(ModelScaler value) {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_append_ModelScaler(swigCPtr, this, ModelScaler.getCPtr(value), value);
+  }
+
+  public void constructProperty_ModelScaler(ModelScaler initValue) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_constructProperty_ModelScaler(swigCPtr, this, ModelScaler.getCPtr(initValue), initValue);
+  }
+
+  public ModelScaler get_ModelScaler() {
+    return new ModelScaler(opensimActuatorsAnalysesToolsJNI.ScaleTool_get_ModelScaler__SWIG_1(swigCPtr, this), false);
+  }
+
+  public ModelScaler upd_ModelScaler() {
+    return new ModelScaler(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_ModelScaler__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_ModelScaler(ModelScaler value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_ModelScaler__SWIG_1(swigCPtr, this, ModelScaler.getCPtr(value), value);
+  }
+
+  public void copyProperty_MarkerPlacer(ScaleTool source) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_copyProperty_MarkerPlacer(swigCPtr, this, ScaleTool.getCPtr(source), source);
+  }
+
+  public MarkerPlacer get_MarkerPlacer(int i) {
+    return new MarkerPlacer(opensimActuatorsAnalysesToolsJNI.ScaleTool_get_MarkerPlacer__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public MarkerPlacer upd_MarkerPlacer(int i) {
+    return new MarkerPlacer(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_MarkerPlacer__SWIG_0(swigCPtr, this, i), false);
+  }
+
+  public void set_MarkerPlacer(int i, MarkerPlacer value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_MarkerPlacer__SWIG_0(swigCPtr, this, i, MarkerPlacer.getCPtr(value), value);
+  }
+
+  public int append_MarkerPlacer(MarkerPlacer value) {
+    return opensimActuatorsAnalysesToolsJNI.ScaleTool_append_MarkerPlacer(swigCPtr, this, MarkerPlacer.getCPtr(value), value);
+  }
+
+  public void constructProperty_MarkerPlacer(MarkerPlacer initValue) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_constructProperty_MarkerPlacer(swigCPtr, this, MarkerPlacer.getCPtr(initValue), initValue);
+  }
+
+  public MarkerPlacer get_MarkerPlacer() {
+    return new MarkerPlacer(opensimActuatorsAnalysesToolsJNI.ScaleTool_get_MarkerPlacer__SWIG_1(swigCPtr, this), false);
+  }
+
+  public MarkerPlacer upd_MarkerPlacer() {
+    return new MarkerPlacer(opensimActuatorsAnalysesToolsJNI.ScaleTool_upd_MarkerPlacer__SWIG_1(swigCPtr, this), false);
+  }
+
+  public void set_MarkerPlacer(MarkerPlacer value) {
+    opensimActuatorsAnalysesToolsJNI.ScaleTool_set_MarkerPlacer__SWIG_1(swigCPtr, this, MarkerPlacer.getCPtr(value), value);
+  }
+
   public ScaleTool() {
     this(opensimActuatorsAnalysesToolsJNI.new_ScaleTool__SWIG_0(), true);
   }
 
   public ScaleTool(String aFileName) throws java.io.IOException {
     this(opensimActuatorsAnalysesToolsJNI.new_ScaleTool__SWIG_1(aFileName), true);
-  }
-
-  public ScaleTool(ScaleTool aSubject) {
-    this(opensimActuatorsAnalysesToolsJNI.new_ScaleTool__SWIG_2(ScaleTool.getCPtr(aSubject), aSubject), true);
-  }
-
-  public void copyData(ScaleTool aSubject) {
-    opensimActuatorsAnalysesToolsJNI.ScaleTool_copyData(swigCPtr, this, ScaleTool.getCPtr(aSubject), aSubject);
   }
 
   public Model createModel() {
