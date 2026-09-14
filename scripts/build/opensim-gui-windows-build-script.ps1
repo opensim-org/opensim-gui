@@ -3,9 +3,9 @@ param (
   [switch]$s=$false,
   [switch]$h=$false,
   [string]$d="Release",
-  [string]$c="opensim_46",
-  [string]$g="opensim_46",
-  [string]$v="dev",
+  [string]$c="main",
+  [string]$g="main",
+  [string]$v="master",
   [int]$j=[int]4
 )
 
@@ -13,9 +13,9 @@ param (
 $DEBUG_TYPE="Release"
 $NUM_JOBS=4
 $MOCO="on"
-$CORE_BRANCH="opensim_46"
-$GUI_BRANCH="opensim_46"
-$VIEWER_BRANCH="dev"
+$CORE_BRANCH="main"
+$GUI_BRANCH="main"
+$VIEWER_BRANCH="master"
 
 function Help {
     Write-Output "This script builds the last available version of OpenSim-Gui in your computer."
@@ -90,8 +90,8 @@ choco install cmake.install --version 3.23.3 --installargs '"ADD_CMAKE_TO_PATH=S
 choco install git.install -y
 
 # Install dependencies of opensim-core
-choco install python3 -y
-choco install openjdk13 -y
+choco install python --version=3.11.0 -y
+choco install temurin17 -y
 choco install swig --version 4.1.1 -y
 choco install nsis -y
 py -m pip install numpy==2.4
@@ -113,7 +113,7 @@ $WebClient.DownloadFile("https://archive.apache.org/dist/netbeans/netbeans-insta
 $expectedHash = "c3d7a34184c4021486751fbc3878eb2376677674ff8d6d4bf87017fd2434122c8438072aa891e535fa0fa9aeafcb49ad833a61903180772369d99571b073baac"
 $hashFromFile = Get-FileHash -Algorithm SHA512 -Path C:/opensim-workspace/netbeans-17/Apache-NetBeans-17-bin-windows-x64.exe
 if (($hashFromFile.Hash) -ne ($expectedHash)) { Write-Error "Hash doesn't match." }
-C:/opensim-workspace/netbeans-17/Apache-NetBeans-17-bin-windows-x64.exe --silent | Out-Null # This installer is gregarious.
+C:/opensim-workspace/netbeans-17/Apache-NetBeans-17-bin-windows-x64.exe --silent --javahome "$env:JAVA_HOME" | Out-Null # This installer is gregarious.
 
 # Clone opensim-core
 chdir C:/opensim-workspace/
@@ -124,7 +124,7 @@ git checkout $CORE_BRANCH
 # Generate dependencies project and build dependencies using superbuild
 md C:/opensim-workspace/opensim-core-dependencies-build
 chdir C:/opensim-workspace/opensim-core-dependencies-build
-cmake C:/opensim-workspace/opensim-core-source/dependencies/ -G"Visual Studio 17 2022" -A x64 -DCMAKE_INSTALL_PREFIX="C:/opensim-workspace/opensim-core-dependencies-install" -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=$MOCO -DOPENSIM_WITH_TROPTER:BOOL=$MOCO
+cmake C:/opensim-workspace/opensim-core-source/dependencies/ -G"Visual Studio 17 2022" -A x64 -DCMAKE_INSTALL_PREFIX="C:/opensim-workspace/opensim-core-dependencies-install" -DSUPERBUILD_ezc3d:BOOL=on -DOPENSIM_WITH_CASADI:BOOL=$MOCO -DOPENSIM_WITH_TROPTER:BOOL=$MOCO 
 cmake . -LAH
 cmake --build . --config $DEBUG_TYPE -- /maxcpucount:$NUM_JOBS
 
@@ -151,11 +151,11 @@ md C:/opensim-workspace/opensim-gui-build
 chdir C:/opensim-workspace/opensim-gui-build
 md C:/opensim-gui
 cmake C:/opensim-workspace/opensim-gui-source/ -G"Visual Studio 17 2022" -A x64 -DCMAKE_PREFIX_PATH=C:/opensim-core -DAnt_EXECUTABLE="C:\Program Files\NetBeans-17\netbeans\extide\ant\bin\ant" -DANT_ARGS="-Dnbplatform.default.netbeans.dest.dir=C:\Program Files\NetBeans-17\netbeans;-Dnbplatform.default.harness.dir=C:\Program Files\NetBeans-17\netbeans\harness"
-cmake --build . --target CopyOpenSimCore --config $DEBUG_TYPE --verbose
-cmake --build . --target CopyModels --config $DEBUG_TYPE --verbose
-cmake --build . --target PrepareInstaller --config $DEBUG_TYPE --verbose
-cmake --build . --target CopyJRE --config $DEBUG_TYPE --verbose
-cmake --build . --target CopyVisualizer --config $DEBUG_TYPE --verbose
+cmake --build . --target CopyOpenSimCore --config $DEBUG_TYPE
+cmake --build . --target CopyModels --config $DEBUG_TYPE
+cmake --build . --target PrepareInstaller --config $DEBUG_TYPE
+cmake --build . --target CopyJRE --config $DEBUG_TYPE
+cmake --build . --target CopyVisualizer --config $DEBUG_TYPE
 
 # Add jxbrowser files to installer content
 $root = "C:/opensim-workspace"
