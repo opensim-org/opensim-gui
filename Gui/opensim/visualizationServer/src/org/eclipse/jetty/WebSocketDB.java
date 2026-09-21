@@ -27,7 +27,6 @@
  */
 package org.eclipse.jetty;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
@@ -46,10 +45,11 @@ public class WebSocketDB {
     static WebSocketDB instance;
     private Set<VisWebSocket> sockets = Collections.synchronizedSet(new HashSet<VisWebSocket>());
     private Observer observer;
-    public static boolean debug = false;
+    public static boolean debug = true;
     double lastTime = 0.0;
     // Keep list of OpenModel messages that are still pending (not acknowledged yet)
     private static LinkedList<String> pendingModels = new LinkedList<String>();
+    private static MessageQueue messageQueue = new MessageQueue(10);
     /** Creates a new instance of WebSocketDB */
     private WebSocketDB() {
         instance = this;
@@ -62,10 +62,22 @@ public class WebSocketDB {
         if (debug) System.out.println("Socket count ="+sockets.size());
         socket.addObserver(observer);
         observer.update(socket, null);
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-  LocalTime localTime = LocalTime.now();
-  System.out.println(dtf.format(localTime));
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalTime localTime = LocalTime.now();
+        System.out.println(dtf.format(localTime));
         System.out.println("Connected...");
+    }
+
+    public void sendQueuedMessages(VisWebSocket socket) {
+        // send messages from quue to the new socket
+        int size = messageQueue.size();
+        for(int msgIndex=0; msgIndex < size; msgIndex++){
+            JSONObject nextMsg = messageQueue.poll();
+            if (nextMsg != null){
+                this.broadcastMessageJson(nextMsg, socket);
+                if (debug) System.out.println("Sending next Queued Message");
+            }
+        }
     }
     
     public void unRegisterSocket(VisWebSocket socket) {
@@ -73,8 +85,8 @@ public class WebSocketDB {
         sockets.remove(socket);
         if (debug) System.out.println("Socket count ="+sockets.size());
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-  LocalTime localTime = LocalTime.now();
-  System.out.println(dtf.format(localTime));
+        LocalTime localTime = LocalTime.now();
+        System.out.println(dtf.format(localTime));
         System.out.println("Disconnecting");
      }
     
@@ -108,7 +120,6 @@ public class WebSocketDB {
             specificSocket.sendVisualizerMessage(msg);
             return;
         }
-        int i=0;
         for (VisWebSocket sock : sockets){
             if (debug) {
                 //System.out.println("Broadcast:"+msg.toJSONString()+"\n");
@@ -119,8 +130,8 @@ public class WebSocketDB {
                 }
             }
             sock.sendVisualizerMessage(msg);
-            i++;
         }
+        messageQueue.offer(msg);
     }
     
     public void finishPendingMessage(String uuidString){
