@@ -27,7 +27,6 @@
  */
 package org.eclipse.jetty;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Collections;
@@ -36,8 +35,6 @@ import java.util.LinkedList;
 import java.util.Observer;
 import java.util.Set;
 import java.util.UUID;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 
 /**
@@ -123,7 +120,6 @@ public class WebSocketDB {
             specificSocket.sendVisualizerMessage(msg);
             return;
         }
-        int i=0;
         for (VisWebSocket sock : sockets){
             if (debug) {
                 //System.out.println("Broadcast:"+msg.toJSONString()+"\n");
@@ -134,9 +130,8 @@ public class WebSocketDB {
                 }
             }
             sock.sendVisualizerMessage(msg);
-            messageQueue.offer(msg);
-            i++;
         }
+        messageQueue.offer(msg);
     }
     
     public void finishPendingMessage(String uuidString){

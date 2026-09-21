@@ -1341,22 +1341,6 @@ public final class ViewDB extends Observable implements Observer, LookupListener
     }
     public void addVisualizerObject(JSONObject jsonObject, double[] bounds) {
         if (websocketdb!=null){
-            // wait for model to be ready 
-            boolean wait = true;
-            while (websocketdb.isPending(currentJson.getModelUUID()) && wait){
-                try {
-                    // Because of delays in communication, the visualizer may take a bit of time to initialize, acknowledge model open
-                    // but we can't wait indefinitely as something fatal may happen.
-                    // Adding objects to Model that hasn't been initialized causes problems downstream
-                    // This scenario happens exclusively when previewing data so the time spent reading /parsing dominates anyway
-                    // TODO: explore more robust mechanism to regulate communication with low overhead, -Ayman 07/18
-                    Thread.sleep(500); 
-                    wait = false;
-                } catch (InterruptedException ex) {
-                    Exceptions.printStackTrace(ex);
-                    wait = false;
-                }
-            }
             websocketdb.broadcastMessageJson(currentJson.createAddObjectCommand(jsonObject, bounds), null);
         }
     }
