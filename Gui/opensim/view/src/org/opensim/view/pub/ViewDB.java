@@ -1388,7 +1388,8 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         String msgType = (String)jsonObject.get("type");
         if (msgType != null) {
             if (msgType.equalsIgnoreCase("ViewerReady")){
-                if (debugLevel > 1) System.out.println("ViewerReady received.");
+                if (debugLevel > 1) System.out.println("==================ViewerReady received.========================");
+                WebSocketDB.getInstance().setViewerReady();
                 ViewDB.getInstance().handleViewerReady();
                 return;
             }

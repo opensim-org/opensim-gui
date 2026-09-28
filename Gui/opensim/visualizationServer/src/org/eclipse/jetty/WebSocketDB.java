@@ -45,11 +45,12 @@ public class WebSocketDB {
     static WebSocketDB instance;
     private Set<VisWebSocket> sockets = Collections.synchronizedSet(new HashSet<VisWebSocket>());
     private Observer observer;
-    public static boolean debug = true;
+    public static boolean debug = false;
     double lastTime = 0.0;
     // Keep list of OpenModel messages that are still pending (not acknowledged yet)
     private static LinkedList<String> pendingModels = new LinkedList<String>();
     private static MessageQueue messageQueue = new MessageQueue(10);
+    private static boolean viewerReady = false;
     /** Creates a new instance of WebSocketDB */
     private WebSocketDB() {
         instance = this;
@@ -75,11 +76,17 @@ public class WebSocketDB {
             JSONObject nextMsg = messageQueue.poll();
             if (nextMsg != null){
                 this.broadcastMessageJson(nextMsg, socket);
-                if (debug) System.out.println("Sending next Queued Message");
+                if (debug) {
+                    System.out.println("Sending next Queued Message:"+
+                        nextMsg.toJSONString().substring(0, 100));
+                }
             }
         }
     }
     
+    public void setViewerReady(){
+        viewerReady = true;
+    }
     public void unRegisterSocket(VisWebSocket socket) {
         if (debug) System.out.println("unRegister Socket");
         sockets.remove(socket);
@@ -131,7 +138,9 @@ public class WebSocketDB {
             }
             sock.sendVisualizerMessage(msg);
         }
-        messageQueue.offer(msg);
+        if (debug) System.out.println("Queuing:"+msg.toJSONString());
+        if (!viewerReady)
+            messageQueue.offer(msg);
     }
     
     public void finishPendingMessage(String uuidString){
