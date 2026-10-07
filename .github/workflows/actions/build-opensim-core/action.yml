@@ -5,7 +5,7 @@ inputs:
   swig-version:
     description: 'SWIG version to install via choco'
     required: false
-    default: '4.1.1'
+    default: '4.4.1'
   python-version:
     description: 'Python version'
     required: false
