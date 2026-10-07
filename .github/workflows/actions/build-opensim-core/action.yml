@@ -1,11 +1,7 @@
 name: 'Build opensim-core'
-description: 'Installs SWIG, Python/NumPy, JDK, NetBeans, and VC++ Redistributable, then checks out and builds opensim-core and its dependencies, with caching'
+description: 'Installs Python/NumPy, JDK, NetBeans, and VC++ Redistributable, then checks out and builds opensim-core and its dependencies, with caching'
 
 inputs:
-  swig-version:
-    description: 'SWIG version to install via choco'
-    required: true
-    default: '4.4.1'
   python-version:
     description: 'Python version'
     required: false
@@ -42,7 +38,7 @@ runs:
     - name: Install SWIG
       shell: pwsh
       run: |
-        choco install swig --version ${{ inputs.swig-version }} --yes --limit-output --allow-downgrade
+        choco install swig --version 4.4.1 --yes --limit-output --allow-downgrade
         swig -swiglib
 
     - name: Install Python
@@ -106,7 +102,7 @@ runs:
       uses: actions/cache@v4
       with:
         path: ${{ github.workspace }}/${{ inputs.path }}/build/dependencies
-        key: ${{ runner.os }}-deps-msvc-dev-gui-default-${{ inputs.swig-version }}-${{ hashFiles(format('{0}/dependencies/CMakeLists.txt', inputs.path), format('{0}/dependencies/**/CMakeLists.txt', inputs.path), format('{0}/CMakePresets.json', inputs.path)) }}
+        key: ${{ runner.os }}-deps-msvc-dev-gui-default-${{ hashFiles(format('{0}/dependencies/CMakeLists.txt', inputs.path), format('{0}/dependencies/**/CMakeLists.txt', inputs.path), format('{0}/CMakePresets.json', inputs.path)) }}
 
     - name: Build opensim-core-dependencies
       shell: pwsh
@@ -141,7 +137,5 @@ runs:
       #if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
-        $swigDir = "C:\ProgramData\Chocolatey\lib\swig\tools\install\swigwin-4.4.1"
-        cmake . --preset msvc-dev-gui-default -DSWIG_EXECUTABLE="$swigDir\swig.exe" -DSWIG_LIB="$swigDir\Lib" -LAH -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install"
         cmake --build --preset msvc-dev-gui-default -j 4 
         cmake --build --preset msvc-dev-gui-default --target install
