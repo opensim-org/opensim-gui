@@ -38,6 +38,7 @@ runs:
     - name: Install SWIG
       shell: pwsh
       run: |
+        choco uninstall swig -y --all-versions
         choco install swig --version 4.4.1 --yes --limit-output --allow-downgrade
         swig -swiglib
         echo "C:\ProgramData\Chocolatey\lib\swig\tools\install\swigwin-4.4.1" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
