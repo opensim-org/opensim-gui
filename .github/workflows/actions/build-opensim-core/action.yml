@@ -4,7 +4,7 @@ description: 'Installs SWIG, Python/NumPy, JDK, NetBeans, and VC++ Redistributab
 inputs:
   swig-version:
     description: 'SWIG version to install via choco'
-    required: false
+    required: true
     default: '4.4.1'
   python-version:
     description: 'Python version'
