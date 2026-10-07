@@ -35,24 +35,19 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: Install SWIG 4.4.1
+    - name: Install SWIG
+      run: |
+        choco install swig --version 4.4.1 --yes --limit-output --allow-downgrade
+        swig -swiglib  
+        
+    - name: Debug swig
       shell: pwsh
       run: |
-        # Download SWIG 4.4.1
-        Invoke-WebRequest -Uri "https://github.com/swig/swig/archive/refs/tags/v4.4.1.tar.gz" -OutFile "swig-4.4.1.tar.gz"
-        
-        # Extract (requires 7z or tar)
-        tar -xzf swig-4.4.1.tar.gz
-        cd swig-4.4.1
-        
-        # Build and install
-        ./configure.exe --prefix="C:/swig"
-        make
-        make install
-        
-        # Add to PATH
-        echo "C:\swig\bin" | Out-File -FilePath $env:GITHUB_PATH -Encoding utf8 -Append
-
+          & "C:\ProgramData\chocolatey\bin\swig.exe" --shimgen-noop
+          & "C:\ProgramData\chocolatey\bin\swig.exe" -version
+          Get-ChildItem C:\ProgramData\Chocolatey\lib\swig\tools\install -Directory
+          Get-ChildItem C:\ProgramData\Chocolatey\lib\swig\tools\install\swigwin-4.4.1 | Select -First 5
+    
     - name: Install Python
       uses: actions/setup-python@v4
       with:
