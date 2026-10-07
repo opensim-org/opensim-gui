@@ -36,17 +36,14 @@ runs:
   using: 'composite'
   steps:
     - name: Install SWIG
+      shell: pwsh
       run: |
         choco install swig --version 4.4.1 --yes --limit-output --allow-downgrade
         swig -swiglib  
-        
-    - name: Debug swig
-      shell: pwsh
-      run: |
-          & "C:\ProgramData\chocolatey\bin\swig.exe" --shimgen-noop
-          & "C:\ProgramData\chocolatey\bin\swig.exe" -version
-          Get-ChildItem C:\ProgramData\Chocolatey\lib\swig\tools\install -Directory
-          Get-ChildItem C:\ProgramData\Chocolatey\lib\swig\tools\install\swigwin-4.4.1 | Select -First 5
+        & "C:\ProgramData\chocolatey\bin\swig.exe" --shimgen-noop
+        & "C:\ProgramData\chocolatey\bin\swig.exe" -version
+        Get-ChildItem C:\ProgramData\Chocolatey\lib\swig\tools\install -Directory
+        Get-ChildItem C:\ProgramData\Chocolatey\lib\swig\tools\install\swigwin-4.4.1 | Select -First 5
     
     - name: Install Python
       uses: actions/setup-python@v4
