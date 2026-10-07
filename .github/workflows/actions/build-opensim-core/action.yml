@@ -36,6 +36,7 @@ runs:
   using: 'composite'
   steps:
     - name: Install SWIG 4.4.1
+      shell: pwsh
       run: |
         # Download SWIG 4.4.1
         Invoke-WebRequest -Uri "https://github.com/swig/swig/archive/refs/tags/v4.4.1.tar.gz" -OutFile "swig-4.4.1.tar.gz"
