@@ -141,6 +141,7 @@ runs:
       #if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
-        cmake . --preset msvc-dev-gui-default -LAH -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install"
+        $swigDir = "C:\ProgramData\Chocolatey\lib\swig\tools\install\swigwin-4.4.1"
+        cmake . --preset msvc-dev-gui-default -DSWIG_EXECUTABLE="$swigDir\swig.exe" -LAH -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install"
         cmake --build --preset msvc-dev-gui-default -j 4 
         cmake --build --preset msvc-dev-gui-default --target install
