@@ -139,5 +139,5 @@ runs:
       #if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
-        cmake . --preset msvc-dev-gui-default -LAH -DSWIG_EXECUTABLE="C:\ProgramData\chocolatey\lib\swig\tools\install\swig" -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install"
+        cmake . --preset msvc-dev-gui-default -DSWIG_EXECUTABLE="C:/ProgramData/chocolatey/lib/swig/tools/install/swig" -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install" -LAH
         cmake --build --preset msvc-dev-gui-default --target install
