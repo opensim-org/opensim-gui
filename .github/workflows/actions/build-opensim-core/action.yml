@@ -139,5 +139,5 @@ runs:
       #if: steps.cache-core.outputs.cache-hit != 'true'
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
-        cmake --build --preset msvc-dev-gui-default -j 4 
+        cmake -DSWIG_EXECUTABLE="C:\ProgramData\chocolatey\lib\swig\tools\install\swig" --build --preset msvc-dev-gui-default -j 4 
         cmake --build --preset msvc-dev-gui-default --target install
