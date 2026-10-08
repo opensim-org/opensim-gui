@@ -140,5 +140,5 @@ runs:
       #C:\ProgramData\chocolatey\lib\swig\tools\install\swigwin-4.1.1\swig.exe
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
-        cmake . --preset msvc-dev-gui-default -DSWIG_EXECUTABLE="C:/ProgramData/chocolatey/lib/swig/tools/install/swigwin-4.1.1/swig.exe" -DSWIG_DIR="C:/ProgramData/chocolatey/lib/swig/tools/install/swigwin-4.4.1/Lib" -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install" -LAH
+        cmake . --preset msvc-dev-gui-default -DSWIG_EXECUTABLE="C:/ProgramData/chocolatey/lib/swig/tools/install/swigwin-4.4.1/swig.exe" -DSWIG_DIR="C:/ProgramData/chocolatey/lib/swig/tools/install/swigwin-4.4.1/Lib" -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install" -LAH
         cmake --build --preset msvc-dev-gui-default --target install
