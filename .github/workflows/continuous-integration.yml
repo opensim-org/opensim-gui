@@ -51,12 +51,14 @@ jobs:
       with:
         python-version: '3.11' 
         
-    - name: Install packages
+    - name: Install Homebrew packages
+      # Save the gfortran version to a file so we can use it in the cache key.
       run: |
-        brew uninstall cmake
-        brew install cmake pkgconfig autoconf libtool automake wget pcre doxygen llvm
+        brew install pkgconfig autoconf libtool automake wget pcre doxygen llvm bison
         brew reinstall gcc
-        pip3 install numpy==2.4
+        pip3 install numpy==2.0
+        pip3 install wheel
+        pip3 install build
         gfortran -v
         mkdir gfortran_version
         gfortran -v &> gfortran_version/gfortran_version.txt
@@ -127,9 +129,9 @@ jobs:
     - name: Install SWIG
       run: |
         mkdir ~/swig-source && cd ~/swig-source
-        wget https://github.com/swig/swig/archive/refs/tags/v4.1.1.tar.gz
-        tar xzf v4.1.1.tar.gz && cd swig-4.1.1
-        sh autogen.sh && ./configure --prefix=$HOME/swig --disable-ccache
+        wget https://github.com/swig/swig/archive/refs/tags/v4.4.1.tar.gz
+        tar xzf v4.4.1.tar.gz && cd swig-4.4.1
+        sh autogen.sh && ./configure BISON="$(brew --prefix bison)/bin/bison" --prefix=$HOME/swig --disable-ccache
         make && make -j4 install
 
     - name: Build opensim-core
@@ -235,8 +237,8 @@ jobs:
       #if: steps.cache-swig.outputs.cache-hit != 'true'
       run: |
         mkdir ~/swig-source && cd ~/swig-source
-        wget https://github.com/swig/swig/archive/refs/tags/v4.1.1.tar.gz
-        tar xzf v4.1.1.tar.gz && cd swig-4.1.1
+        wget https://github.com/swig/swig/archive/refs/tags/v4.4.1.tar.gz
+        tar xzf v4.4.1.tar.gz && cd swig-4.4.1
         sh autogen.sh && ./configure --prefix=$HOME/swig --disable-ccache
         make && make -j4 install  
         

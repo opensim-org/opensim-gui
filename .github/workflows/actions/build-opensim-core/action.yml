@@ -1,11 +1,7 @@
 name: 'Build opensim-core'
-description: 'Installs SWIG, Python/NumPy, JDK, NetBeans, and VC++ Redistributable, then checks out and builds opensim-core and its dependencies, with caching'
+description: 'Installs Python/NumPy, JDK, NetBeans, and VC++ Redistributable, then checks out and builds opensim-core and its dependencies, with caching'
 
 inputs:
-  swig-version:
-    description: 'SWIG version to install via choco'
-    required: false
-    default: '4.1.1'
   python-version:
     description: 'Python version'
     required: false
@@ -42,9 +38,10 @@ runs:
     - name: Install SWIG
       shell: pwsh
       run: |
-        choco install swig --version ${{ inputs.swig-version }} --yes --limit-output --allow-downgrade
+        choco uninstall swig -y --all-versions
+        choco install swig --version 4.4.1 --yes --limit-output --allow-downgrade
         swig -swiglib
-
+    
     - name: Install Python
       uses: actions/setup-python@v4
       with:
@@ -106,7 +103,7 @@ runs:
       uses: actions/cache@v4
       with:
         path: ${{ github.workspace }}/${{ inputs.path }}/build/dependencies
-        key: ${{ runner.os }}-deps-msvc-dev-gui-default-${{ inputs.swig-version }}-${{ hashFiles(format('{0}/dependencies/CMakeLists.txt', inputs.path), format('{0}/dependencies/**/CMakeLists.txt', inputs.path), format('{0}/CMakePresets.json', inputs.path)) }}
+        key: ${{ runner.os }}-deps-msvc-dev-gui-default-${{ hashFiles(format('{0}/dependencies/CMakeLists.txt', inputs.path), format('{0}/dependencies/**/CMakeLists.txt', inputs.path), format('{0}/CMakePresets.json', inputs.path)) }}
 
     - name: Build opensim-core-dependencies
       shell: pwsh
@@ -139,8 +136,8 @@ runs:
     - name: Build opensim-core
       shell: pwsh
       #if: steps.cache-core.outputs.cache-hit != 'true'
+      #C:\ProgramData\chocolatey\lib\swig\tools\install\swigwin-4.1.1\swig.exe
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
-        cmake . --preset msvc-dev-gui-default -LAH -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install"
-        cmake --build --preset msvc-dev-gui-default -j 4 
+        cmake . --preset msvc-dev-gui-default -DSWIG_EXECUTABLE="C:/ProgramData/chocolatey/lib/swig/tools/install/swigwin-4.4.1/swig.exe" -DSWIG_DIR="C:/ProgramData/chocolatey/lib/swig/tools/install/swigwin-4.4.1/Lib" -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install" -LAH
         cmake --build --preset msvc-dev-gui-default --target install
