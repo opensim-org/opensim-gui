@@ -81,16 +81,8 @@ public class MarkerPair extends OpenSimObject {
     this(opensimActuatorsAnalysesToolsJNI.new_MarkerPair__SWIG_0(), true);
   }
 
-  public MarkerPair(MarkerPair aMarkerPair) {
-    this(opensimActuatorsAnalysesToolsJNI.new_MarkerPair__SWIG_1(MarkerPair.getCPtr(aMarkerPair), aMarkerPair), true);
-  }
-
   public MarkerPair(String aName1, String aName2) {
-    this(opensimActuatorsAnalysesToolsJNI.new_MarkerPair__SWIG_2(aName1, aName2), true);
-  }
-
-  public void copyData(MarkerPair aMarkerPair) {
-    opensimActuatorsAnalysesToolsJNI.MarkerPair_copyData(swigCPtr, this, MarkerPair.getCPtr(aMarkerPair), aMarkerPair);
+    this(opensimActuatorsAnalysesToolsJNI.new_MarkerPair__SWIG_1(aName1, aName2), true);
   }
 
   public void getMarkerNames(SWIGTYPE_p_std__string aName1, SWIGTYPE_p_std__string aName2) {
