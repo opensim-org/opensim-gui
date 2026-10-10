@@ -910,6 +910,9 @@ public class ModelVisualizationJson extends JSONObject {
         guiJson.put("UUID", modelUUID.toString());  
         guiJson.put("Op", "OpenModel");
         guiJson.put("use_offset", movable);
+        if (model instanceof ModelForExperimentalData){
+            guiJson.put("json", this);
+        }
         return guiJson;
     }
 

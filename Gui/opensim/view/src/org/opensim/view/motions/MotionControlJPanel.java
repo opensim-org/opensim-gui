@@ -828,6 +828,13 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             jsonMessage.put("clip_list", clipUUIDs);
             ViewDB.getInstance().sendVisualizerCommand(jsonMessage);
          }
+         else if (evt.getOperation() == Operation.Open){
+             // Send objects to visualizer to be used by clips later
+             MotionDisplayer newMotionDisplayer = new MotionDisplayer(evt.getMotion(), evt.getModel());
+             // add uuid to current animations
+             MotionsDB.getInstance().addMotionDisplayer(evt.getMotion(), newMotionDisplayer);
+             MotionsDB.getInstance().getDisplayerForMotion(evt.getMotion()).setupMotionDisplay();
+         }
          motionLoaded = (getMasterMotion().getNumMotions() > 0);
          updatePanelDisplay();
       }
