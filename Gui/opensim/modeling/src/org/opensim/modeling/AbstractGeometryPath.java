@@ -303,15 +303,4 @@ public class AbstractGeometryPath extends ModelComponent {
     opensimSimulationJNI.AbstractGeometryPath_setPreScaleLength(swigCPtr, this, State.getCPtr(s), s, preScaleLength);
   }
 
-  /**
-   * Generates default decorations for this `AbstractGeometryPath`, based on<br>
-   * the decorative points emitted by `implForEachDecorativePathPoint`.<br>
-   * <br>
-   * Derived classes may override this to provide different display behavior<br>
-   * for the path.
-   */
-  public void generateDecorations(boolean fixed, ModelDisplayHints arg1, State arg2, ArrayDecorativeGeometry arg3) {
-    opensimSimulationJNI.AbstractGeometryPath_generateDecorations(swigCPtr, this, fixed, ModelDisplayHints.getCPtr(arg1), arg1, State.getCPtr(arg2), arg2, ArrayDecorativeGeometry.getCPtr(arg3), arg3);
-  }
-
 }

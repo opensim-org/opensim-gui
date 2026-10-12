@@ -275,10 +275,6 @@ public class opensimCommon {
     return opensimCommonJNI.choose(n, k);
   }
 
-  public static boolean isValidFileName(SWIGTYPE_p_PropertyT_std__string_t value) {
-    return opensimCommonJNI.isValidFileName(SWIGTYPE_p_PropertyT_std__string_t.getCPtr(value));
-  }
-
   public static String getObjectDEFAULT_NAME() {
     return opensimCommonJNI.ObjectDEFAULT_NAME_get();
   }

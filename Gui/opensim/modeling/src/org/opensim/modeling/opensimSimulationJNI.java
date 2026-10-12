@@ -5994,7 +5994,6 @@ public class opensimSimulationJNI {
   public final static native void AbstractGeometryPath_setColor(long jarg1, AbstractGeometryPath jarg1_, long jarg2, State jarg2_, long jarg3, Vec3 jarg3_);
   public final static native double AbstractGeometryPath_getPreScaleLength(long jarg1, AbstractGeometryPath jarg1_, long jarg2, State jarg2_);
   public final static native void AbstractGeometryPath_setPreScaleLength(long jarg1, AbstractGeometryPath jarg1_, long jarg2, State jarg2_, double jarg3);
-  public final static native void AbstractGeometryPath_generateDecorations(long jarg1, AbstractGeometryPath jarg1_, boolean jarg2, long jarg3, ModelDisplayHints jarg3_, long jarg4, State jarg4_, long jarg5, ArrayDecorativeGeometry jarg5_);
   public final static native long GeometryPath_safeDownCast(long jarg1, OpenSimObject jarg1_);
   public final static native void GeometryPath_assign(long jarg1, GeometryPath jarg1_, long jarg2, OpenSimObject jarg2_);
   public final static native String GeometryPath_getClassName();
