@@ -275,7 +275,7 @@ public class MotionsDB extends Observable // Observed by other entities in motio
               (parentMotion==null)?MotionEvent.Operation.Open:MotionEvent.Operation.Assoc);
       setChanged();
       notifyObservers(evt);
-
+      // The following line sends the clip to the viewer which could be a problem if the motionobjects were not added first
       if (parentMotion==null) setCurrent(model, motion); // Also make it current (a separate event is sent out)
    }
 

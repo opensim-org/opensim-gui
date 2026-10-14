@@ -408,8 +408,6 @@ public class MotionDisplayer {
         if (simmMotionData == null)
            return;
 
-        int numColumnsIncludingTime = colNames.getSize();
-        interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
         // If provided simmMotionData is empty or have one frame, then we're building it live and can't
         // convert to full State form, will keep using old mapping until Tool run is finished
         // Performance will be limited by the running computation anyway.
@@ -418,6 +416,8 @@ public class MotionDisplayer {
         if (simmMotionData instanceof AnnotatedMotion){
             // Add place hoders for markers
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
+            if (mot.getMotionDisplayer()!= null)
+                return;
             Vector<ExperimentalDataObject> objects=mot.getClassified();
             mot.setMotionDisplayer(this);
             addExperimentalDataObjectsToJson(objects);
@@ -434,6 +434,9 @@ public class MotionDisplayer {
             ((JSONArray)modelObjectJson.get("children")).add(motionObjectsRoot);
             return;
         }
+        
+        int numColumnsIncludingTime = colNames.getSize();
+        interpolatedStates = new ArrayDouble(0.0, numColumnsIncludingTime-1);
         mapIndicesToBodies.clear();
         mapIndicesToDofs.clear();
 
