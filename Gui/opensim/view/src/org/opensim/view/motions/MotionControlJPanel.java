@@ -779,6 +779,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             JSONObject jsonMessage = new JSONObject();
             jsonMessage.put("Op", "SetCurrentAnimations");
             jsonMessage.put("clip_list", clipUUIDs);
+            jsonMessage.put("anim_start", getMasterMotion().getStartTime());
+            jsonMessage.put("anim_end", getMasterMotion().getEndTime());
             ViewDB.getInstance().sendVisualizerCommand(jsonMessage);
             
          } else if (evt.getOperation() == Operation.Modified) {
@@ -795,10 +797,11 @@ public class MotionControlJPanel extends javax.swing.JToolBar
 
          } else if (evt.getOperation() == Operation.Assoc) {
              // Create MotionDisplayer and associate it to that of currentMotion
-             MotionDisplayer newMotionDisplayer = new MotionDisplayer(evt.getMotion(), evt.getModel());
-             // add uuid to current animations
-             MotionsDB.getInstance().addMotionDisplayer(evt.getMotion(), newMotionDisplayer);
-             getMasterMotion().getDisplayer(0).associateDisplayer(newMotionDisplayer);
+            MotionDisplayer newMotionDisplayer = new MotionDisplayer(evt.getMotion(), evt.getModel());
+            // add uuid to current animations
+            MotionsDB.getInstance().addMotionDisplayer(evt.getMotion(), newMotionDisplayer);
+            getMasterMotion().getDisplayer(0).associateDisplayer(newMotionDisplayer);
+            newMotionDisplayer.setupMotionDisplay();
              // send clip to viewer
             String animationUUID = newMotionDisplayer.getAnimationClipUUID();
             ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(evt.getModel());
@@ -807,7 +810,6 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             currentAnimation.put("Root", modelViz.getModelUUID().toString());
             currentAnimation.put("Op", "AddAnimationClip");
             ViewDB.getInstance().sendAnimationClip(currentAnimation);
-            newMotionDisplayer.setupMotionDisplay();
             getMasterMotion().setTime(getMasterMotion().getCurrentTime());
             // Update current animation
             JSONArray clipUUIDs = new JSONArray(); 
@@ -826,6 +828,8 @@ public class MotionControlJPanel extends javax.swing.JToolBar
             JSONObject jsonMessage = new JSONObject();
             jsonMessage.put("Op", "SetCurrentAnimations");
             jsonMessage.put("clip_list", clipUUIDs);
+            jsonMessage.put("anim_start", getMasterMotion().getStartTime());
+            jsonMessage.put("anim_end", getMasterMotion().getEndTime());
             ViewDB.getInstance().sendVisualizerCommand(jsonMessage);
          }
          motionLoaded = (getMasterMotion().getNumMotions() > 0);
