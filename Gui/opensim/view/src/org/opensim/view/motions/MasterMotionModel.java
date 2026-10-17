@@ -157,7 +157,8 @@ public class MasterMotionModel {
    public boolean finished(int direction) {
       //int index = getIndexClosestToCurrentTime();
       //if (index==superMotionTimes.size()-1 && direction==1 || index==0 && direction==-1)
-      if (currentTime>=getEndTime() && direction==1 || currentTime<=getStartTime() && direction==-1)
+      double roundoff = 1e-5;
+      if (currentTime>=getEndTime()-roundoff && direction==1 || currentTime<=getStartTime()+roundoff && direction==-1)
          return !wrapMotion;
       else
          return false;
@@ -279,12 +280,12 @@ public class MasterMotionModel {
    // -----------------------------------------------------------------------
    // Time range
    // -----------------------------------------------------------------------
-   double getStartTime()
+   public double getStartTime()
    {
       return superMotionTimes.size()>0 ? superMotionTimes.firstElement() : 0.0;
    }
 
-   double getEndTime()
+   public double getEndTime()
    {
       return superMotionTimes.size()>0 ? superMotionTimes.lastElement() : 0.0;
    }
