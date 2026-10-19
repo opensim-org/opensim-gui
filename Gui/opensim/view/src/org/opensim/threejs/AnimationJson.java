@@ -53,6 +53,7 @@ import org.opensim.view.experimentaldata.ExperimentalDataObject;
  * @author Ayman
  */
 public class AnimationJson extends JSONObject {
+    int chunck_size = 5000;
     public AnimationJson() {
         
     }
@@ -66,7 +67,8 @@ public class AnimationJson extends JSONObject {
         for(int i=0; i< mot.getSize(); i++){
           times[i]=timeArray.get(i);
         }
-        
+        // break into chuncks and send separately in 1000 rows chuncks
+        int numChuncks = times.length / chunck_size +1;
         put("duration", times[times.length-1]);
         put("uuid", UUID.randomUUID().toString());
         // Create a track for time, tracks[objIndex], with name expObj.position

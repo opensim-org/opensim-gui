@@ -418,6 +418,8 @@ public class MotionDisplayer {
         if (simmMotionData instanceof AnnotatedMotion){
             // Add place hoders for markers
             AnnotatedMotion mot= (AnnotatedMotion) simmMotionData;
+            if (mot.getMotionDisplayer() != null)
+                return;
             Vector<ExperimentalDataObject> objects=mot.getClassified();
             mot.setMotionDisplayer(this);
             addExperimentalDataObjectsToJson(objects);
@@ -881,7 +883,7 @@ public class MotionDisplayer {
    // if a clip exists in the map, return uuid else create and add to the map
     public String getAnimationClipUUID() {
         clipUUID = MotionsDB.getInstance().mapMotions2AnimationUUIDs.get(simmMotionData);
-        if (clipUUID==null){
+        if (clipUUID==null){ // if size is too big get Clip for first segment then send remaining sgments in 
             animationClip = createAnimationClipForModelMotion(model, simmMotionData);
             clipUUID = (String) animationClip.get("uuid");
             MotionsDB.getInstance().addAnimationClipUUID(simmMotionData, clipUUID);

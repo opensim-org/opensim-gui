@@ -177,7 +177,7 @@ public class MasterMotionModel {
       if (displayer == null){
           displayer = new MotionDisplayer(simmMotionData, model);
           MotionsDB.getInstance().addMotionDisplayer(simmMotionData, displayer);
-          
+          displayer.setupMotionDisplay();
       }
         sendClipToViewer(displayer, model);
       
