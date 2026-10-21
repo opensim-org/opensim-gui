@@ -98,6 +98,20 @@ import org.opensim.view.pub.ViewDB;
 
 public class MotionDisplayer {
 
+    /**
+     * @return the animationStartTime
+     */
+    public double getAnimationStartTime() {
+        return animationStartTime;
+    }
+
+    /**
+     * @return the animationEndTime
+     */
+    public double getAnimationEndTime() {
+        return animationEndTime;
+    }
+
     private double[] defaultForceColor = new double[]{0., 1.0, 0.};
     private Vec3 defaultForceColorVec3 = new Vec3(0., 1.0, 0.);
     private MuscleColoringFunction mcf=null;
@@ -112,6 +126,8 @@ public class MotionDisplayer {
             new HashMap<OpenSimObject, ArrayList<UUID>>();
     private String clipUUID = null;
     AnimationJson animationClip = null;
+    private double animationStartTime=Double.NEGATIVE_INFINITY;
+    private double animationEndTime=Double.POSITIVE_INFINITY;
     /**
      * @return the modelVisJson
      */
@@ -897,6 +913,8 @@ public class MotionDisplayer {
     
     public AnimationJson createAnimationClipForModelMotion(Model model, Storage simmMotionData) {
         ModelVisualizationJson modelViz = ViewDB.getInstance().getModelVisualizationJson(model);
+        animationStartTime = simmMotionData.getFirstTime();
+        animationEndTime = simmMotionData.getLastTime();
         if (simmMotionData instanceof AnnotatedMotion){
             AnnotatedMotion amot = (AnnotatedMotion) simmMotionData;
             animationClip = new AnimationJson(amot, amot.getClassified());
