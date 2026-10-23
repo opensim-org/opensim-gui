@@ -76,7 +76,7 @@ public class MotionObjectBodyFixed extends ExperimentalDataObject {
     }
 
     @Override
-    public JSONArray createAnimationTracks(AnnotatedMotion motion) {
+    public JSONArray createAnimationTracks(AnnotatedMotion motion, int startIndex, int endIndex) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     

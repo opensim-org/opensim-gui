@@ -86,12 +86,14 @@ public class MasterMotionModel {
 
    private void doUpdateAndRepaint() 
    {
-      ViewDB.getInstance().applyTimeToViews(getCurrentTime());
+      double cTime = getCurrentTime();
+      ViewDB.getInstance().applyTimeToViews(cTime);
       for(int i=0; i<displayers.size(); i++) {
          MotionDisplayer disp = displayers.get(i);
          Model dModel = disp.getModel();
-         // Force rendering only for the last displayer to avoid multiple render calls per frame
-         ViewDB.getInstance().updateModelDisplayNoRepaint(dModel, true, i==(displayers.size()-1));
+         if (cTime <= disp.getAnimationEndTime() && cTime >= disp.getAnimationStartTime())
+            // Force rendering only for the last displayer to avoid multiple render calls per frame
+            ViewDB.getInstance().updateModelDisplayNoRepaint(dModel, true, i==(displayers.size()-1));
       }
       MotionsDB motionsDB = MotionsDB.getInstance();
       motionsDB.reportTimeChange(getCurrentTime());
@@ -157,7 +159,8 @@ public class MasterMotionModel {
    public boolean finished(int direction) {
       //int index = getIndexClosestToCurrentTime();
       //if (index==superMotionTimes.size()-1 && direction==1 || index==0 && direction==-1)
-      if (currentTime>=getEndTime() && direction==1 || currentTime<=getStartTime() && direction==-1)
+      double roundoff = 1e-5;
+      if (currentTime>=getEndTime()-roundoff && direction==1 || currentTime<=getStartTime()+roundoff && direction==-1)
          return !wrapMotion;
       else
          return false;
@@ -176,7 +179,7 @@ public class MasterMotionModel {
       if (displayer == null){
           displayer = new MotionDisplayer(simmMotionData, model);
           MotionsDB.getInstance().addMotionDisplayer(simmMotionData, displayer);
-          
+          displayer.setupMotionDisplay();
       }
         sendClipToViewer(displayer, model);
       
@@ -279,12 +282,12 @@ public class MasterMotionModel {
    // -----------------------------------------------------------------------
    // Time range
    // -----------------------------------------------------------------------
-   double getStartTime()
+   public double getStartTime()
    {
       return superMotionTimes.size()>0 ? superMotionTimes.firstElement() : 0.0;
    }
 
-   double getEndTime()
+   public double getEndTime()
    {
       return superMotionTimes.size()>0 ? superMotionTimes.lastElement() : 0.0;
    }
