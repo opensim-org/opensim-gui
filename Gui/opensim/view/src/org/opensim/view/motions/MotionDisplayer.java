@@ -33,6 +33,7 @@
 package org.opensim.view.motions;
 
 import java.awt.Color;
+import java.io.IOException;
 import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,8 +43,10 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.Vector;
 import java.util.prefs.Preferences;
+import org.eclipse.jetty.JettyMain;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.openide.util.Exceptions;
 import org.opensim.logger.OpenSimLogger;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
@@ -128,6 +131,8 @@ public class MotionDisplayer {
     AnimationJson animationClip = null;
     private double animationStartTime=Double.NEGATIVE_INFINITY;
     private double animationEndTime=Double.POSITIVE_INFINITY;
+    
+    private int SEGMENT_SIZE=5000; // for large data files, we segment every SEGMENT_SIZE frames to reduce memory footprint of Animation JSON
     /**
      * @return the modelVisJson
      */
@@ -917,7 +922,35 @@ public class MotionDisplayer {
         animationEndTime = simmMotionData.getLastTime();
         if (simmMotionData instanceof AnnotatedMotion){
             AnnotatedMotion amot = (AnnotatedMotion) simmMotionData;
-            animationClip = new AnimationJson(amot, amot.getClassified());
+            if (amot.getSize()<=SEGMENT_SIZE)
+                animationClip = new AnimationJson(amot, amot.getClassified(), 0, amot.getSize()-1);
+            else {
+                // Handle large data files by breaking into one clip and annotating
+                // with clip_uuids that are written to files, client does the reverse
+                // to assemble the full AnimationClip together.
+                int numSegments= amot.getSize()/SEGMENT_SIZE +1;
+                String fileName = JettyMain.getServerWorkingDir();
+
+                JSONArray segmentIDs = new JSONArray();
+                for (int seg=0; seg< numSegments; seg++){
+                    try {
+                        AnimationJson nextSegmentJson = new AnimationJson(amot, amot.getClassified(),
+                                seg*SEGMENT_SIZE, (seg==numSegments-1)?amot.getSize()-1:(seg+1)*SEGMENT_SIZE-1);
+                        String uuid = (String) nextSegmentJson.get("uuid");
+                        if (seg==0)
+                            animationClip = nextSegmentJson;
+                        else {
+                            JSONUtilities.writeJsonFile(nextSegmentJson, fileName+uuid.substring(0, 8)+".json");
+                            // write nextSegment to file and retain uuid
+                            segmentIDs.add(uuid);
+                        }
+                     } catch (IOException ex) {
+                        Exceptions.printStackTrace(ex);
+                    }
+                }
+                animationClip.put("composite", true);
+                animationClip.put("clip_uuids", segmentIDs);
+            }
         }
         else { // Pass on MuscleColoringFunction
             animationClip = modelViz.createAnimationJson(simmMotionData, mcf);

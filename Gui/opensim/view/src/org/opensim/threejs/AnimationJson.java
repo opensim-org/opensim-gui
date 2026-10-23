@@ -28,6 +28,7 @@
 package org.opensim.threejs;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.UUID;
 import java.util.Vector;
@@ -53,28 +54,29 @@ import org.opensim.view.experimentaldata.ExperimentalDataObject;
  * @author Ayman
  */
 public class AnimationJson extends JSONObject {
-    int chunck_size = 5000;
+
     public AnimationJson() {
         
     }
-    public AnimationJson(AnnotatedMotion mot, Vector<ExperimentalDataObject> objects) {
-        put("name", mot.getName());
+    public AnimationJson(AnnotatedMotion mot, Vector<ExperimentalDataObject> objects, int startIndex, int lastIndex) {
+        put("name", mot.getName()+String.valueOf(startIndex));
         JSONArray animationsTracks = new JSONArray();
         put("tracks", animationsTracks);
+        int trackSize = lastIndex-startIndex+1;
         double[] times = new double[mot.getSize()];
         ArrayDouble timeArray = new ArrayDouble();
         mot.getTimeColumn(timeArray);
         for(int i=0; i< mot.getSize(); i++){
           times[i]=timeArray.get(i);
         }
+        double[] trackTimes = Arrays.copyOfRange(times, startIndex, lastIndex+1);
         // break into chuncks and send separately in 1000 rows chuncks
-        int numChuncks = times.length / chunck_size +1;
-        put("duration", times[times.length-1]);
+        put("duration", times[lastIndex] - times[startIndex]);
         put("uuid", UUID.randomUUID().toString());
         // Create a track for time, tracks[objIndex], with name expObj.position
-        JSONArray timesJson = JSONUtilities.createFromArrayDouble(times);
+        JSONArray timesJson = JSONUtilities.createFromArrayDouble(trackTimes);
         for (ExperimentalDataObject expObj: objects){
-            JSONArray objTracks = expObj.createAnimationTracks(mot);
+            JSONArray objTracks = expObj.createAnimationTracks(mot, startIndex, lastIndex);
             for (int tr=0; tr < objTracks.size(); tr++){
                 JSONObject nextTrack = (JSONObject) objTracks.get(tr);
                 nextTrack.put("times", timesJson);
