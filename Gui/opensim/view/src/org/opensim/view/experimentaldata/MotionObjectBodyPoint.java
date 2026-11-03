@@ -118,11 +118,11 @@ public class MotionObjectBodyPoint extends ExperimentalDataObject {
     public JSONArray createAnimationTracks(AnnotatedMotion mot, int startIndex, int endIndex) {
         double conversion = mot.getUnitConversion();
         JSONArray animationsTracks = new JSONArray();
-        int sz = endIndex - startIndex;
+        int sz = endIndex - startIndex+1;
         double[] trackData = new double[sz*3];
         int idx = getStartIndexInFileNotIncludingTime();
 
-        for(int i=startIndex; i< endIndex; i++){
+        for(int i=startIndex; i<= endIndex; i++){
             StateVector vec = mot.getStateVector(i);
             ArrayDouble vecData = vec.getData();
             int li = i-startIndex;

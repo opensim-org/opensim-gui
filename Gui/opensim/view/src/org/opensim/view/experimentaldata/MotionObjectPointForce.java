@@ -301,13 +301,13 @@ public class MotionObjectPointForce extends MotionObjectBodyPoint {
     public JSONArray createAnimationTracks(AnnotatedMotion mot, int startIndex, int endIndex) {
         double conversion = mot.getUnitConversion();
         JSONArray animationsTracks = new JSONArray();
-        int sz = endIndex - startIndex;
+        int sz = endIndex - startIndex+1;
         double[] trackData = new double[sz*3];
         double[] orientationData = new double[sz*4];
         double[] scaleData = new double[sz*3];
         int idx = getStartIndexInFileNotIncludingTime();
         Vec3 torqueData = new Vec3(0.);
-        for(int motionFrameIndex=startIndex; motionFrameIndex< endIndex; motionFrameIndex++){
+        for(int motionFrameIndex=startIndex; motionFrameIndex<= endIndex; motionFrameIndex++){
             StateVector vec = mot.getStateVector(motionFrameIndex);
             ArrayDouble vecData = vec.getData();
             int li = motionFrameIndex-startIndex;
