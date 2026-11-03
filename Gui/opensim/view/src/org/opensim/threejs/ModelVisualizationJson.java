@@ -38,6 +38,7 @@ import java.util.UUID;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openide.util.Exceptions;
+import org.opensim.modeling.AbstractGeometryPath;
 import org.opensim.modeling.AbstractOutput;
 import org.opensim.modeling.AbstractPathPoint;
 import org.opensim.modeling.AbstractProperty;
@@ -73,6 +74,7 @@ import org.opensim.modeling.PhysicalFrame;
 import org.opensim.modeling.PropertyHelper;
 import org.opensim.modeling.Quaternion;
 import org.opensim.modeling.Rotation;
+import org.opensim.modeling.Scholz2015GeometryPath;
 import org.opensim.modeling.State;
 import org.opensim.modeling.StatesTrajectory;
 import org.opensim.modeling.Storage;
@@ -156,7 +158,7 @@ public class ModelVisualizationJson extends JSONObject {
     private PathColorMap currentPathColorMap;
     // Preferences
     private double prefMuscleDisplayRadius=5;
-    private int NUM_PATHPOINTS_PER_WRAP_OBJECT=4;
+    private int NUM_PATHPOINTS_PER_WRAP_OBJECT=8;
     private double PATHPOINT_SCALEUP=1.05;
     private boolean debug_path=false;
     public Boolean getFrameVisibility(Frame b) {
@@ -419,6 +421,37 @@ public class ModelVisualizationJson extends JSONObject {
     private static UUID retrieveUuidFromJson(JSONObject pointJson) {
         return UUID.fromString((String) pointJson.get("uuid"));
     }
+
+    private JSONObject createScholzPathPointObjectJson(UUID pathpt_mat_uuid, DecorativeGeometry at) {
+        UUID geometryUuid = retrieveUuidFromJson(pathPointGeometryJSON);
+        UUID materialUuid = pathpt_mat_uuid;
+        Transform xform = at.getTransform();
+        JSONObject ppt_object = new JSONObject();
+        UUID objID = UUID.randomUUID();
+        ppt_object.put("uuid", objID.toString());
+        ppt_object.put("type", "Mesh");
+        ppt_object.put("geometry", geometryUuid.toString());
+        ppt_object.put("material", materialUuid.toString());
+        ppt_object.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1.), 1.0));
+        return ppt_object;
+    }
+    // if scholzPath has non-engaged segment it returns NaNs, fix them
+    private void fixNanPathpointPositions(ArrayDecorativeGeometry adg) {
+        Vec3 lastValidPosition = new Vec3(0., 0., 0.);
+        for (int i=0; i<adg.size()/2+1; i++){
+            int pointIndex = getDecorativeGeometryIndexFromPointIndexScholz(i);
+            Vec3 pointPos = adg.getElt(pointIndex).getTransform().T();
+            if (Double.isNaN(pointPos.get(0)) || Double.isNaN(pointPos.get(1)) || Double.isNaN(pointPos.get(2))){
+                // copy lastValidPosition into 
+                for (int c=0; c<3; c++)
+                    adg.getElt(pointIndex).getTransform().T().set(c,lastValidPosition.get(c));
+            }
+            else
+                for (int c=0; c<3; c++)
+                    lastValidPosition.set(c, pointPos.get(c)); 
+        }
+        
+    }
      // The following inner class and Map are used to cache "computed" pathpoints to speed up 
     // recomputation on the fly
     class ComputedPathPointInfo {
@@ -471,6 +504,10 @@ public class ModelVisualizationJson extends JSONObject {
         state = OpenSimDB.getInstance().getContext(model).getCurrentStateRef();
         mdh = model.getDisplayHints();
         mdh.set_show_frames(true);
+        // Settings for path display of ScholzPath
+        mdh.set_discretize_path(true);
+        mdh.set_show_path_points(true); // so that scholzPath generates the points not just the lines
+        mdh.set_num_samples_per_wrap_segment(NUM_PATHPOINTS_PER_WRAP_OBJECT);
         ComponentsList mcList = model.getComponentsList();
         ComponentIterator mcIter = mcList.begin();
         
@@ -537,16 +574,28 @@ public class ModelVisualizationJson extends JSONObject {
                 visualizerFrames.put(ownerFrame, vf);
             }
         }
-        GeometryPath gPath = GeometryPath.safeDownCast(comp);
-        boolean isGeometryPath = (gPath!=null);
-        if (isGeometryPath){
-            if (debug_path)
-                System.out.println("Creating Json for GeometryPath of "+gPath.getOwner().getName());
-            UUID pathUUID = createJsonForGeometryPath(gPath, visibleStatus, null);
-            pathList.put(gPath, pathUUID);
-            // Add to the ID map so that PathOwner translates to GeometryPath
-            Component parentComp = gPath.getOwner();
-            addComponentToUUIDMap(parentComp, pathUUID);
+        AbstractGeometryPath aPath = AbstractGeometryPath.safeDownCast(comp);
+        boolean isPath = (aPath!=null);
+        if (isPath){
+            GeometryPath gPath = GeometryPath.safeDownCast(comp);
+            if (gPath!=null){  
+                if (debug_path)
+                    System.out.println("Creating Json for GeometryPath of "+gPath.getOwner().getName());
+
+                UUID pathUUID = createJsonForGeometryPath(gPath, visibleStatus, null);
+                pathList.put(gPath, pathUUID);
+                // Add to the ID map so that PathOwner translates to GeometryPath
+                Component parentComp = gPath.getOwner();
+                addComponentToUUIDMap(parentComp, pathUUID);
+            }
+            else {
+                 Scholz2015GeometryPath sPath = Scholz2015GeometryPath.safeDownCast(comp);
+                 if (debug_path)
+                    System.out.println("Creating Json for GeometryPath of "+sPath.getOwner().getName());
+                 UUID pathUUID = createJsonForScholzPath(sPath, visibleStatus, null, state);
+                 //pathList.put(sPath, pathUUID);
+                 addComponentToUUIDMap(comp, pathUUID);
+            }
         }
         else{
             adg.clear();
@@ -826,8 +875,15 @@ public class ModelVisualizationJson extends JSONObject {
             if (!pathsWithWrapping.isEmpty()){
                 
                 // Update status of Wrappoints accordingly
-                for (GeometryPath path:pathsWithWrapping.keySet()){
-                    updatePathWithWrapping(path, bodyTransforms_json, state);
+                for (AbstractGeometryPath path:pathsWithWrapping.keySet()){
+                    GeometryPath gPath = GeometryPath.safeDownCast(path);
+                    if (gPath != null)
+                        updatePathWithWrapping(gPath, bodyTransforms_json, state);
+                    else {
+                        Scholz2015GeometryPath sPath = Scholz2015GeometryPath.safeDownCast(path);
+                        if (sPath != null)
+                            updateScholzPath(sPath, bodyTransforms_json, state);
+                    }
                 }
             }            // Computed points need recomputation
 
@@ -1478,9 +1534,9 @@ public class ModelVisualizationJson extends JSONObject {
     private final HashMap<AbstractPathPoint, ComputedPathPointInfo> proxyPathPoints = new HashMap<AbstractPathPoint, ComputedPathPointInfo>();
     // Points that are generated but stay dormant pending Condition (ConditionalPathPoint) or Wrapping
     private final HashMap<UUID, ComputedPathPointInfo> computedPathPoints = new HashMap<UUID, ComputedPathPointInfo>();
-    private final HashMap<GeometryPath, JSONArray> pathsWithWrapping = new HashMap<GeometryPath, JSONArray>();
+    private final HashMap<AbstractGeometryPath, JSONArray> pathsWithWrapping = new HashMap<AbstractGeometryPath, JSONArray>();
     // Keep track if PathPoints are displayed/enlarged to sync. UI and to keep across edits
-    private final HashMap<GeometryPath, Boolean> pathDisplayStatus = new HashMap<GeometryPath, Boolean>();
+    private final HashMap<AbstractGeometryPath, Boolean> pathDisplayStatus = new HashMap<>();
     // GeometryPath has material (with Skinning) and another material without Skinning for PathPoints
     // this Map maintains the mapping so the colors can stay in sync.
     private final HashMap<OpenSimObject, UUID> mapGeometryPathToPathPointMaterialUUID = 
@@ -1575,6 +1631,24 @@ public class ModelVisualizationJson extends JSONObject {
         }
     }
 
+    private void updateScholzPath(Scholz2015GeometryPath sPath, JSONArray bodyTransforms, State state) {
+        // Call generateDecorations and for each point (in gnd frame) send new xform
+        //System.out.println("updateScholzPath called");
+        ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+        sPath.generateDecorations(false, mdh, state, adg);
+        fixNanPathpointPositions(adg);
+        JSONArray pathPoints = pathsWithWrapping.get(sPath);
+         // generateDecorations produces the order pt1,pt2,line12,pt3,line23...
+        for (int i=0; i< pathPoints.size(); i++){
+            int idx = getDecorativeGeometryIndexFromPointIndexScholz(i);
+            JSONObject onePointXform_json = new JSONObject();
+            Transform xform = adg.getElt(idx).getTransform();
+            onePointXform_json.put("uuid", pathPoints.get(i));
+            onePointXform_json.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1., 1., 1.), getVisScaleFactor()));
+            bodyTransforms.add(onePointXform_json);
+       }
+
+    }
     private UUID addPathPointObjectToParent(AbstractPathPoint pathPoint, String material, boolean visible) {
         
         // Parent
@@ -1846,9 +1920,94 @@ public class ModelVisualizationJson extends JSONObject {
         return mesh_uuid;
     }
 
-    private UUID createPathPointMaterial(GeometryPath path) {
+    private UUID createJsonForScholzPath(Scholz2015GeometryPath path, boolean visible, UUID reuse_uuid, State state){
+        UUID mat_uuid = createPathMaterial(path);
+        UUID pathpt_mat_uuid = createPathPointMaterial(path);
+        // Cycle through pathElements and create reps for points, #NUM_WRAP_POINTS for each obstacle
+        // for now these are notr exposed and we don't know how to get them so will just assume no wrapping
+        // to explore downstream issues
+        JSONArray pathpoint_jsonArr = new JSONArray();
+        // Keep track of First path point so that when changing color we can propagate to all path points, since they share material
+        // Also so that when adding pathpoints due to wrapping, we can get proper/shared material
+        mapGeometryPathToPathPointMaterialUUID.put(path, pathpt_mat_uuid);
+        // Fix issue #2569 where moving pathpoint is not handled properly if first in path
+        int numObstacles  = path.getNumPathElements() - path.getNumPathPoints();
+        int totalNumPoints =  path.getNumPathPoints() + NUM_PATHPOINTS_PER_WRAP_OBJECT * numObstacles;
+        ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+        path.generateDecorations(false, mdh, state, adg);
+        fixNanPathpointPositions(adg);
+        assert(adg.size()== 2*totalNumPoints-1); // 
+        for (int iE=0; iE < path.getNumPathPoints(); iE++){
+            PathPoint ppt = path.getPathPoint(iE);
+            UUID pathpoint_uuid = addPathPointObjectToParent(ppt, pathpt_mat_uuid.toString(), visible);
+            addComponentToUUIDMap(ppt, pathpoint_uuid);
+        }
+        // Now the path, all points created in ground frame
+        // create the object/mesh to connect the geometry, material
+        JSONObject gndJson = mapBodyIndicesToJson.get(0);
+        if (gndJson.get("children")==null)
+                gndJson.put("children", new JSONArray());
+        JSONArray gndChildren = (JSONArray) gndJson.get("children");
+        for (int ip=0; ip < adg.size()/2+1; ip++){ //skip every other Decoration as it's a line
+            // create a pathpoints in ground frame and add its uuid to pathpoint_jsonArr
+            // as of now this includes points coincident with pathpoints on bodies
+            // API is responsible for keeping these in sync on calls to generateDecorations
+            // Every pathpoint will have unique uuid
+            // Geometry of decorativesphere transform from adg
+            // Material of pathpt_mat_uuid
+            int idx = getDecorativeGeometryIndexFromPointIndexScholz(ip);
+            JSONObject scholzPathPointJson = createScholzPathPointObjectJson(pathpt_mat_uuid, adg.at(idx));
+            // retrieve uuid to include in pathpoint_jsonArr
+            UUID scholzPathPointUUID = retrieveUuidFromJson(scholzPathPointJson);
+            pathpoint_jsonArr.add(scholzPathPointUUID.toString());
+            gndChildren.add(scholzPathPointJson);
+            //System.out.println("Adding a point at glround frame:");
+        }
+        pathsWithWrapping.put(path, pathpoint_jsonArr);
+        JSONObject pathGeomJson = new JSONObject();
+        UUID uuidForPathGeomGeometry = UUID.randomUUID();
+        pathGeomJson.put("uuid", uuidForPathGeomGeometry.toString());
+        pathGeomJson.put("type", "CylinderGeometry");
+        pathGeomJson.put("radiusTop", actualMuscleDisplayRadius);
+        pathGeomJson.put("radiusBottom", actualMuscleDisplayRadius);
+        pathGeomJson.put("height", 0.01);
+        pathGeomJson.put("radialSegments", 4);
+        // fix this 0902?
+        pathGeomJson.put("heightSegments", 2*(pathpoint_jsonArr.size()-1)-1);
+        pathGeomJson.put("openEnded", true);
+        // height, radialSegments, heightSegments, openended
+        pathGeomJson.put("name", path.getName()+"Control");
+        //System.out.println("pathGeomJson:"+pathGeomJson.toJSONString());
+        if (reuse_uuid == null) {
+            json_geometries.add(pathGeomJson);
+        }
+        Map<String, Object> obj_json = new LinkedHashMap<String, Object>();
+        UUID mesh_uuid = (reuse_uuid==null)? UUID.randomUUID(): reuse_uuid;
+        obj_json.put("uuid", mesh_uuid.toString());
+        obj_json.put("type", "GeometryPath");
+        obj_json.put("name", path.getName());
+        obj_json.put("points", pathpoint_jsonArr);
+        obj_json.put("active", pathpoint_jsonArr);
+        obj_json.put("geometry", uuidForPathGeomGeometry.toString());
+        obj_json.put("userData",JSONUtilities.createUserDataObject("Path", false));
+        gndChildren.add(obj_json);
+        // Create json entry for material (path_material) and set skinning to true
+        obj_json.put("material", mat_uuid.toString());
+        if (!visible){ // path-belly = cylinder
+            obj_json.put("visible", false);
+        }
+        pathDisplayStatus.put(path, true);
+        return mesh_uuid;
+
+        
+    }
+
+    private static int getDecorativeGeometryIndexFromPointIndexScholz(int ip) {
+        return (ip==0)?ip:ip*2-1;
+    }
+    private UUID createPathPointMaterial(AbstractGeometryPath path) {
         // Repeat for pathpointMaterial
-        Map<String, Object> pathpt_mat_json = new LinkedHashMap<String, Object>();
+        Map<String, Object> pathpt_mat_json = new LinkedHashMap<>();
         UUID pathpt_mat_uuid = UUID.randomUUID();
         pathpt_mat_json.put("uuid", pathpt_mat_uuid.toString());
         populatePathMaterialDefaults(pathpt_mat_json, path);
@@ -1857,7 +2016,7 @@ public class ModelVisualizationJson extends JSONObject {
         return pathpt_mat_uuid;
     }
 
-    private UUID createPathMaterial(GeometryPath path) {
+    private UUID createPathMaterial(AbstractGeometryPath path) {
         // Create material for path, pathpts
         Map<String, Object> mat_json = new LinkedHashMap<String, Object>();
         UUID mat_uuid = UUID.randomUUID();
@@ -1897,7 +2056,7 @@ public class ModelVisualizationJson extends JSONObject {
         }
     }
 
-    private void populatePathMaterialDefaults(Map<String, Object> mat_json, GeometryPath path) {
+    private void populatePathMaterialDefaults(Map<String, Object> mat_json, AbstractGeometryPath path) {
         mat_json.put("type", "MeshStandardMaterial");
         Vec3 pathColor = path.getDefaultColor();
         String colorString = JSONUtilities.mapColorToRGBA(pathColor);
@@ -2183,7 +2342,30 @@ public class ModelVisualizationJson extends JSONObject {
         if (!pathsWithWrapping.isEmpty()){
             // Update status of Wrappoints accordingly
             int expectedLength = (iState+1)*3;
-            for (GeometryPath path:pathsWithWrapping.keySet()){
+            for (AbstractGeometryPath apath:pathsWithWrapping.keySet()){
+                GeometryPath  path = GeometryPath.safeDownCast(apath);
+                Scholz2015GeometryPath sPath = Scholz2015GeometryPath.safeDownCast(apath);
+                if (path == null && sPath != null) {
+                    // Scholz path handling for now
+                    JSONArray pathpoint_jsonArr = pathsWithWrapping.get(apath);
+                    ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
+                    sPath.generateDecorations(false, mdh, nextState, adg);
+                    fixNanPathpointPositions(adg);
+                    for (int pptIdx=0; pptIdx<pathpoint_jsonArr.size(); pptIdx++){
+                        String pointUUIDString = (String) pathpoint_jsonArr.get(pptIdx);
+                        UUID ppt_uuid = UUID.fromString(pointUUIDString);
+                        ArrayList<Double> track = mapUUIDToAnimationTrack.get(ppt_uuid.toString());
+                        if (track == null){
+                            mapUUIDToAnimationTrack.put(ppt_uuid.toString(), new ArrayList<Double>());
+                            track = mapUUIDToAnimationTrack.get(ppt_uuid.toString());
+                        }
+                        int idx = getDecorativeGeometryIndexFromPointIndexScholz(pptIdx);
+                        // At this point we have a track for the uuid corresponding to the scholzPoint
+                        for (int ii=0; ii<3; ii++)
+                                track.add(adg.getElt(idx).getTransform().T().get(ii));
+                    }
+                    continue;
+                }
                 updatePathWithWrapping(path, null, nextState);
                 // if there're points in pathsWithWrapping.value that didn't get an update
                 // grab values for them from the computedPathPointData

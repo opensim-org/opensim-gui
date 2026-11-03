@@ -27,3 +27,4 @@ out.log
 
 # Mac.
 .DS_Store
+**/private.xml

@@ -36,6 +36,8 @@ import java.util.LinkedList;
 import java.util.Observer;
 import java.util.Set;
 import java.util.UUID;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.json.simple.JSONObject;
 
 /**
@@ -50,6 +52,7 @@ public class WebSocketDB {
     double lastTime = 0.0;
     // Keep list of OpenModel messages that are still pending (not acknowledged yet)
     private static LinkedList<String> pendingModels = new LinkedList<String>();
+    private static MessageQueue messageQueue = new MessageQueue(10);
     /** Creates a new instance of WebSocketDB */
     private WebSocketDB() {
         instance = this;
@@ -62,10 +65,22 @@ public class WebSocketDB {
         if (debug) System.out.println("Socket count ="+sockets.size());
         socket.addObserver(observer);
         observer.update(socket, null);
-    DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-  LocalTime localTime = LocalTime.now();
-  System.out.println(dtf.format(localTime));
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
+        LocalTime localTime = LocalTime.now();
+        System.out.println(dtf.format(localTime));
         System.out.println("Connected...");
+    }
+
+    public void sendQueuedMessages(VisWebSocket socket) {
+        // send messages from quue to the new socket
+        int size = messageQueue.size();
+        for(int msgIndex=0; msgIndex < size; msgIndex++){
+            JSONObject nextMsg = messageQueue.poll();
+            if (nextMsg != null){
+                this.broadcastMessageJson(nextMsg, socket);
+                if (debug) System.out.println("Sending next Queued Message");
+            }
+        }
     }
     
     public void unRegisterSocket(VisWebSocket socket) {
@@ -73,8 +88,8 @@ public class WebSocketDB {
         sockets.remove(socket);
         if (debug) System.out.println("Socket count ="+sockets.size());
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH:mm:ss");
-  LocalTime localTime = LocalTime.now();
-  System.out.println(dtf.format(localTime));
+        LocalTime localTime = LocalTime.now();
+        System.out.println(dtf.format(localTime));
         System.out.println("Disconnecting");
      }
     
@@ -111,7 +126,6 @@ public class WebSocketDB {
         int i=0;
         for (VisWebSocket sock : sockets){
             if (debug) {
-                //System.out.println("Broadcast:"+msg.toJSONString()+"\n");
                 if (msg.get("time")!= null){
                     System.out.println("time="+ (double)msg.get("time"));
                     System.out.println("Delta="+((double)msg.get("time")-lastTime));
@@ -119,6 +133,7 @@ public class WebSocketDB {
                 }
             }
             sock.sendVisualizerMessage(msg);
+            messageQueue.offer(msg);
             i++;
         }
     }

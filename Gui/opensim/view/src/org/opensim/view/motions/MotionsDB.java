@@ -663,12 +663,14 @@ public class MotionsDB extends Observable // Observed by other entities in motio
         ModelForExperimentalData modelForDataImport = null;
         try {
             modelForDataImport = new ModelForExperimentalData(FileLoadDataAction.nextNumber++, amot);
+            modelForDataImport.initSystem();
             OpenSimDB.getInstance().addModel(modelForDataImport);
         } catch (IOException ex) {
             ErrorDialog.displayExceptionDialog(ex);
             return;
         }
         amot.setModel(modelForDataImport);
+        modelForDataImport.addMotionObjects(amot.getClassified());
         MotionsDB.getInstance().addMotion(modelForDataImport, amot, null);
         MotionsDB.getInstance().saveStorageFileName(amot, fileName);
     }
