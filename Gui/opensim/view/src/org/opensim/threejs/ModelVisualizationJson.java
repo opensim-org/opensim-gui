@@ -1914,7 +1914,7 @@ public class ModelVisualizationJson extends JSONObject {
         // Also so that when adding pathpoints due to wrapping, we can get proper/shared material
         mapGeometryPathToPathPointMaterialUUID.put(path, pathpt_mat_uuid);
         // Fix issue #2569 where moving pathpoint is not handled properly if first in path
-        int numObstacles  = path.getNumPathElements() - path.getNumPathPoints();
+		int numObstacles  = path.getNumObstacles();
         int totalNumPoints =  path.getNumPathPoints() + NUM_PATHPOINTS_PER_WRAP_OBJECT * numObstacles;
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         path.generateDecorations(false, mdh, state, adg);
