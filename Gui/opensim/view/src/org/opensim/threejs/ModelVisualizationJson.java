@@ -435,24 +435,7 @@ public class ModelVisualizationJson extends JSONObject {
         ppt_object.put("matrix", JSONUtilities.createMatrixFromTransform(xform, new Vec3(1.), 1.0));
         return ppt_object;
     }
-    // if scholzPath has non-engaged segment it returns NaNs, fix them
-    private void fixNanPathpointPositions(ArrayDecorativeGeometry adg) {
-        Vec3 lastValidPosition = new Vec3(0., 0., 0.);
-        for (int i=0; i<adg.size()/2+1; i++){
-            int pointIndex = getDecorativeGeometryIndexFromPointIndexScholz(i);
-            Vec3 pointPos = adg.getElt(pointIndex).getTransform().T();
-            if (Double.isNaN(pointPos.get(0)) || Double.isNaN(pointPos.get(1)) || Double.isNaN(pointPos.get(2))){
-                // copy lastValidPosition into 
-                for (int c=0; c<3; c++)
-                    adg.getElt(pointIndex).getTransform().T().set(c,lastValidPosition.get(c));
-            }
-            else
-                for (int c=0; c<3; c++)
-                    lastValidPosition.set(c, pointPos.get(c)); 
-        }
-        
-    }
-     // The following inner class and Map are used to cache "computed" pathpoints to speed up 
+    // The following inner class and Map are used to cache "computed" pathpoints to speed up 
     // recomputation on the fly
     class ComputedPathPointInfo {
         AbstractPathPoint pt1;
@@ -1636,7 +1619,6 @@ public class ModelVisualizationJson extends JSONObject {
         //System.out.println("updateScholzPath called");
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         sPath.generateDecorations(false, mdh, state, adg);
-        fixNanPathpointPositions(adg);
         JSONArray pathPoints = pathsWithWrapping.get(sPath);
          // generateDecorations produces the order pt1,pt2,line12,pt3,line23...
         for (int i=0; i< pathPoints.size(); i++){
@@ -1931,11 +1913,10 @@ public class ModelVisualizationJson extends JSONObject {
         // Also so that when adding pathpoints due to wrapping, we can get proper/shared material
         mapGeometryPathToPathPointMaterialUUID.put(path, pathpt_mat_uuid);
         // Fix issue #2569 where moving pathpoint is not handled properly if first in path
-        int numObstacles  = path.getNumPathElements() - path.getNumPathPoints();
+		    int numObstacles  = path.getNumObstacles();
         int totalNumPoints =  path.getNumPathPoints() + NUM_PATHPOINTS_PER_WRAP_OBJECT * numObstacles;
         ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
         path.generateDecorations(false, mdh, state, adg);
-        fixNanPathpointPositions(adg);
         assert(adg.size()== 2*totalNumPoints-1); // 
         for (int iE=0; iE < path.getNumPathPoints(); iE++){
             PathPoint ppt = path.getPathPoint(iE);
@@ -2350,7 +2331,6 @@ public class ModelVisualizationJson extends JSONObject {
                     JSONArray pathpoint_jsonArr = pathsWithWrapping.get(apath);
                     ArrayDecorativeGeometry adg = new ArrayDecorativeGeometry();
                     sPath.generateDecorations(false, mdh, nextState, adg);
-                    fixNanPathpointPositions(adg);
                     for (int pptIdx=0; pptIdx<pathpoint_jsonArr.size(); pptIdx++){
                         String pointUUIDString = (String) pathpoint_jsonArr.get(pptIdx);
                         UUID ppt_uuid = UUID.fromString(pointUUIDString);
