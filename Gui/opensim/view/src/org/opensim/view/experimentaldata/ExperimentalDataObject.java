@@ -140,5 +140,5 @@ public abstract class ExperimentalDataObject extends AdhocModelComponent {
      * @param motion The motion/storage file where this object comes from
      * @return list of animation tracks to be sent to the viewer as a part of an animation clip
      */
-    abstract public JSONArray createAnimationTracks(AnnotatedMotion motion);
+    abstract public JSONArray createAnimationTracks(AnnotatedMotion motion, int startIndex, int endIndex);
 }
