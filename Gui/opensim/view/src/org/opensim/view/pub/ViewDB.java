@@ -81,6 +81,20 @@ import org.opensim.view.motions.MotionsDB;
 public final class ViewDB extends Observable implements Observer, LookupListener {
 
     /**
+     * @return the debugBrowser
+     */
+    public boolean isDebugBrowser() {
+        return debugBrowser;
+    }
+
+    /**
+     * @param debugBrowser the debugBrowser to set
+     */
+    public void setDebugBrowser(boolean debugBrowser) {
+        this.debugBrowser = debugBrowser;
+    }
+
+    /**
      * @return the scrubbing
      */
     public boolean isScrubbing() {
@@ -106,6 +120,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    */
    private static boolean applyAppearanceChange = true;
    private static boolean scrubbing = false;
+   private boolean debugBrowser = false;
     public void endAnimation() {
         JSONObject msg = new JSONObject();
         msg.put("Op", "endAnimation");
@@ -211,6 +226,10 @@ public final class ViewDB extends Observable implements Observer, LookupListener
         JSONObject topMsg = new JSONObject();
         topMsg.put("Op", "ClearCurrentAnimation");
         websocketdb.broadcastMessageJson(topMsg, null);
+    }
+
+    public void toggleBrowserLogging() {
+        setDebugBrowser(!isDebugBrowser());
     }
   
    class AppearanceChange {
