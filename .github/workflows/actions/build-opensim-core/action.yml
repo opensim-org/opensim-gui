@@ -53,9 +53,8 @@ runs:
     - uses: actions/setup-java@v5
       with:
         distribution: temurin
-        java-version: ${{ inputs.java-version }}
+        java-version: 17.0.20
         java-package: jdk
-        check-latest: true
 
     - name: Cache Netbeans
       id: cache-netbeans
