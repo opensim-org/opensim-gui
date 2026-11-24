@@ -12,8 +12,8 @@ inputs:
     default: '2.4'
   java-version:
     description: 'JDK version (Temurin)'
-    required: true
-    default: '17'
+    required: false
+    default: '8'
   repository:
     description: 'opensim-core repository to check out'
     required: false
