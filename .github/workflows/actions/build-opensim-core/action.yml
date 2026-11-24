@@ -38,7 +38,6 @@ runs:
     - name: Install SWIG
       shell: pwsh
       run: |
-        choco uninstall swig -y --all-versions
         choco install swig --version 4.4.1 --yes --limit-output --allow-downgrade
         swig -swiglib
     
@@ -51,11 +50,11 @@ runs:
       shell: pwsh
       run: python3 -m pip install numpy==${{ inputs.numpy-version }}
 
-    - name: Set up JDK
-      uses: actions/setup-java@v4
+    - uses: actions/setup-java@v5
       with:
-        distribution: 'temurin'
-        java-version: ${{ inputs.java-version }}
+        distribution: temurin
+        java-version: 17.0.20
+        java-package: jdk
 
     - name: Cache Netbeans
       id: cache-netbeans
@@ -139,5 +138,6 @@ runs:
       #C:\ProgramData\chocolatey\lib\swig\tools\install\swigwin-4.1.1\swig.exe
       run: |
         chdir $env:GITHUB_WORKSPACE/${{ inputs.path }}
+        $env:INCLUDE = "$env:JAVA_HOME/include;$env:JAVA_HOME/include/win32;$env:INCLUDE"
         cmake . --preset msvc-dev-gui-default -DSWIG_EXECUTABLE="C:/ProgramData/chocolatey/lib/swig/tools/install/swigwin-4.4.1/swig.exe" -DSWIG_DIR="C:/ProgramData/chocolatey/lib/swig/tools/install/swigwin-4.4.1/Lib" -DCMAKE_PREFIX_PATH="${{ github.workspace }}/opensim-core/build/dependencies/msvc-dev-gui-default/install" -LAH
         cmake --build --preset msvc-dev-gui-default --target install

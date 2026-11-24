@@ -490,4 +490,8 @@ public final class gui {
         msg.put("data", option);
         sendVisulaizerMessage(msg);
     }
+    
+    static public void toggleBrowserLogging() {
+        ViewDB.getInstance().toggleBrowserLogging();
+    }
 }

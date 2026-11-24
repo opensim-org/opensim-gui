@@ -97,8 +97,12 @@ public class AnimationJson extends JSONObject {
         HashMap<Integer, PhysicalFrame> mapIndexToFrame = modelVisJson.getMapBodyIndicesToFrames();
         int numFrames = mapIndexToFrame.size()-1; // Exclude ground as not moving
         Frame[] frames = new Frame[numFrames];
-        for (int iFrame=0; iFrame< numFrames; iFrame++){
-            frames[iFrame]=mapIndexToFrame.get(iFrame+1);
+        int itFrame=0;
+        for (int iFramek : mapIndexToFrame.keySet() ){
+           if (iFramek!=0){
+               frames[itFrame]=mapIndexToFrame.get(iFramek);
+               itFrame++;
+           }
         }        
         double[] times = new double[mot.getSize()];
         double[][] translationData = new double[numFrames][mot.getSize()*3];
