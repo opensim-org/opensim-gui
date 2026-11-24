@@ -38,7 +38,6 @@ runs:
     - name: Install SWIG
       shell: pwsh
       run: |
-        choco uninstall swig -y --all-versions
         choco install swig --version 4.4.1 --yes --limit-output --allow-downgrade
         swig -swiglib
     
