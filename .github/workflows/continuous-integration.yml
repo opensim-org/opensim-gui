@@ -171,7 +171,7 @@ jobs:
         mkdir -p "$NBM_DIR"
     
         # Download the NBM file
-        curl -L "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm" \
+        curl -L "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.1.dev/org-opensim-javabrowser.nbm" \
              -o "$NBM_DIR/org-opensim-javabrowser.nbm"
     
         # Extract the NBM (nbm is a zip)
@@ -321,9 +321,9 @@ jobs:
         # Create prebuilt directory
         mkdir -p "$NBM_DIR"
     
-        # Download the NBM file pinned to version v4.6.0
+        # Download the NBM file pinned to version v4.6.1
         wget -O "$NBM_DIR/org-opensim-javabrowser.nbm" \
-             "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.0/org-opensim-javabrowser.nbm"
+             "https://github.com/opensim-org/opensim-visualizer/releases/download/v4.6.1.dev/org-opensim-javabrowser.nbm"
     
         # Extract the NBM (nbm is a zip)
         mkdir -p "$EXTRACT_DIR"
