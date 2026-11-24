@@ -12,7 +12,7 @@ inputs:
     default: '2.4'
   java-version:
     description: 'JDK version (Temurin)'
-    required: false
+    required: true
     default: '17'
   repository:
     description: 'opensim-core repository to check out'
@@ -57,15 +57,6 @@ runs:
         distribution: 'temurin'
         java-version: ${{ inputs.java-version }}
 
-    - name: Inspect Java
-      shell: pwsh
-      run: |
-        java -version
-        echo "JAVA_HOME=$env:JAVA_HOME"
-        Get-Command java | Select-Object -ExpandProperty Source
-        Test-Path "$env:JAVA_HOME\include\jni.h"
-        Get-ChildItem "$env:JAVA_HOME\include" -ErrorAction SilentlyContinue
-        
     - name: Cache Netbeans
       id: cache-netbeans
       uses: actions/cache@v3
