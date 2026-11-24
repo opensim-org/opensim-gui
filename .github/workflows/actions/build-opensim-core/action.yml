@@ -55,6 +55,7 @@ runs:
         distribution: temurin
         java-version: ${{ inputs.java-version }}
         java-package: jdk
+        check-latest: true
 
     - name: Cache Netbeans
       id: cache-netbeans
