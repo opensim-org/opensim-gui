@@ -32,7 +32,10 @@
 
 package org.opensim.view.motions;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dialog;
+import java.awt.Window;
 import java.io.IOException;
 import java.util.AbstractList;
 import java.util.ArrayList;
@@ -43,10 +46,16 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.Vector;
 import java.util.prefs.Preferences;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 import org.eclipse.jetty.JettyMain;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.openide.util.Exceptions;
+import org.openide.windows.WindowManager;
 import org.opensim.logger.OpenSimLogger;
 import org.opensim.modeling.ArrayDouble;
 import org.opensim.modeling.ArrayStr;
@@ -75,6 +84,8 @@ import org.opensim.modeling.Vec3;
 import org.opensim.threejs.AnimationJson;
 import org.opensim.threejs.JSONUtilities;
 import org.opensim.threejs.ModelVisualizationJson;
+import org.opensim.utils.DialogUtils;
+import org.opensim.utils.OpenSimDialog;
 import org.opensim.utils.TheApp;
 import org.opensim.view.MuscleColoringFunction;
 import org.opensim.view.experimentaldata.AnnotatedMotion;
@@ -925,12 +936,38 @@ public class MotionDisplayer {
             if (amot.getSize()<=SEGMENT_SIZE)
                 animationClip = new AnimationJson(amot, amot.getClassified(), 0, amot.getSize()-1);
             else {
-                // Handle large data files by breaking into one clip and annotating
-                // with clip_uuids that are written to files, client does the reverse
-                // to assemble the full AnimationClip together.
+                animationClip = createAnimationWithWaitDialog(amot);
+            }
+        }
+        else { // Pass on MuscleColoringFunction
+            animationClip = modelViz.createAnimationJson(simmMotionData, mcf);
+        }
+        return animationClip;
+    }
+    
+    AnimationJson createAnimationWithWaitDialog(AnnotatedMotion amot){
+        // Handle large data files by breaking into one clip and annotating
+        // with clip_uuids that are written to files, client does the reverse
+        // to assemble the full AnimationClip together.
+        if (!SwingUtilities.isEventDispatchThread()) {
+            throw new IllegalStateException("Must be called on EDT");
+        }
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        panel.add(new JLabel("Generating animation clip..."),
+                  BorderLayout.CENTER);
+        panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(
+                20, 30, 20, 30));
+        OpenSimDialog dialog=DialogUtils.createDialogForPanelWithParent((JFrame) WindowManager.getDefault().getMainWindow(),
+                panel, "Please wait...");
+        dialog.setModal(true);
+        final AnimationJson[] result = new AnimationJson[1];
+        // Start a timer that executes after the dialog has had
+        // an opportunity to render.
+        Timer timer = new Timer(200, e -> {
+            try {
+
                 int numSegments= amot.getSize()/SEGMENT_SIZE +1;
                 String fileName = JettyMain.getServerWorkingDir();
-
                 JSONArray segmentIDs = new JSONArray();
                 for (int seg=0; seg< numSegments; seg++){
                     try {
@@ -938,7 +975,7 @@ public class MotionDisplayer {
                                 seg*SEGMENT_SIZE, (seg==numSegments-1)?amot.getSize()-1:(seg+1)*SEGMENT_SIZE-1);
                         String uuid = (String) nextSegmentJson.get("uuid");
                         if (seg==0)
-                            animationClip = nextSegmentJson;
+                            result[0] = nextSegmentJson;
                         else {
                             JSONUtilities.writeJsonFile(nextSegmentJson, fileName+uuid.substring(0, 8)+".json");
                             // write nextSegment to file and retain uuid
@@ -948,14 +985,20 @@ public class MotionDisplayer {
                         Exceptions.printStackTrace(ex);
                     }
                 }
-                animationClip.put("composite", true);
-                animationClip.put("clip_uuids", segmentIDs);
+                result[0].put("composite", true);
+                result[0].put("clip_uuids", segmentIDs);
+                
+            } catch (Exception ex) {
+                //error[0] = ex;
+            } finally {
+                dialog.dispose();
             }
-        }
-        else { // Pass on MuscleColoringFunction
-            animationClip = modelViz.createAnimationJson(simmMotionData, mcf);
-        }
-        return animationClip;
-    }
+        });
 
+        timer.setRepeats(false);
+        timer.start();
+        // Modal dialog starts a nested event loop.
+        dialog.setVisible(true);
+        return result[0];
+    }
 }

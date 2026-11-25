@@ -2214,8 +2214,6 @@ public class ModelVisualizationJson extends JSONObject {
      //motionAsStates.print("motionAsStates.sto");
      
      StatesTrajectory trajectory = StatesTrajectory.createFromStatesStorage(model, motionAsStates, true, true);
-     motionAsStates.delete();
-     
      HashMap<Integer, PhysicalFrame> mapIndexToFrame = getMapBodyIndicesToFrames();
      int numFrames = mapIndexToFrame.size()-1; // Exclude ground as not moving
      Frame[] frames = new Frame[numFrames];
