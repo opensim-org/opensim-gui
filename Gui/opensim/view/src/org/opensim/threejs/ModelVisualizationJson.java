@@ -2212,7 +2212,7 @@ public class ModelVisualizationJson extends JSONObject {
      //dContext.resetStateToDefault(); // TODO revisit fix #279
      model.formStateStorage(mot, motionAsStates, false);
      //motionAsStates.print("motionAsStates.sto");
-     
+     /// This takes too long
      StatesTrajectory trajectory = StatesTrajectory.createFromStatesStorage(model, motionAsStates, true, true);
      HashMap<Integer, PhysicalFrame> mapIndexToFrame = getMapBodyIndicesToFrames();
      int numFrames = mapIndexToFrame.size()-1; // Exclude ground as not moving
@@ -2504,11 +2504,6 @@ public class ModelVisualizationJson extends JSONObject {
             computedIndex++;
         }
         
-//        try {
-//            JSONUtilities.writeJsonFile(animationClipJson, "animationJson.json");
-//        } catch (IOException ex) {
-//            Exceptions.printStackTrace(ex);
-//        }
      return animationClipJson;
  }
 

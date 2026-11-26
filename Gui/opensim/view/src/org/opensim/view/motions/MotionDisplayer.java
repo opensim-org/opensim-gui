@@ -940,7 +940,7 @@ public class MotionDisplayer {
             }
         }
         else { // Pass on MuscleColoringFunction
-            animationClip = modelViz.createAnimationJson(simmMotionData, mcf);
+            animationClip = createModelAnimationWithWaitDialog(modelViz, simmMotionData);
         }
         return animationClip;
     }
@@ -1001,4 +1001,41 @@ public class MotionDisplayer {
         dialog.setVisible(true);
         return result[0];
     }
+    
+    AnimationJson createModelAnimationWithWaitDialog(ModelVisualizationJson modelViz,
+            Storage mot){
+        // Handle large data files by breaking into one clip and annotating
+        // with clip_uuids that are written to files, client does the reverse
+        // to assemble the full AnimationClip together.
+        if (!SwingUtilities.isEventDispatchThread()) {
+            throw new IllegalStateException("Must be called on EDT");
+        }
+        JPanel panel = new JPanel(new BorderLayout(10, 10));
+        panel.add(new JLabel("Generating animation clip..."),
+                  BorderLayout.CENTER);
+        panel.setBorder(javax.swing.BorderFactory.createEmptyBorder(
+                20, 30, 20, 30));
+        OpenSimDialog dialog=DialogUtils.createDialogForPanelWithParent((JFrame) WindowManager.getDefault().getMainWindow(),
+                panel, "Please wait...");
+        dialog.setModal(true);
+        final AnimationJson[] result = new AnimationJson[1];
+        // Start a timer that executes after the dialog has had
+        // an opportunity to render.
+        Timer timer = new Timer(200, e -> {
+            try {
+                result[0] = modelViz.createAnimationJson(mot, mcf);
+            } catch (Exception ex) {
+                //error[0] = ex;
+            } finally {
+                dialog.dispose();
+            }
+        });
+
+        timer.setRepeats(false);
+        timer.start();
+        // Modal dialog starts a nested event loop.
+        dialog.setVisible(true);
+        return result[0];
+    }
+
 }

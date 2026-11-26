@@ -120,7 +120,7 @@ public final class ViewDB extends Observable implements Observer, LookupListener
    */
    private static boolean applyAppearanceChange = true;
    private static boolean scrubbing = false;
-   private boolean debugBrowser = false;
+   private boolean debugBrowser = true;
     public void endAnimation() {
         JSONObject msg = new JSONObject();
         msg.put("Op", "endAnimation");
